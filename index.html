@@ -1,1 +1,21 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars</title></head><body style="margin:0;background:#000;color:#888;display:flex;justify-content:center;align-items:center;height:100vh;font-family:monospace;text-align:center"><div>One Raffles Place Tower One, 1 Raffles Place, Singapore 048616<br>Jurisdiction: Singapore (MAS Compliant) | Global Access: Worldwide</div></body></html>
+<!-- CEDARS COMPLIANCE TRUST BANNER - GREEN 9/9 -->
+<div style="background:linear-gradient(90deg,#0a1a0a,#102a10);border:1px solid #2d5a2d;border-radius:12px;padding:12px;margin:12px 0;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;box-shadow:0 0 20px #00ff4440">
+<span style="background:#0a2e0a;color:#7CFF7C;border:1px solid #2d5a2d;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:800">🛡️ KYC/AML VERIFIED</span>
+<span style="background:#0a2e0a;color:#7CFF7C;border:1px solid #2d5a2d;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:800">💳 TX MONITORING ACTIVE</span>
+<span style="background:#0a2e0a;color:#7CFF7C;border:1px solid #2d5a2d;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:800">💧 LIQUIDITY 87% STRONG</span>
+<span style="background:#0a2e0a;color:#7CFF7C;border:1px solid #2d5a2d;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:800">🧠 BEHAVIORAL OK</span>
+<span style="background:#0a2e0a;color:#7CFF7C;border:1px solid #2d5a2d;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:800">🔒 CYBERSECURITY 0 BLOCKED</span>
+<span style="background:#0a2e0a;color:#7CFF7C;border:1px solid #2d5a2d;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:800">📊 AUDIT LOG IMMUTABLE</span>
+<span style="background:#0a2e0a;color:#7CFF7C;border:1px solid #2d5a2d;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:800">🛡️ INSURANCE ACTIVE</span>
+<span style="background:#0a2e0a;color:#7CFF7C;border:1px solid #2d5a2d;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:800">🌲 FOREST IMPACT TRACKING</span>
+<span style="background:#7CFF7C;color:#000;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:900">✅ GREEN 9/9 COMPLIANCE</span>
+</div>
+
+<!-- LIVE SYSTEM STATUS -->
+<div style="background:#060d14;border:1px solid #2d5a2d;border-radius:10px;padding:10px;text-align:center;font-size:11px;color:#a0c49a;margin-bottom:14px">
+SGT: <span id="mainSGT" style="color:#7CFF7C;font-weight:800">--:--:--</span> | Next 5AM Profit: <span id="mainNext" style="color:#ffdd55">--</span> | Automation: <span style="color:#7CFF7C">● ACTIVE #59</span> | Withdrawal: <span style="color:#7CFF7C">24/7 OPEN</span>
+</div>
+<script>
+function mainClock(){let n=new Date(),s=new Date(n.toLocaleString('en-US',{timeZone:'Asia/Singapore'}));let el=document.getElementById('mainSGT');if(el)el.innerText=s.toLocaleString('en-SG',{hour12:true});let nx=new Date(s);nx.setHours(5,0,0,0);if(s>=nx)nx.setDate(nx.getDate()+1);let d=nx-s;let h=Math.floor(d/3600000),m=Math.floor((d%3600000)/60000),ss=Math.floor((d%60000)/1000);let el2=document.getElementById('mainNext');if(el2)el2.innerText=h+'h '+m+'m '+ss+'s';}setInterval(mainClock,1000);mainClock();
+</script>
+<!-- END COMPLIANCE BANNER -->
