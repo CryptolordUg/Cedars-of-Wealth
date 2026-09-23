@@ -1,0 +1,19 @@
+name: Daily Profit 5AM SGT
+
+on:
+  schedule:
+    - cron: '0 21 * * *'
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trigger profit release log
+        run: |
+          echo "Profit release at 5AM SGT $(date)" >> profit-log.txt
+          echo "Contract: 1095 Days | Profit: Daily 5AM SGT | Withdrawal: 24/7" >> profit-log.txt
+      - name: Send email trigger
+        run: |
+          curl -X POST https://formsubmit.co/ajax/cryptome2030@gmail.com -H "Content-Type: application/json" -d '{"name":"COW DAILY PROFIT 5AM SGT","message":"Automated profit release triggered for all active investors at 5:00 AM SGT. Contract 1095 days background lock active. Withdrawal 24/7 open."}'
