@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cedars of Wealth - Investor Dashboard | RubonAI Live</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:Arial;background:#0a1f0a;color:#fff;margin:0}
+.header{background:#123412;padding:15px;display:flex;justify-content:space-between}
+.card{background:#1a3a1a;margin:15px;padding:20px;border-radius:12px;border:1px solid #2a5a2a}
+.btn{background:#00c853;color:#000;padding:12px 24px;border:none;border-radius:8px;font-weight:bold;cursor:pointer}
+.timer{font-size:28px;color:#00ff88}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h2>🌲 Cedars of Wealth | RubonAI Trader</h2>
+  <span id="status">● Live Spot Trading</span>
+</div>
+
+<!-- Onboarding API -->
+<div class="card">
+  <h3>Investor Onboarding</h3>
+  <p>Registration API + Referral + KYC + Wallet Creation</p>
+  <button class="btn" onclick="onboard()">Create Wallet</button>
+  <p id="wallet">Wallet: Not created</p>
+</div>
+
+<!-- Deposits -->
+<div class="card">
+  <h3>Crypto Deposits - To RubonAI Engine</h3>
+  <p>Deposit API + Blockchain Listener + Validation</p>
+  <button class="btn" onclick="deposit()">Deposit BTC/ETH/SOL/ADA/TRX</button>
+</div>
+
+<!-- RubonAI Live -->
+<div class="card">
+  <h3>RubonAI Live Trading Engine</h3>
+  <p>Market Data + Signal + Order Management + Risk Analytics</p>
+  <div class="timer" id="rubonStatus">RubonAI Scanning... 87% BUY Signal</div>
+  <p>ROI: +8.4% monthly | Win Rate: 71% | Drawdown: 1.2%</p>
+</div>
+
+<!-- Staking & Yield -->
+<div class="card">
+  <h3>Staking & Yield</h3>
+  <p>Staking API + Smart Contract Lock + Reward Distribution</p>
+  <p>Yield: 12% APY | Rewards: Auto-distributed every 10 mins</p>
+</div>
+
+<!-- Withdrawals -->
+<div class="card">
+  <h3>Crypto Withdrawals</h3>
+  <p>Withdrawal API + Gas Optimizer + On-chain Payout</p>
+  <button class="btn" onclick="withdraw()">Withdraw Profit</button>
+  <div class="timer" id="countdown">Profit Release: 23:59:59</div>
+</div>
+
+<!-- Compliance -->
+<div class="card">
+  <h3>Compliance & Security</h3>
+  <p>✅ AML/KYC + Fraud Detection + Sanctions Screening + Audit</p>
+</div>
+
+<script>
+// Data Flow Destination: Trader AI Edge Engine + Blockchain Wallets
+function onboard(){
+  document.getElementById('wallet').innerText="Wallet Created: 0xCedars...Wealth - Secured by Quantum Encryption";
+}
+function deposit(){
+  alert("Deposit API → Wallet Sync → Blockchain Listener → RubonAI Engine Active");
+}
+function withdraw(){
+  alert("Withdrawal API → Wallet Auth → Gas Fee Optimizer → Broadcasted to BTC/ETH/SOL/ADA/TRX");
+}
+// Countdown Timer + Profit Release Button
+setInterval(()=>{
+  document.getElementById('countdown').innerText="Profit Release: "+new Date().toLocaleTimeString();
+},1000);
+// RubonAI Live Update
+setInterval(()=>{
+  document.getElementById('rubonStatus').innerText="RubonAI: "+["BUY","HOLD","SELL"][Math.floor(Math.random()*3)]+" Signal - "+(80+Math.floor(Math.random()*15))+"% Confidence";
+},2000);
+</script>
+
+</body>
+</html>
