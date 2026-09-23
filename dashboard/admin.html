@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin - RubonAI</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<style>
+body{background:#051005;color:#fff;font-family:monospace;padding:15px}
+.card{background:#112211;border:1px solid #2a5;border-radius:10px;padding:15px;margin:10px 0}
+.green{color:#0f8}.btn{background:#0c5;color:#000;padding:10px;border:none;border-radius:6px;font-weight:bold;cursor:pointer}
+table{width:100%;border-collapse:collapse}th,td{border:1px solid #2a5;padding:8px;text-align:left}
+</style>
+</head>
+<body>
+<h2>🛡️ RubonAI Admin - COW-RUBONAI-1095</h2>
+<p>Integrity: <span class="green">STABLE SHA256:7f3a9c2e4b</span> | Auto 24/7 | Min $50 | 1.5% x 1095D</p>
+
+<div class="card"><h3>💰 Live Withdrawals</h3>
+<table id="wTable"><tr><th>User</th><th>Amount</th><th>Status</th><th>Hash</th></tr></table>
+<button class="btn" onclick="addFake()">Simulate Withdraw $100</button>
+</div>
+
+<div class="card"><h3>📦 10 Packages Monitor</h3>
+<div id="packages"></div>
+</div>
+
+<div class="card"><h3>🔐 8 System Layers</h3>
+<p>✅ Identity KYC/AML | ✅ Transaction Oversight | ✅ Liquidity | ✅ Behavioral | ✅ Portfolio | ✅ Compliance | ✅ Cybersecurity Quantum | ✅ Support</p>
+</div>
+
+<script>
+const pkgs=[{name:"Starter",range:"300-999"},{name:"Growth",range:"1k-2.4k"},{name:"Builder",range:"2.5k-4.9k"},{name:"Bronze",range:"5k-9.9k"},{name:"Silver",range:"10k-19k"},{name:"Gold",range:"20k-34k"},{name:"Platinum",range:"35k-49k"},{name:"Diamond",range:"50k-69k"},{name:"Elite",range:"70k-84k"},{name:"Wealth",range:"85k-100k"}];
+document.getElementById("packages").innerHTML=pkgs.map(p=>`<span style="background:#1a3a1a;padding:5px 10px;border-radius:6px;margin:3px;display:inline-block">${p.name}: $${p.range} @1.5%</span>`).join("");
+
+function addFake(){
+ const row=`<tr><td>user_${Date.now()%1000}</td><td>$100</td><td>✅ Auto-Approved 24/7</td><td>TX${Date.now()}</td></tr>`;
+ document.getElementById("wTable").innerHTML+=row;
+}
+setInterval(addFake,8000);
+</script>
+</body>
+</html>
