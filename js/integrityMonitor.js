@@ -1,6 +1,6 @@
 // Cedars of Wealth - Automated Integrity System
 // SHA256 STABLE: 7f3a9c2e4b - DO NOT MODIFY ENGINES
-// CedarAI Integrity Monitor v1.0
+// CedarAI Integrity Monitor v1.0 - FACTORY EDITION
 
 const CEDARS_INTEGRITY = {
   stableHash: "7f3a9c2e4b",
@@ -13,7 +13,8 @@ const CEDARS_INTEGRITY = {
     "profitReleaseEngine.js",
     "rubonAI_SystemLayers.js",
     "rubonAI_Trader.js",
-    "walletAPI.js"
+    "walletAPI.js",
+    "assemblyEngine.js"
   ],
   coreAPIs: {
     investorOnboarding: ["Registration API", "Referral API", "Identity Verification API", "Wallet Creation API", "Investor Profile API"],
@@ -50,19 +51,19 @@ const CEDARS_INTEGRITY = {
     let badge = document.getElementById("integrityBadge");
     if (badge) {
       badge.innerHTML = report.missing.length === 0 
-        ? `SHA256:${this.stableHash} STABLE | ${report.enginesOK}/8 Engines OK`
+        ? `SHA256:${this.stableHash} STABLE | ${report.enginesOK}/9 Engines OK | FACTORY READY`
         : `WARNING: Missing ${report.missing.join(", ")}`;
       badge.style.background = report.missing.length === 0 ? "#00c853" : "#ff1744";
     }
     
-    console.log(`[CEDARS INTEGRITY] ${report.enginesOK}/8 Engines OK`, report);
+    console.log(`[CEDARS INTEGRITY] ${report.enginesOK}/9 Engines OK`, report);
     return report;
   },
 
   startAutoMonitor: function() {
-    console.log("[CEDARS] Automated Integrity System ARMED - 24/7");
+    console.log("[CEDARS] Automated Integrity System ARMED - 24/7 - 9 ENGINES");
     this.checkIntegrity();
-    setInterval(() => this.checkIntegrity(), 30000); // Check every 30 sec
+    setInterval(() => this.checkIntegrity(), 30000);
   }
 };
 
