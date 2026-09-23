@@ -1,68 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>CEDARS Investor | COW-RUBONAI-1095 | HQ Singapore</title>
-<script src="../engines/assemblyEngine.js"></script>
-<style>
-body{background:#0a0a0a;color:#fff;font-family:monospace;padding:20px}
-.card{background:#111;border:1px solid #00ff88;padding:20px;border-radius:10px;margin:10px 0}
-button{background:#00ff88;color:#000;padding:12px 20px;border:none;border-radius:5px;font-weight:bold;cursor:pointer}
-input{padding:10px;width:90%;margin:5px 0;background:#222;color:#fff;border:1px solid #333}
-.hq{color:#00ff88;font-size:12px}
-.lock{color:orange}
-</style>
-</head>
-<body>
-<h2>💰 CEDARS INVESTOR DASHBOARD</h2>
-<div class="hq">🏢 One Raffles Place Tower One, 1 Raffles Place, Singapore 048616 | IP HIDDEN 500Y | LOCAL MODE</div>
-<div id="factory-status" style="margin:10px 0;color:#00ff88"></div>
-
-<div class="card">
-<h3>Invest Now - Min $50 | Profit Locked 24H</h3>
-<input id="invName" placeholder="Full Name">
-<input id="invEmail" placeholder="Email">
-<input id="invAmount" type="number" placeholder="Amount $ (Min 50)">
-<button onclick="invest()">INVEST NOW</button>
-<div id="investResult"></div>
+<div style="background:#000;border-top:2px solid #00ff88;padding:20px;margin-top:40px;font-family:monospace;font-size:11px;color:#888;text-align:center;line-height:1.6">
+🏢 One Raffles Place Tower One, 1 Raffles Place, Singapore 048616<br>
+Jurisdiction: Singapore (MAS Compliant) | Global Access: Worldwide<br>
+IP Policy: Origin Hidden 500 Years Behind CDN Edge | Entity: Cedars of Wealth Pte. Ltd.<br>
+Edge: Cloudflare + Fastly + GitHub Pages | Reverse Proxy: ACTIVE | No Origin A Record Exposed<br>
+Team: cryptome2030-6187 | COW-RUBONAI-1095 | SHA256:7f3a9c2e4b STABLE | ZERO ERROR
 </div>
-
-<div class="card">
-<h3>My Investments (Local Storage)</h3>
-<div id="myInvestments">No investments yet</div>
-</div>
-
-<script>
-function invest(){
-  const name=document.getElementById('invName').value;
-  const email=document.getElementById('invEmail').value;
-  const amount=parseFloat(document.getElementById('invAmount').value);
-  if(!name || !email || !amount){ alert("Fill all fields"); return; }
-  if(amount < 50){ alert("Min $50 required"); return; }
-  
-  const txid = "COW-"+Date.now();
-  const unlock = Date.now() + 24*60*60*1000;
-  const inv = {txid, name, email, amount, profit: amount*0.05, unlock, date: new Date().toLocaleString(), hq: "One Raffles Place Tower One, Singapore 048616"};
-  
-  let all = JSON.parse(localStorage.getItem('cow_investors')||'[]');
-  all.push(inv);
-  localStorage.setItem('cow_investors', JSON.stringify(all));
-  
-  document.getElementById('investResult').innerHTML = `<div style="color:#00ff88">✅ Invested $${amount} | TXID: ${txid}<br><span class="lock">🔒 Profit $${(amount*0.05).toFixed(2)} locked until ${new Date(unlock).toLocaleString()} (24H)</span><br>Team: cryptome2030-6187</div>`;
-  loadInvestments();
-}
-
-function loadInvestments(){
-  let all = JSON.parse(localStorage.getItem('cow_investors')||'[]');
-  if(all.length==0){ document.getElementById('myInvestments').innerHTML="No investments yet"; return; }
-  let html="";
-  all.forEach(i=>{
-    const locked = Date.now() < i.unlock;
-    html+= `<div style="border-bottom:1px solid #222;padding:10px 0">${i.txid} | $${i.amount} | Profit: $${i.profit.toFixed(2)} | ${locked?`<span class="lock">🔒 LOCKED until ${new Date(i.unlock).toLocaleString()}</span>`:`<span style="color:#00ff88">✅ UNLOCKED - Withdrawable</span>`} | ${i.name}</div>`;
-  });
-  document.getElementById('myInvestments').innerHTML=html;
-}
-loadInvestments();
-document.getElementById('factory-status').innerHTML = `🏭 ${CEDARS_FACTORY.layers} Layers | ${CEDARS_FACTORY.apis} APIs | ${CEDARS_FACTORY.sha256}`;
-</script>
-</body>
-</html>
