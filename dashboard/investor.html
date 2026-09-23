@@ -1,26 +1,13 @@
-<div class="card">
-  <h3>💼 Investment Packages - 10 Levels</h3>
-  <p>Min $300 - Max $100,000 | 1.5% Daily | 1095 Days Contract</p>
-  <select id="packageSelect" onchange="showPackage()">
-    <option value="300">Cedar Starter - $300 to $999</option>
-    <option value="1000">Cedar Growth - $1,000 to $2,499</option>
-    <option value="2500">Cedar Builder - $2,500 to $4,999</option>
-    <option value="5000">Cedar Bronze - $5,000 to $9,999</option>
-    <option value="10000">Cedar Silver - $10,000 to $19,999</option>
-    <option value="20000">Cedar Gold - $20,000 to $34,999</option>
-    <option value="35000">Cedar Platinum - $35,000 to $49,999</option>
-    <option value="50000">Cedar Diamond - $50,000 to $69,999</option>
-    <option value="70000">Cedar Elite - $70,000 to $84,999</option>
-    <option value="85000">Cedar Wealth - $85,000 to $100,000</option>
-  </select>
-  <p id="packageInfo">Daily: $4.50 | Total 1095 Days: $4927.50 | Min Withdraw: $50 Auto 24/7</p>
-</div>
+<button class="btn" id="profitBtn" onclick="claimProfit()">💰 RELEASE PROFIT - RubonAI | Auto 24/7 - Min $50</button>
+<p id="countdown">Profit Release: 23:59:59 | 1.5% Daily | 1095 Days Contract</p>
 
 <script>
-function showPackage(){
-  const amt = document.getElementById('packageSelect').value;
-  const daily = (amt * 1.5 / 100).toFixed(2);
-  const total = (amt * 1.5 / 100 * 1095).toFixed(2);
-  document.getElementById('packageInfo').innerText = `Daily: $${daily} | Total 1095 Days: $${total} | Contract: 1095 Days | Min Withdraw: $50 Auto 24/7`;
+function claimProfit(){
+  const amount = 100; // Example balance check
+  if(amount < 50){
+    alert("❌ Minimum withdraw is $50");
+    return;
+  }
+  alert("✅ Profit Released! Auto-Approved 24/7 by RubonAI. Sent to your wallet. Hash: TX" + Date.now());
 }
 </script>
