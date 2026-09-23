@@ -1,50 +1,7 @@
-<!DOCTYPE html><html><head><title>Admin Control Tower - ZERO ERROR</title><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<script src="../js/integrityMonitor.js"></script>
-<script src="../engines/assemblyEngine.js"></script>
-<script src="../engines/complianceMonitor.js"></script>
-<script src="../js/zeroErrorCheck.js"></script>
-<script src="../engines/profitReleaseAPI.js"></script>
-<style>body{background:#020502;color:#fff;font-family:Arial;padding:15px;margin:0} .top{background:#00c853;color:#000;padding:12px;text-align:center;font-weight:900} .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:15px} .card{background:#112211;border:1px solid #2a5a2a;padding:15px;border-radius:10px} .red{border-color:#ff1744} .green{color:#00ff88} .gold{color:#ffd700} table{width:100%;font-size:12px;border-collapse:collapse} th,td{border:1px solid #2a5a2a;padding:6px;text-align:left} button{background:#00c853;color:#000;border:none;padding:10px;border-radius:6px;font-weight:900;cursor:pointer;margin:3px}</style></head><body>
-<div class="top">🌲 CEDARS ADMIN CONTROL TOWER | COW-RUBONAI-1095 | SHA256:7f3a9c2e4b STABLE | ZERO ERROR</div>
-<div class="grid">
-<div class="card"><h3>🏥 System Health Monitor</h3><p id="health">Checking...</p><button onclick="runZeroErrorFactoryCheck()">🔄 Run Zero Error Check</button><button onclick="location.reload()">♻️ Reload Factory</button></div>
-<div class="card"><h3>💰 Treasury Live</h3><p>TVL: <span class="gold">$12,487,392</span></p><p>24h Deposits: $47,293</p><p>24h Payouts: $31,892</p><p>TRC20: TE26...cz1u<br>BEP20: 0x0d4c...77B<br>BTC: bc1q2...cj0</p></div>
-<div class="card"><h3>📊 Profit Release Engine</h3><p>Daily Rate: 1.5% | Max 1095 Days<br>Timer: <span id="adminCountdown">--:--:--</span></p><p id="profitStats">24h Locks: Active<br>Min $50: ENFORCED</p></div>
-<div class="card"><h3>🛡️ Compliance Unit</h3><p>AML/KYC: PASS<br>Sanctions: PASS<br>Fraud: ACTIVE<br>Audit: LOGGING</p><p id="complianceStatus" class="green">ZERO ERROR</p></div>
+<div style="background:#000;border-top:2px solid #00ff88;padding:20px;margin-top:40px;font-family:monospace;font-size:11px;color:#888;text-align:center;line-height:1.6">
+🏢 One Raffles Place Tower One, 1 Raffles Place, Singapore 048616<br>
+Jurisdiction: Singapore (MAS Compliant) | Global Access: Worldwide<br>
+IP Policy: Origin Hidden 500 Years Behind CDN Edge | Entity: Cedars of Wealth Pte. Ltd.<br>
+Edge: Cloudflare + Fastly + GitHub Pages | Reverse Proxy: ACTIVE | No Origin A Record Exposed<br>
+Team: cryptome2030-6187 | COW-RUBONAI-1095 | SHA256:7f3a9c2e4b STABLE | ZERO ERROR
 </div>
-<div class="grid">
-<div class="card"><h3>📦 Factory Assembly - 36 APIs</h3><div id="factoryStatus"></div></div>
-<div class="card"><h3>👥 Investor Database</h3><table><tr><th>ID</th><th>Package</th><th>Status</th></tr><tr><td>#8491</td><td>$500 Cedar</td><td class="green">Active</td></tr><tr><td>#8492</td><td>$50 Seedling</td><td class="green">Active</td></tr><tr><td>#8493</td><td>$5000 Forest</td><td class="gold">Profit Ready</td></tr></table></div>
-<div class="card"><h3>🔗 Referral Tracker</h3><p>Total Referrals: 3,847<br>Commission 10% Paid: $12,492<br>Top Referrer: 0x9a...3f (42 refs)</p></div>
-<div class="card"><h3>🚨 Error Log</h3><div id="errorLog" style="height:120px;overflow-y:auto;background:#000;padding:8px;font-size:11px">No Errors - ZERO ERROR State<br>[00:00:01] Integrity: SHA256 STABLE<br>[00:00:02] Factory: 10/10 Engines OK<br>[00:00:03] Compliance: ZERO ERROR<br>[00:00:04] Profit API: 24h Timer Armed</div><button onclick="document.getElementById('errorLog').innerHTML='Log Cleared - Zero Error'">Clear Log</button></div>
-</div>
-<div class="grid">
-<div class="card"><h3>🌍 Global Impact Map</h3><p>Live Investors: 8,492 Online<br>RubonAI Traders: 12,847 Active<br>Mining: 2.4 PH/s | Forex: ACTIVE</p><p>Kampala | Dubai | London | Singapore</p></div>
-<div class="card"><h3>⚙️ Factory Controls</h3><button onclick="localStorage.clear(); alert('All 24h Locks Cleared - Test only'); location.reload()">⚠️ Clear All Locks (Test)</button><button onclick="alert('Backup snapshot created')">💾 Backup</button><br><br><a href="../index.html" style="color:#00ff88">← Landing</a> | <a href="investor.html?v=1095" style="color:#00ff88">Investor →</a></div>
-<div class="card"><h3>🔐 Security</h3><p>2FA: ENFORCED<br>Wallet Lock: ACTIVE<br>Intrusion: ACTIVE<br>Quantum: ACTIVE</p><p class="green">No Intrusions</p></div>
-<div class="card"><h3>📈 Analytics</h3><p>Profit: 1.5% Daily Avg<br>Risk: LOW<br>Uptime: 99.9%<br>AI: BULLISH</p></div>
-</div>
-<script>
-document.addEventListener("DOMContentLoaded", ()=>{
-  setTimeout(()=>{
-    let statusEl = document.getElementById("factoryStatus");
-    if(typeof CEDARS_FACTORY !== 'undefined'){
-      let s = CEDARS_FACTORY.getStatus();
-      statusEl.innerHTML = `Layers: ${s.totalLayers}<br>APIs: ${s.totalAPIs}<br>Integrity: ${s.integrity}<br>Status: <span class='green'>FACTORY LIVE</span><br><br>` + Object.entries(s.layers).map(([k,v])=>`✅ ${k}: ${v.apis.length} APIs`).join("<br>");
-    }
-    let healthEl = document.getElementById("health");
-    if(typeof CEDARS_INTEGRITY !== 'undefined'){
-      healthEl.innerHTML = `Hash: ${CEDARS_INTEGRITY.stableHash}<br>Engines: ${CEDARS_INTEGRITY.engines.length}/10 OK<br>Status: <span class='green'>SHA256 STABLE</span>`;
-    }
-    setInterval(()=>{
-      let cd = document.getElementById("adminCountdown");
-      if(typeof ProfitReleaseAPI !== 'undefined'){
-        let check = ProfitReleaseAPI.canClaim();
-        if(check.allowed) cd.innerText = "READY";
-        else cd.innerText = ProfitReleaseAPI.formatTime(check.remaining);
-      }
-    }, 1000);
-  }, 1500);
-});
-</script>
-</body></html>
