@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head><title>Packages - RubonAI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{background:#0a1f0a;color:#fff;font-family:Arial;margin:0;padding:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px}
+.card{background:#123412;border:1px solid #2a5a2a;border-radius:12px;padding:20px;text-align:center}
+.card h3{color:#00ff88;margin:5px 0}
+.btn{background:#00c853;color:#000;padding:12px 24px;border:none;border-radius:8px;font-weight:bold;cursor:pointer;width:100%}
+.popular{border:2px solid gold;transform:scale(1.05)}
+.roi{font-size:24px;color:#00ff88;font-weight:bold}
+</style>
+</head>
+<body>
+<h1>🌲 Cedars of Wealth - 10 Investment Packages</h1>
+<p>Powered by RubonAI | 1.5% Daily ROI | 1095 Days Contract | Min Withdraw $50 Auto 24/7</p>
+
+<div class="grid">
+<div class="card"><h3>Cedar Starter</h3><p>$300 - $999</p><div class="roi">1.5% Daily</div><p>Daily: $4.5 - $14.98</p><p>Total 1095D: $4927 - $16404</p><p>1095 Days Contract</p><button class="btn" onclick="invest(300)">Invest Now</button></div>
+
+<div class="card"><h3>Cedar Growth</h3><p>$1,000 - $2,499</p><div class="roi">1.5% Daily</div><p>Daily: $15 - $37.48</p><p>Total 1095D: $16425 - $41035</p><p>1095 Days</p><button class="btn" onclick="invest(1000)">Invest Now</button></div>
+
+<div class="card"><h3>Cedar Builder</h3><p>$2,500 - $4,999</p><div class="roi">1.5% Daily</div><p>Daily: $37.5 - $74.98</p><p>Total 1095D: $41062 - $82071</p><button class="btn" onclick="invest(2500)">Invest Now</button></div>
+
+<div class="card"><h3>Cedar Bronze</h3><p>$5,000 - $9,999</p><div class="roi">1.5% Daily</div><p>Daily: $75 - $149.98</p><p>Total 1095D: $82125 - $164233</p><button class="btn" onclick="invest(5000)">Invest Now</button></div>
+
+<div class="card popular"><h3>⭐ Cedar Silver [POPULAR]</h3><p>$10,000 - $19,999</p><div class="roi">1.5% Daily</div><p>Daily: $150 - $299.98</p><p>Total 1095D: $164250 - $328233</p><button class="btn" onclick="invest(10000)">Invest Now</button></div>
+
+<div class="card"><h3>Cedar Gold</h3><p>$20,000 - $34,999</p><div class="roi">1.5% Daily</div><p>Daily: $300 - $524.98</p><p>Total 1095D: $328500 - $574598</p><button class="btn" onclick="invest(20000)">Invest Now</button></div>
+
+<div class="card"><h3>Cedar Platinum</h3><p>$35,000 - $49,999</p><div class="roi">1.5% Daily</div><p>Daily: $525 - $749.98</p><p>Total 1095D: $574875 - $820963</p><button class="btn" onclick="invest(35000)">Invest Now</button></div>
+
+<div class="card"><h3>Cedar Diamond</h3><p>$50,000 - $69,999</p><div class="roi">1.5% Daily</div><p>Daily: $750 - $1049.98</p><p>Total 1095D: $821250 - $1,149,218</p><button class="btn" onclick="invest(50000)">Invest Now</button></div>
+
+<div class="card"><h3>Cedar Elite</h3><p>$70,000 - $84,999</p><div class="roi">1.5% Daily</div><p>Daily: $1050 - $1274.98</p><p>Total 1095D: $1,149,750 - $1,395,328</p><button class="btn" onclick="invest(70000)">Invest Now</button></div>
+
+<div class="card popular"><h3>💎 Cedar Wealth [MAX]</h3><p>$85,000 - $100,000</p><div class="roi">1.5% Daily</div><p>Daily: $1275 - $1500</p><p>Total 1095D: $1,395,375 - $1,642,500</p><button class="btn" onclick="invest(85000)">Invest Now</button></div>
+</div>
+
+<div style="background:#1a3a1a;padding:20px;border-radius:12px;margin-top:20px;text-align:center">
+<h3>Withdraw Rules</h3>
+<p>Min Withdraw: <b>$50</b> | Automated Approval: <b>24/7</b> | Gas Fee Optimizer Active | RubonAI Ledger Hashed</p>
+</div>
+
+<script>
+function invest(amount){
+  const daily = (amount*1.5/100).toFixed(2);
+  alert(`✅ Package Selected: $${amount}\nDaily 1.5%: $${daily}\nContract: 1095 Days\nRubonAI will start trading instantly`);
+}
+</script>
+</body>
+</html>
