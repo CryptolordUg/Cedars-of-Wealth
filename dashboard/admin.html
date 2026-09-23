@@ -1,7 +1,10 @@
-<div style="background:#000;border-top:2px solid #00ff88;padding:20px;margin-top:40px;font-family:monospace;font-size:11px;color:#888;text-align:center;line-height:1.6">
-🏢 One Raffles Place Tower One, 1 Raffles Place, Singapore 048616<br>
-Jurisdiction: Singapore (MAS Compliant) | Global Access: Worldwide<br>
-IP Policy: Origin Hidden 500 Years Behind CDN Edge | Entity: Cedars of Wealth Pte. Ltd.<br>
-Edge: Cloudflare + Fastly + GitHub Pages | Reverse Proxy: ACTIVE | No Origin A Record Exposed<br>
-Team: cryptome2030-6187 | COW-RUBONAI-1095 | SHA256:7f3a9c2e4b STABLE | ZERO ERROR
-</div>
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin - Cedars of Wealth</title>
+<style>body{margin:0;background:#000;color:#fff;font-family:monospace;padding:20px} .card{background:#0a0a0a;border:1px solid #ff0066;padding:20px;border-radius:10px;max-width:800px;margin:20px auto} input,button{padding:10px;margin:5px;background:#000;color:#ff0066;border:1px solid #ff0066;border-radius:5px} button{background:#ff0066;color:#fff;cursor:pointer} table{width:100%;border-collapse:collapse;margin-top:15px} th,td{border:1px solid #222;padding:8px;font-size:12px;text-align:left} th{color:#ff0066} .footer{margin-top:40px;text-align:center;color:#666;font-size:11px;line-height:1.6;border-top:1px solid #222;padding-top:20px}</style>
+</head><body>
+<div class="card"><h2 style="color:#ff0066;text-align:center">ADMIN DASHBOARD - COW-RUBONAI-1095</h2>
+<input id="pass" type="password" placeholder="Admin Password"><button onclick="login()">UNLOCK</button>
+<div id="data" style="display:none"><h3>Investors</h3><table id="tbl"><tr><th>Name</th><th>Amount</th><th>Time</th></tr></table><button onclick="clearAll()">CLEAR ALL</button></div></div>
+<div class="footer">One Raffles Place Tower One, 1 Raffles Place, Singapore 048616<br>Jurisdiction: Singapore (MAS Compliant) | Global Access: Worldwide</div>
+<script>function login(){if(document.getElementById('pass').value==='COW-RUBONAI-1095'){document.getElementById('data').style.display='block';load()}else alert('Wrong password')}function load(){const t=document.getElementById('tbl');Object.keys(localStorage).forEach(k=>{if(k.startsWith('cow_inv_')){try{const d=JSON.parse(localStorage.getItem(k));const r=t.insertRow();r.insertCell(0).innerText=d.name;r.insertCell(1).innerText='$'+d.amount;r.insertCell(2).innerText=d.time}catch(e){}}})}function clearAll(){if(confirm('Clear?')){Object.keys(localStorage).forEach(k=>{if(k.startsWith('cow_inv_'))localStorage.removeItem(k)});location.reload()}}</script>
+</body></html>
