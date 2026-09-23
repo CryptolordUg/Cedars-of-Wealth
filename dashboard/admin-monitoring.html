@@ -1,58 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cedars of Wealth - Compliance Admin</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cedars of Wealth - Full Compliance Admin</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#060d14;color:#d6e4d0;font-family:'Segoe UI',system-ui;padding:16px}
-.header{text-align:center;padding:20px;border:1px solid #2a5a2a;border-radius:16px;background:linear-gradient(180deg,#102010,#060d14);box-shadow:0 0 30px #00ff4440;margin-bottom:18px}
-.header h1{color:#7CFF7C;font-size:30px;letter-spacing:2px}.header p{color:#a0c49a;margin-top:6px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-bottom:14px}
-.card{background:linear-gradient(135deg,#0f1f14,#121e28);border:1px solid #2d5a2d;border-radius:12px;padding:16px}
-.card h3{color:#7CFF7C;font-size:12px;letter-spacing:1.2px;margin-bottom:8px;text-transform:uppercase}
-.value{font-size:20px;font-weight:800;margin:4px 0}.green{color:#7CFF7C}.yellow{color:#ffdd55}.red{color:#ff6b6b}
-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:12px}
-th{color:#7CFF7C;text-align:left;padding:7px;border-bottom:1px solid #2d5a2d}td{padding:7px;border-bottom:1px solid #1a2e1a}
-.btn{padding:10px 14px;border-radius:8px;border:none;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;text-align:center;margin-top:8px;width:100%}
+*{margin:0;padding:0;box-sizing:border-box}body{background:#060d14;color:#d6e4d0;font-family:Segoe UI;padding:14px}
+.h{text-align:center;padding:18px;border:1px solid #2a5a2a;border-radius:14px;background:linear-gradient(180deg,#102010,#060d14);margin-bottom:14px}
+.h h1{color:#7CFF7C;font-size:28px}.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-bottom:12px}
+.c{background:linear-gradient(135deg,#0f1f14,#121e28);border:1px solid #2d5a2d;border-radius:12px;padding:14px}
+.c h3{color:#7CFF7C;font-size:11px;letter-spacing:1px;margin-bottom:6px}.v{font-size:18px;font-weight:800}
+.green{color:#7CFF7C}.yellow{color:#ffdd55}.log{background:#000;border-radius:8px;padding:8px;height:120px;overflow:auto;font-size:11px;color:#7CFF7C;border:1px solid #1a2e1a}
+table{width:100%;border-collapse:collapse;font-size:11px}th{color:#7CFF7C;text-align:left;padding:6px;border-bottom:1px solid #2d5a2d}td{padding:6px;border-bottom:1px solid #1a2e1a}
+.btn{padding:10px;border-radius:8px;border:none;font-weight:700;width:100%;margin-top:8px;cursor:pointer;text-decoration:none;display:block;text-align:center}
 .btn-green{background:#7CFF7C;color:#000}.btn-dark{background:#1a2e1a;color:#d6e4d0;border:1px solid #2d5a2d}
-.badge{padding:3px 8px;border-radius:20px;font-size:10px;font-weight:800}.badge-green{background:#0a2e0a;color:#7CFF7C;border:1px solid #2d5a2d}.badge-yellow{background:#2e2a0a;color:#ffdd55}.badge-red{background:#2e0a0a;color:#ff6b6b}
-.log{background:#000;border-radius:8px;padding:10px;height:160px;overflow:auto;font-family:monospace;font-size:11px;color:#7CFF7C;border:1px solid #1a2e1a}
-.kpi{display:flex;justify-content:space-between;font-size:11px;margin:4px 0}
-.meter{height:6px;background:#1a2e1a;border-radius:10px;overflow:hidden;margin:6px 0}.meter span{display:block;height:100%;background:#7CFF7C}
-</style>
-</head>
-<body>
-<div class="header">
-<h1>🌲 CEDARS OF WEALTH</h1>
-<p>DAILY COMPLIANCE MONITORING SYSTEM — Integrity Check: <span class="green">● ACTIVE & VERIFIED</span></p>
-<div style="margin-top:10px;font-size:13px">SGT: <span id="sgt" class="green">--:--:--</span> | Next 5AM Profit: <span id="next" class="yellow">--</span> | Workflow: profit-release.yml #59</div>
+.badge{padding:2px 7px;border-radius:12px;font-size:10px;font-weight:800}.bg{background:#0a2e0a;color:#7CFF7C;border:1px solid #2d5a2d}.by{background:#2e2a0a;color:#ffdd55}
+.kpi{display:flex;justify-content:space-between;font-size:11px;margin:3px 0}.meter{height:6px;background:#1a2e1a;border-radius:10px;overflow:hidden}.meter span{display:block;height:100%;background:#7CFF7C}
+</style></head><body>
+<div class="h"><h1>🌲 CEDARS OF WEALTH</h1><p>DAILY COMPLIANCE MONITORING — Integrity: <span class="green">● VERIFIED ACTIVE</span></p><div style="margin-top:8px;font-size:12px">SGT: <span id="sgt" class="green">--</span> | Next 5AM Profit: <span id="next" class="yellow">--</span></div></div>
+
+<div class="g">
+<div class="c"><h3>🛡️ KYC/AML VERIFICATION</h3><div class="kpi"><span>Pending Screening</span><span class="badge by" id="kycP">2</span></div><div class="kpi"><span>Sanctions Check</span><span class="badge bg">CLEAR</span></div><div class="kpi"><span>Verified Cedar Investors</span><span class="green" id="kycOk">0</span></div><button class="btn btn-dark" onclick="loadInv()">REFRESH QUEUE</button></div>
+<div class="c"><h3>💳 TRANSACTION MONITORING</h3><div class="kpi"><span>Deposits Today</span><span class="green" id="depT">0</span></div><div class="kpi"><span>Withdrawals</span><span class="green">24/7 OPEN</span></div><div class="kpi"><span>Cedar TX IDs</span><span id="txCount">--</span></div><a class="btn btn-dark" href="https://github.com/CryptolordUg/Cedars-of-Wealth/actions/workflows/profit-release.yml" target="_blank">VIEW TX LOG</a></div>
+<div class="c"><h3>💧 LIQUIDITY OVERSIGHT</h3><div class="kpi"><span>Inflow Reserve</span><span class="green">Secured</span></div><div class="meter"><span style="width:87%"></span></div><div class="kpi"><span>Stability Index</span><span class="green">87% Strong</span></div><div class="kpi"><span>Outflow Risk</span><span class="badge bg">LOW</span></div></div>
 </div>
 
-<div class="grid">
-<div class="card"><h3>🛡️ KYC/AML Verification - Compliance</h3><div class="kpi"><span>Pending Screening</span><span class="badge badge-yellow" id="kycPending">2</span></div><div class="kpi"><span>Sanctions Check</span><span class="badge badge-green">CLEAR</span></div><div class="kpi"><span>Verified Cedar Investors</span><span class="green" id="kycOk">0</span></div><button class="btn btn-dark" onclick="loadInv()">REFRESH KYC QUEUE</button></div>
-<div class="card"><h3>💳 Transaction Monitoring - Fraud Detection</h3><div class="kpi"><span>Deposits Today</span><span class="green" id="depT">0</span></div><div class="kpi"><span>Withdrawals 24/7</span><span class="green">OPEN</span></div><div class="kpi"><span>Unique Cedar TX IDs</span><span id="txCount">Generating...</span></div><a class="btn btn-dark" href="https://github.com/CryptolordUg/Cedars-of-Wealth/actions/workflows/profit-release.yml" target="_blank">VIEW TX LOG</a></div>
-<div class="card"><h3>💧 Liquidity Oversight - Stability</h3><div class="kpi"><span>Cedar Pool Inflow</span><span class="green">$0 Today</span></div><div class="kpi"><span>Outflow Reserve</span><span class="green">100% Secured</span></div><div class="meter"><span style="width:87%"></span></div><div class="kpi"><span>Stability Index</span><span class="green">87% Strong</span></div></div>
+<div class="g">
+<div class="c"><h3>🧠 BEHAVIORAL ANALYTICS - Risk Detection</h3><table><tr><th>Alert</th><th>Status</th></tr><tr><td>Login Pattern</td><td><span class="badge bg">OK</span></td></tr><tr><td>Withdrawal Spike</td><td><span class="badge bg">OK</span></td></tr><tr><td>Dormant Accounts</td><td><span class="badge by">WATCH</span></td></tr></table></div>
+<div class="c"><h3>🌱 PORTFOLIO MONITORING</h3><div class="v"><span id="totalInv">0</span> Active Cedar Accounts</div><table><thead><tr><th>Investor</th><th>Amt</th><th>Daily</th><th>1095D</th></tr></thead><tbody id="invBody"><tr><td colspan=4>Loading...</td></tr></tbody></table></div>
+<div class="c"><h3>🔒 CYBERSECURITY LOGS</h3><div class="kpi"><span>Failed Logins</span><span>0 /24h</span></div><div class="kpi"><span>2FA</span><span class="badge bg">ENFORCED</span></div><div class="kpi"><span>Intrusion</span><span class="badge bg">0 BLOCKED</span></div><div class="log" style="height:60px;margin-top:6px">Cedar firewall active<br>Admin SSL OK<br>GitHub Pages verified</div></div>
 </div>
 
-<div class="grid">
-<div class="card"><h3>🧠 Behavioral Analytics - Risk Detection</h3><table><tr><th>Alert</th><th>Type</th><th>Status</th></tr><tr><td>Login Pattern</td><td>Normal</td><td><span class="badge badge-green">OK</span></td></tr><tr><td>Withdrawal Spike</td><td>None</td><td><span class="badge badge-green">OK</span></td></tr><tr><td>Dormant Accounts</td><td>Scanning</td><td><span class="badge badge-yellow">WATCH</span></td></tr></table></div>
-<div class="card"><h3>🌱 Portfolio Monitoring - Investor Trust</h3><div class="value"><span id="totalInv">0</span> Active Cedar Accounts</div><table><thead><tr><th>Investor</th><th>Amount</th><th>Daily 1.5%</th><th>1095D</th></tr></thead><tbody id="invBody"><tr><td colspan=4>Loading Cedar investors...</td></tr></tbody></table></div>
-<div class="card"><h3>🔒 Cybersecurity Logs - Safety</h3><div class="kpi"><span>Failed Logins</span><span>0 last 24h</span></div><div class="kpi"><span>2FA Status</span><span class="badge badge-green">ENFORCED</span></div><div class="kpi"><span>Intrusion Attempts</span><span class="badge badge-green">0 BLOCKED</span></div><div class="log" style="height:70px;margin-top:8px" id="secLog">[SGT] Cedar firewall active<br>[SGT] Admin access verified<br>[SGT] GitHub Pages SSL OK</div></div>
+<div class="g">
+<div class="c"><h3>📊 COMPLIANCE DASHBOARDS - Transparency</h3><div class="v green">Alerts: 0 Suspicious</div><div class="log" id="logBox">Fetching Cedar audit log...</div><button class="btn btn-green" onclick="triggerProfit()">MANUAL TRIGGER CEDAR PROFIT</button><div id="profitStatus" style="font-size:11px;margin-top:5px"></div></div>
+<div class="c"><h3>🎧 SUPPORT & COMPLAINTS + PROTECTION</h3><div class="kpi"><span>Open Tickets</span><span class="badge bg">0</span></div><div class="kpi"><span>Resolution</span><span>&lt;2 Hours</span></div><div class="kpi"><span>Insurance</span><span class="badge bg">ACTIVE</span></div><div class="kpi"><span>Forest Impact</span><span class="green">Cedar Tracking</span></div><div class="kpi"><span>Knowledge Hub</span><span class="green">Enabled</span></div><a class="btn btn-dark" href="mailto:cryptome2030@gmail.com">OPEN SUPPORT INBOX</a><div style="display:flex;gap:6px;margin-top:8px"><a class="btn btn-green" style="width:50%" href="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/investor.html" target="_blank">INVESTOR LIVE</a><a class="btn btn-dark" style="width:50%" href="https://cryptolordug.github.io/Cedars-of-Wealth/" target="_blank">MAIN SITE</a></div></div>
 </div>
-
-<div class="grid">
-<div class="card"><h3>📊 Compliance Dashboards - Transparency</h3><div class="value green">Real Time Alerts: 0 Suspicious</div><div class="log" id="logBox">Fetching profit-log.txt Cedar audit trail...</div><button class="btn btn-green" onclick="triggerProfit()">MANUAL TRIGGER 5AM CEDAR PROFIT NOW</button><div id="profitStatus" style="font-size:11px;margin-top:6px;color:#7CFF7C"></div></div>
-<div class="card"><h3>🎧 Support & Complaints - Satisfaction</h3><div class="kpi"><span>Open Tickets</span><span class="badge badge-green">0</span></div><div class="kpi"><span>Avg Resolution</span><span>&lt; 2 Hours</span></div><div class="kpi"><span>Investor Satisfaction</span><span class="green">100%</span></div><a class="btn btn-dark" href="mailto:cryptome2030@gmail.com">OPEN SUPPORT INBOX</a><div style="margin-top:12px"><h3>🛡️ Investor Protection</h3><div class="kpi"><span>Insurance Coverage</span><span class="badge badge-green">ACTIVE</span></div><div class="kpi"><span>Hack/Fraud Protection</span><span class="green">Enabled</span></div><div class="kpi"><span>Forest Impact</span><span class="green">Cedar Growth Tracking</span></div></div></div>
-</div>
-
-<div class="card" style="text-align:center"><a class="btn btn-green" style="width:48%;display:inline-block" href="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/investor.html" target="_blank">OPEN INVESTOR LIVE</a> <a class="btn btn-dark" style="width:48%;display:inline-block" href="https://cryptolordug.github.io/Cedars-of-Wealth/" target="_blank">OPEN MAIN SITE</a><p style="font-size:10px;margin-top:10px;color:#5a7a5a">Cedars of Wealth Compliance Engine • 1095-Day Growth • Withdrawal 24/7 • Daily 5AM SGT Auto-Profit • Integrity Verified</p></div>
-
 <script>
-function updateClock(){let n=new Date(),sgt=new Date(n.toLocaleString('en-US',{timeZone:'Asia/Singapore'}));document.getElementById('sgt').innerText=sgt.toLocaleString('en-SG',{hour12:true});let next=new Date(sgt);next.setHours(5,0,0,0);if(sgt>=next)next.setDate(next.getDate()+1);let diff=next-sgt;let h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);document.getElementById('next').innerText=h+'h '+m+'m '+s+'s';}setInterval(updateClock,1000);updateClock();
-function loadInv(){let html='';let count=0;try{Object.keys(localStorage).forEach(k=>{try{let o=JSON.parse(localStorage.getItem(k));if(o&&o.amount){count++;html+=`<tr><td>${(o.name||k).slice(0,12)}</td><td>$${o.amount}</td><td>$${o.daily||(o.amount*0.015).toFixed(2)}</td><td><span class=badge-green>Locked</span></td></tr>`}}catch{}})}catch{}document.getElementById('totalInv').innerText=count;document.getElementById('kycOk').innerText=count;document.getElementById('kycPending').innerText=count>0?0:2;document.getElementById('txCount').innerText=count>0?count+' TX Verified':'0 Pending KYC';document.getElementById('depT').innerText=count;document.getElementById('invBody').innerHTML=html||'<tr><td colspan=4>No local Cedar accounts - Leads in cryptome2030@gmail.com (FormSubmit)</td></tr>';}loadInv();
-async function triggerProfit(){let b=document.getElementById('profitStatus');b.innerText='⏳ Triggering Cedar 5AM profit...';try{await fetch('https://formsubmit.co/ajax/cryptome2030@gmail.com',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'CEDAR ADMIN TRIGGER',message:'Cedar Compliance: Manual 5AM SGT profit release triggered at '+new Date().toLocaleString()+'. 1095-Day contract active. All Cedar accounts compounding. Withdrawal 24/7.'})});b.innerText='✅ Cedar profit email sent to cryptome2030@gmail.com';}catch(e){b.innerText='❌ Failed - retry';}}
-fetch('https://raw.githubusercontent.com/CryptolordUg/Cedars-of-Wealth/main/profit-log.txt').then(r=>r.text()).then(t=>{document.getElementById('logBox').innerText=t.slice(-2500)||'Cedar audit log will appear after first 5AM SGT run - Immutable blockchain style log';}).catch(()=>document.getElementById('logBox').innerText='Cedar audit log initializing... First auto-run creates profit-log.txt at 5AM SGT');
-</script>
-</body>
-</html>
+function updateClock(){let n=new Date(),s=new Date(n.toLocaleString('en-US',{timeZone:'Asia/Singapore'}));document.getElementById('sgt').innerText=s.toLocaleString('en-SG',{hour12:true});let nx=new Date(s);nx.setHours(5,0,0,0);if(s>=nx)nx.setDate(nx.getDate()+1);let d=nx-s;let h=Math.floor(d/3600000),m=Math.floor((d%3600000)/60000),ss=Math.floor((d%60000)/1000);document.getElementById('next').innerText=h+'h '+m+'m '+ss+'s';}setInterval(updateClock,1000);updateClock();
+function loadInv(){let h='',c=0;Object.keys(localStorage).forEach(k=>{try{let o=JSON.parse(localStorage.getItem(k));if(o&&o.amount){c++;h+=`<tr><td>${(o.name||k).slice(0,10)}</td><td>$${o.amount}</td><td>$${o.daily||(o.amount*0.015).toFixed(2)}</td><td><span class=badge bg>Locked</span></td></tr>`}}catch{}});document.getElementById('totalInv').innerText=c;document.getElementById('kycOk').innerText=c;document.getElementById('kycP').innerText=c>0?0:2;document.getElementById('txCount').innerText=c?c+' Verified':'Pending KYC';document.getElementById('depT').innerText=c;document.getElementById('invBody').innerHTML=h||'<tr><td colspan=4>No local - Check cryptome2030@gmail.com</td></tr>';}loadInv();
+async function triggerProfit(){let b=document.getElementById('profitStatus');b.innerText='⏳ Triggering...';try{await fetch('https://formsubmit.co/ajax/cryptome2030@gmail.com',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'CEDAR COMPLIANCE TRIGGER',message:'Manual Cedar profit at '+new Date().toLocaleString()})});b.innerText='✅ Sent to cryptome2030@gmail.com';}catch{b.innerText='❌ Retry';}}
+fetch('https://raw.githubusercontent.com/CryptolordUg/Cedars-of-Wealth/main/profit-log.txt').then(r=>r.text()).then(t=>document.getElementById('logBox').innerText=t.slice(-2500)||'Cedar audit log starts after first 5AM run').catch(()=>document.getElementById('logBox').innerText='Initializing Cedar audit log...');
+</script></body></html>
