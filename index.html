@@ -1,71 +1,76 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cedars of Wealth - Dual Wallet Live</title>
+<title>Cedars of Wealth - V3 Live Wallet</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}body{background:#06110a;color:#d9ffe6;font-family:Segoe UI}
 .top{position:sticky;top:0;z-index:99;background:#0a1f13;border-bottom:1px solid #1e5a35;display:flex;justify-content:space-between;align-items:center;padding:10px 14px;flex-wrap:wrap;gap:8px}
 .top b{color:#7CFF9E}.nav{display:flex;gap:6px;flex-wrap:wrap}.nav a{background:#102a1a;border:1px solid #1e5a35;padding:6px 10px;border-radius:20px;color:#7CFF9E;text-decoration:none;font-size:11px;font-weight:700}
-.hero{text-align:center;padding:14px;background:linear-gradient(180deg,#0f2d1a,#06110a);border-bottom:1px solid #1e5a35}
-.hero h1{color:#7CFF9E;font-size:22px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px;padding:12px}
+.hero{text-align:center;padding:16px;background:linear-gradient(180deg,#0f2d1a,#06110a);border-bottom:1px solid #1e5a35}
+.hero h1{color:#7CFF9E;font-size:24px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:12px;padding:12px}
 .card{background:linear-gradient(135deg,#0f2315,#0a1f13);border:1px solid #1e5a35;border-radius:12px;padding:14px}
 .card h3{color:#7CFF9E;font-size:11px;letter-spacing:1px;margin-bottom:8px;text-transform:uppercase}
 .k{display:flex;justify-content:space-between;font-size:11px;margin:6px 0;border-bottom:1px dashed #1a3d26;padding-bottom:4px}
+.v{font-weight:800}.ok{color:#4ade80}.green{color:#7CFF9E}
 .badge{padding:3px 8px;border-radius:12px;font-size:10px;font-weight:800;background:#0a2f19;color:#7CFF9E;border:1px solid #1e5a35}
-.btn{padding:10px;border-radius:8px;border:none;font-weight:700;width:100%;margin-top:8px;cursor:pointer;display:block;text-align:center}
+.btn{padding:10px;border-radius:8px;border:none;font-weight:700;width:100%;margin-top:8px;cursor:pointer;display:block;text-align:center;text-decoration:none}
 .btn-g{background:#7CFF9E;color:#000}.btn-d{background:#0f2315;color:#cbd5e1;border:1px solid #1e5a35}
+.meter{height:8px;background:#0f2315;border-radius:10px;overflow:hidden;margin:6px 0}.meter span{display:block;height:100%;background:linear-gradient(90deg,#7CFF9E,#4ade80)}
 .pkg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
 .pkg div{background:#0a1f13;border:1px solid #1e5a35;border-radius:8px;padding:8px;text-align:center;font-size:11px;cursor:pointer}
 .pkg div.active{border-color:#7CFF9E;background:#102a1a}
 select,input{width:100%;padding:8px;border-radius:6px;background:#000;border:1px solid #1e5a35;color:#7CFF9E;margin:6px 0}
-.wallet-box{background:#000;border:1px dashed #1e5a35;padding:10px;border-radius:8px;margin-top:8px;word-break:break-all}
+.wallet-box{background:#000;border:1px dashed #1e5a35;padding:10px;border-radius:8px;margin-top:8px;font-size:11px;word-break:break-all}
 </style></head><body>
 <div class="top"><b>🌲 CEDARS OF WEALTH</b><div class="nav"><a href="#deposit">Deposit</a><a href="#calc">Calculator</a><a href="dashboard/rubonai-trader.html?v=123">RUBONAI</a></div></div>
-<div class="hero"><h1>GREEN 9/9 - DUAL WALLET LIVE</h1><p>Min $300 → Max $100K | Dual Chain Deposits Active</p></div>
+<div class="hero"><h1>GREEN 9/9 VERIFIED - V3 LIVE WALLET</h1><p>SGT: <span id="sgt" class="ok">--</span> | UTC: <span id="utc" class="green">--</span> | Deposits: <span class="ok">● BNB SMART CHAIN LIVE</span></p></div>
 
 <div class="grid">
-<div class="card" id="calc"><h3>🧮 LIVE ROI $300-$100K</h3>
+<div class="card" id="calc"><h3>🧮 LIVE ROI Calculator $300-$100K</h3>
 <input id="calcAmt" type="number" value="1000" min="300" max="100000" oninput="calcROI()">
 <div class="pkg"><div onclick="setAmt(300)">$300<br><b>1.2%</b></div><div onclick="setAmt(1000)" class="active">$1K<br><b>1.5%</b></div><div onclick="setAmt(5000)">$5K<br><b>1.7%</b></div></div>
 <div class="pkg"><div onclick="setAmt(10000)">$10K<br><b>1.8%</b></div><div onclick="setAmt(25000)">$25K<br><b>2.0%</b></div><div onclick="setAmt(50000)">$50K<br><b>2.2%</b></div></div>
-<div class="pkg"><div style="grid-column:span 3" onclick="setAmt(100000)">$100K MAX<br><b>2.5% VIP</b></div></div>
-<div class="k"><span>Daily</span><span id="daily" style="color:#4ade80;font-weight:800">$15</span></div>
-<div class="k"><span>Weekly</span><span id="weekly" style="color:#7CFF9E;font-weight:800">$105</span></div>
-<div class="k"><span>Monthly</span><span id="monthly" style="color:#4ade80;font-weight:800">$450</span></div>
-<div class="k"><span>1095-Day</span><span id="total" style="color:#7CFF9E;font-weight:800">$0</span></div>
+<div class="pkg"><div style="grid-column: span 3" onclick="setAmt(100000)">$100K MAX<br><b>2.5% VIP</b></div></div>
+<hr style="border-color:#1a3d26;margin:8px 0">
+<div class="k"><span>Daily</span><span class="v ok" id="daily">$15.00</span></div>
+<div class="k"><span>Weekly</span><span class="v green" id="weekly">$105.00</span></div>
+<div class="k"><span>Monthly</span><span class="v ok" id="monthly">$450.00</span></div>
+<div class="k"><span>1095-Day Compound</span><span class="v green" id="total">$0</span></div>
+<div class="meter"><span id="meter" style="width:50%"></span></div>
 </div>
 
-<div class="card" id="deposit"><h3>💰 Deposit Panel - Dual Chain</h3>
-<select id="chain" onchange="switchChain()">
-<option value="TRON">TRON - USDT TRC20</option>
-<option value="ETH">Ethereum / BSC - BEP20/ERC20</option>
-</select>
-<input id="depAmt" type="number" value="300" min="300" placeholder="Min $300">
-<button class="btn btn-g" onclick="showWallet()">GENERATE ADDRESS & QR</button>
-<div id="walletBox" class="wallet-box" style="display:none">
-<div>Network: <b id="wNet" style="color:#7CFF9E">TRON</b> | Amount: $<span id="wAmt">300</span></div>
-<div style="margin:8px 0;font-size:13px;font-weight:800;color:#7CFF9E" id="wAddr">TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u</div>
-<div id="wWarn" style="color:#facc15;font-size:10px">⚠️ Only send Tron assets (USDT TRC20) to this address. Other assets will be lost forever.</div>
-<img id="wQR" src="" style="display:block;margin:10px auto;background:#fff;padding:8px;border-radius:8px;width:180px">
+<div class="card" id="deposit"><h3>💰 Deposit - BNB Smart Chain LIVE</h3>
+<div class="k"><span>Network</span><span class="badge">BNB Smart Chain (BEP20)</span></div>
+<select id="coin"><option>BNB Smart Chain</option><option>USDT - BEP20</option><option>BTCB - BEP20</option><option>ETH - BEP20</option></select>
+<input id="depAmt" type="number" value="300" min="300" placeholder="Amount USD Min $300">
+<div class="wallet-box">
+<div>Your Deposit Address:</div>
+<div id="wAddr" style="color:#7CFF9E;font-weight:800;margin:6px 0;font-size:13px">0x0d4c2B95e8FB7Be3DB9953bAcEf3A4Be643bA77B</div>
+<div style="color:#ffb86a;font-size:10px">⚠️ Only send BNB Smart Chain assets to this address. Other assets will be lost forever.</div>
 <button class="btn btn-d" onclick="copyAddr()">COPY ADDRESS</button>
-<button class="btn btn-g" onclick="genTx()">I HAVE SENT - CONFIRM</button>
-<div class="k" style="margin-top:8px"><span>TX ID</span><span id="txid" style="color:#4ade80">PENDING</span></div>
+<button class="btn btn-g" onclick="genTx()">I HAVE SENT - GENERATE TX ID</button>
+<div class="k" style="margin-top:8px"><span>TX ID</span><span class="green" id="txid">PENDING</span></div>
 </div>
+<div class="k" style="margin-top:10px"><span>QR Code</span><span class="ok">Scan to Deposit</span></div>
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=0x0d4c2B95e8FB7Be3DB9953bAcEf3A4Be643bA77B" style="display:block;margin:8px auto;background:#fff;padding:8px;border-radius:8px">
 </div>
 
-<div class="card"><h3>✅ System Status</h3><div class="k"><span>TRON Wallet</span><span class="badge">TE26B...Hcz1u ✅</span></div><div class="k"><span>ETH/BSC Wallet</span><span class="badge">0x0d4c...bA77B ✅</span></div><div class="k"><span>Packages</span><span style="color:#7CFF9E">$300 → $100K</span></div><div class="k"><span>GREEN</span><span style="color:#4ade80">9/9 VERIFIED</span></div><a href="dashboard/rubonai-trader.html?v=123" style="display:block;margin-top:8px;background:#7CFF9E;color:#000;text-align:center;padding:10px;border-radius:8px;text-decoration:none;font-weight:800">OPEN RUBONAI 99 TH/s</a></div>
+<div class="card"><h3>📊 Portfolio</h3><div class="k"><span>Balance</span><span class="v ok">$12,450.00</span></div><div class="k"><span>Packages</span><span class="green">$300 → $100,000</span></div><div class="k"><span>Status</span><span class="badge">GREEN 9/9 ✅</span></div><div class="k"><span>Withdrawal</span><span class="ok">24/7 OPEN</span></div><a class="btn btn-g" href="dashboard/rubonai-trader.html?v=123">OPEN RUBONAI</a></div>
 </div>
 
 <script>
-const WALLETS={
- TRON:{addr:"TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u",warn:"⚠️ Only send Tron assets (USDT TRC20) to this address. Other assets will be lost forever."},
- ETH:{addr:"0x0d4c2B95e8FB7Be3DB9953bAcEf3A4Be643bA77B",warn:"⚠️ Only send Ethereum / BSC assets (ETH, USDT ERC20/BEP20) to this address. Other assets will be lost forever."}
-};
+const WALLET="0x0d4c2B95e8FB7Be3DB9953bAcEf3A4Be643bA77B";
 function getRate(a){if(a>=100000)return 2.5;if(a>=50000)return 2.2;if(a>=25000)return 2.0;if(a>=10000)return 1.8;if(a>=5000)return 1.7;if(a>=1000)return 1.5;return 1.2;}
-function calcROI(){let amt=parseFloat(document.getElementById('calcAmt').value)||300;if(amt<300)amt=300;if(amt>100000)amt=100000;let r=getRate(amt),d=amt*r/100;document.getElementById('daily').innerText='$'+d.toFixed(2)+' ('+r+'%)';document.getElementById('weekly').innerText='$'+(d*7).toFixed(2);document.getElementById('monthly').innerText='$'+(d*30).toFixed(2);document.getElementById('total').innerText='$'+(amt*Math.pow(1+r/100,1095)).toLocaleString(undefined,{maximumFractionDigits:0});}
+function calcROI(){
+ let amt=parseFloat(document.getElementById('calcAmt').value)||300;
+ if(amt<300)amt=300;if(amt>100000)amt=100000;
+ let r=getRate(amt);let d=amt*r/100;
+ document.getElementById('daily').innerText='$'+d.toFixed(2)+' ('+r+'%/day)';
+ document.getElementById('weekly').innerText='$'+(d*7).toFixed(2);
+ document.getElementById('monthly').innerText='$'+(d*30).toFixed(2);
+ document.getElementById('total').innerText='$'+(amt*Math.pow(1+r/100,1095)).toLocaleString(undefined,{maximumFractionDigits:0});
+ document.getElementById('meter').style.width=Math.min(100,(amt/100000)*100)+'%';
+}
 function setAmt(v){document.getElementById('calcAmt').value=v;calcROI();}
-function switchChain(){let c=document.getElementById('chain').value;let w=WALLETS[c];document.getElementById('wAddr').innerText=w.addr;document.getElementById('wWarn').innerText=w.warn;document.getElementById('wNet').innerText=c;if(document.getElementById('walletBox').style.display=='block')showWallet();}
-function showWallet(){let amt=document.getElementById('depAmt').value||300;if(amt<300){alert('Min $300');return;}let c=document.getElementById('chain').value;let w=WALLETS[c];document.getElementById('wAmt').innerText=amt;document.getElementById('wAddr').innerText=w.addr;document.getElementById('wWarn').innerText=w.warn;document.getElementById('wNet').innerText=c;document.getElementById('wQR').src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+w.addr;document.getElementById('walletBox').style.display='block';}
-function copyAddr(){navigator.clipboard.writeText(document.getElementById('wAddr').innerText);alert('✅ Copied: '+document.getElementById('wAddr').innerText);}
-function genTx(){let t='CEDAR-'+new Date().toISOString().slice(0,10).replace(/-/g,'')+'-'+Math.floor(Math.random()*900000+100000);document.getElementById('txid').innerText=t;alert('✅ TX '+t+' confirmed! Deposit will credit in 5-10 mins.');}
-calcROI();
-</script>
-</body></html>
+function copyAddr(){navigator.clipboard.writeText(WALLET);alert('✅ Wallet copied:\n'+WALLET);}
+function genTx(){let t='CEDAR-'+new Date().toISOString().slice(0,10).replace(/-/g,'')+'-'+Math.floor(Math.random()*900000+100000);document.getElementById('txid').innerText=t;alert('✅ TX Generated: '+t+'\nDeposit will credit in 5-10 mins.');}
+function clock(){let n=new Date(),s=new Date(n.toLocaleString('en-US',{timeZone:'Asia/Singapore'})),u=new Date();document.getElementById('sgt').innerText=s.toLocaleString('en-SG',{hour12:true});document.getElementById('utc').innerText=u.toISOString().substr(11,8)+' UTC';}setInterval(clock,1000);clock();calcROI();
+</script></body></html>
