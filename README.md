@@ -1,6 +1,6 @@
 About Cedars of Wealth
 
-Cedars of Wealth is a USA & Europe-based investment firm built on a simple belief: true wealth should last 1000 years, like the cedar kings used for temples — unbreakable, not fast and fragile.What we do:
+Cedars of Wealth is a USA & Europe-based investment firm built on a simple belief: true wealth should last 1000 years, like the cedar kings used for temples unbreakable, not fast and fragile.What we do:
 
 We invest in Solar, Electronics, and Biogas the 3 engines of the future.Why we are different:
 We don't give aid. We build wealth systems. We turn profits from our investments into micro-investments, clean energy, jobs, and ownership for poor households worldwide.Our Promise:
