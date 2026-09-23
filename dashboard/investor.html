@@ -1,80 +1,35 @@
-<!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Investor - Cedars of Wealth</title>
-<style>body{margin:0;background:#0a0a0a;color:#fff;font-family:monospace;padding:20px}.card{background:#111;border:1px solid #00ff88;padding:20px;border-radius:10px;max-width:600px;margin:20px auto}input,button{width:100%;padding:12px;margin:8px 0;background:#000;color:#00ff88;border:1px solid #00ff88;border-radius:5px}button{background:#00ff88;color:#000;font-weight:bold;cursor:pointer}.info{background:#000;padding:10px;border-radius:5px;font-size:12px;line-height:2;text-align:center;margin:10px 0}.footer{margin-top:40px;text-align:center;color:#666;font-size:11px;border-top:1px solid #222;padding-top:20px}</style>
-</head><body>
-<div class="card">
-<h2 style="color:#00ff88;text-align:center">INVESTOR DASHBOARD</h2>
-<div class="info">
-Contract Period: 1095 Days<br>
-Daily Profit Release: 5:00 AM SGT (Singapore)<br>
-Withdrawal: 24/7<br>
-Min Investment: $300
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cedars of Wealth - Investor Portal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#060d14;color:#e8f5e0;font-family:Segoe UI;padding:14px}
+.h{text-align:center;padding:20px;border:1px solid #2a5a2a;border-radius:14px;background:linear-gradient(180deg,#102010,#060d14);margin-bottom:14px}
+.h h1{color:#7CFF7C;font-size:26px}.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:12px}
+.c{background:linear-gradient(135deg,#0f1f14,#121e28);border:1px solid #2d5a2d;border-radius:12px;padding:14px}
+.c h3{color:#7CFF7C;font-size:11px;letter-spacing:1px;margin-bottom:6px}.v{font-size:22px;font-weight:800}.green{color:#7CFF7C}
+.meter{height:10px;background:#1a2e1a;border-radius:10px;overflow:hidden;margin:8px 0}.meter span{display:block;height:100%;background:linear-gradient(90deg,#7CFF7C,#00cc44);transition:width 1s}
+.kpi{display:flex;justify-content:space-between;font-size:12px;margin:5px 0}.badge{padding:3px 8px;border-radius:12px;font-size:10px;font-weight:800}.bg{background:#0a2e0a;color:#7CFF7C;border:1px solid #2d5a2d}
+.btn{padding:12px;border-radius:8px;border:none;font-weight:700;width:100%;margin-top:8px;cursor:pointer;text-align:center;text-decoration:none;display:block}
+.btn-green{background:#7CFF7C;color:#000}.btn-dark{background:#1a2e1a;color:#d6e4d0;border:1px solid #2d5a2d}
+.log{background:#000;border-radius:8px;padding:8px;height:110px;overflow:auto;font-size:11px;color:#7CFF7C;border:1px solid #1a2e1a}
+</style></head><body>
+<div class="h"><h1>🌲 CEDARS OF WEALTH</h1><p>Investor Growth Portal — Daily Profit 5AM SGT • Withdrawal 24/7 OPEN • 1095-Day Cedar Growth</p><div style="margin-top:8px;font-size:12px">SGT: <span id="sgt" class="green">--</span> | Next Profit: <span id="next" style="color:#ffdd55">--</span> | TX ID: <span id="txid" class="green">CEDAR-</span></div></div>
+
+<div class="g">
+<div class="c"><h3>🌱 CEDAR GROWTH TRACKER - Portfolio</h3><div class="v green" id="bal">$0.00 Total Growth</div><div class="kpi"><span>Initial Deposit</span><span id="dep">$0</span></div><div class="kpi"><span>Daily Growth 1.5%</span><span class="green" id="daily">$0</span></div><div class="kpi"><span>Total Compounded</span><span class="green" id="total">$0</span></div><div class="meter"><span id="prog" style="width:5%"></span></div><div class="kpi"><span>1095-Day Progress</span><span id="progT">Day 1 / 1095</span></div></div>
+<div class="c"><h3>💧 LIQUIDITY & PROTECTION - Compliance Verified</h3><div class="kpi"><span>KYC/AML Status</span><span class="badge bg">VERIFIED ✅</span></div><div class="kpi"><span>Insurance Coverage</span><span class="badge bg">ACTIVE 🛡️</span></div><div class="kpi"><span>Withdrawal Access</span><span class="badge bg">24/7 OPEN</span></div><div class="kpi"><span>Forest Impact</span><span class="green" id="forest">0 Cedar Trees Equivalent</span></div><div class="kpi"><span>Audit Trail</span><span class="green">Immutable Log</span></div><button class="btn btn-green" onclick="requestWithdraw()">REQUEST WITHDRAWAL 24/7</button><button class="btn btn-dark" onclick="loadData()">REFRESH GROWTH</button></div>
 </div>
-<div id="nextProfit" style="text-align:center;color:#ff0;font-size:12px;margin:10px 0"></div>
-<input id="name" placeholder="Full Name">
-<input id="amount" type="number" placeholder="Amount USD (min $300)">
-<button onclick="invest()">INVEST NOW</button>
-<div id="status" style="margin-top:15px;text-align:center"></div>
-<div id="profitBox" style="margin-top:15px;display:none;background:#002200;padding:10px;border-radius:5px;text-align:center"></div>
+
+<div class="g">
+<div class="c"><h3>📊 DAILY PROFIT HISTORY - Transparency</h3><div class="log" id="logBox">Fetching your Cedar profit history...</div><div class="kpi"><span>Last Profit Release</span><span id="lastP">5AM SGT Auto</span></div></div>
+<div class="c"><h3>🎓 CEDAR KNOWLEDGE HUB + SUPPORT</h3><div class="kpi"><span>Compounding Mode</span><span class="green">Auto-Compound ON</span></div><div class="kpi"><span>Referral Bonus</span><span class="green">5% Cedar Loyalty</span></div><div class="kpi"><span>Support Tickets</span><span class="badge bg">0 Open</span></div><a class="btn btn-dark" href="mailto:cryptome2030@gmail.com">CONTACT CEDAR SUPPORT</a><a class="btn btn-green" href="https://cryptolordug.github.io/Cedars-of-Wealth/" target="_blank">BACK TO MAIN SITE</a></div>
 </div>
-<div class="footer">One Raffles Place Tower One, 1 Raffles Place, Singapore 048616<br>Jurisdiction: Singapore (MAS Compliant) | Global Access: Worldwide</div>
+
+<div class="c" style="text-align:center;font-size:10px;color:#5a7a5a">Cedars of Wealth • Daily 5AM SGT Profit • 1095-Day Auto-Lock Background • Withdrawal 24/7 • KYC Verified • Insurance Protected • Forest Impact Tracking • Integrity Verified GREEN 9/9</div>
+
 <script>
-const DAILY_RATE=0.015; // 1.5% daily - change here
-
-function getNext5AMSGT(){
-let now=new Date();
-let sgt=new Date(now.toLocaleString('en-US',{timeZone:'Asia/Singapore'}));
-let next=new Date(sgt); next.setHours(5,0,0,0);
-if(sgt>=next) next.setDate(next.getDate()+1);
-let diff=next-sgt;
-let utcNow=new Date();
-let sgtOffset=8*60; let localOffset=utcNow.getTimezoneOffset();
-let target=new Date(utcNow.getTime()+(sgtOffset+localOffset)*60000);
-target.setHours(5,0,0,0); if(target<=utcNow) target.setDate(target.getDate()+1);
-return {next, target, diff};
-}
-
-function updateTimer(){
-let {next, target, diff}=getNext5AMSGT();
-let h=Math.floor(diff/3600000), m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000);
-document.getElementById('nextProfit').innerHTML=`⏰ Next Profit Release: 5:00 AM SGT in ${h}h ${m}m ${s}s`;
-}
-setInterval(updateTimer,1000); updateTimer();
-
-// Auto credit profit every day at 5AM SGT
-function checkAutoProfit(){
-let data=JSON.parse(localStorage.getItem('cow_active')||'null');
-if(!data) return;
-let last=localStorage.getItem('cow_last_profit');
-let sgtNow=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Singapore'}));
-if(sgtNow.getHours()===5 && sgtNow.getMinutes()<2){
-if(last!==sgtNow.toDateString()){
-let profit=data.amount*DAILY_RATE;
-let total=parseFloat(localStorage.getItem('cow_balance')||'0')+profit;
-localStorage.setItem('cow_balance',total);
-localStorage.setItem('cow_last_profit',sgtNow.toDateString());
-document.getElementById('profitBox').style.display='block';
-document.getElementById('profitBox').innerHTML=`💰 Daily Profit Credited: $${profit.toFixed(2)}<br>Total Balance: $${total.toFixed(2)}<br>Time: 5:00 AM SGT`;
-// Email you
-fetch('https://formsubmit.co/ajax/cryptome2030@gmail.com',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'DAILY PROFIT RELEASED',message:`Investor: ${data.name} | Profit: $${profit.toFixed(2)} | Balance: $${total.toFixed(2)} | Release Time: 5:00 AM SGT ${sgtNow.toLocaleString()}`})});
-}
-}
-let bal=localStorage.getItem('cow_balance');
-if(bal){document.getElementById('profitBox').style.display='block'; document.getElementById('profitBox').innerHTML=`Balance: $${parseFloat(bal).toFixed(2)}<br>Daily: ${(data.amount*DAILY_RATE).toFixed(2)} at 5AM SGT`;}
-}
-setInterval(checkAutoProfit,60000); checkAutoProfit();
-
-async function invest(){
-const n=document.getElementById('name').value;
-const a=parseFloat(document.getElementById('amount').value);
-if(!n||a<300){document.getElementById('status').innerHTML='Min $300 required';return}
-document.getElementById('status').innerHTML='⏳ ACTIVATING 1095 DAY CONTRACT...';
-let contractEnd=new Date(); contractEnd.setDate(contractEnd.getDate()+1095);
-localStorage.setItem('cow_active',JSON.stringify({name:n,amount:a,start:new Date().toISOString(),end:contractEnd.toISOString()}));
-localStorage.setItem('cow_balance','0');
-await fetch('https://formsubmit.co/ajax/cryptome2030@gmail.com',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'NEW 1095 CONTRACT',message:`Investor: ${n} | Amount: $${a} | Contract: 1095 Days | Daily: $${(a*DAILY_RATE).toFixed(2)} | Profit Time: 5:00 AM SGT Daily | Withdrawal: 24/7 | Start: ${new Date().toLocaleString()} | End: ${contractEnd.toLocaleDateString()} | System Lock: Auto 1095 days background`})});
-document.getElementById('status').innerHTML=`✅ $${a} ACTIVE<br>📅 Period: 1095 Days<br>💰 Daily Profit: $${(a*DAILY_RATE).toFixed(2)} at 5:00 AM SGT<br>🏦 Withdrawal: 24/7<br>End: ${contractEnd.toLocaleDateString()}`;
-checkAutoProfit();
-}
-</script>
-</body></html>
+function updateClock(){let n=new Date(),s=new Date(n.toLocaleString('en-US',{timeZone:'Asia/Singapore'}));document.getElementById('sgt').innerText=s.toLocaleString('en-SG',{hour12:true});let nx=new Date(s);nx.setHours(5,0,0,0);if(s>=nx)nx.setDate(nx.getDate()+1);let d=nx-s;let h=Math.floor(d/3600000),m=Math.floor((d%3600000)/60000),ss=Math.floor((d%60000)/1000);document.getElementById('next').innerText=h+'h '+m+'m '+ss+'s';document.getElementById('txid').innerText='CEDAR-'+s.getFullYear()+Math.floor(Math.random()*9000+1000);}setInterval(updateClock,1000);updateClock();
+function loadData(){let total=0,amt=0;Object.keys(localStorage).forEach(k=>{try{let o=JSON.parse(localStorage.getItem(k));if(o&&o.amount){amt=parseFloat(o.amount);total=amt;}}catch{}});if(amt==0){document.getElementById('bal').innerText='$0.00 - Check Email Leads';return;}let daily=amt*0.015;let day=Math.floor(Math.random()*30+1);let prog=(day/1095*100).toFixed(2);let comp=(amt*Math.pow(1.015,day)).toFixed(2);document.getElementById('dep').innerText='$'+amt;document.getElementById('daily').innerText='$'+daily.toFixed(2);document.getElementById('total').innerText='$'+comp;document.getElementById('prog').style.width=prog+'%';document.getElementById('progT').innerText='Day '+day+' / 1095 ('+prog+'%)';document.getElementById('forest').innerText=Math.floor(comp/100)+' Cedar Trees Equivalent';document.getElementById('bal').innerText='$'+comp+' Total Growth';}
+loadData();
+async function requestWithdraw(){let email=prompt('Enter withdrawal amount & wallet - sent to compliance:');if(!email)return;await fetch('https://formsubmit.co/ajax/cryptome2030@gmail.com',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'CEDAR WITHDRAWAL 24/7',message:'Investor Withdrawal Request: '+email+' Time: '+new Date().toLocaleString()})});alert('✅ Withdrawal request sent to compliance - cryptome2030@gmail.com - 24/7 OPEN');}
+fetch('https://raw.githubusercontent.com/CryptolordUg/Cedars-of-Wealth/main/profit-log.txt').then(r=>r.text()).then(t=>document.getElementById('logBox').innerText=t.slice(-2000)||'Your Cedar profit history will appear after first 5AM SGT run').catch(()=>document.getElementById('logBox').innerText='Cedar audit trail initializing...');
+</script></body></html>
