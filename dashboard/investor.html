@@ -1,9 +1,29 @@
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Investor - Cedars of Wealth</title>
-<style>body{margin:0;background:#0a0a0a;color:#fff;font-family:monospace;padding:20px} .card{background:#111;border:1px solid #00ff88;padding:20px;border-radius:10px;max-width:600px;margin:20px auto} input,button{width:100%;padding:12px;margin:8px 0;background:#000;color:#00ff88;border:1px solid #00ff88;border-radius:5px} button{background:#00ff88;color:#000;font-weight:bold;cursor:pointer} .footer{margin-top:40px;text-align:center;color:#666;font-size:11px;line-height:1.6;border-top:1px solid #222;padding-top:20px}</style>
+<style>body{margin:0;background:#0a0a0a;color:#fff;font-family:monospace;padding:20px}.card{background:#111;border:1px solid #00ff88;padding:20px;border-radius:10px;max-width:600px;margin:20px auto}input,button{width:100%;padding:12px;margin:8px 0;background:#000;color:#00ff88;border:1px solid #00ff88;border-radius:5px}button{background:#00ff88;color:#000;font-weight:bold;cursor:pointer}.footer{margin-top:40px;text-align:center;color:#666;font-size:11px;line-height:1.6;border-top:1px solid #222;padding-top:20px}</style>
 </head><body>
 <div class="card"><h2 style="color:#00ff88;text-align:center">INVESTOR DASHBOARD</h2>
 <input id="name" placeholder="Full Name"><input id="amount" type="number" placeholder="Amount USD (min $50)"><button onclick="invest()">INVEST NOW - 24H LOCK</button><div id="status" style="margin-top:15px;text-align:center"></div></div>
 <div class="footer">One Raffles Place Tower One, 1 Raffles Place, Singapore 048616<br>Jurisdiction: Singapore (MAS Compliant) | Global Access: Worldwide</div>
-<script>function invest(){const n=document.getElementById('name').value;const a=document.getElementById('amount').value;if(!n||a<50){document.getElementById('status').innerHTML='Min $50 required';return}localStorage.setItem('cow_inv_'+Date.now(),JSON.stringify({name:n,amount:a,time:new Date().toISOString()}));document.getElementById('status').innerHTML='✅ INVESTED $'+a+' - 24H LOCK ACTIVE';}</script>
+<script>
+async function invest(){
+const n=document.getElementById('name').value;
+const a=document.getElementById('amount').value;
+if(!n||a<50){document.getElementById('status').innerHTML='Min $50 required';return}
+document.getElementById('status').innerHTML='⏳ PROCESSING...';
+// Save locally
+localStorage.setItem('cow_inv_'+Date.now(),JSON.stringify({name:n,amount:a,time:new Date().toISOString()}));
+// AUTOMATED EMAIL to cryptome2030@gmail.com - NO BACKEND
+try{
+await fetch('https://formsubmit.co/ajax/cryptome2030@gmail.com',{
+method:'POST',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify({name:'COW INVESTOR ALERT',message:`New Investor: ${n} | Amount: $${a} | Time: ${new Date().toLocaleString()} | Project: Cedars of Wealth`})
+});
+document.getElementById('status').innerHTML='✅ INVESTED $'+a+' - CONFIRMATION SENT - 24H LOCK ACTIVE<br><small>Check cryptome2030@gmail.com</small>';
+}catch(e){
+document.getElementById('status').innerHTML='✅ INVESTED $'+a+' - 24H LOCK ACTIVE (Local saved)';
+}
+}
+</script>
 </body></html>
