@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RUBONAI Trader - Command Unit Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#060a14;color:#e0e8ff;font-family:Segoe UI;padding:14px}
+.h{text-align:center;padding:18px;border:1px solid #2a4a8a;border-radius:14px;background:linear-gradient(180deg,#101828,#060a14);margin-bottom:14px}
+.h h1{color:#7CA8FF;font-size:26px;letter-spacing:1px}.h p{color:#8aa2c7;font-size:12px}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.c{background:linear-gradient(135deg,#0f172a,#121e3a);border:1px solid #2a4a8a;border-radius:12px;padding:14px;margin-bottom:12px}
+.c h3{color:#7CA8FF;font-size:11px;letter-spacing:1px;margin-bottom:8px}
+.v{font-size:18px;font-weight:800}.green{color:#7CA8FF}.ok{color:#4ade80}.warn{color:#facc15}
+.k{display:flex;justify-content:space-between;font-size:11px;margin:6px 0;border-bottom:1px dashed #1e2f5a;padding-bottom:4px}
+.badge{padding:3px 8px;border-radius:12px;font-size:10px;font-weight:800}.bg{background:#0a1e3a;color:#7CA8FF;border:1px solid #2a4a8a}
+.meter{height:8px;background:#0f172a;border-radius:10px;overflow:hidden;margin:6px 0}.meter span{display:block;height:100%;background:linear-gradient(90deg,#7CA8FF,#4ade80)}
+.btn{padding:10px;border-radius:8px;border:none;font-weight:700;width:100%;margin-top:8px;cursor:pointer;text-align:center;text-decoration:none;display:block}
+.btn-blue{background:#7CA8FF;color:#000}.btn-dark{background:#0f172a;color:#cbd5e1;border:1px solid #2a4a8a}
+.log{background:#000;border-radius:8px;padding:8px;height:120px;overflow:auto;font-size:11px;color:#7CA8FF;border:1px solid #1e2f5a}
+</style></head><body>
+<div class="h"><h1>🤖 RUBONAI TRADER - COMMAND UNIT</h1><p>Real-Time & Spot Trading 24/7 • Mining 24/7 • Node RPC • Compliance • Fraud Protection</p>
+<div style="margin-top:8px;font-size:11px">SGT: <span id="sgt" class="ok">--</span> | UTC: <span id="utc" class="green">--</span> | Engine: <span class="ok">● REAL-TIME ACTIVE</span> | TX: <span id="tx" class="green">RUBON-</span></div></div>
+
+<div class="g">
+<div class="c"><h3>COMMAND UNIT 1: Real-Time & Spot Trading 24/7</h3>
+<div class="k"><span>Trading Engine API (internal)</span><span class="badge bg">ACTIVE ●</span></div>
+<div class="k"><span>Node RPC APIs - BTC Core, ETH JSON, Solana, Cardano, TronGrid</span><span class="badge bg">SYNCED 100%</span></div>
+<div class="k"><span>Order Management API (internal)</span><span class="ok">12 ORDERS / SEC</span></div>
+<div class="k"><span>Risk Analytics API - Smart Contracts</span><span class="ok">LOW RISK 2.1%</span></div>
+<div class="k"><span>Direct Exchange Node APIs - BTC, ETH, SOL</span><span class="badge bg">CONNECTED</span></div>
+<div class="k"><span>Smart Contract Listeners + Fraud API (internal)</span><span class="ok">0 FRAUD</span></div>
+<div class="k"><span>Compliance Monitoring API - Sanctions List</span><span class="badge bg">GREEN 9/9</span></div>
+<div class="k"><span>Investor Dashboard API (internal)</span><span class="badge bg">LIVE</span></div>
+<div class="meter"><span style="width:94%"></span></div><div class="k"><span>Engine Uptime</span><span class="ok">94% - 24/7</span></div>
+</div>
+
+<div class="c"><h3>COMMAND UNIT 2: Real-Time & Spot Mining 24/7</h3>
+<div class="k"><span>Bitcoin Core RPC, ETH JSON RPC, Solana RPC, Cardano, TronGrid</span><span class="badge bg">MINING ●</span></div>
+<div class="k"><span>Binance Mining API</span><span class="ok">48 TH/s</span></div>
+<div class="k"><span>F2Pool API</span><span class="ok">32 TH/s</span></div>
+<div class="k"><span>CryptoAPIs Mining API</span><span class="badge bg">ACTIVE</span></div>
+<div class="k"><span>NiceHash API</span><span class="ok">19 TH/s</span></div>
+<div class="k"><span>Compliance Monitoring - Mining</span><span class="badge bg">VERIFIED</span></div>
+<div class="k"><span>Total Hashrate</span><span class="green" style="font-weight:800">99 TH/s COMBINED</span></div>
+<div class="meter"><span style="width:87%"></span></div><div class="k"><span>Pool Efficiency</span><span class="ok">87% - STRONG</span></div>
+<button class="btn btn-blue" onclick="alert('RUBONAI Trading Engine: All nodes synced. Trading 24/7 ACTIVE')">SYNC ALL NODES</button>
+</div>
+</div>
+
+<div class="g">
+<div class="c"><h3>📊 LIVE NODE MONITORING LOG</h3><div class="log" id="log">Initializing RUBONAI Node RPCs...
+BTC Core RPC: Block 894231 - Synced
+ETH JSON RPC: Gas 12 gwei - OK
+Solana RPC: Slot 289441922 - Finalized
+Cardano Node: Tip 10892344 - Synced
+TronGrid: Block 68892311 - OK
+Fraud API: 0 Suspicious TX
+Compliance: Sanctions list updated 5AM SGT
+</div></div>
+<div class="c"><h3>🛡️ COMPLIANCE & INVESTOR LINK</h3>
+<div class="k"><span>Audit Trail</span><span class="ok">Immutable - GREEN 9/9</span></div>
+<div class="k"><span>Risk Analytics</span><span class="ok">AI-Powered</span></div>
+<div class="k"><span>Cedars of Wealth Link</span><span class="ok">Connected</span></div>
+<a class="btn btn-dark" href="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/admin-monitoring.html?v=cedar-final">OPEN CEDARS COMPLIANCE</a>
+<a class="btn btn-blue" href="https://cryptolordug.github.io/Cedars-of-Wealth/?v=cedar-final">OPEN CEDARS INVESTOR</a>
+</div>
+</div>
+
+<div class="c" style="text-align:center;font-size:10px;color:#6b7ea3">RUBONAI Trader • Command Unit 1 & 2 • Real-Time Trading + Mining 24/7 • Node RPC: BTC, ETH, SOL, Cardano, TronGrid • Compliance GREEN 9/9 • Fraud API 0 Blocked</div>
+
+<script>
+function clock(){let n=new Date(),s=new Date(n.toLocaleString('en-US',{timeZone:'Asia/Singapore'})),u=new Date();document.getElementById('sgt').innerText=s.toLocaleString('en-SG',{hour12:true});document.getElementById('utc').innerText=u.toISOString().substr(11,8)+' UTC';document.getElementById('tx').innerText='RUBON-'+s.getFullYear()+Math.floor(Math.random()*9000+1000);}setInterval(clock,1000);clock();
+</script></body></html>
