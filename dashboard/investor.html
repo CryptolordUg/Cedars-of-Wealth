@@ -1,46 +1,68 @@
-<!DOCTYPE html><html><head><title>Investor - RubonAI REAL PROFIT API 24H</title><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<script src="../js/integrityMonitor.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+<title>CEDARS Investor | COW-RUBONAI-1095 | HQ Singapore</title>
 <script src="../engines/assemblyEngine.js"></script>
-<script src="../js/factoryLoader.js"></script>
-<script src="../engines/complianceMonitor.js"></script>
-<script src="../js/zeroErrorCheck.js"></script>
-<script src="../engines/profitReleaseAPI.js"></script>
-<style>body{background:#051005;color:#fff;font-family:Arial;padding:15px} .btn{background:#00c853;color:#000;padding:18px;border:none;border-radius:10px;font-weight:900;width:100%;font-size:17px;cursor:pointer} .btn:disabled{background:#333;color:#888} .card{background:#112211;border:1px solid #2a5a2a;padding:15px;border-radius:10px;margin:12px 0;text-align:center;word-break:break-all} .green{color:#00ff88} .gold{color:#ffd700}</style></head><body>
-<div id="integrityBadge" style="padding:8px;color:white;background:#00c853;border-radius:6px;text-align:center;font-weight:900">✅ ZERO ERROR | 10/10 Engines | PROFIT API 24H ARMED | SHA256 STABLE</div>
-
-<h2>🌲 Investor Dashboard - REAL PROFIT RELEASE 24H</h2>
-<h3 class="green">COW-RUBONAI-1095 | 1.5% Daily | 1095 Days | Min $50</h3>
+<style>
+body{background:#0a0a0a;color:#fff;font-family:monospace;padding:20px}
+.card{background:#111;border:1px solid #00ff88;padding:20px;border-radius:10px;margin:10px 0}
+button{background:#00ff88;color:#000;padding:12px 20px;border:none;border-radius:5px;font-weight:bold;cursor:pointer}
+input{padding:10px;width:90%;margin:5px 0;background:#222;color:#fff;border:1px solid #333}
+.hq{color:#00ff88;font-size:12px}
+.lock{color:orange}
+</style>
+</head>
+<body>
+<h2>💰 CEDARS INVESTOR DASHBOARD</h2>
+<div class="hq">🏢 One Raffles Place Tower One, 1 Raffles Place, Singapore 048616 | IP HIDDEN 500Y | LOCAL MODE</div>
+<div id="factory-status" style="margin:10px 0;color:#00ff88"></div>
 
 <div class="card">
-<h3>💰 Profit Balance: <span class="gold">$100.00</span></h3>
-<button class="btn" id="profitBtn" onclick="claimProfit()">💰 RELEASE PROFIT - RubonAI | Auto 24/7 - Min $50</button>
-<p id="countdown" style="font-weight:900">Profit Release: Loading 24h Timer...</p>
-<p id="lastTx" style="font-size:11px;color:#888">Last TxID: None | Workflow: 8 Steps Auto-Approved</p>
+<h3>Invest Now - Min $50 | Profit Locked 24H</h3>
+<input id="invName" placeholder="Full Name">
+<input id="invEmail" placeholder="Email">
+<input id="invAmount" type="number" placeholder="Amount $ (Min 50)">
+<button onclick="invest()">INVEST NOW</button>
+<div id="investResult"></div>
 </div>
 
-<div class="card"><h3>💳 Real Treasury Deposit</h3><p><b>TRC20 USDT:</b><br>TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u</p><p><b>BEP20/ERC20:</b><br>0x0d4c2B95e8FB7Be3DB9953bAcEf3A4Be643bA77B</p><p><b>BTC:</b><br>bc1q2mnpctqrfn8q673wsd27uqlm5t7vqmrhaj2cj0</p></div>
-
-<div id="factoryAssembly"></div>
+<div class="card">
+<h3>My Investments (Local Storage)</h3>
+<div id="myInvestments">No investments yet</div>
+</div>
 
 <script>
-function claimProfit(){
-  let balance = 100; // This will later come from packageEngine.js - your real package
-  let result = ProfitReleaseAPI.releaseProfit(balance);
-  if(result.success){
-    document.getElementById("profitBtn").innerText = "✅ RELEASED - Next in 24h";
-    document.getElementById("profitBtn").disabled = true;
-    document.getElementById("lastTx").innerText = "Last TxID: " + result.txid + " | Amount: $" + result.amount + " | Status: SENT";
-    setTimeout(()=>{ document.getElementById("profitBtn").disabled = false; }, 2000);
-  }
+function invest(){
+  const name=document.getElementById('invName').value;
+  const email=document.getElementById('invEmail').value;
+  const amount=parseFloat(document.getElementById('invAmount').value);
+  if(!name || !email || !amount){ alert("Fill all fields"); return; }
+  if(amount < 50){ alert("Min $50 required"); return; }
+  
+  const txid = "COW-"+Date.now();
+  const unlock = Date.now() + 24*60*60*1000;
+  const inv = {txid, name, email, amount, profit: amount*0.05, unlock, date: new Date().toLocaleString(), hq: "One Raffles Place Tower One, Singapore 048616"};
+  
+  let all = JSON.parse(localStorage.getItem('cow_investors')||'[]');
+  all.push(inv);
+  localStorage.setItem('cow_investors', JSON.stringify(all));
+  
+  document.getElementById('investResult').innerHTML = `<div style="color:#00ff88">✅ Invested $${amount} | TXID: ${txid}<br><span class="lock">🔒 Profit $${(amount*0.05).toFixed(2)} locked until ${new Date(unlock).toLocaleString()} (24H)</span><br>Team: cryptome2030-6187</div>`;
+  loadInvestments();
 }
 
-// Auto show last TxID if exists
-document.addEventListener("DOMContentLoaded", ()=>{
-  let tx = localStorage.getItem("cow_last_txid");
-  let amt = localStorage.getItem("cow_last_amount");
-  if(tx){
-    document.getElementById("lastTx").innerText = "Last TxID: " + tx + " | Amount: $" + (amt||"0") + " | Status: SENT - Blockchain Confirmed";
-  }
-});
+function loadInvestments(){
+  let all = JSON.parse(localStorage.getItem('cow_investors')||'[]');
+  if(all.length==0){ document.getElementById('myInvestments').innerHTML="No investments yet"; return; }
+  let html="";
+  all.forEach(i=>{
+    const locked = Date.now() < i.unlock;
+    html+= `<div style="border-bottom:1px solid #222;padding:10px 0">${i.txid} | $${i.amount} | Profit: $${i.profit.toFixed(2)} | ${locked?`<span class="lock">🔒 LOCKED until ${new Date(i.unlock).toLocaleString()}</span>`:`<span style="color:#00ff88">✅ UNLOCKED - Withdrawable</span>`} | ${i.name}</div>`;
+  });
+  document.getElementById('myInvestments').innerHTML=html;
+}
+loadInvestments();
+document.getElementById('factory-status').innerHTML = `🏭 ${CEDARS_FACTORY.layers} Layers | ${CEDARS_FACTORY.apis} APIs | ${CEDARS_FACTORY.sha256}`;
 </script>
-</body></html>
+</body>
+</html>
