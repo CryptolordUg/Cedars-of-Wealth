@@ -1,0 +1,8 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin Monitoring</title>
+<style>body{margin:0;background:#0a0a0a;color:#fff;font-family:monospace;padding:20px}.card{background:#111;border:1px solid #00ff88;padding:15px;border-radius:10px;margin:10px 0}a{color:#00ff88}</style></head><body>
+<h2 style="color:#00ff88;text-align:center">ADMIN MONITORING - COW</h2>
+<div class="card">SGT: <span id="sgt"></span><br>Next 5AM SGT: <span id="next"></span><br>Contract: 1095 Days (auto background)<br>Profit: 5AM SGT Daily<br>Withdrawal: 24/7</div>
+<div class="card">Workflow: <a href="https://github.com/CryptolordUg/Cedars-of-Wealth/actions">Check Actions - Last #58 GREEN</a></div>
+<div class="card"><a href="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/investor.html">Go to Investor Live</a></div>
+<script>function u(){let n=new Date(),s=new Date(n.toLocaleString('en-US',{timeZone:'Asia/Singapore'}));document.getElementById('sgt').innerText=s.toLocaleString();let x=new Date(s);x.setHours(5,0,0,0);if(s>=x)x.setDate(x.getDate()+1);let d=x-s;document.getElementById('next').innerText=Math.floor(d/3600000)+'h '+Math.floor((d%3600000)/60000)+'m';}setInterval(u,1000);u();</script>
+</body></html>
