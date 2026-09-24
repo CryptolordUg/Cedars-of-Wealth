@@ -15,39 +15,28 @@
 <a href="/Cedars-of-Wealth/login.html" style="color:#00ff88;font-size:12px;display:block;margin-top:18px;text-decoration:none">← Back to Login</a>
 </div>
 <script>
-// REPLACE WITH YOUR EmailJS KEYS FROM STEP 1
-const SERVICE_ID = "YOUR_SERVICE_ID";
-const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-const PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+const SERVICE_ID = "REPLACE_WITH_YOUR_SERVICE_ID";
+const TEMPLATE_ID = "REPLACE_WITH_YOUR_TEMPLATE_ID";
+const PUBLIC_KEY = "e3V4YLk4056BIonfQ";
 emailjs.init(PUBLIC_KEY);
 
 function sendReset(){
  let email=document.getElementById('email').value.trim();
  if(!email){alert('Enter email');return;}
- let btn=document.getElementById('btn');
- let msg=document.getElementById('msg');
- btn.innerText="SENDING...";
- btn.disabled=true;
-
+ if(SERVICE_ID.includes("REPLACE")){alert('Please send me your Service ID and Template ID to activate auto-email. Go to dashboard.emailjs.com');return;}
+ let btn=document.getElementById('btn');let msg=document.getElementById('msg');
+ btn.innerText="SENDING WORLDWIDE...";btn.disabled=true;
  let token=btoa(email+'|'+Date.now()).replace(/=/g,'');
  let reset_link=`https://cryptolordug.github.io/Cedars-of-Wealth/password.html?email=${encodeURIComponent(email)}&token=${token}`;
-
- // Params for email template
- let params = { to_email: email, reset_link: reset_link, reply_to: "noreply@cedarsofwealth.sg" };
-
+ let params = { to_email: email, reset_link: reset_link, to_name: email.split('@')[0], from_name: "Cedars of Wealth - No Reply", reply_to: "noreply@cedarsofwealth.sg" };
  emailjs.send(SERVICE_ID, TEMPLATE_ID, params).then(()=>{
-   msg.style.display='block';
-   msg.style.color='#00ff88';
-   msg.innerHTML=`✅ Email sent to <b>${email}</b> worldwide!<br><br>Check inbox / spam folder.<br><small style="color:#8899aa">From: Cedars of Wealth (no-reply)</small>`;
-   btn.innerText="SEND RESET LINK";
-   btn.disabled=false;
+   msg.style.display='block';msg.style.color='#00ff88';
+   msg.innerHTML=`✅ Email sent worldwide to <b>${email}</b>!<br><br>Check inbox / spam.<br><small style="color:#8899aa">From: Cedars of Wealth (no-reply)<br>Sender hidden: cryptome2030@gmail.com</small>`;
+   btn.innerText="SEND RESET LINK";btn.disabled=false;
  }).catch((err)=>{
-   // Fallback if keys not set yet - show link
-   msg.style.display='block';
-   msg.style.color='#ffcc00';
-   msg.innerHTML=`⚠️ Auto-email not configured yet. Use this link:<br><br><a href="${reset_link}" style="color:#fff;background:#111;padding:8px 12px;border-radius:8px;word-break:break-all;display:inline-block">${reset_link}</a><br><br><small>Send me your EmailJS keys to enable auto-send</small>`;
-   btn.innerText="SEND RESET LINK";
-   btn.disabled=false;
+   msg.style.display='block';msg.style.color='#ff4444';
+   msg.innerHTML=`❌ Failed: ${err.text || err}<br>Check Service ID / Template ID`;
+   btn.innerText="SEND RESET LINK";btn.disabled=false;
  });
 }
 </script>
