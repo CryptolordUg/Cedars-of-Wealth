@@ -1,0 +1,12 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Login | Cedars</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial;background:radial-gradient(circle at top,#0a1a0f,#020a02);color:#fff;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:15px}.box{background:#0f2310;border:2px solid #00ff8844;border-radius:20px;padding:30px;width:100%;max-width:420px;text-align:center}input{width:100%;padding:14px;margin:10px 0;border-radius:10px;border:1px solid #1a4a1a;background:#020a02;color:#fff}button{width:100%;padding:14px;background:linear-gradient(90deg,#00ff88,#00cc66);color:#000;border:none;border-radius:12px;font-weight:900;cursor:pointer;margin-top:10px}</style></head><body><div class="box"><h1 style="color:#00ff88">🌲 CEDARS</h1><p style="letter-spacing:3px;font-size:11px;margin:10px 0">Investor Login</p><input id="email" type="email" placeholder="Email"><input id="pass" type="password" placeholder="Password"><button onclick="doLogin()">LOGIN</button><div id="msg" style="margin-top:15px;font-size:13px;display:none"></div><a href="forgot.html" style="color:#88cc88;font-size:12px;display:block;margin-top:15px">Forgot Password?</a><a href="register.html" style="color:#00ff88;font-size:12px;display:block;margin-top:10px">Create Account</a></div><script>
+function doLogin(){
+ let e=document.getElementById('email').value.trim().toLowerCase(), p=document.getElementById('pass').value;
+ let users=JSON.parse(localStorage.getItem('cedars_users')||'[]');
+ let u=users.find(x=>x.email===e && atob(x.password)===p);
+ let m=document.getElementById('msg');
+ if(!u){m.style.display='block';m.style.color='#ff4444';m.innerText='❌ Wrong email or password';return;}
+ localStorage.setItem('cedars_current_user',JSON.stringify(u));
+ m.style.display='block';m.style.color='#00ff88';m.innerText='✅ Login success! Redirecting...';
+ setTimeout(()=>location.href='index.html',1000);
+}
+</script></body></html>
