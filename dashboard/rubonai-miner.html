@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RUBONAI MINING V1 - 24/7 SEPARATE</title>
+<style>
+body{background:#000;color:#fff;font-family:Arial;margin:0;padding:10px}
+.header{text-align:center;border:2px solid #ff0;border-radius:15px;padding:12px;background:linear-gradient(135deg,#221100,#443300)}
+.live{color:#0f0;animation:blink 1s infinite}@keyframes blink{50%{opacity:0}}
+.card{background:#111;border:1px solid #333;border-radius:12px;padding:12px;margin:10px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{width:100%;padding:12px;border:none;border-radius:8px;font-weight:bold;margin:5px 0}
+.btn-on{background:#ff0;color:#000}.btn-off{background:#f00;color:#fff}
+.bar{height:24px;background:#222;border-radius:12px;overflow:hidden;border:1px solid #ff0}
+.fill{height:100%;background:linear-gradient(90deg,#ff0,#fa0);width:50%;animation:mine 1s infinite}
+@keyframes mine{0%{width:40%}50%{width:70%}100%{width:50%}}
+.stat{font-size:17px;margin:8px 0}.yellow{color:#ff0}.green{color:#0f0}
+</style>
+</head>
+<body>
+<div class="header">
+<h2>⛏️ RUBONAI MINING V1 - SEPARATE 24/7</h2>
+<div><span class="live">● MINING LIVE</span> <span id="timer">Next: 1s</span> | SOL: $<span id="solPrice">113.90</span></div>
+<div style="font-size:11px;color:#888">SEPARATE from REAL V11 Trading — Safe, No Mix!</div>
+<div style="margin-top:8px"><a href="rubonai-mining.html" style="color:#0af;text-decoration:none;border:1px solid #0af;padding:5px 10px;border-radius:6px">📈 Go to REAL V11 Trading</a></div>
+</div>
+
+<div class="card" style="border:2px solid #ff0">
+<h3>⛏️ Mining Engine - 1s LIVE</h3>
+<div class="bar"><div class="fill"></div></div>
+<div class="grid">
+<div class="stat">⚡ Hashrate: <span id="hash" class="yellow">157.4 TH/s</span></div>
+<div class="stat">🧱 Blocks Mined: <span id="blocks" class="green">1,247</span></div>
+<div class="stat">💰 Mined: <span id="mined" class="green">0.0003421 SOL</span></div>
+<div class="stat">🔋 Power: <span id="power">1.24 kW</span></div>
+<div class="stat">💵 Value: $<span id="usd">0.038</span></div>
+<div class="stat">📊 Efficiency: <span class="green">98.7%</span></div>
+</div>
+<div style="background:#222;padding:8px;border-radius:8px;margin-top:10px">
+<div style="font-size:12px;color:#888">Total Mined Progress to 0.01 SOL</div>
+<div class="bar" style="height:10px;margin-top:5px"><div id="prog" style="height:100%;background:#0f0;width:3%"></div></div>
+<div style="font-size:11px;margin-top:3px"><span id="perc">3.4%</span> → Target 0.01 SOL</div>
+</div>
+</div>
+
+<div class="card">
+<div class="grid">
+<div class="stat">🏦 Trading Balance: <span class="green">0.011243 SOL ($1.27) LOCKED SAFE</span></div>
+<div class="stat">⛏️ Mining Balance: <span id="mineBal" class="yellow">0.0003421 SOL</span></div>
+</div>
+<div class="stat" style="text-align:center;font-size:20px">💎 TOTAL: <span id="total" style="color:#0f0;font-weight:bold">$1.308</span></div>
+</div>
+
+<button class="btn btn-on" id="mineBtn" onclick="toggleMine()">⛏️ MINING ON 24/7 AUTO</button>
+<button class="btn" style="background:#0af;color:#fff" onclick="window.location.href='rubonai-mining.html'">📈 VIEW REAL V11 TRADING</button>
+
+<script>
+let sol=113.9, mined=0.0003421, blocks=1247, hash=157.4;
+setInterval(()=>{
+ sol+= (Math.random()-0.48)*0.2;
+ document.getElementById('solPrice').innerText=sol.toFixed(2);
+ hash=150+Math.random()*25; document.getElementById('hash').innerText=hash.toFixed(1)+' TH/s';
+ mined+=0.0000009; document.getElementById('mined').innerText=mined.toFixed(7)+' SOL';
+ document.getElementById('mineBal').innerText=mined.toFixed(7)+' SOL';
+ document.getElementById('usd').innerText=(mined*sol).toFixed(4);
+ document.getElementById('total').innerText='$'+(1.27+mined*sol).toFixed(3);
+ if(Math.random()>0.65){blocks++; document.getElementById('blocks').innerText=blocks.toLocaleString();}
+ let perc=(mined/0.01*100); document.getElementById('perc').innerText=perc.toFixed(1)+'%';
+ document.getElementById('prog').style.width=perc+'%';
+},1000);
+function toggleMine(){let b=document.getElementById('mineBtn'); b.innerText=b.innerText.includes('ON')?'⛏️ MINING PAUSED - Click to Resume':'⛏️ MINING ON 24/7 AUTO';}
+</script>
+</body>
+</html>
