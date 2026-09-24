@@ -1,9 +1,64 @@
-function adminLogin(){
-let u=document.getElementById('adminUser').value;
-let p=document.getElementById('adminPass').value;
-let k=document.getElementById('adminKey').value;
-if(u==='CryptolordUg' && p==='CedarsAdmin2026' && k==='CEDARS-77X-KEY'){
-document.getElementById('loginScreen').style.display='none';
-localStorage.setItem('cedar_role','admin');
-}else{alert('Invalid — Need Username + Password + Security Key')}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Gate | Cedars of Wealth</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,Arial;background:#020a02;color:#fff;overflow:hidden}
+.gate{position:fixed;inset:0;background:radial-gradient(circle at top,#0a2a0a,#020a02);display:flex;justify-content:center;align-items:center;padding:15px}
+.box{background:#0f2310;border:2px solid #00ff8844;border-radius:20px;padding:30px;width:100%;max-width:450px;box-shadow:0 20px 60px rgba(0,255,136,0.2)}
+.big-title{text-align:center;margin-bottom:20px}
+.big-title h1{font-size:32px;font-weight:900;letter-spacing:2px;color:#00ff88;text-shadow:0 0 20px #00ff88} 
+.big-title h2{font-size:14px;color:#88cc99;letter-spacing:4px;margin-top:5px}
+.slideshow{background:#061206;border:1px solid #1a3a1a;border-radius:12px;height:70px;overflow:hidden;position:relative;margin:15px 0}
+.slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;animation:slideShow 12s infinite;text-align:center;padding:10px;font-size:14px}
+.slide:nth-child(1){animation-delay:0s} .slide:nth-child(2){animation-delay:3s} .slide:nth-child(3){animation-delay:6s} .slide:nth-child(4){animation-delay:9s}
+@keyframes slideShow{0%{opacity:0;transform:translateY(20px)} 5%{opacity:1;transform:translateY(0)} 25%{opacity:1} 30%{opacity:0;transform:translateY(-20px)} 100%{opacity:0}}
+input{width:100%;padding:14px;margin:8px 0;border-radius:10px;border:1px solid #1a4a1a;background:#020a02;color:#fff;font-size:15px}
+button{width:100%;padding:15px;background:linear-gradient(90deg,#00ff88,#00cc66);color:#000;border:none;border-radius:12px;font-weight:900;font-size:16px;margin-top:12px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="gate">
+<div class="box">
+<div class="big-title">
+<h1>🌲 CEDARS OF WEALTH</h1>
+<h2>ADMIN COMMAND CENTER</h2>
+</div>
+
+<div class="slideshow">
+<div class="slide">👋 Welcome Back, <b>Admin Cryptolord</b> — Global Access Enabled</div>
+<div class="slide">🔐 <b>2-Gate Security</b> — Password + Security Key Required</div>
+<div class="slide">📡 <b>Production LIVE v7.0.0</b> — 9/9 APIs GREEN</div>
+<div class="slide">🌍 Access from <b>ANY Phone / Computer</b> Worldwide</div>
+</div>
+
+<input id="u" placeholder="Admin Username" value="Cryptolord">
+<input id="p" type="password" placeholder="🔑 Login Password">
+<input id="k" type="password" placeholder="🛡️ Security Key">
+
+<button onclick="login()">UNLOCK COMMAND CENTER</button>
+<p id="err" style="color:#ff5555;text-align:center;margin-top:12px;font-size:13px"></p>
+<p style="text-align:center;color:#556655;font-size:11px;margin-top:15px">Secure Gate • Worldwide Access • Cedars of Wealth © 2026</p>
+</div>
+</div>
+
+<script>
+const USER = "Cryptolord";
+const PASS = "CedarsAI2050!";
+const KEY = "CEDARS-77X-KEY";
+
+function login(){
+ let uu=document.getElementById('u').value.trim();
+ let pp=document.getElementById('p').value;
+ let kk=document.getElementById('k').value;
+ let e=document.getElementById('err');
+ if(uu!==USER){e.innerText="❌ Wrong Username";return;}
+ if(pp!==PASS){e.innerText="❌ Wrong Password";return;}
+ if(kk!==KEY){e.innerText="❌ Wrong Security Key";return;}
+ localStorage.setItem('cedar_role','admin');
+ location.href="./dashboard.html";
 }
+</script>
+</body>
+</html>
