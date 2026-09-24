@@ -1,28 +1,62 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>RUBONAI Trader V7 | Cedars</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#020a02;color:#fff;font-family:Arial;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:15px}
-.box{background:#0f2310;border:2px solid #00ff8844;border-radius:20px;padding:30px;max-width:600px;width:100%;text-align:center;box-shadow:0 0 40px #00ff8822}
-h1{color:#00ff88}
-.btn{padding:14px 22px;background:#00ff88;border:none;border-radius:10px;font-weight:900;cursor:pointer;margin:10px;display:inline-block;text-decoration:none;color:#000}
-</style>
-</head>
-<body>
-<div class="box">
-<h1>🌲 RUBONAI TRADER V7</h1>
-<p>System Restored Successfully!</p>
-<p style="color:#00ff88">● LIVE</p>
-<p>Balance: $1,250.00</p>
-<a class="btn" href="../login.html">GO TO LOGIN</a>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#020a02;color:#fff;font-family:Arial;padding:15px}
+.header{display:flex;justify-content:space-between;align-items:center;background:#0f2310;border:1px solid #00ff8844;border-radius:12px;padding:15px;margin-bottom:15px}
+.live{color:#00ff88}.balance{color:#00ff88;font-size:22px;font-weight:900}
+.grid{display:grid;grid-template-columns:2fr 1fr;gap:15px}
+.card{background:#0f2310;border:1px solid #00ff8844;border-radius:12px;padding:15px}
+.btn{padding:12px 18px;border:none;border-radius:10px;font-weight:900;cursor:pointer;margin:5px}
+.buy{background:#00ff88;color:#000}.sell{background:#ff4444;color:#fff}
+input{width:100%;padding:12px;background:#020a02;border:1px solid #00ff8844;border-radius:8px;color:#fff;margin:8px 0}
+@media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style></head><body>
+<div class="header">
+<div><h2>🌲 RUBONAI V7</h2><span class="live">● LIVE • Cedars of Wealth</span></div>
+<div style="text-align:right"><div id="bal" class="balance">$1,250.00</div><small id="userEmail">Demo</small><br><a href="../login.html" onclick="localStorage.removeItem('cedars_current_user')" style="color:#ff8888;font-size:12px">Logout</a></div>
+</div>
+<div class="grid">
+<div class="card">
+<h3>BTC/USDT Chart</h3>
+<div style="height:300px;background:#020a02;border-radius:8px;display:flex;align-items:center;justify-content:center;margin:10px 0;border:1px solid #00ff8822">
+<div style="text-align:center"><p style="font-size:48px;color:#00ff88">$67,240</p><p style="color:#00ff88">▲ +2.4% Today</p><small>TradingView Chart Integration Ready</small></div></div>
+<div style="display:flex;gap:10px"><button class="btn buy" style="flex:1" onclick="trade('BUY')">BUY / LONG 🟢</button><button class="btn sell" style="flex:1" onclick="trade('SELL')">SELL / SHORT 🔴</button></div>
+<p id="msg" style="margin-top:10px;color:#00ff88;text-align:center"></p>
+</div>
+<div class="card">
+<h3>Place Order</h3>
+<label>Amount (USDT)</label><input id="amt" type="number" value="100">
+<label>Leverage</label><input value="10x" disabled>
+<button class="btn buy" style="width:100%" onclick="trade('BUY')">EXECUTE TRADE</button>
+<hr style="margin:15px 0;border-color:#00ff8822">
+<h4>Open Positions</h4><div id="positions" style="font-size:13px;margin-top:10px;color:#aaa">No open positions</div>
+<hr style="margin:15px 0;border-color:#00ff8822">
+<h4>Balance History</h4><div style="font-size:12px;color:#888">Initial: $1,250.00<br>Profit: +$0.00</div>
+</div>
 </div>
 <script>
-// Backup - now correctly inside script
-(function(){try{let d=localStorage.getItem('cedars_users');if(d){localStorage.setItem('cedars_backup_'+Date.now(),d);}}catch(e){}})();
+// SECURE BACKUP INSIDE SCRIPT TAG - NO MORE RAW TEXT ERROR
+(function(){try{let d=localStorage.getItem('cedars_users');if(d){localStorage.setItem('cedars_backup_'+Date.now(),d);console.log('Backup secured');}}catch(e){}})();
+
+// Auth check
+let cur=JSON.parse(localStorage.getItem('cedars_current_user')||'null');
+if(!cur){location.href='../login.html?v=FIXEDNOW123';}
+else{document.getElementById('userEmail').innerText=cur.email||'Trader';}
+
+// Balance
+let balance=1250;
+function updateBal(){document.getElementById('bal').innerText='$'+balance.toFixed(2);}
+
+function trade(type){
+ let amt=parseFloat(document.getElementById('amt').value)||100;
+ if(amt>balance){document.getElementById('msg').innerText='❌ Insufficient balance!';return;}
+ let profit=(Math.random()*20-5);
+ balance+=profit;
+ updateBal();
+ document.getElementById('msg').innerText='✅ '+type+' executed: $'+amt+' | PnL: '+(profit>0?'+':'')+'$'+profit.toFixed(2);
+ document.getElementById('positions').innerHTML='<div style="background:#020a02;padding:8px;border-radius:6px;margin:5px 0;border-left:3px solid '+(type=='BUY'?'#00ff88':'#ff4444')+'">'+type+' BTC/USDT $'+amt+'<br><small>PnL: $'+profit.toFixed(2)+'</small></div>'+document.getElementById('positions').innerHTML;
+}
+updateBal();
 </script>
-</body>
-</html>
+</body></html>
