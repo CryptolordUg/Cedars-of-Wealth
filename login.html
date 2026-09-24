@@ -6,7 +6,7 @@ function doLogin(){
  let m=document.getElementById('msg');
  if(!u){m.style.display='block';m.style.color='#ff4444';m.innerText='❌ Wrong email or password';return;}
  localStorage.setItem('cedars_current_user',JSON.stringify(u));
- m.style.display='block';m.style.color='#00ff88';m.innerText='✅ Login success! Redirecting...';
- setTimeout(()=>location.href='index.html',1000);
+ m.style.display='block';m.style.color='#00ff88';m.innerText='✅ Login success!';
+ setTimeout(()=>location.href='dashboard/rubonai-trader.html',1000);
 }
 </script></body></html>
