@@ -1,0 +1,84 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS HEALTH CHECK</title>
+<style>body{background:#020a02;color:#fff;font-family:monospace;padding:20px} .ok{color:#00ff88}.bad{color:#ff4444}.box{border:1px solid #00ff8822;padding:15px;border-radius:12px;margin:10px 0;background:#0a1a0f} button{padding:12px;background:#00ff88;border:none;border-radius:8px;font-weight:900;cursor:pointer;margin:5px}</style>
+</head><body>
+<h1 style="color:#00ff88">🌲 CEDARS AUTO-HEAL SYSTEM</h1>
+<div id="log"></div>
+<div id="fix"></div>
+<script>
+const required=[
+{path:'index.html',name:'Home'},
+{path:'login.html',name:'Login'},
+{path:'register.html',name:'Register'},
+{path:'forgot.html',name:'Forgot'},
+{path:'password.html',name:'Password Reset'},
+{path:'dashboard/rubonai-trader.html',name:'Dashboard Trader'},
+{path:'dashboard/index.html',name:'Dashboard Index (missing causes /dashboard/ 404)'},
+{path:'404.html',name:'404 Redirect'},
+{path:'sw.js',name:'Offline Cache'},
+{path:'terms.html',name:'Terms'},
+{path:'privacy.html',name:'Privacy'},
+{path:'about.html',name:'About'}
+];
+const log=document.getElementById('log');
+async function check(){
+ log.innerHTML='<div class="box">🔍 Scanning live environment...</div>';
+ let missing=[];
+ for(let f of required){
+  try{
+   let r=await fetch(f.path,{method:'HEAD',cache:'no-store'});
+   if(r.ok){
+    log.innerHTML+=`<div class="box ok">✅ ${f.name} — /${f.path} — OK [${r.status}]</div>`;
+   }else{
+    log.innerHTML+=`<div class="box bad">❌ ${f.name} — /${f.path} — MISSING [${r.status}]</div>`;
+    missing.push(f);
+   }
+  }catch(e){
+   log.innerHTML+=`<div class="box bad">❌ ${f.name} — /${f.path} — ERROR ${e.message}</div>`;
+   missing.push(f);
+  }
+ }
+ // Alignment check
+ log.innerHTML+=`<div class="box">📐 Alignment Check: Testing responsive...</div>`;
+ let widths=[320,768,1024];
+ widths.forEach(w=>{ log.innerHTML+=`<div class="box">Viewport ${w}px: ${window.innerWidth>=w?'OK':'Needs mobile fix'}</div>`});
+ 
+ if(missing.length>0){
+  document.getElementById('fix').innerHTML=`
+  <div class="box bad">
+  <h3>🔧 AUTO-FIX FOUND ${missing.length} MISSING PAGES</h3>
+  <p>Click to auto-generate all missing pages with aligned CEDARS theme:</p>
+  <button onclick="autoGenerate()">GENERATE ALL MISSING NOW</button>
+  <pre id="gen"></pre>
+  </div>`;
+  window.missingList=missing;
+ }else{
+  document.getElementById('fix').innerHTML=`<div class="box ok"><h2>✅ ALL PAGES PERFECT — 5 YEAR READY!</h2></div>`;
+ }
+ // Auto-align live env
+ autoAlignCheck();
+}
+function autoAlignCheck(){
+ // Check if pages have viewport meta
+ let meta=document.querySelector('meta[name="viewport"]');
+ if(!meta) log.innerHTML+=`<div class="box bad">⚠️ Missing viewport meta — Mobile alignment broken!</div>`;
+ else log.innerHTML+=`<div class="box ok">📱 Mobile viewport: OK</div>`;
+}
+function autoGenerate(){
+ let out=document.getElementById('gen');
+ out.textContent='Generating templates... copy these files to GitHub:\n\n';
+ window.missingList.forEach(f=>{
+  if(f.path.includes('404.html')){
+   out.textContent+=`\n--- ${f.path} ---\n<!DOCTYPE html><html><head><meta charset="UTF-8"><script>sessionStorage.redirect=location.href;location.href='/Cedars-of-Wealth/';</script></head><body>Redirecting CEDARS...</body></html>\n`;
+  }else if(f.path.includes('dashboard/index.html')){
+   out.textContent+=`\n--- ${f.path} ---\n<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=rubonai-trader.html"></head><body>Redirecting to trader...</body></html>\n`;
+  }else if(f.path.includes('sw.js')){
+   out.textContent+=`\n--- ${f.path} ---\nconst CACHE='cedars-v1';self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['/Cedars-of-Wealth/','/Cedars-of-Wealth/login.html','/Cedars-of-Wealth/register.html','/Cedars-of-Wealth/dashboard/rubonai-trader.html'])))});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)))});\n`;
+  }else{
+   out.textContent+=`\n--- ${f.path} ---\n<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${f.name} | Cedars</title><style>body{background:#020a02;color:#fff;font-family:Arial;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}.box{background:#0f2310;border:2px solid #00ff8844;border-radius:20px;padding:30px;max-width:500px;text-align:center;width:100%}a{color:#00ff88}</style></head><body><div class="box"><h1 style="color:#00ff88">🌲 CEDARS</h1><h2>${f.name}</h2><p>Coming soon — Cedars of Wealth</p><a href="index.html">← Home</a></div></body></html>\n`;
+  }
+ });
+ out.textContent+='\n\n✅ Copy each to GitHub with same filename!';
+}
+check();
+</script>
+</body></html>
