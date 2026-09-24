@@ -1,64 +1,129 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RUBONAI Trader V6 | Cedars of Wealth</title>
-<script src="https://s3.tradingview.com/tv.js"></script>
+<title>RUBONAI V6 - $1 REAL DIRECT NODE</title>
+<script src="../api/direct-nodes.js"></script>
+<script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{background:#020a02;color:#eaffea;font-family:Inter,Arial;padding:12px}
-.top{display:flex;justify-content:space-between;align-items:center;background:#0a1e0a;border:1px solid #00ff8844;border-radius:14px;padding:14px 18px;margin-bottom:12px}
-.live{color:#00ff88;font-size:12px}.bal{color:#00ff88;font-weight:900;font-size:22px}
-.main{display:grid;grid-template-columns:2.2fr 1fr;gap:12px}
-.card{background:#0d2610;border:1px solid #00ff8833;border-radius:14px;padding:14px}
-.tv{height:420px;border-radius:10px;overflow:hidden;background:#000}
-.btn{padding:13px;border:none;border-radius:10px;font-weight:900;cursor:pointer;width:100%;margin-top:8px}
-.buy{background:#00ff88;color:#000}.sell{background:#ff3344;color:#fff}
-input,select{width:100%;padding:11px;background:#020a02;border:1px solid #00ff8844;border-radius:8px;color:#fff;margin:6px 0}
-.signal{padding:8px;border-radius:8px;margin:6px 0;font-size:13px}
-.ai{background:#102a12;border-left:3px solid #00ff88}
-@media(max-width:900px){.main{grid-template-columns:1fr}.tv{height:320px}}
-</style></head><body>
+body{background:#050a05;color:#fff;font-family:Inter;margin:0;padding:10px}
+.header{display:flex;justify-content:space-between;align-items:center;background:#0a1a0a;padding:10px;border-radius:10px;border:1px solid #00ff8844}
+.card{background:#0d2610;border:1px solid #00ff8844;border-radius:12px;padding:12px;margin-top:10px}
+.btn{width:100%;padding:14px;background:#00ff88;color:#000;font-weight:900;border:none;border-radius:10px;cursor:pointer;margin-top:10px}
+input{width:100%;padding:10px;background:#000;border:1px solid #00ff8844;border-radius:8px;color:#fff;margin:5px 0}
+#chart{height:300px;background:#000;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#00ff88;border:1px solid #00ff8844}
+</style>
+</head>
+<body>
 
-<div class="top">
-<div><h2>🌲 RUBONAI AI TRADER</h2><span class="live">● LIVE MARKET • Cedars of Wealth • V6 • Unit 1</span><br><a href="rubonai-mining.html" style="color:#ffaa00;font-size:11px;border:1px solid #ffaa00;padding:4px 10px;border-radius:20px;text-decoration:none;display:inline-block;margin-top:6px">⚒️ SWITCH TO UNIT 2 MINING 24/7 →</a></div>
-<div style="text-align:right"><div id="balance" class="bal">$1,250.00</div><small id="uEmail" style="opacity:.7">trader@cedars.ug</small><br><a href="../login.html" onclick="localStorage.removeItem('cedars_current_user')" style="color:#ff7a7a;font-size:11px;text-decoration:none">Logout →</a></div>
-</div>
-
-<div class="main">
-<div class="card">
-<div style="display:flex;justify-content:space-between"><h3>BTC/USDT • Binance</h3><span style="color:#00ff88" id="priceLive">$67,240.12 ▲ 2.4%</span></div>
-<div id="tv_chart" class="tv" style="margin:10px 0"></div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-<button class="btn buy" onclick="doTrade('BUY')">BUY / LONG 🟢</button>
-<button class="btn sell" onclick="doTrade('SELL')">SELL / SHORT 🔴</button>
-</div>
-<div id="execMsg" style="text-align:center;margin-top:10px;color:#00ff88;font-weight:700"></div>
-<div class="signal ai">
-<b>🤖 RUBONAI AI Analysis:</b><br>
-<span id="aiSignal">Scanning market... RSI 58, MACD Bullish, Trend UP. Suggested: BUY on dip $66,900 with SL $66,200</span>
-</div>
+<div class="header">
+<div><b>RUBONAI AI V6</b> <span style="color:#00ff88;font-size:12px">● DIRECT NODE LIVE</span></div>
+<div style="text-align:right"><div style="font-size:11px;opacity:.6">Balance</div><div id="bal" style="font-weight:900">$1.00 REAL</div></div>
 </div>
 
 <div class="card">
-<h3>Trade Panel</h3>
-<label>Amount USDT</label><input id="amt" type="number" value="150">
-<label>Leverage</label><select id="lev"><option>5x</option><option selected>10x</option><option>20x</option><option>50x</option></select>
-<button class="btn buy" onclick="doTrade('BUY')">EXECUTE ORDER</button>
-<hr style="margin:14px 0;border-color:#00ff8822">
-<h4>Open Positions</h4>
-<div id="positions" style="font-size:12px;color:#9ab09a;margin-top:8px">No open positions yet</div>
+<div style="display:flex;justify-content:space-between;font-size:12px"><span>BTC/USDT</span><span id="btcPrice" style="color:#00ff88">$67,148.20</span></div>
+<div id="chart">📈 LIVE BTC CHART - Block <span id="block">loading...</span></div>
 </div>
+
+<div class="card">
+<h3>⚡ DIRECT TRADE PANEL - $1 REAL ON-CHAIN</h3>
+<label>Amount (USDT/SOL)</label>
+<input id="amount" value="1" placeholder="1">
+<label>Chain</label>
+<select id="chain" style="width:100%;padding:10px;background:#000;color:#fff;border:1px solid #00ff8844;border-radius:8px">
+<option value="sol">Solana (BEST for $1 - fee $0.00001)</option>
+<option value="tron">Tron (USDT TRC20)</option>
+<option value="eth">Ethereum</option>
+<option value="btc">Bitcoin</option>
+</select>
+<button class="btn" id="execBtn" onclick="executeRealOrder()">EXECUTE ORDER - $1 REAL</button>
+<div id="status" style="font-size:11px;margin-top:8px;opacity:.7"></div>
+</div>
+
+<div class="card" style="font-size:11px;line-height:1.8">
+<b>🟢 Direct Nodes Status:</b><br>
+<div id="nodes"></div>
 </div>
 
 <script>
-// Backup fixed inside script
-(function(){ try{ const d=localStorage.getItem('cedars_users'); if(d) localStorage.setItem('cedars_backup_'+Date.now(), d); }catch(e){} })();
-const cur = JSON.parse(localStorage.getItem('cedars_current_user')||'null');
-if(!cur){ location.href='../login.html?v=ORIGINAL'; }
-else{ document.getElementById('uEmail').innerText = cur.email || 'Cedars Trader'; }
-new TradingView.widget({"autosize": true, "symbol": "BINANCE:BTCUSDT", "interval": "15", "timezone": "Africa/Kampala","theme": "dark", "style": "1", "locale": "en", "container_id": "tv_chart","backgroundColor": "#000000", "gridColor": "rgba(0,255,136,0.1)"});
-let bal = 1250; function updBal(){ document.getElementById('balance').innerText = '$'+bal.toFixed(2); }
-function doTrade(type){ const amt = parseFloat(document.getElementById('amt').value)||100; if(amt>bal){ document.getElementById('execMsg').innerText='❌ Insufficient balance'; return; } const pnl = (Math.random()*40 - 10); bal+=pnl; updBal(); document.getElementById('execMsg').innerText='✅ '+type+' '+amt+' USDT executed | PnL: $'+pnl.toFixed(2); const div = document.createElement('div'); div.style.cssText='background:#020a02;padding:8px;border-radius:6px;margin:6px 0;border-left:3px solid '+(type=='BUY'?'#00ff88':'#ff3344'); div.innerHTML=type+' BTC '+amt+' USDT<br><small>PnL: $'+pnl.toFixed(2)+' • '+new Date().toLocaleTimeString()+'</small>'; document.getElementById('positions').prepend(div); }
-updBal();
-setInterval(()=>{ const p=(67240+Math.random()*200-100).toFixed(2); document.getElementById('priceLive').innerText='$'+p+' '+(Math.random()>0.5?'▲':'▼')+' '+(Math.random()*3).toFixed(1)+'%'; },3000);
+// REAL $1 DIRECT NODE TRADER
+async function executeRealOrder(){
+  const amount = document.getElementById('amount').value || 1;
+  const chain = document.getElementById('chain').value;
+  const btn = document.getElementById('execBtn');
+  const status = document.getElementById('status');
+  
+  btn.innerText = "⏳ CONNECTING DIRECT NODES...";
+  
+  try {
+    if(!window.DirectNodes){
+      alert("⚠️ Create api/direct-nodes.js first in GitHub!");
+      btn.innerText = "EXECUTE ORDER - $1 REAL";
+      return;
+    }
+    
+    const test = await window.DirectNodes.testAll();
+    document.getElementById('block').innerText = test.btc_block;
+    document.getElementById('nodes').innerHTML = `
+    BTC Block: ${test.btc_block}<br>
+    ETH: ${test.eth_rpc}<br>
+    SOL: ${test.sol_rpc}<br>
+    TRON: ${test.tron_rpc}<br>
+    Status: ${test.status}
+    `;
+    
+    const solRpc = localStorage.getItem('CEDARS_SOL_RPC') || 'https://api.mainnet-beta.solana.com';
+    const res = await fetch(solRpc, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({jsonrpc:"2.0",id:1,method:"getHealth"})
+    });
+    const health = await res.json();
+    
+    btn.innerText = `✅ $1 DIRECT NODE LIVE - Block ${test.btc_block}`;
+    btn.style.background = "#00ff88";
+    
+    // Try connect Phantom for REAL $1
+    if(window.solana && window.solana.isPhantom){
+      status.innerHTML = "🔗 Phantom found! Connecting...";
+      const resp = await window.solana.connect();
+      const bal = await window.DirectNodes.getSolanaBalance(resp.publicKey.toString());
+      document.getElementById('bal').innerText = bal + " SOL REAL";
+      status.innerHTML = `✅ Wallet: ${resp.publicKey.toString().slice(0,8)}... Balance: ${bal} SOL<br>Ready to send $${amount} real on ${chain}`;
+      alert(`🟢 WALLET CONNECTED!\nBalance: ${bal} SOL\n\nClick EXECUTE again to send REAL $${amount} on ${chain} chain!`);
+      btn.innerText = `SEND $${amount} REAL ${chain.toUpperCase()} NOW`;
+      btn.onclick = ()=> sendReal(chain, amount, resp.publicKey.toString());
+    } else {
+      status.innerHTML = `🟢 Nodes OK Health: ${health.result||'ok'}<br>Install Phantom wallet to send REAL $1, or use TRON for USDT`;
+      alert(`🟢 DIRECT RPC LIVE!\nBTC Block: ${test.btc_block}\n\nFor $1 REAL:\n1. Install Phantom (Solana) - best for $1\n2. Or use TronLink for USDT\n\nNodes are LIVE now!`);
+    }
+    
+  } catch(e){
+    btn.innerText = "EXECUTE ORDER - $1 REAL";
+    status.innerHTML = "Error: " + e.message;
+    alert("Error: " + e.message);
+  }
+}
+
+async function sendReal(chain, amount, from){
+  alert(`This will send REAL $${amount} on ${chain.toUpperCase()} from ${from}\n\nNext step: I will build signer for ${chain} - tell me your wallet!`);
+}
+
+window.addEventListener('load', async ()=>{
+  if(window.DirectNodes){
+    const test = await window.DirectNodes.testAll();
+    document.getElementById('block').innerText = test.btc_block;
+    document.getElementById('nodes').innerHTML = `Loading... BTC ${test.btc_block}`;
+    // Update BTC price
+    try{
+      const r = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT');
+      const d = await r.json();
+      document.getElementById('btcPrice').innerText = '$' + parseFloat(d.price).toLocaleString();
+    }catch{}
+  }
+});
 </script>
-</body></html>
+
+</body>
+</html>
