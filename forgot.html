@@ -1,45 +1,54 @@
 <!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Forgot Password | Cedars of Wealth</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Inter,Arial;background:radial-gradient(circle at top,#0a1a0f,#020a02);color:#fff;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:15px}
-.box{background:#0f2310;border:2px solid #00ff8844;border-radius:20px;padding:30px;width:100%;max-width:420px;text-align:center;overflow:hidden}
-h1{font-size:32px;font-weight:900;color:#00ff88;letter-spacing:2px}
-.sub{letter-spacing:4px;font-size:11px;color:#88cc88;margin:6px 0 18px;font-weight:700}
-.marquee{width:100%;background:#00ff8815;border:1px solid #00ff8833;border-radius:8px;padding:8px 0;margin:10px 0 18px;overflow:hidden;white-space:nowrap}
-.marquee span{display:inline-block;padding-left:100%;animation:slide 8s linear infinite;font-weight:900;font-size:14px;color:#00ff88;letter-spacing:1px}
-@keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
-input{width:100%;padding:14px;margin:10px 0;border-radius:10px;border:1px solid #1a4a1a;background:#020a02;color:#fff;font-size:15px}
-button{width:100%;padding:14px;background:linear-gradient(90deg,#00ff88,#00cc66);color:#000;border:none;border-radius:12px;font-weight:900;font-size:16px;margin-top:10px;cursor:pointer}
-.motto{margin-top:18px;font-weight:900;letter-spacing:3px;color:#ffcc00;font-size:13px;text-transform:uppercase}
-</style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,Arial;background:radial-gradient(circle at top,#0a1a0f,#020a02);color:#fff;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:15px}.box{background:#0f2310;border:2px solid #00ff8844;border-radius:20px;padding:30px;width:100%;max-width:420px;text-align:center;overflow:hidden}h1{font-size:32px;font-weight:900;color:#00ff88}.sub{letter-spacing:4px;font-size:11px;color:#88cc88;margin:6px 0 18px;font-weight:700}.marquee{width:100%;background:#00ff8815;border:1px solid #00ff8833;border-radius:8px;padding:8px 0;margin:10px 0 18px;overflow:hidden;white-space:nowrap}.marquee span{display:inline-block;padding-left:100%;animation:slide 8s linear infinite;font-weight:900;font-size:14px;color:#00ff88}@keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}input{width:100%;padding:14px;margin:10px 0;border-radius:10px;border:1px solid #1a4a1a;background:#020a02;color:#fff;font-size:15px}button{width:100%;padding:14px;background:linear-gradient(90deg,#00ff88,#00cc66);color:#000;border:none;border-radius:12px;font-weight:900;font-size:16px;margin-top:10px;cursor:pointer}.motto{margin-top:18px;font-weight:900;letter-spacing:3px;color:#ffcc00;font-size:13px;text-transform:uppercase}</style>
 </head><body>
 <div class="box">
 <h1>🌲 CEDARS</h1>
 <div class="sub">Trust. Growth. Unity</div>
-
 <div class="marquee"><span>Enter email, We send reset • Enter email, We send reset • Enter email, We send reset •</span></div>
-
-<h3 style="margin:5px 0">Forgot Password?</h3>
+<h3>Forgot Password?</h3>
 <input id="email" type="email" placeholder="Your email">
-<button onclick="sendReset()">SEND RESET LINK</button>
-
-<div id="msg" style="margin-top:15px;font-size:13px;color:#00ff88;display:none"></div>
-
+<button id="btn" onclick="sendReset()">SEND RESET LINK</button>
+<div id="msg" style="margin-top:15px;font-size:13px;display:none"></div>
 <div class="motto">Die rich or Die trying</div>
-
 <a href="/Cedars-of-Wealth/login.html" style="color:#00ff88;font-size:12px;display:block;margin-top:18px;text-decoration:none">← Back to Login</a>
 </div>
-
 <script>
+// REPLACE WITH YOUR EmailJS KEYS FROM STEP 1
+const SERVICE_ID = "YOUR_SERVICE_ID";
+const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+const PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+emailjs.init(PUBLIC_KEY);
+
 function sendReset(){
  let email=document.getElementById('email').value.trim();
  if(!email){alert('Enter email');return;}
+ let btn=document.getElementById('btn');
+ let msg=document.getElementById('msg');
+ btn.innerText="SENDING...";
+ btn.disabled=true;
+
  let token=btoa(email+'|'+Date.now()).replace(/=/g,'');
- let link=`https://cryptolordug.github.io/Cedars-of-Wealth/password.html?email=${encodeURIComponent(email)}&token=${token}`;
- document.getElementById('msg').style.display='block';
- document.getElementById('msg').innerHTML=`✅ Reset link ready!<br><br><a href="${link}" style="color:#fff;background:#111;padding:8px 12px;border-radius:8px;word-break:break-all;display:inline-block">${link}</a><br><br><span style="font-size:11px;color:#8899aa">This link will be auto-emailed to ${email}</span>`;
- localStorage.setItem('reset_'+email, token);
+ let reset_link=`https://cryptolordug.github.io/Cedars-of-Wealth/password.html?email=${encodeURIComponent(email)}&token=${token}`;
+
+ // Params for email template
+ let params = { to_email: email, reset_link: reset_link, reply_to: "noreply@cedarsofwealth.sg" };
+
+ emailjs.send(SERVICE_ID, TEMPLATE_ID, params).then(()=>{
+   msg.style.display='block';
+   msg.style.color='#00ff88';
+   msg.innerHTML=`✅ Email sent to <b>${email}</b> worldwide!<br><br>Check inbox / spam folder.<br><small style="color:#8899aa">From: Cedars of Wealth (no-reply)</small>`;
+   btn.innerText="SEND RESET LINK";
+   btn.disabled=false;
+ }).catch((err)=>{
+   // Fallback if keys not set yet - show link
+   msg.style.display='block';
+   msg.style.color='#ffcc00';
+   msg.innerHTML=`⚠️ Auto-email not configured yet. Use this link:<br><br><a href="${reset_link}" style="color:#fff;background:#111;padding:8px 12px;border-radius:8px;word-break:break-all;display:inline-block">${reset_link}</a><br><br><small>Send me your EmailJS keys to enable auto-send</small>`;
+   btn.innerText="SEND RESET LINK";
+   btn.disabled=false;
+ });
 }
 </script>
 </body></html>
