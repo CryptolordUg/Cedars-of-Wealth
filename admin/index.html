@@ -1,3 +1,9 @@
-<input id="adminUser" placeholder="Admin Username" value="CryptolordUg">
-<input id="adminPass" type="password" placeholder="Password">
-<input id="adminKey" type="password" placeholder="🛡️ Security Key">
+function adminLogin(){
+let u=document.getElementById('adminUser').value;
+let p=document.getElementById('adminPass').value;
+let k=document.getElementById('adminKey').value;
+if(u==='CryptolordUg' && p==='CedarsAdmin2026' && k==='CEDARS-77X-KEY'){
+document.getElementById('loginScreen').style.display='none';
+localStorage.setItem('cedar_role','admin');
+}else{alert('Invalid — Need Username + Password + Security Key')}
+}
