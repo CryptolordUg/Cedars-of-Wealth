@@ -1,0 +1,17 @@
+name: Keep Alive
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          date > last-active.txt
+          git config user.name "Cedars Bot"
+          git config user.email "bot@cedars.com"
+          git add last-active.txt
+          git commit -m "Keep alive $(date)" || exit 0
+          git push
