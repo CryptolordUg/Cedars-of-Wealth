@@ -1,129 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RUBONAI V6 - $1 REAL DIRECT NODE</title>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RUBONAI V6 - 6XQviX REAL</title>
 <script src="../api/direct-nodes.js"></script>
 <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js"></script>
-<style>
-body{background:#050a05;color:#fff;font-family:Inter;margin:0;padding:10px}
-.header{display:flex;justify-content:space-between;align-items:center;background:#0a1a0a;padding:10px;border-radius:10px;border:1px solid #00ff8844}
-.card{background:#0d2610;border:1px solid #00ff8844;border-radius:12px;padding:12px;margin-top:10px}
-.btn{width:100%;padding:14px;background:#00ff88;color:#000;font-weight:900;border:none;border-radius:10px;cursor:pointer;margin-top:10px}
-input{width:100%;padding:10px;background:#000;border:1px solid #00ff8844;border-radius:8px;color:#fff;margin:5px 0}
-#chart{height:300px;background:#000;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#00ff88;border:1px solid #00ff8844}
-</style>
-</head>
-<body>
+<style>body{background:#050a05;color:#fff;font-family:Inter;margin:0;padding:10px}.header{display:flex;justify-content:space-between;align-items:center;background:#0a1a0a;padding:12px;border-radius:12px;border:1px solid #00ff8844}.card{background:#0d2610;border:1px solid #00ff8844;border-radius:12px;padding:12px;margin-top:10px}.btn{width:100%;padding:15px;background:#00ff88;color:#000;font-weight:900;border:none;border-radius:12px;cursor:pointer;font-size:16px}.btn:disabled{background:#333;color:#666}input,select{width:100%;padding:12px;background:#000;border:1px solid #00ff8844;border-radius:8px;color:#fff;margin:6px 0;box-sizing:border-box}</style>
+</head><body>
 
 <div class="header">
-<div><b>RUBONAI AI V6</b> <span style="color:#00ff88;font-size:12px">● DIRECT NODE LIVE</span></div>
-<div style="text-align:right"><div style="font-size:11px;opacity:.6">Balance</div><div id="bal" style="font-weight:900">$1.00 REAL</div></div>
+<div><b>RUBONAI V6</b><br><span style="color:#00ff88;font-size:11px">● DIRECT NODE ● YOUR ADDRESS LIVE</span></div>
+<div style="text-align:right"><div style="font-size:10px;opacity:.6">REAL Balance</div><div id="bal" style="font-weight:900;color:#00ff88">Loading...</div><div style="font-size:9px;opacity:.5">6XQviX...FF6fTb</div></div>
 </div>
 
 <div class="card">
-<div style="display:flex;justify-content:space-between;font-size:12px"><span>BTC/USDT</span><span id="btcPrice" style="color:#00ff88">$67,148.20</span></div>
-<div id="chart">📈 LIVE BTC CHART - Block <span id="block">loading...</span></div>
+<div style="display:flex;justify-content:space-between"><span>BTC/USDT</span><span id="btcPrice" style="color:#00ff88">$67,148</span></div>
+<div id="chart" style="height:80px;background:#000;border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid #00ff8844;margin-top:8px">Block <span id="block">...</span> • Direct Node OK</div>
 </div>
 
 <div class="card">
-<h3>⚡ DIRECT TRADE PANEL - $1 REAL ON-CHAIN</h3>
-<label>Amount (USDT/SOL)</label>
-<input id="amount" value="1" placeholder="1">
-<label>Chain</label>
-<select id="chain" style="width:100%;padding:10px;background:#000;color:#fff;border:1px solid #00ff8844;border-radius:8px">
-<option value="sol">Solana (BEST for $1 - fee $0.00001)</option>
-<option value="tron">Tron (USDT TRC20)</option>
-<option value="eth">Ethereum</option>
-<option value="btc">Bitcoin</option>
-</select>
-<button class="btn" id="execBtn" onclick="executeRealOrder()">EXECUTE ORDER - $1 REAL</button>
-<div id="status" style="font-size:11px;margin-top:8px;opacity:.7"></div>
+<h3 style="margin:0 0 10px 0">⚡ $1 REAL TRADE - YOUR WALLET</h3>
+<label>Your Address (REAL)</label>
+<input id="myAddr" value="6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb" readonly>
+<label>Amount SOL (0.005 = ~$1)</label>
+<input id="amount" value="0.005">
+<label>Send To (Destination)</label>
+<input id="toAddr" placeholder="Paste destination SOL address here">
+<button class="btn" id="execBtn" onclick="executeRealOrder()">1. CONNECT PHANTOM + CHECK REAL BALANCE</button>
+<div id="status" style="font-size:12px;margin-top:10px;line-height:1.6;word-break:break-all"></div>
 </div>
 
-<div class="card" style="font-size:11px;line-height:1.8">
-<b>🟢 Direct Nodes Status:</b><br>
-<div id="nodes"></div>
-</div>
+<div class="card" style="font-size:11px"><b>🟢 Nodes</b><div id="nodes">Checking...</div></div>
 
 <script>
-// REAL $1 DIRECT NODE TRADER
+const MY_WALLET = '6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb';
+
 async function executeRealOrder(){
-  const amount = document.getElementById('amount').value || 1;
-  const chain = document.getElementById('chain').value;
-  const btn = document.getElementById('execBtn');
-  const status = document.getElementById('status');
+  const btn=document.getElementById('execBtn');
+  const status=document.getElementById('status');
+  const amount=parseFloat(document.getElementById('amount').value) || 0.005;
   
-  btn.innerText = "⏳ CONNECTING DIRECT NODES...";
-  
-  try {
-    if(!window.DirectNodes){
-      alert("⚠️ Create api/direct-nodes.js first in GitHub!");
-      btn.innerText = "EXECUTE ORDER - $1 REAL";
+  btn.innerText="⏳ Checking YOUR real balance via direct node...";
+  try{
+    if(!window.DirectNodes){alert('Create api/direct-nodes.js first!');return}
+    const test=await window.DirectNodes.testAll();
+    document.getElementById('block').innerText=test.btc_block;
+    document.getElementById('nodes').innerHTML=`BTC ${test.btc_block} | ETH ${test.eth_rpc} | SOL ${test.sol_rpc}`;
+
+    // YOUR REAL BALANCE - THIS IS THE LINE YOU ASKED!
+    const myRealBal = await window.DirectNodes.getSolanaBalance(MY_WALLET);
+    document.getElementById('bal').innerText = myRealBal + ' SOL REAL';
+    console.log('MY REAL BAL:', myRealBal);
+    status.innerHTML = `✅ YOUR REAL BALANCE: <b style="color:#00ff88">${myRealBal} SOL</b> via direct node<br>Wallet: ${MY_WALLET}<br><br>`;
+
+    // Connect Phantom
+    if(!window.solana || !window.solana.isPhantom){
+      status.innerHTML+=`⚠️ Install Phantom on this browser to send. But your real balance above is LIVE from blockchain!<br><br>Fund this address with 0.01 SOL to start $1 trading.`;
+      btn.innerText=`REAL BAL: ${myRealBal} SOL - INSTALL PHANTOM TO SEND`;
       return;
     }
+    const resp=await window.solana.connect();
+    const connectedAddr=resp.publicKey.toString();
+    status.innerHTML+=`🔗 Connected: ${connectedAddr.slice(0,10)}...<br>`;
     
-    const test = await window.DirectNodes.testAll();
-    document.getElementById('block').innerText = test.btc_block;
-    document.getElementById('nodes').innerHTML = `
-    BTC Block: ${test.btc_block}<br>
-    ETH: ${test.eth_rpc}<br>
-    SOL: ${test.sol_rpc}<br>
-    TRON: ${test.tron_rpc}<br>
-    Status: ${test.status}
-    `;
-    
-    const solRpc = localStorage.getItem('CEDARS_SOL_RPC') || 'https://api.mainnet-beta.solana.com';
-    const res = await fetch(solRpc, {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({jsonrpc:"2.0",id:1,method:"getHealth"})
-    });
-    const health = await res.json();
-    
-    btn.innerText = `✅ $1 DIRECT NODE LIVE - Block ${test.btc_block}`;
-    btn.style.background = "#00ff88";
-    
-    // Try connect Phantom for REAL $1
-    if(window.solana && window.solana.isPhantom){
-      status.innerHTML = "🔗 Phantom found! Connecting...";
-      const resp = await window.solana.connect();
-      const bal = await window.DirectNodes.getSolanaBalance(resp.publicKey.toString());
-      document.getElementById('bal').innerText = bal + " SOL REAL";
-      status.innerHTML = `✅ Wallet: ${resp.publicKey.toString().slice(0,8)}... Balance: ${bal} SOL<br>Ready to send $${amount} real on ${chain}`;
-      alert(`🟢 WALLET CONNECTED!\nBalance: ${bal} SOL\n\nClick EXECUTE again to send REAL $${amount} on ${chain} chain!`);
-      btn.innerText = `SEND $${amount} REAL ${chain.toUpperCase()} NOW`;
-      btn.onclick = ()=> sendReal(chain, amount, resp.publicKey.toString());
-    } else {
-      status.innerHTML = `🟢 Nodes OK Health: ${health.result||'ok'}<br>Install Phantom wallet to send REAL $1, or use TRON for USDT`;
-      alert(`🟢 DIRECT RPC LIVE!\nBTC Block: ${test.btc_block}\n\nFor $1 REAL:\n1. Install Phantom (Solana) - best for $1\n2. Or use TronLink for USDT\n\nNodes are LIVE now!`);
+    if(connectedAddr!==MY_WALLET){
+      status.innerHTML+=`⚠️ You connected different wallet than ${MY_WALLET.slice(0,6)}... Switch to correct one in Phantom!`;
     }
-    
-  } catch(e){
-    btn.innerText = "EXECUTE ORDER - $1 REAL";
-    status.innerHTML = "Error: " + e.message;
-    alert("Error: " + e.message);
+
+    const finalBal=await window.DirectNodes.getSolanaBalance(connectedAddr);
+    document.getElementById('bal').innerText=finalBal+' SOL REAL';
+    btn.innerText=`2. SEND ${amount} SOL REAL (~$1) NOW`;
+    status.innerHTML+=`<br><b>Ready to send REAL $${amount} SOL on mainnet!</b><br>Paste destination and click again.`;
+    btn.onclick=()=>sendRealSOL(amount);
+  }catch(e){
+    btn.innerText="EXECUTE ORDER - RETRY";
+    document.getElementById('status').innerText="Error: "+e.message;
   }
 }
 
-async function sendReal(chain, amount, from){
-  alert(`This will send REAL $${amount} on ${chain.toUpperCase()} from ${from}\n\nNext step: I will build signer for ${chain} - tell me your wallet!`);
+async function sendRealSOL(amount){
+  const to=document.getElementById('toAddr').value.trim();
+  if(!to || to.length<30){alert('Paste valid destination SOL address!');return}
+  const btn=document.getElementById('execBtn');
+  btn.innerText="⏳ Sending REAL SOL - Confirm in Phantom...";
+  try{
+    const connection=new solanaWeb3.Connection(localStorage.getItem('CEDARS_SOL_RPC')||'https://api.mainnet-beta.solana.com');
+    const fromPubkey=window.solana.publicKey;
+    const toPubkey=new solanaWeb3.PublicKey(to);
+    const tx=new solanaWeb3.Transaction().add(solanaWeb3.SystemProgram.transfer({fromPubkey,toPubkey,lamports:Math.floor(amount*1e9)}));
+    tx.feePayer=fromPubkey;
+    tx.recentBlockhash=(await connection.getLatestBlockhash()).blockhash;
+    const {signature}=await window.solana.signAndSendTransaction(tx);
+    const explorer=`https://solscan.io/tx/${signature}`;
+    document.getElementById('status').innerHTML+=`<br>✅ <b style="color:#00ff88">REAL $1 SENT!</b><br>Tx: ${signature}<br><a href="${explorer}" target="_blank" style="color:#00ff88">${explorer}</a>`;
+    btn.innerText="✅ REAL $1 SENT - Check Solscan";
+    alert(`✅ REAL $${amount} SOL SENT!\nTx: ${signature}`);
+  }catch(e){btn.innerText="SEND FAILED - RETRY";alert("Send failed: "+e.message)}
 }
 
-window.addEventListener('load', async ()=>{
+window.addEventListener('load', async()=>{
   if(window.DirectNodes){
-    const test = await window.DirectNodes.testAll();
-    document.getElementById('block').innerText = test.btc_block;
-    document.getElementById('nodes').innerHTML = `Loading... BTC ${test.btc_block}`;
-    // Update BTC price
     try{
-      const r = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT');
-      const d = await r.json();
-      document.getElementById('btcPrice').innerText = '$' + parseFloat(d.price).toLocaleString();
+      const myRealBal = await window.DirectNodes.getSolanaBalance(MY_WALLET);
+      document.getElementById('bal').innerText = myRealBal + ' SOL REAL';
+      console.log('MY REAL BAL on load:', myRealBal);
+      const test=await window.DirectNodes.testAll();
+      document.getElementById('block').innerText=test.btc_block;
+      document.getElementById('nodes').innerHTML=`BTC Block ${test.btc_block} | Ready`;
     }catch{}
   }
 });
 </script>
-
-</body>
-</html>
+</body></html>
