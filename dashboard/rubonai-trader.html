@@ -1,2 +1,1 @@
-// 5-year auto-backup system
-(function(){function backupData(){let data=localStorage.getItem('cedars_users');if(data){localStorage.setItem('cedars_backup_'+Date.now(),data);let keys=Object.keys(localStorage).filter(k=>k.startsWith('cedars_backup_')).sort();if(keys.length>10)keys.slice(0,-10).forEach(k=>localStorage.removeItem(k));}}setInterval(backupData,86400000);backupData();})();
+5-year auto-backup system (function(){function backupData(){let data=localStorage.getItem('cedars_users');...
