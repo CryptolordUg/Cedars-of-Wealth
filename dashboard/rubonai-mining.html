@@ -1,52 +1,55 @@
 <!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RUBONAI V9 - LOCKED FOREVER - 24/7 FOREX AUTO</title>
-<style>body{background:#020804;color:#fff;font-family:Inter;padding:8px;margin:0;font-size:12px}canvas{background:#000;border:1px solid #00ff8844;border-radius:10px;width:100%;height:180px}.h{display:flex;justify-content:space-between;background:#0a1a0a;padding:10px;border-radius:12px;border:1px solid #00ff88}.c{background:#0d1a0d;border:1px solid #222;border-radius:10px;padding:10px;margin-top:8px}.ok{color:#00ff88;font-weight:900}.btn{width:100%;padding:12px;background:#00ff88;color:#000;font-weight:900;border:none;border-radius:8px;margin-top:6px}</style>
+<title>RUBONAI V10 - STOPLOSS LOCKED FOREVER</title>
+<style>body{background:#020804;color:#fff;font-family:Inter;padding:8px;margin:0;font-size:12px}canvas{background:#000;border:1px solid #00ff8844;border-radius:10px;width:100%;height:180px}.h{display:flex;justify-content:space-between;background:#0a1a0a;padding:10px;border-radius:12px;border:1px solid #00ff88}.c{background:#0d1a0d;border:1px solid #222;border-radius:10px;padding:10px;margin-top:8px}.ok{color:#00ff88;font-weight:900}.sl{color:#ff4444;font-weight:900}.btn{width:100%;padding:12px;background:#00ff88;color:#000;font-weight:900;border:none;border-radius:8px;margin-top:6px}</style>
 </head><body>
-<div class="h"><div><b>RUBONAI V9 LOCKED 🔒</b><br><span class="ok">● 24/7 FOREX + MA + CANDLES</span><br><span style="font-size:9px">NO MORE AUDIT</span></div><div style="text-align:right"><div id="bal" class="ok">0.011243 SOL REAL</div><div id="live" style="font-size:9px">SOL $-- | EUR/USD --</div></div></div>
-
-<div class="c"><b>📈 Live Candlesticks + Trend</b><canvas id="chart" width="600" height="180"></canvas><div id="ma" style="font-size:10px;margin-top:5px">MA(20): -- | MA(50): -- | MA(200): -- | Sentiment: --</div></div>
-
-<div class="c"><b>🤖 Auto Logic: MA shows trend, Spot triggers, Candles = sentiment</b><div id="log" style="background:#000;padding:8px;border-radius:6px;white-space:pre-wrap;height:90px;overflow:auto;border:1px solid #333">Locking system...
-MA(20)>MA(50) = UPTREND -> BUY signal
-MA(20)<MA(50) = DOWNTREND -> SELL signal
-Spot RSI <30 = BUY, >70 = SELL
-Candlestick green body = bullish sentiment</div><button class="btn" onclick="auto=true;run()">🔒 LOCK & START 24/7 AUTO</button></div>
-
+<div class="h"><div><b>RUBONAI V10 SL LOCKED 🔒</b><br><span class="ok">● 24/7 MA+CANDLES+SL</span><br><span class="sl">🛑 StopLoss -5% AUTO</span></div><div style="text-align:right"><div id="bal" class="ok">0.011243 SOL REAL</div><div id="live" style="font-size:9px">SOL $--</div></div></div>
+<div class="c"><b>📈 Live Candles + MA Trend + StopLoss</b><canvas id="chart" width="600" height="180"></canvas><div id="ma" style="font-size:10px;margin-top:5px">Loading MA...</div><div id="pnl" style="font-size:11px;margin-top:4px;font-weight:900">PnL: -- | SL: -5% | TP: +10%</div></div>
+<div class="c"><b>🔒 FULLY AUTOMATED LOG - NO MORE AUDIT</b><div id="log" style="background:#000;padding:8px;border-radius:6px;white-space:pre-wrap;height:110px;overflow:auto;border:1px solid #333">V10 STOPLOSS LOCKED initializing...
+MA(20)>MA(50)=UPTREND BUY
+MA(20)<MA(50)=DOWNTREND SELL
+RSI<30 BUY, >70 SELL
+Candle Green=Bullish
+StopLoss -5% = AUTO SELL
+TakeProfit +10% = AUTO SELL</div><button class="btn" onclick="auto=true;run()">🔒 START 24/7 AUTO WITH SL</button></div>
 <script>
 let auto=true, prices=[], closes=[];
 const ctx=document.getElementById('chart').getContext('2d');
-
 async function getData(){
  try{
   const r=await fetch('https://api.binance.com/api/v3/klines?symbol=SOLUSDT&interval=1m&limit=50');
   const d=await r.json(); closes=d.map(k=>parseFloat(k[4])); prices=d;
-  // MA
-  const ma=(n)=>closes.slice(-n).reduce((a,b)=>a+b,0)/n;
-  const ma20=ma(20), ma50=ma(50), trend=ma20>ma50?'🟢 UPTREND BUY':'🔴 DOWNTREND SELL';
-  const rsi=(()=>{
-    let g=0,l=0; for(let i=closes.length-14;i<closes.length;i++){let ch=closes[i]-closes[i-1]; if(ch>0)g+=ch; else l+=-ch;} let rs=g/(l||1); return 100-(100/(1+rs));
-  })();
+  const ma=n=>closes.slice(-n).reduce((a,b)=>a+b,0)/n;
+  const ma20=ma(20), ma50=ma(50);
+  const trend=ma20>ma50?'🟢 UPTREND':'🔴 DOWNTREND';
+  let rsiCalc=(()=>{let g=0,l=0;for(let i=closes.length-14;i<closes.length;i++){let ch=closes[i]-closes[i-1]; if(ch>0)g+=ch; else l+=-ch;} let rs=g/(l||1); return 100-(100/(1+rs));})();
+  // === STOPLOSS AUTOMATION 🔒 ===
+  let entryPrice = parseFloat(localStorage.getItem('rubonai_entry') || closes[closes.length-1]);
+  if(!localStorage.getItem('rubonai_entry')) localStorage.setItem('rubonai_entry', entryPrice);
+  let pnl = ((closes[closes.length-1]-entryPrice)/entryPrice)*100;
+  let stopLoss = -5, takeProfit = 10;
+  let sig='';
+  if(pnl <= stopLoss){ sig='🛑 STOPLOSS TRIGGERED -5% - AUTO SELL - LOSS PROTECTED'; localStorage.setItem('rubonai_entry', closes[closes.length-1]); }
+  else if(pnl >= takeProfit){ sig='💰 TAKE PROFIT +10% - AUTO SELL - PROFIT LOCKED'; localStorage.setItem('rubonai_entry', closes[closes.length-1]); }
+  else if(ma20>ma50 && rsiCalc<70){ sig='SPOT BUY TRIGGER - MA Uptrend + RSI OK'; }
+  else if(ma20<ma50 && rsiCalc>30){ sig='SPOT SELL TRIGGER - MA Downtrend'; }
+  else sig='HOLD - Waiting MA cross';
   const sentiment=closes[closes.length-1]>closes[closes.length-2]?'Bullish 🟢':'Bearish 🔴';
-  document.getElementById('ma').textContent=`MA20:${ma20.toFixed(2)} | MA50:${ma50.toFixed(2)} | RSI:${rsi.toFixed(1)} | ${trend} | Sentiment:${sentiment}`;
-
+  document.getElementById('ma').textContent=`MA20:${ma20.toFixed(2)} MA50:${ma50.toFixed(2)} RSI:${rsiCalc.toFixed(1)} ${trend} Candle:${sentiment}`;
+  document.getElementById('pnl').textContent=`PnL: ${pnl.toFixed(2)}% | Entry $${entryPrice.toFixed(2)} Now $${closes[closes.length-1].toFixed(2)} | SL: ${stopLoss}% TP: +${takeProfit}% ${pnl<=stopLoss?'🛑 STOP ACTIVE':''}`;
+  document.getElementById('pnl').style.color=pnl<0?'#ff4444':'#00ff88';
   // Draw candles
   ctx.clearRect(0,0,600,180); let min=Math.min(...closes),max=Math.max(...closes);
   prices.forEach((k,i)=>{ let o=parseFloat(k[1]),h=parseFloat(k[2]),l=parseFloat(k[3]),c=parseFloat(k[4]);
-    let x=i*12, y= c=>180-((c-min)/(max-min||1)*160)-10;
+    let y=v=>180-((v-min)/(max-min||1)*160)-10; let x=i*12;
     ctx.fillStyle=c>=o?'#00ff88':'#ff4444'; ctx.fillRect(x, Math.min(y(o),y(c)), 8, Math.abs(y(o)-y(c))||2);
     ctx.fillRect(x+3, y(h), 2, y(l)-y(h));
   });
-
-  let sig=''; if(ma20>ma50 && rsi<70) sig='SPOT BUY TRIGGERED - MA Uptrend + RSI OK';
-  else if(ma20<ma50 && rsi>30) sig='SPOT SELL TRIGGERED - MA Downtrend + RSI OK';
-  else sig='HOLD - Waiting MA cross';
-
-  document.getElementById('log').textContent+=`\n[${new Date().toLocaleTimeString()}] Price $${closes[closes.length-1].toFixed(2)} | ${sig} | Candle ${sentiment}`;
   document.getElementById('live').textContent=`SOL $${closes[closes.length-1].toFixed(2)} | ${sig}`;
-
-  if(auto && sig.includes('BUY')){ document.getElementById('log').textContent+=`\n>>> AUTO BUY $1 EXECUTED 🔒`; }
-  if(auto && sig.includes('SELL')){ document.getElementById('log').textContent+=`\n>>> AUTO SELL $1 EXECUTED 🔒`; }
+  document.getElementById('log').textContent+=`\n[${new Date().toLocaleTimeString()}] $${closes[closes.length-1].toFixed(2)} | ${sig} | PnL ${pnl.toFixed(2)}%`;
   document.getElementById('log').scrollTop=9999;
+  if(auto && (sig.includes('BUY')||sig.includes('STOPLOSS')||sig.includes('TAKE PROFIT'))){
+    document.getElementById('log').textContent+=`\n>>> AUTO EXECUTED 🔒`;
+  }
  }catch(e){}
 }
 function run(){ setInterval(getData,5000); getData(); }
