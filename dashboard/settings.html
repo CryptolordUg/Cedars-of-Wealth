@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cedars Settings - $2 Vault | Cedars of Wealth</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#020a02;color:#eaffea;font-family:Inter,Arial;padding:16px}
+.card{background:#0d2610;border:1px solid #00ff8844;border-radius:16px;padding:18px;margin-bottom:14px}
+h2{color:#00ff88}label{font-size:12px;opacity:.8;margin-top:12px;display:block}
+input{width:100%;padding:12px;background:#000;border:1px solid #00ff8844;border-radius:10px;color:#fff;margin:6px 0 12px;font-family:monospace}
+.btn{padding:13px;border:none;border-radius:10px;font-weight:900;cursor:pointer;width:100%;margin-top:10px}
+.save{background:#00ff88;color:#000}.clear{background:#1a1a1a;color:#ff7a7a;border:1px solid #ff334433}
+.warn{background:#1a1200;border:1px solid #ffaa0044;border-radius:10px;padding:12px;font-size:12px;line-height:1.6;margin-bottom:14px}
+.status{padding:10px;border-radius:8px;margin-top:10px;font-size:13px;display:none}
+.ok{background:#0a2a0a;border:1px solid #00ff8844;color:#00ff88}
+</style></head><body>
+
+<div style="max-width:600px;margin:auto">
+<h2>🔒 Cedars Vault — $2 Start</h2>
+<p style="opacity:.6;font-size:12px;margin:6px 0 14px">Keys stored ONLY in your phone browser. Never uploaded to GitHub. Safe for $2 trading.</p>
+
+<div class="warn">
+⚠️ <b>SAFETY RULES:</b><br>
+• Never paste keys in GitHub file `api/.env` with real keys<br>
+• Real keys ONLY here in settings → saved to your phone localStorage<br>
+• Use Binance Testnet first if you fear loss<br>
+• Your $2 is real — start with Spot, not Futures
+</div>
+
+<div class="card">
+<h3>🟢 Binance — For $2 Spot Trading</h3>
+<label>BINANCE API KEY (from binance.com → API Management)</label>
+<input id="bKey" placeholder="Paste Binance API Key">
+<label>BINANCE SECRET</label>
+<input id="bSec" type="password" placeholder="Paste Secret">
+<small style="opacity:.5">Enable: Spot Trading only. Disable Withdrawals for safety.</small>
+</div>
+
+<div class="card">
+<h3>📈 Forex Feed — FREE Real Prices</h3>
+<label>TWELVEDATA API KEY (Free from twelvedata.com)</label>
+<input id="tKey" placeholder="Free key - 800 requests/day">
+<label>DERIV API TOKEN (For $2 forex cent account - optional)</label>
+<input id="dKey" placeholder="Deriv token - from deriv.com">
+</div>
+
+<div class="card">
+<h3>⚒️ Mining Pools — For $2 Cloud Mining</h3>
+<label>F2POOL API KEY (optional)</label>
+<input id="fKey" placeholder="F2Pool token">
+</div>
+
+<button class="btn save" onclick="saveAll()">💾 SAVE KEYS TO MY PHONE ONLY → START $2 TRADING</button>
+<button class="btn clear" onclick="clearAll()">🗑️ Clear All Keys From Phone</button>
+
+<div id="status" class="status"></div>
+
+<div class="card" style="margin-top:14px">
+<h3>💰 Your $2 Status</h3>
+<div id="liveStatus" style="font-size:13px;line-height:2;margin-top:8px"></div>
+<a href="rubonai-trader.html" style="display:block;text-align:center;margin-top:12px;padding:12px;background:#0a1e0a;border-radius:10px;color:#00ff88;text-decoration:none;font-weight:800">→ Go to UNIT 1 TRADER</a>
+<a href="rubonai-mining.html" style="display:block;text-align:center;margin-top:8px;padding:12px;background:#1a1200;border-radius:10px;color:#ffaa00;text-decoration:none;font-weight:800">→ Go to UNIT 2 MINING 24/7</a>
+</div>
+
+<div class="card">
+<b>How to get FREE keys for $2 start:</b><br>
+<span style="font-size:12px;line-height:2">
+1. <b>Binance:</b> binance.com → Profile → API Management → Create API → Enable Spot only<br>
+2. <b>TwelveData:</b> twelvedata.com → Sign Up → Dashboard → Copy API Key (FREE)<br>
+3. <b>Deriv:</b> deriv.com → $2 cent account → Settings → API Token → Create<br>
+4. Start with Binance Spot BTC/USDT $2 minimum
+</span>
+</div>
+
+</div>
+
+<script>
+function load(){
+  document.getElementById('bKey').value = localStorage.getItem('CEDARS_BINANCE_KEY')||'';
+  document.getElementById('bSec').value = localStorage.getItem('CEDARS_BINANCE_SECRET')||'';
+  document.getElementById('tKey').value = localStorage.getItem('CEDARS_TWELVE_KEY')||'';
+  document.getElementById('dKey').value = localStorage.getItem('CEDARS_DERIV_TOKEN')||'';
+  document.getElementById('fKey').value = localStorage.getItem('CEDARS_F2POOL_KEY')||'';
+  check();
+}
+function saveAll(){
+  const bK=document.getElementById('bKey').value.trim();
+  const bS=document.getElementById('bSec').value.trim();
+  const tK=document.getElementById('tKey').value.trim();
+  const dK=document.getElementById('dKey').value.trim();
+  const fK=document.getElementById('fKey').value.trim();
+  if(bK) localStorage.setItem('CEDARS_BINANCE_KEY', bK);
+  if(bS) localStorage.setItem('CEDARS_BINANCE_SECRET', bS);
+  if(tK) localStorage.setItem('CEDARS_TWELVE_KEY', tK);
+  if(dK) localStorage.setItem('CEDARS_DERIV_TOKEN', dK);
+  if(fK) localStorage.setItem('CEDARS_F2POOL_KEY', fK);
+  const s=document.getElementById('status'); s.style.display='block'; s.className='status ok'; s.innerHTML='✅ Keys saved ONLY to your phone! Now go to Trader. Your $2 can start!';
+  check();
+}
+function clearAll(){ if(confirm('Delete all keys from this phone?')){ localStorage.removeItem('CEDARS_BINANCE_KEY');localStorage.removeItem('CEDARS_BINANCE_SECRET');localStorage.removeItem('CEDARS_TWELVE_KEY');localStorage.removeItem('CEDARS_DERIV_TOKEN');localStorage.removeItem('CEDARS_F2POOL_KEY'); location.reload(); } }
+function check(){
+  const hasB=!!localStorage.getItem('CEDARS_BINANCE_KEY');
+  const hasT=!!localStorage.getItem('CEDARS_TWELVE_KEY');
+  document.getElementById('liveStatus').innerHTML = `
+  Binance: ${hasB?'🟢 LIVE - $2 ready':'🔴 Not set - Trading in demo'}<br>
+  Forex Feed: ${hasT?'🟢 Real prices':'🟡 Using free fallback'}<br>
+  Mining: ${hasB?'🟢 Can rent $2 hash on NiceHash': '🔴 Demo only'}<br>
+  6-Hour Automation: <span style="color:#00ff88">ACTIVE (30 sec demo mode)</span>
+  `;
+}
+load();
+</script>
+</body></html>
