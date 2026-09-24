@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RUBONAI Trader V6 | Cedars of Wealth</title>
+<script src="https://s3.tradingview.com/tv.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#020a02;color:#eaffea;font-family:Inter,Arial;padding:12px}
+.top{display:flex;justify-content:space-between;align-items:center;background:#0a1e0a;border:1px solid #00ff8844;border-radius:14px;padding:14px 18px;margin-bottom:12px}
+.live{color:#00ff88;font-size:12px}.bal{color:#00ff88;font-weight:900;font-size:22px}
+.main{display:grid;grid-template-columns:2.2fr 1fr;gap:12px}
+.card{background:#0d2610;border:1px solid #00ff8833;border-radius:14px;padding:14px}
+.tv{height:420px;border-radius:10px;overflow:hidden;background:#000}
+.btn{padding:13px;border:none;border-radius:10px;font-weight:900;cursor:pointer;width:100%;margin-top:8px}
+.buy{background:#00ff88;color:#000}.sell{background:#ff3344;color:#fff}
+input,select{width:100%;padding:11px;background:#020a02;border:1px solid #00ff8844;border-radius:8px;color:#fff;margin:6px 0}
+.signal{padding:8px;border-radius:8px;margin:6px 0;font-size:13px}
+.ai{background:#102a12;border-left:3px solid #00ff88}
+@media(max-width:900px){.main{grid-template-columns:1fr}.tv{height:320px}}
+</style></head><body>
+
+<div class="top">
+<div><h2>🌲 RUBONAI AI TRADER</h2><span class="live">● LIVE MARKET • Cedars of Wealth • V6 Original</span></div>
+<div style="text-align:right"><div id="balance" class="bal">$1,250.00</div><small id="uEmail" style="opacity:.7">trader@cedars.ug</small><br><a href="../login.html" onclick="localStorage.removeItem('cedars_current_user')" style="color:#ff7a7a;font-size:11px;text-decoration:none">Logout →</a></div>
+</div>
+
+<div class="main">
+<div class="card">
+<div style="display:flex;justify-content:space-between"><h3>BTC/USDT • Binance</h3><span style="color:#00ff88" id="priceLive">$67,240.12 ▲ 2.4%</span></div>
+<div id="tv_chart" class="tv" style="margin:10px 0"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<button class="btn buy" onclick="doTrade('BUY')">BUY / LONG 🟢</button>
+<button class="btn sell" onclick="doTrade('SELL')">SELL / SHORT 🔴</button>
+</div>
+<div id="execMsg" style="text-align:center;margin-top:10px;color:#00ff88;font-weight:700"></div>
+
+<div class="signal ai">
+<b>🤖 RUBONAI AI Analysis:</b><br>
+<span id="aiSignal">Scanning market... RSI 58, MACD Bullish, Trend UP. Suggested: BUY on dip $66,900 with SL $66,200</span>
+</div>
+</div>
+
+<div class="card">
+<h3>Trade Panel</h3>
+<label>Amount USDT</label><input id="amt" type="number" value="150">
+<label>Leverage</label><select id="lev"><option>5x</option><option selected>10x</option><option>20x</option><option>50x</option></select>
+<label>Take Profit %</label><input value="15">
+<label>Stop Loss %</label><input value="5">
+<button class="btn buy" onclick="doTrade('BUY')">EXECUTE ORDER</button>
+
+<hr style="margin:14px 0;border-color:#00ff8822">
+<h4>Open Positions</h4>
+<div id="positions" style="font-size:12px;color:#9ab09a;margin-top:8px">No open positions yet</div>
+
+<hr style="margin:14px 0;border-color:#00ff8822">
+<h4>Account Stats</h4>
+<div style="font-size:12px;line-height:1.8">
+Balance: <span id="bal2">$1,250.00</span><br>
+Today PnL: <span style="color:#00ff88">+$0.00</span><br>
+Win Rate: 73%<br>
+</div>
+</div>
+</div>
+
+<script>
+// === FIXED BACKUP - NOW INSIDE SCRIPT (BUG FIXED) ===
+(function(){
+  try{
+    const d = localStorage.getItem('cedars_users');
+    if(d){ localStorage.setItem('cedars_backup_'+Date.now(), d); }
+  }catch(e){ console.log('backup skip'); }
+})();
+
+// Auth guard
+const cur = JSON.parse(localStorage.getItem('cedars_current_user')||'null');
+if(!cur){ location.href='../login.html?v=ORIGINAL'; }
+else{ document.getElementById('uEmail').innerText = cur.email || 'Cedars Trader'; }
+
+// TradingView
+new TradingView.widget({
+  "autosize": true, "symbol": "BINANCE:BTCUSDT", "interval": "15", "timezone": "Africa/Kampala",
+  "theme": "dark", "style": "1", "locale": "en", "container_id": "tv_chart",
+  "backgroundColor": "#000000", "gridColor": "rgba(0,255,136,0.1)"
+});
+
+// Trading logic
+let bal = 1250;
+function updBal(){ document.getElementById('balance').innerText = '$'+bal.toFixed(2); document.getElementById('bal2').innerText = '$'+bal.toFixed(2); }
+
+function doTrade(type){
+  const amt = parseFloat(document.getElementById('amt').value)||100;
+  if(amt>bal){ document.getElementById('execMsg').innerText='❌ Insufficient balance'; return; }
+  const pnl = (Math.random()*40 - 10); bal+=pnl; updBal();
+  document.getElementById('execMsg').innerText='✅ '+type+' '+amt+' USDT executed | PnL: $'+pnl.toFixed(2);
+  const div = document.createElement('div');
+  div.style.cssText='background:#020a02;padding:8px;border-radius:6px;margin:6px 0;border-left:3px solid '+(type=='BUY'?'#00ff88':'#ff3344');
+  div.innerHTML=type+' BTC '+amt+' USDT<br><small>PnL: $'+pnl.toFixed(2)+' • '+new Date().toLocaleTimeString()+'</small>';
+  document.getElementById('positions').prepend(div);
+  document.getElementById('aiSignal').innerText = type=='BUY' ? 'Position opened LONG. AI monitoring TP $68,500 SL $66,200' : 'Position opened SHORT. AI monitoring TP $65,800 SL $67,900';
+}
+updBal();
+
+// fake price ticker
+setInterval(()=>{ const p=(67240+Math.random()*200-100).toFixed(2); document.getElementById('priceLive').innerText='$'+p+' '+(Math.random()>0.5?'▲':'▼')+' '+(Math.random()*3).toFixed(1)+'%'; },3000);
+</script>
+</body></html>
