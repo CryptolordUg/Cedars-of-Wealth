@@ -1,18 +1,41 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Forgot Password | Cedars</title><script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,Arial;background:radial-gradient(circle at top,#0a1a0f,#020a02);color:#fff;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:15px}.box{background:#0f2310;border:2px solid #00ff8844;border-radius:20px;padding:30px;width:100%;max-width:420px;text-align:center}.sub{letter-spacing:4px;font-size:11px;color:#88cc88;margin:6px 0 18px;font-weight:700}.marquee{width:100%;background:#00ff8815;border:1px solid #00ff8833;border-radius:8px;padding:8px 0;margin:10px 0 18px;overflow:hidden;white-space:nowrap}.marquee span{display:inline-block;padding-left:100%;animation:slide 8s linear infinite;font-weight:900;color:#00ff88}@keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}input{width:100%;padding:14px;margin:10px 0;border-radius:10px;border:1px solid #1a4a1a;background:#020a02;color:#fff}button{width:100%;padding:14px;background:linear-gradient(90deg,#00ff88,#00cc66);color:#000;border:none;border-radius:12px;font-weight:900;cursor:pointer}.motto{margin-top:18px;font-weight:900;letter-spacing:3px;color:#ffcc00;font-size:13px}</style></head><body><div class="box"><h1 style="font-size:32px;font-weight:900;color:#00ff88">🌲 CEDARS</h1><div class="sub">Trust. Growth. Unity</div><div class="marquee"><span>Enter email, We send reset • Worldwide No-Reply •</span></div><h3>Forgot Password?</h3><input id="email" type="email" placeholder="Your email" value="cryptome2030@gmail.com"><button id="btn" onclick="sendReset()">SEND RESET LINK</button><div id="msg" style="margin-top:15px;font-size:13px;display:none"></div><div class="motto">Die rich or Die trying</div><a href="login.html" style="color:#00ff88;font-size:12px;display:block;margin-top:18px;text-decoration:none">← Back to Login</a></div><script>
-const SERVICE_ID = "service_6em5yqv";
-const TEMPLATE_ID = "template_5pr2m28";
-const PUBLIC_KEY = "e3V4YLk4056BlonfQ";
-emailjs.init(PUBLIC_KEY);
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Forgot Password | Cedars</title><script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,Arial;background:radial-gradient(circle at top,#0a1a0f,#020a02);color:#fff;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:15px}.box{background:#0f2310;border:2px solid #00ff8844;border-radius:20px;padding:30px;width:100%;max-width:420px;text-align:center}.sub{letter-spacing:4px;font-size:11px;color:#88cc88;margin:6px 0 18px;font-weight:700}input{width:100%;padding:14px;margin:10px 0;border-radius:10px;border:1px solid #1a4a1a;background:#020a02;color:#fff}button{width:100%;padding:14px;background:linear-gradient(90deg,#00ff88,#00cc66);color:#000;border:none;border-radius:12px;font-weight:900;cursor:pointer}.motto{margin-top:18px;font-weight:900;letter-spacing:3px;color:#ffcc00;font-size:13px}.create-btn{background:linear-gradient(90deg,#ffcc00,#ffaa00);margin-top:10px;display:none}</style></head><body><div class="box"><h1 style="font-size:32px;font-weight:900;color:#00ff88">🌲 CEDARS</h1><div class="sub">Trust. Growth. Unity</div><h3>Forgot Password?</h3><input id="email" type="email" placeholder="Your email" value="cryptome2030@gmail.com"><button id="btn" onclick="sendReset()">SEND RESET LINK</button><div id="msg" style="margin-top:15px;font-size:13px;display:none"></div><button id="createBtn" class="create-btn" onclick="location.href='register.html'">CREATE ACCOUNT NOW</button><div class="motto">Die rich or Die trying</div><a href="login.html" style="color:#00ff88;font-size:12px;display:block;margin-top:18px;text-decoration:none">← Back to Login</a></div><script>
+const SERVICE_ID="service_6em5yqv";const TEMPLATE_ID="template_5pr2m28";const PUBLIC_KEY="e3V4YLk4056BlonfQ";emailjs.init(PUBLIC_KEY);
+function checkAccount(email){
+ try{
+  // Check all possible storage keys for your users
+  let keys=["cedars_users","users","cedarsInvestors","investors","accounts"];
+  for(let k of keys){
+   let data=localStorage.getItem(k);
+   if(data){
+    let arr=JSON.parse(data);
+    if(Array.isArray(arr) && arr.some(u=>(u.email||u.mail||'').toLowerCase()===email.toLowerCase())) return true;
+   }
+  }
+  // Also check single user
+  let single=localStorage.getItem('cedars_current_user')||localStorage.getItem('user');
+  if(single){
+   let u=JSON.parse(single);
+   if((u.email||'').toLowerCase()===email.toLowerCase()) return true;
+  }
+  return false;
+ }catch(e){return false;}
+}
 function sendReset(){
- let e=document.getElementById('email').value.trim();
- if(!e)return alert('Enter email');
- let b=document.getElementById('btn'), m=document.getElementById('msg');
- b.innerText='SENDING...';b.disabled=true;m.style.display='none';
- let t=btoa(e+'|'+Date.now()).replace(/=/g,'');
- let link=`https://cryptolordug.github.io/Cedars-of-Wealth/password.html?email=${encodeURIComponent(e)}&token=${t}`;
+ let e=document.getElementById('email').value.trim();if(!e)return alert('Enter email');
+ let b=document.getElementById('btn'),m=document.getElementById('msg'),cb=document.getElementById('createBtn');
+ m.style.display='none';cb.style.display='none';
+ 
+ if(!checkAccount(e)){
+  m.style.display='block';m.style.color='#ff4444';
+  m.innerHTML=`❌ Account not found for <b>${e}</b><br><br>Please create account first to invest with Cedars.`;
+  cb.style.display='block';
+  return;
+ }
+ b.innerText='SENDING...';b.disabled=true;
+ let t=btoa(e+'|'+Date.now()).replace(/=/g,'');let link=`https://cryptolordug.github.io/Cedars-of-Wealth/password.html?email=${encodeURIComponent(e)}&token=${t}`;
  let params={to_email:e,email:e,to_name:e.split('@')[0],name:e.split('@')[0],reset_link:link,link:link,from_name:'Cedars of Wealth',reply_to:'noreply@cedarsofwealth.sg'};
  emailjs.send(SERVICE_ID,TEMPLATE_ID,params).then(()=>{
-  m.style.display='block';m.style.color='#00ff88';m.innerHTML=`✅ Email sent to <b>${e}</b><br>Check inbox / spam<br>From: Cedars of Wealth`;
+  m.style.display='block';m.style.color='#00ff88';m.innerHTML=`✅ Verified investor!<br>Email sent to <b>${e}</b><br>Check inbox + spam`;
   b.innerText='SEND RESET LINK';b.disabled=false;
  }).catch(err=>{
   m.style.display='block';m.style.color='#ff4444';m.innerHTML='❌ '+(err.text||JSON.stringify(err));
