@@ -1,0 +1,12 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Register | Cedars</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial;background:radial-gradient(circle at top,#0a1a0f,#020a02);color:#fff;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:15px}.box{background:#0f2310;border:2px solid #00ff8844;border-radius:20px;padding:30px;width:100%;max-width:420px;text-align:center}input{width:100%;padding:14px;margin:10px 0;border-radius:10px;border:1px solid #1a4a1a;background:#020a02;color:#fff}button{width:100%;padding:14px;background:linear-gradient(90deg,#00ff88,#00cc66);color:#000;border:none;border-radius:12px;font-weight:900;cursor:pointer;margin-top:10px}</style></head><body><div class="box"><h1 style="color:#00ff88">🌲 CEDARS</h1><p style="letter-spacing:3px;font-size:11px;margin:10px 0">Create Investor Account</p><input id="name" placeholder="Full Name"><input id="email" type="email" placeholder="Email"><input id="pass" type="password" placeholder="Password"><button onclick="doReg()">CREATE ACCOUNT</button><div id="msg" style="margin-top:15px;font-size:13px;display:none"></div><a href="login.html" style="color:#00ff88;font-size:12px;display:block;margin-top:15px">Already have account? Login</a></div><script>
+function doReg(){
+ let n=document.getElementById('name').value.trim(), e=document.getElementById('email').value.trim().toLowerCase(), p=document.getElementById('pass').value;
+ if(!n||!e||!p) return alert('Fill all');
+ let users=JSON.parse(localStorage.getItem('cedars_users')||'[]');
+ if(users.some(u=>u.email===e)){ document.getElementById('msg').style.display='block'; document.getElementById('msg').style.color='#ff4444'; document.getElementById('msg').innerHTML='Account exists! <a href=\"login.html\" style=\"color:#00ff88\">Login</a>'; return; }
+ users.push({name:n,email:e,password:btoa(p),created:Date.now()}); localStorage.setItem('cedars_users',JSON.stringify(users));
+ localStorage.setItem('cedars_current_user',JSON.stringify({name:n,email:e}));
+ document.getElementById('msg').style.display='block'; document.getElementById('msg').style.color='#00ff88'; document.getElementById('msg').innerHTML='✅ Account created! Redirecting to login...';
+ setTimeout(()=>location.href='login.html',1500);
+}
+</script></body></html>
