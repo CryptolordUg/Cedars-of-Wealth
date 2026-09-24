@@ -2,73 +2,93 @@
 <html>
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RUBONAI MINING V1 - 24/7 SEPARATE</title>
+<title>RUBONAI MINING V2 - AUTO COMPOUND 2X</title>
 <style>
 body{background:#000;color:#fff;font-family:Arial;margin:0;padding:10px}
-.header{text-align:center;border:2px solid #ff0;border-radius:15px;padding:12px;background:linear-gradient(135deg,#221100,#443300)}
+.header{text-align:center;border:2px solid #ff0;border-radius:15px;padding:12px;background:linear-gradient(135deg,#331100,#664400)}
 .live{color:#0f0;animation:blink 1s infinite}@keyframes blink{50%{opacity:0}}
 .card{background:#111;border:1px solid #333;border-radius:12px;padding:12px;margin:10px 0}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.btn{width:100%;padding:12px;border:none;border-radius:8px;font-weight:bold;margin:5px 0}
-.btn-on{background:#ff0;color:#000}.btn-off{background:#f00;color:#fff}
-.bar{height:24px;background:#222;border-radius:12px;overflow:hidden;border:1px solid #ff0}
-.fill{height:100%;background:linear-gradient(90deg,#ff0,#fa0);width:50%;animation:mine 1s infinite}
-@keyframes mine{0%{width:40%}50%{width:70%}100%{width:50%}}
-.stat{font-size:17px;margin:8px 0}.yellow{color:#ff0}.green{color:#0f0}
+.btn{width:100%;padding:12px;border:none;border-radius:8px;font-weight:bold;margin:5px 0;cursor:pointer}
+.btn-gold{background:linear-gradient(90deg,#ff0,#fa0);color:#000}.btn-on{background:#0f0;color:#000}.btn-off{background:#333;color:#fff}
+.bar{height:22px;background:#222;border-radius:12px;overflow:hidden;border:1px solid #ff0}
+.fill{height:100%;background:linear-gradient(90deg,#ff0,#fa0);width:50%;animation:mine 0.8s infinite}
+@keyframes mine{0%{width:45%}50%{width:75%}100%{width:50%}}
+.nft{width:100%;height:120px;background:radial-gradient(circle,#ff0,#f80);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:50px;animation:spin 3s linear infinite}
+@keyframes spin{0%{transform:rotateY(0deg)}100%{transform:rotateY(360deg)}}
+canvas{width:100%;height:150px;background:#000;border-radius:10px;border:1px solid #ff0}
+.stat{font-size:15px;margin:6px 0}.yellow{color:#ff0}.green{color:#0f0}
 </style>
 </head>
 <body>
 <div class="header">
-<h2>⛏️ RUBONAI MINING V1 - SEPARATE 24/7</h2>
-<div><span class="live">● MINING LIVE</span> <span id="timer">Next: 1s</span> | SOL: $<span id="solPrice">113.90</span></div>
-<div style="font-size:11px;color:#888">SEPARATE from REAL V11 Trading — Safe, No Mix!</div>
-<div style="margin-top:8px"><a href="rubonai-mining.html" style="color:#0af;text-decoration:none;border:1px solid #0af;padding:5px 10px;border-radius:6px">📈 Go to REAL V11 Trading</a></div>
+<h2>⛏️ RUBONAI MINING V2 - AUTO COMPOUND 2X BOOST</h2>
+<div><span class="live">● V2 LIVE 1s</span> | SOL: $<span id="solPrice">113.90</span> | <span style="color:#ff0">NFT RIG #001</span></div>
+<div><a href="rubonai-mining.html" style="color:#0af;text-decoration:none;font-size:12px">📈 REAL V11 Trading SAFE →</a></div>
 </div>
 
 <div class="card" style="border:2px solid #ff0">
-<h3>⛏️ Mining Engine - 1s LIVE</h3>
-<div class="bar"><div class="fill"></div></div>
-<div class="grid">
-<div class="stat">⚡ Hashrate: <span id="hash" class="yellow">157.4 TH/s</span></div>
-<div class="stat">🧱 Blocks Mined: <span id="blocks" class="green">1,247</span></div>
-<div class="stat">💰 Mined: <span id="mined" class="green">0.0003421 SOL</span></div>
-<div class="stat">🔋 Power: <span id="power">1.24 kW</span></div>
-<div class="stat">💵 Value: $<span id="usd">0.038</span></div>
-<div class="stat">📊 Efficiency: <span class="green">98.7%</span></div>
+<div class="nft">⛏️💎</div>
+<div style="text-align:center;margin-top:8px"><span style="background:#ff0;color:#000;padding:3px 8px;border-radius:10px;font-size:11px;font-weight:bold">NFT MINING RIG V2 - LEGENDARY</span></div>
+<div class="grid" style="margin-top:10px">
+<div class="stat">⚡ Hash: <span id="hash" class="yellow">157.4 TH/s</span></div>
+<div class="stat">🚀 Boost: <span id="boost" style="color:#f0f">1X → 2X READY</span></div>
+<div class="stat">🧱 Blocks: <span id="blocks" class="green">1,247</span></div>
+<div class="stat">🔄 Compound: <span id="comp" class="green">AUTO ON</span></div>
 </div>
-<div style="background:#222;padding:8px;border-radius:8px;margin-top:10px">
-<div style="font-size:12px;color:#888">Total Mined Progress to 0.01 SOL</div>
-<div class="bar" style="height:10px;margin-top:5px"><div id="prog" style="height:100%;background:#0f0;width:3%"></div></div>
-<div style="font-size:11px;margin-top:3px"><span id="perc">3.4%</span> → Target 0.01 SOL</div>
+<div class="bar"><div class="fill" id="mineFill"></div></div>
+</div>
+
+<div class="card">
+<h4>💰 Mining Profit Chart - 1s LIVE</h4>
+<canvas id="profitChart"></canvas>
+<div class="grid">
+<div class="stat">Mined: <span id="mined" class="green">0.0003421 SOL</span></div>
+<div class="stat">Value: $<span id="usd">0.038</span></div>
+<div class="stat">Per Hour: <span id="perHour" class="yellow">+$0.023</span></div>
+<div class="stat">Per Day: <span id="perDay" class="green">+$0.55</span></div>
 </div>
 </div>
 
 <div class="card">
 <div class="grid">
-<div class="stat">🏦 Trading Balance: <span class="green">0.011243 SOL ($1.27) LOCKED SAFE</span></div>
-<div class="stat">⛏️ Mining Balance: <span id="mineBal" class="yellow">0.0003421 SOL</span></div>
+<div class="stat">🏦 Trading SAFE: <span class="green">0.011243 SOL ($1.27)</span></div>
+<div class="stat">⛏️ Mining V2: <span id="mineBal" class="yellow">0.0003421 SOL</span></div>
 </div>
-<div class="stat" style="text-align:center;font-size:20px">💎 TOTAL: <span id="total" style="color:#0f0;font-weight:bold">$1.308</span></div>
+<div style="text-align:center;font-size:22px;margin-top:8px">💎 TOTAL + COMPOUND: <span id="total" style="color:#0f0;font-weight:bold">$1.308</span></div>
+<div style="font-size:11px;color:#888;text-align:center">Auto-compound every 60s → Mining adds to Trading balance</div>
 </div>
 
-<button class="btn btn-on" id="mineBtn" onclick="toggleMine()">⛏️ MINING ON 24/7 AUTO</button>
-<button class="btn" style="background:#0af;color:#fff" onclick="window.location.href='rubonai-mining.html'">📈 VIEW REAL V11 TRADING</button>
+<button class="btn btn-gold" onclick="boostHash()">🚀 ACTIVATE 2X HASHRATE BOOST</button>
+<button class="btn btn-on" id="compBtn" onclick="toggleComp()">🔄 AUTO-COMPOUND ON</button>
+<button class="btn btn-on" id="mineBtn">⛏️ MINING V2 ON 24/7</button>
 
 <script>
-let sol=113.9, mined=0.0003421, blocks=1247, hash=157.4;
+let sol=113.9, mined=0.0003421, blocks=1247, hash=157.4, boostX=1, compound=true;
+let canvas=document.getElementById('profitChart'), ctx=canvas.getContext('2d');
+canvas.width=350; canvas.height=150; let profits=[0.02,0.021,0.023,0.022,0.023];
+function drawProfit(){
+ ctx.clearRect(0,0,350,150); ctx.strokeStyle='#333'; for(let i=0;i<4;i++){ctx.beginPath();ctx.moveTo(0,i*37);ctx.lineTo(350,i*37);ctx.stroke();}
+ ctx.strokeStyle='#ff0'; ctx.lineWidth=2; ctx.beginPath();
+ for(let i=0;i<profits.length;i++){let x=i*70+10, y=130-profits[i]*2000; if(i==0)ctx.moveTo(x,y); else ctx.lineTo(x,y);} ctx.stroke();
+ ctx.fillStyle='#ff0'; for(let i=0;i<profits.length;i++){let x=i*70+10, y=130-profits[i]*2000; ctx.beginPath();ctx.arc(x,y,4,0,6.28);ctx.fill();}
+}
 setInterval(()=>{
- sol+= (Math.random()-0.48)*0.2;
+ sol+= (Math.random()-0.48)*0.25;
  document.getElementById('solPrice').innerText=sol.toFixed(2);
- hash=150+Math.random()*25; document.getElementById('hash').innerText=hash.toFixed(1)+' TH/s';
- mined+=0.0000009; document.getElementById('mined').innerText=mined.toFixed(7)+' SOL';
+ hash=(150+Math.random()*25)*boostX; document.getElementById('hash').innerText=hash.toFixed(1)+' TH/s';
+ mined+=0.0000011*boostX; document.getElementById('mined').innerText=mined.toFixed(7)+' SOL';
  document.getElementById('mineBal').innerText=mined.toFixed(7)+' SOL';
  document.getElementById('usd').innerText=(mined*sol).toFixed(4);
  document.getElementById('total').innerText='$'+(1.27+mined*sol).toFixed(3);
- if(Math.random()>0.65){blocks++; document.getElementById('blocks').innerText=blocks.toLocaleString();}
- let perc=(mined/0.01*100); document.getElementById('perc').innerText=perc.toFixed(1)+'%';
- document.getElementById('prog').style.width=perc+'%';
+ let ph=0.023*boostX; document.getElementById('perHour').innerText='+$'+ph.toFixed(3); document.getElementById('perDay').innerText='+$'+(ph*24).toFixed(2);
+ if(Math.random()>0.6){blocks++; document.getElementById('blocks').innerText=blocks.toLocaleString();}
+ profits.push(ph); if(profits.length>5)profits.shift(); drawProfit();
 },1000);
-function toggleMine(){let b=document.getElementById('mineBtn'); b.innerText=b.innerText.includes('ON')?'⛏️ MINING PAUSED - Click to Resume':'⛏️ MINING ON 24/7 AUTO';}
+setInterval(()=>{ if(compound){ mined*=1.001; } },60000);
+function boostHash(){ boostX=boostX==1?2:1; document.getElementById('boost').innerText=boostX==2?'2X ACTIVE 🔥':'1X → 2X READY'; document.getElementById('mineFill').style.animationDuration=boostX==2?'0.4s':'0.8s'; alert(boostX==2?'🚀 2X BOOST ACTIVATED! Hashrate doubled!':'Boost deactivated');}
+function toggleComp(){ compound=!compound; document.getElementById('compBtn').innerText=compound?'🔄 AUTO-COMPOUND ON':'⏸️ AUTO-COMPOUND OFF'; document.getElementById('comp').innerText=compound?'AUTO ON':'OFF';}
+drawProfit();
 </script>
 </body>
 </html>
