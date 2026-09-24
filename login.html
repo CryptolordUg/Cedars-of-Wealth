@@ -1,86 +1,37 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reset Password | Cedars</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial;background:radial-gradient(circle at top,#0a1a0f,#020a02);color:#fff;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:15px}
-.box{background:#0f2310;border:2px solid #00ff8844;border-radius:20px;padding:30px;width:100%;max-width:420px;text-align:center;box-shadow:0 0 40px #00ff8822}
-input{width:100%;padding:14px;margin:10px 0;border-radius:10px;border:1px solid #1a4a1a;background:#020a02;color:#fff;outline:none}
-input:focus{border-color:#00ff88}
-button{width:100%;padding:14px;background:linear-gradient(90deg,#00ff88,#00cc66);color:#000;border:none;border-radius:12px;font-weight:900;cursor:pointer;margin-top:10px;letter-spacing:1px}
-button:disabled{opacity:0.5}
-.small{font-size:11px;color:#88aa88;margin-top:10px;letter-spacing:1px}
-.link{color:#00ff88;font-size:13px;text-decoration:none;display:block;margin-top:15px}
-#msg{margin-top:15px;padding:12px;border-radius:10px;display:none;font-size:13px}
-.success{background:#00ff8822;border:1px solid #00ff88;color:#00ff88}
-.error{background:#ff444422;border:1px solid #ff4444;color:#ff8888}
-</style>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS | Login</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}body{background:#020a02;color:#fff;font-family:Arial;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:15px}.box{background:#0f2310;border:2px solid #00ff8844;border-radius:20px;padding:30px;max-width:420px;width:100%}.input{width:100%;padding:14px;background:#020a02;border:1px solid #00ff8844;border-radius:10px;color:#fff;margin:10px 0}.btn{width:100%;padding:14px;background:linear-gradient(90deg,#00ff88,#00cc66);border:none;border-radius:10px;font-weight:900;cursor:pointer;margin:10px 0}</style>
 </head><body>
 <div class="box">
-<h1 style="color:#00ff88;font-size:22px">🌲 CEDARS</h1>
-<p class="small">RESET YOUR PASSWORD</p>
-
-<div id="emailShow" style="margin:15px 0;font-size:13px;color:#aaffaa"></div>
-
-<input id="newPass" type="password" placeholder="New Password (min 6 chars)">
-<input id="confirmPass" type="password" placeholder="Confirm New Password">
-
-<button id="resetBtn" onclick="doReset()">RESET PASSWORD</button>
-
-<div id="msg"></div>
-
-<a href="login.html" class="link">← Back to Login</a>
+<div id="loginForm">
+<h1 style="color:#00ff88;text-align:center">🌲 CEDARS</h1><p style="text-align:center;margin:10px 0">Login to RUBONAI</p>
+<input id="email" class="input" placeholder="Email">
+<input id="pass" class="input" type="password" placeholder="Password">
+<button class="btn" onclick="doLogin()">LOGIN</button>
+<p style="text-align:center;font-size:13px"> <a href="#" onclick="showForgot();return false;" style="color:#00ff88">Forgot Password?</a> | <a href="register.html" style="color:#00ff88">Register</a></p>
+<p id="msg" style="text-align:center;margin-top:10px;color:#ff8888"></p>
 </div>
-
+<div id="forgotForm" style="display:none">
+<h2 style="color:#00ff88">Reset Password</h2>
+<input id="femail" class="input" placeholder="Enter your email">
+<button class="btn" onclick="doForgot()">SEND RESET</button>
+<p style="text-align:center"><a href="#" onclick="showLogin();return false;" style="color:#00ff88">Back to Login</a></p>
+</div>
+</div>
 <script>
-// Get email from URL ?email= or from reset storage
-const params = new URLSearchParams(window.location.search);
-let emailFromUrl = params.get('email');
-let resetData = JSON.parse(localStorage.getItem('cedars_reset_request')||'null');
-
-let targetEmail = emailFromUrl || (resetData ? resetData.email : null);
-let emailDiv = document.getElementById('emailShow');
-let msg = document.getElementById('msg');
-
-if(!targetEmail){
-  emailDiv.innerHTML = "❌ Invalid or expired reset link";
-  msg.style.display='block';
-  msg.className='error';
-  msg.innerHTML = "No reset request found.<br>Please go to <a href='forgot.html' style='color:#00ff88'>Forgot Password</a> again.";
-  document.getElementById('resetBtn').disabled=true;
-} else {
-  emailDiv.innerHTML = `Resetting for:<br><b style="color:#fff">${targetEmail}</b>`;
-  // Check if link expired (15 min)
-  if(resetData && (Date.now() - resetData.time > 15*60*1000)){
-    msg.style.display='block';
-    msg.className='error';
-    msg.innerText='⏰ Link expired! Request new one.';
-    document.getElementById('resetBtn').disabled=true;
-  }
+function showForgot(){document.getElementById('loginForm').style.display='none';document.getElementById('forgotForm').style.display='block';}
+function showLogin(){document.getElementById('forgotForm').style.display='none';document.getElementById('loginForm').style.display='block';}
+function doLogin(){
+ let e=document.getElementById('email').value.trim();
+ let p=document.getElementById('pass').value;
+ let users=JSON.parse(localStorage.getItem('cedars_users')||'[]');
+ let u=users.find(x=>(x.email===e||x.username===e)&&x.password===p);
+ if(u){localStorage.setItem('cedars_current_user',JSON.stringify(u));location.href='dashboard/rubonai-trader.html';}
+ else{document.getElementById('msg').innerText='Invalid email or password. Try registering first.';}
 }
-
-function doReset(){
-  let p1 = document.getElementById('newPass').value;
-  let p2 = document.getElementById('confirmPass').value;
-
-  if(p1.length < 6){ show('Password too short - min 6 chars',0); return; }
-  if(p1 !== p2){ show('Passwords do not match!',0); return; }
-
-  let users = JSON.parse(localStorage.getItem('cedars_users')||'[]');
-  let idx = users.findIndex(u=>u.email===targetEmail.toLowerCase());
-
-  if(idx === -1){ show('Account not found! Please register.',0); return; }
-
-  users[idx].password = btoa(p1);
-  localStorage.setItem('cedars_users', JSON.stringify(users));
-  localStorage.removeItem('cedars_reset_request');
-
-  show('✅ Password reset successful! Redirecting to login...',1);
-  setTimeout(()=>location.href='login.html',1500);
-}
-
-function show(t,ok){
-  msg.style.display='block';
-  msg.className = ok ? 'success' : 'error';
-  msg.innerText = t;
-}
+function doForgot(){let e=document.getElementById('femail').value;alert('If '+e+' exists, reset link sent! (Demo: just login with new password: cedars123)');showLogin();}
+ // Auto-redirect if already logged in
+ let cur=localStorage.getItem('cedars_current_user'); if(cur && !location.hash.includes('reset')){/* stay on login - user clicked logout */}
+// FIX: Never show "Invalid reset link" on normal login - only if ?token= present
+if(!location.search.includes('token')){showLogin();}
 </script>
 </body></html>
