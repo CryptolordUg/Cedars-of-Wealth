@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RUBONAI V6 - 6XQviX REAL</title>
+<title>RUBONAI V6 - AUTO WALLET</title>
 <script src="../api/direct-nodes.js"></script>
 <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js"></script>
 <style>body{background:#050a05;color:#fff;font-family:Inter;margin:0;padding:10px}.header{display:flex;justify-content:space-between;align-items:center;background:#0a1a0a;padding:12px;border-radius:12px;border:1px solid #00ff8844}.card{background:#0d2610;border:1px solid #00ff8844;border-radius:12px;padding:12px;margin-top:10px}.btn{width:100%;padding:15px;background:#00ff88;color:#000;font-weight:900;border:none;border-radius:12px;cursor:pointer;font-size:16px}.btn:disabled{background:#333;color:#666}input,select{width:100%;padding:12px;background:#000;border:1px solid #00ff8844;border-radius:8px;color:#fff;margin:6px 0;box-sizing:border-box}</style>
 </head><body>
 
 <div class="header">
-<div><b>RUBONAI V6</b><br><span style="color:#00ff88;font-size:11px">● DIRECT NODE ● YOUR ADDRESS LIVE</span></div>
-<div style="text-align:right"><div style="font-size:10px;opacity:.6">REAL Balance</div><div id="bal" style="font-weight:900;color:#00ff88">Loading...</div><div style="font-size:9px;opacity:.5">6XQviX...FF6fTb</div></div>
+<div><b>RUBONAI V6</b><br><span style="color:#00ff88;font-size:11px">● DIRECT NODE ● AUTO DETECT</span></div>
+<div style="text-align:right"><div style="font-size:10px;opacity:.6">REAL Balance</div><div id="bal" style="font-weight:900;color:#00ff88">Click CONNECT...</div><div id="addrShort" style="font-size:9px;opacity:.5">Not connected</div></div>
 </div>
 
 <div class="card">
@@ -17,62 +17,73 @@
 </div>
 
 <div class="card">
-<h3 style="margin:0 0 10px 0">⚡ $1 REAL TRADE - YOUR WALLET</h3>
-<label>Your Address (REAL)</label>
-<input id="myAddr" value="6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb" readonly>
+<h3 style="margin:0 0 10px 0">⚡ $1 REAL TRADE - AUTO WALLET</h3>
+<label>Your Address (Auto from Phantom)</label>
+<input id="myAddr" value="" placeholder="Click CONNECT below to auto-fill">
 <label>Amount SOL (0.005 = ~$1)</label>
 <input id="amount" value="0.005">
 <label>Send To (Destination)</label>
-<input id="toAddr" placeholder="Paste destination SOL address here">
-<button class="btn" id="execBtn" onclick="executeRealOrder()">1. CONNECT PHANTOM + CHECK REAL BALANCE</button>
+<input id="toAddr" placeholder="Paste destination SOL address">
+<button class="btn" id="execBtn" onclick="executeRealOrder()">1. CONNECT PHANTOM - SHOW $1.28 REAL</button>
 <div id="status" style="font-size:12px;margin-top:10px;line-height:1.6;word-break:break-all"></div>
 </div>
 
 <div class="card" style="font-size:11px"><b>🟢 Nodes</b><div id="nodes">Checking...</div></div>
 
 <script>
-const MY_WALLET = '6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb';
+const MY_WALLET = localStorage.getItem('MY_SOL_ADDR') || '6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb';
 
 async function executeRealOrder(){
   const btn=document.getElementById('execBtn');
   const status=document.getElementById('status');
+
+  // QUICK PATCH YOU ASKED FOR - AUTO DETECT
+  if(window.solana && window.solana.isPhantom){
+    try{
+      const resp = await window.solana.connect({onlyIfTrusted:true});
+      const connected = resp.publicKey.toString();
+      localStorage.setItem('MY_SOL_ADDR', connected);
+      document.getElementById('myAddr').value = connected;
+      document.getElementById('addrShort').innerText = connected.slice(0,6)+'...'+connected.slice(-4);
+    }catch(e){ console.log('Trusted connect failed, will request'); }
+  }
+
   const amount=parseFloat(document.getElementById('amount').value) || 0.005;
   
-  btn.innerText="⏳ Checking YOUR real balance via direct node...";
+  btn.innerText="⏳ Connecting Phantom...";
   try{
     if(!window.DirectNodes){alert('Create api/direct-nodes.js first!');return}
     const test=await window.DirectNodes.testAll();
     document.getElementById('block').innerText=test.btc_block;
     document.getElementById('nodes').innerHTML=`BTC ${test.btc_block} | ETH ${test.eth_rpc} | SOL ${test.sol_rpc}`;
 
-    // YOUR REAL BALANCE - THIS IS THE LINE YOU ASKED!
-    const myRealBal = await window.DirectNodes.getSolanaBalance(MY_WALLET);
-    document.getElementById('bal').innerText = myRealBal + ' SOL REAL';
-    console.log('MY REAL BAL:', myRealBal);
-    status.innerHTML = `✅ YOUR REAL BALANCE: <b style="color:#00ff88">${myRealBal} SOL</b> via direct node<br>Wallet: ${MY_WALLET}<br><br>`;
-
-    // Connect Phantom
     if(!window.solana || !window.solana.isPhantom){
-      status.innerHTML+=`⚠️ Install Phantom on this browser to send. But your real balance above is LIVE from blockchain!<br><br>Fund this address with 0.01 SOL to start $1 trading.`;
-      btn.innerText=`REAL BAL: ${myRealBal} SOL - INSTALL PHANTOM TO SEND`;
+      status.innerHTML=`⚠️ Install Phantom extension to show $1.28.<br>Download: https://phantom.app/<br><br>Your old address ${MY_WALLET} balance is being checked...`;
+      const myRealBal = await window.DirectNodes.getSolanaBalance(MY_WALLET);
+      document.getElementById('bal').innerText = myRealBal + ' SOL REAL (old)';
+      btn.innerText=`Install Phantom - Old Bal: ${myRealBal} SOL`;
       return;
     }
-    const resp=await window.solana.connect();
+
+    let resp;
+    try{ resp = await window.solana.connect(); }catch(e){ status.innerHTML='❌ You rejected connection. Click again.'; btn.innerText='1. CONNECT PHANTOM - TRY AGAIN'; return; }
     const connectedAddr=resp.publicKey.toString();
-    status.innerHTML+=`🔗 Connected: ${connectedAddr.slice(0,10)}...<br>`;
-    
-    if(connectedAddr!==MY_WALLET){
-      status.innerHTML+=`⚠️ You connected different wallet than ${MY_WALLET.slice(0,6)}... Switch to correct one in Phantom!`;
-    }
+    localStorage.setItem('MY_SOL_ADDR', connectedAddr);
+    document.getElementById('myAddr').value = connectedAddr;
+    document.getElementById('addrShort').innerText = connectedAddr.slice(0,6)+'...'+connectedAddr.slice(-4);
+    status.innerHTML=`🔗 Connected: ${connectedAddr}<br>Checking REAL balance...<br>`;
 
     const finalBal=await window.DirectNodes.getSolanaBalance(connectedAddr);
     document.getElementById('bal').innerText=finalBal+' SOL REAL';
+    status.innerHTML+=`✅ YOUR REAL BALANCE: <b style="color:#00ff88;font-size:16px">${finalBal} SOL (~$${(finalBal*200).toFixed(2)})</b><br>`;
+    
     btn.innerText=`2. SEND ${amount} SOL REAL (~$1) NOW`;
-    status.innerHTML+=`<br><b>Ready to send REAL $${amount} SOL on mainnet!</b><br>Paste destination and click again.`;
+    status.innerHTML+=`<br><b>Ready to send REAL $1 on mainnet!</b><br>Paste destination and click again.`;
     btn.onclick=()=>sendRealSOL(amount);
   }catch(e){
     btn.innerText="EXECUTE ORDER - RETRY";
     document.getElementById('status').innerText="Error: "+e.message;
+    console.error(e);
   }
 }
 
@@ -97,11 +108,14 @@ async function sendRealSOL(amount){
 }
 
 window.addEventListener('load', async()=>{
+  const saved = localStorage.getItem('MY_SOL_ADDR');
+  if(saved){
+    document.getElementById('myAddr').value = saved;
+    document.getElementById('addrShort').innerText = saved.slice(0,6)+'...'+saved.slice(-4);
+    document.getElementById('bal').innerText = 'Saved: '+saved.slice(0,6)+'... Click CONNECT';
+  }
   if(window.DirectNodes){
     try{
-      const myRealBal = await window.DirectNodes.getSolanaBalance(MY_WALLET);
-      document.getElementById('bal').innerText = myRealBal + ' SOL REAL';
-      console.log('MY REAL BAL on load:', myRealBal);
       const test=await window.DirectNodes.testAll();
       document.getElementById('block').innerText=test.btc_block;
       document.getElementById('nodes').innerHTML=`BTC Block ${test.btc_block} | Ready`;
