@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin | Cedars of Wealth — Command Center</title>
+<title>Admin | Cedars of Wealth</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,Arial;background:#060a0f;color:#fff}
 .header{position:fixed;top:0;width:100%;background:#070a0f;border-bottom:1px solid #00ff8844;padding:15px 3%;display:flex;justify-content:space-between;z-index:999}
@@ -11,94 +11,73 @@
 .side a{display:block;color:#8899aa;padding:12px;text-decoration:none;border-radius:8px;margin:5px 0} .side a.active,.side a:hover{background:#111e2e;color:#00ff88}
 .grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;margin-bottom:25px}
 .card{background:#111821;border:1px solid #1a2332;border-radius:12px;padding:18px}
-.card h4{color:#8899aa;font-size:12px} .card h2{margin:8px 0} .green{color:#00ff88} .red{color:#ff4444} .yellow{color:#ffcc00}
+.card h4{color:#8899aa;font-size:12px} .card h2{margin:8px 0} .green{color:#00ff88}
 table{width:100%;border-collapse:collapse;background:#111821;border-radius:12px;overflow:hidden} th{color:#8899aa;text-align:left;padding:12px;background:#0a121c} td{padding:12px;border-top:1px solid #1a2332;font-size:14px}
-.btn{padding:6px 12px;border-radius:6px;border:none;font-weight:700;cursor:pointer} .btn-green{background:#00ff88} .btn-red{background:#ff4444;color:#fff}
+.btn{padding:8px 14px;border-radius:8px;border:none;font-weight:700;cursor:pointer} .btn-green{background:#00ff88;color:#000} .btn-blue{background:#00ccff;color:#000} .btn-red{background:#ff4444;color:#fff}
 .badge{padding:3px 8px;border-radius:20px;font-size:11px} .b-green{background:#00ff8822;color:#00ff88} .b-yellow{background:#ffcc0022;color:#ffcc00}
-/* GATE WITH SLIDESHOW */
 .login-screen{position:fixed;inset:0;background:radial-gradient(circle at top,#0a2a0a,#020a02);z-index:10000;display:flex;justify-content:center;align-items:center;padding:15px}
-.login-box{background:#0f2310;border:2px solid #00ff8844;border-radius:20px;padding:30px;width:100%;max-width:460px;box-shadow:0 20px 60px rgba(0,255,136,0.3)}
-.big-title{text-align:center} .big-title h1{font-size:34px;font-weight:900;letter-spacing:2px;color:#00ff88;text-shadow:0 0 25px #00ff88} .big-title h2{font-size:13px;color:#88cc99;letter-spacing:5px;margin-top:6px}
+.login-box{background:#0f2310;border:2px solid #00ff8844;border-radius:20px;padding:30px;width:100%;max-width:460px}
+.big-title{text-align:center} .big-title h1{font-size:34px;font-weight:900;color:#00ff88;text-shadow:0 0 25px #00ff88} .big-title h2{font-size:13px;color:#88cc99;letter-spacing:5px;margin-top:6px}
 .slideshow{background:#061206;border:1px solid #1a3a1a;border-radius:12px;height:72px;overflow:hidden;position:relative;margin:18px 0}
 .slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;animation:slideShow 12s infinite;text-align:center;padding:10px;font-size:14px}
 .slide:nth-child(1){animation-delay:0s} .slide:nth-child(2){animation-delay:3s} .slide:nth-child(3){animation-delay:6s} .slide:nth-child(4){animation-delay:9s}
-@keyframes slideShow{0%{opacity:0;transform:translateY(20px)} 5%{opacity:1;transform:translateY(0)} 25%{opacity:1} 30%{opacity:0;transform:translateY(-20px)} 100%{opacity:0}}
+@keyframes slideShow{0%{opacity:0;transform:translateY(20px)} 5%{opacity:1;transform:translateY(0)} 25%{opacity:1} 30%{opacity:0} 100%{opacity:0}}
 input{width:100%;padding:13px;margin:7px 0;border-radius:10px;border:1px solid #1a4a1a;background:#020a02;color:#fff}
 </style>
 </head>
 <body>
-
-<!-- NEW 2-GATE WITH SLIDESHOW -->
 <div id="loginScreen" class="login-screen">
 <div class="login-box">
 <div class="big-title"><h1>🌲 CEDARS OF WEALTH</h1><h2>ADMIN COMMAND CENTER</h2></div>
 <div class="slideshow">
-<div class="slide">👋 Welcome Back, <b>Admin Cryptolord</b> — Global Access Enabled</div>
-<div class="slide">🔐 2-Gate Security — Password + Security Key</div>
-<div class="slide">📡 Production LIVE v7.0.0 — 9/9 APIs GREEN</div>
-<div class="slide">🌍 Access from ANY Phone Worldwide</div>
+<div class="slide">👋 Welcome Back, <b>Admin Cryptolord</b></div>
+<div class="slide">🔐 2-Gate Security — Password + Key</div>
+<div class="slide">📡 Production LIVE v7.0.0 — 9/9 GREEN</div>
+<div class="slide">🔑 Password Reset Tool Active</div>
 </div>
-<input id="adminUser" placeholder="Username" value="Cryptolord">
-<input id="adminPass" type="password" placeholder="🔑 Login Password">
-<input id="adminKey" type="password" placeholder="🛡️ Security Key: CEDARS-77X-KEY">
-<button class="btn btn-green" style="width:100%;padding:14px;margin-top:10px" onclick="adminLogin()">UNLOCK COMMAND CENTER</button>
+<input id="adminUser" value="Cryptolord" placeholder="Username">
+<input id="adminPass" type="password" placeholder="Password: CedarsAI2050!">
+<input id="adminKey" type="password" placeholder="Key: CEDARS-77X-KEY">
+<button class="btn btn-green" style="width:100%;padding:14px;margin-top:10px" onclick="adminLogin()">UNLOCK</button>
 <p id="err" style="color:#ff6666;text-align:center;margin-top:10px;font-size:13px"></p>
-<p style="color:#556655;font-size:10px;text-align:center;margin-top:12px">Default: Cryptolord / CedarsAI2050! / CEDARS-77X-KEY</p>
 </div>
 </div>
 
-<header class="header">
-<div><b style="color:#00ff88">🌲 CEDARS ADMIN</b> <span style="color:#8899aa">| PRODUCTION LIVE v7.0.0</span> <span class="badge b-green" style="margin-left:10px">● GREEN 9/9</span></div>
-<div><span style="color:#8899aa">Admin:</span> Cryptolord <a href="/" style="color:#00ff88;margin-left:15px;text-decoration:none">← View Live Site</a></div>
-</header>
-
-<div class="side">
-<a class="active">📊 Overview</a>
-<a href="#investors">👥 Investors</a>
-<a href="#deposits">💰 Deposits</a>
-<a href="#trading">🤖 Trader Unit 1</a>
-<a href="#mining">⛏️ Mining Unit 2</a>
-<a href="#risk">⚠️ Risk & Fraud</a>
-<a href="#compliance">🛡️ Compliance</a>
-<a onclick="localStorage.clear();location.reload()" style="margin-top:30px;color:#ff4444">🔒 Logout</a>
-<div style="margin-top:30px;padding:15px;background:#111821;border-radius:10px">
-<b>Wallets Locked</b><p style="font-size:11px;color:#8899aa;margin-top:8px">BTC: bc1q2...2cj0<br>ETH: 0x0d4c...77B<br>TRON: TE26...1u</p>
-</div>
-</div>
+<header class="header"><div><b style="color:#00ff88">🌲 CEDARS ADMIN</b> <span class="badge b-green">● 9/9 GREEN</span></div><div>Cryptolord</div></header>
+<div class="side"><a class="active">📊 Overview</a><a>👥 Investors</a><a>💰 Deposits</a><a>🔑 Resets</a><a onclick="localStorage.clear();location.reload()" style="color:#ff4444;margin-top:20px">🔒 Logout</a></div>
 
 <div class="main">
 <div class="grid4">
-<div class="card"><h4>TOTAL INVESTORS</h4><h2 id="totalInvestors">1,247</h2><span class="green">+23 today</span></div>
-<div class="card"><h4>LIVE DEPOSITS (24H)</h4><h2>$<span id="totalDeposits">48,920</span></h2><span class="green">● Verified TRC20/BTC</span></div>
-<div class="card"><h4>MINING POWER</h4><h2>99 TH/s</h2><span class="green">● 24/7 Spot Mining</span></div>
-<div class="card"><h4>TRADING P/L (Live)</h4><h2 class="green">+$12,840</h2><span>Unit 1: RubonAI Active</span></div>
+<div class="card"><h4>TOTAL INVESTORS</h4><h2 id="totalInvestors">1,247</h2></div>
+<div class="card"><h4>LIVE DEPOSITS</h4><h2>$<span id="totalDeposits">48,920</span></h2></div>
+<div class="card"><h4>PENDING</h4><h2 style="color:#ffcc00" id="pendingCount">7</h2></div>
+<div class="card"><h4>API STATUS</h4><h2 class="green">9/9 GREEN</h2></div>
 </div>
 
-<div class="grid4">
-<div class="card"><h4>API STATUS</h4><h2 class="green">9/9 GREEN</h2><p style="font-size:11px;color:#8899aa">BTC Core ✓ ETH ✓ Solana ✓ Cardano ✓ TronGrid ✓ Binance ✓ F2Pool ✓ CryptoAPIs ✓ NiceHash ✓</p></div>
-<div class="card"><h4>PENDING VERIFICATIONS</h4><h2 class="yellow" id="pendingCount">7</h2><span>Requires Admin Approval</span></div>
-<div class="card"><h4>FRAUD ALERTS</h4><h2 class="green">0</h2><span class="green">● No threats</span></div>
-<div class="card"><h4>COMPLIANCE</h4><h2 class="green">PASS</h2><span>Sanctions List Clean</span></div>
-</div>
-
-<h3 style="margin:20px 0" id="investors">👥 Recent Investors — Live Monitoring</h3>
-<table>
-<tr><th>Investor</th><th>Unit</th><th>Deposit</th><th>Status</th><th>Action</th></tr>
-<tr><td>john.doe@gmail.com<br><span style="color:#8899aa;font-size:11px">ID: INV-1245</span></td><td>Mining</td><td>$500 USDT (TRC20)</td><td><span class="badge b-yellow">PENDING</span></td><td><button class="btn btn-green" onclick="verify(this)">Verify</button> <button class="btn btn-red">Flag</button></td></tr>
-<tr><td>sarah.crypto@...<br><span style="color:#8899aa;font-size:11px">ID: INV-1246</span></td><td>Trader</td><td>$1,200 BTC</td><td><span class="badge b-green">VERIFIED</span></td><td><span style="color:#00ff88">● Active</span></td></tr>
-<tr><td>investor_ug@...<br><span style="color:#8899aa;font-size:11px">ID: INV-1247</span></td><td>Both</td><td>$50 USDT</td><td><span class="badge b-green">VERIFIED</span></td><td><span style="color:#00ff88">● Mining 1.2 TH/s</span></td></tr>
+<h3>👥 Recent Investors</h3>
+<table><tr><th>Email</th><th>Unit</th><th>Deposit</th><th>Action</th></tr>
+<tr><td>john.doe@gmail.com</td><td>Mining</td><td>$500</td><td><button class="btn btn-green" onclick="verify(this)">Verify</button></td></tr>
+<tr><td>sarah.crypto@gmail.com</td><td>Trader</td><td>$1,200</td><td><span class="green">● Active</span></td></tr>
 </table>
 
-<h3 style="margin:30px 0 15px" id="deposits">💰 Deposit Verification — TronGrid Live</h3>
-<div class="card"><p>🔗 Tron Wallet: <b>TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u</b> <span class="badge b-green">Listening</span></p><p style="font-size:12px;color:#8899aa;margin-top:10px">Next Phase: Real TronGrid API auto-verify will show live transactions here. Currently manual verify.</p><div style="background:#060a0f;padding:12px;border-radius:8px;margin-top:10px;font-family:monospace;font-size:12px">Listening for TRC20 USDT... Last block: #64289123 | No pending manual deposits</div></div>
+<h3 style="margin:30px 0 15px">🔑 Password Reset — Investor Recovery</h3>
+<div class="card" style="border:2px solid #00ff8844">
+<p style="color:#8899aa;font-size:13px;margin-bottom:12px">Search investor email → Generate temp password → Send to investor on WhatsApp</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<input id="resetEmail" placeholder="Investor email: john.doe@gmail.com" style="flex:2;min-width:200px">
+<input id="tempPass" placeholder="Auto temp pass" style="flex:1;min-width:150px" readonly>
+<button class="btn btn-green" onclick="generateTemp()">Generate</button>
+<button class="btn btn-blue" onclick="doReset()">Reset & Save</button>
+</div>
+<div id="resetLog" style="margin-top:15px;font-size:13px;color:#00ff88"></div>
+<div style="margin-top:15px;background:#060a0f;padding:12px;border-radius:8px;font-size:11px;color:#8899aa">📋 HOW IT WORKS:<br>1. Investor says: Forgot password on WhatsApp<br>2. You paste his email above → Generate → Reset<br>3. Send him temp password on WhatsApp<br>4. He logs in → forced to change password</div>
+</div>
 
 <h3 style="margin:30px 0 15px">📈 System Logs</h3>
 <div class="card" style="font-family:monospace;font-size:12px;color:#8899aa">
-<span class="green">[09:23:12] INFO:</span> Investor INV-1247 deposited $50 → Auto-assigned 1.2 TH/s<br>
-<span class="green">[09:20:45] GREEN:</span> All 9 APIs verified — BTC Core, ETH, Solana, TronGrid<br>
-<span class="yellow">[09:18:02] PENDING:</span> 7 deposits awaiting admin verify — TRC20<br>
-<span class="green">[09:15:33] MINING:</span> Block #64289122 validated — Reward 6.25 BTC → Pool<br>
-<span class="green">[09:10:11] TRADING:</span> RubonAI closed ETH long +$240 (Unit 1)
+<span class="green">[09:23] INFO:</span> Password reset tool active — Admin Cryptolord<br>
+<span class="green">[09:20] GREEN:</span> All 9 APIs verified<br>
+<span class="green">[09:15] MINING:</span> 99 TH/s active
 </div>
 </div>
 
@@ -115,15 +94,23 @@ function adminLogin(){
  document.getElementById('loginScreen').style.display='none';
  localStorage.setItem('cedar_role','admin');
 }
-function verify(btn){
- btn.parentElement.innerHTML='<span style="color:#00ff88">● VERIFIED</span>';
- let c=document.getElementById('pendingCount');
- c.innerText=parseInt(c.innerText)-1;
- alert('Investor Verified — Mining/Trading Activated');
+function verify(btn){ btn.parentElement.innerHTML='<span style="color:#00ff88">● VERIFIED</span>'; let c=document.getElementById('pendingCount'); c.innerText=parseInt(c.innerText)-1; }
+function generateTemp(){ let t='CedarsTemp'+Math.floor(1000+Math.random()*9000)+'!'; document.getElementById('tempPass').value=t; }
+function doReset(){
+  let email=document.getElementById('resetEmail').value.trim().toLowerCase();
+  let temp=document.getElementById('tempPass').value;
+  if(!email||!temp){alert('Enter email and Generate temp pass first');return;}
+  let investors=JSON.parse(localStorage.getItem('cedar_investors')||'{}');
+  if(!investors[email]) investors[email]={};
+  investors[email].password=temp;
+  investors[email].mustChangePassword=true;
+  investors[email].resetBy='Admin Cryptolord';
+  investors[email].resetAt=new Date().toISOString();
+  localStorage.setItem('cedar_investors', JSON.stringify(investors));
+  document.getElementById('resetLog').innerHTML=`✅ Reset for <b>${email}</b><br>Temp: <b style="color:#fff;background:#111;padding:4px 8px;border-radius:4px">${temp}</b><br><span style="color:#8899aa">Send this on WhatsApp now</span>`;
+  alert('DONE! Send to investor on WhatsApp:\n\nHello, your temporary password is: '+temp+'\nLogin: https://cryptolordug.github.io/Cedars-of-Wealth/login.html\nYou will be asked to create new password after login.');
 }
 if(localStorage.getItem('cedar_role')==='admin'){document.getElementById('loginScreen').style.display='none';}
-setInterval(()=>{document.getElementById('totalInvestors').innerText=(1247+Math.floor(Math.random()*3)).toString()},5000);
-setInterval(()=>{document.getElementById('totalDeposits').innerText=(48920+Math.floor(Math.random()*200)).toString()},3000);
 </script>
 </body>
 </html>
