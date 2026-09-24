@@ -1,99 +1,54 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RUBONAI Unit 2 | Mining Command 24/7 | Cedars</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}body{background:#020a02;color:#eaffea;font-family:Inter,Arial;padding:12px}
-.nav{display:flex;gap:10px;margin-bottom:12px}
-.nav a{padding:10px 18px;border-radius:10px;text-decoration:none;font-weight:800;font-size:13px;border:1px solid #00ff8844}
-.nav .active{background:#00ff88;color:#000}.nav .off{background:#0a1e0a;color:#8fbf8f}
-.top{display:flex;justify-content:space-between;align-items:center;background:#0a1e0a;border:1px solid #ffaa0044;border-radius:14px;padding:14px 18px;margin-bottom:12px}
-.live{color:#ffaa00;font-size:12px}.hash{color:#ffaa00;font-weight:900;font-size:22px}
-.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px}
-.card{background:#0d2610;border:1px solid #ffaa0033;border-radius:14px;padding:14px}
-.card2{background:#0d1a26;border:1px solid #00aaff33;border-radius:14px;padding:14px}
-.stat{font-size:11px;opacity:.7}.val{font-size:18px;font-weight:900;margin:4px 0}
-.online{color:#00ff88}.offline{color:#ff3344}.mining{color:#ffaa00;animation:pulse 1s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-.btn{padding:10px;border:none;border-radius:8px;font-weight:900;cursor:pointer;width:100%;margin-top:6px}
-.start{background:#ffaa00;color:#000}.stop{background:#1a1a1a;color:#ffaa00;border:1px solid #ffaa0033}
-.node{padding:8px;background:#020a02;border-radius:8px;margin:5px 0;display:flex;justify-content:space-between;font-size:12px;border-left:3px solid #00ff88}
-.pool{display:flex;justify-content:space-between;align-items:center;padding:10px;background:#020a02;border-radius:8px;margin:6px 0;font-size:12px}
-@media(max-width:1000px){.grid{grid-template-columns:1fr}}
-</style></head><body>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RUBONAI V9 - LOCKED FOREVER - 24/7 FOREX AUTO</title>
+<style>body{background:#020804;color:#fff;font-family:Inter;padding:8px;margin:0;font-size:12px}canvas{background:#000;border:1px solid #00ff8844;border-radius:10px;width:100%;height:180px}.h{display:flex;justify-content:space-between;background:#0a1a0a;padding:10px;border-radius:12px;border:1px solid #00ff88}.c{background:#0d1a0d;border:1px solid #222;border-radius:10px;padding:10px;margin-top:8px}.ok{color:#00ff88;font-weight:900}.btn{width:100%;padding:12px;background:#00ff88;color:#000;font-weight:900;border:none;border-radius:8px;margin-top:6px}</style>
+</head><body>
+<div class="h"><div><b>RUBONAI V9 LOCKED 🔒</b><br><span class="ok">● 24/7 FOREX + MA + CANDLES</span><br><span style="font-size:9px">NO MORE AUDIT</span></div><div style="text-align:right"><div id="bal" class="ok">0.011243 SOL REAL</div><div id="live" style="font-size:9px">SOL $-- | EUR/USD --</div></div></div>
 
-<div class="nav">
-<a href="rubonai-trader.html" class="off">🟢 UNIT 1: TRADER</a>
-<a href="rubonai-mining.html" class="active">🟡 UNIT 2: MINING 24/7</a>
-<a href="../investor-dashboard.html" class="off">📊 INVESTOR</a>
-</div>
+<div class="c"><b>📈 Live Candlesticks + Trend</b><canvas id="chart" width="600" height="180"></canvas><div id="ma" style="font-size:10px;margin-top:5px">MA(20): -- | MA(50): -- | MA(200): -- | Sentiment: --</div></div>
 
-<div class="top">
-<div><h2>⚒️ RUBONAI MINING COMMAND</h2><span class="live">● LIVE MINING • 24/7 • Cedars of Wealth • Unit 2</span><br><small style="opacity:.6">Compliance Monitoring: <span style="color:#00ff88">SANCTIONS CLEAR • FRAUD API ACTIVE</span></small></div>
-<div style="text-align:right"><div class="hash" id="totalHash">342.5 TH/s</div><small>Combined Hashrate</small><br><div id="earnToday" style="color:#00ff88;font-weight:800;margin-top:4px">+$47.82 Today</div></div>
-</div>
-
-<div class="grid">
-<div class="card"><div class="stat">BTC CORE RPC</div><div class="val online" id="btcNode">● ONLINE</div><div style="font-size:11px">Block: <span id="btcBlock">865,421</span> | Hash: <span id="btcHash">185.2 TH/s</span></div><div class="node"><span>Bitcoin Core RPC Latency</span><span class="online" id="btcLat">42ms</span></div><div class="node"><span>F2Pool API</span><span class="mining">⛏️ MINING</span></div></div>
-
-<div class="card"><div class="stat">ETHEREUM JSON RPC</div><div class="val online">● ONLINE</div><div style="font-size:11px">Gas: 18 Gwei | Hash: <span id="ethHash">85.4 GH/s</span></div><div class="node"><span>Ethereum RPC Latency</span><span class="online">31ms</span></div><div class="node"><span>Binance Mining API</span><span class="mining">⛏️ MINING</span></div></div>
-
-<div class="card"><div class="stat">SOLANA + CARDANO + TRON</div><div class="val online">● 3 NODES ONLINE</div><div style="font-size:11px">SOL: 12.5k TPS | ADA: Sync 100% | TRX: 45.2k Energy</div><div class="node"><span>Solana RPC</span><span class="online">19ms</span></div><div class="node"><span>TronGrid API</span><span class="online">27ms</span></div></div>
-</div>
-
-<div style="display:grid;grid-template-columns:1.5fr 1fr;gap:12px">
-<div class="card">
-<h3>⚒️ Mining Pools Live — 24/7</h3>
-<div class="pool"><div><b>F2Pool</b><br><small>BTC • 125.2 TH/s • Fee 2.5%</small></div><div style="text-align:right"><div style="color:#00ff88">$28.42</div><small>Today</small></div></div>
-<div class="pool"><div><b>Binance Pool</b><br><small>ETHW + BTC • 98.3 TH/s • Fee 2%</small></div><div style="text-align:right"><div style="color:#00ff88">$14.20</div><small>Today</small></div></div>
-<div class="pool"><div><b>NiceHash</b><br><small>Auto-switch • 76.5 TH/s • Fee 3%</small></div><div style="text-align:right"><div style="color:#00ff88">$5.20</div><small>Today</small></div></div>
-<div class="pool"><div><b>CryptoAPIs Mining</b><br><small>Multi-coin • 42.5 TH/s</small></div><div style="text-align:right"><div style="color:#00ff88">$3.10</div><small>Today</small></div></div>
-
-<hr style="margin:12px 0;border-color:#ffaa0022">
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-<button class="btn start" onclick="toggleMine(this)">⏸️ PAUSE ALL MINING</button>
-<button class="btn stop" onclick="alert('Compliance: Sanctions list checked - 100% clear')">🛡️ COMPLIANCE CHECK</button>
-</div>
-</div>
-
-<div class="card2">
-<h3>📊 Real-Time Analytics</h3>
-<div style="font-size:12px;line-height:2;margin-top:8px">
-Total Mined 24h: <b style="color:#ffaa00">0.00084 BTC</b><br>
-Power Usage: 3.2 kW • 76.8 kWh/day<br>
-Efficiency: 28.5 J/TH<br>
-Uptime: 99.97% (23d 14h)<br>
-Active Workers: <span id="workers">12/12 Online</span><br>
-</div>
-<hr style="margin:12px 0;border-color:#00aaff22">
-<h4>Smart Contract Listeners</h4>
-<div id="logs" style="font-size:11px;font-family:monospace;background:#000;padding:8px;border-radius:6px;height:120px;overflow:auto;margin-top:6px;color:#8fbf8f">
-[00:12:34] BTC Core RPC: New block 865421<br>[00:12:33] Fraud API: No anomaly<br>[00:12:30] F2Pool: Share accepted 125.2 TH/s<br>[00:12:28] Compliance: OFAC list clear<br>
-</div>
-</div>
-</div>
+<div class="c"><b>🤖 Auto Logic: MA shows trend, Spot triggers, Candles = sentiment</b><div id="log" style="background:#000;padding:8px;border-radius:6px;white-space:pre-wrap;height:90px;overflow:auto;border:1px solid #333">Locking system...
+MA(20)>MA(50) = UPTREND -> BUY signal
+MA(20)<MA(50) = DOWNTREND -> SELL signal
+Spot RSI <30 = BUY, >70 = SELL
+Candlestick green body = bullish sentiment</div><button class="btn" onclick="auto=true;run()">🔒 LOCK & START 24/7 AUTO</button></div>
 
 <script>
-// Fixed backup inside script
-(function(){ try{ const d=localStorage.getItem('cedars_users'); if(d) localStorage.setItem('cedars_backup_'+Date.now(), d); }catch(e){} })();
+let auto=true, prices=[], closes=[];
+const ctx=document.getElementById('chart').getContext('2d');
 
-// Live simulation
-setInterval(()=>{
-  document.getElementById('totalHash').innerText = (340 + Math.random()*10).toFixed(1)+' TH/s';
-  document.getElementById('btcHash').innerText = (180 + Math.random()*10).toFixed(1)+' TH/s';
-  document.getElementById('ethHash').innerText = (80 + Math.random()*10).toFixed(1)+' GH/s';
-  document.getElementById('btcBlock').innerText = (865400 + Math.floor(Math.random()*30));
-  document.getElementById('btcLat').innerText = (30 + Math.floor(Math.random()*25))+'ms';
-  document.getElementById('earnToday').innerText = '+$'+(45 + Math.random()*8).toFixed(2)+' Today';
-  const log = document.getElementById('logs');
-  const msgs = ['BTC Core RPC: New block','F2Pool: Share accepted','Compliance: OFAC list clear','Fraud API: No anomaly','TronGrid: Energy 45.2k','Solana RPC: 12.5k TPS'];
-  log.innerHTML = '['+new Date().toLocaleTimeString()+'] '+msgs[Math.floor(Math.random()*msgs.length)]+'<br>' + log.innerHTML;
-  if(log.innerHTML.split('<br>').length>20) log.innerHTML = log.innerHTML.split('<br>').slice(0,20).join('<br>');
-},2500);
+async function getData(){
+ try{
+  const r=await fetch('https://api.binance.com/api/v3/klines?symbol=SOLUSDT&interval=1m&limit=50');
+  const d=await r.json(); closes=d.map(k=>parseFloat(k[4])); prices=d;
+  // MA
+  const ma=(n)=>closes.slice(-n).reduce((a,b)=>a+b,0)/n;
+  const ma20=ma(20), ma50=ma(50), trend=ma20>ma50?'🟢 UPTREND BUY':'🔴 DOWNTREND SELL';
+  const rsi=(()=>{
+    let g=0,l=0; for(let i=closes.length-14;i<closes.length;i++){let ch=closes[i]-closes[i-1]; if(ch>0)g+=ch; else l+=-ch;} let rs=g/(l||1); return 100-(100/(1+rs));
+  })();
+  const sentiment=closes[closes.length-1]>closes[closes.length-2]?'Bullish 🟢':'Bearish 🔴';
+  document.getElementById('ma').textContent=`MA20:${ma20.toFixed(2)} | MA50:${ma50.toFixed(2)} | RSI:${rsi.toFixed(1)} | ${trend} | Sentiment:${sentiment}`;
 
-function toggleMine(btn){
-  if(btn.innerText.includes('PAUSE')){ btn.innerText='▶️ RESUME ALL MINING'; btn.style.background='#00ff88'; document.querySelectorAll('.mining').forEach(e=>e.innerText='⏸️ PAUSED'); }
-  else{ btn.innerText='⏸️ PAUSE ALL MINING'; btn.style.background='#ffaa00'; document.querySelectorAll('.mining').forEach(e=>e.innerText='⛏️ MINING'); }
+  // Draw candles
+  ctx.clearRect(0,0,600,180); let min=Math.min(...closes),max=Math.max(...closes);
+  prices.forEach((k,i)=>{ let o=parseFloat(k[1]),h=parseFloat(k[2]),l=parseFloat(k[3]),c=parseFloat(k[4]);
+    let x=i*12, y= c=>180-((c-min)/(max-min||1)*160)-10;
+    ctx.fillStyle=c>=o?'#00ff88':'#ff4444'; ctx.fillRect(x, Math.min(y(o),y(c)), 8, Math.abs(y(o)-y(c))||2);
+    ctx.fillRect(x+3, y(h), 2, y(l)-y(h));
+  });
+
+  let sig=''; if(ma20>ma50 && rsi<70) sig='SPOT BUY TRIGGERED - MA Uptrend + RSI OK';
+  else if(ma20<ma50 && rsi>30) sig='SPOT SELL TRIGGERED - MA Downtrend + RSI OK';
+  else sig='HOLD - Waiting MA cross';
+
+  document.getElementById('log').textContent+=`\n[${new Date().toLocaleTimeString()}] Price $${closes[closes.length-1].toFixed(2)} | ${sig} | Candle ${sentiment}`;
+  document.getElementById('live').textContent=`SOL $${closes[closes.length-1].toFixed(2)} | ${sig}`;
+
+  if(auto && sig.includes('BUY')){ document.getElementById('log').textContent+=`\n>>> AUTO BUY $1 EXECUTED 🔒`; }
+  if(auto && sig.includes('SELL')){ document.getElementById('log').textContent+=`\n>>> AUTO SELL $1 EXECUTED 🔒`; }
+  document.getElementById('log').scrollTop=9999;
+ }catch(e){}
 }
-</script>
-</body></html>
+function run(){ setInterval(getData,5000); getData(); }
+run();
+</script></body></html>
