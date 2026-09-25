@@ -1,0 +1,73 @@
+openapi: 3.1.0
+info:
+  title: Cedars of Wealth Trading API
+  version: 1.0.0
+  description: Institutional-grade Forex and Wealth Intelligence — AI + Risk + Education — Master POST /cedars/master-analysis wealth_score 91 — Base https://api.cedarsofwealth.com/v1
+servers:
+    - url: https://api.cedarsofwealth.com/v1
+    description: Production
+    - url: https://sandbox.cedarsofwealth.com/v1
+    description: Sandbox
+security:
+    - BearerAuth: []
+    ApiKeyAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+  schemas:
+    MasterAnalysis:
+      type: object
+      properties:
+        pair: {type: string, example: EURUSD}
+        trend: {type: string, example: Bullish}
+        sentiment: {type: string, example: Bullish}
+        volatility: {type: string, example: Medium}
+        signal: {type: string, enum: [BUY, SELL, HOLD]}
+        confidence: {type: integer, example: 87}
+        risk_reward: {type: string, example: 1:3}
+        recommended_lot: {type: number, example: 0.01}
+        wealth_score: {type: integer, example: 91}
+paths:
+  /auth/login:
+    post:
+      tags: [Authentication]
+      responses:
+        '200': {description: Login Success}
+  /market/pulse:
+    get:
+      tags: [Market Intelligence]
+      responses:
+        '200': {description: Market Overview OPEN London EURUSD GBPUSD}
+  /strength/all:
+    get:
+      tags: [Currency Strength]
+      responses:
+        '200': {description: USD 84 EUR 73 GBP 66 JPY 42}
+  /cedars/master-analysis:
+    post:
+      tags: [Master Intelligence]
+      summary: Flagship — Single endpoint all services — Wealth 91
+      responses:
+        '200':
+          description: Master — Highest-prob lowest-risk
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MasterAnalysis'
+              example:
+                pair: EURUSD
+                trend: Bullish
+                sentiment: Bullish
+                volatility: Medium
+                signal: BUY
+                confidence: 87
+                risk_reward: 1:3
+                recommended_lot: 0.01
+                wealth_score: 91
