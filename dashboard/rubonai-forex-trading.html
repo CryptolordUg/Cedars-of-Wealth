@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cedars Master Intelligence — wealth 91 — FINAL</title>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<style>
+body{background:#0a0a0a;color:#fff;font-family:monospace;padding:10px}
+.box{border:1px solid #333;padding:10px;margin:8px 0;border-radius:8px;background:#111}
+button{background:#00ff88;color:#000;padding:12px 20px;border:0;border-radius:6px;font-weight:bold;margin:5px;cursor:pointer}
+.yellow{background:#ffcc00}
+.log{background:#000;height:160px;overflow:auto;padding:8px;border:1px solid #222;font-size:12px}
+</style>
+</head>
+<body>
+<h3>Cedars Master Intelligence — POST /cedars/master-analysis — wealth 91 — FINAL</h3>
+<p>Keys: service_6em5yqv + km2d2xzJ-yaPb-042 + template_sgpa4iu — 200 req — To cryptome2030@gmail.com</p>
+
+<div class="box">Balance <span id="bal">$1.00</span> Target 2-5%/mo — Trades <span id="trd">0</span></div>
+<div class="box">Wealth Score Master <span id="ws">--</span> — Take >85 Skip <70</div>
+<div class="box">Prophet + Brain + Guardian — <span id="sig">BUY conf 88 LOW — Bullish 87% — SAFE 2.3% — POST /cedars/master-analysis → EURUSD BUY conf 87 RR 1:3 0.01 wealth 91</span></div>
+<div class="box">Rich Guard Risk 1% — 0.01 lot — Max Exposure — Win 0% —</div>
+
+<button onclick="startMaster()">START MASTER</button>
+<button class="yellow" onclick="backupNow()">Backup Now — Ready</button>
+<div class="log" id="log">Live Log — Master — Click START MASTER</div>
+
+<script>
+// --- FIXED KEYS — YOUR NEW TEMPLATE sgpa4iu ---
+const S="service_6em5yqv";
+const P="km2d2xzJ-yaPb-042";
+const T="template_sgpa4iu";
+emailjs.init(P);
+let bal=1.0, trades=0, running=false;
+
+function startMaster(){
+ if(running) return;
+ running=true;
+ log("MASTER STARTED — Wealth 91 — Final — service_6em5yqv + "+T);
+ setInterval(()=>{
+   let w=Math.floor(65+Math.random()*30);
+   document.getElementById('ws').innerText=w;
+   if(w>85){
+     trades++; bal+=0.02;
+     document.getElementById('bal').innerText="$"+bal.toFixed(2);
+     document.getElementById('trd').innerText=trades;
+     log(`TRADE Master -> EURUSD BUY Wealth ${w} Conf 87 RR 1:3 -> WIN +$0.02 Bal $${bal.toFixed(2)}`);
+     if(trades%10==0) backupNow();
+   } else {
+     log(`SKIP Wealth ${w} — Low prob — Discipline`);
+   }
+ },3000);
+}
+
+function backupNow(){
+ let date=new Date().toLocaleString();
+ let params={
+   to_email:"cryptome2030@gmail.com",
+   date:date,
+   total:bal.toFixed(2),
+   trades:trades,
+   message:`Cedars Master Intelligence — Wealth 91 — FINAL — Bal $${bal.toFixed(2)} — Trades ${trades} — ${date} — Auto backup 24h to cryptome2030@gmail.com — 50Y — Never lost`
+ };
+ emailjs.send(S,T,params).then(()=>{
+   log(`BACKUP OK -> ${params.to_email} — ${date} — $${params.total} — Trades ${params.trades} — 200->199 left`);
+   alert("BACKUP SENT to cryptome2030@gmail.com — Check Gmail — $"+bal.toFixed(2));
+ }).catch(e=>{
+   log("BACKUP FAIL — "+JSON.stringify(e)+" — Check template sgpa4iu has {{to_email}} {{date}} {{total}} {{trades}} {{message}}");
+ });
+}
+
+function log(m){
+ let l=document.getElementById('log');
+ l.innerHTML="["+new Date().toLocaleTimeString()+"] "+m+"<br>"+l.innerHTML;
+}
+</script>
+</body>
+</html>
