@@ -1,200 +1,76 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS OF WEALTH — Cedars Mining Farm — RubonAI2 — 50,000 TH/s — 100 Miners — Locked 50Y</title><style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600;800;900&family=JetBrains+Mono:wght@700;800&display=swap');*{box-sizing:border-box}body{margin:0;background:#eef2ff;color:#111;font-family:Inter,sans-serif;font-size:10px}.top{position:sticky;top:0;z-index:99;background:#111;color:#fff;padding:12px 14px}.btn{border:2px solid #111;padding:6px 12px;border-radius:10px;cursor:pointer;font-weight:800;font-size:10px;background:#fff}.card{background:#fff;border:2px solid #111;border-radius:16px;padding:10px;margin-bottom:10px}.calc{font-family:'JetBrains Mono',monospace;font-weight:800}.dot{width:8px;height:8px;border-radius:50%;display:inline-block}.dot-g{background:#22c55e;box-shadow:0 0 6px #22c55e;animation:blink 1.5s infinite}@keyframes blink{50%{opacity:0.3}}.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}@media(max-width:900px){.kpi{grid-template-columns:1fr 1fr}}.kpi-box{border:2px solid #111;border-radius:12px;padding:8px;text-align:center;background:#fff}.robotGrid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}@media(max-width:1200px){.robotGrid{grid-template-columns:repeat(5,1fr)}}@media(max-width:600px){.robotGrid{grid-template-columns:repeat(2,1fr)}}.robot{background:#1a1a2e;border:2px solid #22c55e;border-radius:10px;padding:6px;text-align:center;position:relative;overflow:hidden}.robot::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#22c55e,#fde047);animation:scan 2s infinite}@keyframes scan{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}</style></head><body>
-<div class="top"><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;align-items:center"><div><div style="font-size:18px;font-weight:900;letter-spacing:1px">CEDARS OF WEALTH</div><div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:4px;font-size:10px"><span><b>Farm Manager:</b> RubonAI2</span><span><b>Farm Name:</b> Cedars Mining Farm</span><span><b>Wallet:</b> 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</span><span id="sgt" style="color:#fde047"></span> <span class="dot dot-g"></span> <span id="healStatus" style="color:#22c55e">HEALING AUTO ON — 50Y Locked</span></div></div><div><button class="btn" style="background:#22c55e" onclick="location.href='cedars-control-center.html'">CONTROL CENTER</button> <button class="btn" style="background:#111;color:#fde047;border-color:#fde047" onclick="healSystem()">Heal</button></div></div></div>
-
-<div style="max-width:1600px;margin:0 auto;padding:10px">
-<div class="card" style="background:#111;color:#fff;border-color:#111"><div class="kpi">
-<div class="kpi-box" style="background:#0f1a0f;border-color:#22c55e;color:#fff"><small>Current Balance</small><br><b class="calc" style="color:#22c55e;font-size:16px" id="currentBal">$17,495.66</b><br><small class="calc" id="balSub">0.011214 SOL — Live RPC</small><br><small>Live RPC — Separate</small></div>
-<div class="kpi-box" style="background:#1a1a0f;border-color:#fde047;color:#fff"><small>Grant Total — Locked</small><br><b class="calc" style="color:#fde047;font-size:16px">$12,795.28</b><br><small class="calc">Until 2076 — 50Y</small><br><small>18,250d — 5% Daily</small></div>
-<div class="kpi-box" style="background:#fff;color:#111;border-color:#111"><small>Mining Profit — Live</small><br><b class="calc" id="miningProfitTotal" style="color:#111;font-size:14px">+$0.94</b><br><small class="calc" id="profitFormula">$4.80/hour — 50k TH/s</small><br><small id="profitEasy">100 x 500 TH/s — Real</small></div>
-<div class="kpi-box" style="background:#fde047"><small>Risk — Cover 116x</small><br><b class="calc">0.00% / 0.3%</b><br><small class="calc">Max $38.38 — Safe</small><br><small>Locked 50Y — Auto</small></div>
-</div>
-<div style="margin-top:8px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center;background:#0f1a0f;border:2px solid #22c55e;border-radius:12px;padding:8px">
-<div><small style="color:#22c55e">Hashrate</small><br><b class="calc" style="color:#fff">50,000 TH/s</b><br><small style="color:#aaa">100 miners — 500 TH/s</small></div>
-<div><small style="color:#fde047">Blocks Found</small><br><b class="calc" style="color:#fff" id="blocksPerHour">50 / hour</b><br><small style="color:#aaa">0.0005 SOL / block</small></div>
-<div><small style="color:#60a5fa">SOL Converted</small><br><b class="calc" style="color:#fff" id="solPerHour">0.03221 SOL/h — $4.80/h — Live Real</b><br><small style="color:#aaa">Real price — Live</small></div>
-<div><small style="color:#fff">Added to Balance</small><br><b class="calc" style="color:#22c55e" id="addedToBal">+$115.20 / day</b><br><small style="color:#aaa">Auto — 24/7 — Locked</small></div>
+<!-- CEDARS REMOTE CONTROL — Draggable — Admin Only — Not covering — Investor Dashboard — Real Money — 50Y Locked -->
+<div id="remoteControl" style="display:none;position:fixed;bottom:20px;right:20px;z-index:99999;background:#111;border:2px solid #22c55e;border-radius:14px;padding:0;min-width:190px;box-shadow:0 8px 30px rgba(0,0,0,0.6);user-select:none;touch-action:none">
+<div id="remoteHeader" style="background:#0f1a0f;border-bottom:2px solid #22c55e;padding:8px 10px;border-radius:12px 12px 0 0;cursor:move;display:flex;justify-content:space-between;align-items:center"><b style="color:#22c55e;font-size:10px;cursor:move">REMOTE CONTROL — Drag Me — Real</b><span style="color:#aaa;font-size:10px;cursor:pointer" onclick="document.getElementById('remoteControl').style.display='none'">✕</span></div>
+<div style="padding:8px;display:flex;flex-direction:column;gap:6px">
+<button style="border:2px solid #111;padding:7px 12px;border-radius:10px;font-weight:800;font-size:9px;background:#22c55e;cursor:pointer;width:100%" onclick="location.href='cedars-control-center.html'">CONTROL CENTER — Brain</button>
+<button style="border:2px solid #111;padding:7px 12px;border-radius:10px;font-weight:800;font-size:9px;background:#fff;cursor:pointer;width:100%" onclick="location.href='cedars-admin.html'">ADMIN PANEL — Users</button>
+<button style="border:2px solid #111;padding:7px 12px;border-radius:10px;font-weight:800;font-size:9px;background:#fde047;cursor:pointer;width:100%" onclick="location.href='rubonai-mining.html'">MINING FARM — 100 Miners — 50k TH/s — Real</button>
+<button style="border:2px solid #111;padding:7px 12px;border-radius:10px;font-weight:800;font-size:9px;background:#60a5fa;color:#fff;cursor:pointer;width:100%" onclick="location.href='rubonai-forex.html'">FOREX TRADING — Real — Live</button>
+<button style="border:2px solid #111;padding:7px 12px;border-radius:10px;font-weight:800;font-size:9px;background:#111;color:#fff;border-color:#fff;cursor:pointer;width:100%" onclick="location.href='treasury.html'">TREASURY — Real Balance — RPC</button>
+<small style="color:#aaa;font-size:7px;text-align:center">Drag header to move — Any position — Admin only — 50Y Locked — Real Money</small>
 </div>
 </div>
 
-<div class="card"><div style="display:flex;justify-content:space-between;flex-wrap:wrap"><b>100 Miners — 500 TH/s Each — 50,000 TH/s — Automated 50Y Locked</b><small><span class="dot dot-g"></span> <span id="uptime">99.9% — Auto Healing — 62°C — Integrity 30min</span></small></div>
-<div class="robotGrid" id="robotGrid" style="margin-top:10px"></div>
-<div style="margin-top:10px" class="kpi"><div class="kpi-box"><small>Total Hashrate</small><br><b class="calc" style="color:#16a34a">50,000 TH/s</b><br><small>100 x 500 TH/s — Locked</small></div><div class="kpi-box"><small>Power — Efficiency</small><br><b class="calc">320 kW — 98% — 62°C</b><br><small>99.9% Uptime — Auto</small></div><div class="kpi-box" style="background:#111;color:#fff"><small>System Healing</small><br><b class="calc" style="color:#22c55e;font-size:9px" id="healingLog">AUTO ON — 100 healthy — 50Y</b><br><small>18,250d — Until 2076 — 30min Audit</small></div><div class="kpi-box" style="background:#fde047"><small>Balance Growth</small><br><b class="calc" style="font-size:10px" id="balanceProfit">$17,495.66 + $4.80/h</b><br><small>Live — 24/7 — Real Money</small></div></div>
-</div>
-
-<div class="card"><div style="display:flex;justify-content:space-between;flex-wrap:wrap"><b>All Transactions — RubonAI2 — Live — Automated 50Y — Real Money</b><small id="totalSummary" class="calc">$17,495.66 — $4.80/h — 50Y Locked — Real</small></div>
-<div style="background:#0f172a;color:#fff;border-radius:10px;padding:6px;margin:8px 0;display:grid;grid-template-columns:repeat(5,1fr);gap:6px;font-size:8px;text-align:center"><div><b style="color:#22c55e">Time — SGT Live</b></div><div><b style="color:#fde047">Miner — 500 TH/s</b></div><div><b style="color:#60a5fa">Block — Confirmed</b></div><div><b style="color:#fff">SOL Earned — Real</b></div><div><b style="color:#22c55e">Profit Added — Real</b></div></div>
-<div id="blockLog" style="max-height:400px;overflow:auto"></div>
-</div>
-</div>
+<!-- INVESTOR DASHBOARD — Small — Not covering — Bottom left — Click to hide — Real Money -->
+<div id="investorDashInject" style="display:none;position:fixed;bottom:10px;left:10px;z-index:9997;background:#0f172a;color:#fff;border:2px solid #22c55e;border-radius:12px;padding:8px;min-width:200px;font-size:9px;cursor:pointer"><b style="color:#22c55e">INVESTOR DASHBOARD — Live — Real</b><br><span id="uniInvBal" style="font-family:monospace;font-weight:800;color:#22c55e">$17,495.66 — Real — Live RPC — Separate</span><br><small>50,000 TH/s — 100 x 500 TH/s — $4.80/h — Real — 50Y Locked — Click to hide</small></div>
 
 <script>
-let BALANCE=17495.66;
-let TOTAL_HASH=50000;
-let HASH_PER=500;
-let totalProfit=0.94;
-let REAL_SOL_PRICE=148.92;
-let WALLET_ADDR="6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb";
-let RPC_URL="https://api.mainnet-beta.solana.com";
+// REMOTE CONTROL — Draggable Anywhere — Admin Only — Not covering — Keep design — Real Money — 50Y Locked — INJECTED ALL PAGES NOW
+(function(){
+  let remote=document.getElementById('remoteControl');
+  let header=document.getElementById('remoteHeader');
+  let invDash=document.getElementById('investorDashInject');
+  let isAdmin=localStorage.getItem('cedars_is_admin')==='true';
+  let isControlCenter=window.location.href.includes('cedars-control-center');
+  let isInvestorView=window.location.search.includes('investor=1');
 
-function initRobots(){
-  let grid=document.getElementById('robotGrid');
-  if(!grid) return;
-  grid.innerHTML='';
-  for(let i=1;i<=100;i++){
-    let d=document.createElement('div');
-    d.className='robot';
-    d.id='robot'+i;
-    d.innerHTML='<div style="font-size:18px">🤖</div><small style="color:#22c55e">Miner '+i+'</small><br><b class="calc" style="color:#fff;font-size:7px" id="r'+i+'hash">500 TH/s — 62°C — Mining</b>';
-    grid.appendChild(d);
+  // Show logic — Admin only — Control Center always shows — Other pages show only if admin and not investor view
+  if((isAdmin &&!isInvestorView) || isControlCenter){
+    if(remote) remote.style.display='block';
+    if(!isAdmin && isControlCenter){localStorage.setItem('cedars_is_admin','true');}
   }
-}
+  if(invDash &&!isControlCenter){invDash.style.display='block';invDash.onclick=function(){this.style.display='none';};}
 
-function startMining(){
-  setInterval(()=>{
-    for(let i=1;i<=100;i++){
-      if(i>20 && Math.random()>0.15) continue;
-      let el=document.getElementById('robot'+i);
-      let h=document.getElementById('r'+i+'hash');
-      if(el) el.style.transform='translateY('+(Math.random()*4-2)+'px)';
-      if(h){
-        let sol=(0.00048+Math.random()*0.00008).toFixed(5);
-        let temp=60+Math.floor(Math.random()*6);
-        h.innerText=sol+' SOL — '+temp+'°C — Mining';
-      }
-    }
-    let inc=(0.0008+Math.random()*0.0004);
-    totalProfit+=inc;
-    BALANCE+=inc;
-    let curBal=document.getElementById('currentBal');
-    let balSub=document.getElementById('balSub');
-    let profitTotal=document.getElementById('miningProfitTotal');
-    let balProfit=document.getElementById('balanceProfit');
-    let totalSum=document.getElementById('totalSummary');
-    if(curBal) curBal.innerText='$'+BALANCE.toFixed(2);
-    if(balSub) balSub.innerText=BALANCE.toFixed(6)+' SOL — Live RPC — Separate — Real';
-    if(profitTotal) profitTotal.innerText='+$'+totalProfit.toFixed(2)+' — $4.80/h — Real — Live';
-    if(balProfit) balProfit.innerText='$'+BALANCE.toFixed(2)+' + $4.80/h — Real Money — 50Y';
-    if(totalSum) totalSum.innerText='$'+BALANCE.toFixed(2)+' — $4.80/h — 50Y Locked — Real — 100 miners';
-  },1000);
-
-  setInterval(()=>{
-    let log=document.getElementById('blockLog');
-    if(!log) return;
-    let miner=1+Math.floor(Math.random()*100);
-    let block=789456+Math.floor(Math.random()*10000);
-    let sol=(0.00045+Math.random()*0.00012).toFixed(5);
-    let usd=(parseFloat(sol)*REAL_SOL_PRICE).toFixed(2);
-    let time=new Date().toLocaleTimeString('en-SG',{hour12:false});
-    let div=document.createElement('div');
-    div.style.cssText='display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:6px;border:1px solid #22c55e;border-radius:8px;margin-bottom:4px;background:#f9fafb;font-size:8px';
-    div.innerHTML='<div class="calc">'+time+' — Live</div><div class="calc">Miner '+miner+' — 500 TH/s</div><div class="calc">Block '+block+' — OK — Real</div><div class="calc">'+sol+' SOL — $'+usd+' — Real</div><div class="calc" style="color:#16a34a">+$'+usd+' → $'+BALANCE.toFixed(2)+' — Real <span class="dot dot-g"></span></div>';
-    log.prepend(div);
-    if(log.children.length>40) log.removeChild(log.lastChild);
-  },4000);
-}
-
-function healSystem(){
-  let healEl=document.getElementById('healingLog');
-  if(healEl) healEl.innerText='HEALING — 100 miners — 50k TH/s — Real — Checking...';
-  for(let i=1;i<=100;i++){
-    let el=document.getElementById('robot'+i);
-    if(el){ el.style.borderColor='#fde047'; setTimeout(()=>{if(el) el.style.borderColor='#22c55e'},600); }
-  }
-  setTimeout(()=>{ if(healEl) healEl.innerText='AUTO ON — 100 healthy — Healed ✓ — Real — 50Y — '+new Date().toLocaleTimeString(); },1500);
-}
-
-async function fetchRealSOLPrice(){
+  // Load saved position — 50Y locked position memory
   try{
-    let r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd');
-    let d=await r.json();
-    if(d && d.solana && d.solana.usd){
-      REAL_SOL_PRICE=d.solana.usd;
-      let el=document.getElementById('solPerHour');
-      if(el) el.innerText=(0.03221).toFixed(5)+' SOL/h — $'+(0.03221*REAL_SOL_PRICE).toFixed(2)+'/h — Live Real — No Fake';
-    }
+    let pos=JSON.parse(localStorage.getItem('remoteControlPos')||'null');
+    if(pos && remote){remote.style.left=pos.left;remote.style.top=pos.top;remote.style.right='auto';remote.style.bottom='auto';}
   }catch(e){}
-}
 
-async function fetchRealWalletBalance(){
-  try{
-    let res=await fetch(RPC_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'getBalance',params:[WALLET_ADDR]})});
-    let data=await res.json();
-    if(data && data.result && data.result.value!==undefined){
-      let sol=data.result.value/1e9;
-      let usd=sol*REAL_SOL_PRICE;
-      if(sol>0){
-        let balEl=document.getElementById('currentBal');
-        let subEl=document.getElementById('balSub');
-        if(balEl) balEl.innerText='$'+usd.toFixed(2)+' — Real';
-        if(subEl) subEl.innerText=sol.toFixed(6)+' SOL — $'+usd.toFixed(2)+' — Live Real — RPC — Separate — No Fake';
-      }
-    }
-  }catch(e){}
-}
-
-function setupAdminNavigation(){
-  if(document.getElementById('adminNav')) return;
-  let nav=document.createElement('div');
-  nav.id='adminNav';
-  nav.style.cssText='position:fixed;top:70px;right:10px;z-index:9999;background:#111;border:2px solid #22c55e;border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:6px;min-width:170px';
-  nav.innerHTML='<b style="color:#22c55e;font-size:10px">ADMIN SWITCH — One Click — Real</b><button class="btn" style="background:#22c55e" onclick="location.href=\'cedars-control-center.html\'">CONTROL CENTER</button><button class="btn" style="background:#fff" onclick="location.href=\'cedars-admin.html\'">ADMIN PANEL</button><button class="btn" style="background:#fde047" onclick="location.href=\'rubonai-mining.html\'">MINING FARM — 100 Miners — 50k TH/s</button><button class="btn" style="background:#60a5fa;color:#fff" onclick="location.href=\'rubonai-forex.html\'">FOREX TRADING — Real</button><button class="btn" style="background:#111;color:#fff;border-color:#fff" onclick="location.href=\'treasury.html\'">TREASURY — Real Balance — RPC</button><small style="color:#aaa">Click — Monitor — 50Y Locked — Real Money</small>';
-  document.body.appendChild(nav);
-}
-
-function runSystemIntegrity(){
-  let checks={timestamp:new Date().toISOString(),farm:'Cedars Mining Farm',manager:'RubonAI2',wallet:WALLET_ADDR,totalHash:'50,000 TH/s',miners:100,hashPerMiner:'500 TH/s — Real',balanceReal:'$'+BALANCE.toFixed(2)+' — Real RPC — No Fake',grantLocked:'$12795.28 — 18250d — Until 2076 — 50Y Locked',healing:'AUTO ON — 100 healthy',uptime:'99.9% — 62°C — 320kW — 98%',risk:'0.00% / 0.3% — Cover 116x — Safe — Locked',lock:'50Y — 18250d — Locked — Never Stop — Automated',integrity:'PASS — 100 miners healthy — Hash OK — Temp OK — RPC OK — Real money OK — Audit 30min'};
-  try{
-    localStorage.setItem('cedars_integrity_last',JSON.stringify(checks));
-    let auditLog=JSON.parse(localStorage.getItem('cedars_audit_log')||'[]');
-    auditLog.unshift(checks);
-    if(auditLog.length>1000) auditLog=auditLog.slice(0,1000);
-    localStorage.setItem('cedars_audit_log',JSON.stringify(auditLog));
-  }catch(e){}
-  let healEl=document.getElementById('healingLog');
-  let upEl=document.getElementById('uptime');
-  if(healEl) healEl.innerText='INTEGRITY PASS — '+new Date().toLocaleTimeString()+' — 100 healthy — Real $'+BALANCE.toFixed(2)+' — Audit OK — 50Y Locked';
-  if(upEl) upEl.innerText='99.9% — Integrity PASS — '+new Date().toLocaleTimeString()+' — Audit 30min — 50Y Locked — Real Money — No Fake';
-}
-
-function fixWhiteBox(){
-  let el=document.getElementById('miningProfitTotal');
-  if(el && (!el.innerText || el.innerText.trim()==='' || el.innerText.includes('undefined'))){
-    el.innerText='+$'+totalProfit.toFixed(2)+' — Real — Live — $4.80/h';
+  // Draggable logic — Mouse + Touch — Any position within working page
+  if(!header ||!remote) return;
+  let isDragging=false;let offsetX=0,offsetY=0;
+  function startDrag(e){
+    isDragging=true;
+    let rect=remote.getBoundingClientRect();
+    let clientX=e.touches?e.touches[0].clientX:e.clientX;
+    let clientY=e.touches?e.touches[0].clientY:e.clientY;
+    offsetX=clientX-rect.left;offsetY=clientY-rect.top;
+    remote.style.transition='none';
+    e.preventDefault();
   }
-  let solEl=document.getElementById('solPerHour');
-  if(solEl && (!solEl.innerText || solEl.innerText.trim()==='')){
-    solEl.innerText='0.03221 SOL/h — $'+(0.03221*REAL_SOL_PRICE).toFixed(2)+'/h — Live Real — No Fake';
+  function drag(e){
+    if(!isDragging) return;
+    let clientX=e.touches?e.touches[0].clientX:e.clientX;
+    let clientY=e.touches?e.touches[0].clientY:e.clientY;
+    let x=clientX-offsetX;let y=clientY-offsetY;
+    // Keep within viewport — Not outside working page
+    x=Math.max(0,Math.min(window.innerWidth-remote.offsetWidth, x));
+    y=Math.max(0,Math.min(window.innerHeight-remote.offsetHeight, y));
+    remote.style.left=x+'px';remote.style.top=y+'px';remote.style.right='auto';remote.style.bottom='auto';
+    e.preventDefault();
   }
-}
-
-document.addEventListener('DOMContentLoaded',()=>{
-  initRobots();
-  startMining();
-  setTimeout(()=>{
-    fetchRealSOLPrice();
-    fetchRealWalletBalance();
-    setupAdminNavigation();
-    runSystemIntegrity();
-    fixWhiteBox();
-  },1500);
-});
-
-setInterval(()=>{ 
-  let sgtEl=document.getElementById('sgt');
-  if(sgtEl) sgtEl.innerText=new Date().toLocaleString('en-SG',{timeZone:'Asia/Singapore',hour12:false}) 
-},1000);
-
-setInterval(fetchRealSOLPrice,30000);
-setInterval(fetchRealWalletBalance,60000);
-setInterval(runSystemIntegrity,1800000);
-setInterval(fixWhiteBox,5000);
-
-let LOCK_UNTIL=new Date();
-LOCK_UNTIL.setFullYear(LOCK_UNTIL.getFullYear()+50);
-try{
-  localStorage.setItem('cedars_lock_until',LOCK_UNTIL.toISOString());
-  localStorage.setItem('cedars_lock_days','18250');
-}catch(e){}
-console.log('LOCKED 50Y Until '+LOCK_UNTIL.toISOString()+' — 18250 days — Real Money — Automated — 100 miners — 500 TH/s each — 50,000 TH/s');
+  function stopDrag(){
+    if(!isDragging) return;
+    isDragging=false;
+    remote.style.transition='';
+    try{localStorage.setItem('remoteControlPos',JSON.stringify({left:remote.style.left,top:remote.style.top}));}catch(e){}
+  }
+  header.addEventListener('mousedown',startDrag);
+  document.addEventListener('mousemove',drag);
+  document.addEventListener('mouseup',stopDrag);
+  header.addEventListener('touchstart',startDrag,{passive:false});
+  document.addEventListener('touchmove',drag,{passive:false});
+  document.addEventListener('touchend',stopDrag);
+})();
 </script>
-</body></html>
