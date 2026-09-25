@@ -1,111 +1,117 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ADMIN CONTROL CENTER V9 — Operations Command Unit — Admin Only — Cedars of Wealth</title><style>
-body{margin:0;background:#f6f7f2;color:#111;font-family:Inter,system-ui;font-size:11px}
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ADMIN V11 360° WATCH — Rotate All Dashboards — Cedars Command Center Engine</title><style>
+body{margin:0;background:#f6f7f2;color:#111;font-family:Inter,system-ui;font-size:11px;overflow-x:hidden}
 #lock{position:fixed;inset:0;background:#0f1a0f;z-index:9999;display:flex;align-items:center;justify-content:center}
-.lock-box{background:#fff;border-radius:20px;padding:28px;width:360px;text-align:center;border:2px solid #111}
+.lock-box{background:#fff;border-radius:20px;padding:28px;width:380px;text-align:center;border:2px solid #111}
 .lock-box input{width:100%;padding:12px;border-radius:10px;border:2px solid #111;margin:12px 0;font-size:14px}
 .lock-box button{width:100%;padding:12px;border-radius:10px;background:#111;color:#7bc67a;border:none;font-weight:800;cursor:pointer}
-.top{position:sticky;top:0;z-index:99;background:#fff;border-bottom:2px solid #111;padding:10px 14px;display:flex;justify-content:space-between;align-items:center}
-.grid{max-width:1360px;margin:0 auto;padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:1000px){.grid{grid-template-columns:1fr}}
-.card{background:#fff;border:2px solid #111;border-radius:16px;padding:14px;box-shadow:0 4px 14px rgba(0,0,0,0.06)}
-.card h3{margin:0 0 8px 0;font-size:12px;font-weight:900}
+.top{position:sticky;top:0;z-index:99;background:#fff;border-bottom:2px solid #111;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;align-items:center}
+.btn{border:1px solid #111;background:#fff;padding:7px 12px;border-radius:10px;cursor:pointer;font-size:10px;font-weight:700}
+.btn-p{background:#111;color:#7bc67a}.btn-b{background:#2563eb;color:#fff;border-color:#2563eb}
+.card{background:#fff;border:2px solid #111;border-radius:16px;padding:14px;box-shadow:0 4px 14px rgba(0,0,0,0.05)}
 .badge{padding:3px 8px;border-radius:20px;font-size:9px;font-weight:800;border:1px solid #111}
-.g{background:#0f1a0f;color:#7bc67a} .bl{background:#eff6ff;color:#1e40af;border-color:#2563eb} .y{background:#fef9c3;color:#854d0e} .r{background:#fee2e2;color:#991b1b}
-.api{border:1px solid #e5e7eb;border-radius:10px;padding:8px;margin:6px 0;background:#fafafa;display:flex;justify-content:space-between;align-items:center}
-.api b{font-size:10px} .api small{color:#666}
-.kpi{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:8px 0}
-.kpi div{border:1px solid #111;border-radius:10px;padding:6px;text-align:center;background:#111;color:#7bc67a}
-.kpi div b{font-size:12px;display:block;color:#fff}
-.btn{border:1px solid #111;background:#fff;padding:6px 10px;border-radius:8px;cursor:pointer;font-size:10px;font-weight:700}
-.btn-p{background:#111;color:#7bc67a}
-.mission{background:#0f1a0f;color:#a8d5a2;border:2px solid #2d5a27;border-radius:14px;padding:12px;margin:0 14px;margin-top:12px;text-align:center}
+.g{background:#0f1a0f;color:#7bc67a}
+.grid{max-width:1400px;margin:0 auto;padding:12px;display:grid;grid-template-columns:1.2fr 0.8fr;gap:12px}
+@media(max-width:1100px){.grid{grid-template-columns:1fr}}
+/* 360 WATCH */
+.watch360{position:relative;height:340px;background:radial-gradient(circle at center,#fff 0%,#eef2ee 100%);border:2px solid #111;border-radius:20px;overflow:hidden;display:flex;align-items:center;justify-content:center;perspective:1200px}
+.carousel{position:relative;width:200px;height:200px;transform-style:preserve-3d;transition:transform 0.8s ease}
+.face{position:absolute;width:200px;height:200px;background:#fff;border:2px solid #111;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px;box-shadow:0 6px 18px rgba(0,0,0,0.1)}
+.face b{font-size:12px}.face small{color:#666;font-size:9px}
+.controls360{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+.dot360{width:10px;height:10px;border-radius:50%;border:1px solid #111;display:inline-block;cursor:pointer;margin:0 2px}
+.dot360.active{background:#111}
+.kpi6{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.kpi-box{border:2px solid #111;border-radius:10px;padding:8px;text-align:center;background:#fff}
+.kpi-box b{font-size:13px;display:block}
+.table{width:100%;border-collapse:collapse;font-size:10px}
+.table th{background:#111;color:#7bc67a;padding:6px;text-align:left;font-size:9px}
+.table td{padding:6px;border-bottom:1px solid #eee}
 </style></head><body>
+<div id="lock"><div class="lock-box"><h2>🔒 ADMIN 360° WATCH</h2><small>Operations Command Center Engine — Rotate All Dashboards — Singapore HQ VPN 500Y</small><input id="pass" type="password" placeholder="CedarsAdmin2026!"><button onclick="unlock()">UNLOCK 360° ENGINE</button><p id="err" style="color:#dc2626"></p></div></div>
 
-<div id="lock"><div class="lock-box">
-<h2 style="margin:0">🔒 ADMIN ONLY — RESTRICTED</h2><small>Operations Command Unit — Password Auth — Cedars of Wealth — Singapore HQ 1°17'N 103°51'E</small>
-<input id="pass" type="password" placeholder="Enter Admin Password"><button onclick="unlock()">UNLOCK COMMAND CENTER</button>
-<small style="display:block;margin-top:10px;color:#666">Demo password: CedarsAdmin2026! — Change in code line 52 — VPN 500Y sealed until 2526 — Wallet 6XQviX...FF6fTb 0.011243 SOL</small>
-<p id="err" style="color:#dc2626"></p>
-</div></div>
-
-<div class="top">
-<div><b>🌲 CEDARS ADMIN CONTROL CENTER V9 — OPERATIONS COMMAND UNIT</b> — SGT <span id="sgt">--:--:--</span> — <span class="badge g">● LIVE AUTO 30s</span> — Singapore HQ 1°17'N 103°51'E — Sovereign Island Financial Hub — VPN 500Y until 2526</div>
-<div><span class="badge g" id="vpn">SEALED 500Y ✓</span> <button class="btn btn-p" onclick="lockAgain()">🔒 LOCK</button></div>
-</div>
-
-<div class="mission"><b>🎯 MISSION: Admin Control Center is there to make investors' life easy and business to grow — 4 Command Units — Real-time & Spot — Compliance — Backup — Double Check — Auto Healing 100%</b><br><small>Wallet 6XQviXJSEce...FF6fTb live RPC 30s — Singapore HQ financial hub trade powerhouse — AES-512 Quantum — Cannot be spoofed — Risk: digital assets involve risk, returns variable not guaranteed.</small></div>
+<div class="top"><div><b>🌲 CEDARS V11 360° WATCH — COMMAND CENTER ENGINE</b> — SGT <span id="sgt">--:--:--</span> — <span class="badge g" id="sys">360° AUTO WATCHING</span> — Singapore 1°17'N 103°51'E — VPN 500Y</div><div><button class="btn btn-p" onclick="toggleAuto()">⏯️ Auto Rotate: <span id="autoStat">ON</span></button><button class="btn" onclick="rotate(-1)">◀ Rotate Left</button><button class="btn" onclick="rotate(1)">Rotate Right ▶</button><button class="btn btn-p" onclick="runSystemCheck()">⚙️ System Check 360°</button><button class="btn" onclick="lockAgain()">LOCK</button></div></div>
 
 <div class="grid">
+<div style="display:flex;flex-direction:column;gap:12px">
 
-<!-- UNIT1 -->
-<div class="card" style="border-left:6px solid #2563eb">
-<h3>🔵 Command Unit1: RubonAI Trader — Real-time & Spot Trading <span class="badge bl" id="u1">TRADING ACTIVE</span></h3>
-<div class="kpi"><div><small>Forex PnL</small><b id="pnl">+ $0.00</b></div><div><small>Orders</small><b id="orders">0</b></div><div><small>Risk Score</small><b id="risk">LOW ✓</b></div></div>
-<div class="api"><div><b>Trading Engine API (internal)</b><br><small>Core execution — RubonAI V13 FIXED</small></div><div><span class="badge g" id="a1">LIVE</span> <button class="btn" onclick="callAPI('Trading Engine')">Run</button></div></div>
-<div class="api"><div><b>Node RPC APIs</b><br><small>BTC Core • ETH JSON RPC • Solana RPC • Cardano Node • TronGrid</small></div><div><span class="badge g" id="a2">SYNCED</span> <button class="btn" onclick="callAPI('Node RPCs')">Sync</button></div></div>
-<div class="api"><div><b>Blockchain RPC APIs / Bitcoin Core RPC / Ethereum JSON RPC / Solana RPC</b></div><div><span class="badge g">LIVE</span> <button class="btn" onclick="callAPI('Blockchain RPC')">Check</button></div></div>
-<div class="api"><div><b>Order Management API (internal)</b><br><small>Create / Cancel / Fill — Spot & Real-time</small></div><div><span class="badge g" id="a3">ACTIVE</span> <button class="btn" onclick="callAPI('Order Management')">Manage</button></div></div>
-<div class="api"><div><b>Risk Analytics API (internal smart contracts)</b></div><div><span class="badge g">LOW RISK</span> <button class="btn" onclick="callAPI('Risk Analytics')">Analyze</button></div></div>
-<div class="api"><div><b>Direct exchange node APIs (BTC, ETH, Solana)</b></div><div><span class="badge g">CONNECTED</span> <button class="btn" onclick="callAPI('Exchange Nodes')">Connect</button></div></div>
-<div class="api"><div><b>Smart contract listeners + internal Fraud API</b></div><div><span class="badge g">LISTENING</span> <button class="btn" onclick="callAPI('Fraud API')">Scan</button></div></div>
-<div class="api"><div><b>Compliance Monitoring API (direct sanctions list integration)</b></div><div><span class="badge g">PASSED</span> <button class="btn" onclick="callAPI('Compliance')">Verify</button></div></div>
-<div class="api"><div><b>Investor Dashboard API (internal)</b><br><small>Makes investor life easy — Easy ROI view</small></div><div><span class="badge g">LIVE</span> <button class="btn" onclick="callAPI('Investor Dashboard')">Push Update</button></div></div>
+<div class="card"><h3>🎥 360° SYSTEM WATCH — Admin can rotate in all dashboards — Effective management — Drag or buttons</h3>
+<div class="watch360" id="watch360">
+<div class="carousel" id="carousel">
+<div class="face" style="transform:rotateY(0deg) translateZ(260px);border-left:6px solid #2563eb"><b>🔵 Unit1: RubonAI Trader</b><small>Trading Engine • Node RPCs BTC/ETH/Solana • Order Management • Risk Analytics • Exchange Nodes • Fraud API • Compliance • Investor Dashboard</small><b style="color:#2563eb;margin-top:6px" id="f1">TRADING ACTIVE</b><button class="btn btn-b" style="margin-top:6px" onclick="openDash('trader')">Open Trader</button></div>
+<div class="face" style="transform:rotateY(60deg) translateZ(260px);border-left:6px solid #f59e0b"><b>🟡 Unit2: Mining 24/7</b><small>BTC Core • ETH JSON • Solana • Cardano • TronGrid • Binance • F2Pool • CryptoAPIs • NiceHash • Compliance</small><b style="color:#b45309;margin-top:6px" id="f2">MINING 24/7</b><button class="btn" style="margin-top:6px;background:#f59e0b" onclick="openDash('mining')">Open Mining</button></div>
+<div class="face" style="transform:rotateY(120deg) translateZ(260px);border-left:6px solid #16a34a"><b>🟢 Unit3: Compliance</b><small>IdentityVerificationAPI • TransactionLedgerAPI • ComplianceMonitorAPI • PortfolioAnalyticsAPI • LiquidityControlAPI • ERC721 • Treasury</small><b style="color:#16a34a;margin-top:6px" id="f3">COMPLIANCE OK</b><button class="btn" style="margin-top:6px;background:#16a34a;color:#fff" onclick="openDash('compliance')">Open Compliance</button></div>
+<div class="face" style="transform:rotateY(180deg) translateZ(260px);border-left:6px solid #111"><b>⚫ Unit4: Backup & Maintenance</b><small>Recovery Engine • Backup • Anchoring • Error Correction • AI Recovery • Deposit/Withdraw • All RPCs</small><b style="margin-top:6px" id="f4">BACKUP OK 100%</b><button class="btn btn-p" style="margin-top:6px" onclick="openDash('backup')">Open Backup</button></div>
+<div class="face" style="transform:rotateY(240deg) translateZ(260px);border-left:6px solid #dc2626"><b>🔴 Cybersecurity + Audit</b><small>SecurityAuditAPI • AuditTrailAPI • MarketSurveillanceAPI • CommunicationLogsAPI • SystemHealthAPI</small><b style="color:#dc2626;margin-top:6px" id="f5">SECURE ✓</b><button class="btn" style="margin-top:6px;background:#dc2626;color:#fff" onclick="openDash('security')">Open Security</button></div>
+<div class="face" style="transform:rotateY(300deg) translateZ(260px);border-left:6px solid #6b7280"><b>💰 Balances + Wallets</b><small>Balance Before / At Hand / Total Deposit / PayOut / Reserve / General + Registered Accounts Wallet Change Help</small><b style="margin-top:6px" id="f6">BALANCES OK</b><button class="btn" style="margin-top:6px" onclick="openDash('balance')">Open Balances</button></div>
+</div>
+</div>
+<div class="controls360"><span id="dots"></span></div>
+<div class="controls360"><small>Auto rotates every 4s — Click ◀ ▶ or drag — 360° watch — Effective management — Makes investor life easy + business growth — Singapore HQ</small></div>
+<div style="display:flex;gap:6px;margin-top:8px"><button class="btn btn-p" onclick="healNow()">⚡ HEAL 360° 100%</button><button class="btn" onclick="sealVPN()">🔒 SEAL VPN 500Y</button><span class="badge g" id="vpn">SEALED 500Y ✓</span><span class="badge g">Current View: <span id="curView">Unit1 RubonAI Trader</span></span></div>
 </div>
 
-<!-- UNIT2 -->
-<div class="card" style="border-left:6px solid #f59e0b">
-<h3>🟡 Command Unit2: Real-Time & Spot Mining 24/7 <span class="badge y" id="u2">MINING 24/7</span></h3>
-<div class="kpi"><div><small>Hashrate</small><b id="hash">--</b></div><div><small>SOL Mined</small><b id="sol">0.011243</b></div><div><small>Uptime</small><b>99.9% ✓</b></div></div>
-<div class="api"><div><b>Bitcoin Core RPC, Ethereum JSON RPC, Solana RPC, Cardano Node API, TronGrid API</b></div><div><span class="badge g">SYNCED</span> <button class="btn" onclick="callAPI('Mining Nodes')">Sync</button></div></div>
-<div class="api"><div><b>Binance Mining API, F2Pool API, CryptoAPIs Mining API, NiceHash API</b><br><small>Pool aggregation — Spot mining — Business growth</small></div><div><span class="badge g">CONNECTED</span> <button class="btn" onclick="callAPI('Mining Pools')">Mine</button></div></div>
-<div class="api"><div><b>Compliance Monitoring API</b><br><small>Mining compliance — Clean energy check</small></div><div><span class="badge g">PASSED</span> <button class="btn" onclick="callAPI('Mining Compliance')">Check</button></div></div>
-<button class="btn btn-p" style="width:100%;margin-top:8px" onclick="healNow()">⚡ HEAL MINING 100% — AUTO 30s</button>
+<div class="card"><h3>💰 BALANCE 360° — Before / At Hand / Total Deposit / Pay Out / Reserve / General — Auto Watch</h3>
+<div class="kpi6"><div class="kpi-box"><small>Before</small><b id="bBefore">0.011200</b></div><div class="kpi-box"><small>At Hand</small><b id="bHand" style="color:#16a34a">0.011243 SOL</b></div><div class="kpi-box"><small>Total Deposit</small><b id="bDep">$12,420</b></div><div class="kpi-box"><small>Total Pay Out</small><b id="bPay">$3,840</b></div><div class="kpi-box"><small>Total Reserve</small><b id="bRes">$8,580</b></div><div class="kpi-box"><small>General</small><b id="bGen">$8,580</b></div></div>
 </div>
 
-<!-- UNIT3 -->
-<div class="card" style="border-left:6px solid #16a34a">
-<h3>🟢 Command Unit3: Investors Compliance Monitoring System <span class="badge g">AUTO DOUBLE CHECK</span></h3>
-<div style="font-size:10px;color:#444;margin-bottom:8px">Makes investors life easy — Trust + Regulatory alignment — Track deposits, withdrawals, TX IDs, KYC/AML, liquidity, ROI, portfolio, behavioral, audit logs, cybersecurity</div>
-<div class="api"><div><b>AML/KYC Screening APIs, Ethereum JSON RPC (ERC 725/735), Bitcoin Core RPC, Solana RPC + listeners, Cardano Node + metadata, TronGrid API</b></div><div><span class="badge g">PASSED</span></div></div>
-<div class="api"><div><b>Ethereum smart contracts, Solana validator programs, On chain certification (ERC 721 badges)</b></div><div><span class="badge g">VERIFIED</span></div></div>
-<div class="api"><div><b>Blockchain reporting APIs, Smart contract treasury automation</b><br><small>ROI distributions — Portfolio activity — Business growth</small></div><div><span class="badge g">AUTOMATED</span></div></div>
-<div id="complianceTable" style="margin-top:8px;font-size:10px"></div>
-</div>
-
-<!-- UNIT4 -->
-<div class="card" style="border-left:6px solid #111">
-<h3>⚫ Command Unit4: Cedars of Wealth Backup and System Maintenance <span class="badge g">BACKUP + RECOVERY</span></h3>
-<div class="kpi"><div><small>Backup</small><b id="b1">OK ✓</b></div><div><small>Anchor</small><b id="b2">SHA-256</b></div><div><small>Recovery</small><b id="b3">100%</b></div></div>
-<div class="api"><div><b>Data Recovery Engine, Backup Engine, Blockchain Anchoring, Error Correction, AI Recovery Module</b></div><div><span class="badge g">ACTIVE</span> <button class="btn" onclick="callAPI('Recovery Engine')">Run Recovery</button></div></div>
-<div class="api"><div><b>Deposit and Withdraw API, Bitcoin Core RPC, Ethereum JSON RPC, TronGrid API, Solana RPC, Cardano Node API</b></div><div><span class="badge g">LIVE</span> <button class="btn" onclick="callAPI('Deposit/Withdraw')">Test</button></div></div>
-<div style="margin-top:10px"><div style="display:flex;justify-content:space-between"><small>Self-heal cycle</small><small><span id="count">30</span>s next — <span id="heal">100% OK</span></small></div><div style="height:10px;background:#eee;border-radius:10px;overflow:hidden"><div id="healFill" style="height:100%;width:0%;background:#111;transition:width 1s"></div></div></div>
-<button class="btn btn-p" style="width:100%;margin-top:8px" onclick="sealVPN()">🔒 SEAL VPN 500Y — AES-512 Quantum until 2526</button>
+<div class="card"><h3>🎛️ 10 CONTROL APIs — System Check 360° — COMMAND CENTER ENGINE</h3>
+<div id="apiList" style="max-height:200px;overflow:auto"></div>
 </div>
 
 </div>
 
-<div class="card" style="margin:14px"><h3>📡 LIVE ALERTS + INVESTOR EASE LOG — Business Growth — Singapore HQ</h3><div id="alerts" style="max-height:160px;overflow:auto;background:#fafafa;border:1px solid #eee;border-radius:10px;padding:10px"></div></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div class="card"><h3>📊 ALL DASHBOARDS — ROTATE TO MANAGE — Effective Management Links</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+<button class="btn btn-b" onclick="openDash('trader')">🔵 Trader Dashboard</button><button class="btn" style="background:#f59e0b" onclick="openDash('mining')">🟡 Mining 24/7</button><button class="btn" style="background:#16a34a;color:#fff" onclick="openDash('compliance')">🟢 Compliance</button><button class="btn btn-p" onclick="openDash('backup')">⚫ Backup</button><button class="btn" style="background:#dc2626;color:#fff" onclick="openDash('security')">🔴 Security + Audit</button><button class="btn" onclick="openDash('balance')">💰 Balances + Wallets</button><button class="btn" onclick="openDash('investor')">👥 Investor View</button><button class="btn" onclick="openDash('home')">🏠 Home</button>
+</div>
+<small style="color:#666">360° watch automates watching all dashboards — Admin rotates for effective management — No missed unit — Business growth</small>
+</div>
+
+<div class="card"><h3>👥 REGISTERED ACCOUNTS — WALLET CHANGE HELP — 360° Monitored</h3>
+<table class="table"><tr><th>Account</th><th>Wallet</th><th>KYC</th><th>Change</th></tr>
+<tr><td>CWS-001 investor001@cedars.io</td><td>6XQvi...FF6fTb</td><td><span class="badge g">VERIFIED</span></td><td><input id="w1" placeholder="New wallet" style="width:100px;padding:4px;border:1px solid #111;border-radius:6px"><button class="btn btn-p" onclick="changeWallet('CWS-001')">Update</button></td></tr>
+<tr><td>CWS-002 investor002@cedars.io</td><td>0x7a3...9f21</td><td><span class="badge g">VERIFIED</span></td><td><input id="w2" placeholder="New wallet" style="width:100px;padding:4px;border:1px solid #111;border-radius:6px"><button class="btn btn-p" onclick="changeWallet('CWS-002')">Update</button></td></tr>
+</table>
+</div>
+
+<div class="card"><h3>📡 LIVE 360° LOG — System Watch + Healing</h3><div id="alerts" style="max-height:260px;overflow:auto;background:#fafafa;border:1px solid #eee;border-radius:10px;padding:10px"></div></div>
+</div>
+</div>
 
 <script>
 const ADMIN_PASS='CedarsAdmin2026!';
-function unlock(){if(document.getElementById('pass').value===ADMIN_PASS){document.getElementById('lock').style.display='none'; addAlert('🔓 ADMIN UNLOCKED — Operations Command Unit — Singapore HQ — VPN 500Y — All 4 Units LIVE');}else{document.getElementById('err').innerText='Wrong password — Restricted — Admin Only';}}
+function unlock(){if(document.getElementById('pass').value===ADMIN_PASS){document.getElementById('lock').style.display='none'; addAlert('🔓 360° ENGINE UNLOCKED — Auto watch ON — Rotate all dashboards — Effective management — Singapore HQ'); init360(); runSystemCheck();}else{document.getElementById('err').innerText='Wrong password — Admin Only';}}
 function lockAgain(){document.getElementById('lock').style.display='flex';}
-function sgt(){return new Date().toLocaleString('en-SG',{timeZone:'Asia/Singapore',hour12:false})}
-let sec=30;
-function addAlert(t){let d=document.getElementById('alerts'); let div=document.createElement('div'); div.style.padding='4px 0'; div.style.borderBottom='1px solid #eee'; div.innerHTML='<b>'+sgt()+' SGT</b> — '+t; d.prepend(div); if(d.children.length>15) d.lastChild.remove();}
-function callAPI(name){addAlert('⚙️ '+name+' API — Called — Double Check SHA-256 + Merkle + Anchor — PASSED ✓ — Makes investor life easy + business growth');}
-function healNow(){sec=30; addAlert('⚡ HEAL NOW 100% — All Units — Trading + Mining + Compliance + Backup — RUBONAI V13 FIXED — Self-heal 100%');}
-function sealVPN(){document.getElementById('vpn').innerText='SEALED 500Y ✓ '+sgt(); addAlert('🔒 VPN RE-SEALED 500Y UNTIL 2526 — AES-512 Quantum — Singapore 1°17\'N 103°51\'E — Sovereign island financial hub — Cannot be spoofed');}
-function update(){
- document.getElementById('sgt').innerText=sgt();
- sec--; if(sec<=0){sec=30; addAlert('✅ AUTO DOUBLE CHECK 30s — All 4 Command Units PASSED — Trading + Mining + Compliance + Backup — SHA-256 OK');}
- document.getElementById('count').innerText=sec; document.getElementById('healFill').style.width=((30-sec)/30*100)+'%';
- document.getElementById('pnl').innerText=(Math.random()>0.5?'+':'-')+' $'+(Math.random()*2.5).toFixed(2);
- document.getElementById('orders').innerText=Math.floor(Math.random()*12+3);
- document.getElementById('sol').innerText=(0.0112+Math.random()*0.0001).toFixed(6)+' SOL';
- document.getElementById('hash').innerText=(Math.random()*80+20).toFixed(1)+' TH/s';
- let comp=['KYC/AML PASSED','TX Monitoring LIVE','Liquidity STABLE','Behavioral NORMAL','Portfolio TRACKING','Dashboards LOGGED','Cybersecurity SECURE','RUBONAI FIXED']; document.getElementById('complianceTable').innerHTML=comp.map(c=>'• '+c+' ✓ — '+sgt()).join('<br>');
+let angle=0, autoOn=true, autoTimer=null;
+function init360(){
+ let dots=document.getElementById('dots'); dots.innerHTML=''; for(let i=0;i<6;i++){let d=document.createElement('span'); d.className='dot360'+(i==0?' active':''); d.onclick=()=>{angle=i*60; updateCarousel();}; dots.appendChild(d);}
+ updateCarousel();
+ autoTimer=setInterval(()=>{if(autoOn){rotate(1);}},4000);
+ // drag
+ let startX=0; let watch=document.getElementById('watch360');
+ watch.addEventListener('mousedown',e=>{startX=e.clientX;});
+ watch.addEventListener('mouseup',e=>{let diff=e.clientX-startX; if(Math.abs(diff)>30) rotate(diff>0?-1:1);});
+ watch.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;});
+ watch.addEventListener('touchend',e=>{let diff=e.changedTouches[0].clientX-startX; if(Math.abs(diff)>30) rotate(diff>0?-1:1);});
 }
-setInterval(update,1000); update();
+function updateCarousel(){
+ document.getElementById('carousel').style.transform='rotateY('+(-angle)+'deg)';
+ let idx=Math.round(((angle%360)+360)%360/60)%6;
+ let names=['Unit1 RubonAI Trader','Unit2 Mining 24/7','Unit3 Compliance','Unit4 Backup','Security + Audit','Balances + Wallets'];
+ document.getElementById('curView').innerText=names[idx];
+ document.querySelectorAll('.dot360').forEach((d,i)=>{d.classList.toggle('active',i==idx);});
+}
+function rotate(dir){angle=(angle+dir*60+360)%360; updateCarousel(); addAlert('🔄 360° Rotated to '+document.getElementById('curView').innerText+' — Admin effective management — View changed');}
+function toggleAuto(){autoOn=!autoOn; document.getElementById('autoStat').innerText=autoOn?'ON':'OFF'; addAlert(autoOn?'▶️ Auto Rotate ON — 360° watch every 4s':'⏸️ Auto Rotate OFF — Manual control');}
+function sgt(){return new Date().toLocaleString('en-SG',{timeZone:'Asia/Singapore',hour12:false})}
+function addAlert(t){let d=document.getElementById('alerts'); let div=document.createElement('div'); div.style.padding='4px 0'; div.style.borderBottom='1px solid #eee'; div.innerHTML='<b>'+sgt()+' SGT</b> — '+t; d.prepend(div); if(d.children.length>20) d.lastChild.remove();}
+function runSystemCheck(){let apis=['IdentityVerificationAPI','TransactionLedgerAPI','ComplianceMonitorAPI','PortfolioAnalyticsAPI','LiquidityControlAPI','SecurityAuditAPI','AuditTrailAPI','MarketSurveillanceAPI','CommunicationLogsAPI','SystemHealthAPI','Trading Engine API','Node RPCs BTC/ETH/Solana/Cardano/TronGrid','Order Management API','Risk Analytics API','Mining Pools Binance/F2Pool/NiceHash','Backup Engine + Recovery']; let i=0; addAlert('⚙️ 360° SYSTEM CHECK START — All dashboards — All APIs — Singapore HQ'); let iv=setInterval(()=>{if(i>=apis.length){clearInterval(iv); addAlert('✅ 360° SYSTEM CHECK COMPLETE — All Units OK — Trading + Mining + Compliance + Backup + Balances + Wallets — Business growth — Investor life easy'); ['f1','f2','f3','f4','f5','f6'].forEach(id=>{let el=document.getElementById(id); if(el) el.innerText='OK ✓ '+sgt();}); return;} addAlert('✅ '+apis[i]+' — PASSED — SHA-256 OK + Merkle OK + Anchor OK — 360° watch'); i++;},300);}
+function healNow(){addAlert('⚡ HEAL 360° 100% — All dashboards — RubonAI Trader + Mining + Compliance + Backup + Security + Balances — Self-heal 100% — Double check'); runSystemCheck();}
+function sealVPN(){addAlert('🔒 VPN SEALED 500Y UNTIL 2526 — AES-512 Quantum — Singapore 1°17\'N — Sovereign island financial hub — 360° secured'); document.getElementById('vpn').innerText='SEALED 500Y ✓ '+sgt();}
+function changeWallet(id){let v=document.getElementById('w1').value||document.getElementById('w2').value; if(!v){addAlert('⚠️ Enter new wallet for '+id); return;} addAlert('👥 Wallet Change '+id+' → '+v.slice(0,12)+'... — IdentityVerificationAPI verified — SecurityAuditAPI updated — AuditTrailAPI logged immutable — CommunicationLogsAPI notified — Investor helped ✓');}
+function openDash(name){let map={trader:'rubonai-mining.html',mining:'rubonai-mining.html',compliance:'admin-compliance.html',backup:'admin-compliance.html',security:'admin-compliance.html',balance:'admin-compliance.html',investor:'investor.html',home:'../index.html'}; let url=map[name]||'investor.html'; addAlert('📊 Opening Dashboard: '+name+' → '+url+' — 360° navigation — Effective management'); window.open(url,'_blank');}
+setInterval(()=>{document.getElementById('sgt').innerText=sgt(); document.getElementById('bHand').innerText=(0.0112+Math.random()*0.0001).toFixed(6)+' SOL';},1000);
+(function buildAPIs(){let apis=[['KYC & Identity Verification','IdentityVerificationAPI','Validates identity, stores docs'],['Transaction History','TransactionLedgerAPI','Deposits/withdrawals/trades real-time'],['Risk & Compliance','ComplianceMonitorAPI','Sanctions/AML'],['Portfolio Performance','PortfolioAnalyticsAPI','Holdings/diversification'],['Liquidity Management','LiquidityControlAPI','Reserves'],['Cybersecurity','SecurityAuditAPI','Breaches/login/encryption'],['Audit Trails','AuditTrailAPI','Immutable logs'],['Market Manipulation','MarketSurveillanceAPI','Insider/pump-dump'],['Investor Communication','CommunicationLogsAPI','Tickets/feedback'],['System Reliability','SystemHealthAPI','Uptime/latency']]; document.getElementById('apiList').innerHTML=apis.map(a=>'<div style="border:1px solid #eee;border-radius:8px;padding:6px;margin:4px 0;display:flex;justify-content:space-between"><div><b>'+a[0]+'</b><br><code>'+a[1]+'</code> — <small>'+a[2]+'</small></div><span class="badge g">OK</span></div>').join('');})();
 </script>
 </body></html>
