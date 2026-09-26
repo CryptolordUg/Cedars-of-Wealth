@@ -1,77 +1,116 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Cedars of Wealth - Pro Desk</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cedars of Wealth - Pro Desk + Auto Systems</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;color:#fff;font-family:system-ui,-apple-system,sans-serif;background:linear-gradient(135deg,#0a0f1e 0%,#0f2a1a 50%,#1a150a 100%) fixed;min-height:100vh;padding:12px}
-body::before{content:"🌲";position:fixed;font-size:300px;opacity:0.04;top:5%;left:50%;transform:translateX(-50%);pointer-events:none;z-index:0}
-.container{max-width:1200px;margin:0 auto;position:relative;z-index:1}
-.card{background:rgba(17,26,46,0.88);backdrop-filter:blur(12px);padding:16px;border-radius:16px;margin:12px 0;border:1px solid rgba(255,255,255,0.08);box-shadow:0 4px 20px rgba(0,0,0,0.3)}
-button{background:#22c55e;border:0;padding:10px 16px;border-radius:10px;color:#fff;font-weight:600;cursor:pointer;font-size:14px}
-button:active{transform:scale(0.98)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px}
-.chart-box{background:rgba(0,0,0,0.25);border-radius:12px;padding:8px;border:1px solid rgba(255,255,255,0.05)}
-.chart-box h4{margin:8px 4px;font-size:14px;color:#a7f3d0}
-iframe{width:100%;height:320px;border:0;border-radius:8px;background:#000}
-#p{font-size:clamp(18px,4vw,28px);font-weight:700}
-#m{font-size:clamp(13px,3vw,16px);margin-top:8px;opacity:0.9}
-h2{font-size:clamp(20px,5vw,32px);margin:10px 0}
-input[type=file]{max-width:100%;font-size:14px;color:#fff}
-@media(max-width:600px){
- body{padding:8px}
-.card{padding:12px;margin:8px 0}
- iframe{height:280px}
-.grid{grid-template-columns:1fr}
-}
-@media(min-width:1024px){
-.grid{grid-template-columns:1fr 1fr 1fr}
- iframe{height:380px}
-}
-</style>
-</head><body><div class="container">
-<h2>🌲 Cedars of Wealth - Pro Desk</h2>
+*{box-sizing:border-box}body{margin:0;color:#fff;font-family:system-ui;background:linear-gradient(135deg,#0a0f1e 0%,#0f2a1a 50%,#1a150a 100%) fixed;padding:12px;min-height:100vh}
+.container{max-width:1200px;margin:0 auto}.card{background:rgba(17,26,46,.9);padding:16px;border-radius:16px;margin:12px 0;border:1px solid rgba(255,255,255,.08)}
+button{background:#22c55e;border:0;padding:10px 14px;border-radius:10px;color:#fff;font-weight:600;cursor:pointer;margin:4px}
+button.warn{background:#f59e0b}button.danger{background:#ef4444}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.chart-box{background:rgba(0,0,0,.25);border-radius:12px;padding:8px}.chart-box h4{margin:6px;color:#a7f3d0;font-size:14px}
+iframe{width:100%;height:300px;border:0;border-radius:8px}@media(min-width:1024px){.grid{grid-template-columns:1fr 1fr 1fr}iframe{height:360px}}
+.status{font-size:13px;line-height:1.6}.ok{color:#4ade80}.bad{color:#f87171}
+input{padding:8px;border-radius:8px;border:1px solid #333;background:#0a0f1e;color:#fff}
+</style></head><body><div class="container">
+<h2>🌲 Cedars of Wealth - Auto Systems</h2>
 <div class="card" id="p">Portfolio: loading...</div>
 <div class="card"><b>Market - LIVE</b> <button onclick="refreshAll()">↻ Refresh</button><div id="m">Loading...</div></div>
 
-<div class="card"><b>Forex - Live</b><div class="grid" style="margin-top:10px">
+<div class="card"><b>⚙️ System Health & Integrity</b><div class="status" id="health">Checking...</div>
+<button onclick="runIntegrityCheck()">Run Integrity Check</button>
+<button onclick="autoHeal()">Auto Heal</button>
+<button class="warn" onclick="exportBackup()">Export Backup</button>
+</div>
+
+<div class="card"><b>🔔 Profit Alarm</b><br><br>
+Target $ <input id="target" type="number" value="10" style="width:120px"> <button onclick="saveTarget()">Set Alarm</button>
+<div id="alarmStatus" class="status" style="margin-top:8px">No alarm set</div>
+</div>
+
+<div class="card"><b>📈 Profit Maximization</b><div id="maxim" class="status">Analyzing...</div></div>
+
+<div class="card"><b>Forex</b><div class="grid">
 <div class="chart-box"><h4>EUR/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=FX:EURUSD&interval=D&theme=dark&style=1"></iframe></div>
 <div class="chart-box"><h4>GBP/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=FX:GBPUSD&interval=D&theme=dark&style=1"></iframe></div>
 <div class="chart-box"><h4>USD/JPY</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=FX:USDJPY&interval=D&theme=dark&style=1"></iframe></div>
-<div class="chart-box"><h4>XAU/USD Gold</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=OANDA:XAUUSD&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>Gold</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=OANDA:XAUUSD&interval=D&theme=dark&style=1"></iframe></div>
 </div></div>
 
-<div class="card"><b>Crypto Holdings - Live</b><div class="grid" style="margin-top:10px">
-<div class="chart-box"><h4>XMR/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=KRAKEN:XMRUSD&interval=D&theme=dark&style=1"></iframe></div>
-<div class="chart-box"><h4>SOL/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=COINBASE:SOLUSD&interval=D&theme=dark&style=1"></iframe></div>
-<div class="chart-box"><h4>KAS/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=KUCOIN:KASUSDT&interval=D&theme=dark&style=1"></iframe></div>
-<div class="chart-box"><h4>ERG/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=KUCOIN:ERGUSDT&interval=D&theme=dark&style=1"></iframe></div>
-<div class="chart-box"><h4>RVN/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:RVNUSDT&interval=D&theme=dark&style=1"></iframe></div>
-<div class="chart-box"><h4>NIM/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:NIMUSDT&interval=D&theme=dark&style=1"></iframe></div>
-<div class="chart-box"><h4>BAN/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=CRYPTO:BANUSD&interval=D&theme=dark&style=1"></iframe></div>
-<div class="chart-box"><h4>VRSC/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=CRYPTO:VRSCUSD&interval=D&theme=dark&style=1"></iframe></div>
-<div class="chart-box"><h4>DUCO/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=CRYPTO:DUCOUSD&interval=D&theme=dark&style=1"></iframe></div>
+<div class="card"><b>Holdings</b><div class="grid">
+<div class="chart-box"><h4>XMR</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=KRAKEN:XMRUSD&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>SOL</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=COINBASE:SOLUSD&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>KAS</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=KUCOIN:KASUSDT&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>ERG</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=KUCOIN:ERGUSDT&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>RVN</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:RVNUSDT&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>NIM</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:NIMUSDT&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>BAN</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=CRYPTO:BANUSD&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>VRSC</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=CRYPTO:VRSCUSD&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>DUCO</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=CRYPTO:DUCOUSD&interval=D&theme=dark&style=1"></iframe></div>
 </div></div>
 
-<div class="card"><b>Automation System</b><br><br><input type="file" id="f" accept=".json"><br><small style="opacity:.7">Upload backup JSON - auto-saved in browser localStorage for auto-load</small><div id="log" style="margin-top:8px;font-size:12px;opacity:.9;word-break:break-all;line-height:1.5"></div></div>
+<div class="card"><b>Automation</b><br><br><input type="file" id="f" accept=".json"><div id="log" class="status" style="margin-top:8px"></div></div>
 
 <script>
 const IDS={XMR:'monero',VRSC:'verus-coin',DUCO:'duinocoin',NIM:'nimiq-2',BAN:'banano',RVN:'ravencoin',ERG:'ergo',KAS:'kaspa',SOL:'solana'};
-let prices={};
-async function loadPrices(){try{const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids='+Object.values(IDS).join(',')+'&vs_currencies=usd');prices=await r.json();}catch(e){}}
-async function loadFX(){try{const r=await fetch('https://open.er-api.com/v6/latest/USD');const j=await r.json();document.getElementById('m').innerHTML=`EUR/USD ${(1/j.rates.EUR).toFixed(4)} | GBP/USD ${(1/j.rates.GBP).toFixed(4)} | USD/JPY ${j.rates.JPY.toFixed(2)}`;}catch(e){document.getElementById('m').innerHTML='FX offline';}}
+let prices={}, portfolioTotal=0, lastBalances={};
+
+async function loadPrices(retries=3){
+ for(let i=0;i<retries;i++){
+  try{const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids='+Object.values(IDS).join(',')+'&vs_currencies=usd&include_24hr_change=true');prices=await r.json();return true;}catch(e){await new Promise(r=>setTimeout(r,1000));}
+ }
+ return false;
+}
+async function loadFX(){try{const r=await fetch('https://open.er-api.com/v6/latest/USD');const j=await r.json();document.getElementById('m').innerHTML=`EUR/USD ${(1/j.rates.EUR).toFixed(4)} | GBP/USD ${(1/j.rates.GBP).toFixed(4)} | USD/JPY ${j.rates.JPY.toFixed(2)}`;return true;}catch(e){return false;}}
+
+function runIntegrityCheck(){
+ let issues=[]; const s=localStorage.getItem('cedars_backup');
+ if(!s) issues.push('No backup in storage');
+ else{try{const d=JSON.parse(s); if(!d.cedars_coinBalances) issues.push('Missing coinBalances');}catch(e){issues.push('Corrupt backup JSON');}}
+ let missing=Object.keys(IDS).filter(k=>!prices[IDS[k]]);
+ if(missing.length) issues.push('Missing prices: '+missing.join(','));
+ document.getElementById('health').innerHTML = issues.length? `<span class="bad">Issues: ${issues.join('; ')}</span>` : `<span class="ok">All systems OK - ${new Date().toLocaleTimeString()}</span>`;
+ // Auto daily backup
+ autoBackup();
+ return issues.length===0;
+}
+function autoHeal(){ loadPrices().then(ok=>{ const s=localStorage.getItem('cedars_backup'); if(s&&ok){renderFromData(JSON.parse(s)); document.getElementById('health').innerHTML+='<br><span class="ok">Auto-heal: prices restored</span>';}});}
+function autoBackup(){
+ const s=localStorage.getItem('cedars_backup'); if(!s) return;
+ const today=new Date().toDateString();
+ if(localStorage.getItem('cedars_backup_date')!==today){
+  localStorage.setItem('cedars_backup_'+today, s);
+  localStorage.setItem('cedars_backup_date', today);
+ }
+}
+function exportBackup(){
+ const s=localStorage.getItem('cedars_backup'); if(!s) return alert('No backup');
+ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([s],{type:'application/json'})); a.download='cedars-backup-'+new Date().toISOString().slice(0,10)+'.json'; a.click();
+}
+function saveTarget(){ localStorage.setItem('cedars_target', document.getElementById('target').value); checkAlarm(); }
+function checkAlarm(){
+ const t=parseFloat(localStorage.getItem('cedars_target')); if(!t) return;
+ const el=document.getElementById('alarmStatus');
+ if(portfolioTotal>=t){ el.innerHTML=`<span class="ok">🚨 TARGET HIT! $${portfolioTotal.toFixed(2)} >= $${t}</span>`; if(Notification.permission==='granted') new Notification('Cedars Profit Alarm!'); }
+ else el.innerHTML=`Target $${t} - Current $${portfolioTotal.toFixed(2)} (${((portfolioTotal/t)*100).toFixed(1)}%)`;
+}
 async function renderFromData(d){
  await loadPrices();
- let b=d.cedars_coinBalances; if(typeof b==='string') b=JSON.parse(b);
- let t=0,rows=[];
- for(let s in b){let a=parseFloat(b[s]); if(isNaN(a)) continue; let pr=prices[IDS[s]]?.usd||0; let v=a*pr; t+=v; rows.push(`${s}: ${a} x $${pr} = $${v.toFixed(2)}`);}
- // Automation: save timestamp
- localStorage.setItem('cedars_last_update', new Date().toISOString());
- document.getElementById('p').innerHTML=`Portfolio: $${t.toLocaleString('en-US',{minimumFractionDigits:3})} <span style="color:#4ade80;font-size:0.6em">live (${rows.length} assets)</span>`;
- document.getElementById('log').innerHTML=rows.join('<br>')+`<br><small style="opacity:.6">Last sync: ${new Date().toLocaleString()}</small>`;
+ let b=d.cedars_coinBalances; if(typeof b==='string') b=JSON.parse(b); lastBalances=b;
+ let t=0,rows=[],best={sym:'',change:-999};
+ for(let s in b){let a=parseFloat(b[s]); if(isNaN(a)) continue; let info=prices[IDS[s]]||{}; let pr=info.usd||0; let chg=info.usd_24h_change||0; let v=a*pr; t+=v; rows.push(`${s}: ${a} x $${pr.toFixed(4)} = $${v.toFixed(2)} (${chg.toFixed(1)}%)`); if(chg>best.change) best={sym:s,change:chg};}
+ portfolioTotal=t;
+ document.getElementById('p').innerHTML=`Portfolio: $${t.toLocaleString('en-US',{minimumFractionDigits:3})} <span style="color:#4ade80;font-size:.6em">live</span>`;
+ document.getElementById('log').innerHTML=rows.join('<br>');
+ document.getElementById('maxim').innerHTML=`Top 24h: <b>${best.sym}</b> (${best.change.toFixed(1)}%)<br>Suggestion: Consider trimming laggards under -5% and adding to ${best.sym} strength. Rebalance monthly.`;
+ checkAlarm(); autoBackup();
+ // Health auto
+ runIntegrityCheckSilent();
 }
+function runIntegrityCheckSilent(){let missing=Object.keys(IDS).filter(k=>!prices[IDS[k]]); document.getElementById('health').innerHTML=`<span class="${missing.length?'bad':'ok'}">Health: ${missing.length? 'Missing '+missing.join(',') : 'OK'} | Last: ${new Date().toLocaleTimeString()} | Auto-backup: ${localStorage.getItem('cedars_backup_date')||'none'}</span>`;}
 async function refreshAll(){await loadFX();const s=localStorage.getItem('cedars_backup');if(s) renderFromData(JSON.parse(s));}
-document.getElementById('f').addEventListener('change',e=>{const fr=new FileReader();fr.onload=()=>{try{const d=JSON.parse(fr.result);localStorage.setItem('cedars_backup',JSON.stringify(d));renderFromData(d);}catch(err){alert('Invalid backup file');}};fr.readAsText(e.target.files[0]);});
-// Auto-load automation
-(async()=>{await loadFX();const s=localStorage.getItem('cedars_backup');if(s) renderFromData(JSON.parse(s));else document.getElementById('p').innerText='Portfolio: Upload backup to start automation';})();
-</script>
-</div></body></html>
+document.getElementById('f').addEventListener('change',e=>{const fr=new FileReader();fr.onload=()=>{try{const d=JSON.parse(fr.result); if(!d.cedars_coinBalances) throw 'bad'; localStorage.setItem('cedars_backup',JSON.stringify(d)); renderFromData(d);}catch(err){alert('Integrity check failed: invalid file');}};fr.readAsText(e.target.files[0]);});
+// Daily auto update every 5 min + on load
+setInterval(refreshAll, 5*60*1000);
+if('Notification' in window) Notification.requestPermission();
+(async()=>{const st=localStorage.getItem('cedars_target'); if(st) document.getElementById('target').value=st; await loadFX(); const s=localStorage.getItem('cedars_backup'); if(s) renderFromData(JSON.parse(s)); else document.getElementById('p').innerText='Upload backup to start automation';})();
+</script></div></body></html>
