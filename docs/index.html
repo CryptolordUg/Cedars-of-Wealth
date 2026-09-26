@@ -1,50 +1,77 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>Cedars of Wealth - Pro Desk</title>
 <style>
-body{margin:0;color:#fff;font-family:system-ui;background:linear-gradient(135deg,#0a0f1e 0%,#0f2a1a 50%,#1a150a 100%) fixed;min-height:100vh;padding:20px}
-body::before{content:"🌲";position:fixed;font-size:400px;opacity:0.04;top:10%;left:50%;transform:translateX(-50%);pointer-events:none}
-.card{background:rgba(17,26,46,0.85);backdrop-filter:blur(10px);padding:15px;border-radius:12px;margin:12px 0;border:1px solid rgba(255,255,255,0.08)}
-button{background:#22c55e;border:0;padding:8px 14px;border-radius:8px;color:#fff;font-weight:600;cursor:pointer;margin-right:8px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:800px){.grid{grid-template-columns:1fr}}
-iframe{width:100%;height:350px;border:0;border-radius:8px}
-h4{margin:8px 0}
+*{box-sizing:border-box}
+body{margin:0;color:#fff;font-family:system-ui,-apple-system,sans-serif;background:linear-gradient(135deg,#0a0f1e 0%,#0f2a1a 50%,#1a150a 100%) fixed;min-height:100vh;padding:12px}
+body::before{content:"🌲";position:fixed;font-size:300px;opacity:0.04;top:5%;left:50%;transform:translateX(-50%);pointer-events:none;z-index:0}
+.container{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.card{background:rgba(17,26,46,0.88);backdrop-filter:blur(12px);padding:16px;border-radius:16px;margin:12px 0;border:1px solid rgba(255,255,255,0.08);box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+button{background:#22c55e;border:0;padding:10px 16px;border-radius:10px;color:#fff;font-weight:600;cursor:pointer;font-size:14px}
+button:active{transform:scale(0.98)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px}
+.chart-box{background:rgba(0,0,0,0.25);border-radius:12px;padding:8px;border:1px solid rgba(255,255,255,0.05)}
+.chart-box h4{margin:8px 4px;font-size:14px;color:#a7f3d0}
+iframe{width:100%;height:320px;border:0;border-radius:8px;background:#000}
+#p{font-size:clamp(18px,4vw,28px);font-weight:700}
+#m{font-size:clamp(13px,3vw,16px);margin-top:8px;opacity:0.9}
+h2{font-size:clamp(20px,5vw,32px);margin:10px 0}
+input[type=file]{max-width:100%;font-size:14px;color:#fff}
+@media(max-width:600px){
+ body{padding:8px}
+.card{padding:12px;margin:8px 0}
+ iframe{height:280px}
+.grid{grid-template-columns:1fr}
+}
+@media(min-width:1024px){
+.grid{grid-template-columns:1fr 1fr 1fr}
+ iframe{height:380px}
+}
 </style>
-</head><body>
+</head><body><div class="container">
 <h2>🌲 Cedars of Wealth - Pro Desk</h2>
 <div class="card" id="p">Portfolio: loading...</div>
-<div class="card"><b>Market - LIVE</b> <button onclick="refreshAll()">↻ Refresh</button><div id="m" style="margin-top:8px">Loading...</div></div>
+<div class="card"><b>Market - LIVE</b> <button onclick="refreshAll()">↻ Refresh</button><div id="m">Loading...</div></div>
 
-<div class="card"><b>Forex Charts - Live</b>
-<div class="grid" style="margin-top:10px">
-<div><h4>EUR/USD</h4><iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:EURUSD&interval=D&theme=dark&style=1"></iframe></div>
-<div><h4>GBP/USD</h4><iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:GBPUSD&interval=D&theme=dark&style=1"></iframe></div>
-<div><h4>USD/JPY</h4><iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:USDJPY&interval=D&theme=dark&style=1"></iframe></div>
-<div><h4>XAU/USD Gold</h4><iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA:XAUUSD&interval=D&theme=dark&style=1"></iframe></div>
+<div class="card"><b>Forex - Live</b><div class="grid" style="margin-top:10px">
+<div class="chart-box"><h4>EUR/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=FX:EURUSD&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>GBP/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=FX:GBPUSD&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>USD/JPY</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=FX:USDJPY&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>XAU/USD Gold</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=OANDA:XAUUSD&interval=D&theme=dark&style=1"></iframe></div>
 </div></div>
 
-<div class="card"><b>Crypto Holdings - Live Charts</b>
-<div class="grid" style="margin-top:10px">
-<div><h4>XMR/USD Monero</h4><iframe src="https://s.tradingview.com/widgetembed/?symbol=KRAKEN:XMRUSD&interval=D&theme=dark&style=1"></iframe></div>
-<div><h4>SOL/USD Solana</h4><iframe src="https://s.tradingview.com/widgetembed/?symbol=COINBASE:SOLUSD&interval=D&theme=dark&style=1"></iframe></div>
-<div><h4>KAS/USD Kaspa</h4><iframe src="https://s.tradingview.com/widgetembed/?symbol=KUCOIN:KASUSDT&interval=D&theme=dark&style=1"></iframe></div>
-<div><h4>ERG/USD Ergo</h4><iframe src="https://s.tradingview.com/widgetembed/?symbol=KUCOIN:ERGUSDT&interval=D&theme=dark&style=1"></iframe></div>
-<div><h4>RVN/USD Ravencoin</h4><iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:RVNUSDT&interval=D&theme=dark&style=1"></iframe></div>
-<div><h4>NIM/USD Nimiq</h4><iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:NIMUSDT&interval=D&theme=dark&style=1"></iframe></div>
-<div><h4>BAN/USD Banano</h4><iframe src="https://s.tradingview.com/widgetembed/?symbol=CRYPTO:BANUSD&interval=D&theme=dark&style=1"></iframe></div>
-<div><h4>VRSC/USD Verus</h4><iframe src="https://s.tradingview.com/widgetembed/?symbol=CRYPTO:VRSCUSD&interval=D&theme=dark&style=1"></iframe></div>
-<div><h4>DUCO/USD Duinocoin</h4><iframe src="https://s.tradingview.com/widgetembed/?symbol=CRYPTO:DUCOUSD&interval=D&theme=dark&style=1"></iframe></div>
+<div class="card"><b>Crypto Holdings - Live</b><div class="grid" style="margin-top:10px">
+<div class="chart-box"><h4>XMR/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=KRAKEN:XMRUSD&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>SOL/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=COINBASE:SOLUSD&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>KAS/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=KUCOIN:KASUSDT&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>ERG/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=KUCOIN:ERGUSDT&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>RVN/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:RVNUSDT&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>NIM/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:NIMUSDT&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>BAN/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=CRYPTO:BANUSD&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>VRSC/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=CRYPTO:VRSCUSD&interval=D&theme=dark&style=1"></iframe></div>
+<div class="chart-box"><h4>DUCO/USD</h4><iframe loading="lazy" src="https://s.tradingview.com/widgetembed/?symbol=CRYPTO:DUCOUSD&interval=D&theme=dark&style=1"></iframe></div>
 </div></div>
 
-<div class="card"><input type="file" id="f" accept=".json"><small> Upload backup - auto-saved</small><div id="log" style="margin-top:8px;font-size:12px;opacity:.9;word-break:break-all"></div></div>
+<div class="card"><b>Automation System</b><br><br><input type="file" id="f" accept=".json"><br><small style="opacity:.7">Upload backup JSON - auto-saved in browser localStorage for auto-load</small><div id="log" style="margin-top:8px;font-size:12px;opacity:.9;word-break:break-all;line-height:1.5"></div></div>
 
 <script>
 const IDS={XMR:'monero',VRSC:'verus-coin',DUCO:'duinocoin',NIM:'nimiq-2',BAN:'banano',RVN:'ravencoin',ERG:'ergo',KAS:'kaspa',SOL:'solana'};
 let prices={};
 async function loadPrices(){try{const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids='+Object.values(IDS).join(',')+'&vs_currencies=usd');prices=await r.json();}catch(e){}}
-async function loadFX(){try{const r=await fetch('https://open.er-api.com/v6/latest/USD');const j=await r.json();document.getElementById('m').innerHTML=`EUR/USD ${(1/j.rates.EUR).toFixed(4)} | GBP/USD ${(1/j.rates.GBP).toFixed(4)} | USD/JPY ${j.rates.JPY.toFixed(2)}`;}catch(e){}}
-async function renderFromData(d){await loadPrices();let b=d.cedars_coinBalances;if(typeof b==='string')b=JSON.parse(b);let t=0,rows=[];for(let s in b){let a=parseFloat(b[s]);if(isNaN(a))continue;let pr=prices[IDS[s]]?.usd||0;let v=a*pr;t+=v;rows.push(`${s}: ${a} x $${pr} = $${v.toFixed(2)}`);}document.getElementById('p').innerHTML=`Portfolio: $${t.toLocaleString('en-US',{minimumFractionDigits:3})} <span style="color:#4ade80">live priced (${rows.length} assets)</span>`;document.getElementById('log').innerHTML=rows.join('<br>');}
-async function refreshAll(){await loadFX();const s=localStorage.getItem('cedars_backup');if(s)renderFromData(JSON.parse(s));}
-document.getElementById('f').addEventListener('change',e=>{const fr=new FileReader();fr.onload=()=>{const d=JSON.parse(fr.result);localStorage.setItem('cedars_backup',JSON.stringify(d));renderFromData(d);};fr.readAsText(e.target.files[0]);});
-(async()=>{await loadFX();const s=localStorage.getItem('cedars_backup');if(s)renderFromData(JSON.parse(s));else document.getElementById('p').innerText='Portfolio: Upload backup to start';})();
-</script></body></html>
+async function loadFX(){try{const r=await fetch('https://open.er-api.com/v6/latest/USD');const j=await r.json();document.getElementById('m').innerHTML=`EUR/USD ${(1/j.rates.EUR).toFixed(4)} | GBP/USD ${(1/j.rates.GBP).toFixed(4)} | USD/JPY ${j.rates.JPY.toFixed(2)}`;}catch(e){document.getElementById('m').innerHTML='FX offline';}}
+async function renderFromData(d){
+ await loadPrices();
+ let b=d.cedars_coinBalances; if(typeof b==='string') b=JSON.parse(b);
+ let t=0,rows=[];
+ for(let s in b){let a=parseFloat(b[s]); if(isNaN(a)) continue; let pr=prices[IDS[s]]?.usd||0; let v=a*pr; t+=v; rows.push(`${s}: ${a} x $${pr} = $${v.toFixed(2)}`);}
+ // Automation: save timestamp
+ localStorage.setItem('cedars_last_update', new Date().toISOString());
+ document.getElementById('p').innerHTML=`Portfolio: $${t.toLocaleString('en-US',{minimumFractionDigits:3})} <span style="color:#4ade80;font-size:0.6em">live (${rows.length} assets)</span>`;
+ document.getElementById('log').innerHTML=rows.join('<br>')+`<br><small style="opacity:.6">Last sync: ${new Date().toLocaleString()}</small>`;
+}
+async function refreshAll(){await loadFX();const s=localStorage.getItem('cedars_backup');if(s) renderFromData(JSON.parse(s));}
+document.getElementById('f').addEventListener('change',e=>{const fr=new FileReader();fr.onload=()=>{try{const d=JSON.parse(fr.result);localStorage.setItem('cedars_backup',JSON.stringify(d));renderFromData(d);}catch(err){alert('Invalid backup file');}};fr.readAsText(e.target.files[0]);});
+// Auto-load automation
+(async()=>{await loadFX();const s=localStorage.getItem('cedars_backup');if(s) renderFromData(JSON.parse(s));else document.getElementById('p').innerText='Portfolio: Upload backup to start automation';})();
+</script>
+</div></body></html>
