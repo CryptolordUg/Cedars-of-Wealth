@@ -1,1 +1,1 @@
-CREATE TABLE beneficiaries (id UUID PRIMARY KEY DEFAULT uuid_generate_v4(), user_id UUID REFERENCES users(id), beneficiary_user_id UUID REFERENCES users(id), share_pct NUMERIC CHECK(share_pct>0), created_at TIMESTAMPTZ DEFAULT now());
+CREATE TABLE beneficiaries (id UUID PRIMARY KEY DEFAULT uuid_generate_v4(), user_id UUID REFERENCES users(id), share_pct NUMERIC);
