@@ -1,0 +1,82 @@
+openapi: 3.0.3
+info:
+  title: RUBONAI Forex v2
+  version: 2.0.0
+servers:
+    - url: https://api.cedarsrubon.com/v2
+paths:
+  /forex/quotes:
+    get:
+      summary: Live quotes
+      parameters:
+                - name: symbol
+          in: query
+          schema: {type: string}
+      responses:
+        '200':
+          description: ok
+  /market/strength:
+    get:
+      summary: Currency strength meter
+      responses: {'200': {description: ok}}
+  /signals/scalp:
+    get:
+      summary: Scalp signals
+      responses: {'200': {description: ok}}
+  /ai/prophet:
+    post:
+      summary: AI forecast
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pair: {type: string}
+                timeframe: {type: string}
+      responses: {'200': {description: ok}}
+  /risk/check:
+    post:
+      summary: Risk approval gate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                balance: {type: number}
+                risk_percent: {type: number}
+                symbol: {type: string}
+      responses: {'200': {description: ok}}
+  /risk/position-size:
+    post:
+      summary: Calculate lot size
+      responses: {'200': {description: ok}}
+  /trade/execute:
+    post:
+      summary: Execute with risk check
+      responses: {'200': {description: ok}}
+  /cedars-wealth-engine:
+    post:
+      summary: Flagship wealth engine
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pair: {type: string}
+                  action: {type: string}
+                  confidence: {type: number}
+                  risk_score: {type: number}
+                  wealth_score: {type: number}
+  /wealth/score:
+    get:
+      summary: Wealth score
+      responses: {'200': {description: ok}}
+  /calendar/high-impact:
+    get:
+      summary: High impact events
+      responses: {'200': {description: ok}}
