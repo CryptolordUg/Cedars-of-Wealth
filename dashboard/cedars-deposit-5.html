@@ -1,0 +1,19 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars Deposit Withdraw Test</title></head>
+<body style="font-family:sans-serif;padding:20px">
+<h2>Cedars Withdraw Test - $5 Min</h2>
+<select id="net"><option value="solana">Solana</option><option value="tron">Tron TRC20</option></select><br><br>
+<input id="amt" type="number" value="5" min="5" style="padding:8px"> 
+<button onclick="testW()" style="padding:8px">Test Withdraw</button>
+<div id="out" style="margin-top:15px"></div>
+<script>
+function testW(){
+  const amt=parseFloat(document.getElementById('amt').value);
+  const net=document.getElementById('net').value;
+  if(amt<5){document.getElementById('out').innerHTML='Error: Minimum $5';return;}
+  let fee = net==='tron' ? 1.0 : amt*0.02;
+  let netAmt = amt-fee;
+  document.getElementById('out').innerHTML=
+    `Network: ${net}<br>Gross: $${amt}<br>Fee: $${fee.toFixed(2)}<br><b>Net: $${netAmt.toFixed(2)}</b><br>Status: Queued for test`;
+}
+</script>
+</body></html>
