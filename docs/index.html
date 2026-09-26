@@ -4,42 +4,41 @@
 <style>body{background:#0a0f1e;color:#fff;font-family:system-ui;padding:20px}.card{background:#111a2e;padding:15px;border-radius:12px;margin:10px 0}</style>
 </head><body>
 <h2>🌲 Cedars of Wealth</h2>
-<div class="card" id="p">Portfolio: $9,343.89 <span style="color:#4ade80">+$931.29 (10.91%)</span></div>
+<div class="card" id="p">Portfolio: loading...</div>
 <div class="card"><b>Market - LIVE</b><div id="m">Loading...</div></div>
-<div class="card"><input type="file" id="f" accept=".json"><small> Upload backup to auto-update</small><div id="log" style="margin-top:8px;font-size:12px;opacity:.9;word-break:break-all"></div></div>
+<div class="card"><input type="file" id="f" accept=".json"><small> Upload backup</small><div id="log" style="margin-top:8px;font-size:12px;opacity:.9;word-break:break-all"></div></div>
 <script>
-async function load(){
+const IDS={XMR:'monero',VRSC:'verus-coin',DUCO:'duinocoin',NIM:'nimiq-2',BAN:'banano',RVN:'ravencoin',ERG:'ergo',KAS:'kaspa',SOL:'solana'};
+let prices={};
+async function loadPrices(){
  try{
-  const r=await fetch('https://open.er-api.com/v6/latest/USD');
-  const j=await r.json();
-  document.getElementById('m').innerHTML=`EUR/USD ${(1/j.rates.EUR).toFixed(4)}<br>GBP/USD ${(1/j.rates.GBP).toFixed(4)}<br>USD/JPY ${j.rates.JPY.toFixed(2)}<br><small>Live via open.er-api.com</small>`;
- }catch(e){document.getElementById('m').innerText='Market offline';}
+  const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids='+Object.values(IDS).join(',')+'&vs_currencies=usd');
+  prices=await r.json();
+ }catch(e){}
 }
-load(); setInterval(load,60000);
+async function loadFX(){
+ try{
+  const r=await fetch('https://open.er-api.com/v6/latest/USD'); const j=await r.json();
+  document.getElementById('m').innerHTML=`EUR/USD ${(1/j.rates.EUR).toFixed(4)}<br>GBP/USD ${(1/j.rates.GBP).toFixed(4)}<br>USD/JPY ${j.rates.JPY.toFixed(2)}`;
+ }catch(e){document.getElementById('m').innerText='FX offline';}
+}
+loadPrices(); loadFX();
 document.getElementById('f').addEventListener('change',e=>{
  const fr=new FileReader();
- fr.onload=()=>{
-  try{
-   const d=JSON.parse(fr.result);
-   let out='Keys: '+Object.keys(d).slice(0,5).join(', ')+'<br>';
-   let balances = d.cedars_coinBalances;
-   if(typeof balances==='string'){ try{balances=JSON.parse(balances);}catch{} }
-   out+='Balances type: '+(typeof balances)+' ';
-   if(balances && typeof balances==='object'){
-     out+='Coins: '+Object.keys(balances).slice(0,10).join(', ')+'<br>';
-     let total=0; let details=[];
-     for(let k in balances){
-       let v=balances[k];
-       let num=parseFloat(v);
-       if(!isNaN(num)){ details.push(k+': '+num); total+=num; }
-     }
-     out+='Found: '+details.slice(0,10).join(' | ')+'<br>';
-     document.getElementById('p').innerHTML=`Portfolio: $${total.toLocaleString('en-US',{minimumFractionDigits:2})} <span style="color:#4ade80">from backup (${Object.keys(balances).length} assets)</span>`;
-   }
-   let trades=d.cedars_trades;
-   if(trades) out+='Trades found: '+(Array.isArray(trades)?trades.length:typeof trades);
-   document.getElementById('log').innerHTML=out;
-  }catch(err){document.getElementById('log').innerText='Invalid JSON: '+err.message}
+ fr.onload=async()=>{
+  await loadPrices();
+  const d=JSON.parse(fr.result);
+  let balances=d.cedars_coinBalances;
+  if(typeof balances==='string') balances=JSON.parse(balances);
+  let total=0; let rows=[];
+  for(let sym in balances){
+   let amt=parseFloat(balances[sym]); if(isNaN(amt)) continue;
+   let id=IDS[sym]; let p=prices[id]?.usd||0;
+   let val=amt*p; total+=val;
+   rows.push(`${sym}: ${amt} x $${p} = $${val.toFixed(2)}`);
+  }
+  document.getElementById('p').innerHTML=`Portfolio: $${total.toLocaleString('en-US',{minimumFractionDigits:2})} <span style="color:#4ade80">live priced (${rows.length} assets)</span>`;
+  document.getElementById('log').innerHTML=rows.join('<br>');
  };
  fr.readAsText(e.target.files[0]);
 });
