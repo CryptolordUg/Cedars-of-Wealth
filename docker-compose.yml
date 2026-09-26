@@ -1,25 +1,7 @@
-version: '3.8'
-services:
-  api:
-    build: ./api
-    ports:
-      - "8080:8080"
-    env_file:
-      - ./api/.env
-    depends_on:
-      - db
-      - redis
-    restart: unless-stopped
-  db:
-    image: timescale/timescaledb:latest-pg15
-    environment:
-      POSTGRES_PASSWORD: cedars_strong_pw_change_me
-      POSTGRES_DB: cedars
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    restart: unless-stopped
-  redis:
-    image: redis:7-alpine
-    restart: unless-stopped
-volumes:
-  pgdata:
+healer:
+  build: ./healer
+  restart: unless-stopped
+  environment:
+    - TZ=America/New_York
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
