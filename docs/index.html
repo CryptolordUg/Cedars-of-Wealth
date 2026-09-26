@@ -1,46 +1,36 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cedars of Wealth</title>
-<style>body{background:#0a0f1e;color:#fff;font-family:system-ui;padding:20px}.card{background:#111a2e;padding:15px;border-radius:12px;margin:10px 0}button{background:#22c55e;border:0;padding:8px 14px;border-radius:8px;color:#fff;font-weight:600;cursor:pointer}</style>
+<title>Cedars of Wealth - Pro Desk</title>
+<style>
+body{margin:0;color:#fff;font-family:system-ui;background:linear-gradient(135deg,#0a0f1e 0%,#0f2a1a 50%,#1a150a 100%) fixed;min-height:100vh;padding:20px}
+body::before{content:"🌲";position:fixed;font-size:400px;opacity:0.04;top:10%;left:50%;transform:translateX(-50%);pointer-events:none}
+.card{background:rgba(17,26,46,0.85);backdrop-filter:blur(10px);padding:15px;border-radius:12px;margin:12px 0;border:1px solid rgba(255,255,255,0.08)}
+button{background:#22c55e;border:0;padding:8px 14px;border-radius:8px;color:#fff;font-weight:600;cursor:pointer;margin-right:8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:800px){.grid{grid-template-columns:1fr}}
+iframe{width:100%;height:350px;border:0;border-radius:8px}
+</style>
 </head><body>
-<h2>🌲 Cedars of Wealth</h2>
+<h2>🌲 Cedars of Wealth - Pro Desk</h2>
 <div class="card" id="p">Portfolio: loading...</div>
-<div class="card"><b>Market - LIVE</b><div id="m">Loading...</div><div style="margin-top:8px"><button onclick="refreshAll()">↻ Refresh Prices</button></div>
-<div class="card"><input type="file" id="f" accept=".json"><small> Upload backup - saved automatically</small><div id="log" style="margin-top:8px;font-size:12px;opacity:.9;word-break:break-all"></div></div>
+<div class="card"><b>Market - LIVE</b> <button onclick="refreshAll()">↻ Refresh</button><div id="m" style="margin-top:8px">Loading...</div></div>
+
+<div class="card"><b>Forex Charts - Live</b>
+<div class="grid" style="margin-top:10px">
+<div><h4>EUR/USD</h4><iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:EURUSD&interval=D&theme=dark&style=1"></iframe></div>
+<div><h4>GBP/USD</h4><iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:GBPUSD&interval=D&theme=dark&style=1"></iframe></div>
+<div><h4>USD/JPY</h4><iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:USDJPY&interval=D&theme=dark&style=1"></iframe></div>
+<div><h4>XAU/USD Gold</h4><iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA:XAUUSD&interval=D&theme=dark&style=1"></iframe></div>
+</div></div>
+
+<div class="card"><input type="file" id="f" accept=".json"><small> Upload backup - auto-saved</small><div id="log" style="margin-top:8px;font-size:12px;opacity:.9;word-break:break-all"></div></div>
+
 <script>
 const IDS={XMR:'monero',VRSC:'verus-coin',DUCO:'duinocoin',NIM:'nimiq-2',BAN:'banano',RVN:'ravencoin',ERG:'ergo',KAS:'kaspa',SOL:'solana'};
 let prices={};
-async function loadPrices(){
- try{
-  const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids='+Object.values(IDS).join(',')+'&vs_currencies=usd');
-  prices=await r.json();
- }catch(e){}
-}
-async function loadFX(){
- try{
-  const r=await fetch('https://open.er-api.com/v6/latest/USD'); const j=await r.json();
-  document.getElementById('m').innerHTML=`EUR/USD ${(1/j.rates.EUR).toFixed(4)}<br>GBP/USD ${(1/j.rates.GBP).toFixed(4)}<br>USD/JPY ${j.rates.JPY.toFixed(2)}`;
- }catch(e){}
-}
-async function renderFromData(d){
- await loadPrices();
- let balances=d.cedars_coinBalances;
- if(typeof balances==='string') balances=JSON.parse(balances);
- let total=0; let rows=[];
- for(let sym in balances){
-  let amt=parseFloat(balances[sym]); if(isNaN(amt)) continue;
-  let p=prices[IDS[sym]]?.usd||0;
-  let val=amt*p; total+=val;
-  rows.push(`${sym}: ${amt} x $${p} = $${val.toFixed(2)}`);
- }
- document.getElementById('p').innerHTML=`Portfolio: $${total.toLocaleString('en-US',{minimumFractionDigits:2})} <span style="color:#4ade80">live priced (${rows.length} assets)</span>`;
- document.getElementById('log').innerHTML=rows.join('<br>');
-}
-async function refreshAll(){ await loadFX(); const s=localStorage.getItem('cedars_backup'); if(s) renderFromData(JSON.parse(s)); }
-document.getElementById('f').addEventListener('change',e=>{
- const fr=new FileReader();
- fr.onload=()=>{ const d=JSON.parse(fr.result); localStorage.setItem('cedars_backup', JSON.stringify(d)); renderFromData(d); };
- fr.readAsText(e.target.files[0]);
-});
-(async()=>{ await loadFX(); const s=localStorage.getItem('cedars_backup'); if(s) renderFromData(JSON.parse(s)); else document.getElementById('p').innerText='Portfolio: Upload backup to start'; })();
+async function loadPrices(){try{const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids='+Object.values(IDS).join(',')+'&vs_currencies=usd');prices=await r.json();}catch(e){}}
+async function loadFX(){try{const r=await fetch('https://open.er-api.com/v6/latest/USD');const j=await r.json();document.getElementById('m').innerHTML=`EUR/USD ${(1/j.rates.EUR).toFixed(4)} | GBP/USD ${(1/j.rates.GBP).toFixed(4)} | USD/JPY ${j.rates.JPY.toFixed(2)}`;}catch(e){}}
+async function renderFromData(d){await loadPrices();let b=d.cedars_coinBalances;if(typeof b==='string')b=JSON.parse(b);let t=0,rows=[];for(let s in b){let a=parseFloat(b[s]);if(isNaN(a))continue;let pr=prices[IDS[s]]?.usd||0;let v=a*pr;t+=v;rows.push(`${s}: ${a} x $${pr} = $${v.toFixed(2)}`);}document.getElementById('p').innerHTML=`Portfolio: $${t.toLocaleString('en-US',{minimumFractionDigits:3})} <span style="color:#4ade80">live priced (${rows.length} assets)</span>`;document.getElementById('log').innerHTML=rows.join('<br>');}
+async function refreshAll(){await loadFX();const s=localStorage.getItem('cedars_backup');if(s)renderFromData(JSON.parse(s));}
+document.getElementById('f').addEventListener('change',e=>{const fr=new FileReader();fr.onload=()=>{const d=JSON.parse(fr.result);localStorage.setItem('cedars_backup',JSON.stringify(d));renderFromData(d);};fr.readAsText(e.target.files[0]);});
+(async()=>{await loadFX();const s=localStorage.getItem('cedars_backup');if(s)renderFromData(JSON.parse(s));else document.getElementById('p').innerText='Portfolio: Upload backup to start';})();
 </script></body></html>
