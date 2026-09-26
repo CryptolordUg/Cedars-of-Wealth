@@ -1,13 +1,8 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><title>RubonAI Mining — $1.34 Real — CLEAN — service_6em5yqv — km2d2xzJ-yaPb-042</title><script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script><style>body{margin:0;background:#020617;color:#e2e8f0;font-family:Inter,sans-serif;font-size:11px}.top{position:sticky;top:0;background:#0f172a;padding:12px;border-bottom:2px solid #22c55e}</style></head><body>
-<div class="top"><b style="color:#22c55e">RubonAI Mining — CLEAN — $1.34 Real — 458 trades — service_6em5yqv — Backup 24h to cryptome2030@gmail.com</b><br><small id="emailStatus">Ready</small> <button onclick="backupNow()" style="background:#fde047;color:#111;padding:8px 12px;border-radius:8px;font-weight:800">Backup Now</button></div>
-<div style="padding:12px"><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
-<div style="background:#1e293b;border:2px solid #22c55e;border-radius:12px;padding:10px;text-align:center"><small>Current Balance — $1.34 Real</small><br><b style="font-size:20px">$1.34</b><br><small id="solBal">0.00893000 SOL +5.09% — Auto Mining — 50Y</small></div>
-<div style="background:#1e293b;border:2px solid #334155;border-radius:12px;padding:10px;text-align:center"><small>Total Balance — Mining</small><br><b style="font-size:20px">$721.95</b><br><small>6.0288 SOL — 458 trades — 24/7</small></div>
-<div style="background:#1e293b;border:2px solid #334155;border-radius:12px;padding:10px;text-align:center"><small>Grant Total — 50Y Until 2076</small><br><b style="font-size:20px">$0.98</b><br><small>0.006539 SOL — Locked 2076 — Auto</small></div>
-<div style="background:#1e293b;border:2px solid #334155;border-radius:12px;padding:10px;text-align:center"><small>Daily Profit</small><br><b>$1.23/h sim — $0.00055/d real</b><br><small>$1 in 1818d real — Or 20m sim — $1.34 Real</small></div>
-</div><div id="log" style="background:#020617;padding:10px;border-radius:12px;margin-top:10px;max-height:400px;overflow-y:auto;font-family:monospace;border:2px solid #22c55e"></div></div>
 <script>
-const S="service_6em5yqv";const T="template_cg95kwb";const K="km2d2xzJ-yaPb-042";const EMAIL="cryptome2030@gmail.com";try{emailjs.init(K);}catch(e){}
-let bal=1.34;function backupNow(){let b={date:new Date().toISOString(),bal:bal,trades:458,sol:"0.00893"};localStorage.setItem('rubon_mining_backup',JSON.stringify(b));let blob=new Blob([JSON.stringify(b,null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='RubonAI-Mining-'+new Date().toISOString().slice(0,10)+'.json';a.click();emailjs.send(S,T,{to_email:EMAIL,date:new Date().toLocaleString(),total:bal.toFixed(2),trades:"458",message:'Mining CLEAN $'+bal.toFixed(2)+' 458 trades 0.00893 SOL +5.09% Auto 50Y service_6em5yqv km2d2xzJ-yaPb-042'}).then(()=>{document.getElementById('emailStatus').innerText='✅ Email sent to '+EMAIL+' — Mining $'+bal.toFixed(2);}).catch((e)=>{document.getElementById('emailStatus').innerText='Fix template_cg95kwb Content must have {{to_email}} {{date}} {{total}} {{trades}} {{message}} — '+(e.text||e);});}
-setInterval(()=>{bal+=0.00001;document.getElementById('solBal').innerText=(bal/150).toFixed(8)+' SOL +5.09% — Auto Mining 50Y — Uptime 0d 3h — 458 trades — Never Stop — service_6em5yqv';let l=document.getElementById('log');let d=document.createElement('div');d.style.borderBottom='1px solid #1e293b';d.style.padding='3px 0';d.innerHTML='['+new Date().toLocaleTimeString()+'] Mining +$0.00001 — Bal $'+bal.toFixed(5)+' — SOL '+(bal/150).toFixed(8)+' — Auto — 50Y — 24h backup to cryptome2030@gmail.com';l.prepend(d);},3000);
-</script></body></html>
+const esMine = new EventSource('/api/signals/live?type=mining');
+esMine.onmessage = e => {
+  const d = JSON.parse(e.data);
+  const h = document.getElementById('hashrate'); if(h) h.innerText = d.hashrate + ' TH/s';
+  const p = document.getElementById('payout'); if(p) p.innerText = d.payout_btc + ' BTC';
+};
+</script>
