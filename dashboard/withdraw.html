@@ -1,0 +1,29 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars Withdraw</title>
+<style>body{font-family:sans-serif;padding:16px;background:#f6fbf6}.card{background:#fff;padding:12px;margin:10px 0;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.08)}button{padding:10px 16px;background:#2e7d32;color:#fff;border:0;border-radius:8px}</style>
+</head><body>
+<h1>💸 Cedars Withdrawals</h1>
+<p>Automated 360°: Principal 50%/6mo + Reserve 20%/30mo</p>
+<div id="list"></div>
+<script>
+let inv=JSON.parse(localStorage.getItem('cedars_inv')||'[]');
+let list=document.getElementById('list');
+if(!inv.length) list.innerHTML='<p>No investments yet. <a href="packages.html">Choose a package</a></p>';
+inv.forEach((v,i)=>{
+ let amt=parseFloat(v.amount||0);
+ let principal_due=(amt*0.5/6).toFixed(2);
+ let reserve_due=(amt*0.2/30).toFixed(2);
+ let total=(parseFloat(principal_due)+parseFloat(reserve_due)).toFixed(2);
+ let d=document.createElement('div'); d.className='card';
+ d.innerHTML=`<b>${v.pkg||'Package'} - $${amt}</b><br>Principal due this month: $${principal_due}<br>Reserve due this month: $${reserve_due}<br><b>Total withdrawable: $${total}</b><br><br><button onclick="withdraw(${i},${total})">Withdraw $${total}</button>`;
+ list.appendChild(d);
+});
+function withdraw(i,amt){
+ let addr=prompt('Enter your USDT (TRC20) address for $'+amt);
+ if(!addr) return;
+ alert('Withdrawal request $'+amt+' to '+addr+' submitted. Test mode - will process in 24h.');
+ let inv2=JSON.parse(localStorage.getItem('cedars_inv')||'[]');
+ inv2[i].last_withdraw=Date.now();
+ localStorage.setItem('cedars_inv',JSON.stringify(inv2));
+}
+</script>
+</body></html>
