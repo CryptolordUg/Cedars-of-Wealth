@@ -1,0 +1,1 @@
+CREATE TABLE impact_metrics (id UUID PRIMARY KEY DEFAULT uuid_generate_v4(), households_supported INT DEFAULT 0, graduates INT DEFAULT 0, jobs_created INT DEFAULT 0, recorded_at TIMESTAMPTZ DEFAULT now());
