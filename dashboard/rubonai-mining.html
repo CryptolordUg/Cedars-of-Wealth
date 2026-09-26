@@ -1,13 +1,7 @@
-<div id="calc">
-  <input id="depAmt" type="number" placeholder="Deposit $" />
-  <button onclick="calcDep()">Calculate</button>
-  <div id="calcOut"></div>
-</div>
-<script>
-function calcDep(){
-  const amt = parseFloat(document.getElementById('depAmt').value||0);
-  const boosted = amt*1.7;
-  document.getElementById('calcOut').innerHTML =
-    `Boosted (70%): $${boosted.toFixed(2)}<br>Locked: 200 years<br>200y projection: $${(amt*Math.pow(1.7,200)).toExponential(2)}`;
-}
-</script>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RubonAI Mining</title></head>
+<body style="font-family:sans-serif;padding:20px">
+<h2>RubonAI Mining</h2>
+<p>Hashrate: <b>125 TH/s</b> (test)</p>
+<p>Daily Yield: <b>0.0021 BTC</b> (test)</p>
+<button onclick="alert('Miner sync test OK')" style="padding:8px">Sync Miner</button>
+</body></html>
