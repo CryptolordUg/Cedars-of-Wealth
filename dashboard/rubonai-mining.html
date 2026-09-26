@@ -1,7 +1,8 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RubonAI Mining</title></head>
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RubonAI Mining</title></head>
 <body style="font-family:sans-serif;padding:20px">
-<h2>RubonAI Mining</h2>
-<p>Hashrate: <b>125 TH/s</b> (test)</p>
-<p>Daily Yield: <b>0.0021 BTC</b> (test)</p>
-<button onclick="alert('Miner sync test OK')" style="padding:8px">Sync Miner</button>
+<div style="background:yellow;padding:10px">HTML loaded OK - Mining recovered</div>
+<h2>RubonAI Mining - Dashboard</h2>
+<p>Hashrate: <b id="hr">125 TH/s</b></p>
+<button onclick="document.getElementById('hr').innerText=Math.floor(Math.random()*200)+' TH/s'" style="padding:8px">Refresh</button>
 </body></html>
