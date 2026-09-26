@@ -1,37 +1,51 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
+// Founder: CEDARS RUBON WEALTH, Cryptolord
+// Key: CEDARSRUBON COIN KEY
 
-// CEDARSRUBON Perpetuity Endowment
 contract CedarsRubonPerpetuity {
-    uint public constant RENEWAL_INTERVAL = 365 days;
-    uint public lastRenewalFund;
-    address public guardian;
-    address public domainVault;
-    address public constant ARWEAVE_FUND = 0x0000000000000000000000000000000000000000; // replace
-    address public constant ENS_REGISTRY = 0x0000000000000000000000000000000000000000; // replace
+  address public cryptolordKey;
+  uint public lastBackup;
+  uint public lastAudit;
+  uint public lastRenewalFund;
+  bool public migrated;
 
-    event PerpetuityFunded(uint amount, uint timestamp);
+  event BackupSent(uint timestamp);
+  event AuditGenerated(uint timestamp, bytes32 hash);
+  event PerpetuityFunded(uint amount, uint timestamp);
+  event Migrated(address newChain);
 
-    modifier onlyGuardian() {
-        require(msg.sender == guardian, "not guardian");
-        _;
-    }
+  constructor() {
+    cryptolordKey = msg.sender; // CEDARSRUBON COIN KEY
+  }
 
-    constructor(address _domainVault) {
-        guardian = msg.sender;
-        domainVault = _domainVault;
-        lastRenewalFund = block.timestamp;
-    }
+  modifier onlyKey() { require(msg.sender == cryptolordKey, "not key"); _; }
 
-    function fundPerpetuity() external onlyGuardian {
-        require(block.timestamp >= lastRenewalFund + RENEWAL_INTERVAL, "too early");
-        uint amount = address(this).balance * 5 / 1000; // 0.5% yearly
-        payable(domainVault).transfer(amount * 40 / 100);
-        payable(ARWEAVE_FUND).transfer(amount * 30 / 100);
-        payable(ENS_REGISTRY).transfer(amount * 30 / 100);
-        lastRenewalFund = block.timestamp;
-        emit PerpetuityFunded(amount, block.timestamp);
-    }
+  // 1. 6-hour lifetime backup to cryptome2030@gmail.com (via oracle)
+  function autoBackup() external { /* oracle pushes encrypted snapshot */ }
 
-    receive() external payable {}
+  // 2. 5-year audit
+  function autoAudit(bytes32 auditHash) external onlyKey {
+    require(block.timestamp >= lastAudit + 1825 days, "too early");
+    lastAudit = block.timestamp;
+    emit AuditGenerated(block.timestamp, auditHash);
+  }
+
+  // 3. 12-month migration
+  function autoMigrate(address newChain) external onlyKey {
+    require(!migrated, "already migrated"); migrated = true;
+    emit Migrated(newChain);
+  }
+
+  // 4. Perpetuity Endowment - 0.5% yearly
+  function fundPerpetuity(address domainVault) external onlyKey {
+    require(block.timestamp >= lastRenewalFund + 365 days, "too early");
+    uint amount = address(this).balance * 5 / 1000;
+    payable(domainVault).transfer(amount);
+    lastRenewalFund = block.timestamp;
+    emit PerpetuityFunded(amount, block.timestamp);
+  }
+
+  receive() external payable {}
 }
+// Signed: CEDARSRUBON COIN KEY, for CEDARS RUBON WEALTH, Cryptolord
