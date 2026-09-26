@@ -1,8 +1,8 @@
-COMPOUND_RATE = 0.70  # 70% boost
+COMPOUND_RATE = 0.70
 LOCK_YEARS = 200
+DISPLAY_YEARS = 30
 
 def calculate_compound(principal: float, years: float):
-    # 70% annual compound, locked 200 years max
     years = min(years, LOCK_YEARS)
     return principal * ((1 + COMPOUND_RATE) ** years)
 
@@ -11,12 +11,7 @@ def deposit_preview(amount: float):
         "deposit": amount,
         "forex_boosted": amount * 1.7,
         "mining_boosted": amount * 1.7,
-        "projected_200y": calculate_compound(amount, 200),
+        "projected_30y_display": calculate_compound(amount, DISPLAY_YEARS),
+        "projected_200y_locked": calculate_compound(amount, LOCK_YEARS),
         "lock_years": LOCK_YEARS
     }
-
-def withdraw_preview(balance: float, withdraw_amount: float):
-    if withdraw_amount < 5.00:
-        return {"error": "Minimum withdrawal is $5.00"}
-    fee = withdraw_amount * 0.02
-    return {"gross": withdraw_amount, "fee": fee, "net": withdraw_amount - fee, "remaining": balance - withdraw_amount}
