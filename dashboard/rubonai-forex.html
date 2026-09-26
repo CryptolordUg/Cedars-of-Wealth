@@ -1,13 +1,7 @@
-<div id="calc">
-  <input id="depAmt" type="number" placeholder="Deposit $" />
-  <button onclick="calcDep()">Calculate</button>
-  <div id="calcOut"></div>
-</div>
-<script>
-function calcDep(){
-  const amt = parseFloat(document.getElementById('depAmt').value||0);
-  const boosted = amt*1.7;
-  document.getElementById('calcOut').innerHTML =
-    `Boosted (70%): $${boosted.toFixed(2)}<br>Locked: 200 years<br>200y projection: $${(amt*Math.pow(1.7,200)).toExponential(2)}`;
-}
-</script>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RubonAI Forex</title></head>
+<body style="font-family:sans-serif;padding:20px">
+<h2>RubonAI Forex - Live Trading Feed</h2>
+<select id="pair"><option>EURUSD</option><option>GBPUSD</option><option>XAUUSD</option><option>BTCUSD</option></select>
+<button onclick="document.getElementById('out').innerText='Signal: BUY '+document.getElementById('pair').value+' @ test price'" style="padding:8px;margin-left:8px">Get Signal</button>
+<p id="out"></p>
+</body></html>
