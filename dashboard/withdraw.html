@@ -1,32 +1,24 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars Withdraw</title>
-<style>body{font-family:sans-serif;padding:16px;background:#f6fbf6;max-width:600px;margin:0 auto}.card{background:#fff;padding:14px;margin:10px 0;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.08)}button{padding:12px 18px;background:#2e7d32;color:#fff;border:0;border-radius:8px;font-size:15px;cursor:pointer}a{color:#2e7d32}</style>
-</head><body>
-<h1>💸 Cedars Withdrawals</h1>
-<p>Principal 50% / 6 months + Reserve 20% / 30 months.<br>Withdrawals available monthly.</p>
-<div id="list"></div>
-<p><a href="packages.html">← Choose a package</a></p>
+<!-- Deposit -->
+<button onclick="buyPackage('seed',5)">Buy Seed - $5 + $5 fee</button>
 <script>
-function load(){
- let inv=JSON.parse(localStorage.getItem('cedars_inv')||'[]');
- let list=document.getElementById('list');
- if(!inv.length){
-  list.innerHTML='<div class="card"><b>No investments yet.</b><br><br><a href="packages.html">Invest now →</a></div>'; return;
- }
- list.innerHTML='';
- inv.forEach((v)=>{
-  let amt=parseFloat(v.amount);
-  let p=(amt*0.5/6).toFixed(2);
-  let r=(amt*0.2/30).toFixed(2);
-  let t=(parseFloat(p)+parseFloat(r)).toFixed(2);
-  let d=new Date(v.date).toLocaleDateString();
-  list.innerHTML+=`<div class="card"><b>${v.pkg} - $${amt}</b> <small>(${d})</small><br>Withdrawable now: <b>$${t}</b><br><small>Principal: $${p} | Reserve: $${r}</small><br><br><button onclick="withdraw('${t}')">Withdraw $${t}</button></div>`;
- });
+const FEE_WALLET = "TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u";
+function buyPackage(name, amt){
+  const total = amt + 5;
+  if(!confirm(`Package $${amt} + $5 maintenance fee = $${total}\n$5 goes to ${FEE_WALLET}\nConfirm?`)) return;
+  // save investment (existing logic)
+  let inv = JSON.parse(localStorage.getItem('investments')||'[]');
+  inv.push({pkg:name, amount:amt, fee:5, date:new Date().toISOString(), feeTo:FEE_WALLET});
+  localStorage.setItem('investments', JSON.stringify(inv));
+  alert(`Activated! $5 fee logged to company wallet.`);
+  location.reload();
 }
-function withdraw(t){
- let addr=prompt('Enter your USDT address to receive $'+t+':');
- if(!addr) return;
- if(addr.length<10){ alert('Please enter a valid address'); return; }
- alert('Withdrawal request of $'+t+' to '+addr+' submitted for review (test mode).');
+function requestWithdraw(){
+  const amt = parseFloat(prompt("Amount to withdraw (min $5):"));
+  if(amt < 5) return alert("Minimum $5");
+  const net = amt - 5;
+  if(!confirm(`Withdrawal $${amt}\nFee $5 to ${FEE_WALLET}\nYou receive $${net}\nConfirm?`)) return;
+  alert(`Withdrawal queued. $5 fee to ${FEE_WALLET}`);
 }
-load();
-</script></body></html>
+</script>
+<button onclick="requestWithdraw()">Withdraw</button>
+<p style="font-size:12px">All deposits/withdrawals include $5 to TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u for maintenance & community education.</p>
