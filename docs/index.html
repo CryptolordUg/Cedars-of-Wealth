@@ -34,7 +34,6 @@ document.getElementById('f').addEventListener('change',e=>{
        if(!isNaN(num)){ details.push(k+': '+num); total+=num; }
      }
      out+='Found: '+details.slice(0,10).join(' | ')+'<br>';
-     // For demo, treat total coins as USD estimate if no prices
      document.getElementById('p').innerHTML=`Portfolio: $${total.toLocaleString('en-US',{minimumFractionDigits:2})} <span style="color:#4ade80">from backup (${Object.keys(balances).length} assets)</span>`;
    }
    let trades=d.cedars_trades;
