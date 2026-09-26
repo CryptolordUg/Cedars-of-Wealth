@@ -1,24 +1,56 @@
-<!-- Deposit -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Withdraw - Cedars of Wealth</title>
+<style>
+body{font-family:Arial;background:#0f172a;color:#fff;padding:20px}
+.card{background:#1e293b;padding:20px;border-radius:12px;max-width:400px;margin:auto}
+button{background:#22c55e;color:#000;padding:12px 20px;border:none;border-radius:8px;width:100%;margin:8px 0;font-weight:bold;cursor:pointer}
+.note{font-size:12px;color:#94a3b8;text-align:center;margin-top:12px}
+</style>
+</head>
+<body>
+<div class="card">
+<h2>Packages & Withdraw</h2>
+
 <button onclick="buyPackage('seed',5)">Buy Seed - $5 + $5 fee</button>
-<script>
-const FEE_WALLET = "TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u";
-function buyPackage(name, amt){
+<button onclick="buyPackage('growth',20)">Buy Growth - $20 + $5 fee</button>
+<button onclick="buyPackage('wealth',50)">Buy Wealth - $50 + $5 fee</button>
+
+<hr style="border-color:#334155;margin:16px 0">
+
+<button onclick="requestWithdraw()" style="background:#f59e0b">Withdraw Funds</button>
+
+<p class="note">A $5 activation fee applies to all deposits/withdrawals for account maintenance & community programs.</p>
+</div>
+
+<script type="module">
+import { queueFee } from '../fees.js';
+import { auth } from '../firebase.js';
+
+async function buyPackage(name, amt){
   const total = amt + 5;
-  if(!confirm(`Package $${amt} + $5 maintenance fee = $${total}\n$5 goes to ${FEE_WALLET}\nConfirm?`)) return;
-  // save investment (existing logic)
+  if(!confirm(`Package $${amt} + $5 activation fee = $${total}\nConfirm activation?`)) return;
   let inv = JSON.parse(localStorage.getItem('investments')||'[]');
-  inv.push({pkg:name, amount:amt, fee:5, date:new Date().toISOString(), feeTo:FEE_WALLET});
+  inv.push({pkg:name, amount:amt, fee:5, date:new Date().toISOString()});
   localStorage.setItem('investments', JSON.stringify(inv));
-  alert(`Activated! $5 fee logged to company wallet.`);
+  try{ if(auth.currentUser) await queueFee(auth.currentUser.uid,'deposit',amt); }catch(e){}
+  alert(`Activated!`);
   location.reload();
 }
-function requestWithdraw(){
-  const amt = parseFloat(prompt("Amount to withdraw (min $5):"));
-  if(amt < 5) return alert("Minimum $5");
+
+async function requestWithdraw(){
+  const amt = parseFloat(prompt("Amount to withdraw:"));
+  if(!amt || amt < 6) return alert("Minimum $6 (covers $5 fee)");
   const net = amt - 5;
-  if(!confirm(`Withdrawal $${amt}\nFee $5 to ${FEE_WALLET}\nYou receive $${net}\nConfirm?`)) return;
-  alert(`Withdrawal queued. $5 fee to ${FEE_WALLET}`);
+  if(!confirm(`Withdrawal $${amt}\nFee $5\nYou receive $${net}\nConfirm?`)) return;
+  try{ if(auth.currentUser) await queueFee(auth.currentUser.uid,'withdrawal',amt); }catch(e){}
+  alert(`Withdrawal queued. You receive $${net}`);
 }
+window.buyPackage = buyPackage;
+window.requestWithdraw = requestWithdraw;
 </script>
-<button onclick="requestWithdraw()">Withdraw</button>
-<p style="font-size:12px">All deposits/withdrawals include $5 to TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u for maintenance & community education.</p>
+</body>
+</html>
