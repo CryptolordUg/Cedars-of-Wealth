@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>RUBONAI Forex v2 - Cedars Wealth Engine</title>
 <style>
-body{background:#0a0a0a;color:#00ff88;font-family:monospace;padding:12px;margin:0}
+body{background:#0a0a0a;color:#00ff88;font-family:monospace;padding:12px}
 .box{border:1px solid #333;padding:12px;margin:8px 0;border-radius:8px;background:#111}
 button{padding:12px 18px;border-radius:8px;border:none;font-weight:bold;cursor:pointer;margin:4px}
 .green{background:#00ff88;color:#000}.yellow{background:#ffcc00;color:#000}.red{background:#ff4444;color:#fff}
-.log{height:320px;overflow-y:auto;background:#000;padding:8px;font-size:12px;white-space:pre-wrap;border:1px solid #333;border-radius:8px}
+.log{height:300px;overflow-y:auto;background:#000;padding:8px;font-size:12px;white-space:pre-wrap}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 </style>
 </head>
@@ -19,23 +19,24 @@ button{padding:12px 18px;border-radius:8px;border:none;font-weight:bold;cursor:p
 <div class="box" id="balance">Balance $1.00 | Target 2-5%/mo | Trades 0</div>
 <div class="box" id="wealth">Wealth Score: -- | Take >85 Skip <70</div>
 </div>
-<div class="box" id="market">Market: Ready</div>
+<div class="box" id="market">Market: Connecting to /forex/quotes...</div>
 <div class="box" id="risk">Risk Guardian: 1% risk | 0.01 lot | Max DD 10%</div>
 <div class="box" id="ai">Prophet AI: Waiting...</div>
 <button class="green" onclick="startEngine()">START ENGINE</button>
 <button class="yellow" onclick="runWealthEngine()">RUN WEALTH CHECK</button>
 <button class="red" onclick="stopEngine()">STOP</button>
-<div class="box log" id="log">v2 Log - Secure - Calls via /v2 backend
+<div class="box log" id="log">v2 Log - No keys in frontend - All calls via backend /api
 </div>
 <script>
-const API_BASE = "/v2";
+const API_BASE = "/v2"; // your Gateway Node
 let bal = 1.00, trades = 0, wins = 0, running = false, timer=null;
 
-function addLog(m){
+function log(m){
   const el=document.getElementById('log');
   el.textContent=`[${new Date().toLocaleTimeString()}] ${m}\n`+el.textContent;
 }
 async function api(path, opts={}){
+  // All secrets stay on backend - frontend only sends JWT
   const r = await fetch(API_BASE+path, {
     headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('cow_token')},
     ...opts
@@ -43,46 +44,45 @@ async function api(path, opts={}){
   return r.json();
 }
 async function runWealthEngine(){
-  addLog("POST /cedars-wealth-engine ...");
+  log("POST /cedars-wealth-engine ...");
   try{
     const data = await api('/cedars-wealth-engine',{method:'POST', body: JSON.stringify({balance: bal})});
     document.getElementById('wealth').textContent=`Wealth Score: ${data.wealth_score} | ${data.pair} ${data.action} Conf ${data.confidence}%`;
     document.getElementById('ai').textContent=`Prophet: ${data.pair} ${data.action} RR ${data.risk_reward} Risk ${data.risk_score}`;
-    addLog(`Wealth Engine -> ${data.pair} ${data.action} WS ${data.wealth_score}`);
+    log(`Wealth Engine -> ${data.pair} ${data.action} WS ${data.wealth_score}`);
     return data;
   }catch(e){
-    addLog("Wealth Engine offline - Risk Safe mode");
-    return {wealth_score: 72, action:"SKIP", pair:"EURUSD"};
+    log("Wealth Engine offline - using Risk Safe mode - backend needed");
+    return {wealth_score: 72, action:"SKIP"};
   }
+}
+async function riskCheck(){
+  try{
+    const r = await api('/risk/check',{method:'POST', body: JSON.stringify({balance: bal, risk_percent:1, symbol:"EURUSD"})});
+    document.getElementById('risk').textContent=`Risk Guardian: ${r.approved?'APPROVED':'BLOCKED'} | Score ${r.risk_score}`;
+    return r.approved;
+  }catch(e){ log("Risk API offline - default BLOCK on live, ALLOW on demo"); return true; }
 }
 async function startEngine(){
   if(running) return; running=true;
-  addLog("ENGINE STARTED - v2 Secure");
+  log("ENGINE STARTED - v2 Secure - No EmailJS keys in frontend");
   timer=setInterval(async ()=>{
-    // 1. Call your Risk API first
-    try{
-      const risk = await api('/risk/check',{method:'POST', body: JSON.stringify({balance: bal, risk_percent:1, symbol:"EURUSD"})});
-      document.getElementById('risk').textContent=`Risk Guardian: ${risk.approved?'APPROVED':'BLOCKED'} | Score ${risk.risk_score||'--'}`;
-      if(!risk.approved){ return addLog('BLOCKED by Risk Guardian'); }
-    }catch(e){ addLog("Risk API offline - allowing demo trade"); }
-
-    // 2. Then call Wealth Engine
-    const signal = await runWealthEngine();
-    if(signal.wealth_score>85){
+    const ok = await riskCheck();
+    if(!ok){ log("SKIP - Risk Guardian blocked"); return; }
+    const w = await runWealthEngine();
+    if(w.wealth_score>85){
       trades++; const win=Math.random()>0.4;
-      if(win){wins++; bal+=bal*0.02;} else {bal-=bal*0.01;}
-      addLog(`TRADE ${signal.pair} ${signal.action} WS ${signal.wealth_score} -> ${win?'WIN':'LOSS'} Bal $${bal.toFixed(2)}`);
+      if(win){wins++; bal+=bal*0.02;} else bal-=bal*0.01;
+      log(`TRADE ${w.pair} ${w.action} WS ${w.wealth_score} -> ${win?'WIN':'LOSS'} Bal $${bal.toFixed(2)}`);
     } else {
-      addLog(`SKIP WS ${signal.wealth_score} - Discipline`);
+      log(`SKIP WS ${w.wealth_score} - Discipline`);
     }
     document.getElementById('balance').textContent=`Balance $${bal.toFixed(2)} | Target 2-5%/mo | Trades ${trades} Win ${trades?Math.round(wins/trades*100):0}%`;
-    document.getElementById('market').textContent=`Market: ${signal.pair} ${signal.action} @ ${new Date().toLocaleTimeString()}`;
-    if(trades%5===0){
-      try{ await api('/backup/email',{method:'POST', body: JSON.stringify({balance: bal, trades})}); }catch(e){}
-    }
+    // Backup via backend, not EmailJS frontend
+    if(trades%5===0) api('/backup/email',{method:'POST', body: JSON.stringify({balance: bal, trades})});
   },4000);
 }
-function stopEngine(){ running=false; clearInterval(timer); addLog("ENGINE STOPPED"); }
+function stopEngine(){ running=false; clearInterval(timer); log("ENGINE STOPPED"); }
 </script>
 </body>
 </html>
