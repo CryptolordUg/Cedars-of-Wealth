@@ -1,0 +1,1 @@
+CREATE OR REPLACE FUNCTION check_min_withdrawal() RETURNS TRIGGER AS $$ BEGIN IF NEW.amount < 5 AND NEW.entry_type = 'withdrawal' THEN RAISE EXCEPTION 'Minimum withdrawal is $5'; END IF; RETURN NEW; END; $$ LANGUAGE plpgsql;
