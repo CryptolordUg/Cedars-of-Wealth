@@ -6,7 +6,7 @@
 <h2>🌲 Cedars of Wealth</h2>
 <div class="card" id="p">Portfolio: $9,343.89 <span style="color:#4ade80">+$931.29 (10.91%)</span></div>
 <div class="card"><b>Market - LIVE</b><div id="m">Loading...</div></div>
-<div class="card"><input type="file" id="f" accept=".json"><small> Upload MY_722_BACKUP_25Sep.json to auto-update</small><div id="log" style="margin-top:8px;font-size:13px;opacity:.8"></div></div>
+<div class="card"><input type="file" id="f" accept=".json"><small> Upload backup to auto-update</small><div id="log" style="margin-top:8px;font-size:12px;opacity:.9;word-break:break-all"></div></div>
 <script>
 async function load(){
  try{
@@ -21,20 +21,26 @@ document.getElementById('f').addEventListener('change',e=>{
  fr.onload=()=>{
   try{
    const d=JSON.parse(fr.result);
-   const keys=Object.keys(d);
-   // try common balance fields
-   let bal = d.balance || d.equity || d.portfolio_value || d.total || d.Portfolio || null;
-   // if nested, search first numeric large value
-   if(!bal){
-     for(let k of keys){ if(typeof d[k]==='number' && d[k]>1000){ bal=d[k]; break; } }
+   let out='Keys: '+Object.keys(d).slice(0,5).join(', ')+'<br>';
+   let balances = d.cedars_coinBalances;
+   if(typeof balances==='string'){ try{balances=JSON.parse(balances);}catch{} }
+   out+='Balances type: '+(typeof balances)+' ';
+   if(balances && typeof balances==='object'){
+     out+='Coins: '+Object.keys(balances).slice(0,10).join(', ')+'<br>';
+     let total=0; let details=[];
+     for(let k in balances){
+       let v=balances[k];
+       let num=parseFloat(v);
+       if(!isNaN(num)){ details.push(k+': '+num); total+=num; }
+     }
+     out+='Found: '+details.slice(0,10).join(' | ')+'<br>';
+     // For demo, treat total coins as USD estimate if no prices
+     document.getElementById('p').innerHTML=`Portfolio: $${total.toLocaleString('en-US',{minimumFractionDigits:2})} <span style="color:#4ade80">from backup (${Object.keys(balances).length} assets)</span>`;
    }
-   document.getElementById('log').innerText='Found keys: '+keys.slice(0,8).join(', ');
-   if(bal){
-     document.getElementById('p').innerHTML=`Portfolio: $${Number(bal).toLocaleString('en-US',{minimumFractionDigits:2})} <span style="color:#4ade80">updated from backup</span>`;
-   } else {
-     document.getElementById('log').innerText+=' | No balance field auto-found';
-   }
-  }catch(err){alert('Invalid JSON')}
+   let trades=d.cedars_trades;
+   if(trades) out+='Trades found: '+(Array.isArray(trades)?trades.length:typeof trades);
+   document.getElementById('log').innerHTML=out;
+  }catch(err){document.getElementById('log').innerText='Invalid JSON: '+err.message}
  };
  fr.readAsText(e.target.files[0]);
 });
