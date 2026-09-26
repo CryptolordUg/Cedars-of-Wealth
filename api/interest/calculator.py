@@ -1,17 +1,9 @@
-COMPOUND_RATE = 0.70
-LOCK_YEARS = 200
-DISPLAY_YEARS = 30
-
-def calculate_compound(principal: float, years: float):
-    years = min(years, LOCK_YEARS)
-    return principal * ((1 + COMPOUND_RATE) ** years)
-
-def deposit_preview(amount: float):
-    return {
-        "deposit": amount,
-        "forex_boosted": amount * 1.7,
-        "mining_boosted": amount * 1.7,
-        "projected_30y_display": calculate_compound(amount, DISPLAY_YEARS),
-        "projected_200y_locked": calculate_compound(amount, LOCK_YEARS),
-        "lock_years": LOCK_YEARS
-    }
+<script>
+function calcDep(){
+  const amt = parseFloat(document.getElementById('depAmt').value||0);
+  const boosted = amt*1.7;
+  const proj30 = amt*Math.pow(1.7,30);
+  document.getElementById('calcOut').innerHTML =
+    `Boosted (70%): $${boosted.toFixed(2)}<br>Locked: 200 years (backend)<br>30y preview: $${proj30.toExponential(2)}`;
+}
+</script>
