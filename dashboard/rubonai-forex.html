@@ -1,8 +1,13 @@
+<div id="calc">
+  <input id="depAmt" type="number" placeholder="Deposit $" />
+  <button onclick="calcDep()">Calculate</button>
+  <div id="calcOut"></div>
+</div>
 <script>
-const esForex = new EventSource('/api/signals/live?type=forex');
-esForex.onmessage = e => {
-  const d = JSON.parse(e.data);
-  const el = document.getElementById('price'); if(el) el.innerText = d.price;
-  const s = document.getElementById('signal'); if(s) s.innerText = d.signal;
-};
+function calcDep(){
+  const amt = parseFloat(document.getElementById('depAmt').value||0);
+  const boosted = amt*1.7;
+  document.getElementById('calcOut').innerHTML =
+    `Boosted (70%): $${boosted.toFixed(2)}<br>Locked: 200 years<br>200y projection: $${(amt*Math.pow(1.7,200)).toExponential(2)}`;
+}
 </script>
