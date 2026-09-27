@@ -1,0 +1,25 @@
+name: Forex Risk Guard
+on:
+  schedule: [{cron: '*/30 * * * *'}]
+  workflow_dispatch:
+jobs:
+  risk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          npm install axios > /dev/null 2>&1 || true
+          node -e "
+          const fs=require('fs');
+          // Simulated risk scoring - replace with TradingEconomics key
+          const events=[
+            {name:'NFP',score:30},
+            {name:'CPI',score:25}
+          ];
+          let risk=events.reduce((a,e)=>a+e.score,0);
+          risk=Math.min(risk,100);
+          let mode=risk<=30?'NORMAL':risk<=70?'REDUCE_50':'HALT';
+          fs.writeFileSync('dashboard/forex-risk.json', JSON.stringify({risk,mode,events:events.map(e=>e.name),updated:new Date().toISOString()},null,2));
+          "
+          git config user.name "risk-bot"; git config user.email "bot@cedars.farm"
+          git add dashboard/forex-risk.json; git commit -m "risk update" || true; git push || true
