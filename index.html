@@ -1,17 +1,49 @@
-<div class="topnav">
-<a class="logo" href="/Cedars-of-Wealth/">🌲 Cedars of Wealth</a>
-<div style="display:flex;align-items:center">
-<a href="/Cedars-of-Wealth/">Home</a>
-<a href="/Cedars-of-Wealth/about/">About</a>
-<a href="/Cedars-of-Wealth/plans/">Plans</a>
-<div style="position:relative;display:inline-block;margin-left:16px">
-<a href="/Cedars-of-Wealth/dashboard/" style="margin:0">Dashboard ▾</a>
-<div style="display:none;position:absolute;background:#131a2e;border:1px solid #2a3a5a;border-radius:8px;padding:8px;min-width:200px;z-index:100" onmouseover="this.style.display='block'" onmouseout="this.style.display='none'">
-<a href="/Cedars-of-Wealth/dashboard/#annual-calendar" style="display:block;padding:8px;margin:0">Annual Calendar</a>
-<a href="/Cedars-of-Wealth/dashboard/#planner" style="display:block;padding:8px;margin:0">Economic Planner</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cedars of Wealth</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#0a0f1e;color:#fff;line-height:1.6}
+.hero{padding:70px 20px 30px;text-align:center}
+.hero h1{font-size:44px;margin:0 0 16px}
+.hero p{color:#a0b0cc;max-width:600px;margin:0 auto 24px}
+.btn{display:inline-block;padding:14px 28px;background:linear-gradient(135deg,#4f7cff,#2dd4a7);color:#fff;text-decoration:none;border-radius:8px;font-weight:700;margin:8px}
+.card{background:#131a2e;border:1px solid #1e2a4a;border-radius:12px;padding:24px;margin:16px 0}
+.wrap{max-width:1000px;margin:0 auto;padding:20px 15px}
+</style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<div class="wrap">
+<div class="hero">
+<h1>🌲 Cedars of Wealth</h1>
+<p>10-Year Wealth Education. Mighty Cedar Package.</p>
+<a class="btn" href="/Cedars-of-Wealth/register/">Join Now</a>
+<a class="btn" href="/Cedars-of-Wealth/plans/" style="background:#1a233f;border:1px solid #2a3a5a">View Plans</a>
+</div>
+
+<div class="card">
+<h3>Why Cedars?</h3>
+<p style="color:#a0b0cc">Long-term financial education, not hype. Learn risk management, compounding, and discipline over 10 years.</p>
+</div>
+
+<div class="card">
+<h3>Packages</h3>
+<p style="color:#a0b0cc">Seedling, Growing Cedar, Mighty Cedar — pick your learning path.</p>
+<a class="btn" href="/Cedars-of-Wealth/plans/">Compare Plans</a>
 </div>
 </div>
-<a class="joinbtn" href="/Cedars-of-Wealth/register/" style="margin-left:16px">Join</a>
-</div>
-</div>
-<style>.topnav div div:hover div{display:block!important}</style>
+
+<div id="site-footer"></div>
+
+<script>
+fetch('/Cedars-of-Wealth/includes/header.html').then(r=>r.text()).then(h=>document.getElementById('site-header').innerHTML=h);
+fetch('/Cedars-of-Wealth/includes/footer.html').then(r=>r.text()).then(h=>document.getElementById('site-footer').innerHTML=h);
+</script>
+</body>
+</html>
