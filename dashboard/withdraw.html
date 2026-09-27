@@ -1,56 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Withdraw - Cedars of Wealth</title>
+<title>CEDARS OF WEALTH - Withdraw</title>
 <style>
-body{font-family:Arial;background:#0f172a;color:#fff;padding:20px}
-.card{background:#1e293b;padding:20px;border-radius:12px;max-width:400px;margin:auto}
-button{background:#22c55e;color:#000;padding:12px 20px;border:none;border-radius:8px;width:100%;margin:8px 0;font-weight:bold;cursor:pointer}
-.note{font-size:12px;color:#94a3b8;text-align:center;margin-top:12px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+body{background:#0a0f1e;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{background:#131a2e;border:1px solid #1e2a4a;border-radius:20px;padding:28px;max-width:400px;width:100%}
+h1{font-size:20px;text-align:center;margin-bottom:6px}
+.sub{text-align:center;color:#8a9bb5;font-size:13px;margin-bottom:20px}
+label{font-size:13px;color:#8a9bb5;display:block;margin:14px 0 6px}
+input{width:100%;padding:13px;border-radius:10px;border:1px solid #1e2a4a;background:#0d1428;color:#fff;font-size:15px}
+.feebox{background:#0d1428;border-radius:10px;padding:14px;margin-top:14px;font-size:14px;line-height:1.8}
+.feebox span{float:right;color:#2dd4a7}
+.consent{display:flex;gap:10px;margin-top:16px;font-size:13px;color:#8a9bb5;line-height:1.5}
+.consent input{width:18px;height:18px;margin-top:2px}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;font-size:16px;font-weight:600;margin-top:18px;background:linear-gradient(135deg,#4f7cff,#2dd4a7);color:#fff;cursor:pointer}
+.btn:disabled{opacity:.4;cursor:not-allowed}
 </style>
 </head>
 <body>
 <div class="card">
-<h2>Packages & Withdraw</h2>
+<h1>Withdraw</h1>
+<p class="sub">CEDARS OF WEALTH</p>
 
-<button onclick="buyPackage('seed',5)">Buy Seed - $5 + $5 fee</button>
-<button onclick="buyPackage('growth',20)">Buy Growth - $20 + $5 fee</button>
-<button onclick="buyPackage('wealth',50)">Buy Wealth - $50 + $5 fee</button>
+<label>Wallet address</label>
+<input id="wallet" placeholder="Your Solana address">
 
-<hr style="border-color:#334155;margin:16px 0">
+<label>Amount (USDC)</label>
+<input id="amount" type="number" placeholder="0.00" min="10" oninput="calc()">
 
-<button onclick="requestWithdraw()" style="background:#f59e0b">Withdraw Funds</button>
-
-<p class="note">A $5 activation fee applies to all deposits/withdrawals for account maintenance & community programs.</p>
+<div class="feebox">
+<div>Withdrawal fee (2%): <span id="fee">$0.00</span></div>
+<div>You will receive: <span id="net">$0.00</span></div>
 </div>
 
-<script type="module">
-import { queueFee } from '../fees.js';
-import { auth } from '../firebase.js';
+<label class="consent"><input type="checkbox" id="agree" onchange="toggleBtn()"> I confirm this is my wallet and I agree to the 2% withdrawal fee. Withdrawals are processed within 24 hours.</label>
 
-async function buyPackage(name, amt){
-  const total = amt + 5;
-  if(!confirm(`Package $${amt} + $5 activation fee = $${total}\nConfirm activation?`)) return;
-  let inv = JSON.parse(localStorage.getItem('investments')||'[]');
-  inv.push({pkg:name, amount:amt, fee:5, date:new Date().toISOString()});
-  localStorage.setItem('investments', JSON.stringify(inv));
-  try{ if(auth.currentUser) await queueFee(auth.currentUser.uid,'deposit',amt); }catch(e){}
-  alert(`Activated!`);
-  location.reload();
+<button class="btn" id="btn" disabled onclick="submitWd()">Confirm Withdrawal</button>
+<p class="sub" id="msg" style="margin-top:12px"></p>
+</div>
+<script>
+function calc(){
+  const amt = parseFloat(document.getElementById('amount').value)||0;
+  const fee = amt*0.02;
+  document.getElementById('fee').textContent='$'+fee.toFixed(2);
+  document.getElementById('net').textContent='$'+(amt-fee).toFixed(2);
 }
-
-async function requestWithdraw(){
-  const amt = parseFloat(prompt("Amount to withdraw:"));
-  if(!amt || amt < 6) return alert("Minimum $6 (covers $5 fee)");
-  const net = amt - 5;
-  if(!confirm(`Withdrawal $${amt}\nFee $5\nYou receive $${net}\nConfirm?`)) return;
-  try{ if(auth.currentUser) await queueFee(auth.currentUser.uid,'withdrawal',amt); }catch(e){}
-  alert(`Withdrawal queued. You receive $${net}`);
+function toggleBtn(){
+  document.getElementById('btn').disabled=!document.getElementById('agree').checked;
 }
-window.buyPackage = buyPackage;
-window.requestWithdraw = requestWithdraw;
+function submitWd(){
+  const w=document.getElementById('wallet').value.trim();
+  const a=document.getElementById('amount').value;
+  if(w.length<32){document.getElementById('msg').textContent='Enter valid wallet address';return;}
+  if(!a||a<10){document.getElementById('msg').textContent='Minimum 10 USDC';return;}
+  const fee=(a*0.02).toFixed(2), net=(a-fee).toFixed(2);
+  const text=encodeURIComponent(`WITHDRAWAL REQUEST - CEDARS OF WEALTH\nWallet: ${w}\nAmount: ${a} USDC\nFee: ${fee} USDC\nNet: ${net} USDC`);
+  window.open(`https://wa.me/?text=${text}`,'_blank');
+  document.getElementById('msg').textContent='Request prepared';
+}
 </script>
 </body>
 </html>
