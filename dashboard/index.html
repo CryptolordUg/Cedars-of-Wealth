@@ -1,15 +1,35 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard - CEDARS OF WEALTH</title>
-<style>*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}body{background:#0a0f1e;color:#fff;padding:20px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:500px;margin:20px auto}.item{background:#131a2e;border:1px solid #1e2a4a;border-radius:14px;padding:20px;text-align:center;text-decoration:none;color:#fff}.item span{font-size:24px}</style></head>
-<body><h2 style="text-align:center">Dashboard</h2><p style="text-align:center;color:#8a9bb5;font-size:13px">CEDARS OF WEALTH</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - CEDARS OF WEALTH</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+body{background:#0a0f1e;color:#fff;padding:20px;min-height:100vh}
+h2{text-align:center;margin-top:10px}
+.sub{text-align:center;color:#8a9bb5;font-size:13px;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:500px;margin:0 auto}
+.item{background:#131a2e;border:1px solid #1e2a4a;border-radius:14px;padding:22px 10px;text-align:center;text-decoration:none;color:#fff}
+.item span{font-size:26px;display:block;margin-bottom:8px}
+.item:active{transform:scale(.97)}
+.logout{text-align:center;margin-top:28px}
+.logout a{color:#ff6b6b;text-decoration:none;font-size:14px}
+</style>
+</head>
+<body>
+<h2>Dashboard</h2>
+<p class="sub">CEDARS OF WEALTH</p>
 <div class="grid">
-<a class="item" href="deposit.html"><span>💰</span><br>Deposit</a>
-<a class="item" href="withdraw.html"><span>🏦</span><br>Withdraw</a>
-<a class="item" href="#"><span>📊</span><br>Transactions</a>
-<a class="item" href="#"><span>👥</span><br>Referral</a>
-<a class="item" href="#"><span>🔔</span><br>Notifications</a>
-<a class="item" href="#"><span>🛟</span><br>Support</a>
-<a class="item" href="#"><span>👤</span><br>Profile</a>
-<a class="item" href="#"><span>⚙️</span><br>Settings</a>
+<a class="item" href="deposit.html"><span>💰</span>Deposit</a>
+<a class="item" href="withdraw.html"><span>🏦</span>Withdraw</a>
+<a class="item" href="#"><span>📊</span>Transactions</a>
+<a class="item" href="#"><span>👥</span>Referral</a>
+<a class="item" href="#"><span>🔔</span>Notifications</a>
+<a class="item" href="#"><span>🛟</span>Support</a>
+<a class="item" href="#"><span>👤</span>Profile</a>
+<a class="item" href="#"><span>⚙️</span>Settings</a>
 </div>
-<div style="text-align:center;margin-top:20px"><a href="../index.html" style="color:#ff6b6b;text-decoration:none">Logout</a></div>
-</body></html>
+<div class="logout"><a href="../index.html">Logout</a></div>
+</body>
+</html>
