@@ -1,22 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CEDARS OF WEALTH - Deposit</title>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+body{background:#0a0f1e;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{background:#131a2e;border:1px solid #1e2a4a;border-radius:20px;padding:32px;max-width:420px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.header{background:linear-gradient(135deg,#4f7cff,#2dd4a7);margin:-32px -32px 24px;padding:24px;border-radius:20px 20px 0 0}
+.header h1{font-size:20px;font-weight:700}
+.header p{opacity:.85;font-size:13px;margin-top:4px}
+#qr{background:#fff;padding:16px;border-radius:12px;display:inline-block;margin:16px 0}
+.wallet{font-size:11px;color:#8a9bb5;word-break:break-all;background:#0d1428;padding:12px;border-radius:8px;margin:12px 0}
+.btn{display:block;width:100%;padding:14px;border:none;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;margin-top:12px;text-decoration:none}
+.btn-primary{background:linear-gradient(135deg,#2dd4a7,#4f7cff);color:#fff}
+.btn-secondary{background:#1e2a4a;color:#fff}
+.note{font-size:12px;color:#8a9bb5;margin-top:16px;line-height:1.5}
+</style>
 </head>
-<body style="margin:0;background:#020617;font-family:Inter,system-ui;display:flex;justify-content:center;padding:20px">
-<div style="max-width:420px;width:100%;background:#0f172a;border:1px solid #1e293b;border-radius:20px;padding:24px;text-align:center;color:#e8eefc">
-<div style="background:linear-gradient(135deg,#9945FF,#14F195);margin:-24px -24px 20px;padding:20px;border-radius:20px 20px 0 0">
-<h2 style="margin:0;color:white;font-size:20px">💎 Deposit USDC</h2>
-<p style="margin:6px 0 0;color:white;opacity:.9;font-size:13px">Solana • Instant • Low fee</p>
+<body>
+<div class="card">
+<div class="header">
+<h1>Deposit USDC</h1>
+<p>CEDARS OF WEALTH • Solana Network</p>
 </div>
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=solana%3A6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb%3Flabel%3DCEDARS%2520OF%2520WEALTH" alt="Deposit QR" style="width:260px;height:260px;border-radius:16px;border:4px solid white;background:white">
-<div style="margin-top:16px;font-size:12px;color:#94a3b8">Treasury Wallet (Solana)</div>
-<div style="margin:8px 0;background:#020617;padding:12px;border-radius:10px;font-family:monospace;font-size:11px;word-break:break-all;color:#14F195">6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div>
-<a href="solana:6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb?label=CEDARS%20OF%20WEALTH" style="display:block;background:linear-gradient(135deg,#14F195,#9945FF);color:#000;text-decoration:none;padding:14px;border-radius:10px;font-weight:800;margin-top:10px">Open in Phantom</a>
-<button onclick="navigator.clipboard.writeText('6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb');this.innerText='Copied ✓'" style="background:#1e293b;color:white;border:0;padding:12px;border-radius:10px;width:100%;margin-top:10px;cursor:pointer">Copy Address</button>
-<p style="font-size:11px;color:#facc15;margin-top:12px">⚠️ Send USDC on Solana only.</p>
+<div id="qr"></div>
+<div class="wallet" id="walletAddr">YOUR_SOLANA_WALLET_HERE</div>
+<a class="btn btn-primary" id="phantomBtn" href="#">Open in Phantom</a>
+<button class="btn btn-secondary" onclick="copyAddr()">Copy Address</button>
+<p class="note">Send only <b>USDC on Solana</b> to this address.<br>Minimum deposit: 10 USDC.<br>Funds are credited after 1 confirmation.</p>
 </div>
+<script>
+const WALLET = "YOUR_SOLANA_WALLET_HERE";
+document.getElementById('walletAddr').textContent = WALLET;
+QRCode.toCanvas(WALLET, {width:200}, (err, canvas)=>{
+  if(!err) document.getElementById('qr').appendChild(canvas);
+});
+document.getElementById('phantomBtn').href = `https://phantom.app/ul/browse/${encodeURIComponent(window.location.href)}`;
+function copyAddr(){
+  navigator.clipboard.writeText(WALLET);
+  alert('Wallet address copied');
+}
+</script>
 </body>
 </html>
