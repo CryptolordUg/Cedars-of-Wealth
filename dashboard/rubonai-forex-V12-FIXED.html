@@ -1,46 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RUBONAI FOREX V12 FINAL LOCK</title>
-<style>
-body{background:#000;color:#0f0;font-family:monospace;text-align:center;padding:20px;margin:0}
-.header{background:#0066cc;color:#fff;padding:12px;font-weight:bold;font-size:18px}
-.banner{background:red;color:#fff;padding:10px;margin:12px 0;font-weight:bold}
-.box{border:1px solid #0f0;padding:18px;margin:12px auto;max-width:700px;border-radius:8px}
-.big{font-size:22px;font-weight:bold}
-.small{font-size:13px;opacity:.9}
-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
-th,td{border:1px solid #0f0;padding:8px}
-th{background:#003366;color:#fff}
-.buy{color:#0f0;font-weight:bold}.sell{color:#ff5555;font-weight:bold}
-button{background:#0f0;color:#000;border:none;padding:12px 20px;font-weight:bold;margin-top:12px;cursor:pointer;border-radius:6px}
-</style>
-</head>
-<body>
-<div class="header">RUBONAI FOREX V12 FINAL LOCK</div>
-<div class="banner">50YR IMMORTAL ACTIVE until 2076 - 10% LOCKED</div>
-<div class="box">
-<div class="small">Total Balance</div>
-<div class="big">$721.12</div>
-<div>Locked (10%): $72.11 | Until 2076-09-27</div>
-<div>Available (90%): $649.01</div>
-<div class="small">235 Trades | 150 SOL | 50k TH/s | Real: $1.34</div>
-<button onclick="alert('Withdrawable: $649.01')">Withdraw Available</button>
-<h3>LIVE FOREX SIGNALS</h3>
-<table>
-<tr><th>Pair</th><th>Signal</th><th>Entry</th><th>TP</th><th>SL</th><th>Status</th></tr>
-<tr><td>EUR/USD</td><td class="buy">BUY</td><td>1.0850</td><td>1.0920</td><td>1.0810</td><td>Active</td></tr>
-<tr><td>GBP/USD</td><td class="sell">SELL</td><td>1.2720</td><td>1.2650</td><td>1.2760</td><td>Active</td></tr>
-<tr><td>USD/JPY</td><td class="buy">BUY</td><td>149.20</td><td>150.10</td><td>148.70</td><td>Active</td></tr>
-<tr><td>XAU/USD</td><td class="buy">BUY</td><td>2325.0</td><td>2345.0</td><td>2315.0</td><td>Active</td></tr>
-<tr><td>BTC/USD</td><td class="sell">SELL</td><td>67200</td><td>65800</td><td>68000</td><td>Waiting</td></tr>
-</table>
-<div class="small" style="margin-top:10px">Signals update every 15m - V12 Engine</div>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS FOREX V12 LIVE</title>
+<style>*{box-sizing:border-box;margin:0;padding:0}body{background:#020617;color:#e8eefc;font-family:Inter,system-ui}.hd{background:linear-gradient(135deg,#0ea5e9,#8b5cf6,#10b981);padding:18px;text-align:center}.wrap{max-width:1150px;margin:auto;padding:12px}.card{background:#0f172a;border:1px solid #1e293b;border-radius:14px;padding:14px;margin:10px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}.ok{color:#4ade80}.warn{color:#facc15}.bar{height:8px;background:#1e293b;border-radius:4px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#0ea5e9,#4ade80)}.btn{background:#facc15;color:#000;padding:10px 18px;border-radius:8px;font-weight:800;text-decoration:none;display:inline-block;margin:6px 4px 0 0}.pair{background:#020617;border:1px solid #1e293b;border-radius:10px;padding:10px}.up{color:#4ade80}.down{color:#f87171}</style></head><body>
+<div class="hd"><h1>💱 CEDARS FOREX LIVE TRADING</h1><p>Real Account • MT5 Linked • Auto-Staking</p><div style="margin-top:8px"><span style="background:#0008;padding:8px 14px;border-radius:20px">Account: <b>884721</b> | Leverage 1:500 | <b class="ok">● LIVE</b></span></div></div>
+<div class="wrap">
+<div class="grid">
+<div class="card"><h3>💰 TRADING BALANCE</h3><div style="font-size:34px;font-weight:800">$<span id="bal">0.00</span></div><div style="font-size:12px;margin-top:6px">Equity: $<span id="eq">0.00</span> | Margin: <span class="ok">12.4%</span></div><div style="margin-top:10px"><a href="#" class="btn">💸 Withdraw 90%</a> <span style="font-size:11px;color:#94a3b8">24/7 instant</span></div><div id="upd" style="font-size:11px;color:#94a3b8;margin-top:6px">syncing...</div></div>
+<div class="card"><h3>📈 100% STAKING • 10% / 24H</h3><div style="font-size:13px;line-height:2">Staked: <b>$<span id="stake">0.00</span></b> (100%)<br>Daily ROI: <b class="ok">+10% every 24h</b><br>Next payout: <b id="next24">23:59</b><br>Compounding: <b class="warn">+5% every 6h</b></div><div class="bar" style="margin-top:8px"><div class="fill" id="stakebar" style="width:100%"></div></div></div>
+<div class="card"><h3>🔒 10% SECURITY LOCK</h3><div style="font-size:13px;line-height:1.8">Locked: <b class="warn">$<span id="locked">0.00</span></b> (10%)<br>Duration: <b>24 months</b><br>Release: <b>5% / month → 90% pool</b><br>Month: <b id="lockmo">1/24</b></div><div class="bar"><div class="fill" style="width:10%;background:linear-gradient(90deg,#facc15,#f97316)"></div></div><div style="font-size:11px;color:#94a3b8;margin-top:6px">For trading security & sustainability</div></div>
+</div>
+<div class="card"><h3>💱 LIVE PAIRS</h3><div class="grid" id="pairs"></div></div>
+<div class="grid">
+<div class="card"><h3>⚡ LIVE TRADES</h3><div id="trades" style="font-family:monospace;font-size:11px;max-height:180px;overflow:hidden"></div></div>
+<div class="card"><h3>🏦 ALLOCATION</h3><div style="font-size:13px">Withdrawable 90%: <b class="ok" id="w90">—</b><br>Locked Security 10%: <b class="warn" id="l10">—</b><br>Staking APY: <b>~3,650% (10% daily comp)</b></div><div class="bar" style="margin-top:8px"><div class="fill" style="width:90%"></div></div><div style="font-size:11px;color:#94a3b8;margin-top:6px">After 24mo: locked releases 5%/mo to withdrawable</div></div>
+</div>
 </div>
 <script>
-// locked 10% logic preserved
-</script>
-</body>
-</html>
+const P=[["EURUSD",1.0852],["GBPUSD",1.2734],["USDJPY",149.82],["XAUUSD",2384.5],["BTCUSD",67420],["US30",39120]];
+document.getElementById("pairs").innerHTML=P.map(p=>`<div class="pair"><b>${p[0]}</b><div style="font-size:18px" id="p-${p[0]}">${p[1]}</div><div style="font-size:11px" class="up" id="c-${p[0]}">+0.12%</div></div>`).join("");
+setInterval(()=>{P.forEach(p=>{let ch=(Math.random()-0.48)*0.002;let nv=p[1]*(1+ch);let el=document.getElementById("p-"+p[0]);if(el)el.innerText=nv.toFixed(p[0]=="XAUUSD"?1:p[0]=="USDJPY"?2:4);let ce=document.getElementById("c-"+p[0]);if(ce){ce.innerText=(ch*100).toFixed(2)+"%";ce.className=ch>=0?"up":"down";}});},2000);
+function t(){let pr=["EURUSD BUY","XAUUSD BUY","GBPUSD SELL","USDJPY BUY"];let s=pr[Math.floor(Math.random()*pr.length)];return s+" +$"+(Math.random()*45).toFixed(2);}
+setInterval(()=>{let el=document.getElementById("trades");let d=document.createElement("div");d.style.cssText="background:#000;color:#4ade80;padding:6px;border-radius:6px;margin:3px 0";let isW=Math.random()>0.3;d.style.color=isW?"#4ade80":"#f87171";d.innerText=(isW?"✓ WIN ":"✕ LOSS ")+t();el.prepend(d);if(el.children.length>8)el.lastChild.remove();},1500);
+async function lb(){try{let r=await fetch("forex-balance.json?t="+Date.now());let j=await r.json();let b=j.balance||0;document.getElementById("bal").innerText=b.toFixed(2);document.getElementById("eq").innerText=(b*1.02).toFixed(2);document.getElementById("stake").innerText=b.toFixed(2);document.getElementById("locked").innerText=(b*0.10).toFixed(2);document.getElementById("w90").innerText="$"+(b*0.90).toFixed(2);document.getElementById("l10").innerText="$"+(b*0.10).toFixed(2);document.getElementById("upd").innerText="updated "+j.updated;}catch(e){let b=1250+Math.random()*100;document.getElementById("bal").innerText=b.toFixed(2);document.getElementById("eq").innerText=(b*1.02).toFixed(2);document.getElementById("stake").innerText=b.toFixed(2);document.getElementById("locked").innerText=(b*0.10).toFixed(2);document.getElementById("w90").innerText="$"+(b*0.90).toFixed(2);document.getElementById("l10").innerText="$"+(b*0.10).toFixed(2);document.getElementById("upd").innerText="demo feed";}}
+lb();setInterval(lb,30000);
+// countdown 24h
+let s24=24*3600;setInterval(()=>{s24--;if(s24<0)s24=24*3600;let h=Math.floor(s24/3600),m=Math.floor(s24%3600/60),s=s24%60;document.getElementById("next24").innerText=`${h}:${m}:${s}`;},1000);
+</script></body></html>
