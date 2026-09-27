@@ -1,84 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dashboard - Cedars of Wealth</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#0a0f1e;color:#fff;line-height:1.6}
-.topnav{background:#070c1a;padding:14px 20px;border-bottom:1px solid #1e2a4a;display:flex;justify-content:space-between;align-items:center}
-.topnav a{color:#a0b0cc;text-decoration:none;margin-left:16px;font-size:14px}
-.topnav .logo{color:#fff;font-weight:700;font-size:18px;margin:0;text-decoration:none}
-.wrap{max-width:1000px;margin:0 auto;padding:20px 15px}
-.card{background:#131a2e;border:1px solid #1e2a4a;border-radius:12px;padding:20px;margin:16px 0}
-button{padding:10px 18px;background:#1a233f;color:#fff;border:1px solid #2a3a5a;border-radius:8px;margin:4px;cursor:pointer}
-input,select{width:100%;padding:12px;background:#0a0f1e;border:1px solid #2a3a5a;color:#fff;margin:8px 0;border-radius:8px}
-.big{width:100%;padding:14px;background:linear-gradient(135deg,#4f7cff,#2dd4a7);border:0;border-radius:8px;color:#fff;font-weight:700}
-.muted{font-size:12px;color:#8a94ad}
-.sitefooter{background:#070c1a;border-top:1px solid #1e2a4a;padding:30px 20px;color:#8a94ad;font-size:13px;margin-top:40px;text-align:center}
-.joinbtn{color:#fff!important;background:linear-gradient(135deg,#4f7cff,#2dd4a7);padding:8px 16px;border-radius:8px}
-table{width:100%;font-size:13px;border-collapse:collapse}
-th,td{padding:8px;text-align:left}
-th{color:#8a94ad;border-bottom:1px solid #2a3a5a}
-</style>
-</head>
-<body>
 <div class="topnav">
 <a class="logo" href="/Cedars-of-Wealth/">🌲 Cedars of Wealth</a>
-<div><a href="/Cedars-of-Wealth/">Home</a><a href="/Cedars-of-Wealth/plans/">Plans</a><a href="/Cedars-of-Wealth/dashboard/">Dashboard</a><a class="joinbtn" href="/Cedars-of-Wealth/register/">Join</a></div>
-</div>
-
-<div class="wrap">
-<h1>Dashboard</h1>
-<p>Package: Mighty Cedar | Status: Active ✅ | Member: CRA-25841</p>
-
-<div class="card"><h3>Portfolio Growth</h3><canvas id="c1"></canvas></div>
-<div class="card"><h3>Reserve Fund</h3><canvas id="c2"></canvas></div>
-
-<div class="card"><h3>10-Year Wealth Calendar (2026-2036)</h3>
-<div style="overflow-x:auto"><table>
-<tr><th>Year</th><th>Focus</th><th>Action</th></tr>
-<tr><td>2026</td><td>Foundation</td><td style="color:#8a94ad">Build emergency fund, start DCA</td></tr>
-<tr><td>2027</td><td>Risk Management</td><td style="color:#8a94ad">Learn position sizing, stop-loss</td></tr>
-<tr><td>2028</td><td>Diversification</td><td style="color:#8a94ad">Add BTC/ETH + stable reserve</td></tr>
-<tr><td>2029</td><td>Halving Cycle Study</td><td style="color:#8a94ad">Study past cycles, avoid FOMO</td></tr>
-<tr><td>2030</td><td>Compounding</td><td style="color:#8a94ad">Reinvest, review 5yr performance</td></tr>
-<tr><td>2031</td><td>Tax Planning</td><td style="color:#8a94ad">Learn local crypto tax rules</td></tr>
-<tr><td>2032</td><td>Passive Models</td><td style="color:#8a94ad">Explore staking (educational)</td></tr>
-<tr><td>2033</td><td>Wealth Protection</td><td style="color:#8a94ad">Cold wallet, estate basics</td></tr>
-<tr><td>2034</td><td>Mentorship</td><td style="color:#8a94ad">Teach others, refine strategy</td></tr>
-<tr><td>2035</td><td>Legacy</td><td style="color:#8a94ad">10yr review, set next decade goals</td></tr>
-</table></div>
-<p class="muted">Educational roadmap only. Not financial advice.</p></div>
-
-<div class="card"><h3>5-Year Investor Learning Planner</h3><canvas id="c3"></canvas>
-<p class="muted">Illustrative learning curve: Knowledge vs Portfolio Discipline (1-100 score)</p></div>
-
-<div class="card"><h3>Wallet</h3>
-<button>Deposit</button><button>Request Withdrawal</button>
-<p class="muted">Transaction History | Download Statement</p>
-</div>
-
-<div class="card"><h3>Referral Program</h3>
-<p>Direct: 0 | Team: 0 | Bonuses: $0</p>
-<input readonly id="rl" value="https://cryptolordug.github.io/Cedars-of-Wealth/register/?ref=CRA-25841">
-<button onclick="navigator.clipboard.writeText(document.getElementById('rl').value);alert('Copied!')">Copy Referral Link</button>
-</div>
-
-<div class="card"><h3>Upgrade Center</h3>
-<p>Current: Mighty Cedar</p>
-<select><option>Seed $5</option><option>Sprout $25</option><option>Sapling $100</option><option>Cedar $500</option><option selected>Mighty Cedar $1,000</option><option>Forest $5,000</option></select>
-<button class="big">Upgrade Package</button>
-<p class="muted">Illustrative only. No guaranteed returns.</p>
+<div style="display:flex;align-items:center">
+<a href="/Cedars-of-Wealth/">Home</a>
+<a href="/Cedars-of-Wealth/about/">About</a>
+<a href="/Cedars-of-Wealth/plans/">Plans</a>
+<div style="position:relative;display:inline-block;margin-left:16px">
+<a href="/Cedars-of-Wealth/dashboard/" style="margin:0">Dashboard ▾</a>
+<div style="display:none;position:absolute;background:#131a2e;border:1px solid #2a3a5a;border-radius:8px;padding:8px;min-width:200px;z-index:100" onmouseover="this.style.display='block'" onmouseout="this.style.display='none'">
+<a href="/Cedars-of-Wealth/dashboard/#annual-calendar" style="display:block;padding:8px;margin:0">Annual Calendar</a>
+<a href="/Cedars-of-Wealth/dashboard/#planner" style="display:block;padding:8px;margin:0">Economic Planner</a>
 </div>
 </div>
-
-<div class="sitefooter"><p>© 2026 Cedars of Wealth. Educational purposes only.</p></div>
-
-<script>
-new Chart(document.getElementById('c1'),{type:'line',data:{labels:['Jan',[STRIPPED] $',data:[12000,[STRIPPED]
-new Chart(document.getElementById('c2'),{type:'bar',data:{labels:['Jan',[STRIPPED] $',data:[5000,[STRIPPED]
-new Chart(document.getElementById('c3'),{type:'line',data:{labels:['2026',[STRIPPED] Score',data:[20,[STRIPPED] Score',data:[30,[STRIPPED]
-</script>
-</body>
-</html>
+<a class="joinbtn" href="/Cedars-of-Wealth/register/" style="margin-left:16px">Join</a>
+</div>
+</div>
+<style>.topnav div div:hover div{display:block!important}</style>
