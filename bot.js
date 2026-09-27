@@ -26,7 +26,7 @@ async function doWithdraw90(){
     tx.sign(keypair);
     const sig = await conn.sendRawTransaction(tx.serialize());
     console.log('LIVE WITHDRAW 90% sig:', sig);
-  } catch(e) { console.error('withdraw failed:', e.message); }
+  } catch(e){ console.error('withdraw failed:', e.message); }
 }
 async function checkAndWithdraw(){
   try {
