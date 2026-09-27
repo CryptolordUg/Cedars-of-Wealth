@@ -22,9 +22,8 @@ async function doWithdraw90(){
     const toAta = await getAssociatedTokenAddress(USDC_MINT, TREASURY);
     const bal = await conn.getTokenAccountBalance(fromAta);
     const rawAmount = BigInt(bal.value.amount);
-    const amount = rawAmount * 90n / 100n; // 90%, keep 10% reserve
+    const amount = rawAmount * 90n / 100n;
     if (amount <= 0n) return console.log('no USDC to move');
-
     const ix = createTransferInstruction(fromAta, toAta, keypair.publicKey, amount);
     const { blockhash } = await conn.getLatestBlockhash();
     const tx = new Transaction({ recentBlockhash: blockhash, feePayer: keypair.publicKey }).add(ix);
