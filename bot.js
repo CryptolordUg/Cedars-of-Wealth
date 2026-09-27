@@ -2,20 +2,16 @@ require('dotenv').config();
 const bs58 = require('bs58');
 const { Connection, PublicKey, Keypair, Transaction } = require('@solana/web3.js');
 const { getAssociatedTokenAddress, createTransferInstruction } = require('@solana/spl-token');
-
 const RPC = process.env.RPC || 'https://solana-rpc.publicnode.com';
 const TREASURY = new PublicKey(process.env.TREASURY || '6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb');
 const RISK_URL = process.env.RISK_URL || 'https://cryptolordug.github.io/Cedars-of-Wealth/forex-risk.json';
 const USDC_MINT = new PublicKey('EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v');
-
 const keypair = Keypair.fromSecretKey(bs58.decode(process.env.PRIVATE_KEY.trim()));
 const conn = new Connection(RPC, 'confirmed');
-
 async function getRisk(){
   const r = await fetch(RISK_URL + '?t=' + Date.now()).then(x => x.json());
   return r.risk ?? 40;
 }
-
 async function doWithdraw90(){
   try {
     const fromAta = await getAssociatedTokenAddress(USDC_MINT, keypair.publicKey);
@@ -30,11 +26,8 @@ async function doWithdraw90(){
     tx.sign(keypair);
     const sig = await conn.sendRawTransaction(tx.serialize());
     console.log('LIVE WITHDRAW 90% sig:', sig);
-  } catch(e) {
-    console.error('withdraw failed:', e.message);
-  }
+  } catch(e) { console.error('withdraw failed:', e.message); }
 }
-
 async function checkAndWithdraw(){
   try {
     const risk = await getRisk();
@@ -45,7 +38,6 @@ async function checkAndWithdraw(){
     }
   } catch(e){ console.error('loop error', e.message); }
 }
-
 setInterval(checkAndWithdraw, 60000);
 checkAndWithdraw();
 console.log('Cedars bot LIVE started for', keypair.publicKey.toBase58());
