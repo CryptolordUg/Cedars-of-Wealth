@@ -1,0 +1,24 @@
+name: Update SOL Balance
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch balance
+        run: |
+          WALLET="6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb"
+          BAL=$(curl -s https://api.mainnet-beta.solana.com -X POST -H "Content-Type: application/json" -d "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"getBalance\",\"params\":[\"$WALLET\"]}" | jq -r '.result.value')
+          SOL=$(echo "scale=4; $BAL/1000000000" | bc)
+          echo "{\"wallet\":\"$WALLET\",\"lamports\":$BAL,\"sol\":$SOL,\"updated\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" > dashboard/balance.json
+          cat dashboard/balance.json
+      - name: Commit
+        run: |
+          git config user.name "rubonai-bot"
+          git config user.email "bot@rubonai.local"
+          git add dashboard/balance.json
+          git diff --staged --quiet || git commit -m "auto: update balance"
+          git push
