@@ -1,0 +1,24 @@
+name: Forex 10pct Daily
+on:
+  schedule: [{cron: '0 0 * * *'}]
+  workflow_dispatch:
+jobs:
+  stake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          python3 -c "
+          import json,datetime,os
+          p='dashboard/forex-balance.json'
+          d=json.load(open(p)) if os.path.exists(p) else {'balance':1000}
+          b=float(d.get('balance',1000))
+          b=b*1.10
+          out={'balance':round(b,2),'withdrawable_90':round(b*0.9,2),'locked_10':round(b*0.1,2),'updated':datetime.datetime.utcnow().isoformat()+'Z'}
+          open(p,'w').write(json.dumps(out,indent=2))
+          "
+          git config user.name "forex-bot"
+          git config user.email "bot@cedars.farm"
+          git add dashboard/forex-balance.json
+          git commit -m "10% daily" || true
+          git push || true
