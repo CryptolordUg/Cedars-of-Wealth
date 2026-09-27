@@ -1,7 +1,2 @@
-// Telegram float
-var tg = document.createElement('a');
-tg.href = 'https://t.me/+qXjnwt0SX0BkODQ8';
-tg.target = '_blank';
-tg.innerHTML = '✈️';
-tg.style.cssText = 'position:fixed;bottom:24px;right:24px;width:64px;height:64px;background:#229ED9;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;text-decoration:none;z-index:1000;box-shadow:0 4px 12px rgba(0,0,0,0.3)';
-document.body.appendChild(tg);
+<a href="/Cedars-of-Wealth/" style="color:#fff;text-decoration:none;font-weight:800;font-size:22px">🌲 CEDARS OF WEALTH</a>Replace with:
+<a href="/Cedars-of-Wealth/" style="color:#fff;text-decoration:none;font-weight:800;font-size:22px;display:flex;align-items:center;gap:10px"><span style="width:38px;height:38px;background:linear-gradient(135deg,#2dd4a7,#4f7cff);border-radius:10px;display:inline-flex;align-items:center;justify-content:center;font-size:22px">🌲</span> CEDARS OF WEALTH <span style="font-size:12px;font-weight:400;color:#8a9bb5;margin-left:6px">NZ</span></a>
