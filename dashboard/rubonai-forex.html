@@ -1,15 +1,18 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><title>RUBONAI V12</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<style>body{margin:0;background:#070b18;color:#fff;font-family:Arial;padding:16px}.top{background:linear-gradient(90deg,#00ff88,#00aaff);border-radius:16px;padding:18px;color:#000}.immortal{background:#ff0033;color:#fff;text-align:center;padding:12px;border-radius:10px;margin:12px 0;font-weight:900}.card{background:#12172a;border-radius:14px;padding:16px;margin:12px 0}.big{font-size:42px;font-weight:900}.green{color:#00ff88}.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1c2540}.btn{width:100%;padding:16px;border:0;border-radius:12px;font-weight:900;margin:8px 0;background:#00ff88}#drop{border:3px dashed #00ff88;border-radius:16px;padding:30px;text-align:center;background:#0f1a2a}</style></head><body>
-<div class="top"><h1>RUBONAI V12 FINAL LOCK</h1><div>75-99 + 50YR IMMORTAL - 100 Miners - PASS</div></div>
-<div class="immortal">🔒 50YR IMMORTAL ACTIVE until 2076</div>
-<div id="drop">📥 DROP MY_722_BACKUP_25Sep.json HERE<br><br><input type="file" id="f" accept=".json"></div>
-<div class="card"><div class="big" id="b">$9,320.27</div><div class="green" id="m">Mining $721.12 | Real $1.34 | 235 Trades</div></div>
-<div class="card" id="c">Drop backup to see coins...</div>
-<script>
-function R(d){try{let L=JSON.parse(d.cedars_backup_latest||'{}');let B=JSON.parse(d.cedars_coinBalances||'{}');document.getElementById('b').innerText='$'+(L.totalBal||'721')+' Mining | $'+(L.realUsd||'1.34')+' Real';document.getElementById('m').innerText=(L.tradeCount||'235')+' Trades | '+ (L.solPrice||150)+' SOL | 50k TH/s';let h='';for(let k in B)h+='<div class=row><span>'+k+'</span><span>'+B[k]+'</span></div>';document.getElementById('c').innerHTML=h}catch(e){}}
-function H(f){let r=new FileReader();r.onload=e=>{let d=JSON.parse(e.target.result);for(let k in d)localStorage.setItem(k,d[k]);R(d);alert('LOADED!')};r.readAsText(f)}
-document.getElementById('f').addEventListener('change',e=>H(e.target.files[0]));
-let D=document.getElementById('drop');D.addEventListener('dragover',e=>e.preventDefault());D.addEventListener('drop',e=>{e.preventDefault();H(e.dataTransfer.files[0])});
-if(localStorage.cedars_backup_latest)R(localStorage);
-</script></body></html>
+// 10% 50YR LOCK / 90% WITHDRAWABLE
+const totalBalance = 721.12; // change to your live balance var if different
+const lockPercent = 0.10;
+const lockedAmount = (totalBalance * lockPercent).toFixed(2); // $72.11 locked until 2076
+const withdrawableAmount = (totalBalance * (1 - lockPercent)).toFixed(2); // $649.01 available
+const lockUntil = new Date('2076-09-27').getTime();
+
+function canWithdraw(amount) {
+  if (amount > withdrawableAmount) {
+    alert('Only $' + withdrawableAmount + ' withdrawable. $' + lockedAmount + ' locked until 2076 (50YR IMMORTAL).');
+    return false;
+  }
+  return true;
+}
+// Update display
+// document.getElementById('mining-balance').innerText = '$' + totalBalance;
+// document.getElementById('locked-balance').innerText = '$' + lockedAmount + ' LOCKED 50YR';
+// document.getElementById('available-balance').innerText = '$' + withdrawableAmount + ' AVAILABLE';
