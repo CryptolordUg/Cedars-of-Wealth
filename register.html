@@ -1,86 +1,14 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reset Password | Cedars</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial;background:radial-gradient(circle at top,#0a1a0f,#020a02);color:#fff;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:15px}
-.box{background:#0f2310;border:2px solid #00ff8844;border-radius:20px;padding:30px;width:100%;max-width:420px;text-align:center;box-shadow:0 0 40px #00ff8822}
-input{width:100%;padding:14px;margin:10px 0;border-radius:10px;border:1px solid #1a4a1a;background:#020a02;color:#fff;outline:none}
-input:focus{border-color:#00ff88}
-button{width:100%;padding:14px;background:linear-gradient(90deg,#00ff88,#00cc66);color:#000;border:none;border-radius:12px;font-weight:900;cursor:pointer;margin-top:10px;letter-spacing:1px}
-button:disabled{opacity:0.5}
-.small{font-size:11px;color:#88aa88;margin-top:10px;letter-spacing:1px}
-.link{color:#00ff88;font-size:13px;text-decoration:none;display:block;margin-top:15px}
-#msg{margin-top:15px;padding:12px;border-radius:10px;display:none;font-size:13px}
-.success{background:#00ff8822;border:1px solid #00ff88;color:#00ff88}
-.error{background:#ff444422;border:1px solid #ff4444;color:#ff8888}
-</style>
-</head><body>
-<div class="box">
-<h1 style="color:#00ff88;font-size:22px">🌲 CEDARS</h1>
-<p class="small">RESET YOUR PASSWORD</p>
-
-<div id="emailShow" style="margin:15px 0;font-size:13px;color:#aaffaa"></div>
-
-<input id="newPass" type="password" placeholder="New Password (min 6 chars)">
-<input id="confirmPass" type="password" placeholder="Confirm New Password">
-
-<button id="resetBtn" onclick="doReset()">RESET PASSWORD</button>
-
-<div id="msg"></div>
-
-<a href="login.html" class="link">← Back to Login</a>
-</div>
-
-<script>
-// Get email from URL ?email= or from reset storage
-const params = new URLSearchParams(window.location.search);
-let emailFromUrl = params.get('email');
-let resetData = JSON.parse(localStorage.getItem('cedars_reset_request')||'null');
-
-let targetEmail = emailFromUrl || (resetData ? resetData.email : null);
-let emailDiv = document.getElementById('emailShow');
-let msg = document.getElementById('msg');
-
-if(!targetEmail){
-  emailDiv.innerHTML = "❌ Invalid or expired reset link";
-  msg.style.display='block';
-  msg.className='error';
-  msg.innerHTML = "No reset request found.<br>Please go to <a href='forgot.html' style='color:#00ff88'>Forgot Password</a> again.";
-  document.getElementById('resetBtn').disabled=true;
-} else {
-  emailDiv.innerHTML = `Resetting for:<br><b style="color:#fff">${targetEmail}</b>`;
-  // Check if link expired (15 min)
-  if(resetData && (Date.now() - resetData.time > 15*60*1000)){
-    msg.style.display='block';
-    msg.className='error';
-    msg.innerText='⏰ Link expired! Request new one.';
-    document.getElementById('resetBtn').disabled=true;
-  }
-}
-
-function doReset(){
-  let p1 = document.getElementById('newPass').value;
-  let p2 = document.getElementById('confirmPass').value;
-
-  if(p1.length < 6){ show('Password too short - min 6 chars',0); return; }
-  if(p1 !== p2){ show('Passwords do not match!',0); return; }
-
-  let users = JSON.parse(localStorage.getItem('cedars_users')||'[]');
-  let idx = users.findIndex(u=>u.email===targetEmail.toLowerCase());
-
-  if(idx === -1){ show('Account not found! Please register.',0); return; }
-
-  users[idx].password = btoa(p1);
-  localStorage.setItem('cedars_users', JSON.stringify(users));
-  localStorage.removeItem('cedars_reset_request');
-
-  show('✅ Password reset successful! Redirecting to login...',1);
-  setTimeout(()=>location.href='login.html',1500);
-}
-
-function show(t,ok){
-  msg.style.display='block';
-  msg.className = ok ? 'success' : 'error';
-  msg.innerText = t;
-}
-</script>
-</body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Register - CEDARS OF WEALTH</title>
+<style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}body{background:#0a0f1e;color:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}.box{background:#131a2e;border:1px solid #1e2a4a;border-radius:20px;padding:32px;width:100%;max-width:400px}h2{text-align:center;margin-bottom:8px}p.sub{text-align:center;color:#8a9bb5;font-size:13px;margin-bottom:24px}input{width:100%;padding:14px;border-radius:12px;border:1px solid #1e2a4a;background:#0a0f1e;color:#fff;margin-bottom:12px;font-size:15px}button{width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,#4f7cff,#2dd4a7);color:#fff;font-weight:700;font-size:16px;cursor:pointer}.link{text-align:center;margin-top:16px;font-size:14px;color:#8a9bb5}.link a{color:#2dd4a7;text-decoration:none}</style></head>
+<body><div class="box">
+<h2>CEDARS OF WEALTH</h2><p class="sub">Create your account</p>
+<form onsubmit="event.preventDefault(); window.location.href='dashboard/';">
+<input type="text" placeholder="Full Name" required>
+<input type="email" placeholder="Email" required>
+<input type="text" placeholder="Solana Wallet Address (Phantom)">
+<input type="text" placeholder="Referral Code (optional)">
+<input type="password" placeholder="Password" required>
+<button type="submit">Create Account</button>
+</form><div class="link">Already have account? <a href="dashboard/">Sign In</a></div>
+</div></body></html>
