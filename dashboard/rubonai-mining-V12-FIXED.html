@@ -4,41 +4,21 @@
 <div style="background:red;color:#fff;padding:10px;font-weight:bold">50YR IMMORTAL ACTIVE until 2076 - 10% LOCKED</div>
 <p>Wallet: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</p>
 <p>Live Balance: <span id="bal" style="font-size:24px;font-weight:bold;color:#fff">loading...</span> SOL</p>
-<p style="font-size:12px;color:#888">auto-updates every 30s from Solana chain</p>
+<p style="font-size:12px;color:#888">auto-updates every 10m via GitHub Actions bot</p>
 <p>100 Workers | 150 SOL target | 50k TH/s | Coin: SOL</p>
-<h3>100 WORKERS LIVE</h3><div id="workers" style="font-size:12px;text-align:left;max-width:400px;margin:auto">loading...</div>
+<h3>100 WORKERS LIVE</h3><div id="workers" style="font-size:12px;text-align:left;max-width:400px;margin:auto"></div>
 <h3>COINS MINED / MINTS</h3>
-<p>Recent activity auto-loaded below:</p><div id="txs" style="font-size:12px;max-width:500px;margin:auto;text-align:left">loading txs...</div>
+<p><a href="https://solscan.io/account/6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb#transfers" style="color:#0f0">View Recent Transfers / Mints on Solscan</a></p>
 <script>
 var walletAddr="6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb";
 function loadWorkers(){var h="";for(var i=1;i<=100;i++){var n=("00"+i).slice(-3);h+="Worker "+n+": Online - 500 TH/s<br>";}document.getElementById("workers").innerHTML=h;}
 async function loadBal(){
  try{
-  var proxy="https://corsproxy.io/?url="+encodeURIComponent("https://api.mainnet-beta.solana.com");
-  var res=await fetch(proxy,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getBalance",params:[walletAddr]})});
-  var data=await res.json();
-  var d=data; try{d=JSON.parse(data.contents||JSON.stringify(data));}catch(e){}
-  var lamports=d.result?d.result.value:(JSON.parse(data.contents||"{}").result||{}).value;
-  if(lamports===undefined){throw "no data";}
-  document.getElementById("bal").innerText=(lamports/1e9).toFixed(4);
- }catch(e){
-  try{
-   var r2=await fetch("https://api.allorigins.win/raw?url="+encodeURIComponent("https://api.mainnet-beta.solana.com"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getBalance",params:[walletAddr]})});
-   var j2=await r2.json(); document.getElementById("bal").innerText=(j2.result.value/1e9).toFixed(4);
-  }catch(e2){document.getElementById("bal").innerText="unavailable";}
- }
+  var r=await fetch("balance.json?t="+Date.now());
+  var j=await r.json();
+  document.getElementById("bal").innerText=j.sol.toFixed(4)+" (updated "+j.updated.slice(11,16)+" UTC)";
+ }catch(e){document.getElementById("bal").innerText="waiting for first bot run...";}
 }
-async function loadTxs(){
- try{
-  var proxy="https://corsproxy.io/?url="+encodeURIComponent("https://api.mainnet-beta.solana.com");
-  var res=await fetch(proxy,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getSignaturesForAddress",params:[walletAddr,{limit:5}]})});
-  var data=await res.json(); var txt=""; var arr=[];
-  try{arr=JSON.parse(data.contents).result||data.result||[];}catch(e){arr=data.result||[];}
-  if(arr.length==0){document.getElementById("txs").innerHTML="No recent txs found";return;}
-  arr.forEach(function(s){txt+="• "+s.signature.slice(0,20)+"... : "+new Date(s.blockTime*1000).toLocaleString()+"<br>";});
-  document.getElementById("txs").innerHTML=txt;
- }catch(e){document.getElementById("txs").innerHTML='Check on <a href="https://solscan.io/account/'+walletAddr+'#transfers" style="color:#0f0">Solscan</a>';}
-}
-loadWorkers();loadBal();loadTxs();setInterval(loadBal,30000);
+loadWorkers();loadBal();setInterval(loadBal,60000);
 </script>
 </body></html>
