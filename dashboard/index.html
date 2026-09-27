@@ -1,19 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Dashboard - Cedars RubonAI</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#0a0f1e;color:#fff;line-height:1.6}
-.wrap{max-width:1000px;margin:0 auto;padding:20px 15px}
-.card{background:#131a2e;border:1px solid #1e2a4a;border-radius:12px;padding:20px;margin:16px 0}
-h3{margin-top:0;color:#fff}
-button{padding:10px 18px;background:#1a233f;color:#fff;border:1px solid #2a3a5a;border-radius:8px;cursor:pointer;margin:4px}
-button:hover{background:#243152}
-input,select{width:100%;padding:12px;background:#0a0f1e;border:1px solid #2a3a5a;color:#fff;border-radius:8px;margin:8px 0}
-.upgrade-btn{width:100%;padding:14px;background:linear-gradient(135deg,#4f7cff,#2dd4a7);border:0;border-radius:8px;color:#fff;font-weight:700;margin-top:10px}
-a{color:#4f7cff}
-.muted{font-size:12px;color:#8a94ad}
-</style>
+<style>*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#0a0f1e;color:#fff}.wrap{max-width:1000px;margin:0 auto;padding:20px 15px}.card{background:#131a2e;border:1px solid #1e2a4a;border-radius:12px;padding:20px;margin:16px 0}button{padding:10px 18px;background:#1a233f;color:#fff;border:1px solid #2a3a5a;border-radius:8px;margin:4px;cursor:pointer}input,select{width:100%;padding:12px;background:#0a0f1e;border:1px solid #2a3a5a;color:#fff;border-radius:8px;margin:8px 0}.big{width:100%;padding:14px;background:linear-gradient(135deg,#4f7cff,#2dd4a7);border:0;border-radius:8px;color:#fff;font-weight:700}</style>
 </head>
+<body>
+<div id="site-header"></div>
+<div class="wrap">
+<h1>🌲 CEDARS RUBONAI Dashboard</h1>
+<p>Package: Mighty Cedar | Status: Active ✅ | Member: CRA-25841</p>
+
+<div class="card"><h3>Portfolio Growth</h3><canvas id="c1"></canvas></div>
+<div class="card"><h3>Reserve Fund</h3><canvas id="c2"></canvas></div>
+
+<div class="card"><h3>Wallet</h3>
+<button>Deposit</button><button>Request Withdrawal</button>
+<p style="font-size:13px;color:#8a94ad">Transaction History | Download Statement</p>
+</div>
+
+<div class="card"><h3>Referral Program</h3>
+<p>Direct: 0 | Team: 0 | Bonuses: $0</p>
+<input readonly value="https://cryptolordug.github.io/Cedars-of-Wealth/register/?ref=CRA-25841" id="rl">
+<button onclick="navigator.clipboard.writeText(document.getElementById('rl').value)">Copy Referral Link</button>
+</div>
+
+<div class="card"><h3>Upgrade Center</h3>
+<p>Current: Mighty Cedar</p>
+<select><option>Seed $5</option><option>Sprout $25</option><option>Sapling $100</option><option>Cedar $500</option><option selected>Mighty Cedar $1,000</option><option>Forest $5,000</option><option>Pro $10,000</option><option>Empire $25,000</option><option>Legacy $50,000</option><option>Immortal $100,000</option></select>
+<button class="big">Upgrade Package</button>
+<p style="font-size:11px;color:#8a94ad">Illustrative only. No guaranteed returns.</p>
+</div>
+
+</div>
+<div id="site-footer"></div>
+<script>
+new Chart(document.getElementById('c1'),{type:'line',data:{labels:['Jan','Feb','Mar','Apr','May'],datasets:[{label:'Growth',data:[100,120,135,160,185],borderColor:'#4f7cff'}]}});
+new Chart(document.getElementById('c2'),{type:'bar',data:{labels:['Jan','Feb','Mar','Apr','May'],datasets:[{label:'Reserve',data:[10,25,40,60,80],backgroundColor:'#2dd4a7'}]}});
+</script>
+<script src="/Cedars-of-Wealth/js/layout.js"></script>
+</body>
+</html>
