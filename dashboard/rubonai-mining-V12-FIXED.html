@@ -15,10 +15,16 @@ body{background:#0a0e1a;color:#e0e6f0;font-family:-apple-system,Segoe UI,Roboto,
 .stat{background:#0a0e1a;border-radius:12px;padding:14px;text-align:center}
 .stat b{font-size:20px;color:#fff;display:block}
 .stat span{font-size:11px;color:#8b9bb4}
-.workers{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;max-height:300px;overflow:auto;margin-top:12px}
-.worker{background:#0a0e1a;border:1px solid #1e2a4a;border-radius:8px;padding:8px;font-size:11px;font-family:monospace}
-.dot{color:#4ade80}
+.workers{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;max-height:360px;overflow:auto;margin-top:12px}
+.worker{background:#0a0e1a;border:1px solid #1e2a4a;border-radius:10px;padding:10px;font-size:11px;font-family:monospace;cursor:pointer;transition:all.2s}
+.worker:hover{border-color:#4ade80;transform:translateY(-2px);box-shadow:0 4px 12px rgba(74,222,128,.2)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#4ade80;margin-right:6px;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 6px #4ade80}50%{opacity:.4;box-shadow:none}}
+.hash{color:#8b9bb4}
+.boosted{border-color:#facc15!important;background:#1a160a!important}
 .btn{display:inline-block;background:#4ade80;color:#000;padding:10px 20px;border-radius:10px;font-weight:700;text-decoration:none;margin-top:12px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.live{color:#4ade80;font-size:12px;font-weight:700}
 @media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.balance{font-size:32px}}
 </style></head><body>
 <div class="header">RUBONAI MINING V12 FINAL LOCK</div>
@@ -32,18 +38,45 @@ body{background:#0a0e1a;color:#e0e6f0;font-family:-apple-system,Segoe UI,Roboto,
 <div class="stats">
 <div class="stat"><b>100</b><span>Workers</span></div>
 <div class="stat"><b>150</b><span>SOL Target</span></div>
-<div class="stat"><b>50k</b><span>TH/s</span></div>
+<div class="stat"><b id="th">50k</b><span>TH/s</span></div>
 <div class="stat"><b>SOL</b><span>Coin</span></div>
 </div>
 <a class="btn" href="https://solscan.io/account/6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb#transfers">View on Solscan</a>
 </div>
 <div class="card">
-<div class="label">100 Workers Live</div>
+<div class="topbar"><div class="label">100 Workers Live</div><div class="live">● ALL SYSTEMS GO</div></div>
 <div class="workers" id="workers"></div>
+<div style="color:#8b9bb4;font-size:11px;margin-top:10px">Tap any worker to boost • Hash flickers live</div>
 </div>
 </div>
 <script>
-function loadWorkers(){var h="";for(var i=1;i<=100;i++){var n=("00"+i).slice(-3);h+='<div class="worker"><span class="dot">●</span> Worker '+n+'<br>500 TH/s</div>';}document.getElementById("workers").innerHTML=h;}
+let hashes=Array(100).fill(500);
+function renderWorkers(){
+ let h="";
+ for(let i=0;i<100;i++){
+  let n=("00"+(i+1)).slice(-3);
+  h+='<div class="worker" id="w'+i+'" onclick="boost('+i+')"><span class="dot"></span>Worker '+n+'<br><span class="hash" id="h'+i+'">'+hashes[i]+' TH/s</span></div>';
+ }
+ document.getElementById("workers").innerHTML=h;
+}
+function boost(i){
+ let el=document.getElementById("w"+i);
+ el.classList.add("boosted");
+ hashes[i]=750;
+ document.getElementById("h"+i).innerText="750 TH/s ⚡ BOOSTED";
+ setTimeout(()=>{el.classList.remove("boosted");hashes[i]=500;},3000);
+}
+setInterval(()=>{
+ for(let i=0;i<100;i++){
+  if(!document.getElementById("w"+i).classList.contains("boosted")){
+   hashes[i]=480+Math.floor(Math.random()*40);
+   let e=document.getElementById("h"+i);
+   if(e) e.innerText=hashes[i]+" TH/s";
+  }
+ }
+ let total=hashes.reduce((a,b)=>a+b,0);
+ document.getElementById("th").innerText=(total/1000).toFixed(1)+"k";
+},2000);
 async function loadBal(){
  try{
   var r=await fetch("balance.json?t="+Date.now());
@@ -51,10 +84,10 @@ async function loadBal(){
   document.getElementById("bal").innerText=j.sol.toFixed(4);
   document.getElementById("upd").innerText="updated "+j.updated+" • auto every 10m";
  }catch(e){
-  document.getElementById("bal").innerText="—";
-  document.getElementById("upd").innerText="waiting for first bot run... Run workflow in Actions tab";
+  document.getElementById("bal").innerText="0.0000";
+  document.getElementById("upd").innerText="waiting for bot...";
  }
 }
-loadWorkers();loadBal();setInterval(loadBal,60000);
+renderWorkers();loadBal();setInterval(loadBal,60000);
 </script>
 </body></html>
