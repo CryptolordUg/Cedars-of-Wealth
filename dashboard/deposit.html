@@ -1,48 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CEDARS OF WEALTH - Deposit</title>
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
-body{background:#0a0f1e;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-.card{background:#131a2e;border:1px solid #1e2a4a;border-radius:20px;padding:32px;max-width:420px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-.header{background:linear-gradient(135deg,#4f7cff,#2dd4a7);margin:-32px -32px 24px;padding:24px;border-radius:20px 20px 0 0}
-.header h1{font-size:20px;font-weight:700}
-.header p{opacity:.85;font-size:13px;margin-top:4px}
-#qr{background:#fff;padding:16px;border-radius:12px;display:inline-block;margin:16px 0}
-.wallet{font-size:11px;color:#8a9bb5;word-break:break-all;background:#0d1428;padding:12px;border-radius:8px;margin:12px 0}
-.btn{display:block;width:100%;padding:14px;border:none;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;margin-top:12px;text-decoration:none}
-.btn-primary{background:linear-gradient(135deg,#2dd4a7,#4f7cff);color:#fff}
-.btn-secondary{background:#1e2a4a;color:#fff}
-.note{font-size:12px;color:#8a9bb5;margin-top:16px;line-height:1.5}
-</style>
-</head>
-<body>
-<div class="card">
-<div class="header">
-<h1>Deposit USDC</h1>
-<p>CEDARS OF WEALTH • Solana Network</p>
-</div>
-<div id="qr"></div>
-<div class="wallet" id="walletAddr">YOUR_SOLANA_WALLET_HERE</div>
-<a class="btn btn-primary" id="phantomBtn" href="#">Open in Phantom</a>
-<button class="btn btn-secondary" onclick="copyAddr()">Copy Address</button>
-<p class="note">Send only <b>USDC on Solana</b> to this address.<br>Minimum deposit: 10 USDC.<br>Funds are credited after 1 confirmation.</p>
-</div>
-<script>
-const WALLET = "YOUR_SOLANA_WALLET_HERE";
-document.getElementById('walletAddr').textContent = WALLET;
-QRCode.toCanvas(WALLET, {width:200}, (err, canvas)=>{
-  if(!err) document.getElementById('qr').appendChild(canvas);
-});
-document.getElementById('phantomBtn').href = `https://phantom.app/ul/browse/${encodeURIComponent(window.location.href)}`;
-function copyAddr(){
-  navigator.clipboard.writeText(WALLET);
-  alert('Wallet address copied');
-}
-</script>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Deposit - CEDARS OF WEALTH</title></head><body style="margin:0;background:#0a0f1e;color:#fff;font-family:sans-serif">
+<div style="background:linear-gradient(135deg,#4f7cff,#2dd4a7);text-align:center;padding:8px;font-size:13px;font-weight:600">🚀 Daily profits credited automatically | Withdraw anytime</div>
+<header style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid #1e2a4a;position:sticky;top:0;background:#0a0f1e;z-index:100"><div style="font-weight:800">🌲 CEDARS OF WEALTH</div><nav style="display:flex;gap:18px;align-items:center"><a href="../index.html" style="color:#8a9bb5;font-size:14px;text-decoration:none">Home</a><a href="../about.html" style="color:#8a9bb5;font-size:14px;text-decoration:none">About</a><a href="../register.html" style="background:linear-gradient(135deg,#4f7cff,#2dd4a7);color:#fff;padding:10px 18px;border-radius:20px;font-size:14px;font-weight:700;text-decoration:none">Start Investing</a></nav></header>
+<div style="max-width:600px;margin:20px auto;padding:0 20px"><h1>Choose Plan</h1><div style="background:#131a2e;border:1px solid #1e2a4a;border-radius:12px;padding:16px;margin-top:12px"><h3>Seedling - 5%</h3><p style="color:#8a9bb5">$50 - $999 / 5 Days</p></div><div style="background:#131a2e;border:1px solid #1e2a4a;border-radius:12px;padding:16px;margin-top:12px"><h3>Sapling - 7%</h3><p style="color:#8a9bb5">$1000 - $9999 / 7 Days</p></div><div style="background:#131a2e;border:1px solid #1e2a4a;border-radius:12px;padding:16px;margin-top:12px"><h3>Mighty Cedar - 10%</h3><p style="color:#8a9bb5">$10000+ / 10 Days</p></div></div>
+<footer style="border-top:1px solid #1e2a4a;margin-top:40px;background:#080d1a;text-align:center;padding:20px;color:#5a6b8a;font-size:12px">© 2026 CEDARS OF WEALTH. All rights reserved.<br><a href="../index.html" style="color:#8a9bb5;margin:0 8px;text-decoration:none">Home</a><a href="../about.html" style="color:#8a9bb5;margin:0 8px;text-decoration:none">About</a><a href="../register.html" style="color:#8a9bb5;margin:0 8px;text-decoration:none">Register</a></footer>
+</body></html>
