@@ -1,17 +1,28 @@
 <div class="topnav">
 <a class="logo" href="/Cedars-of-Wealth/">🌲 Cedars of Wealth</a>
-<div style="display:flex;align-items:center">
+<div class="navlinks">
 <a href="/Cedars-of-Wealth/">Home</a>
 <a href="/Cedars-of-Wealth/about/">About</a>
 <a href="/Cedars-of-Wealth/plans/">Plans</a>
-<div style="position:relative;display:inline-block;margin-left:16px">
-<a href="/Cedars-of-Wealth/dashboard/" style="margin:0">Dashboard ▾</a>
-<div style="display:none;position:absolute;background:#131a2e;border:1px solid #2a3a5a;border-radius:8px;padding:8px;min-width:200px;z-index:100" onmouseover="this.style.display='block'" onmouseout="this.style.display='none'">
-<a href="/Cedars-of-Wealth/dashboard/#annual-calendar" style="display:block;padding:8px;margin:0">Annual Calendar</a>
-<a href="/Cedars-of-Wealth/dashboard/#planner" style="display:block;padding:8px;margin:0">Economic Planner</a>
+<div class="dropdown">
+<a href="/Cedars-of-Wealth/dashboard/">Dashboard ▾</a>
+<div class="dropdown-content">
+<a href="/Cedars-of-Wealth/dashboard/#annual-calendar">Annual Calendar</a>
+<a href="/Cedars-of-Wealth/dashboard/#planner">Economic Planner</a>
 </div>
 </div>
-<a class="joinbtn" href="/Cedars-of-Wealth/register/" style="margin-left:16px">Join</a>
+<a class="joinbtn" href="/Cedars-of-Wealth/register/">Join</a>
 </div>
 </div>
-<style>.topnav div div:hover div{display:block!important}</style>
+<style>
+.topnav{display:flex;justify-content:space-between;align-items:center;background:#070c1a;padding:14px 20px;border-bottom:1px solid #1e2a4a;flex-wrap:wrap}
+.topnav .logo{color:#fff;font-weight:700;font-size:18px;text-decoration:none}
+.navlinks{display:flex;align-items:center;gap:16px}
+.navlinks a{color:#a0b0cc;text-decoration:none;font-size:14px}
+.dropdown{position:relative}
+.dropdown-content{display:none;position:absolute;top:100%;left:0;background:#131a2e;border:1px solid #2a3a5a;border-radius:8px;min-width:180px;z-index:1000;padding:6px}
+.dropdown-content a{display:block;padding:10px;margin:0!important}
+.dropdown:hover .dropdown-content{display:block}
+.joinbtn{color:#fff!important;background:linear-gradient(135deg,#4f7cff,#2dd4a7);padding:8px 16px;border-radius:8px}
+@media(max-width:600px){.navlinks{flex-wrap:wrap;gap:10px;margin-top:10px}}
+</style>
