@@ -1,42 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RUBONAI V12 FINAL LOCK</title>
+<title>RUBONAI MINING V12 FINAL LOCK</title>
 <style>
-body{background:#000;color:#0f0;font-family:monospace;text-align:center;padding:20px}
-.header{background:green;color:#fff;padding:10px;font-weight:bold}
-.banner{background:red;color:#fff;padding:8px;margin:10px 0;font-weight:bold}
-.box{border:1px solid #0f0;padding:15px;margin:10px 0}
+body{background:#000;color:#0f0;font-family:monospace;text-align:center;padding:20px;margin:0}
+.header{background:#0066cc;color:#fff;padding:12px;font-weight:bold;font-size:18px}
+.banner{background:red;color:#fff;padding:10px;margin:12px 0;font-weight:bold}
+.box{border:1px solid #0f0;padding:18px;margin:12px auto;max-width:900px;border-radius:8px}
+.big{font-size:22px;font-weight:bold}
+.small{font-size:13px;opacity:.9}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:12px}
+.miner{border:1px solid #0f0;padding:10px;border-radius:6px;font-size:12px;background:#001100}
+.miner .on{color:#0f0;font-weight:bold}
+button{background:#0f0;color:#000;border:none;padding:12px 20px;font-weight:bold;margin-top:12px;cursor:pointer;border-radius:6px}
 </style>
 </head>
 <body>
-<div class="header">RUBONAI V12 FINAL LOCK</div>
+<div class="header">RUBONAI MINING V12 FINAL LOCK</div>
 <div class="banner">50YR IMMORTAL ACTIVE until 2076 - 10% LOCKED</div>
-
 <div class="box">
-<div>Total: $<span id="total">721.12</span></div>
-<div>Locked (10%): $<span id="locked-display"></span> until 2076</div>
-<div>Available (90%): $<span id="available-display"></span></div>
-<div>Mining: $721.12 | Real: $1.34</div>
-<div>235 Trades | 150 SOL | 50k TH/s</div>
+<div class="small">Total Balance</div>
+<div class="big">$721.12</div>
+<div>Locked (10%): $72.11 | Until 2076-09-27</div>
+<div>Available (90%): $649.01</div>
+<div class="small">100 Miners | 150 SOL | 50k TH/s | Real: $1.34</div>
+<button onclick="alert('Withdrawable: $649.01')">Withdraw Available</button>
+<h3>100 MINERS LIVE</h3>
+<div class="grid" id="grid"></div>
 </div>
-
 <script>
-const totalBalance = 721.12;
-const lockedAmount = (totalBalance * 0.10).toFixed(2);
-const withdrawableAmount = (totalBalance * 0.90).toFixed(2);
-const lockUntil = '2076-09-27';
-document.getElementById('locked-display').innerText = lockedAmount;
-document.getElementById('available-display').innerText = withdrawableAmount;
-
-function canWithdraw(amount){
-  if(amount > parseFloat(withdrawableAmount)){
-    alert('Only $'+withdrawableAmount+' withdrawable. $'+lockedAmount+' locked until 2076.');
-    return false;
-  }
-  return true;
+const grid=document.getElementById('grid');
+for(let i=1;i<=100;i++){
+  let h=(480+Math.random()*40).toFixed(1);
+  grid.innerHTML+=`<div class="miner">Miner #${i}<br><span class="on">● ACTIVE</span><br>${h} TH/s<br>Uptime 99.${Math.floor(Math.random()*9)}%</div>`;
 }
 </script>
 </body>
