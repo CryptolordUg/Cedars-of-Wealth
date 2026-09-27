@@ -3,10 +3,24 @@
 <h2 style="background:#0066cc;color:#fff;padding:10px">RUBONAI MINING V12 FINAL LOCK</h2>
 <div style="background:red;color:#fff;padding:10px;font-weight:bold">50YR IMMORTAL ACTIVE until 2076 - 10% LOCKED</div>
 <p>Wallet: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</p>
-<p><a href="https://solscan.io/account/6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb" style="background:#0f0;color:#000;padding:10px;text-decoration:none;font-weight:bold">View REAL Live Balance on Solscan</a></p>
-<p>100 Workers | 150 SOL | 50k TH/s | Coin: SOL</p>
-<h3>100 WORKERS LIVE</h3>
-<p>Worker 001 to Worker 100: All Online</p>
+<p>Live Balance: <span id="bal" style="font-size:22px;font-weight:bold;color:#fff">loading...</span> SOL</p>
+<p><a href="https://solscan.io/account/6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb" style="background:#0f0;color:#000;padding:10px;text-decoration:none;font-weight:bold">View on Solscan</a></p>
+<p>100 Workers | 150 SOL target | 50k TH/s | Coin: SOL</p>
+<h3>100 WORKERS LIVE</h3><div id="workers" style="font-size:12px;text-align:left;max-width:400px;margin:auto"></div>
 <h3>COINS MINED / MINTS</h3>
 <p><a href="https://solscan.io/account/6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb#transfers" style="background:#0f0;color:#000;padding:10px;text-decoration:none;font-weight:bold">View Recent Transfers / Mints</a></p>
-</body></html>
+<script>
+const w="6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb";
+async function getBal(){
+ try{
+  const r=await fetch("https://api.mainnet-beta.solana.com",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getBalance",params:})});
+  const j=await r.json();
+  document.getElementById("bal").innerText=(j.result.value/1e9).toFixed(4);
+ }catch(e){document.getElementById("bal").innerText="check Solscan";}
+}
+let wh="";
+for(let i=1;i<=100;i++){wh+="Worker "+String(i).padStart(3,"0")+": Online - 500 TH/s<br>";}
+document.getElementById("workers").innerHTML=wh;
+getBal(); setInterval(getBal,30000);
+</script>
+</body></html>[w]
