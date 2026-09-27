@@ -1,0 +1,40 @@
+name: Compound Every 6H
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+jobs:
+  compound:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Calculate 6h compound
+        run: |
+          mkdir -p dashboard
+          BAL=$(cat dashboard/balance.json 2>/dev/null | python3 -c "import json,sys; print(json.load(sys.stdin).get('sol',0))" 2>/dev/null || echo "0")
+          echo "Balance before: $BAL SOL"
+          # 80% available, 20% flagged for reinvest pool (logged, not moved - you control keys)
+          python3 << 'PY'
+          import json, datetime, os
+          p="dashboard/balance.json"
+          d=json.load(open(p)) if os.path.exists(p) else {"sol":0}
+          sol=float(d.get("sol",0))
+          avail=round(sol*0.8,4)
+          reinvest_pool=round(sol*0.2,4)
+          log={
+            "timestamp": datetime.datetime.utcnow().isoformat()+"Z",
+            "total_sol": sol,
+            "available_withdraw_80pct": avail,
+            "reinvest_pool_20pct": reinvest_pool,
+            "note": "6h compound check - funds stay in wallet, 80% marked withdrawable"
+          }
+          open("dashboard/compound-log.json","a").write(json.dumps(log)+"\n")
+          print(f"80% withdrawable: {avail} SOL | 20% reinvest pool: {reinvest_pool} SOL")
+          PY
+      - name: Commit log
+        run: |
+          git config user.name "cedars-bot"
+          git config user.email "bot@cedars.farm"
+          git add dashboard/compound-log.json || true
+          git commit -m "6h compound check" || true
+          git push || true
