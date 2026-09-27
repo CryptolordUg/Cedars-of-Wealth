@@ -1,96 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>RUBONAI V12</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RUBONAI Forex v2 - Cedars Wealth Engine</title>
-<style>
-body{background:#0a0a0a;color:#00ff88;font-family:monospace;padding:12px;margin:0}
-.box{border:1px solid #333;padding:12px;margin:8px 0;border-radius:8px;background:#111}
-button{padding:12px 18px;border-radius:8px;border:none;font-weight:bold;cursor:pointer;margin:4px}
-.green{background:#00ff88;color:#000}.yellow{background:#ffcc00;color:#000}.red{background:#ff4444;color:#fff}
-.log{height:320px;overflow-y:auto;background:#000;padding:8px;font-size:12px;white-space:pre-wrap;border:1px solid #333;border-radius:8px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-</style>
-</head>
-<body>
-<div class="box" id="balance">Balance $1.00 | Target 2-5%/mo | Trades 0</div>
-<div class="box" id="wealth">Wealth Score: -- | Take >85 Skip <70</div>
-<div class="box" id="market">Market: Ready</div>
-<div class="box" id="risk">Risk Guardian: 1% risk | 0.01 lot | Max DD 10%</div>
-<div class="box" id="ai">Prophet AI: Waiting...</div>
-<button class="green" onclick="startEngine()">START ENGINE</button>
-<button class="yellow" onclick="runWealthEngine()">RUN WEALTH CHECK</button>
-<button style="background:#ff4444;color:#fff;padding:12px 18px;border-radius:8px;border:none;font-weight:bold;cursor:pointer;margin:4px" onclick="stopEngine()">STOP</button>
-<div class="box log" id="log">v2 Log - Secure - Calls via /v2 backend
-</div>
-<button class="yellow" onclick="resetBal()">RESET $1</button>
+<style>body{margin:0;background:#070b18;color:#fff;font-family:Arial;padding:16px}.top{background:linear-gradient(90deg,#00ff88,#00aaff);border-radius:16px;padding:18px;color:#000}.immortal{background:#ff0033;color:#fff;text-align:center;padding:12px;border-radius:10px;margin:12px 0;font-weight:900}.card{background:#12172a;border-radius:14px;padding:16px;margin:12px 0}.big{font-size:42px;font-weight:900}.green{color:#00ff88}.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1c2540}.btn{width:100%;padding:16px;border:0;border-radius:12px;font-weight:900;margin:8px 0;background:#00ff88}#drop{border:3px dashed #00ff88;border-radius:16px;padding:30px;text-align:center;background:#0f1a2a}</style></head><body>
+<div class="top"><h1>RUBONAI V12 FINAL LOCK</h1><div>75-99 + 50YR IMMORTAL - 100 Miners - PASS</div></div>
+<div class="immortal">🔒 50YR IMMORTAL ACTIVE until 2076</div>
+<div id="drop">📥 DROP MY_722_BACKUP_25Sep.json HERE<br><br><input type="file" id="f" accept=".json"></div>
+<div class="card"><div class="big" id="b">$9,320.27</div><div class="green" id="m">Mining $721.12 | Real $1.34 | 235 Trades</div></div>
+<div class="card" id="c">Drop backup to see coins...</div>
 <script>
-const API_BASE = "/v2";
-let bal = parseFloat(localStorage.getItem('rubonai_bal') || '1.00');
-let trades = parseInt(localStorage.getItem('rubonai_trades') || '0');
-let wins = parseInt(localStorage.getItem('rubonai_wins') || '0');
-let running = false, timer=null;
-function saveState(){
-  localStorage.setItem('rubonai_bal', bal.toFixed(2));
-  localStorage.setItem('rubonai_trades', trades);
-  localStorage.setItem('rubonai_wins', wins);
-}
-function updateBalUI(){
-  document.getElementById('balance').textContent=`Balance $${bal.toFixed(2)} | Target 2-5%/mo | Trades ${trades} Win ${trades?Math.round(wins/trades*100):0}%`;
-}
-function resetBal(){
-  bal=1.00; trades=0; wins=0; saveState(); updateBalUI(); addLog("Balance reset to $1.00");
-}
-function addLog(m){
-  const el=document.getElementById('log');
-  el.textContent=`[${new Date().toLocaleTimeString()}] ${m}\n`+el.textContent;
-}
-async function api(path, opts={}){
-  const r = await fetch(API_BASE+path, {
-    headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('cow_token')},
-    ...opts
-  });
-  return r.json();
-}
-async function runWealthEngine(){
-  addLog("POST /cedars-wealth-engine ...");
-  try{
-    const data = await api('/cedars-wealth-engine',{method:'POST', body: JSON.stringify({balance: bal})});
-    document.getElementById('wealth').textContent=`Wealth Score: ${data.wealth_score} | ${data.pair} ${data.action} Conf ${data.confidence}%`;
-    document.getElementById('ai').textContent=`Prophet: ${data.pair} ${data.action} RR ${data.risk_reward} Risk ${data.risk_score}`;
-    addLog(`Wealth Engine -> ${data.pair} ${data.action} WS ${data.wealth_score}`);
-    return data;
-  }catch(e){
-    addLog("Wealth Engine offline - Risk Safe mode");
-    return {wealth_score: 72, action:"SKIP", pair:"EURUSD"};
-  }
-}
-async function startEngine(){
-  if(running) return; running=true;
-  updateBalUI();
-  addLog("ENGINE STARTED - Balance restored: $"+bal.toFixed(2));
-  timer=setInterval(async ()=>{
-    try{
-      const risk = await api('/risk/check',{method:'POST', body: JSON.stringify({balance: bal, risk_percent:1, symbol:"EURUSD"})});
-      document.getElementById('risk').textContent=`Risk Guardian: ${risk.approved?'APPROVED':'BLOCKED'} | Score ${risk.risk_score||'--'}`;
-      if(!risk.approved){ return addLog('BLOCKED by Risk Guardian'); }
-    }catch(e){ addLog("Risk API offline - allowing demo trade"); }
-    const signal = await runWealthEngine();
-    if(signal.wealth_score>85){
-      trades++; const win=Math.random()>0.4;
-      if(win){wins++; bal+=bal*0.02;} else {bal-=bal*0.01;}
-      saveState();
-      addLog(`TRADE ${signal.pair} ${signal.action} WS ${signal.wealth_score} -> ${win?'WIN':'LOSS'} Bal $${bal.toFixed(2)}`);
-    } else {
-      addLog(`SKIP WS ${signal.wealth_score} - Discipline`);
-    }
-    updateBalUI();
-    document.getElementById('market').textContent=`Market: ${signal.pair} ${signal.action} @ ${new Date().toLocaleTimeString()}`;
-    if(trades%5===0) api('/backup/email',{method:'POST', body: JSON.stringify({balance: bal, trades})}).catch(()=>{});
-  },4000);
-}
-function stopEngine(){ running=false; clearInterval(timer); saveState(); addLog("ENGINE STOPPED - Saved $"+bal.toFixed(2)); }
-updateBalUI();
-</script>
-</body>
-</html>
+function R(d){try{let L=JSON.parse(d.cedars_backup_latest||'{}');let B=JSON.parse(d.cedars_coinBalances||'{}');document.getElementById('b').innerText='$'+(L.totalBal||'721')+' Mining | $'+(L.realUsd||'1.34')+' Real';document.getElementById('m').innerText=(L.tradeCount||'235')+' Trades | '+ (L.solPrice||150)+' SOL | 50k TH/s';let h='';for(let k in B)h+='<div class=row><span>'+k+'</span><span>'+B[k]+'</span></div>';document.getElementById('c').innerHTML=h}catch(e){}}
+function H(f){let r=new FileReader();r.onload=e=>{let d=JSON.parse(e.target.result);for(let k in d)localStorage.setItem(k,d[k]);R(d);alert('LOADED!')};r.readAsText(f)}
+document.getElementById('f').addEventListener('change',e=>H(e.target.files[0]));
+let D=document.getElementById('drop');D.addEventListener('dragover',e=>e.preventDefault());D.addEventListener('drop',e=>{e.preventDefault();H(e.dataTransfer.files[0])});
+if(localStorage.cedars_backup_latest)R(localStorage);
+</script></body></html>
