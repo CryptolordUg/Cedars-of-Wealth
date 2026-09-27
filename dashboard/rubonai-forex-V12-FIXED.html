@@ -17,7 +17,7 @@ const TREASURY_WALLET = "YOUR_TREASURY_WALLET_HERE";
 let connection, publicKey=null, usdcMint;
 function getConn(){
   const useDev = document.getElementById('devnetToggle').checked;
-  const endpoint = useDev? "https://api.devnet.solana.com" : "https://api.mainnet-beta.solana.com";
+  const endpoint = useDev? "https://api.devnet.solana.com" : "https://rpc.ankr.com/solana";
   document.getElementById('netLabel').innerText = (useDev?'Devnet • Test USDC':'Mainnet • Real USDC')+' • Risk Guard v3';
   usdcMint = new solanaWeb3.PublicKey(useDev?USDC_MINT_DEV:USDC_MINT_MAIN);
   return new solanaWeb3.Connection(endpoint,'confirmed');
@@ -43,7 +43,7 @@ async function loadBalance(){
     document.getElementById('stake').innerText=ui.toFixed(2);
     document.getElementById('locked').innerText=(ui*0.10).toFixed(2);
     document.getElementById('upd').innerText='on-chain balance loaded';
-    document.getElementById('upd').className='ok';
+    document.getElementById('upd').style.color='#4ade80';
   }catch(e){ document.getElementById('upd').innerText='error loading balance: '+e.message; }
 }
 async function loadHistory(){
