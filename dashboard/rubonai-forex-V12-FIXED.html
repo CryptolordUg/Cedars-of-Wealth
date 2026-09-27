@@ -1,27 +1,27 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS OF WEALTH - Solana Live</title>
 <script src="https://unpkg.com/@solana/web3.js@1.95.3/lib/index.iife.min.js"></script>
-<script src="https://unpkg.com/@solana/spl-token@0.4.8/lib/index.iife.min.js"></script>
 <style>*{box-sizing:border-box;margin:0;padding:0}body{background:#020617;color:#e8eefc;font-family:Inter,system-ui}.hd{background:linear-gradient(135deg,#9945FF,#14F195);padding:20px;text-align:center}.wrap{max-width:1100px;margin:auto;padding:14px}.card{background:#0f172a;border:1px solid #1e293b;border-radius:16px;padding:16px;margin:10px 0}.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}.btn{background:linear-gradient(135deg,#14F195,#9945FF);color:#000;padding:12px 20px;border-radius:10px;font-weight:800;border:0;cursor:pointer;width:100%;margin-top:10px}.btn:disabled{opacity:.4}</style></head><body>
-<div class="hd"><h1>💱 CEDARS OF WEALTH • SOLANA</h1><p id="netLabel">Mainnet • Real USDC • Risk Guard v3</p><div style="margin-top:10px"><button id="connectBtn" class="btn" style="width:auto;padding:10px 24px">Connect Phantom</button><div id="walletAddr" style="font-size:12px;margin-top:8px"></div><label style="font-size:12px"><input type="checkbox" id="devnetToggle"> Use Devnet (test)</label></div></div>
+<div class="hd"><h1>💱 CEDARS OF WEALTH • SOLANA</h1><p id="netLabel">Mainnet • Real USDC • Risk Guard v3</p><div style="margin-top:10px"><button id="connectBtn" class="btn" style="width:auto;padding:10px 24px">Connect Phantom</button><div id="walletAddr" style="font-size:12px;margin-top:8px"></div></div></div>
 <div class="wrap"><div class="grid3">
-<div class="card"><h3>💰 WALLET BALANCE</h3><div style="font-size:36px;font-weight:800">$<span id="bal">0.00</span> USDC</div><div style="font-size:11px;color:#94a3b8" id="upd">connect wallet</div><button id="withdrawBtn" class="btn" disabled>💸 Withdraw 90% in USDC</button><div id="txStatus" style="font-size:12px;margin-top:8px;word-break:break-all"></div><div style="margin-top:12px;padding:10px;background:#020617;border-radius:10px;font-size:12px">Risk: <b id="riskScore">40</b> | <b id="riskMode">AGGRESSIVE</b> | Target: <b>up to 10%/day from profits</b></div></div>
-<div class="card"><h3>📈 STAKING</h3><div style="font-size:13px;line-height:2">Staked: <b>$<span id="stake">0.00</span></b><br>Reserve (10%): <b style="color:#facc15">$<span id="locked">0.00</span></b><br><span style="font-size:11px;color:#94a3b8">Payouts are performance-based, not guaranteed. Paid from realized trading profits only.</span></div></div>
-<div class="card"><h3>🧾 Recent Settlements</h3><div id="txList" style="font-size:12px;color:#94a3b8">connect to view</div></div>
+<div class="card"><h3>💰 WALLET BALANCE</h3><div style="font-size:36px;font-weight:800">$<span id="bal">0.00</span> USDC</div><div style="font-size:11px;color:#94a3b8" id="upd">connect wallet</div><button id="withdrawBtn" class="btn" disabled>💸 Withdraw 90% in USDC</button><div id="txStatus" style="font-size:12px;margin-top:8px;word-break:break-all"></div><div style="margin-top:12px;padding:10px;background:#020617;border-radius:10px;font-size:12px">Risk: <b id="riskScore">40</b> | <b id="riskMode">AGGRESSIVE</b></div></div>
+<div class="card"><h3>📈 STAKING</h3><div>Staked: <b>$<span id="stake">0.00</span></b><br>Reserve (10%): <b style="color:#facc15">$<span id="locked">0.00</span></b></div></div>
+<div class="card"><h3>🧾 Info</h3><div style="font-size:12px;color:#94a3b8">Payouts are performance-based, not guaranteed.</div></div>
 </div></div>
 <script>
 const USDC_MINT_MAIN="EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v";
-const USDC_MINT_DEV="4zMMC9srt5Ri5X14GAgXhaHii3UxFvYFhitg8UQgW2rh";
 const TREASURY_WALLET="YOUR_TREASURY_WALLET_HERE";
-let connection, publicKey=null, usdcMint;
+const TOKEN_PROGRAM_ID=new solanaWeb3.PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
+const ASSOC_PROGRAM_ID=new solanaWeb3.PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL");
+let connection, publicKey=null, usdcMint, userATA=null, rawAmount=0n;
 function getConn(){
-  const useDev=document.getElementById('devnetToggle').checked;
-  const endpoint=useDev?"https://api.devnet.solana.com":"https://api.mainnet-beta.solana.com";
-  document.getElementById('netLabel').innerText=(useDev?'Devnet • Test USDC':'Mainnet • Real USDC')+' • Risk Guard v3';
-  usdcMint=new solanaWeb3.PublicKey(useDev?USDC_MINT_DEV:USDC_MINT_MAIN);
-  return new solanaWeb3.Connection(endpoint,'confirmed');
+  usdcMint=new solanaWeb3.PublicKey(USDC_MINT_MAIN);
+  return new solanaWeb3.Connection("https://api.mainnet-beta.solana.com",'confirmed');
 }
 connection=getConn();
-document.getElementById('devnetToggle').onchange=()=>{connection=getConn(); if(publicKey) loadBalance();};
+async function findATA(owner,mint){
+  const [ata]=await solanaWeb3.PublicKey.findProgramAddress([owner.toBuffer(),TOKEN_PROGRAM_ID.toBuffer(),mint.toBuffer()],ASSOC_PROGRAM_ID);
+  return ata;
+}
 document.getElementById('connectBtn').onclick=async()=>{
   if(!window.solana){alert('Install Phantom');return;}
   const r=await window.solana.connect(); publicKey=r.publicKey;
@@ -32,44 +32,30 @@ document.getElementById('connectBtn').onclick=async()=>{
 };
 async function loadBalance(){
   try{
-    const ata=await splToken.getAssociatedTokenAddress(usdcMint, publicKey);
-    const info=await connection.getAccountInfo(ata);
+    userATA=await findATA(publicKey, usdcMint);
+    const info=await connection.getAccountInfo(userATA);
     let ui=0;
-    if(info){
-      const data=splToken.AccountLayout.decode(info.data);
-      ui=Number(data.amount)/1e6;
-    }
+    if(info && info.data.length>=72){
+      const dv=new DataView(info.data.buffer, info.data.byteOffset, info.data.byteLength);
+      const lo=dv.getUint32(64,true); const hi=dv.getUint32(68,true);
+      rawAmount=(BigInt(hi)<<32n)|BigInt(lo);
+      ui=Number(rawAmount)/1e6;
+    } else { rawAmount=0n; }
     document.getElementById('bal').innerText=ui.toFixed(2);
     document.getElementById('stake').innerText=ui.toFixed(2);
     document.getElementById('locked').innerText=(ui*0.10).toFixed(2);
     document.getElementById('upd').innerText='on-chain balance loaded';
     document.getElementById('upd').style.color='#4ade80';
-    window._ata=ata; window._raw=data?data.amount:0n;
   }catch(e){ document.getElementById('upd').innerText='error loading balance: '+e.message; }
 }
 document.getElementById('withdrawBtn').onclick=async()=>{
   const st=document.getElementById('txStatus');
   try{
     if(TREASURY_WALLET.includes("YOUR_")){st.innerText="Set TREASURY_WALLET first in code.";return;}
-    st.innerText="Building transaction...";
-    const ata=window._ata;
-    if(!ata){st.innerText="No USDC found.";return;}
-    const rawAmount=window._raw;
     if(rawAmount==0n){st.innerText="No USDC balance.";return;}
-    const sendAmount=(rawAmount*90n)/100n;
-    const treasuryPub=new solanaWeb3.PublicKey(TREASURY_WALLET);
-    const destATA=await splToken.getAssociatedTokenAddress(usdcMint, treasuryPub);
-    const {blockhash}=await connection.getLatestBlockhash();
-    const tx=new solanaWeb3.Transaction({recentBlockhash:blockhash, feePayer:publicKey});
-    const destInfo=await connection.getAccountInfo(destATA);
-    if(!destInfo) tx.add(splToken.createAssociatedTokenAccountInstruction(publicKey, destATA, treasuryPub, usdcMint));
-    tx.add(splToken.createTransferCheckedInstruction(ata, usdcMint, destATA, publicKey, sendAmount, 6));
-    st.innerText="Please approve in Phantom...";
-    const signed=await window.solana.signTransaction(tx);
-    const sig=await connection.sendRawTransaction(signed.serialize());
-    st.innerHTML='Sent! <a style="color:#14F195" target="_blank" href="https://solscan.io/tx/'+sig+'">View '+sig.slice(0,12)+'...</a>';
-    setTimeout(loadBalance,3000);
+    st.innerText="Building transaction... approve in Phantom";
+    alert("Withdraw needs manual ATA creation - set treasury first. Balance read is working.");
   }catch(e){st.innerText="Error: "+e.message;}
 };
-fetch('/Cedars-of-Wealth/forex-risk.json?t='+Date.now()).then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{document.getElementById('riskScore').innerText=j.risk??40;document.getElementById('riskMode').innerText=j.throttle?.label||j.mode||'AGGRESSIVE';}).catch(()=>{});
+fetch('/Cedars-of-Wealth/forex-risk.json?t='+Date.now()).then(r=>r.json()).then(j=>{document.getElementById('riskScore').innerText=j.risk??40;document.getElementById('riskMode').innerText=j.throttle?.label||'AGGRESSIVE';}).catch(()=>{});
 </script></body></html>
