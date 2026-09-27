@@ -1,25 +1,59 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS OF WEALTH - Forex Live</title>
-<style>*{box-sizing:border-box;margin:0;padding:0}body{background:#020617;color:#e8eefc;font-family:Inter,system-ui,-apple-system}.hd{background:linear-gradient(135deg,#0ea5e9 0%,#8b5cf6 50%,#10b981 100%);padding:22px 18px;text-align:center;position:sticky;top:0;z-index:10}.hd h1{font-size:26px;letter-spacing:1px}.pill{background:rgba(0,0,0,.45);padding:8px 16px;border-radius:20px;display:inline-block;margin-top:10px;font-size:13px;backdrop-filter:blur(10px)}.wrap{max-width:1200px;margin:auto;padding:14px}.card{background:linear-gradient(180deg,#0f172a,#0b1220);border:1px solid #1e293b;border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 8px 24px rgba(0,0,0,.35)}.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}.ok{color:#4ade80}.warn{color:#facc15}.down{color:#f87171}.bar{height:10px;background:#1e293b;border-radius:6px;overflow:hidden;margin-top:10px}.fill{height:100%;background:linear-gradient(90deg,#0ea5e9,#4ade80);transition:width .5s}.btn{background:linear-gradient(135deg,#facc15,#f97316);color:#000;padding:12px 20px;border-radius:10px;font-weight:800;text-decoration:none;display:inline-block;margin-top:10px;border:0;cursor:pointer}.pair{background:#020617;border:1px solid #1e293b;border-radius:12px;padding:12px;transition:transform .2s}.pair:hover{transform:translateY(-2px)}.live-dot{width:8px;height:8px;background:#4ade80;border-radius:50%;display:inline-block;animation:pulse 1.5s infinite}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}.throttle{display:flex;gap:6px;margin-top:10px}.throttle div{flex:1;text-align:center;font-size:10px;padding:6px;border-radius:6px;background:#1e293b;color:#64748b}.throttle .active{background:#0ea5e9;color:#fff}</style></head><body>
-<div class="hd"><h1>💱 CEDARS OF WEALTH</h1><p style="opacity:.9">Real Trading Account • MT5 Linked • Auto-Staking + Risk Guard v3</p><div class="pill">Account: <b>884721</b> | Leverage 1:500 | <span class="live-dot"></span> <b class="ok">LIVE</b> | Equity: $<span id="eq">12,728</span> | Margin: <span class="ok">12.4%</span></div></div>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS OF WEALTH - Solana Live</title>
+<script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+<style>*{box-sizing:border-box;margin:0;padding:0}body{background:#020617;color:#e8eefc;font-family:Inter,system-ui}.hd{background:linear-gradient(135deg,#9945FF,#14F195);padding:20px;text-align:center}.wrap{max-width:1100px;margin:auto;padding:14px}.card{background:#0f172a;border:1px solid #1e293b;border-radius:16px;padding:16px;margin:10px 0}.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}.btn{background:linear-gradient(135deg,#14F195,#9945FF);color:#000;padding:12px 20px;border-radius:10px;font-weight:800;border:0;cursor:pointer;width:100%;margin-top:10px}.btn:disabled{opacity:.5}.ok{color:#4ade80}.warn{color:#facc15}.pair{background:#020617;border:1px solid #1e293b;border-radius:12px;padding:12px}</style></head><body>
+<div class="hd"><h1>💱 CEDARS OF WEALTH • SOLANA</h1><p>Real USDC • Phantom Connected • Risk Guard v3</p><div style="margin-top:10px"><button id="connectBtn" class="btn" style="width:auto;padding:10px 24px">Connect Phantom Wallet</button><div id="walletAddr" style="font-size:12px;margin-top:8px;opacity:.8"></div></div></div>
 <div class="wrap">
 <div class="grid3">
-<div class="card"><h3>💰 TRADING BALANCE</h3><div style="font-size:38px;font-weight:800;margin:8px 0">$<span id="bal">12,678.93</span></div><div style="font-size:11px;color:#94a3b8" id="upd"><span class="live-dot"></span> live • ticking</div><div style="margin-top:10px"><a href="#" class="btn">💸 Withdraw 90% Instant</a><div style="font-size:11px;color:#94a3b8;margin-top:6px">24/7 • No limits • <span class="ok">Available</span></div></div><div style="margin-top:12px;padding:10px;background:#020617;border-radius:10px;font-size:12px">Risk: <b id="riskScore">40</b> | <b id="riskMode">AGGRESSIVE</b></div><div style="font-size:11px;color:#94a3b8;margin-top:8px">PF: <b id="pf">2.14</b> | DD: <b id="dd">8.2%</b> | Sharpe: <b>1.8</b> | Lev: <b id="lev">10x</b></div><div class="throttle"><div id="t0" class="active">0-49<br>1x</div><div id="t50">50-69<br>0.5x</div><div id="t70">70-89<br>0.25x</div><div id="t90">90+<br>HALT</div></div><div id="trades" style="font-family:monospace;font-size:11px;margin-top:10px;max-height:140px;overflow:hidden"></div></div>
-<div class="card"><h3>📈 100% STAKING • 10% / 24H</h3><div style="font-size:13px;line-height:2.1;margin-top:8px">Staked: <b>$<span id="stake">12,678.93</span></b> (100%)<br>Daily ROI: <b class="ok">+10% every 24h</b><br>Compounding: <b class="warn">+5% every 6h</b><br>Next payout: <b id="next24">23:59:16</b><br>Total earned: <b class="ok">$<span id="earned">1,267.89</span></b></div><div class="bar"><div class="fill" id="stakebar" style="width:72%"></div></div><div style="font-size:11px;color:#94a3b8;margin-top:6px">72% to next compound</div></div>
-<div class="card"><h3>🔒 10% SECURITY LOCK</h3><div style="font-size:13px;line-height:2;margin-top:8px">Locked: <b class="warn">$<span id="locked">1,267.89</span></b> (10%)<br>Duration: <b>24 months</b><br>Release: <b>5% / month → 90% pool</b><br>Month: <b id="lockmo">1/24</b></div><div class="bar"><div class="fill" style="width:4%;background:linear-gradient(90deg,#facc15,#f97316)"></div></div><div class="grid3" style="margin-top:12px;grid-template-columns:1fr 1fr"><div style="background:#020617;padding:10px;border-radius:10px"><div style="font-size:11px;color:#94a3b8">Withdrawable 90%</div><b class="ok" id="w90">$11,411.04</b></div><div style="background:#020617;padding:10px;border-radius:10px"><div style="font-size:11px;color:#94a3b8">APY</div><b>~3,650%</b></div></div></div>
+<div class="card"><h3>💰 WALLET BALANCE (Real)</h3><div style="font-size:36px;font-weight:800">$<span id="bal">0.00</span> USDC</div><div style="font-size:11px;color:#94a3b8" id="upd">connect wallet to load</div><button id="withdrawBtn" class="btn" disabled>💸 Withdraw 90% in USDC</button><div id="txStatus" style="font-size:12px;margin-top:8px"></div><div style="margin-top:12px;padding:10px;background:#020617;border-radius:10px;font-size:12px">Risk: <b id="riskScore">40</b> | <b id="riskMode">AGGRESSIVE</b> | Lev: <b>10x</b></div></div>
+<div class="card"><h3>📈 STAKING • On-Chain</h3><div style="font-size:13px;line-height:2">Staked: <b>$<span id="stake">0.00</span></b><br>Real APY: <b class="ok">~7.2% (Solana)</b><br>Bot PnL Share: <b class="warn">+10% / 24h target</b></div><div style="font-size:11px;color:#94a3b8;margin-top:8px">Note: 10%/day is bot target, not protocol yield. Paid from trading profits only when profitable.</div></div>
+<div class="card"><h3>🔒 10% SECURITY LOCK</h3><div style="font-size:13px;line-height:2">Locked: <b class="warn">$<span id="locked">0.00</span></b><br>On-chain vault • 24 months</div></div>
 </div>
-<div class="card"><h3><span class="live-dot"></span> LIVE PAIRS • REAL SPREADS</h3><div class="grid3" id="pairs" style="margin-top:10px"></div></div>
+<div class="card"><h3>LIVE PAIRS</h3><div class="grid3" id="pairs"></div></div>
 </div>
 <script>
-let bal=12678.93,earned=1267.89;
-const fmt=n=>n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
-function refresh(){document.getElementById('bal').innerText=fmt(bal);document.getElementById('eq').innerText=fmt(bal*1.004);document.getElementById('stake').innerText=fmt(bal);document.getElementById('locked').innerText=fmt(bal*0.10);document.getElementById('w90').innerText='$'+fmt(bal*0.90);document.getElementById('earned').innerText=fmt(earned);}
-const P=[["EURUSD",1.0895,0.2],["GBPUSD",1.2720,0.3],["USDJPY",149.7548,0.4],["XAUUSD",2382,35],["BTCUSD",67473,12]];
-let prices={};P.forEach(p=>prices[p[0]]=p[1]);
-function renderPairs(){document.getElementById("pairs").innerHTML=P.map(p=>'<div class="pair"><div style="display:flex;justify-content:space-between"><b>'+p[0]+'</b><span style="font-size:10px;color:#64748b">spr '+p[2]+'</span></div><div style="font-size:20px;margin:6px 0" id="p-'+p[0]+'">'+prices[p[0]]+'</div><div style="font-size:11px" id="c-'+p[0]+'" class="ok">+0.00%</div></div>').join("");}
-renderPairs();refresh();
-setInterval(()=>{P.forEach(p=>{let ch=(Math.random()-0.48)*0.0025;prices[p[0]]*=(1+ch);let el=document.getElementById("p-"+p[0]);if(el)el.innerText=prices[p[0]]>1000?prices[p[0]].toFixed(0):prices[p[0]].toFixed(4);let ce=document.getElementById("c-"+p[0]);if(ce){ce.innerText=(ch*100).toFixed(2)+"%";ce.className=ch>=0?"ok":"down";}});},1800);
-const syms=["EURUSD","GBPUSD","XAUUSD","BTCUSD","USDJPY"];
-setInterval(()=>{let el=document.getElementById("trades");let s=syms[Math.floor(Math.random()*syms.length)];let isW=Math.random()>0.35;let amt=(Math.random()*85+5).toFixed(2);let d=document.createElement("div");d.style.cssText="background:#020617;padding:7px;border-radius:8px;margin:4px 0;color:"+(isW?"#4ade80":"#f87171");d.innerText=(isW?"✓ WIN +$":"✕ LOSS -$")+amt+" "+s;el.prepend(d);if(el.children.length>6)el.lastChild.remove();bal+=isW?parseFloat(amt):-parseFloat(amt)*0.6;earned+=isW?parseFloat(amt)*0.1:0;refresh();},2200);
-let t=86356;setInterval(()=>{t--;let h=String(Math.floor(t/3600)).padStart(2,'0'),m=String(Math.floor(t%3600/60)).padStart(2,'0'),ss=String(t%60).padStart(2,'0');document.getElementById("next24").innerText=h+":"+m+":"+ss;},1000);
+const USDC_MINT = new solanaWeb3.PublicKey("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v");
+const TREASURY = new solanaWeb3.PublicKey("YOUR_TREASURY_WALLET_HERE"); // <-- replace with your wallet
+let connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'), 'confirmed');
+let publicKey = null;
+
+document.getElementById('connectBtn').onclick = async () => {
+  try {
+    const resp = await window.solana.connect();
+    publicKey = resp.publicKey;
+    document.getElementById('walletAddr').innerText = publicKey.toString().slice(0,8)+'...'+publicKey.toString().slice(-8);
+    document.getElementById('connectBtn').innerText = 'Connected ✓';
+    document.getElementById('withdrawBtn').disabled = false;
+    loadBalance();
+  } catch(e){ alert('Phantom not found. Install Phantom.'); }
+};
+
+async function loadBalance(){
+  try{
+    let tokenAccounts = await connection.getParsedTokenAccountsByOwner(publicKey,{mint:USDC_MINT});
+    let bal = 0;
+    tokenAccounts.value.forEach(a=>{ bal += a.account.data.parsed.info.tokenAmount.uiAmount || 0; });
+    document.getElementById('bal').innerText = bal.toFixed(2);
+    document.getElementById('stake').innerText = bal.toFixed(2);
+    document.getElementById('locked').innerText = (bal*0.10).toFixed(2);
+    document.getElementById('upd').innerText = 'real on-chain balance';
+  }catch(e){ document.getElementById('upd').innerText='error loading'; }
+}
+
+document.getElementById('withdrawBtn').onclick = async () => {
+  const status = document.getElementById('txStatus');
+  try{
+    status.innerText = 'Preparing 90% withdrawal...';
+    let tokenAccounts = await connection.getParsedTokenAccountsByOwner(publicKey,{mint:USDC_MINT});
+    let source = tokenAccounts.value[0].pubkey;
+    let amount = Math.floor(tokenAccounts.value[0].account.data.parsed.info.tokenAmount.amount * 0.9);
+    // Simplified: uses associated token account transfer via memo - in production use @solana/spl-token createTransferInstruction
+    status.innerHTML = '<span class="warn">Demo signing ready.</span> Replace TREASURY wallet and add SPL transfer instruction for mainnet send of '+amount+' units.';
+    // For full send, import spl-token lib and do: createTransferInstruction(source, destATA, publicKey, amount)
+  }catch(e){ status.innerText='Error: '+e.message; }
+};
+
+// live pairs ticker (demo prices)
+const P=[["SOL/USD",172.4],["EURUSD",1.0895],["XAUUSD",2382]];
+document.getElementById("pairs").innerHTML=P.map(p=>'<div class="pair"><b>'+p[0]+'</b><div style="font-size:20px">'+p[1]+'</div></div>').join("");
 fetch('/Cedars-of-Wealth/forex-risk.json?t='+Date.now()).then(r=>r.json()).then(j=>{document.getElementById('riskScore').innerText=j.risk;document.getElementById('riskMode').innerText=j.throttle?j.throttle.label:j.mode;}).catch(()=>{});
 </script></body></html>
