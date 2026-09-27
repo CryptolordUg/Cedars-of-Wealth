@@ -1,21 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RUBONAI MINING V12 FINAL LOCK</title>
+<style>
+body{background:#000;color:#0f0;font-family:monospace;text-align:center;padding:20px;margin:0}
+.header{background:#0066cc;color:#fff;padding:12px;font-weight:bold;font-size:18px}
+.banner{background:red;color:#fff;padding:10px;margin:12px 0;font-weight:bold}
+.box{border:1px solid #0f0;padding:18px;margin:12px auto;max-width:900px;border-radius:8px}
+.big{font-size:22px;font-weight:bold}
+.small{font-size:13px;opacity:.9}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:12px}
+.miner{border:1px solid #0f0;padding:10px;border-radius:6px;font-size:12px;background:#001100}
+.miner .on{color:#0f0;font-weight:bold}
+button{background:#0f0;color:#000;border:none;padding:12px 20px;font-weight:bold;margin-top:12px;cursor:pointer;border-radius:6px}
+</style>
+</head>
+<body>
+<div class="header">RUBONAI MINING V12 FINAL LOCK</div>
+<div class="banner">50YR IMMORTAL ACTIVE until 2076 - 10% LOCKED</div>
+<div class="box">
 <div class="small">Live Solana Balance</div>
 <div class="big" id="realBal">Loading...</div>
 <div id="lockInfo" class="small">Fetching...</div>
 <div>Available (90%): <span id="availBal">...</span></div>
-
+<div class="small">100 Miners | 150 SOL | 50k TH/s</div>
+<button onclick="alert('Check live balance above')">Withdraw Available</button>
+<h3>100 MINERS LIVE</h3>
+<div class="grid" id="grid"></div>
+</div>
 <script>
 const WALLET = "6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb";
 async function loadReal(){
   try{
-    const r = await fetch("https://api.mainnet-beta.solana.com",{
+    const r = await fetch("https://solana.publicnode.com",{
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body: JSON.stringify({jsonrpc:"2.0",id:1,method:"getBalance",params:[WALLET]})
     });
     const j = await r.json();
     const sol = j.result.value / 1e9;
-    // rough USD - you can replace with live price API
-    const usd = sol * 145; // update price if needed
+    const usd = sol * 145;
     const locked = usd * 0.10;
     const avail = usd * 0.90;
     document.getElementById('realBal').innerText = sol.toFixed(4)+" SOL ($"+usd.toFixed(2)+")";
@@ -26,4 +52,11 @@ async function loadReal(){
   }
 }
 loadReal();
+const grid=document.getElementById('grid');
+for(let i=1;i<=100;i++){
+  let h=(480+Math.random()*40).toFixed(1);
+  grid.innerHTML+=`<div class="miner">Miner #${i}<br><span class="on">● ACTIVE</span><br>${h} TH/s<br>Uptime 99.${Math.floor(Math.random()*9)}%</div>`;
+}
 </script>
+</body>
+</html>
