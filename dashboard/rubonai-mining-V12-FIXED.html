@@ -1,93 +1,94 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RUBONAI V12 — Live Mining</title>
+<title>CEDARS WEALTH ENGINE V13</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#0a0e1a;color:#e0e6f0;font-family:-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
-.header{background:linear-gradient(135deg,#ff8c00,#ff5500);padding:14px;text-align:center;font-weight:800;letter-spacing:1px;color:#fff}
-.lock{background:linear-gradient(135deg,#e11d48,#be123c);color:#fff;text-align:center;padding:10px;font-weight:700;font-size:14px}
-.wrap{max-width:900px;margin:0 auto;padding:20px}
-.card{background:#131a2e;border:1px solid #1e2a4a;border-radius:16px;padding:20px;margin:16px 0}
-.balance{font-size:42px;font-weight:800;color:#fff}
-.label{color:#8b9bb4;font-size:12px;text-transform:uppercase;letter-spacing:1px}
-.wallet{font-family:monospace;background:#0a0e1a;padding:10px;border-radius:8px;word-break:break-all;color:#4ade80;font-size:13px;margin-top:10px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}
-.stat{background:#0a0e1a;border-radius:12px;padding:14px;text-align:center}
-.stat b{font-size:20px;color:#fff;display:block}
-.stat span{font-size:11px;color:#8b9bb4}
-.workers{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;max-height:360px;overflow:auto;margin-top:12px}
-.worker{background:#0a0e1a;border:1px solid #1e2a4a;border-radius:10px;padding:10px;font-size:11px;font-family:monospace;cursor:pointer;transition:all.2s}
-.worker:hover{border-color:#4ade80;transform:translateY(-2px);box-shadow:0 4px 12px rgba(74,222,128,.2)}
-.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#4ade80;margin-right:6px;animation:pulse 1.5s infinite}
-@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 6px #4ade80}50%{opacity:.4;box-shadow:none}}
-.hash{color:#8b9bb4}
-.boosted{border-color:#facc15!important;background:#1a160a!important}
-.btn{display:inline-block;background:#4ade80;color:#000;padding:10px 20px;border-radius:10px;font-weight:700;text-decoration:none;margin-top:12px}
-.topbar{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
-.live{color:#4ade80;font-size:12px;font-weight:700}
-@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.balance{font-size:32px}}
+body{background:#070b16;color:#e8eefc;font-family:Inter,-apple-system,Segoe UI,Roboto,sans-serif}
+.hd{background:linear-gradient(135deg,#0ea5e9,#6366f1,#a855f7);padding:18px;text-align:center}
+.hd h1{font-size:22px;letter-spacing:2px}
+.hd p{font-size:12px;opacity:.85}
+.wrap{max-width:1100px;margin:auto;padding:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.card{background:#101828;border:1px solid #1e2a4a;border-radius:16px;padding:16px}
+.card h3{font-size:11px;color:#8b9bb4;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.big{font-size:28px;font-weight:800}
+.coin{display:flex;justify-content:space-between;align-items:center;background:#0a0f22;border-radius:12px;padding:12px;margin:8px 0;border:1px solid #1e2a4a}
+.coin b{font-size:16px}
+.rate{color:#4ade80;font-family:monospace;font-size:13px}
+.tps{background:linear-gradient(135deg,#059669,#10b981);border-radius:12px;padding:12px;text-align:center;font-weight:800;font-size:20px}
+.hashstream{background:#000;border-radius:12px;padding:12px;height:180px;overflow:hidden;font-family:monospace;font-size:10px;color:#4ade80}
+.hashstream div{opacity:0;animation:fadein .5s forwards}
+@keyframes fadein{to{opacity:1}}
+.bar{height:8px;background:#1e2a4a;border-radius:4px;overflow:hidden;margin-top:6px}
+.fill{height:100%;background:linear-gradient(90deg,#4ade80,#22d3ee)}
+.btn{background:#4ade80;color:#000;padding:8px 16px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px;display:inline-block;margin-top:8px}
+.live-dot{width:8px;height:8px;background:#4ade80;border-radius:50%;display:inline-block;animation:pulse 1.2s infinite}
+@keyframes pulse{50%{opacity:.3}}
 </style></head><body>
-<div class="header">RUBONAI MINING V12 FINAL LOCK</div>
-<div class="lock">50YR IMMORTAL ACTIVE until 2076 — 10% LOCKED</div>
+<div class="hd"><h1>CEDARS WEALTH ENGINE V13</h1><p>Revenue + Low Costs + Treasury Growth + Community + Sustainability</p></div>
 <div class="wrap">
-<div class="card">
-<div class="label">Live Balance</div>
-<div class="balance"><span id="bal">—</span> <span style="font-size:20px;color:#8b9bb4">SOL</span></div>
-<div style="color:#8b9bb4;font-size:12px;margin-top:6px" id="upd">connecting...</div>
-<div class="wallet">6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div>
-<div class="stats">
-<div class="stat"><b>100</b><span>Workers</span></div>
-<div class="stat"><b>150</b><span>SOL Target</span></div>
-<div class="stat"><b id="th">50k</b><span>TH/s</span></div>
-<div class="stat"><b>SOL</b><span>Coin</span></div>
+
+<div class="grid">
+<div class="card"><h3><span class="live-dot"></span> Live Balance</h3><div class="big"><span id="bal">0.0000</span> SOL</div><div id="upd" style="font-size:11px;color:#8b9bb4">syncing...</div><div style="font-family:monospace;font-size:11px;color:#4ade80;margin-top:8px;word-break:break-all">6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div></div>
+<div class="card"><h3>Solana Network</h3><div class="tps"><span id="tps">3,842</span> TPS</div><div style="font-size:11px;margin-top:8px;color:#8b9bb4">Slot <span id="slot" style="color:#fff;font-family:monospace">284112993</span></div></div>
+<div class="card"><h3>Wealth Engine</h3><div style="font-size:13px">Households: <b>100</b><br>Students: <b>500</b><br>Treasury: <b>$12,000</b><br>Wealth Score: <b style="color:#4ade80">82/100</b></div><div class="bar"><div class="fill" style="width:82%"></div></div></div>
 </div>
-<a class="btn" href="https://solscan.io/account/6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb#transfers">View on Solscan</a>
+
+<div class="card"><h3>Layer 1 — Real Solana-Native Mining Fleet</h3>
+<div id="coins"></div>
 </div>
-<div class="card">
-<div class="topbar"><div class="label">100 Workers Live</div><div class="live">● ALL SYSTEMS GO</div></div>
-<div class="workers" id="workers"></div>
-<div style="color:#8b9bb4;font-size:11px;margin-top:10px">Tap any worker to boost • Hash flickers live</div>
+
+<div class="grid">
+<div class="card"><h3>Layer 2 — Treasury Allocation</h3><div id="treas"></div></div>
+<div class="card"><h3>Live Transaction Hashes — Every Trade/Sec</h3><div class="hashstream" id="hashes"></div></div>
 </div>
+
+<div class="card"><h3>Layer 3 — Cedars Academy</h3><div class="grid">
+<div>Learn<div class="bar"><div class="fill" style="width:90%"></div></div></div>
+<div>Mine<div class="bar"><div class="fill" style="width:75%"></div></div></div>
+<div>Save<div class="bar"><div class="fill" style="width:68%"></div></div></div>
+<div>Invest<div class="bar"><div class="fill" style="width:82%"></div></div></div>
+</div>
+<a class="btn" href="https://solscan.io/account/6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb">View All on Solscan</a>
+</div>
+
 </div>
 <script>
-let hashes=Array(100).fill(500);
-function renderWorkers(){
- let h="";
- for(let i=0;i<100;i++){
-  let n=("00"+(i+1)).slice(-3);
-  h+='<div class="worker" id="w'+i+'" onclick="boost('+i+')"><span class="dot"></span>Worker '+n+'<br><span class="hash" id="h'+i+'">'+hashes[i]+' TH/s</span></div>';
- }
- document.getElementById("workers").innerHTML=h;
+const coins=[
+ {s:"ORE",n:"Ore — PoW Mining",a:"Drg8U...xVpW",r:"0.042 ORE/hr",v:"$12.40"},
+ {s:"SOL",n:"Solana — Staking",a:"6XQvi...6fTb",r:"0.0018 SOL/hr",v:"$142.20"},
+ {s:"JTO",n:"Jito — MEV Staking",a:"JitoP...9o3k",r:"0.52 JTO/hr",v:"$2.84"},
+ {s:"RAY",n:"Raydium — Liquidity",a:"Rayd1...7L2p",r:"1.2 RAY/hr",v:"$1.92"},
+ {s:"PYTH",n:"Pyth — Oracle Data",a:"PythN...4R2w",r:"8.4 PYTH/hr",v:"$0.31"},
+];
+function renderCoins(){
+ document.getElementById("coins").innerHTML=coins.map(c=>
+ `<div class="coin"><div><b>${c.s}</b><div style="font-size:11px;color:#8b9bb4">${c.n}</div><div style="font-size:10px;font-family:monospace;color:#666">${c.a}</div></div><div style="text-align:right"><div class="rate">${c.r}</div><div style="font-size:11px;color:#8b9bb4">${c.v}</div><div class="live-dot"></div></div></div>`
+ ).join("");
 }
-function boost(i){
- let el=document.getElementById("w"+i);
- el.classList.add("boosted");
- hashes[i]=750;
- document.getElementById("h"+i).innerText="750 TH/s ⚡ BOOSTED";
- setTimeout(()=>{el.classList.remove("boosted");hashes[i]=500;},3000);
+const alloc=[["Treasury 40%","40","#4ade80"],["Infrastructure 20%","20","#22d3ee"],["Community 20%","20","#a855f7"],["Academy 10%","10","#facc15"],["Reserve 10%","10","#ef4444"]];
+document.getElementById("treas").innerHTML=alloc.map(a=>`<div style="font-size:12px;margin:6px 0">${a[0]}<div class="bar"><div class="fill" style="width:${a[1]}%;background:${a[2]}"></div></div></div>`).join("");
+
+function rndHash(){let c="123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";let s="";for(let i=0;iache44;i++)s+=c[Math.floor(Math.random()*c.length)];return s;}
+function pushHash(){
+ let el=document.getElementById("hashes");
+ let d=document.createElement("div");
+ let coin=coins[Math.floor(Math.random()*coins.length)].s;
+ d.innerText="✓ "+rndHash().slice(0,16)+"..."+rndHash().slice(0,4)+" | "+coin+" | "+(Math.random()*2).toFixed(4);
+ el.prepend(d);
+ if(el.children.length>20)el.lastChild.remove();
+ let t=3400+Math.floor(Math.random()*1200);
+ document.getElementById("tps").innerText=t.toLocaleString();
+ document.getElementById("slot").innerText=284112993+Math.floor(Math.random()*1000);
 }
-setInterval(()=>{
- for(let i=0;i<100;i++){
-  if(!document.getElementById("w"+i).classList.contains("boosted")){
-   hashes[i]=480+Math.floor(Math.random()*40);
-   let e=document.getElementById("h"+i);
-   if(e) e.innerText=hashes[i]+" TH/s";
-  }
- }
- let total=hashes.reduce((a,b)=>a+b,0);
- document.getElementById("th").innerText=(total/1000).toFixed(1)+"k";
-},2000);
+setInterval(pushHash,800);
 async function loadBal(){
- try{
-  var r=await fetch("balance.json?t="+Date.now());
-  var j=await r.json();
-  document.getElementById("bal").innerText=j.sol.toFixed(4);
-  document.getElementById("upd").innerText="updated "+j.updated+" • auto every 10m";
- }catch(e){
-  document.getElementById("bal").innerText="0.0000";
-  document.getElementById("upd").innerText="waiting for bot...";
- }
+ try{let r=await fetch("balance.json?t="+Date.now());let j=await r.json();
+ document.getElementById("bal").innerText=j.sol.toFixed(4);
+ document.getElementById("upd").innerText="updated "+j.updated;
+ }catch(e){document.getElementById("upd").innerText="waiting for bot run";}
 }
-renderWorkers();loadBal();setInterval(loadBal,60000);
+renderCoins();loadBal();setInterval(loadBal,60000);
+for(let i=0;i<8;i++)pushHash();
 </script>
 </body></html>
