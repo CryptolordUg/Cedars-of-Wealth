@@ -1,0 +1,31 @@
+name: Daily 2% Check
+on:
+  schedule:
+    - cron: '0 16 * * *' # 12pm ET daily (EDT)
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Search for banned phrases
+        run: |
+          echo "Checking for guaranteed return claims..."
+          if grep -r -i -E "2% (daily|guaranteed)|guaranteed.*2%|daily.*2%" --include="*.html" --include="*.js" .; then
+            echo "::error::Found banned 2% guarantee language"
+            exit 1
+          else
+            echo "Clean - no 2% guarantees found"
+          fi
+      - name: Create issue if failed
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '⚠️ Banned 2% language detected - needs repair',
+              body: 'Automated check found "2%" guarantee language. Please remove it.'
+            })
