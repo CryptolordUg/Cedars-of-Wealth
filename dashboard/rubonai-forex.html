@@ -1,18 +1,39 @@
-// 10% 50YR LOCK / 90% WITHDRAWABLE
-const totalBalance = 721.12; // change to your live balance var if different
-const lockPercent = 0.10;
-const lockedAmount = (totalBalance * lockPercent).toFixed(2); // $72.11 locked until 2076
-const withdrawableAmount = (totalBalance * (1 - lockPercent)).toFixed(2); // $649.01 available
-const lockUntil = new Date('2076-09-27').getTime();
-
-function canWithdraw(amount) {
-  if (amount > withdrawableAmount) {
-    alert('Only $' + withdrawableAmount + ' withdrawable. $' + lockedAmount + ' locked until 2076 (50YR IMMORTAL).');
-    return false;
-  }
-  return true;
-}
-// Update display
-// document.getElementById('mining-balance').innerText = '$' + totalBalance;
-// document.getElementById('locked-balance').innerText = '$' + lockedAmount + ' LOCKED 50YR';
-// document.getElementById('available-balance').innerText = '$' + withdrawableAmount + ' AVAILABLE';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cedars of Wealth - AAPL Chart</title>
+<style>
+  body { margin:0; background:#0a0f1a; color:#e0e0e0; font-family: Arial, sans-serif; }
+  .header { padding:12px 16px; background:#111827; border-bottom:1px solid #1f2937; display:flex; justify-content:space-between; align-items:center; }
+  .header h1 { margin:0; font-size:18px; color:#22c55e; }
+  .header a { color:#60a5fa; text-decoration:none; font-size:14px; }
+  #tv_chart { height: calc(100vh - 53px); }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>CEDARS OF WEALTH - AAPL</h1>
+  <a href="rubonai-forex-V12-FIXED.html">← Back to Dashboard</a>
+</div>
+<div id="tv_chart"></div>
+<script src="https://s3.tradingview.com/tv.js"></script>
+<script>
+new TradingView.widget({
+  "container_id": "tv_chart",
+  "symbol": "NASDAQ:AAPL",
+  "interval": "D",
+  "theme": "dark",
+  "style": "1",
+  "locale": "en",
+  "toolbar_bg": "#0a0f1a",
+  "enable_publishing": false,
+  "hide_side_toolbar": false,
+  "allow_symbol_change": true,
+  "studies": ["Volume@tv-basicstudies"],
+  "autosize": true
+});
+</script>
+</body>
+</html>
