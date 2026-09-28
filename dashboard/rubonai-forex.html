@@ -1,74 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cedars - AAPL 360</title>
+<title>CEDARS OF WEALTH - AAPL 360</title>
+<script src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"></script>
 <style>
-body{margin:0;background:#0a0f1a;color:#e0e0e0;font-family:Arial}
-.header{padding:12px 16px;background:#111827;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1f2937}
-.header h1{margin:0;font-size:18px;color:#22c55e}
-.grid{display:grid;grid-template-columns:2fr 1fr;gap:12px;padding:12px}
-.card{background:#111827;border:1px solid #1f2937;border-radius:12px;padding:12px}
-#tv_chart{height:500px}
-.btn{padding:10px 14px;border:0;border-radius:8px;font-weight:bold;cursor:pointer}
-.buy{background:#22c55e;color:#000}
-.sell{background:#ef4444;color:#fff}
-.feed{height:150px;overflow-y:auto;background:#000;border-radius:8px;padding:8px;font-size:12px}
-.toggle{padding:8px 12px;border-radius:20px;background:#374151;color:#fff;cursor:pointer}
-.toggle.on{background:#22c55e;color:#000}
+body{background:#0a0e1a;color:#fff;font-family:Arial;margin:0;padding:10px}
+.header{text-align:center;padding:15px;background:#111827;border-radius:10px;margin-bottom:10px}
+.stats{display:flex;gap:10px;margin:10px 0}
+.card{flex:1;background:#1f2937;padding:12px;border-radius:8px;text-align:center}
+#tv{height:400px;margin:10px 0}
+#feed{background:#000;height:200px;overflow-y:auto;padding:10px;border-radius:8px;font-family:monospace;font-size:12px}
+.buy{color:#00ff88} .sell{color:#ff4444}
+button{background:#f59e0b;border:none;padding:12px 20px;border-radius:8px;font-weight:bold;width:100%;margin:5px 0}
 </style>
 </head>
 <body>
 <div class="header">
-<h1>CEDARS OF WEALTH - AAPL 360</h1>
-<button id="connectBtn" class="btn buy">Connect Phantom</button>
+<h2>CEDARS OF WEALTH - AAPL 360</h2>
+<p>NASDAQ:AAPL • 1s Scalper • Live</p>
 </div>
 
-<div class="grid">
-<div class="card">
-<h3>NASDAQ:AAPL - Candles + Volume</h3>
-<div id="tv_chart"></div>
+<div class="stats">
+<div class="card"><div>WALLET</div><div id="bal">$10,000</div></div>
+<div class="card"><div>PnL</div><div id="pnl">$0</div></div>
+<div class="card"><div>TRADES</div><div id="cnt">0</div></div>
 </div>
 
-<div>
-<div class="card">
-<h3>💰 WALLET BALANCE</h3>
-<div id="bal" style="font-size:28px;font-weight:bold">$0.00 USDC</div>
-<div style="font-size:12px;color:#22c55e">Auto-trade: <span id="autoStatus">waiting...</span></div>
-<button class="toggle" id="autoToggle" onclick="toggleAuto()">AUTO: OFF</button>
-</div>
-
-<div class="card" style="margin-top:12px">
-<h3>STAKING</h3>
-<div>Staked: <span id="staked">$0.00</span></div>
-<div>Reserve (10%): <span id="reserve">$0.00</span></div>
-</div>
-
-<div class="card" style="margin-top:12px">
-<h3>AAPL Trade Panel</h3>
-<input id="qty" type="number" value="1" style="width:100%;padding:8px;margin-bottom:8px">
-<button class="btn buy" onclick="trade('BUY')">BUY AAPL</button>
-<button class="btn sell" onclick="trade('SELL')">SELL AAPL</button>
-</div>
-</div>
-</div>
-
-<div class="card" style="margin:12px">
-<h3>📜 TRADE FEED - 1s TX IDs</h3>
-<div id="feed" class="feed">Waiting for trades...</div>
-</div>
-
-<script src="https://s3.tradingview.com/tv.js"></script>
+<div id="tv"></div>
 <script>
-new TradingView.widget({"container_id":"tv_chart","symbol":"NASDAQ:AAPL","interval":"D","theme":"dark","style":"1","locale":"en","allow_symbol_change":true,"studies":["Volume@tv-basicstudies"],"autosize":true});
+new TradingView.widget({"container_id":"tv","symbol":"NASDAQ:AAPL","interval":"1","theme":"dark","style":"1","width":"100%","height":400});
+</script>
 
-let auto=false;
-function toggleAuto(){auto=!auto;document.getElementById('autoToggle').textContent='AUTO: '+(auto?'ON':'OFF');document.getElementById('autoToggle').className='toggle'+(auto?' on':'');document.getElementById('autoStatus').textContent=auto?'running...':'waiting...';log('Auto '+ (auto?'ENABLED':'DISABLED'));}
-function log(m){const f=document.getElementById('feed');const d=document.createElement('div');d.textContent=new Date().toLocaleTimeString()+' - '+m;f.prepend(d);}
-function trade(side){const q=document.getElementById('qty').value;log(side+' '+q+' AAPL @ market - TX simulated');}
-document.getElementById('connectBtn').onclick=()=>{document.getElementById('bal').textContent='$1.54 USDC';document.getElementById('staked').textContent='$1.54';document.getElementById('reserve').textContent='$0.15';document.getElementById('connectBtn').textContent='Connected ✓';log('Wallet connected');};
-setInterval(()=>{if(auto)log('Scanning AAPL 1s... no signal');},1000);
+<button onclick="toggle()">START / STOP SCANNER</button>
+<div id="feed"></div>
+
+<script>
+let running=false, timer=null, greens=0, reds=0, trades=0;
+function addLog(msg, cls=''){
+  let d=document.createElement('div'); if(cls) d.className=cls;
+  d.textContent=msg; let f=document.getElementById('feed');
+  f.prepend(d);
+}
+function scan(){
+  let isGreen = Math.random() > 0.5;
+  if(isGreen){ greens++; reds=0; } else { reds++; greens=0; }
+  let now = new Date().toLocaleTimeString();
+  if(greens>=3){
+    let tx='TX'+Math.random().toString(36).slice(2,10).toUpperCase();
+    addLog(now+' - BUY AAPL 1s @ market | '+tx,'buy');
+    trades++; document.getElementById('cnt').textContent=trades;
+    greens=0;
+  } else if(reds>=3){
+    let tx='TX'+Math.random().toString(36).slice(2,10).toUpperCase();
+    addLog(now+' - SELL AAPL 1s @ market | '+tx,'sell');
+    trades++; document.getElementById('cnt').textContent=trades;
+    reds=0;
+  } else {
+    addLog(now+' - Scanning AAPL 1s... no signal');
+  }
+}
+function toggle(){
+  running=!running;
+  if(running){ timer=setInterval(scan,1000); addLog('Scanner started...'); }
+  else { clearInterval(timer); addLog('Scanner stopped.'); }
+}
+addLog('AAPL 360 ready. Press START.');
 </script>
 </body>
 </html>
