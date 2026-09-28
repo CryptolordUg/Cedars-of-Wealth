@@ -1,54 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CEDARS 24/7 - $1 Real Ready</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CEDARS - TradingView Pro</title>
 <style>
-body{background:#0a0e1a;color:#fff;font-family:Arial;padding:10px;margin:0}
-.header{background:#111827;padding:15px;border-radius:10px;text-align:center;border:2px solid #f59e0b}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:10px 0}
-.card{background:#1f2937;padding:12px;border-radius:8px;text-align:center}
-.price{color:#f59e0b;font-weight:bold;font-size:18px}
-#feed{background:#000;height:300px;overflow-y:auto;padding:10px;border-radius:8px;font-family:monospace;font-size:12px}
-.buy{color:#00ff88}.sell{color:#ff4444}.info{color:#888}
-button{border:none;padding:12px;border-radius:8px;font-weight:bold;width:100%;margin:5px 0;cursor:pointer}
-.sync{background:#f59e0b;color:#000}.stop{background:#dc2626;color:#fff}
-.risk{background:#1f2937;padding:10px;border-radius:8px;margin:10px 0;font-size:13px}
+body{background:#131722;color:#d1d4dc;font-family:Trebuchet MS;margin:0}
+.header{background:#1e2530;padding:12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #363c4e}
+.tv-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px}
+.tv-card{background:#1e2530;border-radius:8px;overflow:hidden}
+.tv-card .top{padding:8px;font-weight:bold;color:#f0b90b}
+button{background:#f0b90b;border:none;padding:8px 12px;border-radius:6px;font-weight:bold;cursor:pointer}
+#feed{background:#000;height:180px;overflow:auto;font-family:monospace;font-size:11px;padding:8px}
+.buy{color:#26a69a}.sell{color:#ef5350}
 </style>
 </head>
 <body>
 <div class="header">
-<h2>CEDARS OF WEALTH - 24/7</h2>
-<div>Cloud: <span id="cloud">connecting...</span></div>
-<div>Deriv: <span id="deriv">checking...</span> | Balance: <span id="bal">-</span></div>
-<div>Trading: <span id="tenabled">checking...</span></div>
-<button class="sync" onclick="syncNow()">SYNC NOW</button>
-<button class="stop" onclick="emergencyStop()">🛑 EMERGENCY STOP</button>
+<div><b>CEDARS OF WEALTH</b> | <span id="cloud">connecting...</span> | Bal: <span id="bal">-</span></div>
+<div><button onclick="emergencyStop()">EMERGENCY STOP</button></div>
 </div>
-<div class="risk">Account $1 Test | Max risk $0.01/trade | Daily stop $0.03 | Max 3 positions | Kill-switch: TRADING_ENABLED=false in Render</div>
-<div class="grid" id="pairs"></div>
+<div style="padding:8px;font-size:12px">Account $1 Test | Max $0.01/trade | Kill-switch: TRADING_ENABLED=false</div>
+<div class="tv-grid">
+<div class="tv-card"><div class="top">EUR/USD</div><div class="tradingview-widget-container"><div id="tv1"></div></div></div>
+<div class="tv-card"><div class="top">GBP/USD</div><div id="tv2"></div></div>
+<div class="tv-card"><div class="top">XAU/USD GOLD</div><div id="tv3"></div></div>
+<div class="tv-card"><div class="top">BTC/USD</div><div id="tv4"></div></div>
+</div>
 <div id="feed"></div>
+<script src="https://s3.tradingview.com/tv.js"></script>
 <script>
-const RENDER_URL = "https://cedars-24-7-server.onrender.com";
-const PAIRS=[{name:"EUR/USD",price:1.08},{name:"GBP/USD",price:1.26},{name:"USD/JPY",price:150.79},{name:"XAU/USD",price:2320.64},{name:"BTC/USD",price:67148.96},{name:"BOOM1000",price:1000}];
-function render(){document.getElementById('pairs').innerHTML=PAIRS.map(p=>`<div class="card"><div>${p.name}</div><div class="price">${p.price.toFixed(2)}</div></div>`).join('');}
-render();
+const RENDER_URL="https://cedars-24-7-server.onrender.com";
+function mk(id,sym){ new TradingView.widget({container_id:id,autosize:true,symbol:sym,interval:"1",theme:"dark",style:"1",locale:"en",hide_top_toolbar:false});}
+mk("tv1","OANDA:EURUSD"); mk("tv2","OANDA:GBPUSD"); mk("tv3","OANDA:XAUUSD"); mk("tv4","BITSTAMP:BTCUSD");
 function log(m,c=''){let d=document.createElement('div');if(c)d.className=c;d.textContent=new Date().toLocaleTimeString()+' '+m;document.getElementById('feed').prepend(d);}
-async function check(){
- try{
-  let r=await fetch(RENDER_URL+'/status'); let j=await r.json();
-  document.getElementById('cloud').textContent='ONLINE 24/7';
-  document.getElementById('deriv').textContent=j.deriv_connected?'CONNECTED':'NOT CONNECTED';
-  document.getElementById('bal').textContent=j.balance??'-';
-  document.getElementById('tenabled').textContent=j.trading_enabled?'TRUE':'FALSE - SAFE';
-  let f=await fetch(RENDER_URL+'/feed'); let logs=await f.json();
-  document.getElementById('feed').innerHTML=''; logs.forEach(l=>log(l.msg,l.type));
- }catch(e){ document.getElementById('cloud').textContent='OFFLINE - Local only'; }
-}
-async function syncNow(){ log('Sync check','info'); check(); }
-async function emergencyStop(){ if(!confirm('Stop?'))return; try{await fetch(RENDER_URL+'/emergency-stop',{method:'POST'}); log('STOP SENT','sell');}catch(e){alert('Go to Render dashboard and Suspend service manually');} }
-log('Ready. Replace RENDER_URL with your real Render URL then Commit again.','info');
-setInterval(check,4000); check();
+async function check(){ try{let r=await fetch(RENDER_URL+'/status');let j=await r.json();document.getElementById('cloud').textContent='ONLINE 24/7';document.getElementById('bal').textContent=j.balance??'-';let f=await fetch(RENDER_URL+'/feed');let l=await f.json();document.getElementById('feed').innerHTML='';l.forEach(x=>log(x.msg,x.type));}catch(e){document.getElementById('cloud').textContent='OFFLINE';}}
+async function emergencyStop(){if(!confirm('Stop?'))return;try{await fetch(RENDER_URL+'/emergency-stop',{method:'POST'});}catch(e){alert('Suspend in Render manually');}}
+log('TradingView look restored. Replace RENDER_URL then Commit.');
+setInterval(check,4000);check();
 </script>
 </body>
 </html>
