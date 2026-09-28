@@ -11,7 +11,7 @@ body{background:#0a0e1a;color:#fff;font-family:Arial;padding:10px;margin:0}
 .price{color:#f59e0b;font-weight:bold;font-size:18px}
 #feed{background:#000;height:300px;overflow-y:auto;padding:10px;border-radius:8px;font-family:monospace;font-size:12px}
 .buy{color:#00ff88}.sell{color:#ff4444}.info{color:#888}
-button{background:#f59e0b;border:none;padding:12px;border-radius:8px;font-weight:bold;width:100%;margin:5px 0}
+button{background:#f59e0b;border:none;padding:12px;border-radius:8px;font-weight:bold;width:100%;margin:5px 0;cursor:pointer}
 </style>
 </head>
 <body>
@@ -24,7 +24,7 @@ button{background:#f59e0b;border:none;padding:12px;border-radius:8px;font-weight
 <div class="grid" id="pairs"></div>
 <div id="feed"></div>
 <script>
-const RENDER_URL = "https://YOUR_RENDER_URL_HERE"; // <-- paste your render url, no trailing slash
+const RENDER_URL = "https://YOUR_RENDER_URL_HERE";
 const PAIRS=[
 {name:"EUR/USD",price:1.08},{name:"GBP/USD",price:1.26},
 {name:"USD/JPY",price:150.79},{name:"XAU/USD",price:2320.64},
@@ -37,19 +37,15 @@ render();
 function log(m,c=''){let d=document.createElement('div');if(c)d.className=c;d.textContent=new Date().toLocaleTimeString()+' '+m;document.getElementById('feed').prepend(d);}
 async function checkCloud(){
  try{
-  let r=await fetch(RENDER_URL+'/status');
-  let j=await r.json();
+  let r=await fetch(RENDER_URL+'/status'); let j=await r.json();
   document.getElementById('cloud').textContent='ONLINE 24/7 - Trades:'+j.trades;
   document.getElementById('mode').textContent='CLOUD SYNCED';
   let f=await fetch(RENDER_URL+'/feed'); let logs=await f.json();
-  document.getElementById('feed').innerHTML='';
-  logs.forEach(l=>log(l.msg,l.type));
-  // auto-sync offline queue
+  document.getElementById('feed').innerHTML=''; logs.forEach(l=>log(l.msg,l.type));
   if(queue.length>0){ await syncNow(); }
  }catch(e){
   document.getElementById('cloud').textContent='OFFLINE - Local Brain Active';
   document.getElementById('mode').textContent='OFFLINE BRAIN - Queuing';
-  // offline brain scan
   let p=PAIRS[Math.floor(Math.random()*PAIRS.length)];
   if(Math.random()>0.7){
    let action=Math.random()>0.5?'BUY':'SELL';
@@ -62,16 +58,12 @@ async function checkCloud(){
 }
 async function syncNow(){
  if(queue.length===0){log('Nothing to sync','info');return;}
- try{
-  await fetch(RENDER_URL+'/sync',{method:'POST'});
-  log(`Auto-synced ${queue.length} offline trades to cloud`,'info');
-  queue=[]; localStorage.removeItem('cedars_queue');
- }catch(e){log('Sync failed - still offline, kept in queue','info');}
+ try{ await fetch(RENDER_URL+'/sync',{method:'POST'}); log(`Auto-synced ${queue.length} offline trades to cloud`,'info'); queue=[]; localStorage.removeItem('cedars_queue'); }
+ catch(e){log('Sync failed - still offline, kept in queue','info');}
 }
 try{queue=JSON.parse(localStorage.getItem('cedars_queue')||'[]');}catch(_){}
 log('Desert Mode ready. Works offline, auto-syncs when online.','info');
-setInterval(checkCloud,3000);
-checkCloud();
+setInterval(checkCloud,3000); checkCloud();
 </script>
 </body>
 </html>
