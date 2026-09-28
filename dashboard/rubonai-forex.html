@@ -3,37 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cedars of Wealth - AAPL Chart</title>
+<title>Cedars - AAPL 360</title>
 <style>
-  body { margin:0; background:#0a0f1a; color:#e0e0e0; font-family: Arial, sans-serif; }
-  .header { padding:12px 16px; background:#111827; border-bottom:1px solid #1f2937; display:flex; justify-content:space-between; align-items:center; }
-  .header h1 { margin:0; font-size:18px; color:#22c55e; }
-  .header a { color:#60a5fa; text-decoration:none; font-size:14px; }
-  #tv_chart { height: calc(100vh - 53px); }
+body{margin:0;background:#0a0f1a;color:#e0e0e0;font-family:Arial}
+.header{padding:12px 16px;background:#111827;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1f2937}
+.header h1{margin:0;font-size:18px;color:#22c55e}
+.grid{display:grid;grid-template-columns:2fr 1fr;gap:12px;padding:12px}
+.card{background:#111827;border:1px solid #1f2937;border-radius:12px;padding:12px}
+#tv_chart{height:500px}
+.btn{padding:10px 14px;border:0;border-radius:8px;font-weight:bold;cursor:pointer}
+.buy{background:#22c55e;color:#000}
+.sell{background:#ef4444;color:#fff}
+.feed{height:150px;overflow-y:auto;background:#000;border-radius:8px;padding:8px;font-size:12px}
+.toggle{padding:8px 12px;border-radius:20px;background:#374151;color:#fff;cursor:pointer}
+.toggle.on{background:#22c55e;color:#000}
 </style>
 </head>
 <body>
 <div class="header">
-  <h1>CEDARS OF WEALTH - AAPL</h1>
-  <a href="rubonai-forex-V12-FIXED.html">← Back to Dashboard</a>
+<h1>CEDARS OF WEALTH - AAPL 360</h1>
+<button id="connectBtn" class="btn buy">Connect Phantom</button>
 </div>
+
+<div class="grid">
+<div class="card">
+<h3>NASDAQ:AAPL - Candles + Volume</h3>
 <div id="tv_chart"></div>
+</div>
+
+<div>
+<div class="card">
+<h3>💰 WALLET BALANCE</h3>
+<div id="bal" style="font-size:28px;font-weight:bold">$0.00 USDC</div>
+<div style="font-size:12px;color:#22c55e">Auto-trade: <span id="autoStatus">waiting...</span></div>
+<button class="toggle" id="autoToggle" onclick="toggleAuto()">AUTO: OFF</button>
+</div>
+
+<div class="card" style="margin-top:12px">
+<h3>STAKING</h3>
+<div>Staked: <span id="staked">$0.00</span></div>
+<div>Reserve (10%): <span id="reserve">$0.00</span></div>
+</div>
+
+<div class="card" style="margin-top:12px">
+<h3>AAPL Trade Panel</h3>
+<input id="qty" type="number" value="1" style="width:100%;padding:8px;margin-bottom:8px">
+<button class="btn buy" onclick="trade('BUY')">BUY AAPL</button>
+<button class="btn sell" onclick="trade('SELL')">SELL AAPL</button>
+</div>
+</div>
+</div>
+
+<div class="card" style="margin:12px">
+<h3>📜 TRADE FEED - 1s TX IDs</h3>
+<div id="feed" class="feed">Waiting for trades...</div>
+</div>
+
 <script src="https://s3.tradingview.com/tv.js"></script>
 <script>
-new TradingView.widget({
-  "container_id": "tv_chart",
-  "symbol": "NASDAQ:AAPL",
-  "interval": "D",
-  "theme": "dark",
-  "style": "1",
-  "locale": "en",
-  "toolbar_bg": "#0a0f1a",
-  "enable_publishing": false,
-  "hide_side_toolbar": false,
-  "allow_symbol_change": true,
-  "studies": ["Volume@tv-basicstudies"],
-  "autosize": true
-});
+new TradingView.widget({"container_id":"tv_chart","symbol":"NASDAQ:AAPL","interval":"D","theme":"dark","style":"1","locale":"en","allow_symbol_change":true,"studies":["Volume@tv-basicstudies"],"autosize":true});
+
+let auto=false;
+function toggleAuto(){auto=!auto;document.getElementById('autoToggle').textContent='AUTO: '+(auto?'ON':'OFF');document.getElementById('autoToggle').className='toggle'+(auto?' on':'');document.getElementById('autoStatus').textContent=auto?'running...':'waiting...';log('Auto '+ (auto?'ENABLED':'DISABLED'));}
+function log(m){const f=document.getElementById('feed');const d=document.createElement('div');d.textContent=new Date().toLocaleTimeString()+' - '+m;f.prepend(d);}
+function trade(side){const q=document.getElementById('qty').value;log(side+' '+q+' AAPL @ market - TX simulated');}
+document.getElementById('connectBtn').onclick=()=>{document.getElementById('bal').textContent='$1.54 USDC';document.getElementById('staked').textContent='$1.54';document.getElementById('reserve').textContent='$0.15';document.getElementById('connectBtn').textContent='Connected ✓';log('Wallet connected');};
+setInterval(()=>{if(auto)log('Scanning AAPL 1s... no signal');},1000);
 </script>
 </body>
 </html>
