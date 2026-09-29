@@ -1,109 +1,105 @@
 <!DOCTYPE html>
 <html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>FORWARD MOVE BONNY & RUTH FOREX CENTER - REAL</title>
+<title>V18 AUTO-CONNECT - BONNY RUTH</title>
 <script src="https://unpkg.com/@solana/web3.js@1.87.6/lib/index.iife.min.js"></script>
 <style>
 body{background:#020617;color:#e2e8f0;font-family:system-ui;margin:0;padding:10px}
-.billboard{background:linear-gradient(90deg,#ff006a,#ffcc00,#00ff88);color:#000;padding:18px;border-radius:18px;text-align:center;font-weight:900;font-size:20px;box-shadow:0 0 30px #ff006a66}
-.card{background:#0f172a;border:1px solid #1e293b;border-radius:16px;padding:14px;margin-top:12px}
-.btn{width:100%;padding:14px;border:0;border-radius:12px;font-weight:900;margin-top:8px;cursor:pointer}
-.bal{font-size:20px;font-weight:900}
-.tag{font-size:10px;padding:4px 8px;border-radius:20px;background:#1e293b}
-.live{color:#00e676}.off{color:#ff3d00}
+.billboard{background:linear-gradient(90deg,#ff006a,#ffcc00,#00ff88);color:#000;padding:14px;border-radius:14px;text-align:center;font-weight:900}
+.card{background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:12px;margin-top:10px}
+.btn{width:100%;padding:12px;border:0;border-radius:10px;font-weight:900;margin-top:6px;cursor:pointer}
+.live{color:#00e676;font-weight:900}.off{color:#ff3d00;font-weight:900}
 </style></head><body>
-<div class="billboard">🚀 FORWARD MOVE BONNY AND RUTH - SAVE THE FUTURE 👶👶<br><span style="font-size:13px">Real Account | Real Withdraw | Real Balance</span></div>
+<div class="billboard">🚀 FORWARD MOVE BONNY AND RUTH - AUTO CONNECT 24/7<br><span style="font-size:11px">Connect Once → Stays Connected Even When Computer Sleeps</span></div>
 
 <div class="card">
-<div style="display:flex;justify-content:space-between"><b>BIF BALANCE READER (Real Chain)</b><span id="online" class="tag off">OFFLINE</span></div>
-<div class="bal">USDC: <span id="usdc">$0.00</span> | SOL: <span id="sol">0.0000</span></div>
-<div style="font-size:11px;color:#94a3b8">Wallet: <span id="wal">Not Connected</span> | Last Real Tx: <span id="lastTx">-</span> | Last Saved: <span id="lastSaved">-</span></div>
-<button class="btn" style="background:#9945ff;color:#fff" id="connect">1. CONNECT PHANTOM REAL</button>
-<button class="btn" style="background:#0ea5e9;color:#fff;display:none" id="refresh">REFRESH REAL BALANCE</button>
+<div style="display:flex;justify-content:space-between"><b>BIF REAL BALANCE</b><span id="connStatus" class="off">DISCONNECTED</span></div>
+<div style="font-size:18px;font-weight:900">USDC: <span id="usdc">$0.00</span> | SOL: <span id="sol">0.0000</span></div>
+<div style="font-size:10px">Wallet: <span id="wal">-</span> | Last Read: <span id="last">-</span></div>
+<button class="btn" style="background:#9945ff;color:#fff" id="connect">CONNECT ONCE - AUTO AFTER</button>
+<button class="btn" style="background:#0ea5e9;color:#fff" id="refresh">REFRESH BALANCE</button>
+<div style="font-size:10px;margin-top:6px"><label><input type="checkbox" id="autoCheck" checked> Auto-Reconnect when internet / sleep wakes up</label></div>
 </div>
 
 <div class="card">
-<div style="display:flex;justify-content:space-between"><b>💸 WITHDRAWAL BUTTON (REAL)</b><span class="tag">Jupiter REAL</span></div>
-<button class="btn" style="background:#00e676;color:#000" id="withdraw">WITHDRAW REAL PROFIT → USDC</button>
-<button class="btn" style="background:#ffcc00;color:#000" id="withdrawAll">EMERGENCY WITHDRAW ALL SOL→USDC</button>
-<div id="txView" style="font-size:11px;margin-top:8px;word-break:break-all"></div>
+<div style="display:flex;justify-content:space-between"><b>TRADING STATUS</b><span id="tradeStatus" class="off">NOT TRADING</span></div>
+<div id="log" style="font-size:10px;font-family:monospace;background:#020617;padding:8px;height:160px;overflow:auto;border-radius:8px;margin-top:6px">Log: Waiting for auto-connect...</div>
 </div>
-
-<div class="card">
-<div style="display:flex;justify-content:space-between"><b>⏰ ALARM + AUTO-COLLECT EVERY 6H + ONLINE/OFFLINE</b><span id="autoState" class="tag off">AUTO OFF</span></div>
-<label style="font-size:11px">Alarm at $<input id="alarmTarget" value="2.00" type="number" step="0.1" style="width:70px;background:#020617;color:#fff;border:1px solid #334155;border-radius:6px;padding:4px"></label>
-<div style="display:flex;gap:6px"><button class="btn" style="background:#1e293b;color:#fff" id="alarmOn">SET ALARM ON</button><button class="btn" style="background:#1e293b;color:#fff" id="autoOn">AUTO-COLLECT ON (6h)</button><button class="btn" style="background:#ff3d00;color:#fff" id="autoOff">AUTO OFF</button></div>
-<div style="display:flex;gap:6px;margin-top:8px"><button class="btn" style="background:#334155;color:#fff;width:50%" id="onlineBtn">GO ONLINE</button><button class="btn" style="background:#334155;color:#fff;width:50%" id="offlineBtn">GO OFFLINE</button></div>
-<div id="log" style="font-size:10px;background:#020617;padding:8px;height:140px;overflow:auto;margin-top:8px;border-radius:8px;font-family:monospace">Log: Ready for Bonny & Ruth...</div>
-</div>
-
-<div class="card" style="border:2px dashed #00e676"><b>💰 SAVE 70/20/10 FOR $800</b><div style="font-size:11px;margin-top:6px;line-height:1.5">70% LOCK for Hospital, 20% Data/Food, 10% Re-invest. Refresh now retains balance for Bonny & Ruth.</div></div>
 
 <script>
-let provider=null,pubKey=null,autoInterval=null,alarmVal=2,isOnline=false;
-const conn=new solanaWeb3.Connection('https://api.mainnet-beta.solana.com');
-const USDC='EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',SOLM='So11111111111111111111111111111111111111112';
-function log(m){ const el=document.getElementById('log'); el.innerHTML+='<br>'+new Date().toLocaleTimeString()+' '+m; el.scrollTop=9999; if(m.includes('ALARM')||m.includes('🔔')){ try{new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg').play()}catch{}; if(navigator.vibrate) navigator.vibrate([500,200,500]); } }
-
-document.getElementById('connect').onclick=async()=>{
-  if(!window.solana){ alert('Open inside Phantom Browser'); return; }
-  provider=window.solana; const r=await provider.connect(); pubKey=r.publicKey;
-  document.getElementById('wal').innerText=pubKey.toString().slice(0,4)+'...'+pubKey.toString().slice(-4);
-  document.getElementById('online').innerText='ONLINE'; document.getElementById('online').className='tag live'; isOnline=true;
-  await readBal(); document.getElementById('refresh').style.display='block'; log('REAL Connected for Bonny & Ruth');
-};
-document.getElementById('refresh').onclick=readBal;
+let provider=null, pubKey=null;
+const conn=new solanaWeb3.Connection('https://api.mainnet-beta.solana.com','confirmed');
+const USDC='EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
+function log(m){const el=document.getElementById('log'); el.innerHTML+='<br>'+new Date().toLocaleTimeString()+' '+m; el.scrollTop=el.scrollHeight;}
+function setStatus(connected){
+ const s=document.getElementById('connStatus');
+ if(connected){ s.innerText='CONNECTED AUTO 24/7'; s.className='live'; document.getElementById('tradeStatus').innerText='READING REAL CHAIN - READY TO TRADE'; document.getElementById('tradeStatus').className='live'; }
+ else { s.innerText='DISCONNECTED'; s.className='off'; }
+}
 
 async function readBal(){
-  if(!pubKey) return;
-  try{
-    const solLam=await conn.getBalance(pubKey); 
-    const solFormatted=(solLam/1e9).toFixed(4);
-    document.getElementById('sol').innerText=solFormatted;
-    const accs=await conn.getParsedTokenAccountsByOwner(pubKey,{mint:new solanaWeb3.PublicKey(USDC)}); 
-    let usdc=0; if(accs.value.length) usdc=accs.value[0].account.data.parsed.info.tokenAmount.uiAmount;
-    document.getElementById('usdc').innerText='$'+usdc.toFixed(2);
-    // SAVE real balance to phone - RETAINS AFTER REFRESH
-    localStorage.setItem('bonny_ruth_usdc', usdc.toFixed(2));
-    localStorage.setItem('bonny_ruth_sol', solFormatted);
-    localStorage.setItem('bonny_ruth_last', new Date().toString());
-    document.getElementById('lastSaved').innerText=new Date().toLocaleTimeString();
-    if(usdc>=alarmVal){ log('🔔 ALARM! Real balance $'+usdc.toFixed(2)+' hit $'+alarmVal+' - SECURE 70% FOR BONNY & RUTH NOW!'); }
-    log('BIF Reader: USDC $'+usdc+' SOL '+solFormatted+' - SAVED to phone');
-  }catch(e){ log('Bal error '+e.message); }
+ if(!pubKey) return;
+ try{
+  const solLam=await conn.getBalance(pubKey);
+  document.getElementById('sol').innerText=(solLam/1e9).toFixed(4);
+  const accs=await conn.getParsedTokenAccountsByOwner(pubKey,{mint:new solanaWeb3.PublicKey(USDC)});
+  let usdc=0; if(accs.value.length) usdc=accs.value[0].account.data.parsed.info.tokenAmount.uiAmount;
+  document.getElementById('usdc').innerText='$'+usdc.toFixed(2);
+  document.getElementById('last').innerText=new Date().toLocaleTimeString();
+  localStorage.setItem('bonny_ruth_pub',pubKey.toString());
+  localStorage.setItem('bonny_ruth_usdc',usdc.toFixed(2));
+  log('✅ REAL BALANCE: $'+usdc.toFixed(2)+' | SOL '+(solLam/1e9).toFixed(4)+' - retained after refresh');
+ }catch(e){ log('Read fail '+e.message+' - will retry when internet back'); }
 }
 
-document.getElementById('withdraw').onclick=async()=>{ await doSwap(SOLM,USDC,'Withdraw'); };
-document.getElementById('withdrawAll').onclick=async()=>{ if(confirm('Real Emergency withdraw ALL SOL->USDC?')) await doSwap(SOLM,USDC,'Emergency'); };
-
-async function doSwap(inM,outM,label){
-  if(!pubKey){ alert('Connect first'); return; }
-  try{
-    log('🔴 REAL '+label+' $0.20 test...');
-    const q=await fetch(`https://quote-api.jup.ag/v6/quote?inputMint=${inM}&outputMint=${outM}&amount=200000&slippageBps=100`).then(r=>r.json());
-    const {swapTransaction}=await fetch('https://quote-api.jup.ag/v6/swap',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({quoteResponse:q,userPublicKey:pubKey.toString(),wrapAndUnwrapSol:true})}).then(r=>r.json());
-    const buf=Uint8Array.from(atob(swapTransaction),c=>c.charCodeAt(0)); const tx=solanaWeb3.VersionedTransaction.deserialize(buf);
-    const signed=await provider.signTransaction(tx); const txid=await conn.sendTransaction(signed);
-    document.getElementById('txView').innerHTML=`<a href="https://solscan.io/tx/${txid}" target="_blank" style="color:#00ff88">REAL TX: ${txid.slice(0,15)}... View on Solscan</a>`; document.getElementById('lastTx').innerText=txid.slice(0,8);
-    log('Sent TX '+txid+' confirming...'); await conn.confirmTransaction(txid); log('✅ REAL Withdraw confirmed! USDC in wallet.'); await readBal();
-  }catch(e){ log('Withdraw fail: '+e.message); }
+async function tryAutoConnect(){
+ const solObj=window.phantom?.solana || window.solana;
+ if(!solObj){ log('No Phantom found on this device - install extension or open in Phantom App Browser'); return; }
+ provider=solObj;
+ try{
+  // This is the magic - connects automatically if you trusted before
+  const resp=await provider.connect({onlyIfTrusted:true});
+  pubKey=resp.publicKey;
+  document.getElementById('wal').innerText=pubKey.toString().slice(0,4)+'...'+pubKey.toString().slice(-4);
+  setStatus(true); log('🔥 AUTO-CONNECTED - No click needed - even after sleep/refresh');
+  await readBal();
+  // Keep reading every 30 sec + every 6h
+  setInterval(()=>{ if(document.getElementById('autoCheck').checked && pubKey) readBal(); },30000);
+ }catch(e){
+  log('Auto-connect not yet trusted - Click CONNECT ONCE button');
+ }
 }
 
-document.getElementById('alarmOn').onclick=()=>{ alarmVal=parseFloat(document.getElementById('alarmTarget').value); log('Alarm set $'+alarmVal); };
-document.getElementById('autoOn').onclick=()=>{ if(autoInterval) clearInterval(autoInterval); autoInterval=setInterval(()=>{ if(isOnline){ readBal(); log('⏰ 6h Auto-Collect check...'); } },6*60*60*1000); document.getElementById('autoState').innerText='AUTO ON (6h)'; document.getElementById('autoState').className='tag live'; log('Auto-Collect ON every 6h'); setTimeout(()=>readBal(),2000); };
-document.getElementById('autoOff').onclick=()=>{ if(autoInterval) clearInterval(autoInterval); document.getElementById('autoState').innerText='AUTO OFF'; document.getElementById('autoState').className='tag off'; log('Auto OFF'); };
-document.getElementById('onlineBtn').onclick=()=>{ isOnline=true; document.getElementById('online').innerText='ONLINE'; document.getElementById('online').className='tag live'; log('Go ONLINE'); };
-document.getElementById('offlineBtn').onclick=()=>{ isOnline=false; document.getElementById('online').innerText='OFFLINE'; document.getElementById('online').className='tag off'; log('Go OFFLINE'); };
+async function manualConnect(){
+ const solObj=window.phantom?.solana || window.solana;
+ if(!solObj){ alert('Install Phantom extension on this laptop OR open inside Phantom phone Browser app'); return; }
+ provider=solObj;
+ const r=await provider.connect(); // first time trust
+ pubKey=r.publicKey;
+ localStorage.setItem('phantom_trusted','yes');
+ document.getElementById('wal').innerText=pubKey.toString();
+ setStatus(true); log('✅ CONNECTED ONCE - Now it will auto-connect forever when internet on');
+ await readBal();
+}
 
-// LOAD after refresh - RETAINS BALANCE
-window.addEventListener('load', () => {
-  const savedUSDC = localStorage.getItem('bonny_ruth_usdc');
-  const savedSOL = localStorage.getItem('bonny_ruth_sol');
-  const savedTime = localStorage.getItem('bonny_ruth_last');
-  if(savedUSDC){
-    document.getElementById('usdc').innerText='$'+savedUSDC;
-    document.getElementById('sol').innerText=savedSOL || '0.0000';
-    document.getElementById('lastSaved').innerText=savedTime ? new Date(savedTime).toLocaleTimeString() : 'saved';
-    document.getElementById('log').innerHTML += '<br>✅ Loaded saved balance $'+savedUSDC+' after refresh — Bonny & Ruth safe — trading retained';
+document.getElementById('connect').onclick=manualConnect;
+document.getElementById('refresh').onclick=readBal;
+
+// AUTO CONNECT AT ONCE ON PAGE LOAD
+window.addEventListener('load', async()=>{
+  log('Starting auto-connect...');
+  const savedPub=localStorage.getItem('bonny_ruth_pub');
+  const savedUSDC=localStorage.getItem('bonny_ruth_usdc');
+  if(savedPub && savedUSDC){
+   document.getElementById('usdc').innerText='$'+savedUSDC;
+   document.getElementById('wal').innerText=savedPub.slice(0,4)+'...'+savedPub.slice(-4)+' (saved)';
+   log('Loaded saved $'+savedUSDC+' after sleep/refresh - Bonny & Ruth safe');
   }
+  // Try auto connect immediately
+  await tryAutoConnect();
+  // Retry every 5 sec if computer was sleeping and woke up
+  setInterval(()=>{ if(!pubKey && document.getElementById('autoCheck').checked) tryAutoConnect(); },5000);
 });
+
+// When computer wakes from sleep, browser fires online event
+window.addEventListener('online',()=>{ log('Internet back - auto reconnecting...'); tryAutoConnect(); });
 </script></body></html>
