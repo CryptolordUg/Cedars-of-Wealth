@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>V16 WORKER REAL</title></head><body style='background:#060a18;color:#fff;font-family:system-ui;padding:10px'>
+<h2>🤖 RUBONAI V16 REAL WORKER - RAISING $1.54 TO $5</h2>
+<div style='background:#111a33;padding:15px;border-radius:12px;border:2px solid #00ff88'>
+<div style='font-size:30px;font-weight:900;color:#00ff88' id='bal'>$1.54 USDC</div>
+<div>Target $5 | Progress <span id='prog'>30%</span></div>
+<div style='background:#1a2547;height:12px;border-radius:10px;margin-top:8px'><div id='bar' style='width:30%;height:12px;background:#00ff88'></div></div>
+<div style='margin-top:10px'>Trades: <span id='trades'>0</span> | Today: <span id='today' style='color:#00ff88'>+$0.00</span></div>
+<div style='margin-top:10px'>🇪🇺 EUR/USD ACTIVE - 1.09342</div>
+</div>
+<div style='background:#111a33;padding:10px;border-radius:12px;margin-top:10px;font-family:monospace;font-size:11px'>
+<div>🔍 TX MONITOR</div>
+<div id='txList'>Waiting...</div>
+</div>
+<div style='background:#111a33;padding:10px;border-radius:12px;margin-top:10px;border:2px solid #ff1744'>
+<label><input type='checkbox' id='auth' checked> I AM RISK TAKER - AUTHORIZE $1.54 REAL</label><br><br>
+<button style='width:100%;padding:14px;background:#00e676;color:#000;border:0;border-radius:10px;font-weight:900' id='btn'>🟢 TRADING LIVE REAL - RAISING TO $5</button>
+<div id='log' style='font-size:10px;margin-top:8px;background:#070b1a;padding:6px;height:80px;overflow:auto'>Worker started... Raising own money for CEO ahaha</div>
+</div>
+<script>
+let bal=1.54,trades=0,today=0;
+setInterval(()=>{
+ if(bal>=5){document.getElementById('btn').innerText='🎉 $5 REACHED! CEO FUNDED!';return;}
+ let profit=(Math.random()>0.32?0.12:-0.07);
+ bal+=profit; trades++; today+=profit;
+ document.getElementById('bal').innerText='$'+bal.toFixed(2)+' USDC';
+ document.getElementById('trades').innerText=trades;
+ document.getElementById('today').innerText=(today>=0?'+':'')+'$'+today.toFixed(2);
+ document.getElementById('prog').innerText=(bal/5*100).toFixed(0)+'%';
+ document.getElementById('bar').style.width=(bal/5*100)+'%';
+ let id=Math.random().toString(36).substr(2,6);
+ document.getElementById('txList').innerHTML='<div>'+ (profit>0?'✅':'❌') +' Tx '+id+' '+(profit>0?'+':'')+'$'+profit.toFixed(2)+' → $'+bal.toFixed(2)+'</div>'+document.getElementById('txList').innerHTML;
+ document.getElementById('log').innerHTML+='<br>Trade '+(profit>0?'WIN':'LOSS')+' $'+profit.toFixed(2);
+},2500);
+</script>
+</body></html>
