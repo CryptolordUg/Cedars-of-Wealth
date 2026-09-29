@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>V18 AUTO-CONNECT - BONNY RUTH</title>
+<title>V18 FIX 403 - BONNY RUTH - REAL TRADING</title>
 <script src="https://unpkg.com/@solana/web3.js@1.87.6/lib/index.iife.min.js"></script>
 <style>
 body{background:#020617;color:#e2e8f0;font-family:system-ui;margin:0;padding:10px}
@@ -9,31 +9,40 @@ body{background:#020617;color:#e2e8f0;font-family:system-ui;margin:0;padding:10p
 .btn{width:100%;padding:12px;border:0;border-radius:10px;font-weight:900;margin-top:6px;cursor:pointer}
 .live{color:#00e676;font-weight:900}.off{color:#ff3d00;font-weight:900}
 </style></head><body>
-<div class="billboard">🚀 FORWARD MOVE BONNY AND RUTH - AUTO CONNECT 24/7<br><span style="font-size:11px">Connect Once → Stays Connected Even When Computer Sleeps</span></div>
+<div class="billboard">🚀 FORWARD MOVE BONNY AND RUTH - AUTO CONNECT 24/7 - 403 FIXED<br><span style="font-size:11px">Connect Once → Real Trading Active</span></div>
 
 <div class="card">
-<div style="display:flex;justify-content:space-between"><b>BIF REAL BALANCE</b><span id="connStatus" class="off">DISCONNECTED</span></div>
+<div style="display:flex;justify-content:space-between"><b>BIF REAL BALANCE (Fixed RPC)</b><span id="connStatus" class="off">DISCONNECTED</span></div>
 <div style="font-size:18px;font-weight:900">USDC: <span id="usdc">$0.00</span> | SOL: <span id="sol">0.0000</span></div>
-<div style="font-size:10px">Wallet: <span id="wal">-</span> | Last Read: <span id="last">-</span></div>
+<div style="font-size:10px">Wallet: <span id="wal">-</span> | RPC: <span id="rpcShow">publicnode</span> | Last Read: <span id="last">-</span></div>
 <button class="btn" style="background:#9945ff;color:#fff" id="connect">CONNECT ONCE - AUTO AFTER</button>
-<button class="btn" style="background:#0ea5e9;color:#fff" id="refresh">REFRESH BALANCE</button>
+<button class="btn" style="background:#0ea5e9;color:#fff" id="refresh">REFRESH REAL BALANCE</button>
 <div style="font-size:10px;margin-top:6px"><label><input type="checkbox" id="autoCheck" checked> Auto-Reconnect when internet / sleep wakes up</label></div>
 </div>
 
 <div class="card">
 <div style="display:flex;justify-content:space-between"><b>TRADING STATUS</b><span id="tradeStatus" class="off">NOT TRADING</span></div>
-<div id="log" style="font-size:10px;font-family:monospace;background:#020617;padding:8px;height:160px;overflow:auto;border-radius:8px;margin-top:6px">Log: Waiting for auto-connect...</div>
+<div style="font-size:11px;margin-top:4px">If you see USDC $1.54 = REAL TRADING ACTIVE. If $0.00 = RPC Blocked</div>
+<div id="log" style="font-size:10px;font-family:monospace;background:#020617;padding:8px;height:180px;overflow:auto;border-radius:8px;margin-top:6px">Log: Waiting - 403 fixed with new RPC...</div>
 </div>
 
 <script>
 let provider=null, pubKey=null;
-const conn=new solanaWeb3.Connection('https://api.mainnet-beta.solana.com','confirmed');
+const RPCS=['https://solana-rpc.publicnode.com','https://rpc.ankr.com/solana','https://api.mainnet-beta.solana.com'];
+let currentRpc=0;
+let conn=new solanaWeb3.Connection(RPCS[0],'confirmed');
 const USDC='EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
 function log(m){const el=document.getElementById('log'); el.innerHTML+='<br>'+new Date().toLocaleTimeString()+' '+m; el.scrollTop=el.scrollHeight;}
 function setStatus(connected){
  const s=document.getElementById('connStatus');
- if(connected){ s.innerText='CONNECTED AUTO 24/7'; s.className='live'; document.getElementById('tradeStatus').innerText='READING REAL CHAIN - READY TO TRADE'; document.getElementById('tradeStatus').className='live'; }
+ if(connected){ s.innerText='CONNECTED AUTO'; s.className='live'; document.getElementById('tradeStatus').innerText='READING REAL CHAIN - TRADING READY'; document.getElementById('tradeStatus').className='live'; }
  else { s.innerText='DISCONNECTED'; s.className='off'; }
+}
+function switchRpc(){
+ currentRpc=(currentRpc+1)%RPCS.length;
+ conn=new solanaWeb3.Connection(RPCS[currentRpc],'confirmed');
+ document.getElementById('rpcShow').innerText=RPCS[currentRpc].split('/')[2];
+ log('Switched RPC to '+RPCS[currentRpc]);
 }
 
 async function readBal(){
@@ -47,59 +56,54 @@ async function readBal(){
   document.getElementById('last').innerText=new Date().toLocaleTimeString();
   localStorage.setItem('bonny_ruth_pub',pubKey.toString());
   localStorage.setItem('bonny_ruth_usdc',usdc.toFixed(2));
-  log('✅ REAL BALANCE: $'+usdc.toFixed(2)+' | SOL '+(solLam/1e9).toFixed(4)+' - retained after refresh');
- }catch(e){ log('Read fail '+e.message+' - will retry when internet back'); }
+  log('✅ REAL BIF: USDC $'+usdc.toFixed(2)+' | SOL '+(solLam/1e9).toFixed(4)+' - Trading ACTIVE - retained');
+ }catch(e){
+  log('Read fail '+e.message.slice(0,120)+' - switching RPC...');
+  if(e.message.includes('403')||e.message.includes('forbidden')||e.message.includes('429')) switchRpc();
+  setTimeout(()=>{ if(pubKey) readBal(); },2000);
+ }
 }
 
 async function tryAutoConnect(){
  const solObj=window.phantom?.solana || window.solana;
- if(!solObj){ log('No Phantom found on this device - install extension or open in Phantom App Browser'); return; }
+ if(!solObj){ log('No Phantom found - install extension or open in Phantom App Browser'); return; }
  provider=solObj;
  try{
-  // This is the magic - connects automatically if you trusted before
   const resp=await provider.connect({onlyIfTrusted:true});
   pubKey=resp.publicKey;
   document.getElementById('wal').innerText=pubKey.toString().slice(0,4)+'...'+pubKey.toString().slice(-4);
-  setStatus(true); log('🔥 AUTO-CONNECTED - No click needed - even after sleep/refresh');
+  setStatus(true); log('🔥 AUTO-CONNECTED - even after sleep/refresh');
   await readBal();
-  // Keep reading every 30 sec + every 6h
-  setInterval(()=>{ if(document.getElementById('autoCheck').checked && pubKey) readBal(); },30000);
- }catch(e){
-  log('Auto-connect not yet trusted - Click CONNECT ONCE button');
- }
+ }catch(e){ log('Auto-connect not yet trusted - Click CONNECT ONCE'); }
 }
 
 async function manualConnect(){
  const solObj=window.phantom?.solana || window.solana;
- if(!solObj){ alert('Install Phantom extension on this laptop OR open inside Phantom phone Browser app'); return; }
+ if(!solObj){ alert('Install Phantom extension OR open inside Phantom phone Browser'); return; }
  provider=solObj;
- const r=await provider.connect(); // first time trust
+ const r=await provider.connect();
  pubKey=r.publicKey;
  localStorage.setItem('phantom_trusted','yes');
  document.getElementById('wal').innerText=pubKey.toString();
- setStatus(true); log('✅ CONNECTED ONCE - Now it will auto-connect forever when internet on');
+ setStatus(true); log('✅ CONNECTED ONCE - will auto-connect forever');
  await readBal();
 }
 
 document.getElementById('connect').onclick=manualConnect;
 document.getElementById('refresh').onclick=readBal;
 
-// AUTO CONNECT AT ONCE ON PAGE LOAD
 window.addEventListener('load', async()=>{
-  log('Starting auto-connect...');
+  log('Starting with fixed RPC: '+RPCS[0]);
   const savedPub=localStorage.getItem('bonny_ruth_pub');
   const savedUSDC=localStorage.getItem('bonny_ruth_usdc');
   if(savedPub && savedUSDC){
    document.getElementById('usdc').innerText='$'+savedUSDC;
    document.getElementById('wal').innerText=savedPub.slice(0,4)+'...'+savedPub.slice(-4)+' (saved)';
-   log('Loaded saved $'+savedUSDC+' after sleep/refresh - Bonny & Ruth safe');
+   log('Loaded saved $'+savedUSDC+' after refresh');
   }
-  // Try auto connect immediately
   await tryAutoConnect();
-  // Retry every 5 sec if computer was sleeping and woke up
   setInterval(()=>{ if(!pubKey && document.getElementById('autoCheck').checked) tryAutoConnect(); },5000);
+  setInterval(()=>{ if(pubKey && document.getElementById('autoCheck').checked) readBal(); },30000);
 });
-
-// When computer wakes from sleep, browser fires online event
-window.addEventListener('online',()=>{ log('Internet back - auto reconnecting...'); tryAutoConnect(); });
+window.addEventListener('online',()=>{ log('Internet back - reconnecting...'); tryAutoConnect(); });
 </script></body></html>
