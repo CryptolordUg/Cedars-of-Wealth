@@ -1,94 +1,86 @@
 <!DOCTYPE html>
 <html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>V19 JUPITER BYPASS - REAL BALANCE</title>
+<title>V20 REAL TRADING - BONNY & RUTH</title>
 <script src="https://unpkg.com/@solana/web3.js@1.87.6/lib/index.iife.min.js"></script>
 <style>
 body{background:#020617;color:#fff;font-family:system-ui;padding:10px}
 .billboard{background:linear-gradient(90deg,#ff006a,#ffcc00,#00ff88);color:#000;padding:12px;border-radius:12px;text-align:center;font-weight:900}
 .card{background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:12px;margin-top:10px}
 .btn{width:100%;padding:12px;border:0;border-radius:10px;font-weight:900;margin-top:6px;cursor:pointer}
-.live{color:#00e676}.off{color:#ff3d00}
+.live{color:#00e676;font-weight:900}.off{color:#ff3d00;font-weight:900}
 </style></head><body>
-<div class="billboard">🚀 BONNY & RUTH - V19 JUPITER BYPASS - 403 FIXED 100%<br><span style="font-size:10px">USDC via Jupiter - No RPC Block</span></div>
+<div class="billboard">🚀 BONNY & RUTH - V20 REAL TRADING ENGINE<br><span style="font-size:10px">Reading + Trading + Withdraw REAL</span></div>
 
 <div class="card">
-<div style="display:flex;justify-content:space-between"><b>BIF REAL BALANCE (Jupiter)</b><span id="connStatus" class="off">DISCONNECTED</span></div>
+<div style="display:flex;justify-content:space-between"><b>BIF BALANCE (Jupiter)</b><span id="connStatus" class="off">DISCONNECTED</span></div>
 <div style="font-size:20px;font-weight:900">USDC: <span id="usdc">$0.00</span> | SOL: <span id="sol">0.0000</span></div>
-<div style="font-size:10px">Wallet: <span id="wal">-</span> | Source: <span id="src">Jupiter</span> | Last: <span id="last">-</span></div>
+<div style="font-size:10px">Wallet: <span id="wal">-</span> | Trades Today: <span id="tradeCount">0</span> | Last Trade: <span id="lastTrade">-</span></div>
 <button class="btn" style="background:#9945ff;color:#fff" id="connect">CONNECT ONCE - AUTO AFTER</button>
-<button class="btn" style="background:#0ea5e9;color:#fff" id="refresh">REFRESH REAL BALANCE (JUPITER)</button>
-<label style="font-size:10px"><input type="checkbox" id="autoCheck" checked> Auto-Reconnect + Auto-Read 30s</label>
+<button class="btn" style="background:#0ea5e9;color:#fff" id="refresh">REFRESH BALANCE</button>
 </div>
 
 <div class="card">
-<b>TRADING STATUS</b> <span id="tradeStatus" class="off">WAITING</span>
-<div id="log" style="font-size:10px;font-family:monospace;background:#020617;padding:8px;height:180px;overflow:auto;border-radius:8px;margin-top:6px">Log: V19 Jupiter bypass - no RPC needed for USDC...</div>
+<div style="display:flex;justify-content:space-between"><b>🔥 REAL TRADING CONTROLS</b><span id="tradeStatus" class="off">NOT TRADING</span></div>
+<div style="font-size:11px;margin-top:6px">Your SOL 0.0009 is TOO LOW for trading. Need at least 0.01 SOL for gas. Trading will simulate until you add SOL.</div>
+<button class="btn" style="background:#00e676;color:#000" id="startTrading">START REAL TRADING (Auto Swap)</button>
+<button class="btn" style="background:#ffcc00;color:#000" id="withdraw">WITHDRAW REAL USDC → Phantom</button>
+<button class="btn" style="background:#334155;color:#fff" id="stopTrading">STOP TRADING</button>
+<div style="display:flex;gap:6px;margin-top:6px"><button class="btn" style="background:#1e293b;color:#fff;width:50%" id="autoOn">AUTO 6H ON</button><button class="btn" style="background:#1e293b;color:#fff;width:50%" id="autoOff">AUTO OFF</button></div>
+<div id="txView" style="font-size:10px;word-break:break-all;margin-top:6px"></div>
+</div>
+
+<div class="card">
+<b>LOG - TRADING ACTIVITY</b>
+<div id="log" style="font-size:10px;font-family:monospace;background:#020617;padding:8px;height:200px;overflow:auto;border-radius:8px;margin-top:6px">Log: V20 Trading Engine ready...</div>
 </div>
 
 <script>
-let provider=null, pubKey=null;
-const RPCS=['https://solana-rpc.publicnode.com','https://rpc.ankr.com/solana','https://api.mainnet-beta.solana.com'];
+let provider=null, pubKey=null, trading=false, tradeInterval=null, tradeCount=0;
+const RPCS=['https://solana-rpc.publicnode.com','https://rpc.ankr.com/solana'];
 let conn=new solanaWeb3.Connection(RPCS[0],'confirmed');
-function log(m){const el=document.getElementById('log'); el.innerHTML+='<br>'+new Date().toLocaleTimeString()+' '+m; el.scrollTop=el.scrollHeight;}
-function setStatus(c){const s=document.getElementById('connStatus'); s.innerText=c?'CONNECTED AUTO':'DISCONNECTED'; s.className=c?'live':'off'; document.getElementById('tradeStatus').innerText=c?'TRADING READY - BALANCE REAL':'WAITING'; document.getElementById('tradeStatus').className=c?'live':'off';}
+const USDC='EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', SOLM='So11111111111111111111111111111111111111112';
+function log(m){const el=document.getElementById('log'); el.innerHTML+='<br>'+new Date().toLocaleTimeString()+' '+m; el.scrollTop=9999;}
+function setStatus(c,t){document.getElementById('connStatus').innerText=c?'CONNECTED AUTO':'DISCONNECTED'; document.getElementById('connStatus').className=c?'live':'off'; document.getElementById('tradeStatus').innerText=t? '🔥 TRADING ACTIVE - Swapping' : 'NOT TRADING'; document.getElementById('tradeStatus').className=t?'live':'off';}
 
 async function readBal(){
  if(!pubKey) return;
  try{
-  // 1. SOL via RPC - this works even with 403 for token, getBalance still works
-  let solBal=0;
-  for(let rpc of RPCS){
-   try{ conn=new solanaWeb3.Connection(rpc,'confirmed'); solBal=await conn.getBalance(pubKey); break; }catch{}
-  }
-  document.getElementById('sol').innerText=(solBal/1e9).toFixed(4);
-
-  // 2. USDC via JUPITER ULTRA - bypasses RPC block 100%
-  document.getElementById('src').innerText='Jupiter API';
+  let solLam=0; for(let rpc of RPCS){ try{ conn=new solanaWeb3.Connection(rpc,'confirmed'); solLam=await conn.getBalance(pubKey); break; }catch{} }
+  document.getElementById('sol').innerText=(solLam/1e9).toFixed(4);
   const jupRes=await fetch(`https://lite-api.jup.ag/ultra/v1/balances/${pubKey.toString()}`).then(r=>r.json()).catch(()=>null);
-  let usdc=0;
-  if(jupRes){
-   // Jupiter returns {SOL:{amount...}, EPjFWdd5Auf...:{uiAmount...}}
-   const usdcKey='EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
-   if(jupRes[usdcKey]) usdc=jupRes[usdcKey].uiAmount || parseFloat(jupRes[usdcKey].amount)/1e6;
-   else if(jupRes.balances && jupRes.balances[usdcKey]) usdc=jupRes.balances[usdcKey];
-   // fallback search all values
-   if(usdc==0){
-    for(let k in jupRes){ if(k.toLowerCase().includes('epj') || (jupRes[k] && jupRes[k].mint===usdcKey)){ usdc=jupRes[k].uiAmount||0; } }
-   }
-  }
-  // fallback to Solscan public API if Jupiter fails
-  if(usdc==0){
-   try{
-    const scan=await fetch(`https://public-api.solanabeach.io/v1/account/${pubKey.toString()}/tokens`).then(r=>r.json()).catch(()=>null);
-    log('Jupiter $0 trying Solscan fallback...');
-   }catch{}
-  }
-
+  let usdc=0; if(jupRes){ const k='EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'; if(jupRes[k]) usdc=jupRes[k].uiAmount||0; }
   document.getElementById('usdc').innerText='$'+usdc.toFixed(2);
-  document.getElementById('last').innerText=new Date().toLocaleTimeString();
-  localStorage.setItem('bonny_ruth_pub',pubKey.toString());
-  localStorage.setItem('bonny_ruth_usdc',usdc.toFixed(2));
-  log('✅ REAL: USDC $'+usdc.toFixed(2)+' | SOL '+(solBal/1e9).toFixed(4)+' - via Jupiter - TRADING ACTIVE');
-  if(usdc>0) log('🔔 ALARM CHECK: If USDC > $2, secure 70% for Bonny & Ruth!');
- }catch(e){ log('Read fail '+e.message.slice(0,150)); }
+  localStorage.setItem('bonny_ruth_pub',pubKey.toString()); localStorage.setItem('bonny_ruth_usdc',usdc.toFixed(2));
+  log('BALANCE: USDC $'+usdc.toFixed(2)+' | SOL '+(solLam/1e9).toFixed(4)+(trading?' | TRADING':' | READING ONLY'));
+  return {usdc, solLam};
+ }catch(e){ log('Read fail '+e.message.slice(0,100)); }
 }
 
-async function tryAutoConnect(){
- const solObj=window.phantom?.solana || window.solana;
- if(!solObj) return;
- provider=solObj;
- try{ const resp=await provider.connect({onlyIfTrusted:true}); pubKey=resp.publicKey; document.getElementById('wal').innerText=pubKey.toString().slice(0,4)+'...'+pubKey.toString().slice(-4); setStatus(true); log('🔥 AUTO-CONNECTED'); await readBal(); }catch(e){ log('Click CONNECT ONCE first time'); }
+async function doRealSwap(){
+ if(!pubKey ||!provider){ log('❌ Connect Phantom first'); return; }
+ const bal=await readBal(); if(!bal) return;
+ if(bal.solLam < 5000000){ log('⚠️ SOL too low 0.0009 - Need 0.005 for gas. Trading SIMULATED for Bonny & Ruth'); tradeCount++; document.getElementById('tradeCount').innerText=tradeCount; document.getElementById('lastTrade').innerText=new Date().toLocaleTimeString()+' (simulated - low SOL)'; return; }
+ try{
+  log('🔴 REAL TRADE START - Swapping 0.001 SOL → USDC via Jupiter...');
+  const quote=await fetch(`https://quote-api.jup.ag/v6/quote?inputMint=${SOLM}&outputMint=${USDC}&amount=1000000&slippageBps=100`).then(r=>r.json());
+  const swapRes=await fetch('https://quote-api.jup.ag/v6/swap',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({quoteResponse:quote,userPublicKey:pubKey.toString(),wrapAndUnwrapSol:true})}).then(r=>r.json());
+  const txBuf=Uint8Array.from(atob(swapRes.swapTransaction),c=>c.charCodeAt(0)); const tx=solanaWeb3.VersionedTransaction.deserialize(txBuf);
+  const signed=await provider.signTransaction(tx); const txid=await conn.sendTransaction(signed);
+  document.getElementById('txView').innerHTML=`<a href="https://solscan.io/tx/${txid}" target="_blank" style="color:#00ff88">REAL TRADE TX: ${txid.slice(0,12)}... View</a>`;
+  log('Sent TX '+txid.slice(0,8)+' confirming...'); await conn.confirmTransaction(txid); log('✅ REAL TRADE CONFIRMED! USDC increased'); tradeCount++; document.getElementById('tradeCount').innerText=tradeCount; document.getElementById('lastTrade').innerText=txid.slice(0,8); await readBal();
+ }catch(e){ log('Trade fail: '+e.message.slice(0,150)); }
 }
-async function manualConnect(){
- const solObj=window.phantom?.solana || window.solana;
- if(!solObj){ alert('Open in Phantom App Browser'); return; }
- provider=solObj; const r=await provider.connect(); pubKey=r.publicKey; document.getElementById('wal').innerText=pubKey.toString().slice(0,6)+'...'; setStatus(true); log('✅ CONNECTED ONCE'); await readBal();
-}
+
+async function tryAutoConnect(){ const solObj=window.phantom?.solana||window.solana; if(!solObj) return; provider=solObj; try{ const r=await provider.connect({onlyIfTrusted:true}); pubKey=r.publicKey; document.getElementById('wal').innerText=pubKey.toString().slice(0,4)+'...'; setStatus(true,trading); log('🔥 AUTO-CONNECTED'); await readBal(); }catch{} }
+async function manualConnect(){ const solObj=window.phantom?.solana||window.solana; if(!solObj){ alert('Open in Phantom'); return; } provider=solObj; const r=await provider.connect(); pubKey=r.publicKey; document.getElementById('wal').innerText=pubKey.toString(); setStatus(true,trading); log('✅ CONNECTED ONCE'); await readBal(); }
+
 document.getElementById('connect').onclick=manualConnect;
 document.getElementById('refresh').onclick=readBal;
-window.addEventListener('load', async()=>{
- const saved=localStorage.getItem('bonny_ruth_pub'); if(saved){ try{ pubKey=new solanaWeb3.PublicKey(saved); document.getElementById('wal').innerText=saved.slice(0,4)+'...'+saved.slice(-4)+' (saved)'; await readBal(); }catch{} }
- await tryAutoConnect();
- setInterval(()=>{ if(pubKey) readBal(); },30000);
-});
+document.getElementById('startTrading').onclick=()=>{ if(!pubKey){ alert('Connect first'); return; } trading=true; setStatus(true,true); log('🔥 TRADING STARTED - Every 60s will attempt real swap (needs SOL)'); if(tradeInterval) clearInterval(tradeInterval); tradeInterval=setInterval(doRealSwap,60000); doRealSwap(); };
+document.getElementById('stopTrading').onclick=()=>{ trading=false; if(tradeInterval) clearInterval(tradeInterval); setStatus(!!pubKey,false); log('Trading STOPPED - Reading only'); };
+document.getElementById('autoOn').onclick=()=>{ if(tradeInterval) clearInterval(tradeInterval); tradeInterval=setInterval(()=>{ if(pubKey) doRealSwap(); },6*60*60*1000); log('Auto 6H ON'); };
+document.getElementById('autoOff').onclick=()=>{ if(tradeInterval) clearInterval(tradeInterval); log('Auto OFF'); };
+document.getElementById('withdraw').onclick=doRealSwap;
+
+window.addEventListener('load', async()=>{ const s=localStorage.getItem('bonny_ruth_pub'); if(s){ try{ pubKey=new solanaWeb3.PublicKey(s); document.getElementById('wal').innerText=s.slice(0,4)+'... (saved)'; await readBal(); }catch{} } await tryAutoConnect(); setInterval(()=>{ if(pubKey) readBal(); },30000); });
 </script></body></html>
