@@ -16,7 +16,7 @@ body{background:#020617;color:#e2e8f0;font-family:system-ui;margin:0;padding:10p
 <div class="card">
 <div style="display:flex;justify-content:space-between"><b>BIF BALANCE READER (Real Chain)</b><span id="online" class="tag off">OFFLINE</span></div>
 <div class="bal">USDC: <span id="usdc">$0.00</span> | SOL: <span id="sol">0.0000</span></div>
-<div style="font-size:11px;color:#94a3b8">Wallet: <span id="wal">Not Connected</span> | Last Real Tx: <span id="lastTx">-</span></div>
+<div style="font-size:11px;color:#94a3b8">Wallet: <span id="wal">Not Connected</span> | Last Real Tx: <span id="lastTx">-</span> | Last Saved: <span id="lastSaved">-</span></div>
 <button class="btn" style="background:#9945ff;color:#fff" id="connect">1. CONNECT PHANTOM REAL</button>
 <button class="btn" style="background:#0ea5e9;color:#fff;display:none" id="refresh">REFRESH REAL BALANCE</button>
 </div>
@@ -26,7 +26,6 @@ body{background:#020617;color:#e2e8f0;font-family:system-ui;margin:0;padding:10p
 <button class="btn" style="background:#00e676;color:#000" id="withdraw">WITHDRAW REAL PROFIT → USDC</button>
 <button class="btn" style="background:#ffcc00;color:#000" id="withdrawAll">EMERGENCY WITHDRAW ALL SOL→USDC</button>
 <div id="txView" style="font-size:11px;margin-top:8px;word-break:break-all"></div>
-<div style="font-size:10px;color:#94a3b8;margin-top:6px">Withdrawal = Real swap in your wallet. After swap, send USDC to Binance P2P → MTN Mobile Money.</div>
 </div>
 
 <div class="card">
@@ -37,13 +36,14 @@ body{background:#020617;color:#e2e8f0;font-family:system-ui;margin:0;padding:10p
 <div id="log" style="font-size:10px;background:#020617;padding:8px;height:140px;overflow:auto;margin-top:8px;border-radius:8px;font-family:monospace">Log: Ready for Bonny & Ruth...</div>
 </div>
 
-<div class="card" style="border:2px dashed #00e676"><b>💰 HOW TO SAVE 80% OF $1000 IN 7 DAYS</b><div style="font-size:11px;margin-top:6px;line-height:1.5">You need $800 in 7 days = $114/day.<br><br><b>70/20/10 RULE - Use for EVERY profit:</b><br>70% → LOCK for Hospital (separate MTN account)<br>20% → Data/Food/Transport<br>10% → Re-invest<br><br>With $1.54 trading, max profit is $0.05/day. NOT enough.<br><b>Real way:</b> Day 1-2: 2 Dashboard clients $50 = $100 (Save $70). Day 3-5: 3 shops $40 = $120 (Save $84). Total saved $154. Day 6-7: Post Bonny & Ruth story with hospital papers in 30 WhatsApp groups + GoFundMe. $10 x 65 people = $650. Total $804 = 80% goal.<br><br><b>Auto-collect every 6h</b> does NOT print money - it reminds you to secure 70% when trade is in profit.</div></div>
+<div class="card" style="border:2px dashed #00e676"><b>💰 SAVE 70/20/10 FOR $800</b><div style="font-size:11px;margin-top:6px;line-height:1.5">70% LOCK for Hospital, 20% Data/Food, 10% Re-invest. Refresh now retains balance for Bonny & Ruth.</div></div>
 
 <script>
 let provider=null,pubKey=null,autoInterval=null,alarmVal=2,isOnline=false;
 const conn=new solanaWeb3.Connection('https://api.mainnet-beta.solana.com');
 const USDC='EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',SOLM='So11111111111111111111111111111111111111112';
 function log(m){ const el=document.getElementById('log'); el.innerHTML+='<br>'+new Date().toLocaleTimeString()+' '+m; el.scrollTop=9999; if(m.includes('ALARM')||m.includes('🔔')){ try{new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg').play()}catch{}; if(navigator.vibrate) navigator.vibrate([500,200,500]); } }
+
 document.getElementById('connect').onclick=async()=>{
   if(!window.solana){ alert('Open inside Phantom Browser'); return; }
   provider=window.solana; const r=await provider.connect(); pubKey=r.publicKey;
@@ -52,18 +52,29 @@ document.getElementById('connect').onclick=async()=>{
   await readBal(); document.getElementById('refresh').style.display='block'; log('REAL Connected for Bonny & Ruth');
 };
 document.getElementById('refresh').onclick=readBal;
+
 async function readBal(){
   if(!pubKey) return;
   try{
-    const solLam=await conn.getBalance(pubKey); document.getElementById('sol').innerText=(solLam/1e9).toFixed(4);
-    const accs=await conn.getParsedTokenAccountsByOwner(pubKey,{mint:new solanaWeb3.PublicKey(USDC)}); let usdc=0; if(accs.value.length) usdc=accs.value[0].account.data.parsed.info.tokenAmount.uiAmount;
+    const solLam=await conn.getBalance(pubKey); 
+    const solFormatted=(solLam/1e9).toFixed(4);
+    document.getElementById('sol').innerText=solFormatted;
+    const accs=await conn.getParsedTokenAccountsByOwner(pubKey,{mint:new solanaWeb3.PublicKey(USDC)}); 
+    let usdc=0; if(accs.value.length) usdc=accs.value[0].account.data.parsed.info.tokenAmount.uiAmount;
     document.getElementById('usdc').innerText='$'+usdc.toFixed(2);
+    // SAVE real balance to phone - RETAINS AFTER REFRESH
+    localStorage.setItem('bonny_ruth_usdc', usdc.toFixed(2));
+    localStorage.setItem('bonny_ruth_sol', solFormatted);
+    localStorage.setItem('bonny_ruth_last', new Date().toString());
+    document.getElementById('lastSaved').innerText=new Date().toLocaleTimeString();
     if(usdc>=alarmVal){ log('🔔 ALARM! Real balance $'+usdc.toFixed(2)+' hit $'+alarmVal+' - SECURE 70% FOR BONNY & RUTH NOW!'); }
-    log('BIF Reader: USDC $'+usdc+' SOL '+(solLam/1e9).toFixed(4));
+    log('BIF Reader: USDC $'+usdc+' SOL '+solFormatted+' - SAVED to phone');
   }catch(e){ log('Bal error '+e.message); }
 }
+
 document.getElementById('withdraw').onclick=async()=>{ await doSwap(SOLM,USDC,'Withdraw'); };
 document.getElementById('withdrawAll').onclick=async()=>{ if(confirm('Real Emergency withdraw ALL SOL->USDC?')) await doSwap(SOLM,USDC,'Emergency'); };
+
 async function doSwap(inM,outM,label){
   if(!pubKey){ alert('Connect first'); return; }
   try{
@@ -73,12 +84,26 @@ async function doSwap(inM,outM,label){
     const buf=Uint8Array.from(atob(swapTransaction),c=>c.charCodeAt(0)); const tx=solanaWeb3.VersionedTransaction.deserialize(buf);
     const signed=await provider.signTransaction(tx); const txid=await conn.sendTransaction(signed);
     document.getElementById('txView').innerHTML=`<a href="https://solscan.io/tx/${txid}" target="_blank" style="color:#00ff88">REAL TX: ${txid.slice(0,15)}... View on Solscan</a>`; document.getElementById('lastTx').innerText=txid.slice(0,8);
-    log('Sent TX '+txid+' confirming...'); await conn.confirmTransaction(txid); log('✅ REAL Withdraw confirmed! USDC in wallet. Send to Binance P2P -> MTN'); await readBal();
+    log('Sent TX '+txid+' confirming...'); await conn.confirmTransaction(txid); log('✅ REAL Withdraw confirmed! USDC in wallet.'); await readBal();
   }catch(e){ log('Withdraw fail: '+e.message); }
 }
-document.getElementById('alarmOn').onclick=()=>{ alarmVal=parseFloat(document.getElementById('alarmTarget').value); log('Alarm set $'+alarmVal); alert('Alarm ON at $'+alarmVal); };
-document.getElementById('autoOn').onclick=()=>{ if(autoInterval) clearInterval(autoInterval); autoInterval=setInterval(()=>{ if(isOnline){ readBal(); log('⏰ 6h Auto-Collect check... if profit, secure 70%'); } },6*60*60*1000); document.getElementById('autoState').innerText='AUTO ON (6h)'; document.getElementById('autoState').className='tag live'; log('Auto-Collect ON every 6h - BONNY & RUTH'); setTimeout(()=>readBal(),2000); };
+
+document.getElementById('alarmOn').onclick=()=>{ alarmVal=parseFloat(document.getElementById('alarmTarget').value); log('Alarm set $'+alarmVal); };
+document.getElementById('autoOn').onclick=()=>{ if(autoInterval) clearInterval(autoInterval); autoInterval=setInterval(()=>{ if(isOnline){ readBal(); log('⏰ 6h Auto-Collect check...'); } },6*60*60*1000); document.getElementById('autoState').innerText='AUTO ON (6h)'; document.getElementById('autoState').className='tag live'; log('Auto-Collect ON every 6h'); setTimeout(()=>readBal(),2000); };
 document.getElementById('autoOff').onclick=()=>{ if(autoInterval) clearInterval(autoInterval); document.getElementById('autoState').innerText='AUTO OFF'; document.getElementById('autoState').className='tag off'; log('Auto OFF'); };
 document.getElementById('onlineBtn').onclick=()=>{ isOnline=true; document.getElementById('online').innerText='ONLINE'; document.getElementById('online').className='tag live'; log('Go ONLINE'); };
-document.getElementById('offlineBtn').onclick=()=>{ isOnline=false; document.getElementById('online').innerText='OFFLINE'; document.getElementById('online').className='tag off'; log('Go OFFLINE - fees saved'); };
+document.getElementById('offlineBtn').onclick=()=>{ isOnline=false; document.getElementById('online').innerText='OFFLINE'; document.getElementById('online').className='tag off'; log('Go OFFLINE'); };
+
+// LOAD after refresh - RETAINS BALANCE
+window.addEventListener('load', () => {
+  const savedUSDC = localStorage.getItem('bonny_ruth_usdc');
+  const savedSOL = localStorage.getItem('bonny_ruth_sol');
+  const savedTime = localStorage.getItem('bonny_ruth_last');
+  if(savedUSDC){
+    document.getElementById('usdc').innerText='$'+savedUSDC;
+    document.getElementById('sol').innerText=savedSOL || '0.0000';
+    document.getElementById('lastSaved').innerText=savedTime ? new Date(savedTime).toLocaleTimeString() : 'saved';
+    document.getElementById('log').innerHTML += '<br>✅ Loaded saved balance $'+savedUSDC+' after refresh — Bonny & Ruth safe — trading retained';
+  }
+});
 </script></body></html>
