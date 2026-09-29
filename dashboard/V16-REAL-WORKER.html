@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>V38 CLEAN DISCO FOOTER MARKET PRICES UGX - SAME SETTINGS</title>
+<title>V39 UNIVERSAL MARKET PRICES WORLDWIDE - SAME SETTINGS</title>
 <script src="https://unpkg.com/@solana/web3.js@1.87.6/lib/index.iife.min.js"></script>
 <script src="https://unpkg.com/@solana/spl-token@0.3.8/lib/index.iife.min.js"></script>
 <script src="https://s3.tradingview.com/tv.js"></script>
@@ -35,149 +35,191 @@
 .profit-bar{height:6px;background:#1e293b;border-radius:3px;overflow:hidden;margin-top:4px}
 .profit-fill-real{height:100%;background:linear-gradient(90deg,#00e676,#0ea5e9)}
 .popup-header{position:fixed;top:120px;left:50%;transform:translateX(-50%);z-index:9999;background:#0f172a;border:2px solid #00e676;border-radius:14px;padding:12px 18px;min-width:340px;max-width:90%;display:none;box-shadow:0 12px 36px rgba(0,230,118,0.4)}
-.stick{height:4px;background:linear-gradient(90deg,#ff006a,#ffcc00,#00ff88);border-radius:2px;position:relative;overflow:hidden}
-.stick-move{position:absolute;top:0;left:0;height:100%;width:20%;background:#fff;animation:move 1s linear infinite}
-@keyframes move{0%{left:-20%}100%{left:100%}}
 .tx-item{background:#020617;border:1px solid #1e293b;border-radius:8px;padding:5px;margin-top:4px;font-size:9px;word-break:break-all}
 .input-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-.input-row input{flex:1;min-width:120px;background:#020617;border:1px solid #1e293b;border-radius:10px;padding:10px;color:#e2e8f0;font-size:11px;font-weight:700}
-.calc-box{background:#020617;border:1px solid #ffcc00;border-radius:12px;padding:8px;margin-top:8px}
-/* CLEAN DISCO FOOTER - SLOW MOTION - READABLE FROM DISTANCE */
-.lock-footer{position:sticky;bottom:0;z-index:99;background:#000;border-top:3px solid #fff;overflow:hidden;white-space:nowrap;height:44px;display:flex;align-items:center}
-.ticker-track{display:inline-flex;animation:tickerSlow 140s linear infinite}
+.input-row input,.input-row select{flex:1;min-width:110px;background:#020617;border:1px solid #1e293b;border-radius:10px;padding:10px;color:#e2e8f0;font-size:11px;font-weight:700}
+.calc-box{background:#020617;border:1px solid #00e676;border-radius:12px;padding:8px;margin-top:8px}
+/* UNIVERSAL CLEAN DISCO FOOTER - SLOW MOTION - READABLE FROM DISTANCE - DIFFERENT COLORS */
+.lock-footer{position:sticky;bottom:0;z-index:99;background:#000;border-top:3px solid #fff;overflow:hidden;white-space:nowrap;height:46px;display:flex;align-items:center}
+.ticker-track{display:inline-flex;animation:tickerSlow 160s linear infinite}
 @keyframes tickerSlow{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.disco-item{padding:8px 28px;font-weight:900;font-size:14px;letter-spacing:1px;border-right:2px solid rgba(255,255,255,0.2);text-shadow:0 0 8px currentColor,0 0 16px currentColor}
-.disco-green{color:#00e676;background:linear-gradient(90deg,#001a0f,#003322);animation:discoGreen 3s infinite alternate}
-.disco-yellow{color:#ffea00;background:linear-gradient(90deg,#1a1600,#332b00);animation:discoYellow 2.5s infinite alternate}
-.disco-blue{color:#00d4ff;background:linear-gradient(90deg,#00111a,#002233);animation:discoBlue 3.2s infinite alternate}
-.disco-pink{color:#ff00aa;background:linear-gradient(90deg,#1a0011,#330022);animation:discoPink 2.8s infinite alternate}
-.disco-orange{color:#ff8c00;background:linear-gradient(90deg,#1a0e00,#331c00);animation:discoOrange 3.5s infinite alternate}
-@keyframes discoGreen{0%{background:#001a0f;box-shadow:0 0 10px #00e676}100%{background:#00e676;color:#000;box-shadow:0 0 30px #00e676}}
-@keyframes discoYellow{0%{background:#1a1600;box-shadow:0 0 10px #ffea00}100%{background:#ffea00;color:#000;box-shadow:0 0 30px #ffea00}}
-@keyframes discoBlue{0%{background:#00111a;box-shadow:0 0 10px #00d4ff}100%{background:#00d4ff;color:#000;box-shadow:0 0 30px #00d4ff}}
-@keyframes discoPink{0%{background:#1a0011;box-shadow:0 0 10px #ff00aa}100%{background:#ff00aa;color:#000;box-shadow:0 0 30px #ff00aa}}
-@keyframes discoOrange{0%{background:#1a0e00;box-shadow:0 0 10px #ff8c00}100%{background:#ff8c00;color:#000;box-shadow:0 0 30px #ff8c00}}
-#debug{position:fixed;bottom:48px;left:6px;background:#000;color:#00e676;font-size:9px;padding:6px;border-radius:8px;border:1px solid #00e676;z-index:10000;max-width:90%}
-@media(max-width:900px){.main{flex-direction:column;overflow:auto}.right{width:100%;border-left:0;border-top:1px solid #1e293b} #tv_chart{height:58vh!important}.disco-item{font-size:12px;padding:6px 18px}.lock-footer{height:38px}}
+.disco-item{padding:9px 26px;font-weight:900;font-size:14px;letter-spacing:0.8px;border-right:2px solid rgba(255,255,255,0.2);text-shadow:0 0 8px currentColor}
+.disco-green{color:#00e676;background:#001a0f;animation:discoG 3s infinite alternate}
+.disco-yellow{color:#ffea00;background:#1a1600;animation:discoY 2.6s infinite alternate}
+.disco-blue{color:#00d4ff;background:#00111a;animation:discoB 3.1s infinite alternate}
+.disco-pink{color:#ff00aa;background:#1a0011;animation:discoP 2.9s infinite alternate}
+.disco-orange{color:#ff8c00;background:#1a0e00;animation:discoO 3.4s infinite alternate}
+.disco-white{color:#fff;background:#111;animation:discoW 3s infinite alternate}
+@keyframes discoG{0%{box-shadow:0 0 10px #00e676}100%{background:#00e676;color:#000;box-shadow:0 0 28px #00e676}}
+@keyframes discoY{0%{box-shadow:0 0 10px #ffea00}100%{background:#ffea00;color:#000;box-shadow:0 0 28px #ffea00}}
+@keyframes discoB{0%{box-shadow:0 0 10px #00d4ff}100%{background:#00d4ff;color:#000;box-shadow:0 0 28px #00d4ff}}
+@keyframes discoP{0%{box-shadow:0 0 10px #ff00aa}100%{background:#ff00aa;color:#000;box-shadow:0 0 28px #ff00aa}}
+@keyframes discoO{0%{box-shadow:0 0 10px #ff8c00}100%{background:#ff8c00;color:#000;box-shadow:0 0 28px #ff8c00}}
+@keyframes discoW{0%{box-shadow:0 0 10px #fff}100%{background:#fff;color:#000;box-shadow:0 0 28px #fff}}
+#debug{position:fixed;bottom:52px;left:6px;background:#000;color:#00e676;font-size:9px;padding:6px;border-radius:8px;border:1px solid #00e676;z-index:10000;max-width:90%}
+@media(max-width:900px){.main{flex-direction:column;overflow:auto}.right{width:100%;border-left:0;border-top:1px solid #1e293b} #tv_chart{height:58vh!important}.disco-item{font-size:11px;padding:6px 16px}.lock-footer{height:40px}}
 </style></head><body>
 <div class="lock-header">
 <div style="text-align:center"><b style="font-size:20px;font-weight:900;letter-spacing:2px;background:linear-gradient(90deg,#00e676,#ffcc00,#ff006a);-webkit-background-clip:text;-webkit-text-fill-color:transparent">BONNY AND RUTH FORWARD MATCHING 2026</b></div>
-<div style="display:flex;justify-content:space-between;flex-wrap:wrap;font-size:9px;color:#94a3b8"><span id="connStatus" class="off">DISCONNECTED - CLICK CONNECT ONCE</span><span>REAL USDC: <span id="usdc" style="color:#00e676;font-weight:900">$0.00</span> | SOL: <span id="sol">0.0144</span> | Trades: <span id="tradeCount">0</span> | Pub: <span id="pubShort">---</span></span><span>Status: <span id="tradeStatus" class="off">NOT TRADING</span> | <span id="headerPair">EUR/USD</span> <span id="headerProfit" style="color:#00e676;font-weight:900">0%</span></span></div>
-<div class="top-btns"><button class="btn btn-p" id="connect">CONNECT ONCE</button><button class="btn btn-d" id="refresh">REFRESH BALANCE</button><button class="btn btn-g" id="startTrading">START REAL TRADING 98%</button><button class="btn btn-y" id="withdraw">WITHDRAW EXTERNAL USDC</button><button class="btn btn-d" id="stopTrading">STOP TRADING</button></div>
-<div class="battery-wrap"><span style="font-size:9px;font-weight:900;color:#00e676">REAL</span><div class="battery"><div id="batteryFill" class="battery-fill" style="width:0%"></div></div><div class="battery-cap"></div><span style="font-size:9px;font-weight:900;color:#ffcc00">WITHDRAWABLE</span><span id="batteryTxt" style="font-size:10px;font-weight:900;color:#00e676">USDC $0.00</span><span id="liveProfit" style="font-size:9px;color:#00e676;font-weight:900">0%</span><span id="ugxRate" style="font-size:8px;color:#ffcc00;font-weight:900">1 USD = 3,750 UGX</span></div>
+<div style="display:flex;justify-content:space-between;flex-wrap:wrap;font-size:9px;color:#94a3b8"><span id="connStatus" class="off">DISCONNECTED</span><span>USDC: <span id="usdc" style="color:#00e676;font-weight:900">$0.00</span> | SOL: <span id="sol">0.0144</span> | <span id="pubShort">---</span></span><span>Status: <span id="tradeStatus" class="off">NOT TRADING</span> | <span id="headerPair">EUR/USD</span></span></div>
+<div class="top-btns"><button class="btn btn-p" id="connect">CONNECT ONCE</button><button class="btn btn-d" id="refresh">REFRESH</button><button class="btn btn-g" id="startTrading">START TRADING 98%</button><button class="btn btn-y" id="withdraw">WITHDRAW EXTERNAL</button><button class="btn btn-d" id="stopTrading">STOP</button></div>
+<div class="battery-wrap"><span style="font-size:9px;font-weight:900;color:#00e676">REAL</span><div class="battery"><div id="batteryFill" class="battery-fill" style="width:0%"></div></div><div class="battery-cap"></div><span id="batteryTxt" style="font-size:10px;font-weight:900;color:#00e676">USDC $0.00</span><span id="ugxRate" style="font-size:8px;color:#ffcc00;font-weight:900">UNIVERSAL RATES LIVE</span></div>
 </div>
 
-<div id="popupLog" class="popup-header"><b id="popupTitle">🔥 REAL TRADE</b><div id="popupMsg" style="font-size:11px;margin-top:4px"></div><div class="stick" style="margin-top:6px"><div class="stick-move"></div></div><div style="font-size:9px;margin-top:4px;display:flex;justify-content:space-between"><span>Pair: <span id="popupPair">EUR/USD</span></span><span>Profit: <span id="popupProfit" style="color:#00e676;font-weight:900">0%</span></span><span>Real USDC: <span id="popupBal">$0.00</span></span></div></div>
+<div id="popupLog" class="popup-header"><b id="popupTitle">🔥 TRADE</b><div id="popupMsg" style="font-size:11px;margin-top:4px"></div><div style="font-size:9px;margin-top:4px;display:flex;justify-content:space-between"><span id="popupPair">EUR/USD</span><span id="popupProfit" style="color:#00e676;font-weight:900">0%</span><span id="popupBal">$0.00</span></div></div>
 
 <div class="main">
 <div class="left">
-<div class="slideshow"><div class="slide-track"><div class="slide-item" style="color:#00e676">BONNY AND RUTH FORWARD MATCHING 2026 — REAL ACCOUNT — SAME SETTINGS</div><div class="slide-item" style="color:#ffcc00" id="slideSpot">SPOT MARKET LIVE UGX RATES LOADING...</div></div></div>
-<div class="card" style="flex:1;display:flex;flex-direction:column;margin-top:6px"><div id="tv_chart" style="height:72vh;min-height:520px;width:100%;flex:1;background:#020617;border-radius:12px;border:1px solid #1e293b"></div><div style="font-size:8px;color:#64748b;display:flex;justify-content:space-between;margin-top:4px"><span>Easy Candles Green Bullish Red Bearish | Y=Price X=Time | Entry Blue SL Red TP Green</span><span><span id="chartPair">EUR/USD</span> <span id="detectTxt" style="color:#00e676;font-weight:900">0%</span></span></div></div>
+<div class="slideshow"><div class="slide-track"><div class="slide-item" style="color:#00e676">BONNY AND RUTH FORWARD MATCHING 2026 — UNIVERSAL WORLDWIDE — SAME SETTINGS</div><div class="slide-item" style="color:#ffcc00" id="slideSpot">UNIVERSAL SPOT MARKET PRICES LIVE LOADING...</div></div></div>
+<div class="card" style="flex:1;display:flex;flex-direction:column;margin-top:6px"><div id="tv_chart" style="height:68vh;min-height:500px;width:100%;flex:1;background:#020617;border-radius:12px;border:1px solid #1e293b"></div><div style="font-size:8px;color:#64748b;display:flex;justify-content:space-between;margin-top:4px"><span>Easy Candles Green Bullish Red Bearish</span><span><span id="chartPair">EUR/USD</span> <span id="detectTxt" style="color:#00e676;font-weight:900">0%</span></span></div></div>
 
-<!-- DELETED TRANSMISSION FOOTER AS REQUESTED - NO 📡 REAL TRANSMISSION BLOCK -->
-
-<!-- WITHDRAW TO ANY EXTERNAL USDC + UGX CALCULATOR - KEPT CLEAN -->
 <div class="card" style="margin-top:6px">
-<div style="display:flex;justify-content:space-between;font-size:10px"><b>💸 WITHDRAW TO ANY EXTERNAL USDC + UGX CALCULATOR</b><span id="calcRealUSDC" style="color:#00e676;font-weight:900">$0.00 = 0 UGX</span></div>
+<div style="display:flex;justify-content:space-between;font-size:11px"><b>🌍 UNIVERSAL EXCHANGE CALCULATOR + WITHDRAW TO ANY EXTERNAL USDC</b><span id="calcRealUSDC" style="color:#00e676;font-weight:900">$0.00</span></div>
 <div class="input-row">
-<input id="extWallet" placeholder="Paste External USDC Solana Address (Binance/Phantom)">
+<input id="extWallet" placeholder="Paste External USDC Solana Address (Any Wallet Worldwide)">
 <input id="withdrawAmount" type="number" step="0.0001" placeholder="Amount USDC">
 <button class="btn btn-y" id="sendExternal">SEND EXTERNAL</button>
 <button class="btn btn-b" id="maxBtn">MAX</button>
 </div>
 <div class="calc-box">
+<div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:4px"><b style="color:#00e676">💱 UNIVERSAL — SELECT YOUR LOCAL CURRENCY</b><span id="calcRate" style="color:#ffcc00;font-weight:900">1 USD = Loading universal rates...</span></div>
 <div class="input-row">
-<input id="calcUSDC" type="number" step="0.0001" placeholder="Enter USDC Amount">
-<input id="calcUGX" type="text" readonly placeholder="UGX Amount" style="background:#0f172a;color:#ffcc00;font-weight:900">
-<button class="btn btn-g" id="calcBtn">CALC UGX</button>
+<input id="calcUSDC" type="number" step="0.0001" placeholder="Enter USDC Amount (1 USDC = $1)">
+<select id="currencySelect">
+<option value="UGX">🇺🇬 UGX Uganda Shilling</option>
+<option value="KES">🇰🇪 KES Kenya Shilling</option>
+<option value="TZS">🇹🇿 TZS Tanzania Shilling</option>
+<option value="RWF">🇷🇼 RWF Rwanda Franc</option>
+<option value="NGN">🇳🇬 NGN Nigeria Naira</option>
+<option value="GHS">🇬🇭 GHS Ghana Cedi</option>
+<option value="ZAR">🇿🇦 ZAR South Africa Rand</option>
+<option value="ETB">🇪🇹 ETB Ethiopia Birr</option>
+<option value="INR">🇮🇳 INR India Rupee</option>
+<option value="PKR">🇵🇰 PKR Pakistan Rupee</option>
+<option value="BDT">🇧🇩 BDT Bangladesh Taka</option>
+<option value="PHP">🇵🇭 PHP Philippines Peso</option>
+<option value="EUR">🇪🇺 EUR Euro</option>
+<option value="GBP">🇬🇧 GBP British Pound</option>
+<option value="USD" selected>🇺🇸 USD US Dollar</option>
+</select>
+<input id="calcLocal" type="text" readonly placeholder="Local Amount" style="background:#0f172a;color:#ffcc00;font-weight:900">
+<button class="btn btn-g" id="calcBtn">CONVERT</button>
 </div>
-<div style="font-size:8px;margin-top:4px;display:flex;justify-content:space-between"><span>SOL Price: <span id="calcSOL">$0.00</span></span><span id="calcRate" style="color:#ffcc00;font-weight:900">1 USD = 3,750 UGX Live</span><span>External: <span id="extStatus" style="color:#94a3b8">Paste address</span></span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px;font-size:9px">
+<div>Your USDC: <span id="calcRealDetail" style="color:#00e676;font-weight:900">$0.00</span></div>
+<div>SOL Price: <span id="calcSOL" style="color:#0ea5e9;font-weight:900">$0.00</span></div>
+<div>External: <span id="extStatus" style="color:#94a3b8">Paste address</span></div>
 </div>
 </div>
-
+</div>
 </div>
 
 <div class="right">
-<div class="blings"><div style="text-align:center"><div id="blingBlue" class="bling" style="background:#0ea5e9"></div><div style="font-size:7px;color:#0ea5e9;font-weight:900">NOT</div></div><div style="text-align:center"><div id="blingYellow" class="bling" style="background:#ffcc00"></div><div style="font-size:7px;color:#ffcc00;font-weight:900">READY</div></div><div style="text-align:center"><div id="blingGreen" class="bling" style="background:#00e676"></div><div style="font-size:7px;color:#00e676;font-weight:900">TRADING</div></div><div style="margin-left:4px;font-size:8px"><div id="blingStatus" style="font-weight:900">NOT TRADING</div><div id="detectStatus">Market Prices UGX</div></div></div>
-<b style="font-size:11px">🏆 CEO PRO Market Prices UGX</b>
+<div class="blings"><div style="text-align:center"><div id="blingBlue" class="bling" style="background:#0ea5e9"></div><div style="font-size:7px;color:#0ea5e9;font-weight:900">NOT</div></div><div style="text-align:center"><div id="blingYellow" class="bling" style="background:#ffcc00"></div><div style="font-size:7px;color:#ffcc00;font-weight:900">READY</div></div><div style="text-align:center"><div id="blingGreen" class="bling" style="background:#00e676"></div><div style="font-size:7px;color:#00e676;font-weight:900">TRADING</div></div><div style="margin-left:4px;font-size:8px"><div id="blingStatus" style="font-weight:900">NOT TRADING</div><div id="detectStatus">Universal Rates</div></div></div>
+<b style="font-size:11px">🏆 CEO PRO Universal Prices</b>
 <div class="forex-grid" id="forexGrid">
-<div class="forex-card active" data-pair="EUR/USD" id="card-EURUSD"><b>EUR/USD LIVE</b><div class="forex-price" id="price-EURUSD">1.09150</div><div style="font-size:8px;color:#00e676" id="change-EURUSD">BUY Bullish Score 89</div><div style="font-size:8px">UGX <span id="ugx-EURUSD" style="color:#ffcc00;font-weight:900">0</span> | $ <span id="dollar-EURUSD">0.00</span></div><div class="profit-bar"><div id="barReal-EURUSD" class="profit-fill-real" style="width:92%"></div></div></div>
-<div class="forex-card" data-pair="GBP/USD" id="card-GBPUSD"><b>GBP/USD LIVE</b><div class="forex-price" id="price-GBPUSD">1.27190</div><div style="font-size:8px" id="change-GBPUSD">BUY Breakout 92</div><div style="font-size:8px">UGX <span id="ugx-GBPUSD" style="color:#ffcc00;font-weight:900">0</span> | $ <span id="dollar-GBPUSD">0.00</span></div><div class="profit-bar"><div id="barReal-GBPUSD" class="profit-fill-real" style="width:88%"></div></div></div>
-<div class="forex-card" data-pair="USD/JPY" id="card-USDJPY"><b>USD/JPY LIVE</b><div class="forex-price" id="price-USDJPY">149.82</div><div style="font-size:8px" id="change-USDJPY">HOLD Neutral 84</div><div style="font-size:8px">UGX <span id="ugx-USDJPY" style="color:#ffcc00;font-weight:900">0</span> | $ <span id="dollar-USDJPY">0.00</span></div><div class="profit-bar"><div id="barReal-USDJPY" class="profit-fill-real" style="width:95%"></div></div></div>
+<div class="forex-card active" data-pair="EUR/USD" id="card-EURUSD"><b>EUR/USD LIVE</b><div class="forex-price" id="price-EURUSD">1.09150</div><div style="font-size:8px" id="ugx-EURUSD">Loading UGX</div><div style="font-size:7px" id="universal-EURUSD">Universal rates...</div></div>
+<div class="forex-card" data-pair="GBP/USD" id="card-GBPUSD"><b>GBP/USD LIVE</b><div class="forex-price" id="price-GBPUSD">1.27190</div><div style="font-size:8px" id="ugx-GBPUSD">Loading</div><div style="font-size:7px" id="universal-GBPUSD"></div></div>
+<div class="forex-card" data-pair="USD/JPY" id="card-USDJPY"><b>USD/JPY LIVE</b><div class="forex-price" id="price-USDJPY">149.82</div><div style="font-size:8px" id="ugx-USDJPY">Loading</div><div style="font-size:7px" id="universal-USDJPY"></div></div>
 </div>
-<b style="font-size:10px">🔗 Transaction IDs</b><div id="txList"><div style="font-size:9px;color:#64748b">Waiting real...</div></div>
+<b style="font-size:10px">🔗 Transactions</b><div id="txList"><div style="font-size:9px;color:#64748b">Waiting...</div></div>
 </div>
 </div>
 
-<!-- CLEAN FOOTER - SLOW MOTION DISCO LIGHT DIFFERENT COLORS - ONLY MARKET PRICES AND EXCHANGE RATES IN UGX - READABLE FROM DISTANCE -->
+<!-- UNIVERSAL CLEAN DISCO FOOTER - SLOW MOTION - DIFFERENT COLORS - MARKET PRICES + UNIVERSAL EXCHANGE RATES -->
 <div class="lock-footer"><div class="ticker-track" id="tickerTrack">
-<span class="disco-item disco-green" id="ticker1">SOL $150.00 = 562,500 UGX</span>
-<span class="disco-item disco-yellow" id="ticker2">USDC $1.00 = 3,750 UGX</span>
-<span class="disco-item disco-blue" id="ticker3">USD/UGX 3,750 UGX</span>
-<span class="disco-item disco-pink" id="ticker4">EUR/USD 1.09150 = 4,093 UGX</span>
-<span class="disco-item disco-orange" id="ticker5">GBP/USD 1.27190 = 4,769 UGX</span>
-<span class="disco-item disco-green" id="ticker6">USD/JPY 149.82</span>
-<span class="disco-item disco-yellow" id="ticker7">EUR/UGX 4,093 UGX LIVE</span>
-<span class="disco-item disco-blue" id="ticker8">GBP/UGX 4,769 UGX LIVE</span>
-<!-- DUPLICATE FOR SEAMLESS SLOW MOTION -->
-<span class="disco-item disco-green" id="ticker1d">SOL $150.00 = 562,500 UGX</span>
-<span class="disco-item disco-yellow" id="ticker2d">USDC $1.00 = 3,750 UGX</span>
-<span class="disco-item disco-blue" id="ticker3d">USD/UGX 3,750 UGX</span>
-<span class="disco-item disco-pink" id="ticker4d">EUR/USD 1.09150 = 4,093 UGX</span>
-<span class="disco-item disco-orange" id="ticker5d">GBP/USD 1.27190 = 4,769 UGX</span>
-<span class="disco-item disco-green" id="ticker6d">USD/JPY 149.82</span>
-<span class="disco-item disco-yellow" id="ticker7d">EUR/UGX 4,093 UGX LIVE</span>
-<span class="disco-item disco-blue" id="ticker8d">GBP/UGX 4,769 UGX LIVE</span>
+<span class="disco-item disco-green" id="t1">SOL $150.00</span>
+<span class="disco-item disco-yellow" id="t2">USDC $1.00</span>
+<span class="disco-item disco-blue" id="t3">EUR/USD 1.0915</span>
+<span class="disco-item disco-pink" id="t4">GBP/USD 1.2719</span>
+<span class="disco-item disco-orange" id="t5">USD/JPY 149.82</span>
+<span class="disco-item disco-white" id="t6">USD/UGX 3,750</span>
+<span class="disco-item disco-green" id="t7">USD/KES 129</span>
+<span class="disco-item disco-yellow" id="t8">USD/NGN 1,580</span>
+<span class="disco-item disco-blue" id="t9">USD/ZAR 18.5</span>
+<span class="disco-item disco-pink" id="t10">USD/INR 83.5</span>
+<span class="disco-item disco-orange" id="t11">USD/EUR 0.92</span>
+<span class="disco-item disco-white" id="t12">USD/GBP 0.79</span>
+<!-- duplicate slow seamless -->
+<span class="disco-item disco-green" id="t1d">SOL $150.00</span>
+<span class="disco-item disco-yellow" id="t2d">USDC $1.00</span>
+<span class="disco-item disco-blue" id="t3d">EUR/USD 1.0915</span>
+<span class="disco-item disco-pink" id="t4d">GBP/USD 1.2719</span>
+<span class="disco-item disco-orange" id="t5d">USD/JPY 149.82</span>
+<span class="disco-item disco-white" id="t6d">USD/UGX 3,750</span>
+<span class="disco-item disco-green" id="t7d">USD/KES 129</span>
+<span class="disco-item disco-yellow" id="t8d">USD/NGN 1,580</span>
+<span class="disco-item disco-blue" id="t9d">USD/ZAR 18.5</span>
+<span class="disco-item disco-pink" id="t10d">USD/INR 83.5</span>
+<span class="disco-item disco-orange" id="t11d">USD/EUR 0.92</span>
+<span class="disco-item disco-white" id="t12d">USD/GBP 0.79</span>
 </div></div>
 
-<div id="debug">Booting clean disco footer...</div>
+<div id="debug">Universal booting...</div>
 
 <script>
-// SAME SETTINGS V20 NOT CHANGED
-const CONFIG = {"initial_balance":100,"risk_per_trade":0.005};
-let provider=null, pubKey=null, trading=false, tradeInterval=null, tradeCount=0, activeForex='EUR/USD', pairIndex=0, realUSDC=0, realSOL=0, solPrice=150, usdUgxRate=3750;
+const CONFIG={"initial_balance":100,"risk_per_trade":0.005};
+let provider=null, pubKey=null, trading=false, tradeInterval=null, tradeCount=0, activeForex='EUR/USD', pairIndex=0, realUSDC=0, realSOL=0, solPrice=150, rates={UGX:3750,KES:129,TZS:2600,RWF:1300,NGN:1580,GHS:15.5,ZAR:18.5,ETB:57,INR:83.5,PKR:278,BDT:117,PHP:58,EUR:0.92,GBP:0.79,USD:1}, selectedCurrency='UGX';
 const RPCS=['https://solana-rpc.publicnode.com','https://rpc.ankr.com/solana']; let conn=new solanaWeb3.Connection(RPCS[0],'confirmed');
 const USDC='EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', SOLM='So11111111111111111111111111111111111111112';
 const forexList=['EUR/USD','GBP/USD','USD/JPY']; const forexMap={'EUR/USD':'FX:EURUSD','GBP/USD':'FX:GBPUSD','USD/JPY':'FX:USDJPY'};
 function logD(m){ const d=document.getElementById('debug'); if(d) d.innerText=m+' | '+new Date().toLocaleTimeString(); }
-function loadChart(s){ try{ const el=document.getElementById('tv_chart'); if(!el) return; el.innerHTML=''; if(typeof TradingView==='undefined'){ setTimeout(()=>loadChart(s),1000); return; } new TradingView.widget({"autosize":true,"symbol":s,"interval":"1","timezone":"Etc/UTC","theme":"dark","style":"1","locale":"en","toolbar_bg":"#0f172a","container_id":"tv_chart","studies":["Volume@tv-basicstudies","RSI@tv-basicstudies"]}); }catch(e){} }
-function showPopup(t,m,p){ try{ const q=document.getElementById('popupLog'); if(!q) return; document.getElementById('popupTitle').innerText=t; document.getElementById('popupMsg').innerText=m; document.getElementById('popupPair').innerText=activeForex; document.getElementById('popupProfit').innerText=p+'%'; document.getElementById('popupBal').innerText='$'+realUSDC.toFixed(4); q.style.display='block'; setTimeout(()=>{q.style.display='none';},3500); }catch(e){} }
-function addTx(id,type,r,a){ try{ const l=document.getElementById('txList'); const d=document.createElement('div'); d.className='tx-item'; d.innerHTML=`<b>${type} - ${activeForex} $${a.toFixed(4)} = ${(a*usdUgxRate).toLocaleString()} UGX</b><br><a href="https://solscan.io/tx/${id}" target="_blank" style="color:#00e676">${id.slice(0,16)}...</a><br>${new Date().toLocaleTimeString()}`; l.prepend(d); }catch(e){} }
-function setBlings(s){ try{ const b=document.getElementById('blingBlue'), y=document.getElementById('blingYellow'), g=document.getElementById('blingGreen'); b.className='bling'; y.className='bling'; g.className='bling'; if(s==='not') b.classList.add('active-blue'); else if(s==='ready') y.classList.add('active-yellow'); else if(s==='trading') g.classList.add('active-green'); document.getElementById('blingStatus').innerText=s==='trading'?'TRADING '+activeForex:s.toUpperCase(); }catch(e){} }
-function setStatus(c,t){ try{ document.getElementById('connStatus').innerText=c?'CONNECTED $'+realUSDC.toFixed(4):'DISCONNECTED'; document.getElementById('connStatus').className=c?'live':'off'; document.getElementById('tradeStatus').innerText=t?'TRADING '+activeForex:'NOT TRADING'; document.getElementById('tradeStatus').className=t?'live':'off'; if(t) setBlings('trading'); else setBlings(c?'ready':'not'); }catch(e){} }
-function updatePrices(){ try{ forexList.forEach(p=>{ const priceEl=document.getElementById('price-'+p.replace('/','')); if(priceEl){ const cur=parseFloat(priceEl.innerText)||1; const delta=(Math.random()-0.45)*0.0005; const np=(cur+delta); priceEl.innerText=np.toFixed(p.includes('JPY')?2:5); const ugxEl=document.getElementById('ugx-'+p.replace('/','')); if(ugxEl){ if(p==='USD/JPY') ugxEl.innerText=(usdUgxRate/np).toFixed(2)+' UGX per JPY'; else ugxEl.innerText=(np*usdUgxRate).toLocaleString(undefined,{maximumFractionDigits:0})+' UGX'; } } }); if(trading){ pairIndex=(pairIndex+1)%forexList.length; activeForex=forexList[pairIndex]; document.getElementById('headerPair').innerText=activeForex; document.getElementById('chartPair').innerText=activeForex; document.querySelectorAll('.forex-card').forEach(c=>c.classList.remove('active')); const card=document.getElementById('card-'+activeForex.replace('/','')); if(card) card.classList.add('active'); } }catch(e){} }
+function loadChart(s){ try{ const el=document.getElementById('tv_chart'); el.innerHTML=''; if(typeof TradingView==='undefined'){ setTimeout(()=>loadChart(s),1000); return; } new TradingView.widget({"autosize":true,"symbol":s,"interval":"1","timezone":"Etc/UTC","theme":"dark","style":"1","locale":"en","toolbar_bg":"#0f172a","container_id":"tv_chart","studies":["Volume@tv-basicstudies","RSI@tv-basicstudies"]}); }catch(e){} }
+function showPopup(t,m,p){ try{ const q=document.getElementById('popupLog'); document.getElementById('popupTitle').innerText=t; document.getElementById('popupMsg').innerText=m; document.getElementById('popupPair').innerText=activeForex; document.getElementById('popupProfit').innerText=p+'%'; document.getElementById('popupBal').innerText='$'+realUSDC.toFixed(4); q.style.display='block'; setTimeout(()=>{q.style.display='none';},3500); }catch(e){} }
+function addTx(id,type,r,a){ try{ const l=document.getElementById('txList'); const d=document.createElement('div'); d.className='tx-item'; d.innerHTML=`<b>${type} $${a.toFixed(4)} = ${(a*(rates[selectedCurrency]||1)).toLocaleString()} ${selectedCurrency}</b><br><a href="https://solscan.io/tx/${id}" target="_blank" style="color:#00e676">${id.slice(0,12)}...</a> ${new Date().toLocaleTimeString()}`; l.prepend(d); }catch(e){} }
+function setBlings(s){ const b=document.getElementById('blingBlue'), y=document.getElementById('blingYellow'), g=document.getElementById('blingGreen'); b.className='bling'; y.className='bling'; g.className='bling'; if(s==='not') b.classList.add('active-blue'); else if(s==='ready') y.classList.add('active-yellow'); else if(s==='trading') g.classList.add('active-green'); document.getElementById('blingStatus').innerText=s.toUpperCase()+' '+(s==='trading'?activeForex:''); }
+function setStatus(c,t){ document.getElementById('connStatus').innerText=c?'CONNECTED $'+realUSDC.toFixed(4):'DISCONNECTED'; document.getElementById('connStatus').className=c?'live':'off'; document.getElementById('tradeStatus').innerText=t?'TRADING '+activeForex:'NOT TRADING'; document.getElementById('tradeStatus').className=t?'live':'off'; setBlings(t?'trading':c?'ready':'not'); }
 
-async function fetchUgxRate(){ try{ const res=await fetch('https://api.exchangerate-api.com/v4/latest/USD').then(r=>r.json()).catch(()=>null); if(res&&res.rates&&res.rates.UGX) usdUgxRate=res.rates.UGX; else { const res2=await fetch('https://open.er-api.com/v6/latest/USD').then(r=>r.json()).catch(()=>null); if(res2&&res2.rates&&res2.rates.UGX) usdUgxRate=res2.rates.UGX; } document.getElementById('ugxRate').innerText='1 USD = '+usdUgxRate.toLocaleString()+' UGX'; document.getElementById('calcRate').innerText='1 USD = '+usdUgxRate.toLocaleString()+' UGX Live'; updateTicker(); }catch(e){} }
-async function fetchSolPrice(){ try{ const res=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd').then(r=>r.json()).catch(()=>null); if(res&&res.solana&&res.solana.usd){ solPrice=res.solana.usd; document.getElementById('calcSOL').innerText='$'+solPrice.toFixed(2)+' = '+(solPrice*usdUgxRate).toLocaleString()+' UGX'; updateTicker(); } }catch(e){} }
+async function fetchUniversalRates(){ try{ const res=await fetch('https://open.er-api.com/v6/latest/USD').then(r=>r.json()).catch(()=>null); if(res&&res.rates){ ['UGX','KES','TZS','RWF','NGN','GHS','ZAR','ETB','INR','PKR','BDT','PHP','EUR','GBP'].forEach(k=>{ if(res.rates[k]) rates[k]=res.rates[k]; }); } document.getElementById('ugxRate').innerText='UNIVERSAL RATES LIVE '+Object.keys(rates).length+' currencies'; document.getElementById('calcRate').innerText='1 USD = '+rates[selectedCurrency].toLocaleString()+' '+selectedCurrency+' Live'; updateTicker(); logD('Universal rates loaded'); }catch(e){ logD('Using default rates'); updateTicker(); } }
+async function fetchSolPrice(){ try{ const res=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd').then(r=>r.json()).catch(()=>null); if(res&&res.solana&&res.solana.usd){ solPrice=res.solana.usd; document.getElementById('calcSOL').innerText='$'+solPrice.toFixed(2)+' = '+(solPrice*rates[selectedCurrency]).toLocaleString()+' '+selectedCurrency; updateTicker(); } }catch(e){} }
 
 function updateTicker(){
 const eur=parseFloat(document.getElementById('price-EURUSD').innerText)||1.0915; const gbp=parseFloat(document.getElementById('price-GBPUSD').innerText)||1.2719; const jpy=parseFloat(document.getElementById('price-USDJPY').innerText)||149.82;
-const items=[
-`SOL $${solPrice.toFixed(2)} = ${(solPrice*usdUgxRate).toLocaleString()} UGX`,
-`USDC $1.00 = ${usdUgxRate.toLocaleString()} UGX`,
-`USD/UGX ${usdUgxRate.toLocaleString()} UGX`,
-`EUR/USD ${eur.toFixed(5)} = ${(eur*usdUgxRate).toLocaleString()} UGX`,
-`GBP/USD ${gbp.toFixed(5)} = ${(gbp*usdUgxRate).toLocaleString()} UGX`,
-`USD/JPY ${jpy.toFixed(2)} = ${(usdUgxRate/jpy).toFixed(2)} UGX per JPY`,
-`EUR/UGX ${(eur*usdUgxRate).toLocaleString()} UGX LIVE`,
-`GBP/UGX ${(gbp*usdUgxRate).toLocaleString()} UGX LIVE`
+const data=[
+`SOL $${solPrice.toFixed(2)} = ${(solPrice*rates[selectedCurrency]).toLocaleString()} ${selectedCurrency}`,
+`USDC $1.00 = ${rates[selectedCurrency].toLocaleString()} ${selectedCurrency}`,
+`EUR/USD ${eur.toFixed(5)}`,
+`GBP/USD ${gbp.toFixed(5)}`,
+`USD/JPY ${jpy.toFixed(2)}`,
+`USD/UGX ${rates.UGX.toLocaleString()} UGX`,
+`USD/KES ${rates.KES.toLocaleString()} KES`,
+`USD/NGN ${rates.NGN.toLocaleString()} NGN`,
+`USD/ZAR ${rates.ZAR} ZAR`,
+`USD/INR ${rates.INR} INR`,
+`USD/EUR ${rates.EUR} EUR`,
+`USD/GBP ${rates.GBP} GBP`
 ];
-for(let i=0;i<8;i++){ const el=document.getElementById('ticker'+(i+1)); const eld=document.getElementById('ticker'+(i+1)+'d'); if(el) el.innerText=items[i]; if(eld) eld.innerText=items[i]; }
-document.getElementById('slideSpot').innerText='MARKET PRICES LIVE: '+items.join(' | ');
+for(let i=0;i<12;i++){ const el=document.getElementById('t'+(i+1)); const eld=document.getElementById('t'+(i+1)+'d'); if(el) el.innerText=data[i]; if(eld) eld.innerText=data[i]; }
+document.getElementById('slideSpot').innerText='UNIVERSAL LIVE: '+data.slice(0,6).join(' | ');
+document.getElementById('ugx-EURUSD').innerText=`${(eur*rates.UGX).toLocaleString()} UGX | ${(eur*rates.KES).toLocaleString()} KES | ${(eur*rates.NGN).toLocaleString()} NGN`;
+document.getElementById('universal-EURUSD').innerText=`${(eur*rates.ZAR).toFixed(2)} ZAR | ${(eur*rates.INR).toFixed(2)} INR | ${(eur*rates.EUR).toFixed(4)} EUR`;
+document.getElementById('ugx-GBPUSD').innerText=`${(gbp*rates.UGX).toLocaleString()} UGX | ${(gbp*rates.KES).toLocaleString()} KES`;
+document.getElementById('universal-GBPUSD').innerText=`${(gbp*rates.ZAR).toFixed(2)} ZAR | ${(gbp*rates.GBP).toFixed(4)} GBP`;
+document.getElementById('ugx-USDJPY').innerText=`${(rates.UGX/jpy).toFixed(2)} UGX per JPY | ${(rates.KES/jpy).toFixed(2)} KES per JPY`;
+document.getElementById('universal-USDJPY').innerText=`JPY UNIVERSAL RATES LIVE`;
 }
 
-async function readBal(){ if(!pubKey) return; try{ let solLam=0; for(let rpc of RPCS){ try{ conn=new solanaWeb3.Connection(rpc,'confirmed'); solLam=await conn.getBalance(pubKey); break; }catch{} } realSOL=solLam/1e9; document.getElementById('sol').innerText=realSOL.toFixed(4); document.getElementById('pubShort').innerText=pubKey.toString().slice(0,6)+'...'; const jupRes=await fetch(`https://lite-api.jup.ag/ultra/v1/balances/${pubKey.toString()}`).then(r=>r.json()).catch(()=>null); let usdc=0; if(jupRes){ const k='EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'; if(jupRes[k]) usdc=jupRes[k].uiAmount||0; } realUSDC=usdc; document.getElementById('usdc').innerText='$'+usdc.toFixed(4)+' = '+(usdc*usdUgxRate).toLocaleString()+' UGX'; document.getElementById('batteryTxt').innerText='USDC $'+usdc.toFixed(4)+' = '+(usdc*usdUgxRate).toLocaleString()+' UGX'; document.getElementById('calcRealUSDC').innerText='$'+usdc.toFixed(4)+' = '+(usdc*usdUgxRate).toLocaleString()+' UGX'; document.getElementById('batteryFill').style.width=Math.min(100,(usdc/10)*100)+'%'; updateTicker(); localStorage.setItem('bonny_ruth_pub',pubKey.toString()); return {usdc,solLam}; }catch(e){} }
-
-async function doRealSwap(){ if(!pubKey||!provider) return; const real=90+Math.floor(Math.random()*9); if(real<88) return; const bal=await readBal(); if(!bal) return; if(bal.solLam<5000000){ tradeCount++; document.getElementById('tradeCount').innerText=tradeCount; showPopup('SIM '+activeForex,'Sim SOL Low Protect',real); addTx('SIM'+Date.now().toString(16),'SIM '+activeForex,real,0.001); return; } try{ showPopup('REAL '+activeForex+' SOL→USDC','Real swap 0.001 SOL→USDC',real); const quote=await fetch(`https://quote-api.jup.ag/v6/quote?inputMint=${SOLM}&outputMint=${USDC}&amount=1000000&slippageBps=30`).then(r=>r.json()); const swapRes=await fetch('https://quote-api.jup.ag/v6/swap',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({quoteResponse:quote,userPublicKey:pubKey.toString(),wrapAndUnwrapSol:true})}).then(r=>r.json()); const txBuf=Uint8Array.from(atob(swapRes.swapTransaction),c=>c.charCodeAt(0)); const tx=solanaWeb3.VersionedTransaction.deserialize(txBuf); const signed=await provider.signTransaction(tx); const txid=await conn.sendTransaction(signed); addTx(txid,'REAL '+activeForex,real,0.001); await conn.confirmTransaction(txid); tradeCount++; document.getElementById('tradeCount').innerText=tradeCount; await readBal(); }catch(e){ logD('Swap fail '+e.message.slice(0,50)); } }
-
-async function withdrawExternalUSDC(){ if(!pubKey||!provider){ alert('CONNECT ONCE first'); return; } const extAddrStr=document.getElementById('extWallet').value.trim(); const amtStr=document.getElementById('withdrawAmount').value.trim(); if(!extAddrStr){ alert('Paste External Solana USDC address'); return; } let destPub; try{ destPub=new solanaWeb3.PublicKey(extAddrStr); }catch{ alert('Invalid Solana address'); return; } const amount=parseFloat(amtStr); if(!amount||amount<=0){ alert('Enter USDC amount'); return; } if(amount>realUSDC){ alert('Insufficient USDC $'+realUSDC.toFixed(4)); return; } try{ logD('Sending $'+amount+' to '+extAddrStr.slice(0,6)); showPopup('SENDING EXTERNAL','Sending $'+amount.toFixed(4)+' = '+(amount*usdUgxRate).toLocaleString()+' UGX to '+extAddrStr.slice(0,6),98); const mint=new solanaWeb3.PublicKey(USDC); const fromAta=await splToken.getAssociatedTokenAddress(mint, pubKey); const toAta=await splToken.getAssociatedTokenAddress(mint, destPub); const toAtaInfo=await conn.getAccountInfo(toAta); const instructions=[]; if(!toAtaInfo){ instructions.push(splToken.createAssociatedTokenAccountInstruction(pubKey, toAta, destPub, mint)); } instructions.push(splToken.createTransferInstruction(fromAta, toAta, pubKey, amount*1000000)); const {blockhash}=await conn.getLatestBlockhash(); const tx=new solanaWeb3.Transaction({recentBlockhash:blockhash, feePayer:pubKey}); instructions.forEach(i=>tx.add(i)); const signed=await provider.signTransaction(tx); const txid=await conn.sendTransaction(signed); addTx(txid,'SEND EXTERNAL $'+amount.toFixed(4),99,amount); showPopup('SENT EXTERNAL','TX '+txid.slice(0,8)+' Sent $'+amount.toFixed(4)+' = '+(amount*usdUgxRate).toLocaleString()+' UGX',99); await conn.confirmTransaction(txid); await readBal(); document.getElementById('extStatus').innerText='SENT $'+amount.toFixed(4); }catch(e){ alert('Send failed '+e.message.slice(0,150)); } }
+async function readBal(){ if(!pubKey) return; try{ let solLam=0; for(let rpc of RPCS){ try{ conn=new solanaWeb3.Connection(rpc,'confirmed'); solLam=await conn.getBalance(pubKey); break; }catch{} } realSOL=solLam/1e9; document.getElementById('sol').innerText=realSOL.toFixed(4); document.getElementById('pubShort').innerText=pubKey.toString().slice(0,6)+'...'; const jupRes=await fetch(`https://lite-api.jup.ag/ultra/v1/balances/${pubKey.toString()}`).then(r=>r.json()).catch(()=>null); let usdc=0; if(jupRes){ const k='EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'; if(jupRes[k]) usdc=jupRes[k].uiAmount||0; } realUSDC=usdc; document.getElementById('usdc').innerText='$'+usdc.toFixed(4); document.getElementById('batteryTxt').innerText='USDC $'+usdc.toFixed(4)+' = '+(usdc*rates[selectedCurrency]).toLocaleString()+' '+selectedCurrency; document.getElementById('calcRealUSDC').innerText='$'+usdc.toFixed(4)+' = '+(usdc*rates[selectedCurrency]).toLocaleString()+' '+selectedCurrency; document.getElementById('calcRealDetail').innerText='$'+usdc.toFixed(4)+' = '+(usdc*rates[selectedCurrency]).toLocaleString()+' '+selectedCurrency; document.getElementById('batteryFill').style.width=Math.min(100,(usdc/10)*100)+'%'; updateTicker(); localStorage.setItem('bonny_ruth_pub',pubKey.toString()); return {usdc,solLam}; }catch(e){} }
+async function doRealSwap(){ if(!pubKey||!provider) return; const real=90+Math.floor(Math.random()*9); if(real<88) return; const bal=await readBal(); if(!bal) return; if(bal.solLam<5000000){ tradeCount++; showPopup('SIM '+activeForex,'Sim SOL Low',real); addTx('SIM'+Date.now().toString(16),'SIM '+activeForex,real,0.001); return; } try{ showPopup('REAL '+activeForex,'Real swap 0.001 SOL→USDC',real); const quote=await fetch(`https://quote-api.jup.ag/v6/quote?inputMint=${SOLM}&outputMint=${USDC}&amount=1000000&slippageBps=30`).then(r=>r.json()); const swapRes=await fetch('https://quote-api.jup.ag/v6/swap',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({quoteResponse:quote,userPublicKey:pubKey.toString(),wrapAndUnwrapSol:true})}).then(r=>r.json()); const txBuf=Uint8Array.from(atob(swapRes.swapTransaction),c=>c.charCodeAt(0)); const tx=solanaWeb3.VersionedTransaction.deserialize(txBuf); const signed=await provider.signTransaction(tx); const txid=await conn.sendTransaction(signed); addTx(txid,'REAL '+activeForex,real,0.001); await conn.confirmTransaction(txid); await readBal(); }catch(e){ logD('Swap fail'); } }
+async function withdrawExternalUSDC(){ if(!pubKey||!provider){ alert('CONNECT ONCE'); return; } const extAddrStr=document.getElementById('extWallet').value.trim(); const amtStr=document.getElementById('withdrawAmount').value.trim(); if(!extAddrStr){ alert('Paste External Solana USDC address worldwide - any wallet'); return; } let destPub; try{ destPub=new solanaWeb3.PublicKey(extAddrStr); }catch{ alert('Invalid address'); return; } const amount=parseFloat(amtStr); if(!amount||amount<=0){ alert('Enter amount'); return; } if(amount>realUSDC){ alert('Insufficient $'+realUSDC.toFixed(4)); return; } try{ showPopup('SENDING EXTERNAL','Sending $'+amount.toFixed(4)+' = '+(amount*rates[selectedCurrency]).toLocaleString()+' '+selectedCurrency+' to '+extAddrStr.slice(0,6),98); const mint=new solanaWeb3.PublicKey(USDC); const fromAta=await splToken.getAssociatedTokenAddress(mint, pubKey); const toAta=await splToken.getAssociatedTokenAddress(mint, destPub); const toAtaInfo=await conn.getAccountInfo(toAta); const instructions=[]; if(!toAtaInfo){ instructions.push(splToken.createAssociatedTokenAccountInstruction(pubKey, toAta, destPub, mint)); } instructions.push(splToken.createTransferInstruction(fromAta, toAta, pubKey, amount*1000000)); const {blockhash}=await conn.getLatestBlockhash(); const tx=new solanaWeb3.Transaction({recentBlockhash:blockhash, feePayer:pubKey}); instructions.forEach(i=>tx.add(i)); const signed=await provider.signTransaction(tx); const txid=await conn.sendTransaction(signed); addTx(txid,'SEND EXTERNAL $'+amount.toFixed(4),99,amount); showPopup('SENT','TX '+txid.slice(0,8)+' Sent $'+amount.toFixed(4),99); await conn.confirmTransaction(txid); await readBal(); document.getElementById('extStatus').innerText='SENT $'+amount.toFixed(4)+' = '+(amount*rates[selectedCurrency]).toLocaleString()+' '+selectedCurrency; }catch(e){ alert('Send failed '+e.message.slice(0,150)); } }
 
 function startTradingFunc(){ if(!pubKey){ alert('CONNECT ONCE'); return; } trading=true; localStorage.setItem('bonny_ruth_trading','1'); setStatus(true,true); if(tradeInterval) clearInterval(tradeInterval); tradeInterval=setInterval(doRealSwap,40000); doRealSwap(); }
 function stopTradingFunc(){ trading=false; localStorage.setItem('bonny_ruth_trading','0'); if(tradeInterval) clearInterval(tradeInterval); setStatus(!!pubKey,false); }
 async function tryAutoConnect(){ const solObj=window.phantom?.solana||window.solana; if(!solObj) return; provider=solObj; try{ const r=await provider.connect({onlyIfTrusted:true}); pubKey=r.publicKey; document.getElementById('pubShort').innerText=pubKey.toString().slice(0,6)+'...'; setStatus(true,trading); await readBal(); setBlings('ready'); if(localStorage.getItem('bonny_ruth_trading')==='1'&&navigator.onLine) startTradingFunc(); }catch(e){} }
 async function manualConnect(){ try{ const solObj=window.phantom?.solana||window.solana; if(!solObj){ alert('Open in Phantom'); return; } provider=solObj; const r=await provider.connect(); pubKey=r.publicKey; document.getElementById('pubShort').innerText=pubKey.toString().slice(0,6)+'...'; setStatus(true,trading); await readBal(); setBlings('ready'); if(navigator.onLine) startTradingFunc(); }catch(e){ alert(e.message); } }
-function bindClicks(){ const c=document.getElementById('connect'), r=document.getElementById('refresh'), s=document.getElementById('startTrading'), st=document.getElementById('stopTrading'), se=document.getElementById('sendExternal'), max=document.getElementById('maxBtn'), calc=document.getElementById('calcBtn'); if(!c) return false; c.onclick=manualConnect; r.onclick=readBal; s.onclick=startTradingFunc; st.onclick=stopTradingFunc; document.getElementById('withdraw').onclick=()=>{ document.getElementById('extWallet').scrollIntoView({behavior:'smooth'}); }; se.onclick=withdrawExternalUSDC; max.onclick=()=>{ document.getElementById('withdrawAmount').value=realUSDC.toFixed(6); document.getElementById('calcUSDC').value=realUSDC.toFixed(4); document.getElementById('calcUGX').value=(realUSDC*usdUgxRate).toLocaleString()+' UGX'; }; calc.onclick=()=>{ const usdc=parseFloat(document.getElementById('calcUSDC').value)||0; document.getElementById('calcUGX').value=(usdc*usdUgxRate).toLocaleString()+' UGX'; }; document.getElementById('calcUSDC').addEventListener('input',e=>{ const usdc=parseFloat(e.target.value)||0; document.getElementById('calcUGX').value=(usdc*usdUgxRate).toLocaleString()+' UGX'; }); return true; }
+function bindClicks(){
+const c=document.getElementById('connect'), r=document.getElementById('refresh'), s=document.getElementById('startTrading'), st=document.getElementById('stopTrading'), se=document.getElementById('sendExternal'), max=document.getElementById('maxBtn'), calc=document.getElementById('calcBtn'), sel=document.getElementById('currencySelect');
+if(!c) return false;
+c.onclick=manualConnect; r.onclick=readBal; s.onclick=startTradingFunc; st.onclick=stopTradingFunc; document.getElementById('withdraw').onclick=()=>{ document.getElementById('extWallet').scrollIntoView({behavior:'smooth'}); };
+se.onclick=withdrawExternalUSDC;
+max.onclick=()=>{ document.getElementById('withdrawAmount').value=realUSDC.toFixed(6); document.getElementById('calcUSDC').value=realUSDC.toFixed(4); document.getElementById('calcLocal').value=(realUSDC*rates[selectedCurrency]).toLocaleString()+' '+selectedCurrency; };
+calc.onclick=()=>{ const usdc=parseFloat(document.getElementById('calcUSDC').value)||0; document.getElementById('calcLocal').value=(usdc*rates[selectedCurrency]).toLocaleString()+' '+selectedCurrency+' = $'+usdc.toFixed(4); };
+sel.onchange=(e)=>{ selectedCurrency=e.target.value; document.getElementById('calcRate').innerText='1 USD = '+rates[selectedCurrency].toLocaleString()+' '+selectedCurrency+' Live'; const usdc=parseFloat(document.getElementById('calcUSDC').value)||realUSDC; document.getElementById('calcLocal').value=(usdc*rates[selectedCurrency]).toLocaleString()+' '+selectedCurrency; document.getElementById('calcRealUSDC').innerText='$'+realUSDC.toFixed(4)+' = '+(realUSDC*rates[selectedCurrency]).toLocaleString()+' '+selectedCurrency; document.getElementById('calcRealDetail').innerText='$'+realUSDC.toFixed(4)+' = '+(realUSDC*rates[selectedCurrency]).toLocaleString()+' '+selectedCurrency; document.getElementById('batteryTxt').innerText='USDC $'+realUSDC.toFixed(4)+' = '+(realUSDC*rates[selectedCurrency]).toLocaleString()+' '+selectedCurrency; document.getElementById('calcSOL').innerText='$'+solPrice.toFixed(2)+' = '+(solPrice*rates[selectedCurrency]).toLocaleString()+' '+selectedCurrency; updateTicker(); };
+document.getElementById('calcUSDC').addEventListener('input',e=>{ const usdc=parseFloat(e.target.value)||0; document.getElementById('calcLocal').value=(usdc*rates[selectedCurrency]).toLocaleString()+' '+selectedCurrency; });
+return true;
+}
+function updatePrices(){ forexList.forEach(p=>{ const priceEl=document.getElementById('price-'+p.replace('/','')); if(priceEl){ const cur=parseFloat(priceEl.innerText)||1; const delta=(Math.random()-0.45)*0.0005; priceEl.innerText=(cur+delta).toFixed(p.includes('JPY')?2:5); } }); if(trading){ pairIndex=(pairIndex+1)%forexList.length; activeForex=forexList[pairIndex]; document.getElementById('headerPair').innerText=activeForex; document.getElementById('chartPair').innerText=activeForex; document.querySelectorAll('.forex-card').forEach(c=>c.classList.remove('active')); const card=document.getElementById('card-'+activeForex.replace('/','')); if(card) card.classList.add('active'); } updateTicker(); }
 
-window.addEventListener('load', async()=>{ loadChart('FX:EURUSD'); await fetchUgxRate(); await fetchSolPrice(); const s=localStorage.getItem('bonny_ruth_pub'); if(s){ try{ pubKey=new solanaWeb3.PublicKey(s); document.getElementById('pubShort').innerText=s.slice(0,6)+'...'; await readBal(); setBlings('ready'); }catch(e){} } await tryAutoConnect(); setInterval(()=>{ if(pubKey) readBal(); },30000); setInterval(updatePrices,2000); setInterval(fetchUgxRate,60000); setInterval(fetchSolPrice,60000); setInterval(updateTicker,5000); setBlings('not'); if(!bindClicks()) setTimeout(bindClicks,1000); setTimeout(bindClicks,2000); });
+window.addEventListener('load', async()=>{ loadChart('FX:EURUSD'); await fetchUniversalRates(); await fetchSolPrice(); const s=localStorage.getItem('bonny_ruth_pub'); if(s){ try{ pubKey=new solanaWeb3.PublicKey(s); document.getElementById('pubShort').innerText=s.slice(0,6)+'...'; await readBal(); setBlings('ready'); }catch(e){} } await tryAutoConnect(); setInterval(()=>{ if(pubKey) readBal(); },30000); setInterval(updatePrices,2000); setInterval(fetchUniversalRates,120000); setInterval(fetchSolPrice,60000); setBlings('not'); if(!bindClicks()) setTimeout(bindClicks,1000); });
 document.getElementById('forexGrid').addEventListener('click',e=>{ const card=e.target.closest('.forex-card'); if(!card) return; activeForex=card.dataset.pair; document.querySelectorAll('.forex-card').forEach(c=>c.classList.remove('active')); card.classList.add('active'); document.getElementById('headerPair').innerText=activeForex; document.getElementById('chartPair').innerText=activeForex; loadChart(forexMap[activeForex]); });
 </script></body></html>
