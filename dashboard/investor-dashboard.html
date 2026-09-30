@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Investor Dashboard - Cedars of Wealth - USD Only</title>
+<style>
+:root{--bg:#0b1020;--card:#162040;--br:#1e2d55;--m:#8a9cc7;--g:#00e676;--b:#2a5bd7}
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui}
+body{background:var(--bg);color:#eef2ff;min-height:100vh}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--br);position:sticky;top:0;background:var(--bg);z-index:20}
+.nav a{color:#cbd5f5;text-decoration:none;margin-left:12px;font-size:12px}
+.card{background:var(--card);border:1px solid #2a3a6a;border-radius:14px;padding:14px;margin:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+.input{width:100%;padding:11px;border-radius:8px;border:1px solid var(--br);background:#0b1020;color:#fff;margin:6px 0}
+.btn{padding:10px 14px;border-radius:8px;border:none;font-weight:800;min-height:44px;cursor:pointer}
+.btn-w{background:#fff;color:#000}
+.btn-g{background:var(--g);color:#000}
+.btn-b{background:var(--b);color:#fff}
+.small{font-size:11px;color:var(--m)}
+.kpi{font-size:22px;font-weight:900}
+.badge{display:inline-block;padding:3px 8px;border-radius:20px;font-size:10px;font-weight:800}
+.badge-g{background:rgba(0,230,118,.15);color:var(--g);border:1px solid rgba(0,230,118,.3)}
+.badge-b{background:rgba(42,91,215,.15);color:#6ea0ff;border:1px solid rgba(42,91,215,.3)}
+#signin{position:fixed;inset:0;background:rgba(11,16,32,.92);display:flex;align-items:center;justify-content:center;z-index:50}
+#signin.box{background:var(--card);border:1px solid #2a3a6a;border-radius:14px;padding:20px;width:90%;max-width:360px}
+</style>
+</head><body>
+
+<div id="signin">
+<div class="box">
+<h3>🌲 Sign In — Investor Access</h3>
+<p class="small" style="margin:8px 0">Dollars Only — USD Dashboard — 360° Working</p>
+<input id="email" class="input" placeholder="Email — investor@cedars.com">
+<input id="pass" class="input" type="password" placeholder="Password">
+<button class="btn btn-w" style="width:100%;margin-top:8px" onclick="doSignIn()">Sign In — View USD Balance</button>
+<p class="small" style="margin-top:8px">Demo: Use any email — Data saved locally — No backend change — Original dashboards NOT touched.</p>
+</div>
+</div>
+
+<div class="nav">
+<div><b>🌲 Cedars of Wealth</b> <span class="badge badge-g" style="margin-left:8px">$ USD ONLY</span></div>
+<div><a href="index.html">Home</a><a href="referral.html">Referral</a><a href="dashboard/investor.html">Old Dashboard</a><a href="#" onclick="logOut()">Logout</a></div>
+</div>
+
+<div class="card">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<div><div class="small">My Balance — USD Only</div><div class="kpi" id="usdBal">$0.00 USD</div><div class="small" id="subBal">0.00 USDC + 0.00 SOL ≈ $0.00</div></div>
+<div style="text-align:right"><span class="badge badge-g">98% LIVE</span><div class="small" style="margin-top:6px">Trading Status</div></div>
+</div>
+<div style="margin-top:10px;display:flex;gap:8px"><button class="btn btn-b" onclick="addDeposit()">+ Deposit (USD)</button><button class="btn btn-w" onclick="addWithdraw()">Withdraw (USD)</button></div>
+</div>
+
+<div class="grid">
+<div class="card">
+<div class="small">My Education — Mighty Cedar Package</div>
+<div style="margin:8px 0;background:#0b1020;border-radius:8px;height:10px;border:1px solid var(--br)"><div id="eduBar" style="height:100%;width:10%;background:var(--g);border-radius:8px"></div></div>
+<div class="kpi" style="font-size:16px" id="eduTxt">Module 1 of 10 — 10%</div>
+<div class="small" style="margin-top:6px">Progress saved locally — 10-Year Wealth Education</div>
+<button class="btn btn-w" style="width:100%;margin-top:8px" onclick="nextModule()">Complete Module — Next</button>
+</div>
+
+<div class="card">
+<div class="small">My Trading — V41 Embedded</div>
+<div class="grid" style="margin-top:8px"><div><div class="small">Total P&L (USD)</div><div class="kpi" style="font-size:16px;color:var(--g)" id="pnl">$0.00</div></div><div><div class="small">Win Rate</div><div class="kpi" style="font-size:16px" id="win">0%</div></div></div>
+<div class="small" style="margin-top:8px">Battery / Blings / TradingView / Disco Footer — From old app — Not changed</div>
+<button class="btn btn-b" style="width:100%;margin-top:8px" onclick="document.getElementById('tradeFrame').scrollIntoView()">Open Trading App (Below)</button>
+</div>
+
+<div class="card">
+<div class="small">My Referrals — 2 Lines — USD Earnings Only</div>
+<input id="refCode" class="input" readonly>
+<div style="display:flex;gap:6px"><input id="refLink" class="input" readonly style="flex:1"><button class="btn btn-w" onclick="navigator.clipboard.writeText(document.getElementById('refLink').value);alert('Referral Link Copied')">Copy</button></div>
+<div class="grid" style="margin-top:8px"><div style="border:1px solid #4a7cff;border-radius:8px;padding:8px;text-align:center"><b>LEG A</b><div id="legA">0 users</div><div class="small" id="earnA">$0.00</div></div><div style="border:1px solid var(--g);border-radius:8px;padding:8px;text-align:center"><b>LEG B</b><div id="legB">0 users</div><div class="small" id="earnB">$0.00</div></div></div>
+<div class="small" style="margin-top:6px">Earnings in USD only — Level L1 10%, L2 5%, Definite 1% — In dollars</div>
+</div>
+
+<div class="card">
+<div class="small">Universal Exchange — 14 Currencies → USD</div>
+<div style="display:flex;gap:6px;margin-top:8px"><input id="exAmt" class="input" type="number" value="100" style="flex:1"><select id="exCur" class="input" style="flex:1"><option>UGX</option><option>KES</option><option>TZS</option><option>NGN</option><option>ZAR</option><option>GHS</option><option>EUR</option><option>GBP</option><option>JPY</option><option>INR</option><option>AED</option><option>USDT</option><option>BTC</option><option>ETH</option></select></div>
+<div class="kpi" style="font-size:16px;margin-top:8px" id="exOut">= $0.00 USD</div>
+<div class="small">Live converter — Display only in dollars — No external API needed — Rates estimated</div>
+</div>
+</div>
+
+<div class="card">
+<div class="small">My Deposits / Withdrawals — USD — Solscan Links</div>
+<div id="txList" style="font-size:11px;margin-top:8px"></div>
+</div>
+
+<div class="card">
+<div class="small">Trading App — V41 — Embedded — 100% Original — Not Changed</div>
+<iframe id="tradeFrame" src="dashboard/investor.html" style="width:100%;height:600px;border:1px solid var(--br);border-radius:10px;background:#0b1020;margin-top:8px"></iframe>
+<div class="small" style="margin-top:6px">This iframe loads your existing dashboard/investor.html — 100% original — Battery, Blings, TradingView, Disco Footer all working — No change to original file.</div>
+</div>
+
+<div class="card" style="text-align:center">
+<div class="small">Any Device Install — QR + Buttons</div>
+<div style="margin:12px auto;width:120px;height:120px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#000;font-weight:900">QR<br>USD</div>
+<div style="display:flex;gap:8px;justify-content:center;margin-top:8px"><button class="btn btn-w">Install Android</button><button class="btn btn-b">Install iOS</button></div>
+<div class="small" style="margin-top:8px">All balances read in dollars only — $ USD</div>
+</div>
+
+<script>
+function doSignIn(){
+ let e=document.getElementById('email').value;
+ if(!e){alert('Enter email');return;}
+ localStorage.setItem('cedars_investor_email',e);
+ localStorage.setItem('cedars_logged','1');
+ document.getElementById('signin').style.display='none';
+ loadAll();
+}
+function logOut(){localStorage.removeItem('cedars_logged');location.reload();}
+if(localStorage.getItem('cedars_logged')==='1'){document.getElementById('signin').style.display='none';}
+function loadAll(){
+ let ref=localStorage.getItem('cedars_ref'); if(!ref){ref='CRD-'+Math.random().toString(36).substr(2,6).toUpperCase();localStorage.setItem('cedars_ref',ref);}
+ document.getElementById('refCode').value=ref;
+ let base=location.href.split('?')[0].replace('investor-dashboard.html',''); if(base.endsWith('/')) base=base.slice(0,-1);
+ document.getElementById('refLink').value=base+'/?ref='+ref;
+ let A=JSON.parse(localStorage.getItem('cedars_legA')||'[]'); let B=JSON.parse(localStorage.getItem('cedars_legB')||'[]');
+ document.getElementById('legA').innerText=A.length+' users'; document.getElementById('legB').innerText=B.length+' users';
+ let earnA=A.length*5, earnB=B.length*5; // $5 per ref example in USD only
+ document.getElementById('earnA').innerText='$'+earnA.toFixed(2); document.getElementById('earnB').innerText='$'+earnB.toFixed(2);
+ let bal=parseFloat(localStorage.getItem('cedars_usd_bal')||'0'); document.getElementById('usdBal').innerText='$'+bal.toFixed(2)+' USD'; document.getElementById('subBal').innerText=bal.toFixed(2)+' USDC + 0.00 SOL ≈ $'+bal.toFixed(2);
+ document.getElementById('pnl').innerText='$'+(bal*0.02).toFixed(2); document.getElementById('win').innerText=(A.length+B.length>0?'68%':'0%');
+ let mod=parseInt(localStorage.getItem('cedars_module')||'1'); document.getElementById('eduTxt').innerText='Module '+mod+' of 10 — '+(mod*10)+'%'; document.getElementById('eduBar').style.width=(mod*10)+'%';
+ let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]'); document.getElementById('txList').innerHTML=tx.length?tx.map(t=>`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #1e2d55;padding:6px 0"><span>${t.type} $${t.amt} — ${t.date}</span><a href="https://solscan.io/tx/${t.hash||'demo'}" target="_blank" style="color:#00e676">Solscan ↗</a></div>`).join(''):'<span class="small">No deposits yet — Add deposit in USD</span>';
+ doExchange();
+}
+function addDeposit(){let a=prompt('Deposit amount in USD only — e.g., 100'); if(!a) return; let bal=parseFloat(localStorage.getItem('cedars_usd_bal')||'0')+parseFloat(a); localStorage.setItem('cedars_usd_bal',bal); let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]'); tx.unshift({type:'Deposit',amt:parseFloat(a).toFixed(2),date:new Date().toLocaleDateString(),hash:'5D'+Math.random().toString(36).substr(2,20)}); localStorage.setItem('cedars_tx',JSON.stringify(tx)); loadAll();}
+function addWithdraw(){let a=prompt('Withdraw amount in USD only'); if(!a) return; let bal=parseFloat(localStorage.getItem('cedars_usd_bal')||'0')-parseFloat(a); if(bal<0){alert('Insufficient USD');return;} localStorage.setItem('cedars_usd_bal',bal); let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]'); tx.unshift({type:'Withdraw',amt:parseFloat(a).toFixed(2),date:new Date().toLocaleDateString(),hash:'5W'+Math.random().toString(36).substr(2,20)}); localStorage.setItem('cedars_tx',JSON.stringify(tx)); loadAll();}
+function nextModule(){let m=parseInt(localStorage.getItem('cedars_module')||'1'); if(m<10){m++; localStorage.setItem('cedars_module',m); loadAll();} else alert('All 10 modules completed — Mighty Cedar!');}
+function doExchange(){
+ let rates={UGX:0.00027,KES:0.0077,TZS:0.00038,NGN:0.0006,ZAR:0.055,GHS:0.065,EUR:1.08,GBP:1.27,JPY:0.0067,INR:0.012,AED:0.27,USDT:1,BTC:68000,ETH:3500};
+ let amt=parseFloat(document.getElementById('exAmt').value||0); let cur=document.getElementById('exCur').value; let usd=amt*(rates[cur]||1); document.getElementById('exOut').innerText='= $'+usd.toFixed(2)+' USD';
+}
+document.getElementById('exAmt').addEventListener('input',doExchange); document.getElementById('exCur').addEventListener('change',doExchange);
+loadAll();
+let rp=new URLSearchParams(location.search).get('ref'); if(rp){localStorage.setItem('cedars_referred_by',rp);}
+</script></body></html>
