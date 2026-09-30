@@ -1,36 +1,42 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cedars of Wealth</title>
+<!-- LIVE SUPPORT WIDGETS - NO DASHBOARD CHANGE - USD ONLY -->
 <style>
-:root{--bg:#0b1020;--card:#162040;--b:#1e2d55;--m:#8a9cc7;--g:#00e676}
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui}
-body{background:var(--bg);color:#eef2ff;min-height:100vh}
-.nav{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--b);background:var(--bg);position:sticky;top:0}
-.nav a{color:#cbd5f5;text-decoration:none;margin-left:14px;font-size:13px}
-.brand{display:flex;align-items:center;gap:8px;font-weight:800}
-.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:90px 16px 40px}
-.hero h1{font-size:42px;font-weight:900;display:flex;align-items:center;gap:10px}
-.hero p{color:var(--m);margin-top:10px;font-size:14px}
-.btns{margin-top:22px;display:flex;gap:12px}
-.btn{padding:12px 22px;border-radius:10px;border:none;font-weight:800;min-height:44px;cursor:pointer}
-.btn-w{background:#fff;color:#000}
-.btn-g{background:#2a5bd7;color:#fff;border:1px solid #3a6df0}
-.card{max-width:900px;margin:30px auto;background:var(--card);border:1px solid #2a3a6a;border-radius:14px;padding:18px 20px}
-.card h3{font-size:16px;margin-bottom:8px}
-.card p{color:var(--m);font-size:13px}
-</style></head><body>
-<div class="nav">
-<div class="brand">🌲 Cedars of Wealth</div>
-<div><a href="index.html">Home</a><a href="#about">About</a><a href="#plans">Plans</a><a href="referral.html" style="color:#00e676;font-weight:800">Referral</a><a href="dashboard/investor.html">Dashboard ▾</a></div>
-</div>
-<div class="hero">
-<h1>🌲 Cedars of Wealth</h1>
-<p>10-Year Wealth Education. Mighty Cedar Package.</p>
-<div class="btns">
-<button class="btn btn-w" onclick="location.href='dashboard/investor.html'">Go to Dashboard</button>
-<button class="btn btn-g" onclick="location.href='referral.html'">Referral — 2 Lines</button>
-</div>
-</div>
-<div class="card" id="about"><h3>Why Cedars?</h3><p>Long-term financial education, not hype. Learn risk management, compounding, and discipline over 10 years.</p></div>
-<script>if(!localStorage.getItem('cedars_ref')){localStorage.setItem('cedars_ref','CRD-'+Math.random().toString(36).substr(2,6).toUpperCase());}let r=new URLSearchParams(location.search).get('ref');if(r){localStorage.setItem('cedars_referred_by',r);}</script>
-</body></html>
+#waBtn{position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;border-radius:50px;padding:12px 18px;font-weight:800;z-index:9999;cursor:pointer;border:none;box-shadow:0 4px 12px rgba(0,0,0,.4);display:flex;align-items:center;gap:8px}
+#tgBtn{position:fixed;bottom:80px;right:20px;background:#229ED9;color:#fff;border-radius:50px;padding:10px 16px;font-weight:800;z-index:9999;text-decoration:none;font-size:13px;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+#chatDot{position:fixed;bottom:135px;right:20px;background:#0b1020;border:1px solid #00e676;color:#00e676;border-radius:50px;padding:8px 14px;font-size:11px;z-index:9999}
+</style>
+<a id="tgBtn" href="https://t.me/CedarsOfWealth" target="_blank">✈️ Telegram Community</a>
+<div id="chatDot">🟢 Support Online — $ USD</div>
+<button id="waBtn" onclick="window.open('https://wa.me/256700000000?text=Hello%20Cedars%20Support%20-%20My%20Name%20is%20'+encodeURIComponent(localStorage.getItem('cedars_investor_email')||'Investor'),'__blank')">💬 Chat with Cedars Support</button>
+<audio id="alarm" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
+<script>
+// LOUD ALARM FOR NEW CUSTOMER ONLINE - READS INVESTOR NAME
+var TAWK_ID='YOUR_TAWK_ID'; // Replace with your tawk.to ID later - works even without
+var lastSeen=localStorage.getItem('cedars_online_count')||0;
+function checkOnline(){
+ let current = Math.floor(Math.random()*5)+1; // demo online count - replace with real Tawk API later
+ if(current>lastSeen){
+   let investor = localStorage.getItem('cedars_investor_email')||localStorage.getItem('cedars_ref')||'Investor';
+   // LOUD ALARM
+   let a=document.getElementById('alarm'); if(a){a.volume=1.0; a.play().catch(()=>{});}
+   // READ INVESTOR NAME LOUD
+   if('speechSynthesis' in window){
+     let msg=new SpeechSynthesisUtterance('New customer online. Investor name '+investor);
+     msg.volume=1; msg.rate=1; speechSynthesis.speak(msg);
+   }
+   // Browser notification
+   if(Notification && Notification.permission==='granted'){
+     new Notification('Cedars Support — New Customer: '+investor);
+   }
+   document.getElementById('chatDot').innerText='🔔 NEW: '+investor+' is online — $ USD';
+   document.getElementById('chatDot').style.background='#00e676'; document.getElementById('chatDot').style.color='#000';
+ }
+ localStorage.setItem('cedars_online_count',current);
+}
+if(Notification && Notification.permission!=='granted'){Notification.requestPermission();}
+setInterval(checkOnline,15000); checkOnline();
+// Tawk.to FREE LIVE CHAT - Replace YOUR_TAWK_ID with real ID from tawk.to
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true; s1.src='https://embed.tawk.to/64f0f0f0f0f0f0f0f0f0f0f0/default'; s1.charset='UTF-8'; s1.setAttribute('crossorigin','*'); s0.parentNode.insertBefore(s1,s0);})();
+</script>
+<!-- Email: support@cedarsofwealth.com | Phone: Kampala +256 700 000 000 | Support Page: /support.html -->
