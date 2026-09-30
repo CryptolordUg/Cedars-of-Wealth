@@ -1,49 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Cedars of Wealth</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#0a0f1e;color:#fff;line-height:1.6}
-.hero{padding:70px 20px 30px;text-align:center}
-.hero h1{font-size:44px;margin:0 0 16px}
-.hero p{color:#a0b0cc;max-width:600px;margin:0 auto 24px}
-.btn{display:inline-block;padding:14px 28px;background:linear-gradient(135deg,#4f7cff,#2dd4a7);color:#fff;text-decoration:none;border-radius:8px;font-weight:700;margin:8px}
-.card{background:#131a2e;border:1px solid #1e2a4a;border-radius:12px;padding:24px;margin:16px 0}
-.wrap{max-width:1000px;margin:0 auto;padding:20px 15px}
-</style>
-</head>
-<body>
-
-<div id="site-header"></div>
-
-<div class="wrap">
+:root{--bg:#0b1020;--card:#162040;--b:#1e2d55;--m:#8a9cc7;--g:#00e676}
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui}
+body{background:var(--bg);color:#eef2ff;min-height:100vh}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--b);background:var(--bg);position:sticky;top:0}
+.nav a{color:#cbd5f5;text-decoration:none;margin-left:14px;font-size:13px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800}
+.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:90px 16px 40px}
+.hero h1{font-size:42px;font-weight:900;display:flex;align-items:center;gap:10px}
+.hero p{color:var(--m);margin-top:10px;font-size:14px}
+.btns{margin-top:22px;display:flex;gap:12px}
+.btn{padding:12px 22px;border-radius:10px;border:none;font-weight:800;min-height:44px;cursor:pointer}
+.btn-w{background:#fff;color:#000}
+.btn-g{background:#2a5bd7;color:#fff;border:1px solid #3a6df0}
+.card{max-width:900px;margin:30px auto;background:var(--card);border:1px solid #2a3a6a;border-radius:14px;padding:18px 20px}
+.card h3{font-size:16px;margin-bottom:8px}
+.card p{color:var(--m);font-size:13px}
+</style></head><body>
+<div class="nav">
+<div class="brand">🌲 Cedars of Wealth</div>
+<div><a href="index.html">Home</a><a href="#about">About</a><a href="#plans">Plans</a><a href="referral.html" style="color:#00e676;font-weight:800">Referral</a><a href="dashboard/investor.html">Dashboard ▾</a></div>
+</div>
 <div class="hero">
 <h1>🌲 Cedars of Wealth</h1>
 <p>10-Year Wealth Education. Mighty Cedar Package.</p>
-<a class="btn" href="/Cedars-of-Wealth/register/">Join Now</a>
-<a class="btn" href="/Cedars-of-Wealth/plans/" style="background:#1a233f;border:1px solid #2a3a5a">View Plans</a>
-</div>
-
-<div class="card">
-<h3>Why Cedars?</h3>
-<p style="color:#a0b0cc">Long-term financial education, not hype. Learn risk management, compounding, and discipline over 10 years.</p>
-</div>
-
-<div class="card">
-<h3>Packages</h3>
-<p style="color:#a0b0cc">Seedling, Growing Cedar, Mighty Cedar — pick your learning path.</p>
-<a class="btn" href="/Cedars-of-Wealth/plans/">Compare Plans</a>
+<div class="btns">
+<button class="btn btn-w" onclick="location.href='dashboard/investor.html'">Go to Dashboard</button>
+<button class="btn btn-g" onclick="location.href='referral.html'">Referral — 2 Lines</button>
 </div>
 </div>
-
-<div id="site-footer"></div>
-
-<script>
-fetch('/Cedars-of-Wealth/includes/header.html').then(r=>r.text()).then(h=>document.getElementById('site-header').innerHTML=h);
-fetch('/Cedars-of-Wealth/includes/footer.html').then(r=>r.text()).then(h=>document.getElementById('site-footer').innerHTML=h);
-</script>
-</body>
-</html>
+<div class="card" id="about"><h3>Why Cedars?</h3><p>Long-term financial education, not hype. Learn risk management, compounding, and discipline over 10 years.</p></div>
+<script>if(!localStorage.getItem('cedars_ref')){localStorage.setItem('cedars_ref','CRD-'+Math.random().toString(36).substr(2,6).toUpperCase());}let r=new URLSearchParams(location.search).get('ref');if(r){localStorage.setItem('cedars_referred_by',r);}</script>
+</body></html>
