@@ -1,55 +1,86 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cedars of Wealth</title>
-<style>
-:root{--bg:#0b1020;--card:#162040;--b:#1e2d55;--m:#8a9cc7;--g:#00e676}
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,Segoe UI,Roboto}
-body{background:#0b1020;color:#eef2ff;min-height:100vh}
-.nav{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid #1e2d55;background:#0b1020;position:sticky;top:0;z-index:10}
-.nav a{color:#cbd5f5;text-decoration:none;margin-left:14px;font-size:13px}
-.brand{font-weight:800;display:flex;gap:8px;align-items:center}
-.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:90px 16px 40px}
-.hero h1{font-size:42px;font-weight:900;display:flex;gap:10px;align-items:center}
-.hero p{color:#8a9cc7;margin-top:10px;font-size:14px}
-.btns{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-.btn{padding:12px 22px;border-radius:10px;border:none;font-weight:800;min-height:44px;cursor:pointer;font-size:14px}
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars of Wealth - 10 Year Wealth Education</title>
+<style>:root{--bg:#0b1020;--card:#162040;--card2:#1c294f;--br:#1e2d55;--m:#8a9cc7;--g:#00e676;--b:#2a5bd7}*{box-sizing:border-box;font-family:system-ui;margin:0;padding:0}body{background:var(--bg);color:#eef2ff;min-height:100vh}
+.top{position:sticky;top:0;z-index:999;background:rgba(11,16,32,0.98);border-bottom:1px solid var(--br);padding:10px 12px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(8px)}
+.top b{color:#fff;font-size:14px}
+.menu{display:flex;gap:6px;overflow-x:auto;white-space:nowrap;flex-shrink:1;margin-left:10px}
+.menu a{color:var(--m);text-decoration:none;font-size:11px;font-weight:700;padding:6px 10px;border-radius:20px;border:1px solid var(--br);background:var(--card);flex-shrink:0}
+.menu a:hover{background:#fff;color:#000}
+.hero{max-width:800px;margin:40px auto;text-align:center;padding:20px}
+.hero h1{font-size:32px;font-weight:900;color:#fff;margin-bottom:10px}
+.hero p{color:var(--m);font-size:13px;margin-bottom:18px}
+.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{padding:11px 18px;border-radius:10px;border:none;font-weight:800;min-height:44px;cursor:pointer;text-decoration:none;font-size:13px;display:inline-block}
 .btn-w{background:#fff;color:#000}
-.btn-g{background:#2a5bd7;color:#fff;border:1px solid #3a6df0}
-.card{max-width:900px;margin:30px auto;background:#162040;border:1px solid #2a3a6a;border-radius:14px;padding:18px 20px}
-.card h3{font-size:16px;margin-bottom:8px}
-.card p{color:#8a9cc7;font-size:13px;line-height:1.5}
-</style>
-</head><body>
-<div class="nav">
-<div class="brand">🌲 Cedars of Wealth</div>
-<div><a href="index.html">Home</a><a href="#about">About</a><a href="#plans">Plans</a><a href="referral.html" style="color:#00e676;font-weight:800">Referral</a><a href="dashboard/investor.html">Dashboard ▾</a></div>
+.btn-b{background:var(--b);color:#fff}
+.card{background:var(--card);border:1px solid #2a3a6a;border-radius:14px;padding:16px;margin:12px}
+.small{font-size:11px;color:var(--m);line-height:1.5}
+.footer{border-top:1px solid var(--br);padding:16px 12px;margin-top:30px;background:var(--card);display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.footer a{color:var(--m);text-decoration:none;font-size:11px;padding:6px 10px;border-radius:20px;border:1px solid var(--br);background:var(--bg)}
+</style></head><body>
+
+<!-- TOP HEADER — ORIGINAL DARK — ALL LINKS — AS YOU REQUESTED -->
+<div class="top">
+<b>🌲 Cedars of Wealth</b>
+<div class="menu">
+<a href="index.html">Home</a>
+<a href="index.html#about">About us</a>
+<a href="calendar.html">Calendar</a>
+<a href="register.html">Register</a>
+<a href="index.html#plans">Plans</a>
+<a href="deposit.html">Deposit</a>
+<a href="withdraw.html">Withdraw</a>
+<a href="referral.html">Referral</a>
+<a href="login.html" id="signTop">Sign in / Sign out</a>
+</div>
 </div>
 
 <div class="hero">
 <h1>🌲 Cedars of Wealth</h1>
 <p>10-Year Wealth Education. Mighty Cedar Package.</p>
 <div class="btns">
-<button class="btn btn-w" onclick="location.href='dashboard/investor.html'">Go to Dashboard</button>
-<button class="btn btn-g" onclick="location.href='#plans'">View Plans</button>
+<a class="btn btn-w" href="register.html">Start — USD Only</a>
+<a class="btn btn-b" href="#plans">View Plans</a>
+<a class="btn btn-w" href="dashboard/investor.html" style="background:var(--card);color:#fff;border:1px solid var(--br)">Dashboard</a>
 </div>
 </div>
 
 <div class="card" id="about">
 <h3>Why Cedars?</h3>
-<p>Long-term financial education, not hype. Learn risk management, compounding, and discipline over 10 years.</p>
+<p class="small" style="margin-top:6px">Not hype. Learn risk management, compounding, and discipline over 10 years. 10-Year Cedar Package — Education + Trading tools — All balances in USD only — $</p>
 </div>
 
 <div class="card" id="plans">
-<h3>Mighty Cedar Package — USD Only</h3>
-<p>Education + Trading + Referral — All in Dollars. 10 modules. Investor dashboard reads in $ USD only. 360° working.</p>
-<div style="margin-top:10px;display:flex;gap:8px">
-<button class="btn btn-w" onclick="location.href='investor-dashboard.html'">Investor USD Dashboard</button>
-<button class="btn btn-g" onclick="location.href='referral.html'">Referral — 2 Lines</button>
+<h3>Plans — USD Only — $</h3>
+<p class="small">Starter $50 | Growth $150 | Mighty Cedar $500 — All in USD — No UGX — Binary 2 lines only — 10%/5%/1%</p>
+<div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+<div style="background:var(--bg);border:1px solid var(--br);border-radius:10px;padding:10px;text-align:center"><div style="font-weight:800">$50</div><div class="small">Starter</div></div>
+<div style="background:var(--bg);border:1px solid var(--br);border-radius:10px;padding:10px;text-align:center"><div style="font-weight:800">$150</div><div class="small">Growth</div></div>
+<div style="background:var(--bg);border:1px solid var(--br);border-radius:10px;padding:10px;text-align:center"><div style="font-weight:800">$500</div><div class="small">Mighty Cedar</div></div>
 </div>
+<a class="btn btn-w" style="width:100%;margin-top:10px;text-align:center" href="register.html">Register — USD Only</a>
 </div>
 
+<!-- FOOTER — ALL LINKS — TOP FOOTER AS YOU SAID -->
+<div class="footer">
+<a href="index.html">Home</a>
+<a href="index.html#about">About us</a>
+<a href="calendar.html">Calendar</a>
+<a href="register.html">Register</a>
+<a href="index.html#plans">Plans</a>
+<a href="deposit.html">Deposit</a>
+<a href="withdraw.html">Withdraw</a>
+<a href="referral.html">Referral</a>
+<a href="login.html">Sign in / Sign out</a>
+<a href="support.html">Live Support</a>
+<a href="investor-dashboard.html">Investor Dashboard</a>
+<span class="small" style="width:100%;text-align:center;margin-top:8px">© 2026 Cedars of Wealth — USD Only — $ — Kampala UG</span>
+</div>
+
+<script src="fix.js"></script>
 <script>
-if(!localStorage.getItem('cedars_ref')){localStorage.setItem('cedars_ref','CRD-'+Math.random().toString(36).substr(2,6).toUpperCase());}
-let r=new URLSearchParams(location.search).get('ref'); if(r){localStorage.setItem('cedars_referred_by',r);}
+// Sign in/out text change — No system change
+let em=localStorage.getItem('cedars_investor_email'), lg=localStorage.getItem('cedars_logged_in'), el=document.getElementById('signTop');
+if(lg==='true' && em){ el.innerText='Sign out ('+em.split('@')[0]+')'; }
 </script>
+<script src="support-widget.js"></script>
 </body></html>
