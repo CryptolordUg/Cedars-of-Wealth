@@ -1,18 +1,7 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Support - Cedars of Wealth</title>
-<style>:root{--bg:#0b1020;--card:#162040;--br:#1e2d55;--m:#8a9cc7;--g:#00e676}*{font-family:system-ui;box-sizing:border-box}body{background:var(--bg);color:#eef2ff;margin:0}.nav{padding:12px 16px;display:flex;justify-content:space-between;border-bottom:1px solid var(--br)}.card{background:var(--card);border:1px solid #2a3a6a;border-radius:12px;padding:14px;margin:12px}.input{width:100%;padding:11px;border-radius:8px;border:1px solid var(--br);background:#0b1020;color:#fff;margin:6px 0}.btn{padding:11px;border-radius:8px;border:none;font-weight:800;min-height:44px;cursor:pointer;background:#fff;color:#000}</style></head><body>
-<div class="nav"><b>🌲 Cedars Support — USD Only</b><a href="index.html" style="color:#8a9cc7;text-decoration:none;font-size:12px">Home</a></div>
-<div class="card"><h3>Live Customer Support — 24/7 — $ USD</h3>
-<p style="font-size:12px;color:#8a9cc7">WhatsApp • Telegram • Live Chat • Email • Kampala Office</p>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
-<a href="https://wa.me/256700000000" target="_blank" style="background:#25D366;color:#fff;padding:12px;border-radius:8px;text-align:center;text-decoration:none;font-weight:800">WhatsApp Support</a>
-<a href="https://t.me/CedarsOfWealth" target="_blank" style="background:#229ED9;color:#fff;padding:12px;border-radius:8px;text-align:center;text-decoration:none;font-weight:800">Telegram — t.me/CedarsOfWealth</a>
-</div>
-<div style="margin-top:12px;font-size:12px">📧 Email: support@cedarsofwealth.com<br>📞 Kampala Office: +256 700 000 000<br>🟢 Live Chat: Bottom right — Loud alarm + Investor name read</div>
-</div>
-<div class="card"><h4>FAQ Chatbot — USD Only</h4><div id="faq"></div><input id="q" class="input" placeholder="Ask — e.g., How to deposit in USD?"><button class="btn" style="width:100%;margin-top:6px" onclick="ask()">Ask Support</button></div>
-<script>
-let faqs={"deposit":"Deposit in USD — Go to Investor Dashboard > + Deposit (USD) > Solscan link auto created","withdraw":"Withdraw USD only — Dashboard > Withdraw","referral":"Referral 2 lines — Leg A/B — Earnings $5 per user","balance":"Balance shows in $ USD only — USDC + SOL converted to USD"};
-function ask(){let q=document.getElementById('q').value.toLowerCase(); let a="Our team will reply — USD only — For now check: "+Object.keys(faqs).join(', '); for(let k in faqs){if(q.includes(k)){a=faqs[k];}} document.getElementById('faq').innerHTML='<div style="margin-top:8px;background:#0b1020;border:1px solid #1e2d55;border-radius:8px;padding:10px;font-size:12px">'+a+'</div>'; // alarm
- let alarm=new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg'); alarm.volume=1; alarm.play().catch(()=>{}); if('speechSynthesis' in window){let inv=localStorage.getItem('cedars_investor_email')||'Investor'; speechSynthesis.speak(new SpeechSynthesisUtterance('Support question from '+inv));}
-}
-</script></body></html>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Support</title>
+<style>:root{--bg:#0b1020;--card:#162040;--br:#1e2d55;--m:#8a9cc7}*{font-family:system-ui;box-sizing:border-box}body{background:var(--bg);color:#eef2ff;margin:0}.nav{padding:12px 16px;display:flex;justify-content:space-between;border-bottom:1px solid var(--br)}.card{background:var(--card);border:1px solid #2a3a6a;border-radius:12px;padding:14px;margin:12px}.btn{padding:11px;border-radius:8px;border:none;font-weight:800;min-height:44px;display:block;text-align:center;text-decoration:none;margin:6px 0}</style></head><body>
+<div class="nav"><b>🌲 Support — USD Only</b><a href="index.html" style="color:var(--m);text-decoration:none;font-size:12px">Home</a></div>
+<div class="card"><a class="btn" style="background:#25D366;color:#fff" href="https://wa.me/256700000000?text=Hello%20Cedars%20Support" target="_blank">💬 WhatsApp: Chat with Cedars Support</a>
+<a class="btn" style="background:#229ED9;color:#fff" href="https://t.me/CedarsOfWealth" target="_blank">✈️ Telegram: t.me/CedarsOfWealth</a>
+<div style="font-size:11px;color:var(--m);margin-top:10px">Email: support@cedarsofwealth.com<br>Phone Kampala: +256 700 000 000<br>Live chat widget: Add Tawk.to ID later — Code ready — No dashboard jump</div>
+</div></body></html>
