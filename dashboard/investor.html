@@ -1,6 +1,32 @@
-<!DOCTYPE html><html><head><meta charset="utf-8">
-<meta http-equiv="refresh" content="0; url=user.html">
-<link rel="canonical" href="user.html">
-<title>Redirecting…</title></head>
-<body><p>Redirecting to <a href="user.html">My Account</a>…</p>
-<script>location.replace('user.html');</script></body></html>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Investor — Cedars of Wealth</title>
+<style>:root{--bg:#0b1020;--card:#162040;--b:#2a4b9a;--g:#00e676;--m:#8a9cc7;--br:#1e2d55}*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui}body{background:var(--bg);color:#eef2ff} .h{padding:12px 16px;display:flex;justify-content:space-between;border-bottom:1px solid var(--br);background:var(--bg)} .card{background:var(--card);border:1px solid #2a3a6a;border-radius:12px;padding:14px;margin:10px} .btn{padding:10px 14px;border-radius:8px;border:none;font-weight:800;min-height:44px;cursor:pointer} .btn-g{background:var(--g);color:#000} .btn-w{background:#fff;color:#000} .bal{font-size:28px;font-weight:900} .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}</style>
+</head><body>
+<div class="h"><b>🌲 Cedars of Wealth</b><div style="display:flex;gap:6px"><a href="../referral.html" style="background:#00e676;color:#000;padding:6px 10px;border-radius:6px;text-decoration:none;font-size:11px;font-weight:800">👥 REFERRAL 2 LINES</a><a href="../deposit.html" style="color:var(--m);text-decoration:none;font-size:12px">Deposit</a></div></div>
+
+<div class="card"><div style="color:var(--m);font-size:11px">TOTAL BALANCE USDC</div><div class="bal" id="bal">$0.00</div><div style="font-size:11px;color:var(--m)" id="refCode">Code: —</div>
+<div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">
+<button class="btn btn-g" onclick="location.href='../deposit.html'">Deposit</button>
+<button class="btn btn-w" onclick="location.href='../withdraw.html'">Withdraw</button>
+<button class="btn btn-w" style="background:#0b1020;color:#00e676;border:1px solid #2a4b9a" onclick="location.href='../referral.html'">Referral — 10% / 5% / 1%</button>
+</div></div>
+
+<div class="card"><h4 style="margin-bottom:8px">Binary — 2 Lines Only</h4><div class="grid">
+<div style="border:2px solid #4a7cff;border-radius:10px;padding:10px;text-align:center"><b>LEG A</b><div id="legA" style="margin-top:6px">0 refs</div><div id="legABal" style="color:var(--m);font-size:11px">$0</div></div>
+<div style="border:2px solid #00e676;border-radius:10px;padding:10px;text-align:center"><b>LEG B</b><div id="legB" style="margin-top:6px">0 refs</div><div id="legBBal" style="color:var(--m);font-size:11px">$0</div></div>
+</div><p style="font-size:10px;color:var(--m);margin-top:8px">Every account builds only 2 lines. 3rd referral spills to weakest leg. Bonus 10% direct, 5% 2nd, 1% definite.</p></div>
+
+<div class="card"><h4>Recent Activity</h4><div id="hist" style="font-size:11px;color:var(--m);margin-top:6px">No activity yet</div></div>
+
+<script>
+function load(){
+let c=localStorage.getItem('cedars_ref');if(!c){c='CRD-'+Math.random().toString(36).substr(2,6).toUpperCase();localStorage.setItem('cedars_ref',c);}
+document.getElementById('refCode').innerText='Ref Code: '+c+' — 2 Lines 10%/5%/1%';
+let bal=localStorage.getItem('cedars_balance_usdc')||'0.00';document.getElementById('bal').innerText='$'+bal;
+let A=JSON.parse(localStorage.getItem('cedars_legA')||'[]');let B=JSON.parse(localStorage.getItem('cedars_legB')||'[]');
+document.getElementById('legA').innerText=A.length+' refs';document.getElementById('legB').innerText=B.length+' refs';
+let H=JSON.parse(localStorage.getItem('cedars_deposit_history')||'[]');let R=JSON.parse(localStorage.getItem('cedars_referral_history')||'[]');
+let out=H.concat(R).slice(-5);document.getElementById('hist').innerHTML=out.length?out.map(o=>`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #1e2d55;padding:5px 0"><span>${o.name||o.tx||'Activity'}</span><span style="color:#00e676">${o.amount||o.bonus||''}</span></div>`).join(''):'No activity yet — Share your referral link';
+}
+load();
+</script></body></html>
