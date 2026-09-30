@@ -1,0 +1,18 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Referral</title><style>:root{--bg:#0b1020;--card:#162040;--b:#2a4b9a;--g:#00e676;--m:#8a9cc7;--br:#1e2d55}*{box-sizing:border-box;font-family:system-ui}body{background:var(--bg);color:#eef2ff;margin:0}.h{padding:12px 16px;display:flex;justify-content:space-between;border-bottom:1px solid var(--br)}.card{background:var(--card);border:1px solid #2a3a6a;border-radius:12px;padding:14px;margin:12px}.btn{padding:10px 14px;border-radius:8px;border:none;font-weight:700;min-height:44px;cursor:pointer}.input{width:100%;padding:11px;border-radius:8px;border:1px solid var(--br);background:#0b1020;color:#fff;margin:6px 0}</style></head><body>
+<div class="h"><b>🌲 Cedars of Wealth</b><a href="investor-dashboard.html" style="color:var(--m);text-decoration:none;font-size:12px">Dashboard</a></div>
+<div class="card"><h3>Referral — 2 Lines Only — 10% / 5% / 1%</h3>
+<input id="code" class="input" readonly><div style="display:flex;gap:6px"><input id="link" class="input" readonly style="flex:1"><button class="btn" style="background:#fff" onclick="navigator.clipboard.writeText(link.value)">Copy</button></div>
+<p style="font-size:11px;color:var(--m)">Every account builds only 2 lines: Leg A and Leg B. 3rd referral spills to weakest downline.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"><div style="border:2px solid #4a7cff;border-radius:10px;padding:10px;text-align:center"><b>LEG A</b><div id="a">0</div></div><div style="border:2px solid var(--g);border-radius:10px;padding:10px;text-align:center"><b>LEG B</b><div id="b">0</div></div></div>
+<div id="list" style="font-size:11px;margin-top:10px"></div></div>
+<script>
+let c=localStorage.getItem('cedars_ref');if(!c){c='CRD-'+Math.random().toString(36).substr(2,6).toUpperCase();localStorage.setItem('cedars_ref',c)}
+let u=JSON.parse(localStorage.getItem('cedars_user')||'{"name":"Investor"}');
+document.getElementById('code').value=c;
+document.getElementById('link').value=location.origin+location.pathname.replace('referral.html','')+'?ref='+c;
+let A=JSON.parse(localStorage.getItem('cedars_legA')||'[]');let B=JSON.parse(localStorage.getItem('cedars_legB')||'[]');
+document.getElementById('a').innerText=A.length+' refs';document.getElementById('b').innerText=B.length+' refs';
+let H=JSON.parse(localStorage.getItem('cedars_referral_history')||'[]');let out=document.getElementById('list');
+out.innerHTML=H.length?H.map(h=>`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #1e2d55;padding:6px 0"><span>${h.name} — ${h.leg} — ${h.level}</span><span style="color:#00e676">${h.bonus}</span></div>`).join(''):'No referrals yet';
+</script></body></html>
