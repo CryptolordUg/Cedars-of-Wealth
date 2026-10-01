@@ -1,81 +1,83 @@
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CEDARS UNIVERSAL VIEW — Command Center + 4 Branches + Innovations — One Origin</title>
+<title>CEDARS OF WEALTH — COMMAND CENTER 360</title>
 <style>
-body{margin:0;background:#040806;color:#e0ffe9;font-family:monospace;}
-.top{position:sticky;top:0;z-index:99;background:#020805;border-bottom:2px solid #00ff88;padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;}
-.btn{padding:8px 14px;border-radius:8px;border:1px solid #00ff88;background:#00ff88;color:#000;font-weight:bold;cursor:pointer;font-size:12px;}
-.btn2{padding:8px 14px;border-radius:8px;border:1px solid #00ff88;background:#111;color:#00ff88;cursor:pointer;font-size:12px;}
-.badge{padding:3px 8px;border:1px solid #00ff88;border-radius:5px;font-size:10px;background:rgba(0,255,136,0.1);}
-.frame{width:100%;height:92vh;border:none;border-bottom:2px solid #00ff88;background:#000;}
-.sec{padding:12px;border:1px solid #00ff88;margin:10px;border-radius:12px;background:rgba(0,255,136,0.03);}
-h2{color:#00ff88;margin:8px 0;font-size:14px;} .dim{color:#8ac4a0;font-size:11px;}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}@media(max-width:900px){.grid{grid-template-columns:1fr;}}
-.card{border:1px solid #00ff88;border-radius:10px;padding:10px;background:#00110a;}
-.origin{word-break:break-all;background:#001a0f;border:1px dashed #00ff88;padding:8px;border-radius:8px;font-size:11px;margin-top:8px;}
+body{margin:0;background:#020805;color:#d0ffd9;font-family:monospace;overflow-x:hidden;}
+/* BILLBOARD */
+.billboard{width:100%;background:linear-gradient(180deg, #001a0f 0%, #020805 100%);border-bottom:3px solid #00ff88;padding:18px 15px;text-align:center;position:sticky;top:0;z-index:99;box-shadow:0 0 35px rgba(0,255,136,0.25);}
+.bill-title{font-size:38px;font-weight:900;letter-spacing:6px;color:#00ff88;text-shadow:0 0 15px #00ff88, 0 0 30px #00ff88;line-height:1;}
+@media(max-width:600px){.bill-title{font-size:22px;letter-spacing:3px;}}
+.bill-sub{font-size:13px;letter-spacing:4px;color:#fff;margin-top:6px;font-weight:bold;}
+.bill-line{height:2px;background:linear-gradient(90deg, transparent, #00ff88, transparent);margin:10px 0;}
+.origin-badge{display:inline-block;padding:5px 12px;border:1px dashed #00ff88;border-radius:20px;background:#001a0f;font-size:10px;word-break:break-all;}
+/* MILITARY NAV DROPDOWN */
+.nav-wrap{position:absolute;top:15px;right:15px;}
+.drop-btn{padding:8px 14px;background:#000;color:#00ff88;border:1px solid #00ff88;border-radius:6px;cursor:pointer;font-weight:bold;font-size:12px;}
+.dropdown{position:absolute;right:0;top:38px;background:#000a06;border:1px solid #00ff88;border-radius:10px;width:180px;display:none;box-shadow:0 0 20px rgba(0,255,136,0.4);overflow:hidden;}
+.dropdown a{display:block;padding:10px 14px;color:#9effc4;text-decoration:none;font-size:12px;border-bottom:1px solid rgba(0,255,136,0.1);}
+.dropdown a:hover{background:rgba(0,255,136,0.15);color:#00ff88;}
+.show{display:block;}
+/* MILITARY SIMULATION FRAME */
+.mil-frame{border:2px solid #00ff88;margin:10px;border-radius:12px;background:#000;position:relative;overflow:hidden;}
+.mil-frame::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg, #00ff88, transparent, #00ff88);animation:scan 3s linear infinite;}
+@keyframes scan{0%{transform:translateY(0);}100%{transform:translateY(88vh);}}
+.frame{width:100%;height:90vh;border:none;background:#000;}
+.status-bar{display:flex;gap:8px;flex-wrap:wrap;padding:8px 12px;background:#001008;border-top:1px solid #00ff88;font-size:10px;}
+.dot{width:8px;height:8px;border-radius:50%;background:#00ff88;box-shadow:0 0 8px #00ff88;display:inline-block;animation:blink 1.2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.2;}}
+.btn{padding:7px 14px;background:#00ff88;color:#000;border:none;border-radius:6px;font-weight:bold;cursor:pointer;font-size:11px;}
+.btn2{padding:7px 14px;background:#111;color:#00ff88;border:1px solid #00ff88;border-radius:6px;cursor:pointer;font-size:11px;}
 </style></head><body>
 
-<div class="top">
-<div>
-<div style="font-size:16px;font-weight:bold;">🌲 CEDARS UNIVERSAL VIEW — MASTER — ONE ORIGIN — BUILDERS ONLY</div>
-<div class="dim">Main Locked | 4 Branches Merged | 10 Jupiter Innovations | Same Ref CRD-M75TJ2 | No System Change</div>
-<div class="origin" id="originBox">ORIGIN: https://cryptolordug.github.io/Cedars-of-Wealth/register.html?ref=CRD-M75TJ2 — All Branches — Universal</div>
+<!-- BIG BILLBOARD - REPLACES UNIVERSAL VIEW TEXT -->
+<div class="billboard">
+<div class="bill-title">CEDARS OF WEALTH</div>
+<div class="bill-sub">COMMAND CENTER 360 — MILITARY SIMULATION — READY TO HIT WORLDWIDE</div>
+<div class="bill-line"></div>
+<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;align-items:center;">
+<span style="font-size:10px;color:#7abf9a;"><span class="dot"></span> LIVE OPERATOR: cryptomeme2030@gmail.com | GATE-360 | 55% PAYOUT | 720 DAYS | AUDIO ROI</span>
+<span class="origin-badge" id="originBadge">ORIGIN: https://cryptolordug.github.io/Cedars-of-Wealth/register.html?ref=CRD-M75TJ2</span>
+<button class="btn" onclick="openOrigin()">🚀 HIT — OPEN REGISTER</button>
+<button class="btn2" onclick="copyOrigin()">📤 COPY ORIGIN</button>
 </div>
-<div style="display:flex;gap:6px;flex-wrap:wrap;">
-<button class="btn" onclick="openOrigin()">🚀 OPEN REGISTER — ONE ORIGIN</button>
-<button class="btn2" onclick="copyOrigin()">📤 COPY LINK</button>
-<button class="btn2" onclick="document.getElementById('cmd').scrollIntoView()">🌲 Command Center</button>
-<button class="btn2" onclick="document.getElementById('branches').scrollIntoView()">🌍 4 Branches</button>
-<button class="btn2" onclick="document.getElementById('innov').scrollIntoView()">💡 Innovations</button>
+
+<!-- DROPDOWN - HIDDEN NAV -->
+<div class="nav-wrap">
+<button class="drop-btn" onclick="toggleDrop()">☰ MENU ▾</button>
+<div class="dropdown" id="mainDrop">
+<a href="https://cryptolordug.github.io/Cedars-of-Wealth/" target="_blank">🏠 Home</a>
+<a href="https://cryptolordug.github.io/Cedars-of-Wealth/about.html" target="_blank">ℹ️ About us</a>
+<a href="#" onclick="alert('Calendar — Locked in Command Center');return false;">📅 Calendar</a>
+<a href="https://cryptolordug.github.io/Cedars-of-Wealth/register.html?ref=CRD-M75TJ2" target="_blank">📝 Register — One Origin</a>
+<a href="#" onclick="alert('Plans — View in Command Center');document.getElementById('cmd').scrollIntoView();return false;">📊 Plans</a>
+<a href="#" onclick="alert('Deposit — View in Command Center');document.getElementById('cmd').scrollIntoView();return false;">💰 Deposit</a>
+<a href="#" onclick="alert('Withdraw — View in Command Center');document.getElementById('cmd').scrollIntoView();return false;">💸 Withdraw</a>
+<a href="#" onclick="alert('Referral — Origin: CRD-M75TJ2');return false;">🔗 Referral</a>
+<a href="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-global-branches.html" target="_blank">🌍 4 Branches — Global</a>
+<a href="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-builders-innovation-hub.html" target="_blank">💡 Innovation Hub</a>
 </div>
 </div>
 
-<!-- SECTION 1: COMMAND CENTER - WRAPPED, NOT EDITED -->
-<div class="sec" id="cmd">
-<h2>🔒 SECTION 1 — COMMAND CENTER 360 — LOCKED — NO CHANGE — WRAPPED ONLY</h2>
-<div class="dim">Source: cedars-control-center.html?v=CLEAN-100-AUDIO-LOCKED — Displayed via iframe — File NOT edited — Gate GATE-360 — Operator cryptomeme2030@gmail.com — Payout 55% — 720 Days — Audio ROI</div>
-<iframe class="frame" style="height:78vh;" src="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-control-center.html?v=CLEAN-100-AUDIO-LOCKED"></iframe>
 </div>
 
-<!-- SECTION 2: 4 CONTINENTS MERGED -->
-<div class="sec" id="branches">
-<h2>🌍 SECTION 2 — 7 CONTINENTS MERGED INTO 4 BRANCHES — UNIVERSAL — ONE ORIGIN</h2>
-<iframe class="frame" style="height:85vh;" src="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-global-branches.html"></iframe>
+<!-- MILITARY SIMULATION COMMAND CENTER - WRAPPED, NOT EDITED -->
+<div class="mil-frame" id="cmd">
+<iframe class="frame" src="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-control-center.html?v=CLEAN-100-AUDIO-LOCKED"></iframe>
+<div class="status-bar">
+<span><span class="dot"></span> COMMAND CENTER 360 — MIL SIM ACTIVE — CLEAN — NEAT — SMART</span>
+<span>THREAT: LOW</span>
+<span>RADAR: 360° SCANNING</span>
+<span>STREAK: READY</span>
+<span>SYSTEM: NO CHANGE — WRAPPER ONLY</span>
+<span id="copyStatus" style="color:#00ff88;">Ready to hit investors worldwide</span>
 </div>
-
-<!-- SECTION 3: INNOVATIONS -->
-<div class="sec" id="innov">
-<h2>💡 SECTION 3 — BUILDERS INNOVATION HUB — 10 JUPITER TECHNOLOGIES — CREATIVITY</h2>
-<div class="grid">
-<div class="card"><span class="badge">JUPITER SHIELD</span><div class="dim">On-chain proof of 55% payout — Builders verify live</div></div>
-<div class="card"><span class="badge">STARLINK BOARD</span><div class="dim">Live world map — See builders from Afro-Europe, Americas, Asia-Pacific</div></div>
-<div class="card"><span class="badge">WHISPER 2.0</span><div class="dim">Audio ROI — Daily whisper triggers all languages</div></div>
-<div class="card"><span class="badge">LIQUIDITY MIRROR</span><div class="dim">Shows 45% reserve growth — Trust for 720 days</div></div>
-<div class="card"><span class="badge">TIME CAPSULE</span><div class="dim">720 days countdown — Tree rings animation</div></div>
-<div class="card"><span class="badge">GATE RADAR</span><div class="dim">GATE-360 scanning — Builders entry verification</div></div>
-<div class="card"><span class="badge">TRUST RING</span><div class="dim">4 branches connected — One origin ring</div></div>
-<div class="card"><span class="badge">LEGO BLOCKS</span><div class="dim">Builders stack units like Lego — Visual growth</div></div>
-<div class="card"><span class="badge">GOLDEN RECORD</span><div class="dim">Builder oath on-chain — Like Voyager record</div></div>
-<div class="card"><span class="badge">TREE RINGS</span><div class="dim">Each deposit adds a ring to Cedars tree — Legacy</div></div>
-</div>
-<div style="margin-top:10px;">
-<iframe class="frame" style="height:85vh;" src="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-builders-innovation-hub.html"></iframe>
-</div>
-</div>
-
-<div class="sec" style="text-align:center;">
-<div style="font-size:13px;">🌲 UNIVERSAL RULE — ALL BUILD GLOBALLY FROM ONE ORIGIN — NO SYSTEM CHANGE</div>
-<div class="origin">https://cryptolordug.github.io/Cedars-of-Wealth/register.html?ref=CRD-M75TJ2 — All 4 branches — All innovations — Same wallet — cryptomeme2030@gmail.com</div>
-<div style="margin-top:10px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
-<button class="btn" onclick="openOrigin()">🌍 BUILD GLOBALLY — OPEN ORIGIN</button>
-<button class="btn2" onclick="window.open('https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-control-center.html?v=CLEAN-100-AUDIO-LOCKED','_blank')">🔒 Command Center Only</button>
-</div>
-<div class="dim" style="margin-top:8px;" id="copyStatus">Ready — Main not edited — Wrapper only</div>
 </div>
 
 <script>
 const ORIGIN='https://cryptolordug.github.io/Cedars-of-Wealth/register.html?ref=CRD-M75TJ2';
 function openOrigin(){window.open(ORIGIN,'_blank');}
-function copyOrigin(){navigator.clipboard.writeText(ORIGIN).then(()=>{document.getElementById('copyStatus').textContent='✅ Copied — One origin for all 4 branches — '+ORIGIN; document.getElementById('originBox').textContent='COPIED: '+ORIGIN;});}
+function copyOrigin(){navigator.clipboard.writeText(ORIGIN).then(()=>{document.getElementById('copyStatus').textContent='✅ Origin Copied — Universal — '+ORIGIN; document.getElementById('originBadge').textContent='COPIED: '+ORIGIN;});}
+function toggleDrop(){document.getElementById('mainDrop').classList.toggle('show');}
+window.onclick=function(e){if(!e.target.matches('.drop-btn')){var d=document.getElementById('mainDrop'); if(d.classList.contains('show')) d.classList.remove('show');}}
 </script>
 </body></html>
