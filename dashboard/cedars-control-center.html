@@ -1,12 +1,11 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS COMMAND CENTER 360 — 720 DAYS CLOCK + 3 PASSES</title>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS COMMAND CENTER 360 — DAILY AUDIO ROI 1.5% 12PM ET</title>
 <style>
 :root{--bg:#050a14;--card:#0a1428;--g:#00ff88;--y:#ffcc00;--r:#ff3344;--b:#2a7fff}
 *{box-sizing:border-box;font-family:'Courier New',monospace;margin:0;padding:0}
 body{background:var(--bg);color:#c8e6d0;overflow-x:hidden}
 .grid-bg{position:fixed;inset:0;background:linear-gradient(rgba(0,255,136,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,136,0.07) 1px,transparent 1px);background-size:50px 50px;opacity:0.2;pointer-events:none;z-index:0}
 .huge-header{position:relative;z-index:10;background:rgba(5,10,20,0.98);border-bottom:3px solid var(--g);padding:20px 14px;text-align:center;box-shadow:0 0 30px rgba(0,255,136,0.4)}
-.huge-title{font-size:48px;font-weight:900;letter-spacing:8px;color:var(--g);text-shadow:0 0 20px var(--g),0 0 40px var(--g);line-height:1.1}
-@media(max-width:600px){.huge-title{font-size:32px;letter-spacing:4px}}
+.huge-title{font-size:48px;font-weight:900;letter-spacing:8px;color:var(--g);text-shadow:0 0 20px var(--g),0 0 40px var(--g)}
 .topbar{position:relative;z-index:10;background:rgba(10,20,40,0.95);border-bottom:2px solid var(--g);padding:10px 14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
 .badge{padding:3px 8px;border:1px solid var(--g);color:var(--g);font-size:9px;font-weight:900;letter-spacing:1px}
 .bal{font-size:22px;font-weight:900;color:var(--g);text-shadow:0 0 10px var(--g)}
@@ -28,255 +27,277 @@ body{background:var(--bg);color:#c8e6d0;overflow-x:hidden}
 video{width:100%;border:1px solid var(--g);border-radius:4px;background:#000;max-height:180px}
 .security-overlay{position:fixed;inset:0;background:rgba(5,10,20,0.98);z-index:999999;display:flex;align-items:center;justify-content:center;padding:20px}
 .security-box{background:#0a1428;border:2px solid var(--g);padding:20px;border-radius:4px;max-width:420px;width:100%;box-shadow:0 0 40px rgba(0,255,136,0.3)}
-.countdown-big{font-size:28px;font-weight:900;color:var(--g);text-align:center;text-shadow:0 0 15px var(--g);letter-spacing:2px}
+.countdown-big{font-size:26px;font-weight:900;color:var(--g);text-align:center;text-shadow:0 0 15px var(--g);letter-spacing:1px}
+/* NEW AUDIO POPUP — REBRANDED — NOT DULL — MUST CLICK DAILY */
+.audio-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:999998;display:none;align-items:center;justify-content:center;padding:20px}
+.audio-box{background:radial-gradient(circle at top,#0e2a1a 0%,#0a1428 70%);border:2px solid var(--g);padding:24px;border-radius:8px;max-width:500px;width:100%;box-shadow:0 0 50px rgba(0,255,136,0.5);text-align:center;position:relative;overflow:hidden}
+.audio-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--g),var(--y),var(--g));animation:scan 2s linear infinite}
+@keyframes scan{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.wave{display:flex;gap:3px;justify-content:center;align-items:center;height:40px;margin:12px 0}
+.wave span{width:4px;background:var(--g);border-radius:2px;animation:wave 0.8s ease-in-out infinite}
+.wave span:nth-child(2){animation-delay:0.1s;height:20px}.wave span:nth-child(3){animation-delay:0.2s;height:30px}.wave span:nth-child(4){animation-delay:0.3s;height:15px}.wave span:nth-child(5){animation-delay:0.4s}
+@keyframes wave{0%,100%{height:8px}50%{height:35px}}
+.pulse-btn{width:80px;height:80px;border-radius:50%;border:2px solid var(--g);background:rgba(0,255,136,0.15);color:var(--g);font-size:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;margin:0 auto;animation:pulse 1.5s infinite;transition:0.3s}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,255,136,0.7)}70%{box-shadow:0 0 0 20px rgba(0,255,136,0)}100%{box-shadow:0 0 0 0 rgba(0,255,136,0)}}
+.pulse-btn:hover{background:var(--g);color:#000}
 </style></head><body>
 <div class="grid-bg"></div><div id="toast"></div>
 
-<!-- THREE SECURITY PASSES — NORMAL SIGN IN + GATE PASS + OPERATOR NICKNAME AIBOSS — WITHOUT CHANGING SETUP -->
 <div id="securityOverlay" class="security-overlay">
 <div class="security-box">
-<div class="badge" style="display:block;text-align:center;margin-bottom:10px">● CEDARS COMMAND CENTER 360 — 3 SECURITY PASSES — CLASSIFIED</div>
+<div class="badge" style="display:block;text-align:center;margin-bottom:10px">● CEDARS COMMAND CENTER 360 — 3 PASSES — AIBOSS</div>
 <div class="huge-title" style="font-size:20px;text-align:center;margin-bottom:12px">CEDARS OF WEALTH</div>
-<div class="small" style="text-align:center;margin-bottom:12px">ENTER 3 PASSES TO ACCESS COMMAND CENTER 360</div>
-
-<div class="card" style="margin:0 0 8px 0"><div class="small">PASS 1 — NORMAL SIGN IN — EMAIL + PASSWORD</div><input id="pass1Email" placeholder="Email — admin@cedars.com"><input id="pass1Pwd" type="password" placeholder="Password" style="margin-top:6px"></div>
-<div class="card card-y" style="margin:0 0 8px 0"><div class="small">PASS 2 — GATE PASS — SECURITY GATE CODE</div><input id="pass2Gate" type="password" placeholder="Gate Pass — Enter GATE-XXXX"><div class="small" style="margin-top:4px">Default: GATE-360 or your set code in localStorage cedars_gate_pass</div></div>
-<div class="card card-b" style="margin:0 0 10px 0"><div class="small">PASS 3 — OPERATOR NICKNAME — MUST BE AIBOSS</div><input id="pass3Nick" placeholder="Operator Nickname — AIBOSS"><div class="small" style="margin-top:4px">Operator: AIBOSS only — Case sensitive</div></div>
-
+<div class="card" style="margin:0 0 8px 0"><div class="small">PASS 1 — EMAIL + PASSWORD</div><input id="pass1Email" placeholder="Email"><input id="pass1Pwd" type="password" placeholder="Password" style="margin-top:6px"></div>
+<div class="card card-y" style="margin:0 0 8px 0"><div class="small">PASS 2 — GATE PASS</div><input id="pass2Gate" type="password" placeholder="GATE-360"></div>
+<div class="card card-b" style="margin:0 0 10px 0"><div class="small">PASS 3 — OPERATOR NICKNAME</div><input id="pass3Nick" placeholder="AIBOSS"></div>
 <button class="btn" style="padding:12px;font-size:12px" onclick="checkThreePasses()">UNLOCK COMMAND CENTER 360 🔓</button>
 <div id="passMsg" class="small" style="margin-top:8px;color:var(--y);text-align:center"></div>
-<div class="small" style="margin-top:8px;text-align:center">Withdraw + Sign In/Sign Out left inside Command Center after unlock</div>
 </div>
 </div>
 
-<!-- HUGE CENTERED HEADER — 50X BIGGER — CEDARS OF WEALTH -->
+<!-- NEW AUDIO DAILY ROI POPUP — REBRANDED — MUST CLICK DAILY 12PM ET -->
+<div id="audioOverlay" class="audio-overlay">
+<div class="audio-box">
+<div class="badge" style="margin:0 auto">● DAILY HARVEST CALL — COMMAND PAYOUT 55% — 1.5% ROI — 12:00 PM ET</div>
+<div style="font-size:22px;font-weight:900;color:var(--g);margin-top:12px;letter-spacing:2px">CEDARS COMMANDER BRIEFING</div>
+<div class="small" style="margin-top:4px;color:#fff">Day <span id="audioDayNum" style="color:var(--y)">247</span> / 720 — Must listen to redeem daily ROI</div>
+
+<div class="wave" id="audioWave" style="display:none"><span></span><span></span><span></span><span></span></div>
+
+<div style="margin:16px 0">
+<button class="pulse-btn" id="playAudioBtn" onclick="playDailyBriefing()">▶️</button>
+<div class="small" id="audioStatus" style="margin-top:8px;color:var(--y)">CLICK TO LISTEN — MUST LISTEN FULL AUDIO TO RELEASE PAYMENT</div>
+<div class="small" id="audioProgress" style="margin-top:4px">00:00 / 00:18 — AIBOSS voice</div>
+</div>
+
+<div class="card" style="margin:8px 0;text-align:left"><div class="small">COMMANDER MESSAGE — TODAY</div><div id="commanderMsg" style="font-size:11px;color:var(--g);margin-top:6px;line-height:1.4">Good afternoon Commander. This is Day 247 of your 720 contract. Your forest is growing. Today 1.5% ROI is ready from Command Payout 55% Account. Listen fully and harvest. — Operator AIBOSS — Cedars of Wealth</div></div>
+
+<div class="grid2">
+<div class="card" style="margin:0;padding:8px"><div class="small">TODAY ROI 1.5%</div><div class="value value-g" id="todayROI">$7.50</div><div class="small">From Payout 55%</div></div>
+<div class="card card-y" style="margin:0;padding:8px"><div class="small">CONTRACT</div><div class="value value-y" id="audioContract">Day 247/720</div><div class="small">Stops at 720</div></div>
+</div>
+
+<button class="btn" id="releaseBtn" style="margin-top:12px;padding:14px;font-size:12px;opacity:0.3;pointer-events:none;border-color:var(--r);color:var(--r)" onclick="releaseDailyROI()">🔒 LISTEN FULL AUDIO FIRST — PAYMENT LOCKED</button>
+<div class="small" id="releaseInfo" style="margin-top:6px">After audio plays fully, button unlocks — Payment released from Payout Account to dashboard automatically — 12PM ET daily — Must click daily</div>
+<div class="small" style="margin-top:6px;color:var(--b)">Next Harvest: <span id="nextHarvest">12:00 PM ET — Countdown: 04:23:12</span></div>
+</div>
+</div>
+
 <div class="huge-header">
 <div class="huge-title">CEDARS OF WEALTH</div>
-<div class="small" style="margin-top:6px;letter-spacing:3px;color:var(--g)">COMMAND CENTER 360 — FIELD TOUR READY — 720 DAYS CONTRACT CLOCK LIVE — 3 SECURITY PASSES ACTIVE</div>
+<div class="small" style="margin-top:6px;letter-spacing:3px;color:var(--g)">COMMAND CENTER 360 — DAILY AUDIO ROI 1.5% 12PM ET — FROM PAYOUT 55% — MUST CLICK LISTEN DAILY</div>
 <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
 <a class="btn" style="width:auto;padding:6px 14px" href="https://cryptolordug.github.io/Cedars-of-Wealth/withdraw.html">WITHDRAW</a>
-<button class="btn" style="width:auto;padding:6px 14px;border-color:var(--y);color:var(--y)" onclick="toggleSign()">SIGN IN / SIGN OUT</button>
-<a class="btn" style="width:auto;padding:6px 14px;border-color:var(--b);color:var(--b)" href="https://cryptolordug.github.io/Cedars-of-Wealth/index.html">INVESTOR DASHBOARD</a>
+<button class="btn" style="width:auto;padding:6px 14px;border-color:var(--y);color:var(--y)" onclick="toggleSign()">SIGN IN / OUT</button>
+<button class="btn" style="width:auto;padding:6px 14px;border-color:var(--g);color:var(--g)" onclick="triggerAudioPopup()">TEST AUDIO ROI 🔊</button>
 <a class="btn" style="width:auto;padding:6px 14px;border-color:var(--r);color:var(--r)" href="https://t.me/+qXjnwt0SX0BkODQ8" target="_blank">TELEGRAM REAL</a>
 </div>
 </div>
 
 <div class="topbar">
-<div><div class="badge">● CEDARS COMMAND CENTER 360</div><div style="font-size:14px;font-weight:900;letter-spacing:2px;margin-top:4px">COMMAND CENTER 360 — 720 DAYS CLOCK</div><div class="small" id="commandTime">FIELD TOUR READY — SYSTEM SYNC...</div></div>
+<div><div class="badge">● CEDARS COMMAND CENTER 360 — DAILY AUDIO</div><div style="font-size:14px;font-weight:900">COMMAND CENTER 360 — 720 DAYS + AUDIO ROI</div><div class="small" id="commandTime">FIELD TOUR READY</div></div>
 <div class="icon-nav">
 <a class="icon-btn" href="https://cryptolordug.github.io/Cedars-of-Wealth/index.html" title="Investor Dashboard">🏦</a>
-<a class="icon-btn b" href="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/V16-REAL-WORKER.html?v=1" title="Cedars Universal V16">🌐</a>
-<a class="icon-btn y" href="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/investor.html" title="Investor Unit">👤</a>
-<a class="icon-btn" href="https://cryptolordug.github.io/Cedars-of-Wealth/deposit.html" title="Deposit Cmd">💰</a>
-<a class="icon-btn y" href="https://cryptolordug.github.io/Cedars-of-Wealth/withdraw.html" title="Withdraw Cmd">💸</a>
-<a class="icon-btn b" href="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/admin-compliance.html" title="Compliance Cmd">🛡️</a>
-<a class="icon-btn r" href="https://t.me/+qXjnwt0SX0BkODQ8" target="_blank" title="Telegram Real">✈️</a>
-<a class="icon-btn" href="#" title="Command Center">🎯</a>
+<a class="icon-btn b" href="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/V16-REAL-WORKER.html?v=1" title="Cedars Universal">🌐</a>
+<a class="icon-btn y" href="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/investor.html" title="Investor">👤</a>
+<a class="icon-btn" href="https://cryptolordug.github.io/Cedars-of-Wealth/deposit.html" title="Deposit">💰</a>
+<a class="icon-btn y" href="https://cryptolordug.github.io/Cedars-of-Wealth/withdraw.html" title="Withdraw">💸</a>
+<a class="icon-btn b" href="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/admin-compliance.html" title="Compliance">🛡️</a>
+<a class="icon-btn r" href="https://t.me/+qXjnwt0SX0BkODQ8" target="_blank" title="Telegram">✈️</a>
+<a class="icon-btn" href="#" title="Center">🎯</a>
 </div>
 <div style="text-align:right"><div class="small">V16 LIVE</div><div class="bal" id="v16Bal">$0.00</div><div class="badge" id="v16Status">LINKING V16</div></div>
 </div>
 
-<div class="ticker"><span>● CEDARS OF WEALTH — 50X BIGGER CENTERED — 720 DAYS CONTRACT CLOCK LIVE PER ACCOUNT DAY 1 TO 720 — SPEAKING ALERT TO OPERATOR — POPUP + EMAIL TO INVESTOR — 3 PASSES: EMAIL/PASSWORD + GATE PASS + AIBOSS — WITHDRAW + SIGN IN/OUT INSIDE COMMAND CENTER — BUILD 2 IP+UPLOAD+RESET+VIDEO STILL ACTIVE ●</span></div>
+<div class="ticker"><span>● CEDARS OF WEALTH — DAILY AUDIO HARVEST CALL — MUST LISTEN TO REDEEM 1.5% ROI EVERY 12:00 PM ET — FROM COMMAND PAYOUT 55% ACCOUNT AUTOMATED — DAY 1 TO 720 — POPUP AUDIO — PAYMENT RELEASE AFTER LISTEN — COMMAND CENTER AUTOMATED PAYOUT — MAGIC: STREAK BONUS + VOICE AIBOSS + WAVEFORM + COUNTDOWN ET ●</span></div>
 
-<!-- 720 DAYS COUNTDOWN CLOCK — PER ACCOUNT — FROM DEPOSIT — DAY 1 TO 720 — STOPS — SPEAKING ALERT + POPUP + EMAIL -->
-<div class="card" style="margin:8px;border:2px solid var(--g);box-shadow:0 0 20px rgba(0,255,136,0.2)"><div class="badge">⏰ 720 DAYS CONTRACT CLOCK — PER ACCOUNT — FROM DEPOSIT DAY 1 TO DAY 720 — SPEAKING ALERT + POPUP + EMAIL — STOPS AT 720</div>
+<!-- 720 CLOCK + DAILY AUDIO ROI INNOVATION -->
+<div class="card" style="margin:8px;border:2px solid var(--g)"><div class="badge">⏰ 720 DAYS CONTRACT CLOCK — PER ACCOUNT — DAY 1 TO 720 — STOPS + DAILY AUDIO ROI 1.5% 12PM ET</div>
 <div class="grid3" style="margin-top:10px">
-<div class="card" style="margin:0;text-align:center"><div class="small">CONTRACT DURATION</div><div class="value">720 DAYS</div><div class="small">Per deposit — Fixed</div></div>
-<div class="card card-y" style="margin:0;text-align:center"><div class="small">CURRENT ACCOUNT — DAY COUNT</div><div class="countdown-big" id="dayCount">DAY 0 / 720</div><div class="small" id="depositDateInfo">No deposit yet</div></div>
-<div class="card card-b" style="margin:0;text-align:center"><div class="small">TIME REMAINING — COUNTDOWN</div><div class="countdown-big" id="countdownClock" style="color:var(--y)">720 DAYS : 00:00:00</div><div class="small" id="remainingInfo">Stops at Day 720</div></div>
+<div class="card" style="margin:0;text-align:center"><div class="small">CONTRACT</div><div class="value">720 DAYS</div><div class="small">Per deposit</div></div>
+<div class="card card-y" style="margin:0;text-align:center"><div class="small">CURRENT DAY</div><div class="countdown-big" id="dayCount">DAY 0 / 720</div><div class="small" id="depositDateInfo">No deposit</div></div>
+<div class="card card-b" style="margin:0;text-align:center"><div class="small">COUNTDOWN TO END</div><div class="countdown-big" id="countdownClock" style="color:var(--y)">720 DAYS : 00:00:00</div><div class="small" id="remainingInfo">Stops at 720</div></div>
 </div>
 <div class="grid3" style="margin-top:8px">
-<div class="card" style="margin:0;padding:8px"><div class="small">OPERATOR SPEAKING ALERT</div><div class="small" style="color:var(--g);margin-top:4px">🔊 Voice: "Investor Day X of 720 — Action required" — Every 30 days + Day 700, 710, 719, 720 — Speaks to operator</div><button class="btn" style="margin-top:6px" onclick="testVoiceAlert()">TEST SPEAKING ALERT 🔊</button></div>
-<div class="card" style="margin:0;padding:8px"><div class="small">POPUP NOTIFICATION — INVESTOR DASHBOARD</div><div class="small" style="color:var(--y);margin-top:4px">📢 Auto popup in investor dashboard every 30 days + expiry warnings — "Your contract Day X/720"</div><button class="btn" style="margin-top:6px;border-color:var(--y);color:var(--y)" onclick="testPopup()">TEST POPUP 📢</button></div>
-<div class="card" style="margin:0;padding:8px"><div class="small">EMAIL NOTIFICATION — AUTOMATED</div><div class="small" style="color:var(--b);margin-top:4px">📧 Auto email at Day 1, 360, 700, 710, 719, 720 — Via EmailJS / Telegram real — Template ready</div><button class="btn" style="margin-top:6px;border-color:var(--b);color:var(--b)" onclick="testEmailAlert()">TEST EMAIL 📧</button></div>
+<div class="card" style="margin:0;padding:8px"><div class="small">12PM ET TIMER — DAILY</div><div class="value value-g" id="etTimer">12:00 PM ET</div><div class="small" id="etCountdown">Next harvest in 04:12:33</div><div class="small">Kampala 7PM — UTC 4PM</div></div>
+<div class="card" style="margin:0;padding:8px"><div class="small">TODAY ROI 1.5% — FROM PAYOUT 55%</div><div class="value value-y" id="dailyROIVal">$0.00</div><div class="small">Must listen audio to redeem</div></div>
+<div class="card" style="margin:0;padding:8px"><div class="small">PAYOUT ACCOUNT 55% — SOURCE</div><div class="value" id="payoutSource">$0.00</div><div class="small">Automated deduction</div></div>
 </div>
-<div class="small" style="margin-top:8px">Logic: Deposit date saved as cedars_deposit_date_<email> — Clock reads per account — Day 1 = deposit day — Counts up to Day 720 — Then stops counting — Speaking alert uses speechSynthesis — Popup uses toast + localStorage flag cedars_720_popup_<email> — Email uses console + future EmailJS integration</div>
-<div id="allContracts" style="margin-top:8px;max-height:150px;overflow:auto" class="small"></div>
+<div class="grid4" style="margin-top:8px">
+<div class="card" style="margin:0;padding:8px"><div class="small">STREAK BONUS — MAGIC</div><div class="value value-g" id="streakVal">7 Days 🔥</div><div class="small">+0.1% after 7 days</div></div>
+<div class="card" style="margin:0;padding:8px"><div class="small">LISTEN STATUS</div><div class="value value-y" id="listenStatus">Pending</div><div class="small">Must click daily</div></div>
+<div class="card" style="margin:0;padding:8px"><div class="small">AUDIO HARVESTS</div><div class="value" id="totalHarvests">0 / 720</div><div class="small">Total listened</div></div>
+<div class="card" style="margin:0;padding:8px"><div class="small">COMMAND PAYOUT</div><div class="value value-g" id="payoutBal">$0.00</div><div class="small">55% account</div></div>
+</div>
+<div id="allContracts" style="margin-top:8px;max-height:100px;overflow:auto" class="small"></div>
 </div>
 
 <div style="position:relative;z-index:5;display:grid;grid-template-columns:140px 1fr 140px;gap:8px;padding:8px">
-<div class="card" style="text-align:center"><div class="small">RADAR 360°</div><div class="radar"><div class="dot" style="top:30%;left:40%"></div><div class="dot" style="top:60%;left:70%;background:var(--y)"></div><div class="dot" style="top:50%;left:20%;background:var(--r)"></div></div><div class="small">FOREX + INVESTORS</div><div style="margin-top:10px;text-align:left"><div class="small">SYSTEM VITALS</div><div class="row"><span>CPU</span><span style="color:var(--g)" id="cpu">42%</span></div><div class="row"><span>IP</span><span style="color:var(--g)" id="ipVal">Detecting...</span></div><div class="row"><span>Location</span><span style="color:var(--g)" id="locVal">Kampala</span></div><div class="row"><span>TG</span><span style="color:var(--g)">● LINKED</span></div><div class="row"><span>720 CLOCK</span><span style="color:var(--y)" id="clockStatus">● LIVE</span></div></div></div>
+<div class="card" style="text-align:center"><div class="small">RADAR 360°</div><div class="radar"><div class="dot" style="top:30%;left:40%"></div><div class="dot" style="top:60%;left:70%;background:var(--y)"></div><div class="dot" style="top:50%;left:20%;background:var(--r)"></div></div><div class="small">FOREX + INVESTORS</div><div style="margin-top:10px;text-align:left"><div class="small">VITALS</div><div class="row"><span>IP</span><span style="color:var(--g)" id="ipVal">Detect</span></div><div class="row"><span>720</span><span style="color:var(--y)" id="clockStatus">LIVE</span></div><div class="row"><span>12PM ET</span><span style="color:var(--g)" id="etStatus">● SYNC</span></div><div class="row"><span>Audio ROI</span><span style="color:var(--g)">● ACTIVE</span></div></div></div>
 <div class="card"><div class="badge">COMMAND CONSOLE — PAYOUT 55% / RESERVE 45% / OPS 15% / CRISIS 10%</div>
 <div class="grid2" style="margin-top:10px">
-<div class="card" style="margin:0"><div class="small">PAYOUT 55%</div><div class="bal" id="payoutBal">$0.00</div><button class="btn" style="margin-top:6px" onclick="cmd('PAYOUT 55% ACTIVE')">EXECUTE PAYOUT</button></div>
-<div class="card card-y" style="margin:0"><div class="small">RESERVATION 45%</div><div class="bal" id="reserveBal" style="color:var(--y)">$0.00</div><button class="btn" style="border-color:var(--y);color:var(--y);margin-top:6px" onclick="cmd('RESERVE 45% SECURED')">SECURE RESERVE</button></div>
-<div class="card card-b" style="margin:0"><div class="small">OPS 15%</div><div class="bal" id="opsBal" style="color:var(--b)">$0.00</div><button class="btn" style="border-color:var(--b);color:var(--b);margin-top:6px" onclick="cmd('OPS 15% ACTIVE')">OPS CONTROL</button></div>
-<div class="card card-r" style="margin:0"><div class="small">CRISIS 10%</div><div class="bal" id="crisisBal" style="color:var(--r)">$0.00</div><button class="btn" style="border-color:var(--r);color:var(--r);margin-top:6px" onclick="cmd('CRISIS STANDBY')">CRISIS PROTOCOL</button></div>
-</div>
-<div class="grid4" style="margin-top:10px">
-<div class="card" style="margin:0;padding:8px"><div class="small">ROI TRACKER</div><div class="value value-g">$500 → $973.5</div></div>
-<div class="card" style="margin:0;padding:8px"><div class="small">REF EARNINGS</div><div class="value value-y">$5 / ref</div></div>
-<div class="card" style="margin:0;padding:8px"><div class="small">PAYOUT TIMER</div><div class="value" id="payoutTimer">23:41:12</div></div>
-<div class="card" style="margin:0;padding:8px"><div class="small">TOTAL PROFIT</div><div class="value value-g" id="totalProfit">$0.00</div></div>
+<div class="card" style="margin:0"><div class="small">PAYOUT 55% — SOURCE FOR DAILY ROI</div><div class="bal" id="payoutBal2">$0.00</div><div class="small">Auto releases 1.5% daily after audio listen</div><button class="btn" style="margin-top:6px" onclick="triggerAudioPopup()">TRIGGER AUDIO POPUP FOR ALL 🔊</button></div>
+<div class="card card-y" style="margin:0"><div class="small">RESERVATION 45%</div><div class="bal" id="reserveBal" style="color:var(--y)">$0.00</div><button class="btn" style="border-color:var(--y);color:var(--y);margin-top:6px" onclick="cmd('RESERVE SECURED')">SECURE RESERVE</button></div>
+<div class="card card-b" style="margin:0"><div class="small">OPS 15%</div><div class="bal" id="opsBal" style="color:var(--b)">$0.00</div></div>
+<div class="card card-r" style="margin:0"><div class="small">CRISIS 10%</div><div class="bal" id="crisisBal" style="color:var(--r)">$0.00</div></div>
 </div>
 </div>
-<div class="card" style="text-align:center"><div class="small">THREAT</div><div style="font-size:28px;font-weight:900;color:var(--g);margin:6px 0" id="threat">LOW</div><div class="badge">SECURE</div><div style="margin-top:8px"><div class="small">INV: <span id="invCount">0</span></div><div class="small">TG: REAL ●</div><div class="small">IP: <span id="ipLogs">0</span></div></div><div style="margin-top:10px;text-align:left;border-top:1px dotted #1a3a5a;padding-top:8px"><div class="small">AI COMMANDER</div><div class="small" id="aiInsight" style="color:var(--g);margin-top:4px">● Scanning 360°</div></div></div>
+<div class="card" style="text-align:center"><div class="small">THREAT</div><div style="font-size:28px;font-weight:900;color:var(--g);margin:6px 0" id="threat">LOW</div><div class="badge">SECURE</div><div style="margin-top:8px"><div class="small">INV: <span id="invCount">0</span></div><div class="small">Harvest: <span id="harvestToday">0</span></div></div><div style="margin-top:10px;text-align:left;border-top:1px dotted #1a3a5a;padding-top:8px"><div class="small">AI COMMANDER</div><div class="small" id="aiInsight" style="color:var(--g);margin-top:4px">● Daily audio ROI active — 12PM ET — Must listen to redeem</div></div></div>
 </div>
 
 <div style="position:relative;z-index:5;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 8px">
-<div class="card"><div class="badge">IP TRACKER + UPLOAD — BUILD 2</div><div class="small" style="margin-top:8px">LAST IP WHEN CHATTING</div><div id="ipList" style="max-height:80px;overflow:auto;margin-top:4px" class="small">Detecting...</div><div class="small" style="margin-top:10px">UPLOAD PHOTO/VIDEO/SCREENSHOT</div><input type="file" id="fileInput" accept="image/*,video/*" multiple><button class="btn" style="margin-top:6px" onclick="handleUpload()">UPLOAD 📎</button><div id="uploadList" style="margin-top:8px;max-height:80px;overflow:auto" class="small">No uploads</div></div>
-<div class="card card-y"><div class="badge">CREDENTIAL COMMAND — RESET</div><div class="small">Investor Email</div><input id="resetEmail" placeholder="investor@email.com"><div class="grid2" style="margin-top:4px"><button class="btn btn-y" onclick="resetPassword()">RESET PWD 🔐</button><button class="btn" style="border-color:var(--b);color:var(--b)" onclick="generateWalletHelp()">WALLET HELP</button></div><div class="small" style="margin-top:8px">New Wallet</div><input id="newWallet" placeholder="H... Solana"><button class="btn" style="margin-top:6px" onclick="changeWallet()">CHANGE WALLET 💼</button><div id="resetLog" class="small" style="margin-top:8px;color:var(--g)">Awaiting</div></div>
-<div class="card card-b"><div class="badge">VIDEO BRIEFING — CONSENSUAL</div><div class="small">Investor must ALLOW CAMERA — Command Center audio only</div><video id="investorVideo" autoplay muted playsinline style="margin-top:8px"></video><div class="grid2" style="margin-top:6px"><button class="btn" style="border-color:var(--b);color:var(--b)" onclick="startConsensualVideo()">START VIDEO 🎥</button><button class="btn btn-r" onclick="stopVideo()">STOP</button></div><div class="small">Status: <span id="videoStatus" style="color:var(--y)">● Standby</span></div><div id="videoLog" class="small" style="margin-top:4px">No briefing</div></div>
+<div class="card"><div class="badge">IP + UPLOAD</div><div id="ipList" style="max-height:60px;overflow:auto" class="small">Detecting...</div><input type="file" id="fileInput" accept="image/*,video/*" multiple><button class="btn" style="margin-top:6px" onclick="handleUpload()">UPLOAD 📎</button><div id="uploadList" style="margin-top:8px;max-height:60px;overflow:auto" class="small">No uploads</div></div>
+<div class="card card-y"><div class="badge">CREDENTIAL — RESET</div><input id="resetEmail" placeholder="investor@email.com"><div class="grid2" style="margin-top:4px"><button class="btn" onclick="resetPassword()">RESET PWD</button><button class="btn" style="border-color:var(--b);color:var(--b)" onclick="generateWalletHelp()">WALLET HELP</button></div><input id="newWallet" placeholder="H... Solana" style="margin-top:6px"><button class="btn" style="margin-top:6px" onclick="changeWallet()">CHANGE WALLET</button><div id="resetLog" class="small" style="margin-top:8px">Awaiting</div></div>
+<div class="card card-b"><div class="badge">VIDEO BRIEFING — CONSENSUAL</div><video id="investorVideo" autoplay muted playsinline style="margin-top:8px"></video><div class="grid2" style="margin-top:6px"><button class="btn" style="border-color:var(--b);color:var(--b)" onclick="startConsensualVideo()">START VIDEO 🎥</button><button class="btn" style="border-color:var(--r);color:var(--r)" onclick="stopVideo()">STOP</button></div><div class="small">Status: <span id="videoStatus" style="color:var(--y)">● Standby</span></div></div>
 </div>
 
-<div style="position:relative;z-index:5;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 8px;margin-top:8px">
-<div class="card"><div class="badge">FOREX COMMAND</div><div class="grid2" style="margin-top:8px"><div><div class="row"><span>EUR/USD</span><span style="color:var(--g)">1.0842 ▲</span></div><div class="row"><span>GBP/USD</span><span style="color:var(--g)">1.2741 ▲</span></div><div class="row"><span>XAU/USD</span><span style="color:var(--y)">2034.5</span></div><div class="row"><span>USDC/SOL</span><span style="color:var(--g)" id="solPrice">Live</span></div></div><div><div class="row"><span>Jupiter</span><span style="color:var(--g)" id="jupStat">● LIVE</span></div><button class="btn" style="margin-top:6px" onclick="testForex()">TEST FOREX</button></div></div></div>
-<div class="card"><div class="badge">INVESTOR COMMAND + WITHDRAW + SIGN IN/OUT LEFT INSIDE</div><div class="grid2" style="margin-top:8px"><div><div class="small">DEPOSITS</div><div class="bal" id="totalDep" style="font-size:16px">$0.00</div></div><div><div class="small">WITHDRAWALS</div><div class="bal" id="totalWd" style="font-size:16px;color:var(--y)">$0.00</div></div></div><div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap"><button class="btn" style="width:auto" onclick="showAccounts()">ALL ACCOUNTS</button><a class="btn" style="width:auto;text-align:center;text-decoration:none;border-color:var(--y);color:var(--y)" href="https://cryptolordug.github.io/Cedars-of-Wealth/withdraw.html">WITHDRAW ↗</a><button class="btn" style="width:auto;border-color:var(--r);color:var(--r)" onclick="toggleSign()">SIGN OUT</button></div><div id="accountList" style="margin-top:8px;max-height:100px;overflow:auto"></div></div>
-</div>
-
-<div class="card" style="margin:8px"><div class="badge">360° ACTIVITY MATRIX — SOLSCAN + IP + 720 CLOCK + TG REAL</div><div id="activityMatrix" style="margin-top:8px"></div></div>
+<div class="card" style="margin:8px"><div class="badge">360° ACTIVITY MATRIX — AUDIO HARVEST + SOLSCAN + IP + 720</div><div id="activityMatrix" style="margin-top:8px"></div></div>
 
 <script src="../fix.js"></script>
 <script>
-const REAL_TG_LINK='https://t.me/+qXjnwt0SX0BkODQ8';
 function cmd(m){let t=document.getElementById('toast');t.innerText='▶ '+m;t.style.display='block';setTimeout(()=>t.style.display='none',3000);}
 function getV16(){for(let k of ['cedars_v16_balance','cedars_real_worker_bal','cedars_worker_bal','cedars_usd_bal']){let v=localStorage.getItem(k);if(v&&!isNaN(parseFloat(v)))return parseFloat(v);}return 0;}
-
-// THREE SECURITY PASSES — NORMAL + GATE PASS + AIBOSS — WITHOUT CHANGING SETUP
 function checkThreePasses(){
  let email=document.getElementById('pass1Email').value.trim(); let pwd=document.getElementById('pass1Pwd').value.trim();
  let gate=document.getElementById('pass2Gate').value.trim(); let nick=document.getElementById('pass3Nick').value.trim();
- let msg=document.getElementById('passMsg');
- let storedGate=localStorage.getItem('cedars_gate_pass')||'GATE-360';
- // Pass 1 — check email/password simple — if cedars_investor_email exists or admin
- let pass1Ok = email && pwd.length>=4; // For demo — accept any valid email+pwd — real check via localStorage
- // Pass 2 — Gate Pass
- let pass2Ok = gate===storedGate || gate==='GATE-360' || gate==='CEDARS-GATE';
- // Pass 3 — Operator nickname must be AIBOSS
- let pass3Ok = nick==='AIBOSS';
-
- if(!pass1Ok){ msg.innerText='❌ PASS 1 FAILED — Enter Email + Password (Normal Sign In)'; return; }
- if(!pass2Ok){ msg.innerText='❌ PASS 2 FAILED — Gate Pass wrong — Default GATE-360 — Or set your own in localStorage cedars_gate_pass'; return; }
- if(!pass3Ok){ msg.innerText='❌ PASS 3 FAILED — Operator Nickname must be AIBOSS — Case sensitive'; return; }
-
- localStorage.setItem('cedars_command_auth','AIBOSS-'+Date.now());
- localStorage.setItem('cedars_operator_nick','AIBOSS');
- msg.innerText='✅ ALL 3 PASSES PASSED — UNLOCKING COMMAND CENTER 360...';
- cmd('SECURITY: 3 PASSES PASSED — AIBOSS OPERATOR — ACCESS GRANTED');
- setTimeout(()=>{ document.getElementById('securityOverlay').style.display='none'; renderMilitary(); speak('Command Center Three Security Passes Passed — Operator Aiboss — Access granted — 720 days clock active'); },1000);
+ let msg=document.getElementById('passMsg'); let storedGate=localStorage.getItem('cedars_gate_pass')||'GATE-360';
+ let pass1Ok=email&&pwd.length>=4; let pass2Ok=gate===storedGate||gate==='GATE-360'||gate==='CEDARS-GATE'; let pass3Ok=nick==='AIBOSS';
+ if(!pass1Ok){msg.innerText='❌ PASS 1 FAILED';return;} if(!pass2Ok){msg.innerText='❌ PASS 2 FAILED — GATE-360';return;} if(!pass3Ok){msg.innerText='❌ PASS 3 FAILED — Must be AIBOSS';return;}
+ localStorage.setItem('cedars_command_auth','AIBOSS-'+Date.now()); msg.innerText='✅ ALL PASSES PASSED'; cmd('3 PASSES PASSED — AIBOSS'); setTimeout(()=>{document.getElementById('securityOverlay').style.display='none'; renderMilitary(); speak('Three passes passed — Operator Aiboss — Command Center 360 unlocked — Daily audio ROI active');},800);
 }
-function toggleSign(){
- if(localStorage.getItem('cedars_command_auth')){ localStorage.removeItem('cedars_command_auth'); document.getElementById('securityOverlay').style.display='flex'; cmd('SIGNED OUT — 3 PASSES REQUIRED AGAIN'); }
- else{ document.getElementById('securityOverlay').style.display='flex'; }
-}
-// Auto lock if not auth
-if(!localStorage.getItem('cedars_command_auth')){ document.getElementById('securityOverlay').style.display='flex'; } else { document.getElementById('securityOverlay').style.display='none'; }
+function toggleSign(){ if(localStorage.getItem('cedars_command_auth')){localStorage.removeItem('cedars_command_auth'); document.getElementById('securityOverlay').style.display='flex'; cmd('SIGNED OUT');} else document.getElementById('securityOverlay').style.display='flex'; }
+if(!localStorage.getItem('cedars_command_auth')){document.getElementById('securityOverlay').style.display='flex';} else document.getElementById('securityOverlay').style.display='none';}
 
-// 720 DAYS COUNTDOWN CLOCK — PER ACCOUNT — DAY 1 TO 720 — STOPS — SPEAKING ALERT + POPUP + EMAIL
-function getDepositDate(email){
- let key='cedars_deposit_date_'+email; let dateStr=localStorage.getItem(key);
- if(!dateStr){
-   // If first deposit exists, create date now for demo — In real, set on deposit.html when deposit success
-   let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]'); if(tx.length>0){ dateStr=new Date().toISOString(); localStorage.setItem(key,dateStr); } else return null;
- }
- return new Date(dateStr);
-}
+// 720 CLOCK
+function getDepositDate(email){ let key='cedars_deposit_date_'+email; let dateStr=localStorage.getItem(key); if(!dateStr){ let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]'); if(tx.length>0){ dateStr=new Date().toISOString(); localStorage.setItem(key,dateStr);} else return null; } return new Date(dateStr); }
 function update720Clock(){
  let email=localStorage.getItem('cedars_investor_email')||'default'; let depDate=getDepositDate(email);
- if(!depDate){ document.getElementById('dayCount').innerText='DAY 0 / 720'; document.getElementById('countdownClock').innerText='720 DAYS : 00:00:00'; document.getElementById('depositDateInfo').innerText='No deposit yet — Clock starts on first deposit'; document.getElementById('remainingInfo').innerText='Stops at Day 720'; return; }
- let now=new Date(); let diffMs=now-depDate; let diffDays=Math.floor(diffMs/(1000*60*60*24)); // Day 1 = deposit day
- let dayNumber=diffDays+1; if(dayNumber>720) dayNumber=720; let remainingDays=720-dayNumber;
- // Countdown clock — time remaining until Day 720 ends
+ if(!depDate){ document.getElementById('dayCount').innerText='DAY 0 / 720'; document.getElementById('countdownClock').innerText='720 DAYS : 00:00:00'; document.getElementById('depositDateInfo').innerText='No deposit yet'; document.getElementById('remainingInfo').innerText='Stops at 720'; return; }
+ let now=new Date(); let diffDays=Math.floor((now-depDate)/(1000*60*60*24)); let dayNumber=Math.min(720,diffDays+1); let remainingDays=720-dayNumber;
  let endDate=new Date(depDate); endDate.setDate(endDate.getDate()+720); let remMs=endDate-now; if(remMs<0) remMs=0;
  let rDays=Math.floor(remMs/(1000*60*60*24)); let rHours=Math.floor((remMs%(1000*60*60*24))/(1000*60*60)); let rMins=Math.floor((remMs%(1000*60*60))/(1000*60)); let rSecs=Math.floor((remMs%(1000*60))/1000);
- document.getElementById('dayCount').innerText='DAY '+dayNumber+' / 720'; document.getElementById('depositDateInfo').innerText='Deposit: '+depDate.toLocaleDateString()+' — Day '+dayNumber+' — Per account';
+ document.getElementById('dayCount').innerText='DAY '+dayNumber+' / 720'; document.getElementById('depositDateInfo').innerText='Deposit: '+depDate.toLocaleDateString()+' — Day '+dayNumber;
  document.getElementById('countdownClock').innerText=rDays+' DAYS : '+(rHours+'').padStart(2,'0')+':'+(rMins+'').padStart(2,'0')+':'+(rSecs+'').padStart(2,'0');
- document.getElementById('remainingInfo').innerText=remainingDays>0?remainingDays+' days remaining — Stops at 720':'CONTRACT EXPIRED — DAY 720 REACHED — STOPPED';
+ document.getElementById('remainingInfo').innerText=remainingDays>0?remainingDays+' days remaining — Stops at 720':'EXPIRED — STOPPED';
  document.getElementById('clockStatus').innerText=remainingDays>0?'● LIVE DAY '+dayNumber:'● EXPIRED';
- // Speaking alert + Popup + Email — Automated — Without changing setup
- let lastAlertDay=parseInt(localStorage.getItem('cedars_last_alert_day_'+email)||'0');
- if(dayNumber!==lastAlertDay && (dayNumber%30===0 || [1,360,700,710,719,720].includes(dayNumber))){
-   localStorage.setItem('cedars_last_alert_day_'+email,dayNumber);
-   // Speaking alert to operator
-   speak('Investor '+email+' — Day '+dayNumber+' of 720 — '+(remainingDays>0?remainingDays+' days remaining':'Contract expired'));
-   // Popup notification to investor dashboard — saved flag
-   localStorage.setItem('cedars_720_popup_'+email,JSON.stringify({day:dayNumber,msg:'Your contract Day '+dayNumber+' of 720 — '+remainingDays+' days remaining — Cedars of Wealth',time:new Date().toLocaleString()}));
-   cmd('🔊 720 CLOCK: Day '+dayNumber+'/720 — Speaking alert + Popup + Email triggered for '+email);
-   // Email notification — simulated — ready for EmailJS
-   console.log('EMAIL NOTIFY: To '+email+' — Subject: Cedars Contract Day '+dayNumber+'/720 — Body: Your contract is Day '+dayNumber+' of 720 — Remaining '+remainingDays+' days — Dashboard popup sent');
-   // Also show toast popup
-   if(remainingDays<=20){ cmd('📢 INVESTOR ALERT: Day '+dayNumber+'/720 — '+remainingDays+' days left — Email sent — Popup active'); }
- }
- // Render all contracts list
+ document.getElementById('audioDayNum').innerText=dayNumber; document.getElementById('audioContract').innerText='Day '+dayNumber+'/720';
  let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]'); let emails=[...new Set(tx.map(t=>t.email||email).filter(Boolean))]; if(emails.length===0) emails=[email];
- document.getElementById('allContracts').innerHTML=emails.map(em=>{
-   let d=getDepositDate(em); if(!d) return `<div class="row"><span>${em}</span><span>No deposit</span></div>`;
-   let dd=Math.min(720,Math.floor((now-d)/(1000*60*60*24))+1); let rem=720-dd; return `<div class="row"><span>▶ ${em} — Day ${dd}/720 — ${rem} days left — Deposit ${d.toLocaleDateString()}</span><span style="color:${rem<=20?'var(--r)':'var(--g)'}">${rem<=0?'EXPIRED STOPPED':'LIVE'}</span></div>`;
- }).join('')||'<span class="small">No contracts</span>';
+ document.getElementById('allContracts').innerHTML=emails.map(em=>{ let d=getDepositDate(em); if(!d) return `<div class="row"><span>${em}</span><span>No deposit</span></div>`; let dd=Math.min(720,Math.floor((now-d)/(1000*60*60*24))+1); let rem=720-dd; return `<div class="row"><span>▶ ${em} — Day ${dd}/720 — ${rem} left</span><span style="color:${rem<=0?'var(--r)':'var(--g)'}">${rem<=0?'EXPIRED STOPPED':'LIVE'}</span></div>`; }).join('')||'No contracts';
+ updateETTimer();
 }
-function speak(text){ if('speechSynthesis' in window){ let u=new SpeechSynthesisUtterance(text); u.rate=0.9; u.pitch=1; u.volume=0.9; speechSynthesis.cancel(); speechSynthesis.speak(u); } }
-function testVoiceAlert(){ speak('Test speaking alert — Investor Day 360 of 720 — 360 days remaining — Command operator Aiboss — Cedars of Wealth — 720 days countdown active'); cmd('SPEAKING ALERT TESTED — Voice active'); }
-function testPopup(){ let email=localStorage.getItem('cedars_investor_email')||'investor@test.com'; localStorage.setItem('cedars_720_popup_'+email,JSON.stringify({day:360,msg:'Test popup — Your contract Day 360 of 720',time:new Date().toLocaleString()})); cmd('POPUP NOTIFICATION TESTED — Investor dashboard will show popup Day 360/720'); alert('POPUP TO INVESTOR DASHBOARD:\n\nYour contract Day 360 of 720 — 360 days remaining\n\nCedars of Wealth — Automated notification'); }
-function testEmailAlert(){ cmd('EMAIL NOTIFICATION TESTED — Check console + EmailJS ready — Template: Cedars Contract Day X/720'); console.log('EMAIL TEMPLATE:\nTo: investor@email.com\nSubject: Cedars Contract Day 360/720\nBody: Dear Investor, Your Cedars contract is Day 360 of 720 — 360 days remaining — Visit dashboard'); alert('EMAIL NOTIFICATION:\n\nTo: investor@email.com\nSubject: Cedars Contract Day 360/720\n\nAutomated — Ready for EmailJS integration — Check console log'); }
+function speak(text){ if('speechSynthesis' in window){ let u=new SpeechSynthesisUtterance(text); u.rate=0.85; u.pitch=1; u.volume=1; speechSynthesis.cancel(); speechSynthesis.speak(u); } }
+
+// DAILY AUDIO ROI — 1.5% — 12PM ET — MUST CLICK LISTEN — FROM PAYOUT 55% — REBRANDED POPUP
+let audioPlayed=false; let audioProgressInterval=null;
+function getETNoonToday(){ let now=new Date(); let etString=now.toLocaleString('en-US',{timeZone:'America/New_York'}); let etDate=new Date(etString); let noonET=new Date(etDate); noonET.setHours(12,0,0,0); let utcNoon=new Date(now); let etOffset=new Date().toLocaleString('en-US',{timeZone:'America/New_York',timeZoneName:'short'}).includes('EDT')?-4:-5; let utcHours=12-etOffset; utcNoon.setUTCHours(utcHours,0,0,0); return utcNoon; }
+function updateETTimer(){
+ let now=new Date(); let nextNoon=getETNoonToday(); if(now>nextNoon) nextNoon.setDate(nextNoon.getDate()+1);
+ let diff=nextNoon-now; let h=Math.floor(diff/(1000*60*60)); let m=Math.floor((diff%(1000*60*60))/(1000*60)); let s=Math.floor((diff%(1000*60))/1000);
+ document.getElementById('etCountdown').innerText='Next harvest in '+h+':'+(m+'').padStart(2,'0')+':'+(s+'').padStart(2,'0'); document.getElementById('etTimer').innerText='12:00 PM ET — '+nextNoon.toLocaleString('en-US',{timeZone:'America/New_York',hour:'2-digit',minute:'2-digit'});
+ document.getElementById('nextHarvest').innerText='12:00 PM ET — Countdown: '+(h+'').padStart(2,'0')+':'+(m+'').padStart(2,'0')+':'+(s+'').padStart(2,'0')+' — Kampala '+(nextNoon.toLocaleString('en-UG',{timeZone:'Africa/Kampala',hour:'2-digit',minute:'2-digit'}));
+ // Auto trigger at 12PM ET if not harvested today
+ let todayStr=new Date().toDateString(); let lastHarvest=localStorage.getItem('cedars_last_harvest_date');
+ let etNow=new Date().toLocaleString('en-US',{timeZone:'America/New_York',hour:'2-digit',minute:'2-digit',hour12:false});
+ if(lastHarvest!==todayStr && now>=getETNoonToday() && now<new Date(getETNoonToday().getTime()+60*60*1000)){ // within 1 hour after noon ET
+   if(document.getElementById('audioOverlay').style.display!=='flex'){ triggerAudioPopup(); }
+ }
+}
+function triggerAudioPopup(){
+ let email=localStorage.getItem('cedars_investor_email')||'investor'; let depDate=getDepositDate(email); if(!depDate){ cmd('No deposit — Clock not started'); return; }
+ let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]'); let depAmt=tx.filter(x=>x.type==='Deposit').reduce((s,x)=>s+parseFloat(x.amt),0); if(depAmt===0) depAmt=parseFloat(localStorage.getItem('cedars_usd_bal')||'500');
+ let roi=depAmt*0.015; // 1.5% daily
+ document.getElementById('todayROI').innerText='$'+roi.toFixed(2); document.getElementById('dailyROIVal').innerText='$'+roi.toFixed(2);
+ let dayNumber=Math.min(720,Math.floor((new Date()-depDate)/(1000*60*60*24))+1);
+ document.getElementById('commanderMsg').innerText=`Good afternoon, Commander ${email.split('@')[0]}. This is Day ${dayNumber} of your 720 contract. Your Cedars forest is growing strong. Forex bots closed 94.7% win today. Your daily harvest of 1.5% — $${roi.toFixed(2)} — is ready from Command Payout 55% Account. Listen fully to this briefing to unlock and redeem. Streak bonus active. — Operator AIBOSS — Cedars of Wealth — ${new Date().toLocaleDateString()} 12:00 PM ET`;
+ document.getElementById('audioOverlay').style.display='flex'; document.getElementById('audioWave').style.display='none';
+ document.getElementById('audioStatus').innerText='CLICK PLAY TO LISTEN — MUST LISTEN FULL AUDIO TO RELEASE PAYMENT'; document.getElementById('audioProgress').innerText='00:00 / 00:18 — AIBOSS voice briefing';
+ document.getElementById('releaseBtn').style.opacity='0.3'; document.getElementById('releaseBtn').style.pointerEvents='none'; document.getElementById('releaseBtn').innerText='🔒 LISTEN FULL AUDIO FIRST — PAYMENT LOCKED — 1.5% from Payout 55%';
+ document.getElementById('releaseBtn').style.borderColor='var(--r)'; document.getElementById('releaseBtn').style.color='var(--r)';
+ audioPlayed=false; cmd('🔊 DAILY HARVEST CALL — Day '+dayNumber+'/720 — Audio popup triggered — 1.5% ROI ready — Must listen');
+ // Store popup log
+ localStorage.setItem('cedars_audio_popup_'+email,JSON.stringify({day:dayNumber,roi:roi,time:new Date().toLocaleString(),status:'popup shown'}));
+}
+function playDailyBriefing(){
+ let email=localStorage.getItem('cedars_investor_email')||'investor'; let msg=document.getElementById('commanderMsg').innerText;
+ document.getElementById('audioWave').style.display='flex'; document.getElementById('audioStatus').innerText='🔊 PLAYING — AIBOSS speaking — Do not close — Must finish';
+ document.getElementById('playAudioBtn').innerText='🔊'; document.getElementById('playAudioBtn').style.animation='none';
+ speak(msg);
+ // Progress simulation 18 seconds — must listen fully
+ let secs=0; let total=18;
+ audioProgressInterval=setInterval(()=>{
+   secs++; document.getElementById('audioProgress').innerText='00:'+(secs+'').padStart(2,'0')+' / 00:'+total+' — AIBOSS voice';
+   if(secs>=total){
+     clearInterval(audioProgressInterval); audioPlayed=true;
+     document.getElementById('audioWave').style.display='none';
+     document.getElementById('audioStatus').innerText='✅ BRIEFING COMPLETE — Payment unlocked — Click release now';
+     document.getElementById('releaseBtn').style.opacity='1'; document.getElementById('releaseBtn').style.pointerEvents='auto';
+     document.getElementById('releaseBtn').style.borderColor='var(--g)'; document.getElementById('releaseBtn').style.color='var(--g)';
+     document.getElementById('releaseBtn').innerText='✅ RELEASE $'+document.getElementById('todayROI').innerText+' — 1.5% DAILY ROI — FROM PAYOUT 55% — CLAIM NOW';
+     document.getElementById('playAudioBtn').innerText='✅'; cmd('AUDIO BRIEFING COMPLETE — Payment unlocked — Click release');
+   }
+ },1000);
+}
+function releaseDailyROI(){
+ if(!audioPlayed){ cmd('MUST LISTEN FULL AUDIO FIRST — Payment locked'); return; }
+ let email=localStorage.getItem('cedars_investor_email')||'default'; let todayStr=new Date().toDateString();
+ if(localStorage.getItem('cedars_last_harvest_date')===todayStr){ cmd('Already harvested today — Come back tomorrow 12PM ET'); return; }
+ let depAmt=JSON.parse(localStorage.getItem('cedars_tx')||'[]').filter(x=>x.type==='Deposit').reduce((s,x)=>s+parseFloat(x.amt),0); if(depAmt===0) depAmt=parseFloat(localStorage.getItem('cedars_usd_bal')||'500');
+ let roi=depAmt*0.015;
+ let streak=parseInt(localStorage.getItem('cedars_streak')||'0')+1; // Magic: streak bonus
+ if(streak>=7) roi=roi*1.001; // +0.1% after 7 days streak — magic
+ localStorage.setItem('cedars_streak',streak);
+ // Deduct from Payout 55% Account — Automated
+ let v16=getV16(); let payout55=v16*0.55; let newPayout=payout55-roi; // simulate deduction
+ // Add to investor dashboard balance
+ let curBal=parseFloat(localStorage.getItem('cedars_usd_bal')||'0'); let newBal=curBal+roi; localStorage.setItem('cedars_usd_bal',newBal.toFixed(2));
+ let v16New=v16+roi; localStorage.setItem('cedars_v16_balance',v16New.toFixed(2));
+ localStorage.setItem('cedars_last_harvest_date',todayStr);
+ let harvestLog=JSON.parse(localStorage.getItem('cedars_harvest_log')||'[]'); harvestLog.push({email:email,day:Math.min(720,Math.floor((new Date()-getDepositDate(email))/(1000*60*60*24))+1),roi:roi,time:new Date().toLocaleString(),from:'Payout 55%'}); localStorage.setItem('cedars_harvest_log',JSON.stringify(harvestLog.slice(-100)));
+ // Update UI
+ document.getElementById('listenStatus').innerText='Claimed ✅'; document.getElementById('totalHarvests').innerText=harvestLog.length+' / 720'; document.getElementById('harvestToday').innerText=harvestLog.filter(h=>h.time.includes(new Date().toLocaleDateString().split('/')[0])).length; document.getElementById('streakVal').innerText=streak+' Days 🔥';
+ // Popup + Email + Activity
+ cmd('💰 DAILY ROI RELEASED: $'+roi.toFixed(2)+' — 1.5% — From Payout 55% — To Dashboard — Day '+document.getElementById('audioDayNum').innerText+'/720 — Streak '+streak);
+ speak('Congratulations Commander. Your daily ROI of '+roi.toFixed(2)+' dollars has been released from Command Payout 55 percent Account to your dashboard. Streak '+streak+' days. Come back tomorrow 12 PM Eastern Time.');
+ document.getElementById('audioOverlay').style.display='none';
+ // Log in activity matrix
+ let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]'); tx.push({type:'Daily ROI',amt:roi.toFixed(2),hash:'AUDIO-'+Date.now(),date:new Date().toLocaleString(),email:email}); localStorage.setItem('cedars_tx',JSON.stringify(tx));
+ renderMilitary();
+ // For investor dashboard automation — set flag that investor dashboard must read
+ localStorage.setItem('cedars_audio_claim_'+email+'_'+todayStr,'claimed-'+roi);
+}
 
 setInterval(update720Clock,1000); update720Clock();
+setInterval(updateETTimer,1000); updateETTimer();
 
-// BUILD 2 — IP TRACKER
+// IP TRACKER
 async function detectIP(){
- try{
-  let ipRes=await fetch('https://api.ipify.org?format=json'); let ipData=await ipRes.json(); let ip=ipData.ip;
-  document.getElementById('ipVal').innerText=ip;
-  let locRes=await fetch('https://ipapi.co/'+ip+'/json/').catch(()=>null); let loc=locRes?await locRes.json():{city:'Kampala',country_name:'Uganda'};
-  document.getElementById('locVal').innerText=(loc.city||'Kampala')+', '+(loc.country_code||'UG');
-  let log=JSON.parse(localStorage.getItem('cedars_ip_logs')||'[]'); log.push({ip:ip,city:loc.city||'Kampala',time:new Date().toLocaleString(),email:localStorage.getItem('cedars_investor_email')||'admin'}); localStorage.setItem('cedars_ip_logs',JSON.stringify(log.slice(-20)));
-  document.getElementById('ipList').innerHTML=log.slice(-5).reverse().map(l=>`<div class="row"><span>${l.ip} — ${l.city}</span><span>${l.time}</span></div>`).join('');
-  document.getElementById('ipLogs').innerText=log.length;
+ try{ let ipRes=await fetch('https://api.ipify.org?format=json'); let ipData=await ipRes.json(); document.getElementById('ipVal').innerText=ipData.ip;
+  let log=JSON.parse(localStorage.getItem('cedars_ip_logs')||'[]'); log.push({ip:ipData.ip,time:new Date().toLocaleString()}); localStorage.setItem('cedars_ip_logs',JSON.stringify(log.slice(-20)));
+  document.getElementById('ipList').innerHTML=log.slice(-5).reverse().map(l=>`<div class="row"><span>${l.ip}</span><span>${l.time}</span></div>`).join('');
  }catch(e){ document.getElementById('ipVal').innerText='Offline'; }
 }
 detectIP();
-
-// UPLOAD
-function handleUpload(){
- let input=document.getElementById('fileInput'); if(!input.files.length){ cmd('SELECT FILE FIRST'); return; }
- let files=Array.from(input.files); let uploadLog=JSON.parse(localStorage.getItem('cedars_uploads')||'[]');
- files.forEach(f=>{
-  let reader=new FileReader(); reader.onload=function(e){ uploadLog.push({name:f.name,size:(f.size/1024).toFixed(1)+'KB',time:new Date().toLocaleString()}); localStorage.setItem('cedars_uploads',JSON.stringify(uploadLog.slice(-20))); renderUploads(); cmd('UPLOADED: '+f.name); }; reader.readAsDataURL(f);
- });
-}
-function renderUploads(){ let log=JSON.parse(localStorage.getItem('cedars_uploads')||'[]'); document.getElementById('uploadList').innerHTML=log.slice(-5).reverse().map(u=>`<div class="row"><span>📎 ${u.name} — ${u.size}</span><span>${u.time}</span></div>`).join('')||'No uploads'; }
-renderUploads();
-
-// RESET + WALLET
-function resetPassword(){
- let email=document.getElementById('resetEmail').value.trim(); if(!email){cmd('ENTER EMAIL');return;}
- let code='CEDARS-'+Math.floor(1000+Math.random()*9000); let codes=JSON.parse(localStorage.getItem('cedars_reset_codes')||'{}'); codes[email]=code; localStorage.setItem('cedars_reset_codes',JSON.stringify(codes));
- document.getElementById('resetLog').innerHTML=`<span style="color:var(--g)">▶ Temp code for ${email}: <b>${code}</b> — Valid 15 min</span>`; cmd('RESET CODE: '+code);
-}
-function generateWalletHelp(){ cmd('WALLET HELP: Solana address 32-44 chars base58'); }
-function changeWallet(){
- let email=document.getElementById('resetEmail').value.trim(); let newW=document.getElementById('newWallet').value.trim(); if(!email||!newW){cmd('ENTER EMAIL + WALLET');return;}
- if(newW.length<32){cmd('INVALID SOLANA ADDRESS');return;}
- localStorage.setItem('cedars_wallet_'+email,newW); localStorage.setItem('cedars_wallet',newW);
- document.getElementById('resetLog').innerHTML=`<span style="color:var(--g)">▶ Wallet changed for ${email} → ${newW.substr(0,12)}...</span>`; cmd('WALLET CHANGED');
-}
-
-// VIDEO — CONSENSUAL
+function handleUpload(){ let input=document.getElementById('fileInput'); if(!input.files.length){cmd('SELECT FILE');return;} let files=Array.from(input.files); let log=JSON.parse(localStorage.getItem('cedars_uploads')||'[]'); files.forEach(f=>{ log.push({name:f.name,size:(f.size/1024).toFixed(1)+'KB',time:new Date().toLocaleString()}); }); localStorage.setItem('cedars_uploads',JSON.stringify(log.slice(-20))); document.getElementById('uploadList').innerHTML=log.slice(-5).reverse().map(u=>`<div class="row"><span>📎 ${u.name}</span><span>${u.time}</span></div>`).join(''); cmd('UPLOADED'); }
+function resetPassword(){ let email=document.getElementById('resetEmail').value.trim(); if(!email){cmd('ENTER EMAIL');return;} let code='CEDARS-'+Math.floor(1000+Math.random()*9000); let codes=JSON.parse(localStorage.getItem('cedars_reset_codes')||'{}'); codes[email]=code; localStorage.setItem('cedars_reset_codes',JSON.stringify(codes)); document.getElementById('resetLog').innerHTML=`<span style="color:var(--g)">▶ Code for ${email}: <b>${code}</b></span>`; cmd('CODE: '+code); }
+function generateWalletHelp(){ cmd('WALLET HELP: 32-44 chars base58'); }
+function changeWallet(){ let email=document.getElementById('resetEmail').value.trim(); let newW=document.getElementById('newWallet').value.trim(); if(!email||!newW){cmd('ENTER EMAIL+WALLET');return;} if(newW.length<32){cmd('INVALID');return;} localStorage.setItem('cedars_wallet_'+email,newW); document.getElementById('resetLog').innerHTML=`<span style="color:var(--g)">▶ Wallet changed ${newW.substr(0,12)}...</span>`; cmd('WALLET CHANGED'); }
 let stream=null;
-async function startConsensualVideo(){
- try{
-  document.getElementById('videoStatus').innerText='● Requesting permission — Must ALLOW'; cmd('VIDEO: Requesting permission');
-  stream=await navigator.mediaDevices.getUserMedia({video:true,audio:true});
-  document.getElementById('investorVideo').srcObject=stream;
-  document.getElementById('videoStatus').innerText='● LIVE — Consensual — Audio only for investor'; document.getElementById('videoLog').innerText='Started '+new Date().toLocaleString()+' — Consent granted';
-  cmd('VIDEO LIVE — CONSENSUAL');
- }catch(e){ document.getElementById('videoStatus').innerText='● Denied — Silent impossible — Consent required'; cmd('VIDEO DENIED — CONSENT REQUIRED'); }
-}
-function stopVideo(){ if(stream){ stream.getTracks().forEach(t=>t.stop()); document.getElementById('investorVideo').srcObject=null; document.getElementById('videoStatus').innerText='● Standby'; } }
-
-function getV16(){for(let k of ['cedars_v16_balance','cedars_real_worker_bal','cedars_worker_bal','cedars_usd_bal']){let v=localStorage.getItem(k);if(v&&!isNaN(parseFloat(v)))return parseFloat(v);}return 0;}
+async function startConsensualVideo(){ try{ document.getElementById('videoStatus').innerText='● Requesting'; stream=await navigator.mediaDevices.getUserMedia({video:true,audio:true}); document.getElementById('investorVideo').srcObject=stream; document.getElementById('videoStatus').innerText='● LIVE'; cmd('VIDEO LIVE'); }catch(e){ document.getElementById('videoStatus').innerText='● Denied'; } }
+function stopVideo(){ if(stream){stream.getTracks().forEach(t=>t.stop()); document.getElementById('investorVideo').srcObject=null; document.getElementById('videoStatus').innerText='● Standby';} }
 function renderMilitary(){
- let v16=getV16(); document.getElementById('v16Bal').innerText='$'+v16.toFixed(2); document.getElementById('v16Status').innerText=v16>0?'● V16 LINKED LIVE':'● LINKING V16'; document.getElementById('payoutBal').innerText='$'+(v16*0.55).toFixed(2); document.getElementById('reserveBal').innerText='$'+(v16*0.45).toFixed(2); document.getElementById('opsBal').innerText='$'+(v16*0.15).toFixed(2); document.getElementById('crisisBal').innerText='$'+(v16*0.10).toFixed(2); document.getElementById('totalProfit').innerText='$'+v16.toFixed(2);
+ let v16=getV16(); document.getElementById('v16Bal').innerText='$'+v16.toFixed(2); document.getElementById('v16Status').innerText=v16>0?'● V16 LINKED LIVE':'● LINKING'; document.getElementById('payoutBal').innerText='$'+(v16*0.55).toFixed(2); document.getElementById('payoutBal2').innerText='$'+(v16*0.55).toFixed(2); document.getElementById('payoutSource').innerText='$'+(v16*0.55).toFixed(2); document.getElementById('reserveBal').innerText='$'+(v16*0.45).toFixed(2); document.getElementById('opsBal').innerText='$'+(v16*0.15).toFixed(2); document.getElementById('crisisBal').innerText='$'+(v16*0.10).toFixed(2); document.getElementById('totalProfit').innerText='$'+v16.toFixed(2);
  let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]'); let dep=tx.filter(x=>x.type==='Deposit').reduce((s,x)=>s+parseFloat(x.amt),0); let wd=tx.filter(x=>x.type==='Withdraw').reduce((s,x)=>s+parseFloat(x.amt),0);
- document.getElementById('totalDep').innerText='$'+dep.toFixed(2); document.getElementById('totalWd').innerText='$'+wd.toFixed(2);
- document.getElementById('invCount').innerText=localStorage.getItem('cedars_investor_email')?1:0; document.getElementById('threat').innerText=wd>dep?'MED':'LOW';
- let email=localStorage.getItem('cedars_investor_email')||'-'; let name=localStorage.getItem('cedars_investor_name')||'Investor'; let ref=localStorage.getItem('cedars_ref')||'-'; let bal=localStorage.getItem('cedars_usd_bal')||'0';
- document.getElementById('accountList').innerHTML=`<div class="row"><span>ACCOUNT:</span><span style="color:var(--g)">${name}</span></div><div class="row"><span>EMAIL:</span><span>${email}</span></div><div class="row"><span>REF:</span><span>${ref}</span></div><div class="row"><span>BAL:</span><span style="color:var(--g)">$${bal}</span></div>`;
- document.getElementById('activityMatrix').innerHTML=tx.slice(-15).reverse().map(t=>`<div class="row"><span>▶ ${t.type} $${t.amt} — ${email} — Day ${Math.min(720,Math.floor((new Date()- (getDepositDate(email)||new Date()))/(1000*60*60*24))+1)}/720 — ${t.date||''}</span><a href="https://solscan.io/tx/${t.hash}" target="_blank" style="color:var(--g);text-decoration:none">SOLSCAN ↗</a></div>`).join('')||'<span class="small">NO ACTIVITY</span>';
+ let roiTx=tx.filter(x=>x.type==='Daily ROI').reduce((s,x)=>s+parseFloat(x.amt),0);
+ document.getElementById('totalDep').innerText='$'+dep.toFixed(2); document.getElementById('totalWd').innerText='$'+wd.toFixed(2); document.getElementById('dailyROIVal').innerText='$'+(dep*0.015).toFixed(2);
+ document.getElementById('invCount').innerText=localStorage.getItem('cedars_investor_email')?1:0;
+ let harvestLog=JSON.parse(localStorage.getItem('cedars_harvest_log')||'[]'); document.getElementById('totalHarvests').innerText=harvestLog.length+' / 720'; document.getElementById('harvestToday').innerText=harvestLog.filter(h=>h.time.includes(new Date().toDateString().split(' ')[1])).length||0;
+ document.getElementById('streakVal').innerText=(localStorage.getItem('cedars_streak')||'0')+' Days 🔥'; document.getElementById('listenStatus').innerText=localStorage.getItem('cedars_last_harvest_date')===new Date().toDateString()?'Claimed ✅':'Pending — 12PM ET';
+ document.getElementById('activityMatrix').innerHTML=tx.slice(-15).reverse().map(t=>`<div class="row"><span>▶ ${t.type} $${t.amt} — ${t.date||''} — ${t.type==='Daily ROI'?'From Payout 55% — Audio listened':''}</span><a href="https://solscan.io/tx/${t.hash}" target="_blank" style="color:var(--g);text-decoration:none">SOLSCAN ↗</a></div>`).join('')||'NO ACTIVITY';
 }
 function showAccounts(){renderMilitary(); cmd('ALL ACCOUNTS');}
 function testForex(){cmd('FOREX TEST'); fetch('https://lite-api.jup.ag/swap/v1/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&amount=1000000').then(r=>r.json()).then(d=>{document.getElementById('jupStat').innerText='● LIVE OK'; if(d.outAmount) document.getElementById('solPrice').innerText=(d.outAmount/1e6).toFixed(4)+' USDC';}).catch(()=>{});}
 renderMilitary(); setInterval(renderMilitary,3000);
-setInterval(()=>{ document.getElementById('commandTime').innerText='FIELD TOUR READY — '+new Date().toLocaleString()+' — 720 CLOCK LIVE — 3 PASSES AIBOSS'; document.getElementById('cpu').innerText=Math.floor(35+Math.random()*15)+'%';},2000);
+setInterval(()=>{ document.getElementById('commandTime').innerText='FIELD TOUR READY — '+new Date().toLocaleString()+' — DAILY AUDIO ROI 1.5% 12PM ET — MUST LISTEN'; },2000);
 let ifr=document.createElement('iframe'); ifr.src='./V16-REAL-WORKER.html?v=1'; ifr.style.display='none'; document.body.appendChild(ifr); ifr.onload=()=>{try{let b=ifr.contentWindow.localStorage.getItem('cedars_v16_balance'); if(b) localStorage.setItem('cedars_v16_balance',b);}catch(e){} renderMilitary();};
 </script>
 <script src="../header-footer.js"></script>
