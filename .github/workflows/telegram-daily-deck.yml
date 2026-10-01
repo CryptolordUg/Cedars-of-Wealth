@@ -1,0 +1,41 @@
+name: CEDARS OF WEALTH
+on:
+  schedule:
+    - cron: '0 16 * * *'
+  workflow_dispatch:
+
+jobs:
+  send-deck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Daily Training Deck + Audio ROI
+        run: |
+          MESSAGE="🎯 *CEDARS OF WEALTH — COMMAND CENTER 360 — DAILY HARVEST CALL*
+
+          🔊 *Daily Audio ROI 1.5% — 12:00 PM ET — LIVE NOW — Universal*
+
+          Commander Briefing Ready — Day $(date +%d)/720 — Must Listen Full 18s to Release ROI
+
+          ▶️ *How to Redeem Today:*
+          1. Open Command Center 360
+          2. Click AUDIO ROI 🔊
+          3. Listen Full AIBOSS Briefing — Waveform Dancing
+          4. Click RELEASE — $X from Payout 55% Account to Dashboard
+          5. Build 7-Day Streak → +0.1% Bonus
+
+          📚 *Training Deck:*
+          https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-control-center.html?v=CLEAN-100-AUDIO-LOCKED
+
+          ⏰ *720 Days Contract Clock: Per Account Day 1 to 720 — Stops at 720*
+
+          🛡️ *3 Security Passes: Email/PWD + GATE-360 + AIBOSS*
+
+          🔗 Command Center: cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-control-center.html
+          🔗 Telegram Real: t.me/+qXjnwt0SX0BkODQ8
+
+          #CedarsOfWealth #DailyROI #AudioHarvest #CommandCenter360"
+
+          curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
+            -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
+            -d text="$MESSAGE" \
+            -d parse_mode=Markdown
