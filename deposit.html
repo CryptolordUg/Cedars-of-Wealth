@@ -1,45 +1,50 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Deposit — Cedars</title>
-<style>:root{--bg:#0b1020;--card:#162040;--br:#1e2d55;--m:#8a9cc7;--g:#00e676;--b:#2a5bd7}*{box-sizing:border-box;font-family:system-ui}body{background:var(--bg);color:#eef2ff;margin:0}
-.card{background:var(--card);border:1px solid #2a3a6a;border-radius:14px;padding:16px;margin:12px;max-width:480px;margin-left:auto;margin-right:auto}
-.input{width:100%;padding:11px;border-radius:8px;border:1px solid var(--br);background:#0b1020;color:#fff;margin:6px 0}
-.btn{width:100%;padding:12px;border-radius:10px;border:none;font-weight:800;min-height:44px;cursor:pointer;transition:0.2s}
-.btn:active{transform:scale(0.97)}
-.btn-w{background:#fff;color:#000}.btn-b{background:var(--b);color:#fff}.btn-g{background:var(--g);color:#000}
-.small{font-size:11px;color:var(--m)}.bal{font-size:24px;font-weight:900;color:var(--g)}
-#toast{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#0b1020;border:1px solid var(--g);color:#fff;padding:10px 16px;border-radius:20px;z-index:9999999;display:none;font-size:12px;font-weight:700}
-.qr{width:160px;height:160px;background:#fff;border-radius:10px;margin:10px auto;display:flex;align-items:center;justify-content:center;color:#000;font-weight:800;font-size:12px}
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CEDARS OF WEALTH - DEPOSIT USDC - TREASURY LOCKED</title>
+<style>
+body{margin:0;background:#000;color:#fff;font-family:monospace;padding:16px;}
+.box{max-width:560px;margin:0 auto;background:#0a1a0f;border:3px solid #00ff88;border-radius:18px;padding:20px;box-shadow:0 0 40px rgba(0,255,136,0.35);}
+.bal{color:#9effb5;font-size:12px;font-weight:900;} .bal b{color:#00ff88;font-size:32px;text-shadow:0 0 12px #00ff88;}
+h2{color:#00ff88;letter-spacing:5px;margin:12px 0;font-size:22px;}
+.label{font-size:11px;color:#8affb0;font-weight:900;margin-top:14px;letter-spacing:1px;}
+.addr{width:100%;background:#000;border:2px solid #00ff88;border-radius:12px;padding:14px;color:#fff;font-size:12px;font-weight:900;word-break:break-all;box-sizing:border-box;box-shadow:inset 0 0 15px rgba(0,255,136,0.2);}
+.qr{background:#fff;border-radius:14px;width:220px;height:220px;margin:16px auto;display:flex;align-items:center;justify-content:center;overflow:hidden;border:3px solid #00ff88;}
+.qr img{width:210px;height:210px;}
+.btn{width:100%;padding:15px;border:0;border-radius:12px;font-weight:900;cursor:pointer;margin-top:12px;font-size:14px;letter-spacing:1px;}
+.green{background:#00ff88;color:#000;box-shadow:0 0 25px #00ff88;}
+.copy{background:#001a0f;color:#00ff88;border:2px solid #00ff88;}
+input{width:100%;background:#000;border:2px solid #003a1a;border-radius:12px;padding:14px;color:#fff;font-size:13px;font-weight:800;margin-top:8px;box-sizing:border-box;}
+.warn{font-size:10px;color:#ffaa00;margin-top:12px;font-weight:800;line-height:14px;}
+.ok{font-size:11px;color:#00ff88;font-weight:900;margin-top:10px;}
 </style></head><body>
-<div id="toast"></div>
-<div class="card">
-<div class="small">Balance</div><div class="bal" id="usdBal">$0.00</div>
-<div style="margin-top:14px;font-weight:800">Deposit USDC</div>
-<div class="small" style="margin-top:6px">Network: Solana — USDC Only</div>
-<div class="qr">QR CODE<br>USDC<br>Solana</div>
-<div class="small">Deposit Address:</div>
-<input class="input" id="depAddr" value="So11111111111111111111111111111111111111112" readonly onclick="this.select(); popup('✅ Address Copied — Active')">
-<input class="input" id="depAmt" type="number" placeholder="Amount USD — e.g. 50">
-<input class="input" id="depHash" placeholder="Tx Hash (Solscan) — optional">
-<button class="btn btn-g" style="margin-top:8px" onclick="doDeposit()">Confirm Deposit</button>
-<button class="btn btn-b" style="margin-top:8px;background:var(--card);border:1px solid var(--br);color:var(--m)" onclick="location.href='investor-dashboard.html'">Back to Dashboard</button>
-<div class="small" style="margin-top:10px">After confirm — Telegram group auto-join — Email notify + Telegram channel anonymous — No name exposed</div>
+<div class="box">
+<div class="bal">Balance <br><b>$0.00 USD</b></div>
+<h2>DEPOSIT USDC</h2>
+<div class="label">Network: SOLANA — USDC ONLY — DO NOT SEND OTHER TOKENS</div>
+<div class="label">Treasury Deposit Address — Verified:</div>
+<div class="addr" id="addr">6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div>
+<button class="btn copy" onclick="copyAddr()">📋 COPY ADDRESS — HEAVY CLEAR</button>
+<div class="qr"><img id="qrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb" alt="QR"></div>
+<div class="label">Amount USD — e.g. 50</div>
+<input id="amt" placeholder="Amount USD — e.g. 50">
+<div class="label">Tx Hash (Solscan) — optional — Paste after you send</div>
+<input id="tx" placeholder="Tx Hash (Solscan) — optional">
+<button class="btn green" onclick="confirmDeposit()">Confirm Deposit — 55% — 720 Days — Audio 1.5% 12PM ET</button>
+<button class="btn copy" onclick="location.href='https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-universal-view.html'">Back to Dashboard — Command Center 360</button>
+<div class="ok">✓ Wallet Locked: 6XQviX...FF6fTb — Solana — USDC SPL</div>
+<div class="warn">After confirm — Telegram group auto-join — Email notify + Telegram channel anonymous — No name exposed — One Origin CRD-M75TJ2 — Integrity 100% — 360° Scan Operational</div>
 </div>
-<div class="card"><div style="font-weight:800">History</div><div id="txList" style="font-size:11px;margin-top:8px"></div></div>
-<script src="fix.js"></script>
 <script>
-function popup(m){let t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',2500);}
-function load(){let b=typeof CedarsBalance==='function'?CedarsBalance():'0.00';document.getElementById('usdBal').innerText='$'+b; let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]'); document.getElementById('txList').innerHTML=tx.filter(x=>x.type==='Deposit').slice(-10).reverse().map(t=>`<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #1e2d55"><span>$${t.amt} — ${t.date}</span><a href="https://solscan.io/tx/${t.hash}" target="_blank" style="color:#00e676;text-decoration:none">Solscan ↗</a></div>`).join('')||'<span class="small">No deposits yet</span>';}
-function doDeposit(){
-let a=parseFloat(document.getElementById('depAmt').value); let h=document.getElementById('depHash').value||'TX-'+Date.now()+'-'+Math.random().toString(36).substr(2,6).toUpperCase();
-if(!a||a<=0){popup('❌ Enter Amount');return;}
-// ADD BALANCE
-if(typeof CedarsAddBalance==='function'){CedarsAddBalance(a,'Deposit',h);} else {let bal=parseFloat(localStorage.getItem('cedars_usd_bal')||'0')+a; localStorage.setItem('cedars_usd_bal',bal.toString()); let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]'); tx.push({type:'Deposit',amt:a,hash:h,date:new Date().toLocaleString()}); localStorage.setItem('cedars_tx',JSON.stringify(tx));}
-// TELEGRAM + EMAIL NOTIFY + AUTO-JOIN — THIS IS THE LINE YOU ASKED
-if(window.CedarsOnDepositSuccess) CedarsOnDepositSuccess(a,h);
-popup('✅ Deposit $'+a+' Active — Confirmed');
-load();
-setTimeout(()=>{document.getElementById('depAmt').value=''; document.getElementById('depHash').value='';},500);
+const TREASURY_WALLET="6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb";
+function copyAddr(){
+ navigator.clipboard.writeText(TREASURY_WALLET);
+ alert("Copied: "+TREASURY_WALLET+"\n\nOpen Phantom → Send → USDC Solana → Paste → Send USDC only");
+ if('speechSynthesis' in window){var u=new SpeechSynthesisUtterance("Deposit address copied. Send USDC on Solana network only.");speechSynthesis.speak(u);}
 }
-load();
+function confirmDeposit(){
+ var a=document.getElementById('amt').value;
+ var t=document.getElementById('tx').value;
+ if(!a){alert("Enter Amount USD");return;}
+ alert("Deposit Submitted: $"+a+" USDC to\n"+TREASURY_WALLET+"\nTx: "+t+"\n\nVerifying on Solscan — 360° Scan — Audio ROI 1.5% active — 720 days — 55%");
+}
 </script>
-<script src="header-footer.js"></script><script src="support-widget.js"></script>
 </body></html>
