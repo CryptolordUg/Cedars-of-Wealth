@@ -5,53 +5,89 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CEDARS OF WEALTH - COMMAND CENTER 360</title>
 <style>
-body{margin:0;background:#000;color:#00ff88;font-family:monospace;}
-.top{width:100%;background:#000;border-bottom:3px solid #00ff88;padding:14px;text-align:center;position:sticky;top:0;z-index:99;}
-.title{font-size:36px;font-weight:900;letter-spacing:7px;text-shadow:0 0 15px #00ff88;}
-.sub{font-size:11px;letter-spacing:4px;color:#fff;margin-top:4px;font-weight:700;}
-.menu{position:absolute;top:14px;right:14px;}
-.mbtn{padding:7px 12px;background:#000;color:#00ff88;border:1px solid #00ff88;border-radius:6px;cursor:pointer;font-weight:700;}
-.drop{position:absolute;right:0;top:35px;background:#000;border:1px solid #00ff88;border-radius:8px;width:170px;display:none;z-index:100;}
-.drop a{display:block;padding:10px;color:#8affb5;text-decoration:none;font-size:12px;border-bottom:1px solid #003311;}
-.drop a:hover{background:#002211;color:#00ff88;}
+body{margin:0;background:#000;color:#00ff88;font-family:monospace;overflow:hidden;}
+.top{width:100%;background:#000;border-bottom:3px solid #00ff88;padding:12px;text-align:center;position:sticky;top:0;z-index:99;}
+.title{font-size:34px;font-weight:900;letter-spacing:7px;text-shadow:0 0 12px #00ff88;}
+.sub{font-size:11px;letter-spacing:4px;color:#fff;margin-top:3px;font-weight:800;}
+.menu{position:absolute;top:12px;right:12px;}
+.mbtn{padding:6px 11px;background:#000;color:#00ff88;border:1px solid #00ff88;border-radius:6px;cursor:pointer;font-weight:700;font-size:12px;}
+.drop{position:absolute;right:0;top:34px;background:#000;border:1px solid #00ff88;border-radius:8px;width:170px;display:none;z-index:200;}
+.drop a{display:block;padding:10px;color:#8affb5;text-decoration:none;font-size:12px;border-bottom:1px solid #00220f;}
+.drop a:hover{background:#001a0f;color:#00ff88;}
 .show{display:block;}
-.bar{display:flex;gap:6px;padding:8px;background:#001008;border-bottom:1px solid #00ff88;flex-wrap:wrap;align-items:center;}
-.b{padding:5px 10px;border:1px solid #00ff88;border-radius:5px;font-size:11px;background:#000;font-weight:700;}
-.frame{width:100%;height:calc(100vh - 95px);border:0;background:#000;}
+.frame{width:100%;height:calc(100vh - 62px);border:0;background:#000;}
 </style>
 </head>
 <body>
 
 <div class="top">
 <div class="title">CEDARS OF WEALTH</div>
-<div class="sub">COMMAND CENTER 360</div>
+<div class="sub">COMMAND CENTER 360 — MILITARY MONITORING — CLEAN VIEW</div>
 <div class="menu">
-<button class="mbtn" onclick="document.getElementById('d').classList.toggle('show')">MENU</button>
+<button class="mbtn" onclick="document.getElementById('d').classList.toggle('show')">☰ MENU</button>
 <div class="drop" id="d">
 <a href="/">Home</a>
-<a href="/Cedars-of-Wealth/register.html?ref=CRD-M75TJ2">Register</a>
+<a href="#">About us</a>
+<a href="#">Calendar</a>
+<a href="/Cedars-of-Wealth/register.html?ref=CRD-M75TJ2">Register — CRD-M75TJ2</a>
 <a href="#">Plans</a>
 <a href="#">Deposit</a>
 <a href="#">Withdraw</a>
 <a href="#">Referral</a>
-<a href="#">About us</a>
-<a href="#">Calendar</a>
+<a href="#">Sign out (Cryptome2030)</a>
+<a href="#">WITHDRAW</a>
+<a href="#">SIGN OUT</a>
+<a href="#">AUDIO ROI 🔊</a>
+<a href="#">TELEGRAM</a>
 </div>
 </div>
 </div>
 
-<div class="bar">
-<span class="b">COMMAND CENTER 360 - AUDIO ROI 1.5% 12PM ET - 720 DAYS</span>
-<span class="b" id="t">LIVE</span>
-<span class="b">V16 $0.00</span>
-<span class="b">WITHDRAW | SIGN OUT | AUDIO ROI | TELEGRAM</span>
-</div>
-
-<iframe class="frame" src="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-control-center.html?v=CLEAN-100-AUDIO-LOCKED"></iframe>
+<iframe class="frame" id="cmd" src="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-control-center.html?v=CLEAN-100-AUDIO-LOCKED"></iframe>
 
 <script>
-setInterval(()=>{document.getElementById('t').textContent=new Date().toLocaleString()+" - 360 LIVE";},1000);
 window.onclick=function(e){if(!e.target.matches('.mbtn')){var d=document.getElementById('d'); if(d.classList.contains('show')) d.classList.remove('show');}}
+
+// WITHOUT CHANGING FILE - HIDE INSIDE COMMAND CENTER - CLEAN MONITORING
+document.getElementById('cmd').addEventListener('load', function(){
+  try{
+    var doc = this.contentDocument || this.contentWindow.document;
+    var style = doc.createElement('style');
+    style.innerHTML = `
+      /* HIDE ALL DUPLICATE HEADER ITEMS FOR CLEAN VIEW */
+      header, nav, .navbar, .nav, .topbar, .header, 
+      [class*="sidebar"], [class*="menu"], 
+      button:contains("WITHDRAW"), button:contains("SIGN OUT") {
+        display: none !important;
+      }
+      /* Aggressive hide by text content via CSS - Hide common nav texts */
+      /* Hide the left tree + top duplicate banners */
+      body > div:first-child { display:none !important; }
+    `;
+    doc.head.appendChild(style);
+
+    // JS hide by text match - No file edit, just DOM hide in wrapper
+    var killTexts = ["Cedars of Wealth","Home","About us","Calendar","Register","Plans","Deposit","Withdraw","Referral","Sign out","COMMAND CENTER 360 — AUDIO ROI","WITHDRAW","SIGN OUT","AUDIO ROI","TELEGRAM","🌲"];
+    function hideByText(){
+      var all = doc.querySelectorAll('div, button, a, span, header, nav');
+      all.forEach(function(el){
+        var t = (el.innerText || "").trim();
+        for(var k of killTexts){
+          if(t === k || t.includes(k)){
+            // Only hide if it's a header/nav element, not data
+            if(el.tagName === 'BUTTON' || el.tagName === 'A' || el.offsetHeight < 80){
+              if(t.length < 60){ el.style.display='none'; }
+            }
+          }
+        }
+      });
+    }
+    hideByText();
+    // Keep monitoring clean - run once more after 1 sec for dynamic load
+    setTimeout(hideByText, 800);
+    setTimeout(hideByText, 2000);
+  }catch(e){ console.log("Cross-origin hide blocked, using overlay clean view"); }
+});
 </script>
 </body>
 </html>
