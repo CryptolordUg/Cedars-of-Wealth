@@ -6,4 +6,4 @@
 <script src="fix.js"></script><script>
 let ref=localStorage.getItem('cedars_ref')||'CRD-XXXX'; document.getElementById('rc').innerText=ref; document.getElementById('link').innerText=location.origin+location.pathname.replace('referral.html','')+'register.html?ref='+ref;
 let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]'); let refs=tx.filter(t=>t.type==='Referral').length; document.getElementById('legA').innerHTML=Math.floor(refs/2)+' refs<br>$'+(refs*2.5).toFixed(2); document.getElementById('legB').innerHTML=Math.ceil(refs/2)+' refs<br>$'+(refs*2.5).toFixed(2);
-</script><script src="support-widget.js"></script><script src="integrity-check.js"></script></body></html>
+</script><script src="support-widget.js"></script><script src="integrity-check.js"></script></body></html><script src="header-footer.js"></script>
