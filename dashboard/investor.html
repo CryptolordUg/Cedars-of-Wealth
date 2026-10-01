@@ -1,32 +1,13 @@
-<!-- TOP HEADER — ADDED ONLY — NO DASHBOARD CHANGE — COMMANDS WORKING -->
-<style>
-.cedars-top-nav{position:sticky;top:0;z-index:99999;background:rgba(11,16,32,0.96);backdrop-filter:blur(10px);border-bottom:1px solid #1e2d55;padding:8px 12px;display:flex;gap:8px;overflow-x:auto;white-space:nowrap;align-items:center}
-.cedars-top-nav a{color:#8a9cc7;text-decoration:none;font-size:11px;font-weight:700;padding:6px 10px;border-radius:20px;border:1px solid #1e2d55;background:#162040;flex-shrink:0}
-.cedars-top-nav a:hover{background:#fff;color:#000}
-.cedars-top-nav a.active{background:#00e676;color:#000;border-color:#00e676}
-.cedars-bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:99999;background:rgba(11,16,32,0.98);border-top:1px solid #1e2d55;padding:8px 6px;display:flex;gap:6px;overflow-x:auto;white-space:nowrap}
-.cedars-bottom-nav a{color:#8a9cc7;text-decoration:none;font-size:10px;font-weight:700;padding:6px 9px;border-radius:20px;border:1px solid #1e2d55;background:#162040;flex-shrink:0;text-align:center}
-</style>
-<div class="cedars-top-nav">
-<a href="../index.html">Home</a>
-<a href="../index.html#about">About us</a>
-<a href="../calendar.html">Calendar</a>
-<a href="../register.html">Register</a>
-<a href="../index.html#plans">Plans</a>
-<a href="../deposit.html">Deposit</a>
-<a href="../withdraw.html">Withdraw</a>
-<a href="../referral.html">Referral</a>
-<a href="../login.html" id="signLink">Sign in / Sign out</a>
-<a href="../support.html" style="background:#25D366;color:#fff;border-color:#25D366">💬 Support</a>
-</div>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Investor — Cedars</title>
+<style>:root{--bg:#0b1020;--card:#162040;--br:#1e2d55;--m:#8a9cc7;--g:#00e676;--b:#2a5bd7}*{box-sizing:border-box;font-family:system-ui}body{background:var(--bg);color:#eef2ff;margin:0}.card{background:var(--card);border:1px solid #2a3a6a;border-radius:14px;padding:16px;margin:10px}.btn{width:100%;padding:11px;border-radius:10px;border:none;font-weight:800;min-height:44px;cursor:pointer}.btn-w{background:#fff;color:#000}.btn-b{background:var(--b);color:#fff}.small{font-size:11px;color:var(--m)}#toast{position:fixed;top:68px;left:50%;transform:translateX(-50%);background:#0b1020;border:1px solid var(--g);padding:10px 16px;border-radius:20px;z-index:9999;display:none;font-size:12px;font-weight:700}</style></head><body>
+<div id="toast"></div>
+<div class="card"><div class="small">Portfolio</div><div style="font-size:28px;font-weight:900" id="bal">$0.00</div><div class="small">ROI 94.7% WIN — No Trading Area</div><div style="margin-top:10px;display:flex;gap:8px"><button class="btn btn-w" onclick="popup('✅ Deposit Active','../deposit.html')">Deposit</button><button class="btn btn-b" onclick="popup('✅ Withdraw Active','../withdraw.html')">Withdraw</button></div><div class="small" style="margin-top:8px">Payout timer: <span id="timer">23:41:12</span> — Package: <span id="pkg">$100-$10k</span></div></div>
+<div class="card"><div style="font-weight:800">Packages $100-$10k</div><div class="small">ROI Tracker $500 → $124.5k</div><div id="roi" class="small" style="margin-top:8px"></div></div>
+<div class="card"><div style="font-weight:800">Referral</div><div class="small" id="ref"></div><div id="hist" style="margin-top:8px;font-size:11px"></div></div>
+<script src="../fix.js"></script>
 <script>
-// SIGN IN / SIGN OUT AUTO CHANGE — NO DASHBOARD CHANGE
-(function(){
- let email=localStorage.getItem('cedars_investor_email');
- let logged=localStorage.getItem('cedars_logged_in');
- let el=document.getElementById('signLink');
- if(logged==='true' && email){ el.innerText='Sign out ('+email.split('@')[0]+')'; el.onclick=function(e){e.preventDefault(); localStorage.setItem('cedars_logged_in','false'); location.href='../login.html';}; }
- else{ el.innerText='Sign in / Sign out'; }
-})();
-</script><script src="header-footer.js"></script>
-<!-- END TOP HEADER — BELOW IS YOUR ORIGINAL V41 DASHBOARD — UNTOUCHED -->
+function popup(m,go){let t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',2200);if(go)setTimeout(()=>location.href=go,700);}
+function load(){document.getElementById('bal').innerText='$'+(typeof CedarsBalance==='function'?CedarsBalance():'0.00');document.getElementById('ref').innerText=location.origin+'/Cedars-of-Wealth/register.html?ref='+(localStorage.getItem('cedars_ref')||'');let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]');document.getElementById('hist').innerHTML=tx.slice(-5).map(t=>`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #1e2d55"><span>${t.type} $${t.amt}</span><span>${t.hash.substr(0,8)}...</span></div>`).join('');let roi=500;document.getElementById('roi').innerText='Start $500 → Now $'+(roi*1.947).toFixed(2)+' → Target $124.5k — 94.7% WIN';let h=23,m=41,s=12;setInterval(()=>{s--;if(s<0){s=59;m--} if(m<0){m=59;h--} document.getElementById('timer').innerText=(h+'').padStart(2,'0')+':'+(m+'').padStart(2,'0')+':'+(s+'').padStart(2,'0');},1000);}
+load();
+</script><script src="../header-footer.js"></script><script src="../support-widget.js"></script>
+</body></html>
