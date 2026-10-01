@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cedars Builders Innovation Hub — Jupiter Tech — No Change to Main</title>
+<style>
+body{margin:0;background:#050a08;color:#00ff88;font-family:monospace;padding:15px;}
+.header{border:2px solid #00ff88;padding:15px;border-radius:12px;text-align:center;background:rgba(0,255,136,0.05);box-shadow:0 0 20px rgba(0,255,136,0.2);}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px;}
+@media(max-width:800px){.grid{grid-template-columns:1fr;}}
+.card{border:1px solid #00ff88;border-radius:10px;padding:12px;background:rgba(0,255,136,0.04);position:relative;overflow:hidden;}
+.card h3{margin:5px 0;font-size:13px;color:#fff;} .dim{color:#888;font-size:11px;}
+.btn{padding:6px 12px;background:#00ff88;color:#000;border:none;border-radius:6px;font-weight:bold;cursor:pointer;font-size:11px;margin-top:8px;}
+.ring{width:80px;height:80px;border-radius:50%;border:3px solid #00ff88;margin:10px auto;display:flex;align-items:center;justify-content:center;box-shadow:0 0 15px #00ff88;}
+meter{width:100%;height:18px;} input[type=range]{width:100%;}
+.badge{display:inline-block;padding:2px 6px;border:1px solid #00ff88;border-radius:4px;font-size:9px;margin:2px;}
+</style></head><body>
+
+<div class="header">
+<div style="font-size:32px;">🌲 🪐</div>
+<h2 style="margin:5px;">CEDARS BUILDERS INNOVATION HUB</h2>
+<div class="dim">JUPITER-LEVEL TECH • FROM JUPITER TO COMMAND CENTER • NO CHANGE TO MAIN V50</div>
+<div style="margin-top:8px;">
+<span class="badge">Operator: cryptomeme2030@gmail.com</span>
+<span class="badge">Legacy: 1990@Bonny</span>
+<span class="badge">Gate: GATE-360</span>
+<span class="badge">Builders Mode</span>
+</div>
+<div class="dim" style="margin-top:8px;">Main Locked: cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-control-center.html — This hub is SEPARATE — Optional layer only</div>
+</div>
+
+<div class="grid">
+
+<!-- 1 JUPITER SHIELD -->
+<div class="card"><h3>1. 🛡️ JUPITER SHIELD — Auto-Save</h3><div class="dim">From Juno mission — Survives radiation</div>
+<div id="shieldStatus" class="dim">Last backup: checking...</div>
+<button class="btn" onclick="backupNow()">Backup Now</button>
+<button class="btn" style="background:#111;color:#00ff88;border:1px solid #00ff88;" onclick="restoreNow()">Restore Check</button>
+</div>
+
+<!-- 2 BUILDERS BOARD -->
+<div class="card"><h3>2. 🛰️ STARLINK SYNC — Builders Board</h3><div class="dim">Live builder status</div>
+<div id="buildersBoard">● cryptomeme2030@gmail.com — <span style="color:#00ff88">ONLINE</span><br>● admin@cedars.com — <span style="color:#888">OFFLINE</span></div>
+<button class="btn" onclick="location.reload()">Refresh Board</button>
+</div>
+
+<!-- 3 WHISPER MODE -->
+<div class="card"><h3>3. 🤫 TESLA BIOMODE — Whisper Mode 2.0</h3><div class="dim">For builders meetings — Quiet</div>
+<div>Current: <span id="whisperState">OFF</span></div>
+<button class="btn" onclick="setWhisper('on')">Whisper ON — Dim 30%</button>
+<button class="btn" style="background:#111;color:#00ff88;border:1px solid #00ff88;" onclick="setWhisper('off')">Whisper OFF</button>
+</div>
+
+<!-- 4 LIQUIDITY MIRROR -->
+<div class="card"><h3>4. 💧 BINANCE MIRROR — Payout Pool</h3><div class="dim">55% over 720 days — Visual</div>
+<div style="height:60px;background:#111;border-radius:6px;position:relative;overflow:hidden;margin-top:5px;"><div id="liquid" style="position:absolute;bottom:0;width:100%;background:linear-gradient(#00ff88,#008a4a);height:10%;transition:1s;"></div></div>
+<div class="dim">Fill: <span id="liquidPct">10%</span> — Day <span id="liqDay">1</span>/720</div>
+<input type="range" min="1" max="720" value="1" oninput="updateLiquid(this.value)">
+</div>
+
+<!-- 5 TIME CAPSULE -->
+<div class="card"><h3>5. ⏳ TIME CAPSULE — Day Restore</h3><div class="dim">Apple Time Machine — Read only</div>
+<input type="range" min="1" max="720" value="1" id="timeRange" oninput="updateTime(this.value)">
+<div>Viewing Day: <span id="timeDay">1</span> — 🌲 <span id="timeTree">🌱</span></div>
+<button class="btn" onclick="alert('Snapshot Day '+document.getElementById('timeDay').textContent+' — Main untouched — View only')">Snapshot</button>
+</div>
+
+<!-- 6 GATE RADAR -->
+<div class="card"><h3>6. 📡 STRIPE RADAR — Gate-360 Radar</h3><div class="dim">Gate attempts — Visual only</div>
+<div style="width:80px;height:80px;border:1px dashed #00ff88;border-radius:50%;margin:10px auto;position:relative;"><div style="position:absolute;top:50%;left:50%;width:4px;height:4px;background:#00ff88;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 10px #00ff88;"></div><div id="blip" style="position:absolute;top:20%;left:30%;width:6px;height:6px;background:#00ff88;border-radius:50%;"></div></div>
+<div class="dim">Last: AIBOSS — GATE-360 — <span style="color:#00ff88">GRANTED</span></div>
+</div>
+
+<!-- 7 TRUST RING -->
+<div class="card"><h3>7. 🪐 MAGNETOSPHERE — Trust Ring 360°</h3><div class="dim">Jupiter magnetic protection</div>
+<div class="ring" id="trustRing">360°</div>
+<div class="dim" style="text-align:center;">When cryptomeme2030 online — Ring glows</div>
+<button class="btn" onclick="glowRing()">Activate Ring</button>
+</div>
+
+<!-- 8 BUILDER MODE -->
+<div class="card"><h3>8. 🧱 LEGO — Builder Mode Blocks</h3><div class="dim">Modular — Drag idea — Builders</div>
+<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;">
+<span class="badge" style="cursor:move;">📊 Payout Block</span><span class="badge" style="cursor:move;">🌲 Tree Block</span><span class="badge" style="cursor:move;">🔊 Audio Block</span><span class="badge" style="cursor:move;">🛡️ Gate Block</span>
+</div>
+<div class="dim">Future: drag-drop in this hub only — Main untouched</div>
+</div>
+
+<!-- 9 GOLDEN RECORD -->
+<div class="card"><h3>9. 📀 GOLDEN RECORD — Legacy Voice</h3><div class="dim">Voyager to Jupiter beyond — For Day 720</div>
+<button class="btn" onclick="recordLegacy()">🎙️ Record 18s Builder Message</button>
+<div id="recordStatus" class="dim" style="margin-top:5px;">No message yet — Stored locally only</div>
+</div>
+
+<!-- 10 TREE RINGS -->
+<div class="card"><h3>10. 🌳 TREE RINGS — Growth Multiplier</h3><div class="dim">Cedar rings + Jupiter orbital rings</div>
+<div id="rings" style="font-size:18px;letter-spacing:2px;">○</div>
+<div class="dim">Rings: <span id="ringCount">0</span> — 1 ring per 10 days — Visual prestige</div>
+<button class="btn" onclick="addRings()">Simulate +10 Days</button>
+</div>
+
+</div>
+
+<div style="text-align:center;margin-top:15px;" class="dim">
+Builders Hub is SEPARATE — Does NOT edit cedars-control-center.html — Main V50 locked — Payout 55% — 720 Days — Audio ROI — All intact<br>
+Link: <span style="color:#00ff88">cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-builders-innovation-hub.html</span><br><br>
+<button class="btn" style="padding:10px 20px;" onclick="window.open('https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-control-center.html?v=CLEAN-100-AUDIO-LOCKED','_blank')">🌲 Open Main Command Center — Locked</button>
+</div>
+
+<script>
+// NO WRITE TO MAIN KEYS — READ ONLY — SAFE
+let currentDay = 1;
+try{ currentDay = parseInt(localStorage.getItem('cedars_day_cryptomeme2030@gmail.com')||'1'); }catch(e){}
+document.getElementById('shieldStatus').textContent = 'Last backup check: Day '+currentDay+' — Auto every 60s — Separate slot';
+function backupNow(){
+  try{
+    const data = {day:currentDay, time: new Date().toISOString(), email:'cryptomeme2030@gmail.com'};
+    localStorage.setItem('cedars_jupiter_backup', JSON.stringify(data));
+    document.getElementById('shieldStatus').textContent = '✅ Backup saved: Day '+currentDay+' at '+new Date().toLocaleTimeString()+' — Separate slot — Main untouched';
+  }catch(e){ alert('Backup failed'); }
+}
+function restoreNow(){
+  try{
+    const b = JSON.parse(localStorage.getItem('cedars_jupiter_backup')||'null');
+    if(b) alert('Backup found: Day '+b.day+' — '+b.time+'\nMain not restored — Preview only — No change');
+    else alert('No backup yet — Click Backup Now first');
+  }catch(e){}
+}
+function setWhisper(v){
+  localStorage.setItem('cedars_whisper',v);
+  document.getElementById('whisperState').textContent=v.toUpperCase();
+  if(v==='on') document.body.style.filter='brightness(0.7)'; else document.body.style.filter='none';
+}
+function updateLiquid(val){
+  document.getElementById('liqDay').textContent=val;
+  let pct = Math.round((val/720)*100);
+  document.getElementById('liquid').style.height=pct+'%';
+  document.getElementById('liquidPct').textContent=pct+'%';
+}
+function updateTime(val){
+  document.getElementById('timeDay').textContent=val;
+  let tree = val<50?'🌱':val<200?'🌿':val<500?'🌲':'🌳✨';
+  document.getElementById('timeTree').textContent=tree;
+}
+function glowRing(){
+  const r=document.getElementById('trustRing');
+  r.style.boxShadow='0 0 30px #00ff88, 0 0 60px #00ff88';
+  r.style.borderColor='#fff';
+  setTimeout(()=>{r.style.boxShadow='0 0 15px #00ff88'; r.style.borderColor='#00ff88';},1500);
+}
+let rings=0;
+function addRings(){
+  rings++;
+  document.getElementById('ringCount').textContent=rings;
+  document.getElementById('rings').textContent='◎'.repeat(rings).substring(0,30);
+}
+// init
+updateLiquid(currentDay); updateTime(currentDay);
+try{ const w=localStorage.getItem('cedars_whisper')||'off'; document.getElementById('whisperState').textContent=w.toUpperCase(); if(w==='on') document.body.style.filter='brightness(0.7)'; }catch(e){}
+setInterval(()=>{ backupNow(); },60000);
+function recordLegacy(){
+  document.getElementById('recordStatus').textContent='🎙️ Simulated: Builder message for Day 720 would be recorded here — 18s — Stored in cedars_golden_record — No change to main audio workflow';
+  localStorage.setItem('cedars_golden_record','Builder legacy message placeholder — Day '+currentDay);
+}
+</script>
+</body></html>
