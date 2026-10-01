@@ -1,117 +1,79 @@
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CEDARS OF WEALTH // COMMAND CENTER 360 // CLASSIFIED</title>
+<title>CEDARS OF WEALTH - COMMAND CENTER 360</title>
 <style>
-body{margin:0;background:#000;color:#b0ffb0;font-family:monospace;font-size:11px;}
-.class{width:100%;background:#ffcc00;color:#000;text-align:center;font-weight:900;letter-spacing:5px;padding:3px;font-size:9px;}
-.top{width:100%;background:#0a1410;border-bottom:2px solid #00ff88;display:flex;justify-content:space-between;align-items:center;padding:6px 10px;flex-wrap:wrap;gap:6px;}
-.top b{color:#00ff88;letter-spacing:3px;}
-.nav a{padding:4px 9px;border:1px solid #00ff88;border-radius:10px;color:#8affb0;text-decoration:none;font-size:10px;background:#000;}
-.h2{text-align:center;padding:10px;background:#000;border-bottom:1px solid #00ff88;}
-.big{font-size:30px;font-weight:900;letter-spacing:9px;color:#00ff88;text-shadow:0 0 12px #00ff88;}
-@media(max-width:600px){.big{font-size:18px;letter-spacing:4px;}}
-.sub{font-size:9px;letter-spacing:4px;color:#fff;margin-top:2px;}
-.wrap{display:grid;grid-template-columns:180px 1fr 180px;gap:0;height:calc(100vh - 98px);}
-@media(max-width:900px){.wrap{grid-template-columns:1fr; height:auto;}}
-.side{background:#000a06;border-right:1px solid #003311;padding:6px;}
-.sideR{border-left:1px solid #003311;border-right:0;}
-.side h4{color:#00ff88;font-size:9px;letter-spacing:2px;margin:8px 0 4px 0;border-bottom:1px solid #003311;padding-bottom:2px;}
-.side div{padding:4px 6px;border:1px solid #002a12;margin:3px 0;border-radius:4px;background:#00110a;}
-.center{background:#000;position:relative;overflow:hidden;}
-.frame{width:100%;height:100%;border:0;background:#000;}
-.jup{width:100%;background:#000a06;border-top:2px solid #00ff88;padding:6px;display:grid;grid-template-columns:repeat(10,1fr);gap:4px;}
-@media(max-width:900px){.jup{grid-template-columns:repeat(5,1fr);}}
-.j{border:1px solid #00ff88;border-radius:5px;padding:4px;text-align:center;font-size:8px;background:#00110a;}
-.j b{display:block;color:#00ff88;font-size:9px;}
-.cleanHide{display:none;}
+body{margin:0;background:#000;overflow:hidden;font-family:monospace;}
+.top{height:44px;background:#000;border-bottom:2px solid #00ff88;display:flex;align-items:center;justify-content:space-between;padding:0 12px;position:fixed;top:0;left:0;right:0;z-index:99;}
+.big{color:#00ff88;font-weight:900;letter-spacing:6px;font-size:18px;text-shadow:0 0 10px #00ff88;}
+.menu{position:relative;}
+.mbtn{padding:6px 12px;background:#000;color:#00ff88;border:1px solid #00ff88;border-radius:6px;cursor:pointer;font-weight:800;}
+.drop{position:absolute;right:0;top:34px;background:#000;border:1px solid #00ff88;border-radius:8px;width:220px;display:none;z-index:200;max-height:80vh;overflow-y:auto;}
+.drop a,.drop div{display:block;padding:9px 12px;color:#9effb5;text-decoration:none;font-size:11px;border-bottom:1px solid #001a0f;cursor:pointer;}
+.drop a:hover{background:#001a0f;color:#00ff88;}
+.show{display:block;}
+.frame{width:100vw;height:100vh;border:0;background:#000;padding-top:44px;box-sizing:border-box;}
 </style></head><body>
 
-<div class="class">CLASSIFICATION: CEDARS//NOFORN — COMMAND CENTER 360 — AUDIO ROI 1.5% 12PM ET — 720 DAYS — SINGLE ORIGIN CRD-M75TJ2 — MAIN FILE NOT EDITED</div>
-
 <div class="top">
-<b>🌲 CEDARS OF WEALTH — COMMAND CENTER 360</b>
-<div class="nav">
-<a href="/">Home</a><a href="#">About</a><a href="#">Calendar</a><a href="/Cedars-of-Wealth/register.html?ref=CRD-M75TJ2">Register</a><a href="#">Plans</a><a href="#">Deposit</a><a href="#">Withdraw</a><a href="#">Referral</a>
-</div>
-<div style="color:#fff;" id="t">360° LIVE</div>
-</div>
-
-<div class="h2">
-<div class="big">CEDARS OF WEALTH</div>
-<div class="sub">MILITARY INTELLIGENCE ORGANIZED — JADC2 STRUCTURE — OODA LOOP ACTIVE — CLEAN SIGNAL</div>
-</div>
-
-<div class="wrap">
-<!-- LEFT - INTEL STREAMS - MILITARY SECRET: COMINT/SIGINT/HUMINT -->
-<div class="side">
-<h4>▲ SIGINT / COMINT</h4>
-<div>🔊 AUDIO ROI 1.5% — 12PM ET — COMINT ACTIVE</div>
-<div>📡 GATE RADAR — GATE-360 — F2T2EA</div>
-<div>⏳ TIME CAPSULE — 720D COUNTDOWN</div>
-<h4>▲ HUMINT / OSINT</h4>
-<div>👤 BUILDERS NETWORK — HUMINT</div>
-<div>✈️ TELEGRAM — OSINT FEED</div>
-<div>🌐 4 BRANCHES — GLOBAL HUMINT</div>
-<h4>▲ JUPITER ASSETS</h4>
-<div>🛡️ SHIELD — On-chain Proof</div>
-<div>🛰️ STARLINK — Live Map</div>
+<div class="big">CEDARS OF WEALTH — COMMAND CENTER 360</div>
+<div style="display:flex;gap:8px;align-items:center;">
+<span style="color:#fff;font-size:10px;" id="t">360° LIVE</span>
+<div class="menu">
+<button class="mbtn" onclick="document.getElementById('d').classList.toggle('show')">☰ COMMAND</button>
+<div class="drop" id="d">
+<a href="/">Home</a>
+<a href="#">About us</a>
+<a href="#">Calendar</a>
+<a href="/Cedars-of-Wealth/register.html?ref=CRD-M75TJ2">Register — One Origin CRD-M75TJ2</a>
+<a href="#">Plans</a>
+<a href="#">Deposit</a>
+<a href="#">Withdraw</a>
+<a href="#">Referral — 10%</a>
+<a href="#">Sign out</a>
+<div style="background:#001a0f;color:#ffcc00;font-weight:900;">— JUPITER INNOVATIONS —</div>
+<div>🛡️ SHIELD — 55% Proof</div>
+<div>🛰️ STARLINK — Global Map</div>
+<div>🔊 WHISPER 2.0 — Audio ROI</div>
 <div>🪞 MIRROR — 45% Reserve</div>
+<div>⏳ CAPSULE — 720 Days</div>
+<div>📡 RADAR — GATE-360</div>
+<div>⭕ TRUST RING — 4 Branches</div>
+<div>🧱 LEGO — Stack Units</div>
+<div>📀 GOLDEN RECORD — Oath</div>
+<div>🌲 TREE RINGS — Legacy</div>
+</div>
+</div>
+</div>
 </div>
 
-<!-- CENTER - MAIN BATTLE DISPLAY - CLEAN MONITORING - NO NOISE -->
-<div class="center">
 <iframe class="frame" id="cmd" src="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-control-center.html?v=CLEAN-100-AUDIO-LOCKED"></iframe>
-</div>
-
-<!-- RIGHT - LOGISTICS / FINANCE - MILITARY SECRET: SINGLE SOURCE OF TRUTH -->
-<div class="side sideR">
-<h4>▲ FINANCE / LOGISTICS</h4>
-<div>💰 DEPOSIT — SUPPLY CHAIN</div>
-<div>💸 WITHDRAW — 55% PAYOUT — TACTICAL</div>
-<div>🏦 TREASURY — $0.00 — V16</div>
-<div>🎯 TARGETING — PLANS — ENGAGE</div>
-<h4>▲ COMMAND / CONTROL</h4>
-<div>🔒 SIGN OUT — COMMS SECURE</div>
-<div>● 360° LIVE — OODA LOOP</div>
-<div>⭕ TRUST RING — ONE ORIGIN</div>
-<h4>▲ LEGACY SYSTEMS</h4>
-<div>🧱 LEGO BLOCKS — UNIT STACK</div>
-<div>📀 GOLDEN RECORD — OATH</div>
-<div>🌲 TREE RINGS — LEGACY LOG</div>
-</div>
-</div>
-
-<!-- BOTTOM - JUPITER INNOVATIONS - 10 TECHS - ORGANIZED - NO CLUTTER -->
-<div class="jup">
-<div class="j"><b>SHIELD</b>55% Proof</div>
-<div class="j"><b>STARLINK</b>Map</div>
-<div class="j"><b>WHISPER</b>Audio</div>
-<div class="j"><b>MIRROR</b>Reserve</div>
-<div class="j"><b>CAPSULE</b>720D</div>
-<div class="j"><b>RADAR</b>GATE-360</div>
-<div class="j"><b>TRUST</b>Ring</div>
-<div class="j"><b>LEGO</b>Stack</div>
-<div class="j"><b>RECORD</b>Oath</div>
-<div class="j"><b>RINGS</b>Legacy</div>
-</div>
 
 <script>
-setInterval(()=>{document.getElementById('t').textContent=new Date().toLocaleString()+" — 360° LIVE — OODA ACTIVE";},1000);
-// CLEAN UNNECESSARY WRITING INSIDE COMMAND CENTER — WITHOUT CHANGING FILE — VISUAL FILTER ONLY
+setInterval(()=>{document.getElementById('t').textContent=new Date().toLocaleTimeString()+" — 360° LIVE";},1000);
+window.onclick=function(e){if(!e.target.matches('.mbtn')){var d=document.getElementById('d'); if(d.classList.contains('show')) d.classList.remove('show');}}
+// BEST MANAGEMENT — CLEAN DOUBLE CEDARS — HIDE DUPLICATE HEADER INSIDE IFRAME — FULL FULL SCREEN
 document.getElementById('cmd').addEventListener('load', function(){
   try{
     var doc=this.contentDocument;
-    var s=doc.createElement('style');
-    s.innerHTML=`header,.topbar,.navbar{display:none!important} *{letter-spacing:0.5px!important}`;
-    doc.head.appendChild(s);
-    // Remove duplicate text noise — keep only core data
-    var kill=["Cedars of Wealth","Home","About us","Calendar","Register","Plans","Deposit","Withdraw","Referral","Sign out","COMMAND CENTER 360 — AUDIO ROI","WITHDRAW","SIGN OUT","AUDIO ROI 🔊","TELEGRAM"];
-    var all=doc.querySelectorAll('nav, header, div');
+    // Inject clean filter — Hide duplicate top navs and duplicate big titles
+    var style=doc.createElement('style');
+    style.innerHTML=`
+      /* HIDE DIRTY PIECES — ACCOMMODATE INSIDE SYSTEM — NO DOUBLE CEDARS */
+      body{margin:0!important}
+      /* Hide first header row if wrapper already shows it */
+      header, .navbar, .topbar, nav { display:none !important; }
+      /* Hide duplicate CEDARS OF WEALTH big titles inside — keep data only */
+      h1, .big-title { display:none !important; }
+      /* Make operations full full screen — widen */
+      .container, .main, #app, main { width:100%!important; max-width:100%!important; padding:2px!important; margin:0!important; }
+    `;
+    doc.head.appendChild(style);
+    // Aggressive clean — remove elements with same text as wrapper
+    var all=doc.querySelectorAll('div, header, nav');
     all.forEach(function(el){
-      var txt=(el.innerText||"").trim();
-      if(txt.length<45 && kill.some(k=>txt.includes(k)) && el.children.length<=3 && el.offsetHeight<70){
-        // Only hide top nav clones, not data tables
-        if(doc.querySelectorAll('nav').length>0 || txt.includes("Cedars")){ /* keep one */ }
+      var t=(el.innerText||"").trim();
+      if((t==="Cedars of Wealth" || t.startsWith("Cedars of Wealth")) && el.offsetHeight<80){
+        el.style.display='none';
       }
     });
   }catch(e){}
