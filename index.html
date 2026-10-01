@@ -1,44 +1,44 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars of Wealth - 10 Year Education</title>
-<style>:root{--bg:#0b1020;--card:#162040;--br:#1e2d55;--m:#8a9cc7;--g:#00e676;--b:#2a5bd7}*{box-sizing:border-box;font-family:system-ui;margin:0;padding:0}body{background:var(--bg);color:#eef2ff;min-height:100vh}
-.hero{max-width:760px;margin:50px auto;text-align:center;padding:20px}
-.hero h1{font-size:36px;font-weight:900;color:#fff}
-.hero p{color:var(--m);font-size:14px;margin-top:8px}
-.btns{display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap}
-.btn{padding:12px 20px;border-radius:10px;border:none;font-weight:800;cursor:pointer;text-decoration:none;font-size:13px;display:inline-block;min-height:44px}
-.btn-w{background:#fff;color:#000}.btn-b{background:var(--b);color:#fff}
-.card{background:var(--card);border:1px solid #2a3a6a;border-radius:14px;padding:18px;margin:14px auto;max-width:760px}
-.small{font-size:12px;color:var(--m);line-height:1.5}
-.plans{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px}
-.plan{background:#0b1020;border:1px solid var(--br);border-radius:10px;padding:12px;text-align:center}
-</style></head><body>
-
-<div class="hero">
-<h1>🌲 Cedars of Wealth</h1>
-<p>10-Year Wealth Education — Mighty Cedar Package</p>
-<div class="btns">
-<a class="btn btn-w" href="register.html">Start Now</a>
-<a class="btn btn-b" href="#plans">View Plans</a>
-<a class="btn btn-w" href="investor-dashboard.html" style="background:var(--card);color:#fff;border:1px solid var(--br)">Dashboard</a>
+<!-- PACKAGES $5 TO $100,000 - CORRECTED - STANDARD VIEW -->
+<div class="grid3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;">
+  <div class="plan" onclick="openPlan('sprout','5')" style="border-color:#00ff88;">
+    <h4 style="font-size:36px;color:#00ff88;">$5</h4>
+    <div style="color:#fff;font-size:22px;font-weight:bold;">Cedar Sprout</div>
+    <div style="color:#7de8ff;font-size:16px;font-weight:bold;margin-top:6px;">$5 to $99</div>
+    <div style="color:#888;font-size:14px;margin-top:4px;">Daily 1.5% — $0.07/day</div>
+  </div>
+  <div class="plan" onclick="openPlan('root','100')">
+    <h4 style="font-size:36px;">$100</h4>
+    <div style="color:#fff;font-size:22px;font-weight:bold;">Cedar Root</div>
+    <div style="color:#7de8ff;font-size:16px;font-weight:bold;margin-top:6px;">$100 to $499</div>
+    <div style="color:#888;font-size:14px;margin-top:4px;">Daily 1.5% — $1.50/day</div>
+  </div>
+  <div class="plan" onclick="openPlan('trunk','500')">
+    <h4 style="font-size:36px;">$500</h4>
+    <div style="color:#fff;font-size:22px;font-weight:bold;">Cedar Trunk</div>
+    <div style="color:#7de8ff;font-size:16px;font-weight:bold;margin-top:6px;">$500 to $1,999</div>
+    <div style="color:#888;font-size:14px;margin-top:4px;">Daily 1.5% — $7.50/day</div>
+  </div>
+  <div class="plan" onclick="openPlan('branch','2000')">
+    <h4 style="font-size:36px;">$2,000</h4>
+    <div style="color:#fff;font-size:22px;font-weight:bold;">Cedar Branch</div>
+    <div style="color:#7de8ff;font-size:16px;font-weight:bold;margin-top:6px;">$2,000 to $4,999</div>
+    <div style="color:#888;font-size:14px;margin-top:4px;">Daily 1.5% — $30/day</div>
+  </div>
+  <div class="plan" onclick="openPlan('forest','5000')">
+    <h4 style="font-size:36px;">$5,000</h4>
+    <div style="color:#fff;font-size:22px;font-weight:bold;">Cedar Forest</div>
+    <div style="color:#7de8ff;font-size:16px;font-weight:bold;margin-top:6px;">$5,000 to $9,999</div>
+    <div style="color:#888;font-size:14px;margin-top:4px;">Daily 1.5% — $75/day</div>
+  </div>
+  <div class="plan" onclick="openPlan('grove','10000')">
+    <h4 style="font-size:36px;">$10,000</h4>
+    <div style="color:#fff;font-size:22px;font-weight:bold;">Cedar Grove</div>
+    <div style="color:#7de8ff;font-size:16px;font-weight:bold;margin-top:6px;">$10,000 to $49,999</div>
+    <div style="color:#888;font-size:14px;margin-top:4px;">Daily 1.5% — $150/day</div>
+  </div>
+  <div class="plan" onclick="openPlan('legacy','50000')" style="grid-column:span 3;border:2px solid #00ff88;box-shadow:0 0 25px rgba(0,255,136,0.4);background:linear-gradient(145deg,#102a1e,#1a3a2a);">
+    <h4 style="font-size:42px;color:#00ff88;">$50,000 to $100,000</h4>
+    <div style="color:#fff;font-size:24px;font-weight:bold;">Cedar Legacy — MAX PACKAGE</div>
+    <div style="color:#00ff88;font-size:18px;font-weight:bold;margin-top:6px;">$50k to $100k — Daily 1.5% — $750 to $1,500/day — Monthly $22,500 to $45,000</div>
+  </div>
 </div>
-</div>
-
-<div class="card" id="about">
-<h3>Why Cedars?</h3>
-<p class="small" style="margin-top:8px">Learn risk management, compounding and discipline. Education first, trading tools second.</p>
-</div>
-
-<div class="card" id="plans">
-<h3>Plans</h3>
-<div class="plans">
-<div class="plan"><div style="font-weight:800;font-size:18px">$50</div><div class="small">Starter</div></div>
-<div class="plan"><div style="font-weight:800;font-size:18px">$150</div><div class="small">Growth</div></div>
-<div class="plan"><div style="font-weight:800;font-size:18px">$500</div><div class="small">Mighty Cedar</div></div>
-</div>
-<p class="small" style="margin-top:10px">Binary 2 lines only — Referral 10% / 5% / 1% — USD only</p>
-<a class="btn btn-w" style="width:100%;margin-top:12px;text-align:center" href="register.html">Register</a>
-</div>
-
-<script src="fix.js"></script>
-<script src="header-footer.js"></script>
-<script src="support-widget.js"></script>
-</body></html>
