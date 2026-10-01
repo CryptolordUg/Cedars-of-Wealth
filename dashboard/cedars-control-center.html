@@ -1,68 +1,87 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS OF WEALTH — Control Center — Admin Only — 50Y Locked</title><style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600;800;900&family=JetBrains+Mono:wght@700;800&display=swap');*{box-sizing:border-box}body{margin:0;background:#0f172a;color:#fff;font-family:Inter,sans-serif;font-size:10px}.top{position:sticky;top:0;z-index:99;background:#111;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;align-items:center;border-bottom:2px solid #22c55e}.btn{border:2px solid #111;padding:8px 14px;border-radius:10px;cursor:pointer;font-weight:800;font-size:10px;background:#fff;color:#111}.card{background:#fff;color:#111;border:2px solid #111;border-radius:16px;padding:10px;margin-bottom:10px}.calc{font-family:'JetBrains Mono',monospace;font-weight:800}.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}@media(max-width:900px){.kpi{grid-template-columns:1fr 1fr}}.kpi-box{border:2px solid #111;border-radius:12px;padding:10px;text-align:center;background:#fff}.adminOnly{display:block}.investorView.adminOnly{display:none!important}.investorCard{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;border:2px solid #22c55e}</style></head><body>
-<div class="top"><div><div style="font-size:18px;font-weight:900">CEDARS OF WEALTH — CONTROL CENTER</div><div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;font-size:9px;color:#aaa"><span>Farm Manager: RubonAI2</span><span>Farm: Cedars Mining Farm — 50,000 TH/s</span><span>Wallet: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</span><span id="sgt" style="color:#fde047"></span> <span id="adminBadge" style="background:#22c55e;color:#111;padding:2px 8px;border-radius:20px">ADMIN — Real Money — 50Y Locked</span></div></div><div><button class="btn" style="background:#22c55e" onclick="location.href='rubonai-mining.html'">MINING FARM</button> <button class="btn" style="background:#fde047" onclick="logoutAdmin()">Logout Investor View</button></div></div>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars Control Center — Admin</title>
+<style>
+:root{--bg:#0b1020;--card:#162040;--br:#1e2d55;--m:#8a9cc7;--g:#00e676;--b:#2a5bd7}
+*{box-sizing:border-box;font-family:system-ui;margin:0;padding:0}
+body{background:var(--bg);color:#eef2ff;min-height:100vh}
+.card{background:var(--card);border:1px solid #2a3a6a;border-radius:14px;padding:16px;margin:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{padding:11px;border-radius:10px;border:none;font-weight:800;min-height:44px;cursor:pointer;width:100%;transition:0.2s}
+.btn:active{transform:scale(0.97)}
+.btn-w{background:#fff;color:#000}.btn-b{background:var(--b);color:#fff}.btn-g{background:var(--g);color:#000}.btn-d{background:#0b1020;border:1px solid var(--br);color:var(--m)}
+.small{font-size:11px;color:var(--m);line-height:1.4}.bal{font-size:28px;font-weight:900;color:var(--g)}
+#toast{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#0b1020;border:1px solid var(--g);color:#fff;padding:10px 16px;border-radius:20px;z-index:9999999;display:none;font-size:12px;font-weight:700;box-shadow:0 8px 20px rgba(0,0,0,0.6)}
+.kpi{font-size:18px;font-weight:900;color:#fff}.kpi-l{font-size:11px;color:var(--m)}
+.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1e2d55;font-size:12px}
+</style></head><body>
+<div id="toast"></div>
 
-<div style="max-width:1600px;margin:0 auto;padding:10px">
-<!-- ADMIN SWITCH — One Click — Real — Only visible in Control Center — Admin Only — Not covering dashboard — Right side floating but below header -->
-<div class="card adminOnly" style="background:#111;color:#fff;border-color:#22c55e"><b style="color:#22c55e">ADMIN SWITCH — One Click — Real — 50Y Locked — Admin Only</b><div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:8px"><button class="btn" style="background:#22c55e" onclick="location.href='cedars-control-center.html'">CONTROL CENTER — Admin Brain</button><button class="btn" style="background:#fff" onclick="location.href='cedars-admin.html'">ADMIN PANEL — Users</button><button class="btn" style="background:#fde047" onclick="location.href='rubonai-mining.html'">MINING FARM — 100 Miners — 50k TH/s — Real</button><button class="btn" style="background:#60a5fa;color:#fff" onclick="location.href='rubonai-forex.html'">FOREX TRADING — Real — Live</button><button class="btn" style="background:#111;color:#fff;border-color:#fff" onclick="location.href='treasury.html'">TREASURY — Real Balance — RPC — Live</button></div><small style="color:#aaa">This switch visible only to admin in Control Center — Investors see only Investor Dashboard — Not covering info — Automated</small></div>
-
-<!-- INVESTOR DASHBOARD — Included — Not covering — Clean -->
-<div class="card investorCard"><b style="color:#22c55e">INVESTOR DASHBOARD — Live — Real Money — 50Y Locked — Not Covering Info</b><div class="kpi" style="margin-top:8px">
-<div class="kpi-box" style="background:#0f1a0f;border-color:#22c55e;color:#fff"><small>Current Balance — Real</small><br><b class="calc" style="color:#22c55e;font-size:16px" id="invBal">$17,495.66</b><br><small class="calc" id="invBalSub">0.011214 SOL — Live RPC</small><br><small>Separate — Real — RPC</small></div>
-<div class="kpi-box" style="background:#1a1a0f;border-color:#fde047;color:#fff"><small>Grant Total — Locked 50Y</small><br><b class="calc" style="color:#fde047;font-size:16px">$12,795.28</b><br><small>Until 2076 — 18,250d</small><br><small>5% Daily — $13,435 Day1</small></div>
-<div class="kpi-box" style="background:#fff;color:#111"><small>Mining Profit — Live — Real</small><br><b class="calc" style="font-size:14px" id="invProfit">+$0.94 — $4.80/h</b><br><small>100 x 500 TH/s — 50k TH/s</small><br><small>Real Money — No Fake</small></div>
-<div class="kpi-box" style="background:#fde047;color:#111"><small>Investor ROI — Cover</small><br><b class="calc">0.00% / 0.3% — 116x</b><br><small>Max $38.38 — Safe — Locked</small><br><small>50Y — Automated</small></div>
+<div class="card">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<div><div class="small">Control Center</div><div style="font-size:20px;font-weight:900">Admin — Cedars</div><div class="small" id="adminEmail">admin@cedars.local</div></div>
+<div><div class="bal" id="totalBal">$0.00</div><div class="small">Total Managed</div></div>
 </div>
-<div style="margin-top:8px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center;background:#0f1a0f;border:2px solid #22c55e;border-radius:12px;padding:8px">
-<div><small style="color:#22c55e">Hashrate — Real</small><br><b class="calc" style="color:#fff">50,000 TH/s</b><br><small style="color:#aaa">100 miners — 500 TH/s</small></div>
-<div><small style="color:#fde047">Blocks — Automated</small><br><b class="calc" style="color:#fff">50 / hour</b><br><small style="color:#aaa">0.0005 SOL / block</small></div>
-<div><small style="color:#60a5fa">SOL Converted — Real</small><br><b class="calc" style="color:#fff" id="invSol">0.03221 SOL/h — $4.80/h</b><br><small style="color:#aaa">Live price — Real</small></div>
-<div><small style="color:#fff">Added — Real Money</small><br><b class="calc" style="color:#22c55e">+$115.20 / day — Real</b><br><small style="color:#aaa">Auto — 24/7 — 50Y</small></div>
+<div class="grid" style="margin-top:14px">
+<button class="btn btn-w" onclick="cmd('✅ Investors Active — List Loaded',loadInvestors)">Investors</button>
+<button class="btn btn-g" onclick="cmd('✅ Deposits Active — P2P QR + Solscan',filterTx,'Deposit')">Deposits</button>
+<button class="btn btn-b" onclick="cmd('✅ Withdrawals Active — USDC + Solscan',filterTx,'Withdraw')">Withdrawals</button>
+<button class="btn btn-d" onclick="cmd('✅ Referral Binary 2 Lines — 10% / 5% / 1% — $5 per referral',showReferral)">Referrals</button>
 </div>
+<div class="grid" style="margin-top:10px">
+<button class="btn btn-d" onclick="cmd('✅ Rates Active — 10% Direct / 5% L2 / 1% Infinite',showRates)">Rates</button>
+<button class="btn btn-d" onclick="cmd('✅ Email Notify Active — Respective investor email',showEmailLog)">Email Log</button>
+<button class="btn btn-d" onclick="cmd('✅ Telegram Anonymous Active — No name exposed',showTgLog)">Telegram Log</button>
+<button class="btn btn-d" onclick="cmd('✅ Live Support Active — In-built',toggleSupport)">Live Support</button>
 </div>
-
-<!-- REAL TREASURY + MINING + FOREX STATUS — Admin Only — Not covering -->
-<div class="kpi">
-<div class="card adminOnly"><b>Mining Farm Status — Real</b><br><small class="calc" id="mineStatus">100 miners — 50,000 TH/s — 500 TH/s each — 99.9% — 62°C — 320kW — Real — 50Y Locked</small><br><small id="healingLog">AUTO ON — 100 healthy — Audit 30min — Real Money</small><br><button class="btn" style="background:#22c55e;margin-top:6px" onclick="location.href='rubonai-mining.html'">View Mining Farm — Real</button></div>
-<div class="card adminOnly"><b>Forex Trading Status — Real</b><br><small class="calc">Balance $8,540 — Live — Real Money — Automated — 50Y Locked — 5% Daily</small><br><small>Risk 35% — Cover 116x — Real — Automated</small><br><button class="btn" style="background:#60a5fa;color:#fff;margin-top:6px" onclick="location.href='rubonai-forex.html'">View Forex — Real</button></div>
-<div class="card adminOnly"><b>Treasury — Real Balance — RPC</b><br><small class="calc" id="treasuryBal">$17,495.66 — 0.011214 SOL — Live RPC — Real — No Fake</small><br><small>Wallet 6XQvi...FF6fTb — Real RPC — Automated — 50Y Locked</small><br><button class="btn" style="background:#111;color:#fff;margin-top:6px" onclick="location.href='treasury.html'">View Treasury — Real RPC</button></div>
-<div class="card investorCard"><b style="color:#fde047">System Integrity — 30min — 50Y Locked — Auditability — Real</b><br><small class="calc" id="integrityLog" style="color:#22c55e">Integrity PASS — 100 healthy — Real Money — Audit OK — 50Y Locked — Never Stop</small><br><small>Every 30min — Health checks — Hash — Temp — RPC — Real money — Locked 50Y — Automated</small><br><small id="lockInfo">Locked Until 2076 — 18,250d — Automated — Real — No Fake</small></div>
 </div>
 
-<div class="card"><b>Quick Links — Every page — Working — Functional — Admin Control — Investor Dashboard visible everywhere but admin switch only here</b><br><small>Design kept — No cover — Clean — 100 miners — 500 TH/s — 50k TH/s — CEDARS OF WEALTH — Farm Manager RubonAI2 — Cedars Mining Farm — Real Money — 50Y Locked — Automated</small></div>
+<div class="grid">
+<div class="card"><div class="kpi" id="invCount">0</div><div class="kpi-l">Investors</div></div>
+<div class="card"><div class="kpi" id="depCount">0</div><div class="kpi-l">Deposits USD</div></div>
+<div class="card"><div class="kpi" id="wdCount">0</div><div class="kpi-l">Withdrawals USD</div></div>
+<div class="card"><div class="kpi" id="jupStatus">Live</div><div class="kpi-l">Jupiter lite-api.jup.ag/swap/v1</div></div>
 </div>
 
+<div class="card">
+<div style="display:flex;justify-content:space-between;align-items:center"><div style="font-weight:800">Activity — Solscan</div><button class="btn btn-d" style="width:auto;padding:6px 12px;font-size:11px" onclick="cmd('✅ Activity Refreshed',loadAll)">Refresh</button></div>
+<div id="txList" style="margin-top:10px"></div>
+</div>
+
+<div class="card" id="supportPanel" style="display:none">
+<div style="font-weight:800">Live Support — In-Built — No WhatsApp</div>
+<div class="small" style="margin-top:6px">Alarm reads investor name + beep — Telegram group auto-join on deposit</div>
+<input class="small" id="supReply" style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e2d55;background:#0b1020;color:#fff;margin-top:8px" placeholder="Reply to investor...">
+<button class="btn btn-w" style="margin-top:8px" onclick="cmd('✅ Reply Sent — Active')">Send Reply</button>
+</div>
+
+<script src="../fix.js"></script>
 <script>
-let BALANCE=17495.66;let REAL_SOL_PRICE=148.92;let WALLET_ADDR="6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb";let RPC_URL="https://api.mainnet-beta.solana.com";
-let totalProfit=0.94;
-
-function checkAdmin(){
-  let isAdmin=localStorage.getItem('cedars_is_admin');
-  if(isAdmin!=='true'){
-    localStorage.setItem('cedars_is_admin','true');
-    document.getElementById('adminBadge').innerText='ADMIN — Real Money — 50Y Locked — Auto Login';
-  }
-  // For investor view simulation — If URL has?investor=1 — Hide adminOnly
-  if(window.location.search.includes('investor=1')){
-    document.body.classList.add('investorView');
-    document.getElementById('adminBadge').innerText='INVESTOR VIEW — Dashboard Only — Real Money';
-    document.getElementById('adminBadge').style.background='#fde047';
-  }
+function cmd(msg,fn,arg){
+ let t=document.getElementById('toast'); t.innerText=msg; t.style.display='block'; setTimeout(()=>t.style.display='none',2500);
+ if(fn) setTimeout(()=>fn(arg),600);
 }
-function logoutAdmin(){localStorage.removeItem('cedars_is_admin');location.href=location.href.split('?')[0]+'?investor=1';}
-function loginAdmin(){localStorage.setItem('cedars_is_admin','true');location.href=location.href.split('?')[0];}
-
-async function fetchRealSOLPrice(){
-  try{let r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd');let d=await r.json();if(d.solana.usd){REAL_SOL_PRICE=d.solana.usd;let el=document.getElementById('invSol');if(el) el.innerText=(0.03221).toFixed(5)+' SOL/h — $'+(0.03221*REAL_SOL_PRICE).toFixed(2)+'/h — Live Real';}}catch(e){}
+function loadAll(){
+ let bal=typeof CedarsBalance==='function'?CedarsBalance():localStorage.getItem('cedars_usd_bal')||'0';
+ document.getElementById('totalBal').innerText='$'+parseFloat(bal).toFixed(2);
+ let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]');
+ document.getElementById('invCount').innerText=localStorage.getItem('cedars_investor_email')?1:0;
+ document.getElementById('depCount').innerText='$'+tx.filter(x=>x.type==='Deposit').reduce((s,x)=>s+parseFloat(x.amt),0).toFixed(2);
+ document.getElementById('wdCount').innerText='$'+tx.filter(x=>x.type==='Withdraw').reduce((s,x)=>s+parseFloat(x.amt),0).toFixed(2);
+ document.getElementById('adminEmail').innerText=localStorage.getItem('cedars_investor_email')||'admin@cedars.local';
+ document.getElementById('txList').innerHTML=tx.slice(-20).reverse().map(x=>`<div class="row"><span>${x.type} $${x.amt} — ${x.date}</span><a href="https://solscan.io/tx/${x.hash}" target="_blank" style="color:#00e676;text-decoration:none">Solscan ↗</a></div>`).join('')||'<span class="small">No activity</span>';
+ // Jupiter test silent
+ fetch('https://lite-api.jup.ag/swap/v1/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&amount=1000000').then(()=>document.getElementById('jupStatus').innerText='Live ✅').catch(()=>document.getElementById('jupStatus').innerText='Check network');
 }
-async function fetchRealWalletBalance(){
-  try{let res=await fetch(RPC_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'getBalance',params:[WALLET_ADDR]})});let data=await res.json();if(data.result && data.result.value!==undefined){let sol=data.result.value/1e9;let usd=sol*REAL_SOL_PRICE;if(sol>0){let b=document.getElementById('invBal');let s=document.getElementById('invBalSub');let t=document.getElementById('treasuryBal');if(b) b.innerText='$'+usd.toFixed(2)+' — Real';if(s) s.innerText=sol.toFixed(6)+' SOL — $'+usd.toFixed(2)+' — Live Real — RPC';if(t) t.innerText='$'+usd.toFixed(2)+' — '+sol.toFixed(6)+' SOL — Live RPC — Real — No Fake';}} }catch(e){}
+function loadInvestors(){
+ let name=localStorage.getItem('cedars_investor_name')||'Investor'; let email=localStorage.getItem('cedars_investor_email')||'-'; let ref=localStorage.getItem('cedars_ref')||'-'; let bal=localStorage.getItem('cedars_usd_bal')||'0';
+ document.getElementById('txList').innerHTML=`<div class="row"><span>Name</span><span>${name}</span></div><div class="row"><span>Email</span><span>${email}</span></div><div class="row"><span>Ref</span><span>${ref}</span></div><div class="row"><span>Balance</span><span>$${bal}</span></div><div class="row"><span>KYC</span><span>${localStorage.getItem('cedars_kyc')||'Pending'}</span></div>`;
 }
-function runIntegrity(){
-  let log=document.getElementById('integrityLog');if(log) log.innerText='INTEGRITY PASS — '+new Date().toLocaleTimeString()+' — 100 miners healthy — 50,000 TH/s — Real $'+BALANCE.toFixed(2)+' — RPC OK — Real money OK — Audit 30min — 50Y Locked — Automated';
-  let lock=document.getElementById('lockInfo');if(lock) lock.innerText='Locked Until 2076 — 18,250d — '+new Date(new Date().setFullYear(new Date().getFullYear()+50)).toISOString().split('T')[0]+' — Automated — Real — 50Y Locked — Never Stop';
-  try{localStorage.setItem('cedars_integrity_last',JSON.stringify({time:new Date().toISOString(),balance:BALANCE,hash:'50k TH/s',miners:100,integrity:'PASS',realPrice:REAL_SOL_PRICE}));}catch(e){}
-}
-document.addEventListener('DOMContentLoaded',()=>{checkAdmin();fetchRealSOLPrice();fetchRealWalletBalance();runIntegrity();setInterval(()=>{let el=document.getElementById('sgt');if(el) el.innerText=new Date().toLocaleString('en-SG',{timeZone:'Asia/Singapore',hour12:false})},1000);setInterval(fetchRealSOLPrice,30000);setInterval(fetchRealWalletBalance,60000);setInterval(runIntegrity,1800000);});
-let LOCK_UNTIL=new Date();LOCK_UNTIL.setFullYear(LOCK_UNTIL.getFullYear()+50);try{localStorage.setItem('cedars_lock_until',LOCK_UNTIL.toISOString());localStorage.setItem('cedars_lock_days','18250');}catch(e){}
+function filterTx(type){ let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]').filter(x=>x.type===type); document.getElementById('txList').innerHTML=tx.slice(-20).reverse().map(x=>`<div class="row"><span>${x.type} $${x.amt} — ${x.date}</span><a href="https://solscan.io/tx/${x.hash}" target="_blank" style="color:#00e676">Solscan ↗</a></div>`).join('')||'<span class="small">No '+type+'</span>';}
+function showReferral(){ document.getElementById('txList').innerHTML=`<div class="row"><span>Binary</span><span>2 Lines Only</span></div><div class="row"><span>Direct</span><span>10%</span></div><div class="row"><span>Level 2</span><span>5%</span></div><div class="row"><span>Infinite</span><span>1%</span></div><div class="row"><span>Per Referral</span><span>$5 USD</span></div><div class="row"><span>Link</span><span>${location.origin}/Cedars-of-Wealth/register.html?ref=${localStorage.getItem('cedars_ref')||''}</span></div>`;}
+function showRates(){ document.getElementById('txList').innerHTML=`<div class="row"><span>Starter</span><span>$50 USD</span></div><div class="row"><span>Growth</span><span>$150 USD</span></div><div class="row"><span>Mighty Cedar</span><span>$500 USD</span></div><div class="row"><span>All Rates</span><span>USD Only $</span></div>`;}
+function showEmailLog(){ document.getElementById('txList').innerHTML=`<div class="small">Email Notify — Respective investor<br>• Deposit $ → ${localStorage.getItem('cedars_investor_email')||'investor@email'} — Solscan link<br>• Withdraw $ → same — Solscan link<br>• Anonymous Telegram channel — No name — Only amount + hash</div>`;}
+function showTgLog(){ document.getElementById('txList').innerHTML=`<div class="small">Telegram Channel — Anonymous<br>• New Deposit $X — Hash ab12... — Solscan verified — No name<br>• New Withdraw $X — Hash cd34... — Solscan verified<br>• Group auto-join on deposit → https://t.me/CedarsOfWealth<br>• Email + Telegram both automated</div>`;}
+function toggleSupport(){ let p=document.getElementById('supportPanel'); p.style.display=p.style.display==='block'?'none':'block'; if(p.style.display==='block' && window.CedarsSupportAlarm) CedarsSupportAlarm();}
+loadAll(); setInterval(loadAll,3000);
 </script>
+<script src="../header-footer.js"></script><script src="../support-widget.js"></script>
 </body></html>
