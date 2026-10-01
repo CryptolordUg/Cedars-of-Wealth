@@ -1,196 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title>Register - Cedars of Wealth - 10-Year Wealth Education</title>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CEDARS OF WEALTH - REGISTRATION - ONE ORIGIN</title>
 <style>
-:root{--bg:#0b1020;--card:#162040;--card2:#1c2a4e;--blue:#4a7cff;--blue-dark:#2a4b9a;--green:#00e676;--text:#eef2ff;--muted:#8a9cc7;--border:#1e2d55;--input-bg:#0b1020;--input-border:#2a3a6a}
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu}
-body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
-.header{padding:14px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;background:rgba(11,16,32,0.98);backdrop-filter:blur(10px)}
-.header-left{font-weight:800;display:flex;gap:8px;align-items:center;color:var(--text);font-size:16px}
-.nav{display:flex;gap:18px;font-size:14px;align-items:center}
-.nav a{color:var(--muted);text-decoration:none;cursor:pointer}
-.nav a:hover{color:#fff}
-.btn{padding:12px 22px;border-radius:10px;border:none;font-weight:700;cursor:pointer;min-height:48px;transition:0.2s}
-.btn:hover{transform:translateY(-1px)}
-.btn-white{background:#f5f7ff;color:#0b1020}
-.btn-blue{background:var(--blue-dark);color:#fff;border:1px solid #3d5eb8}
-.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted)}
-.btn-full{width:100%}
-.input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--input-border);background:var(--input-bg);color:#fff;margin:6px 0;min-height:48px;font-size:14px}
-.input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 2px rgba(74,124,255,0.2)}
-.input::placeholder{color:#5a6a94}
-.label{font-size:13px;color:var(--muted);margin:10px 0 4px;display:block}
-.main{display:flex;min-height:calc(100vh - 60px);align-items:center;justify-content:space-between;gap:30px;padding:40px 24px;max-width:1280px;margin:0 auto}
-.left{flex:1;max-width:520px}
-.left h1{font-size:52px;font-weight:900;line-height:1.1;letter-spacing:-0.5px}
-.left h1 span{display:block}
-.left p{color:var(--muted);margin-top:16px;font-size:16px;line-height:1.5}
-.left-btns{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
-.card{flex:1;max-width:560px;background:var(--card);border:1px solid #2a3a6a;border-radius:18px;padding:26px;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
-.card h2{text-align:center;font-size:28px;font-weight:800}
-.card .sub{text-align:center;color:var(--muted);font-size:13px;margin:8px 0 18px}
-.terms{display:flex;gap:8px;align-items:flex-start;margin:12px 0;font-size:12px;color:var(--muted);line-height:1.4}
-.terms a{color:var(--blue);text-decoration:none}
-.status{margin-top:12px;padding:10px;border-radius:10px;font-size:12px;display:none}
-.status.ok{background:#0f2a1a;border:1px solid var(--green);color:var(--green);display:block}
-.status.err{background:#2a1212;border:1px solid #ff4d4d;color:#ff8a8a;display:block}
-.verify-box{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:16px;margin-top:16px;display:none}
-.verify-box.active{display:block}
-.code-input{letter-spacing:8px;text-align:center;font-size:20px;font-weight:800}
-.phantom-row{display:flex;gap:8px;margin-top:6px}
-.badge{font-size:9px;background:var(--green);color:#000;padding:2px 6px;border-radius:6px;font-weight:800;margin-left:6px}
-.link{color:var(--blue);cursor:pointer;text-decoration:underline;font-size:13px}
-.footer-note{text-align:center;margin-top:16px;font-size:12px;color:var(--muted)}
-@media(max-width:900px){.main{flex-direction:column}.left h1{font-size:36px}.card{max-width:100%;width:100%}}
-</style>
-</head>
-<body>
-<div class="header">
-<div class="header-left">🌲 Cedars of Wealth</div>
-<div style="display:flex;gap:12px;align-items:center">
-<div class="nav">
-<a href="index.html">Home</a>
-<a href="#" onclick="alert('About: 10-Year Wealth Education - Mighty Cedar Package - Crypto Only SOL/USDC - Top Secret Stable Engine EUR/USD GBP/USD GBP/JPY XAU/USD settled in crypto')">About</a>
-<a href="#" onclick="alert('Plans: Mighty Cedar Package - 99 USDC Crypto Only - Education + Real Trading')">Plans</a>
-<a href="investor-dashboard.html">Dashboard</a>
-</div>
-<a href="register.html" style="background:#f5f7ff;color:#0b1020;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:700;text-decoration:none">Register</a>
-</div>
-</div>
-<div class="main">
-<div class="left">
-<h1><span>🌲 Cedars of</span><span>Wealth</span></h1>
-<p style="margin-top:18px;font-weight:600;color:#cbd5f5">Start your 10-Year Wealth Education journey.</p>
-<p>Secure, transparent, and built for lasting growth. Strictly Crypto Platform — SOL & USDC on Solana — No fiat, no local currency.</p>
-<div class="left-btns">
-<button class="btn btn-ghost" onclick="window.location.href='index.html'">Get Started</button>
-<button class="btn btn-white" onclick="alert('Learn More: 10-Year Wealth Education, Mighty Cedar Package, Risk 0.5% per trade, RR 1:2, V20 Stable Engine - Crypto Settlement Only')">Learn More</button>
-</div>
-<div style="margin-top:20px;font-size:11px;color:#6b7fb0;display:flex;gap:12px;flex-wrap:wrap">
-<span>✅ Crypto Only SOL/USDC</span><span>✅ No Local Currency</span><span>✅ 360° Functional</span>
-</div>
-</div>
-<div class="card">
-<h2>Create your account</h2>
-<p class="sub">Join Cedars of Wealth — secure your future wealth plan</p>
-<label class="label">Full Name *</label>
-<input class="input" id="fullName" placeholder="Enter your full name">
-<label class="label">Email *</label>
-<input class="input" id="email" type="email" placeholder="you@example.com">
-<label class="label">Phone *</label>
-<input class="input" id="phone" placeholder="+256 700 000 000" value="+256 ">
-<label class="label">Country *</label>
-<select class="input" id="country">
-<option value="Uganda" selected>Uganda 🇺🇬</option>
-<option value="Kenya">Kenya 🇰🇪</option>
-<option value="Nigeria">Nigeria 🇳🇬</option>
-<option value="Tanzania">Tanzania 🇹🇿</option>
-<option value="South Africa">South Africa 🇿🇦</option>
-<option value="Ghana">Ghana 🇬🇭</option>
-<option value="Rwanda">Rwanda 🇷🇼</option>
-<option value="Zambia">Zambia 🇿🇲</option>
-<option value="Cameroon">Cameroon 🇨🇲</option>
-<option value="USA">USA 🇺🇸</option>
-<option value="UK">UK 🇬🇧</option>
-<option value="UAE">UAE 🇦🇪</option>
-</select>
-<label class="label">Password *</label>
-<div style="position:relative">
-<input class="input" id="password" type="password" placeholder="Create a password">
-<span onclick="togglePass('password')" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;color:#8a9cc7">👁️</span>
-</div>
-<label class="label">Confirm Password *</label>
-<div style="position:relative">
-<input class="input" id="confirmPassword" type="password" placeholder="Re-enter your password">
-<span onclick="togglePass('confirmPassword')" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;color:#8a9cc7">👁️</span>
-</div>
-<label class="label">Phantom Wallet (optional) <span class="badge">CRYPTO ONLY</span></label>
-<div class="phantom-row">
-<input class="input" id="wallet" placeholder="Enter Phantom wallet address (optional)" style="flex:1;margin:0">
-<button class="btn btn-blue" style="min-height:48px;padding:10px 14px;font-size:12px" onclick="connectPhantom()">Connect</button>
-</div>
-<div class="terms">
-<input type="checkbox" id="terms" checked>
-<div>I agree to <a href="#" onclick="alert('10-Year Wealth Education Terms: Crypto Only SOL/USDC, No fiat, Education not financial advice, Risk management 0.5% per trade, Non-custodial')">10-Year Wealth Education terms</a> and Strictly Crypto Policy — SOL/USDC Only — No UGX/KES/NGN <span style="color:var(--green)">✓ Crypto Only</span></div>
-</div>
-<button class="btn btn-blue btn-full" onclick="doRegister()" style="background:#2a4b9a;font-size:15px">Create Account</button>
-<div id="status" class="status"></div>
-<div id="verifyBox" class="verify-box">
-<h3 style="font-size:14px;margin-bottom:8px">📧 Email Verification Required</h3>
-<p style="font-size:12px;color:var(--muted)">We sent a 6-digit code to <span id="verifyEmail" style="color:#fff;font-weight:700"></span> — Check inbox (mock — code shown below for demo)</p>
-<div style="background:#0b1020;border:1px dashed #2a3a6a;padding:8px;border-radius:8px;margin:8px 0;text-align:center">
-<span style="font-size:11px;color:#8a9cc7">Demo Code: </span><span id="demoCode" style="font-size:18px;font-weight:900;color:var(--green);letter-spacing:4px"></span>
-</div>
-<input class="input code-input" id="codeInput" placeholder="000000" maxlength="6">
-<div style="display:flex;gap:8px;margin-top:8px">
-<button class="btn btn-blue btn-full" onclick="verifyEmail()">Verify & Continue to Dashboard</button>
-<button class="btn btn-ghost" onclick="resendCode()">Resend</button>
-</div>
-</div>
-<div class="footer-note">Already have an account? <span class="link" onclick="window.location.href='investor-dashboard.html'">Sign in</span> — <span class="link" onclick="window.location.href='index.html'">Back to Home</span></div>
-<div style="margin-top:12px;font-size:10px;color:#5a6a94;text-align:center;line-height:1.4">
-Crypto Only — SOL & USDC SPL Solana Only — No Fiat — No UGX/KES/NGN — Non-Custodial — Jupiter Aggregator — Solscan Verified<br>
-TOP SECRET STABLE ENGINE: EUR/USD GBP/USD GBP/JPY XAU/USD — Settled in USDC Only — Do Not Expose Publicly — V20 Risk 0.5%
-</div>
-</div>
+body{margin:0;background:#000;color:#fff;font-family:monospace;padding:16px;}
+.box{max-width:520px;margin:0 auto;background:#0a1a0f;border:3px solid #00ff88;border-radius:18px;padding:22px;box-shadow:0 0 40px rgba(0,255,136,0.35);}
+h2{color:#00ff88;letter-spacing:6px;margin:0 0 8px;font-size:22px;text-align:center;}
+.sub{font-size:10px;color:#8affb0;text-align:center;font-weight:900;letter-spacing:1px;line-height:14px;}
+.label{font-size:11px;color:#9effb5;font-weight:900;margin-top:16px;letter-spacing:1px;}
+input{width:100%;background:#000;border:2px solid #003a1a;border-radius:12px;padding:14px;color:#fff;font-size:13px;font-weight:800;margin-top:8px;box-sizing:border-box;}
+input:focus{border-color:#00ff88;box-shadow:0 0 12px rgba(0,255,136,0.3);outline:none;}
+.btn{width:100%;padding:15px;border:0;border-radius:12px;font-weight:900;cursor:pointer;margin-top:18px;font-size:14px;letter-spacing:1px;}
+.green{background:#00ff88;color:#000;box-shadow:0 0 25px #00ff88;}
+.copy{background:#001a0f;color:#00ff88;border:2px solid #00ff88;}
+.ok{font-size:10px;color:#00ff88;font-weight:900;margin-top:12px;text-align:center;}
+.warn{font-size:9px;color:#ffaa00;font-weight:800;margin-top:14px;line-height:13px;text-align:center;}
+</style></head><body>
+<div class="box">
+<h2>REGISTER — CEDARS</h2>
+<div class="sub">ANONYMOUS — NO NAME — TELEGRAM ONLY — ONE ORIGIN CRD-M75TJ2 — INTEGRITY 100%</div>
+
+<div class="label">Referral Code — Optional — Leave blank if direct</div>
+<input id="ref" placeholder="Referral Code — e.g. CEDARS001">
+
+<div class="label">Telegram Username — Anonymous — @username</div>
+<input id="tg" placeholder="@username — For group join + notify">
+
+<div class="label">Create Passcode — 4 digits — For dashboard access</div>
+<input id="pass" type="password" placeholder="**** — 4 digits only" maxlength="4">
+
+<div class="label">Confirm Passcode</div>
+<input id="pass2" type="password" placeholder="**** — Repeat" maxlength="4">
+
+<button class="btn green" onclick="doReg()">Register — Go to Deposit — 55% 720 Days</button>
+<button class="btn copy" onclick="location.href='https://cryptolordug.github.io/Cedars-of-Wealth/deposit.html'">Already Registered? — Go Deposit — Treasury 6XQviX...FF6fTb</button>
+
+<div class="ok">✓ No Name Exposed ✓ Telegram Anonymous ✓ Solana USDC Only ✓ 360° Scan Operational</div>
+<div class="warn">Deposit Address Locked: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb — USDC SPL Solana Only — Do Not Send Other Tokens — Audio ROI 1.5% 12PM ET Daily</div>
 </div>
 <script>
-function togglePass(id){let i=document.getElementById(id);i.type=i.type==='password'?'text':'password';}
-let generatedCode='';
-function showStatus(msg,type){let s=document.getElementById('status');s.className='status '+(type==='ok'?'ok':'err');s.innerHTML=msg;s.style.display='block';}
-function doRegister(){
-let name=document.getElementById('fullName').value.trim();
-let email=document.getElementById('email').value.trim();
-let phone=document.getElementById('phone').value.trim();
-let country=document.getElementById('country').value;
-let pass=document.getElementById('password').value;
-let cpass=document.getElementById('confirmPassword').value;
-let wallet=document.getElementById('wallet').value.trim();
-let terms=document.getElementById('terms').checked;
-if(!name||!email||!phone||!pass||!cpass){showStatus('❌ Please fill all required fields * — 100% Required','err');return;}
-if(pass.length<6){showStatus('❌ Password must be at least 6 characters','err');return;}
-if(pass!==cpass){showStatus('❌ Password and Confirm Password do not match','err');return;}
-if(!terms){showStatus('❌ You must agree to 10-Year Wealth Education terms','err');return;}
-if(!email.includes('@')){showStatus('❌ Enter valid email','err');return;}
-let user={name:name,email:email,phone:phone,country:country,wallet:wallet,createdAt:new Date().toISOString(),verified:false,balanceUSDC:"0.00",balanceSOL:"0.00"};
-localStorage.setItem('cedars_user',JSON.stringify(user));
-localStorage.setItem('cedars_ref','CRD-'+Math.random().toString(36).substr(2,6).toUpperCase());
-localStorage.setItem('cedars_registered','true');
-generatedCode=Math.floor(100000+Math.random()*900000).toString();
-localStorage.setItem('cedars_verify_code',generatedCode);
-document.getElementById('verifyEmail').innerText=email;
-document.getElementById('demoCode').innerText=generatedCode;
-document.getElementById('verifyBox').classList.add('active');
-showStatus('✅ Account created for '+name+' ('+country+') — Email verification code generated — Check box below — 100% Working','ok');
-if(wallet){localStorage.setItem('phantom',wallet);}
-setTimeout(()=>{document.getElementById('verifyBox').scrollIntoView({behavior:'smooth'});},300);
-}
-function verifyEmail(){
-let input=document.getElementById('codeInput').value.trim();
-let saved=localStorage.getItem('cedars_verify_code');
-if(input===saved){
-let user=JSON.parse(localStorage.getItem('cedars_user'));
-user.verified=true;user.verifiedAt=new Date().toISOString();
-localStorage.setItem('cedars_user',JSON.stringify(user));
-localStorage.setItem('cedars_verified','true');
-showStatus('✅ Email Verified Successfully! Redirecting to Investor Dashboard 360° — Crypto Only — No Fiat — 100% Working','ok');
-setTimeout(()=>{window.location.href='investor-dashboard.html';},1200);
-}else{showStatus('❌ Invalid verification code. Demo code is '+saved+' — Try again','err');}
-}
-function resendCode(){
-generatedCode=Math.floor(100000+Math.random()*900000).toString();
-localStorage.setItem('cedars_verify_code',generatedCode);
-document.getElementById('demoCode').innerText=generatedCode;
-showStatus('📧 New code resent: '+generatedCode+' — 100% Working','ok');
-}
-async function connectPhantom(){
-if(window.solana&&window.solana.isPhantom){
-try{let resp=await window.solana.connect();let pub=resp.publicKey.toString();document.getElementById('wallet').value=pub;localStorage.setItem('phantom',pub);showStatus('✅ Phantom Connected: '+pub.slice(0,6)+'...'+pub.slice(-4)+' — Crypto Only — 100% Working','ok');}catch(e){showStatus('❌ Phantom connect failed: '+e.message,'err');}
-}else{let demo='So11111111111111111111111111111111111111112';document.getElementById('wallet').value=demo;localStorage.setItem('phantom',demo);showStatus('⚠️ Phantom not installed — Demo Solana address set — Install Phantom for real crypto deposit — No fiat — 100% Working','ok');}
+function doReg(){
+ var r=document.getElementById('ref').value;
+ var tg=document.getElementById('tg').value;
+ var p=document.getElementById('pass').value;
+ var p2=document.getElementById('pass2').value;
+ if(!tg){alert("Enter Telegram @username — Anonymous required");return;}
+ if(p.length!=4){alert("Passcode 4 digits");return;}
+ if(p!=p2){alert("Passcodes not match");return;}
+ localStorage.setItem('cedars_ref', r);
+ localStorage.setItem('cedars_tg', tg);
+ localStorage.setItem('cedars_pass', p);
+ alert("Registered Anonymous: "+tg+"\nRef: "+(r||"DIRECT")+"\n\nNext: Deposit USDC to Treasury\n6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb\n\nRedirecting to Deposit — 55% 720 Days");
+ location.href='https://cryptolordug.github.io/Cedars-of-Wealth/deposit.html?v=REG-'+tg;
 }
 </script>
-</body>
-</html>
+</body></html>
