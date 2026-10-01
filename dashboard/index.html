@@ -1,23 +1,82 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard - Cedars of Wealth</title><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#0a0f1e;color:#fff;line-height:1.6}.wrap{max-width:1000px;margin:0 auto;padding:20px 15px}.card{background:#131a2e;border:1px solid #1e2a4a;border-radius:12px;padding:20px;margin:16px 0}button{padding:10px 18px;background:#1a233f;color:#fff;border:1px solid #2a3a5a;border-radius:8px;margin:4px;cursor:pointer}input,select{width:100%;padding:12px;background:#0a0f1e;border:1px solid #2a3a5a;color:#fff;margin:8px 0;border-radius:8px}.big{width:100%;padding:14px;background:linear-gradient(135deg,#4f7cff,#2dd4a7);border:0;border-radius:8px;color:#fff;font-weight:700}.muted{font-size:12px;color:#8a94ad}table{width:100%;font-size:13px;border-collapse:collapse}th,td{padding:8px;text-align:left}th{color:#8a94ad;border-bottom:1px solid #2a3a5a}.sitefooter{background:#070c1a;border-top:1px solid #1e2a4a;padding:30px 20px;color:#8a94ad;font-size:13px;margin-top:40px;text-align:center}</style>
-</head><body>
-<div class="topnav"><a class="logo" href="/Cedars-of-Wealth/">🌲 Cedars of Wealth</a><div class="navlinks"><a href="/Cedars-of-Wealth/">Home</a><a href="/Cedars-of-Wealth/about/">About</a><a href="/Cedars-of-Wealth/plans/">Plans</a><div class="dropdown"><a href="/Cedars-of-Wealth/dashboard/">Dashboard ▾</a><div class="dropdown-content"><a href="/Cedars-of-Wealth/dashboard/#annual-calendar">Annual Calendar</a><a href="/Cedars-of-Wealth/dashboard/#planner">Economic Planner</a></div></div><a class="joinbtn" href="/Cedars-of-Wealth/register/">Join</a></div></div>
-<style>.topnav{display:flex;justify-content:space-between;align-items:center;background:#070c1a;padding:14px 20px;border-bottom:1px solid #1e2a4a;flex-wrap:wrap}.topnav .logo{color:#fff;font-weight:700;font-size:18px;text-decoration:none}.navlinks{display:flex;align-items:center;gap:16px}.navlinks a{color:#a0b0cc;text-decoration:none;font-size:14px}.dropdown{position:relative}.dropdown-content{display:none;position:absolute;top:100%;left:0;background:#131a2e;border:1px solid #2a3a5a;border-radius:8px;min-width:180px;z-index:1000;padding:6px}.dropdown-content a{display:block;padding:10px;margin:0!important}.dropdown:hover .dropdown-content{display:block}.joinbtn{color:#fff!important;background:linear-gradient(135deg,#4f7cff,#2dd4a7);padding:8px 16px;border-radius:8px}</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cedars of Wealth - Dashboard</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#020a14;color:#fff;font-family:system-ui,monospace;width:100vw;min-height:100vh;overflow-x:hidden;}
+.card{background:linear-gradient(145deg,#1c2e55,#2a3f6d);border:1px solid #4a6aaa;border-radius:20px;padding:24px;box-shadow:0 0 25px rgba(80,140,255,0.25);}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.btn{border:none;border-radius:12px;padding:14px 22px;font-weight:bold;font-size:18px;cursor:pointer;}
+@media(max-width:800px){.grid2,.grid3,.grid4{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
 
-<div class="wrap"><h1>Dashboard</h1><p>Package: Mighty Cedar | Status: Active ✅</p>
-<div class="card"><h3>Portfolio Growth</h3><canvas id="c1"></canvas></div>
-<div class="card"><h3>Reserve Fund</h3><canvas id="c2"></canvas></div>
+<header style="width:100vw;background:rgba(2,10,20,0.98);border-bottom:3px solid #c0c0c0;padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px;position:sticky;top:0;z-index:999;">
+  <a href="../index.html"><img src="../assets/cedars-header-400-silver.png" style="width:360px;max-width:85vw;filter:drop-shadow(0 0 20px #fff);"></a>
+  <nav style="display:flex;gap:22px;flex-wrap:wrap;justify-content:center;">
+    <a href="../index.html" style="color:#7da8d0;font-size:18px;text-decoration:none;font-weight:bold;">HOME</a>
+    <a href="../index.html#plans" style="color:#7da8d0;font-size:18px;text-decoration:none;font-weight:bold;">PLANS</a>
+    <a href="../deposit.html" style="color:#7da8d0;font-size:18px;text-decoration:none;font-weight:bold;">DEPOSIT</a>
+    <a href="../withdraw.html" style="color:#7da8d0;font-size:18px;text-decoration:none;font-weight:bold;">WITHDRAW</a>
+    <a href="index.html" style="color:#7de8ff;font-size:18px;text-decoration:none;font-weight:bold;border-bottom:2px solid #7de8ff;">DASHBOARD</a>
+  </nav>
+</header>
 
-<div class="card" id="annual-calendar"><h3>10-Year Wealth Calendar (2026-2036)</h3><div style="overflow-x:auto"><table><tr><th>Year</th><th>Focus</th><th>Action</th></tr><tr><td>2026</td><td>Foundation</td><td style="color:#8a94ad">Build emergency fund, start DCA</td></tr><tr><td>2027</td><td>Risk Management</td><td style="color:#8a94ad">Learn position sizing</td></tr><tr><td>2028</td><td>Diversification</td><td style="color:#8a94ad">Add BTC/ETH + stable reserve</td></tr><tr><td>2029</td><td>Halving Study</td><td style="color:#8a94ad">Study cycles, avoid FOMO</td></tr><tr><td>2030</td><td>Compounding</td><td style="color:#8a94ad">Reinvest, 5yr review</td></tr><tr><td>2031</td><td>Tax Planning</td><td style="color:#8a94ad">Learn local tax rules</td></tr><tr><td>2032</td><td>Passive Models</td><td style="color:#8a94ad">Staking educational</td></tr><tr><td>2033</td><td>Protection</td><td style="color:#8a94ad">Cold wallet basics</td></tr><tr><td>2034</td><td>Mentorship</td><td style="color:#8a94ad">Teach others</td></tr><tr><td>2035</td><td>Legacy</td><td style="color:#8a94ad">10yr review</td></tr></table></div><p class="muted">Educational only. Not financial advice.</p></div>
+<div style="max-width:1300px;margin:0 auto;padding:20px;width:100%;">
 
-<div class="card" id="planner"><h3>5-Year Investor Learning Planner</h3><canvas id="c3"></canvas><p class="muted">Knowledge vs Discipline (1-100)</p></div>
+  <div style="text-align:center;padding:20px 0;">
+    <div style="font-size:42px;font-weight:bold;">🌲 Dashboard</div>
+    <div style="color:#7da8d0;font-size:18px;margin-top:8px;">Treasury Verified: 6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb — Packages $5 to $100,000 — Solana USDC Only</div>
+  </div>
 
-<div class="card"><h3>Wallet</h3><button>Deposit</button><button>Request Withdrawal</button></div>
-<div class="card"><h3>Referral Program</h3><input readonly value="https://cryptolordug.github.io/Cedars-of-Wealth/register/?ref=CRA-25841"><button onclick="navigator.clipboard.writeText(this.previousElementSibling.value);alert('Copied!')">Copy Referral Link</button></div>
+  <!-- STATS - 1 HOUR BACK VERSION -->
+  <div class="grid4">
+    <div class="card" style="text-align:center;"><div style="color:#888;font-size:12px;letter-spacing:2px;">TOTAL DEPOSIT</div><div style="font-size:28px;font-weight:bold;margin-top:6px;">$0.00</div></div>
+    <div class="card" style="text-align:center;border-color:#00ff88;"><div style="color:#00ff88;font-size:12px;letter-spacing:2px;">DAILY ROI 1.5%</div><div style="font-size:28px;font-weight:bold;margin-top:6px;color:#00ff88;">$0.00</div></div>
+    <div class="card" style="text-align:center;"><div style="color:#888;font-size:12px;letter-spacing:2px;">TOTAL EARNED</div><div style="font-size:28px;font-weight:bold;margin-top:6px;">$0.00</div></div>
+    <div class="card" style="text-align:center;"><div style="color:#888;font-size:12px;letter-spacing:2px;">REFERRAL BONUS</div><div style="font-size:28px;font-weight:bold;margin-top:6px;">$0.00</div></div>
+  </div>
+
+  <!-- PACKAGES $5 TO $100K - RESTORED -->
+  <div class="card" style="margin-top:18px;">
+    <div style="font-size:26px;font-weight:bold;">Your Packages — $5 to $100,000 Range</div>
+    <div style="color:#7da8d0;font-size:15px;margin:8px 0 16px;">Sprout $5-$99 | Root $100-$499 | Trunk $500-$1999 | Branch $2000-$4999 | Forest $5000-$9999 | Grove $10k-$49,999 | Legacy $50k-$100k MAX</div>
+    <div class="grid3">
+      <div style="background:#0b1326;border:1px solid #2a3f6d;border-radius:12px;padding:16px;text-align:center;"><div style="font-size:20px;font-weight:bold;">Cedar Sprout</div><div style="color:#7de8ff;">$5 to $99</div></div>
+      <div style="background:#0b1326;border:1px solid #2a3f6d;border-radius:12px;padding:16px;text-align:center;"><div style="font-size:20px;font-weight:bold;">Cedar Root</div><div style="color:#7de8ff;">$100 to $499</div></div>
+      <div style="background:#0b1326;border:1px solid #2a3f6d;border-radius:12px;padding:16px;text-align:center;"><div style="font-size:20px;font-weight:bold;">Cedar Trunk</div><div style="color:#7de8ff;">$500 to $1999</div></div>
+      <div style="background:#0b1326;border:1px solid #2a3f6d;border-radius:12px;padding:16px;text-align:center;"><div style="font-size:20px;font-weight:bold;">Cedar Branch</div><div style="color:#7de8ff;">$2000 to $4999</div></div>
+      <div style="background:#0b1326;border:1px solid #2a3f6d;border-radius:12px;padding:16px;text-align:center;"><div style="font-size:20px;font-weight:bold;">Cedar Forest</div><div style="color:#7de8ff;">$5000 to $9999</div></div>
+      <div style="background:#0b1326;border:1px solid #2a3f6d;border-radius:12px;padding:16px;text-align:center;"><div style="font-size:20px;font-weight:bold;">Cedar Grove</div><div style="color:#7de8ff;">$10k to $49,999</div></div>
+    </div>
+    <div style="margin-top:12px;background:#102a1e;border:1px solid #00ff88;border-radius:12px;padding:16px;text-align:center;"><div style="font-size:22px;font-weight:bold;color:#00ff88;">Cedar Legacy — $50,000 to $100,000 MAX</div></div>
+  </div>
+
+  <div class="grid2" style="margin-top:18px;">
+    <div class="card">
+      <div style="font-size:22px;font-weight:bold;">Referral Link</div>
+      <div style="color:#7da8d0;font-size:14px;margin:8px 0;">Binary 2 lines only — 10% / 5% / 1% Definite ∞</div>
+      <div style="background:#000;border:1px solid #4a6aaa;border-radius:10px;padding:12px;font-size:13px;word-break:break-all;color:#7de8ff;margin:10px 0;">https://cryptolordug.github.io/Cedars-of-Wealth/register.html?ref=YOUR_ID</div>
+      <button class="btn" style="background:#fff;color:#020a14;width:100%;">Copy Referral Link</button>
+    </div>
+    <div class="card">
+      <div style="font-size:22px;font-weight:bold;">Treasury Wallet</div>
+      <div style="color:#7da8d0;font-size:14px;margin:8px 0;">Solana USDC SPL Only — Network MUST be Solana</div>
+      <div style="background:#000;border:1px solid #4a6aaa;border-radius:10px;padding:12px;font-size:12px;word-break:break-all;color:#7de8ff;margin:10px 0;">6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div>
+      <a href="../deposit.html" style="text-decoration:none;"><button class="btn" style="background:linear-gradient(90deg,#7de8ff,#5ac8ff);color:#001a33;width:100%;">Go to Deposit</button></a>
+    </div>
+  </div>
+
+  <div style="text-align:center;color:#5a7aaa;font-size:12px;margin-top:24px;">
+    Dashboard restored back 1 hour — Packages $5 to $100,000 — Treasury 6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb — Full Screen — Blue Color Maintained
+  </div>
+
 </div>
-<div class="sitefooter"><p>© 2026 Cedars of Wealth. Educational purposes only.</p></div>
-<script>
-new Chart(document.getElementById('c1'),{type:'line',data:{labels:['Jan',[STRIPPED] $',data:[12000,[STRIPPED]
-new Chart(document.getElementById('c2'),{type:'bar',data:{labels:['Jan',[STRIPPED] $',data:[5000,[STRIPPED]
-new Chart(document.getElementById('c3'),{type:'line',data:{labels:['2026',[STRIPPED] Score',data:[20,[STRIPPED] Score',data:[30,[STRIPPED]
-</script></body></html>
+</body>
+</html>
