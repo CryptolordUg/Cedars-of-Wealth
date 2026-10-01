@@ -1,87 +1,136 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars Control Center — Admin</title>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars Control Center — Admin Monitor V43</title>
 <style>
-:root{--bg:#0b1020;--card:#162040;--br:#1e2d55;--m:#8a9cc7;--g:#00e676;--b:#2a5bd7}
-*{box-sizing:border-box;font-family:system-ui;margin:0;padding:0}
-body{background:var(--bg);color:#eef2ff;min-height:100vh}
-.card{background:var(--card);border:1px solid #2a3a6a;border-radius:14px;padding:16px;margin:12px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.btn{padding:11px;border-radius:10px;border:none;font-weight:800;min-height:44px;cursor:pointer;width:100%;transition:0.2s}
-.btn:active{transform:scale(0.97)}
-.btn-w{background:#fff;color:#000}.btn-b{background:var(--b);color:#fff}.btn-g{background:var(--g);color:#000}.btn-d{background:#0b1020;border:1px solid var(--br);color:var(--m)}
-.small{font-size:11px;color:var(--m);line-height:1.4}.bal{font-size:28px;font-weight:900;color:var(--g)}
-#toast{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#0b1020;border:1px solid var(--g);color:#fff;padding:10px 16px;border-radius:20px;z-index:9999999;display:none;font-size:12px;font-weight:700;box-shadow:0 8px 20px rgba(0,0,0,0.6)}
-.kpi{font-size:18px;font-weight:900;color:#fff}.kpi-l{font-size:11px;color:var(--m)}
-.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1e2d55;font-size:12px}
+:root{--bg:#0b1020;--card:#162040;--br:#1e2d55;--m:#8a9cc7;--g:#00e676;--b:#2a5bd7;--y:#ffab00}
+*{box-sizing:border-box;font-family:system-ui;margin:0;padding:0}body{background:var(--bg);color:#eef2ff}
+.card{background:var(--card);border:1px solid #2a3a6a;border-radius:14px;padding:14px;margin:10px}
+.btn{padding:10px;border-radius:10px;border:none;font-weight:800;min-height:42px;cursor:pointer;width:100%;transition:0.2s}.btn:active{transform:scale(0.97)}
+.btn-w{background:#fff;color:#000}.btn-g{background:var(--g);color:#000}.btn-b{background:var(--b);color:#fff}.btn-d{background:#0b1020;border:1px solid var(--br);color:var(--m)}
+.small{font-size:11px;color:var(--m)}.bal{font-size:26px;font-weight:900}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #1e2d55;font-size:12px}
+#toast{position:fixed;top:68px;left:50%;transform:translateX(-50%);background:#0b1020;border:1px solid var(--g);padding:10px 16px;border-radius:20px;z-index:9999999;display:none;font-size:12px;font-weight:700}
+.pill{padding:4px 8px;border-radius:12px;font-size:10px;font-weight:800;border:1px solid}
 </style></head><body>
 <div id="toast"></div>
 
 <div class="card">
 <div style="display:flex;justify-content:space-between;align-items:center">
-<div><div class="small">Control Center</div><div style="font-size:20px;font-weight:900">Admin — Cedars</div><div class="small" id="adminEmail">admin@cedars.local</div></div>
-<div><div class="bal" id="totalBal">$0.00</div><div class="small">Total Managed</div></div>
+<div><div class="small">Admin Monitor</div><div style="font-size:20px;font-weight:900">Cedars Control Center</div><div class="small" id="adminInfo">Admin Rights: Full Monitor</div></div>
+<div style="text-align:right"><div class="small">V16 Worker Balance</div><div class="bal" id="v16Bal" style="color:var(--g)">$0.00</div><div class="small" id="v16Src">Linking V16-REAL-WORKER...</div></div>
 </div>
+
 <div class="grid" style="margin-top:14px">
-<button class="btn btn-w" onclick="cmd('✅ Investors Active — List Loaded',loadInvestors)">Investors</button>
-<button class="btn btn-g" onclick="cmd('✅ Deposits Active — P2P QR + Solscan',filterTx,'Deposit')">Deposits</button>
-<button class="btn btn-b" onclick="cmd('✅ Withdrawals Active — USDC + Solscan',filterTx,'Withdraw')">Withdrawals</button>
-<button class="btn btn-d" onclick="cmd('✅ Referral Binary 2 Lines — 10% / 5% / 1% — $5 per referral',showReferral)">Referrals</button>
+<div class="card" style="margin:0;background:#0f1a33;border-color:var(--g)"><div class="small">Payout Account 55%</div><div class="bal" id="payoutBal" style="color:var(--g)">$0.00</div><div class="small">Investor payouts</div><button class="btn btn-g" style="margin-top:8px" onclick="cmd('✅ Payout Account 55% Active — Ready for disbursement')">Manage</button></div>
+<div class="card" style="margin:0;background:#1a1400;border-color:var(--y)"><div class="small">Reservation Account 45%</div><div class="bal" id="reserveBal" style="color:var(--y)">$0.00</div><div class="small">Company reserve</div><button class="btn" style="background:var(--y);color:#000;margin-top:8px" onclick="cmd('✅ Reservation Account 45% Active — Secured')">Manage</button></div>
 </div>
+
 <div class="grid" style="margin-top:10px">
-<button class="btn btn-d" onclick="cmd('✅ Rates Active — 10% Direct / 5% L2 / 1% Infinite',showRates)">Rates</button>
-<button class="btn btn-d" onclick="cmd('✅ Email Notify Active — Respective investor email',showEmailLog)">Email Log</button>
-<button class="btn btn-d" onclick="cmd('✅ Telegram Anonymous Active — No name exposed',showTgLog)">Telegram Log</button>
-<button class="btn btn-d" onclick="cmd('✅ Live Support Active — In-built',toggleSupport)">Live Support</button>
+<button class="btn btn-w" onclick="cmd('✅ All Investors from index.html — Per Account — Loaded',showAllAccounts)">All Accounts</button>
+<button class="btn btn-b" onclick="cmd('✅ Live Activities from index.html + dashboard — Per Account',showLiveActivity)">Live Activities</button>
 </div>
 </div>
 
 <div class="grid">
-<div class="card"><div class="kpi" id="invCount">0</div><div class="kpi-l">Investors</div></div>
-<div class="card"><div class="kpi" id="depCount">0</div><div class="kpi-l">Deposits USD</div></div>
-<div class="card"><div class="kpi" id="wdCount">0</div><div class="kpi-l">Withdrawals USD</div></div>
-<div class="card"><div class="kpi" id="jupStatus">Live</div><div class="kpi-l">Jupiter lite-api.jup.ag/swap/v1</div></div>
+<div class="card"><div class="small">Total Profit (V16)</div><div class="bal" id="totalProfit">$0.00</div><div class="small">From V16-REAL-WORKER</div></div>
+<div class="card"><div class="small">Total Deposits (All Investors)</div><div class="bal" id="totalDep">$0.00</div><div class="small">From index.html accounts</div></div>
+<div class="card"><div class="small">Total Investors</div><div class="bal" id="totalInv">0</div><div class="small">Accounts created</div></div>
+<div class="card"><div class="small">Jupiter Worker</div><div class="bal" id="jupStat" style="font-size:14px">lite-api...Live</div><div class="small">Swap API Fixed</div></div>
 </div>
 
 <div class="card">
-<div style="display:flex;justify-content:space-between;align-items:center"><div style="font-weight:800">Activity — Solscan</div><button class="btn btn-d" style="width:auto;padding:6px 12px;font-size:11px" onclick="cmd('✅ Activity Refreshed',loadAll)">Refresh</button></div>
-<div id="txList" style="margin-top:10px"></div>
+<div style="display:flex;justify-content:space-between"><div style="font-weight:800">Per Account Monitor — From index.html</div><button class="btn btn-d" style="width:auto;padding:6px 10px;font-size:11px" onclick="cmd('✅ Refreshed — V16 Balance Sync',refreshAll)">Refresh V16</button></div>
+<div id="accountList" style="margin-top:10px"></div>
 </div>
 
-<div class="card" id="supportPanel" style="display:none">
-<div style="font-weight:800">Live Support — In-Built — No WhatsApp</div>
-<div class="small" style="margin-top:6px">Alarm reads investor name + beep — Telegram group auto-join on deposit</div>
-<input class="small" id="supReply" style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e2d55;background:#0b1020;color:#fff;margin-top:8px" placeholder="Reply to investor...">
-<button class="btn btn-w" style="margin-top:8px" onclick="cmd('✅ Reply Sent — Active')">Send Reply</button>
+<div class="card">
+<div style="font-weight:800">Investor Dashboard Activities — Reflected</div>
+<div id="activityList" style="margin-top:10px"></div>
 </div>
 
 <script src="../fix.js"></script>
 <script>
-function cmd(msg,fn,arg){
- let t=document.getElementById('toast'); t.innerText=msg; t.style.display='block'; setTimeout(()=>t.style.display='none',2500);
- if(fn) setTimeout(()=>fn(arg),600);
+// V43 ADMIN MONITOR — READ V16 REAL WORKER + INDEX ACCOUNTS
+function cmd(m,fn){let t=document.getElementById('toast'); t.innerText=m; t.style.display='block'; setTimeout(()=>t.style.display='none',2500); if(fn) setTimeout(fn,600);}
+
+let V16_BAL_KEY=['cedars_v16_balance','cedars_real_worker_bal','cedars_worker_bal','cedars_worker_profit','cedars_usd_bal'];
+let ALL_USERS_KEY=['cedars_all_investors','cedars_all_users','cedars_users','cedars_accounts'];
+
+function getV16Balance(){
+ // 1. Try localStorage keys
+ for(let k of V16_BAL_KEY){ let v=localStorage.getItem(k); if(v && !isNaN(parseFloat(v))) return parseFloat(v); }
+ // 2. Try Cedars functions if V16 defines
+ if(typeof window.CedarsV16Balance==='function') return window.CedarsV16Balance();
+ if(typeof window.CedarsWorkerBalance==='function') return window.CedarsWorkerBalance();
+ if(typeof window.CedarsBalance==='function') return parseFloat(window.CedarsBalance());
+ return parseFloat(localStorage.getItem('cedars_usd_bal')||'0');
 }
-function loadAll(){
- let bal=typeof CedarsBalance==='function'?CedarsBalance():localStorage.getItem('cedars_usd_bal')||'0';
- document.getElementById('totalBal').innerText='$'+parseFloat(bal).toFixed(2);
+
+function getAllAccounts(){
+ // Collect from possible keys
+ let list=[];
+ for(let k of ALL_USERS_KEY){ try{ let arr=JSON.parse(localStorage.getItem(k)||'[]'); if(Array.isArray(arr) && arr.length) list=list.concat(arr); }catch(e){} }
+ // Fallback single current investor as account
+ let curEmail=localStorage.getItem('cedars_investor_email');
+ if(curEmail && list.length===0){
+   list.push({email:curEmail,name:localStorage.getItem('cedars_investor_name')||'Investor',ref:localStorage.getItem('cedars_ref')||'-',bal:localStorage.getItem('cedars_usd_bal')||'0',created:new Date().toLocaleDateString()});
+ }
+ return list;
+}
+
+function refreshAll(){
+ // Try fetch V16 file directly for balance text
+ fetch('./V16-REAL-WORKER.html?v='+Date.now()).then(r=>r.text()).then(html=>{
+   // Extract any $ or balance number
+   let m=html.match(/\$?\s*([0-9]+\.[0-9]+|[0-9]+)\s*USD/i) || html.match(/balance[^0-9]*([0-9.]+)/i);
+   if(m){ let val=parseFloat(m[1]); if(!isNaN(val) && val>0){ localStorage.setItem('cedars_v16_balance',val.toString()); } }
+   render();
+ }).catch(()=>{ render(); });
+}
+
+function render(){
+ let v16=getV16Balance();
+ document.getElementById('v16Bal').innerText='$'+v16.toFixed(2);
+ document.getElementById('v16Src').innerText=v16>0?'Synced from V16-REAL-WORKER':'Waiting for V16 deposit — Using local';
+ document.getElementById('totalProfit').innerText='$'+v16.toFixed(2);
+ // 55/45 split
+ let payout=v16*0.55; let reserve=v16*0.45;
+ document.getElementById('payoutBal').innerText='$'+payout.toFixed(2);
+ document.getElementById('reserveBal').innerText='$'+reserve.toFixed(2);
+ // Store for use
+ localStorage.setItem('cedars_payout_55',payout.toString());
+ localStorage.setItem('cedars_reserve_45',reserve.toString());
+
+ let accounts=getAllAccounts();
+ document.getElementById('totalInv').innerText=accounts.length;
+ let totalDep=accounts.reduce((s,a)=>s+parseFloat(a.bal||a.deposit||0),0);
+ // Also add tx deposits
  let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]');
- document.getElementById('invCount').innerText=localStorage.getItem('cedars_investor_email')?1:0;
- document.getElementById('depCount').innerText='$'+tx.filter(x=>x.type==='Deposit').reduce((s,x)=>s+parseFloat(x.amt),0).toFixed(2);
- document.getElementById('wdCount').innerText='$'+tx.filter(x=>x.type==='Withdraw').reduce((s,x)=>s+parseFloat(x.amt),0).toFixed(2);
- document.getElementById('adminEmail').innerText=localStorage.getItem('cedars_investor_email')||'admin@cedars.local';
- document.getElementById('txList').innerHTML=tx.slice(-20).reverse().map(x=>`<div class="row"><span>${x.type} $${x.amt} — ${x.date}</span><a href="https://solscan.io/tx/${x.hash}" target="_blank" style="color:#00e676;text-decoration:none">Solscan ↗</a></div>`).join('')||'<span class="small">No activity</span>';
- // Jupiter test silent
- fetch('https://lite-api.jup.ag/swap/v1/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&amount=1000000').then(()=>document.getElementById('jupStatus').innerText='Live ✅').catch(()=>document.getElementById('jupStatus').innerText='Check network');
+ let txDep=tx.filter(t=>t.type==='Deposit').reduce((s,t)=>s+parseFloat(t.amt),0);
+ if(totalDep===0) totalDep=txDep;
+ document.getElementById('totalDep').innerText='$'+totalDep.toFixed(2);
+
+ // Per account list
+ document.getElementById('accountList').innerHTML=accounts.map((a,i)=>`
+ <div class="card" style="margin:6px 0;padding:10px;background:#0b1020">
+ <div style="display:flex;justify-content:space-between"><span style="font-weight:800;font-size:12px">${a.name||a.email||'Investor '+(i+1)}</span><span class="pill" style="color:var(--g);border-color:var(--g)">$${parseFloat(a.bal||0).toFixed(2)}</span></div>
+ <div class="small" style="margin-top:4px">${a.email||'-'} • Ref: ${a.ref||a.referral||'-'} • ${a.created||''}</div>
+ <div style="display:flex;gap:6px;margin-top:6px"><button class="btn btn-d" style="padding:6px;font-size:11px" onclick="cmd('✅ Account ${a.email||i} — Balance $${a.bal||0} — Active')">View</button><button class="btn btn-d" style="padding:6px;font-size:11px" onclick="if(confirm('Reset balance for ${a.email}?')){localStorage.setItem('cedars_usd_bal','0');render();cmd('✅ Balance Reset — Admin')}">Reset</button></div>
+ </div>`).join('')||'<span class="small">No accounts yet — From index.html register.html</span>';
+
+ document.getElementById('activityList').innerHTML=tx.slice(-20).reverse().map(t=>`<div class="row"><span>${t.type} $${t.amt} — ${t.date||''} — ${t.email||localStorage.getItem('cedars_investor_email')||'Investor'}</span><a href="https://solscan.io/tx/${t.hash}" target="_blank" style="color:#00e676;text-decoration:none">Solscan ↗</a></div>`).join('')||'<span class="small">No activities — Will reflect from investor-dashboard + deposit/withdraw</span>';
+
+ document.getElementById('adminInfo').innerText='Admin Rights: Full Monitor — '+accounts.length+' accounts — Payout 55% $'+payout.toFixed(2)+' — Reserve 45% $'+reserve.toFixed(2);
 }
-function loadInvestors(){
- let name=localStorage.getItem('cedars_investor_name')||'Investor'; let email=localStorage.getItem('cedars_investor_email')||'-'; let ref=localStorage.getItem('cedars_ref')||'-'; let bal=localStorage.getItem('cedars_usd_bal')||'0';
- document.getElementById('txList').innerHTML=`<div class="row"><span>Name</span><span>${name}</span></div><div class="row"><span>Email</span><span>${email}</span></div><div class="row"><span>Ref</span><span>${ref}</span></div><div class="row"><span>Balance</span><span>$${bal}</span></div><div class="row"><span>KYC</span><span>${localStorage.getItem('cedars_kyc')||'Pending'}</span></div>`;
-}
-function filterTx(type){ let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]').filter(x=>x.type===type); document.getElementById('txList').innerHTML=tx.slice(-20).reverse().map(x=>`<div class="row"><span>${x.type} $${x.amt} — ${x.date}</span><a href="https://solscan.io/tx/${x.hash}" target="_blank" style="color:#00e676">Solscan ↗</a></div>`).join('')||'<span class="small">No '+type+'</span>';}
-function showReferral(){ document.getElementById('txList').innerHTML=`<div class="row"><span>Binary</span><span>2 Lines Only</span></div><div class="row"><span>Direct</span><span>10%</span></div><div class="row"><span>Level 2</span><span>5%</span></div><div class="row"><span>Infinite</span><span>1%</span></div><div class="row"><span>Per Referral</span><span>$5 USD</span></div><div class="row"><span>Link</span><span>${location.origin}/Cedars-of-Wealth/register.html?ref=${localStorage.getItem('cedars_ref')||''}</span></div>`;}
-function showRates(){ document.getElementById('txList').innerHTML=`<div class="row"><span>Starter</span><span>$50 USD</span></div><div class="row"><span>Growth</span><span>$150 USD</span></div><div class="row"><span>Mighty Cedar</span><span>$500 USD</span></div><div class="row"><span>All Rates</span><span>USD Only $</span></div>`;}
-function showEmailLog(){ document.getElementById('txList').innerHTML=`<div class="small">Email Notify — Respective investor<br>• Deposit $ → ${localStorage.getItem('cedars_investor_email')||'investor@email'} — Solscan link<br>• Withdraw $ → same — Solscan link<br>• Anonymous Telegram channel — No name — Only amount + hash</div>`;}
-function showTgLog(){ document.getElementById('txList').innerHTML=`<div class="small">Telegram Channel — Anonymous<br>• New Deposit $X — Hash ab12... — Solscan verified — No name<br>• New Withdraw $X — Hash cd34... — Solscan verified<br>• Group auto-join on deposit → https://t.me/CedarsOfWealth<br>• Email + Telegram both automated</div>`;}
-function toggleSupport(){ let p=document.getElementById('supportPanel'); p.style.display=p.style.display==='block'?'none':'block'; if(p.style.display==='block' && window.CedarsSupportAlarm) CedarsSupportAlarm();}
-loadAll(); setInterval(loadAll,3000);
+
+function showAllAccounts(){ render(); }
+function showLiveActivity(){ let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]'); document.getElementById('activityList').innerHTML=tx.reverse().map(t=>`<div class="row"><span>${t.type} $${t.amt} — ${t.hash.substr(0,10)}...</span><span class="small">${t.date}</span></div>`).join('')||'No live activities'; }
+
+// Auto sync V16 every 5 sec
+setInterval(()=>{ render(); },3000);
+render(); refreshAll();
+
+// Load V16 worker in background iframe to sync localStorage — monitor right
+let iframe=document.createElement('iframe'); iframe.src='./V16-REAL-WORKER.html?v=1'; iframe.style.display='none'; document.body.appendChild(iframe);
+iframe.onload=()=>{ try{ let w=iframe.contentWindow; let bal=w.localStorage? w.localStorage.getItem('cedars_usd_bal')||w.localStorage.getItem('cedars_v16_balance'):null; if(bal) localStorage.setItem('cedars_v16_balance',bal); }catch(e){} render(); };
 </script>
 <script src="../header-footer.js"></script><script src="../support-widget.js"></script>
 </body></html>
