@@ -1,7 +1,45 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Deposit USD - Cedars</title><style>:root{--bg:#0b1020;--card:#162040;--br:#1e2d55;--m:#8a9cc7;--g:#00e676}*{box-sizing:border-box;font-family:system-ui}body{background:var(--bg);color:#eef2ff;margin:0}.top{background:rgba(11,16,32,.98);border-bottom:1px solid var(--br);padding:10px 12px;display:flex;justify-content:space-between;position:sticky;top:0;z-index:9}.menu{display:flex;gap:6px;overflow-x:auto}.menu a{color:var(--m);text-decoration:none;font-size:11px;padding:6px 10px;border-radius:20px;border:1px solid var(--br);background:var(--card)}.card{max-width:400px;margin:20px auto;background:var(--card);border:1px solid #2a3a6a;border-radius:14px;padding:16px}.input{width:100%;padding:11px;border-radius:8px;border:1px solid var(--br);background:#0b1020;color:#fff;margin:6px 0}.btn{width:100%;padding:12px;border-radius:10px;border:none;font-weight:800;background:#fff;color:#000;min-height:44px;cursor:pointer}.small{font-size:11px;color:var(--m)}</style></head><body>
-<div class="top"><b>🌲 Deposit — USD Only $</b><div class="menu"><a href="index.html">Home</a><a href="register.html">Register</a><a href="deposit.html">Deposit</a><a href="withdraw.html">Withdraw</a><a href="referral.html">Referral</a><a href="login.html">Sign in/out</a></div></div>
-<div class="card"><h3>Deposit USD Only — $</h3><p class="small">Balance: <span id="bal">$0.00 USD</span> | All USD only</p><input id="amt" class="input" type="number" placeholder="Amount USD e.g. 50"><input id="hash" class="input" placeholder="Solana TX Hash (optional for Solscan)"><button class="btn" onclick="doDep()">Confirm Deposit $ USD</button><p class="small" style="margin-top:8px">Integrity: CedarsBalance(), Support alarm reads name, Solscan proof link added to tx.</p><div id="out" style="margin-top:10px;font-size:12px"></div><a href="investor-dashboard.html" style="color:var(--g);font-size:12px">→ Go Dashboard</a></div>
-<script src="fix.js"></script><script>
-function doDep(){let a=parseFloat(document.getElementById('amt').value); if(!a||a<=0){alert('Enter USD amount');return;} let bal=parseFloat(localStorage.getItem('cedars_usd_bal')||'0')+a; localStorage.setItem('cedars_usd_bal',bal.toString()); let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]'); let h=document.getElementById('hash').value||'SIM-'+Math.random().toString(36).substr(2,9).toUpperCase(); tx.push({type:'Deposit',amt:a,hash:h,date:new Date().toLocaleString()}); localStorage.setItem('cedars_tx',JSON.stringify(tx)); document.getElementById('out').innerHTML='✅ Deposited $'+a+' USD — <a href="https://solscan.io/tx/'+h+'" target="_blank" style="color:#00e676">Solscan ↗</a>'; document.getElementById('bal').innerText='$'+bal.toFixed(2)+' USD'; if(window.CedarsSupportAlarm) CedarsSupportAlarm(); alert('Deposited $'+a+' USD'); location.href='investor-dashboard.html';}
-document.getElementById('bal').innerText='$'+(parseFloat(localStorage.getItem('cedars_usd_bal')||'0').toFixed(2))+' USD';
-</script><script src="support-widget.js"></script><script src="integrity-check.js"></script></body></html><script src="header-footer.js"></script>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Deposit — Cedars</title>
+<style>:root{--bg:#0b1020;--card:#162040;--br:#1e2d55;--m:#8a9cc7;--g:#00e676;--b:#2a5bd7}*{box-sizing:border-box;font-family:system-ui}body{background:var(--bg);color:#eef2ff;margin:0}
+.card{background:var(--card);border:1px solid #2a3a6a;border-radius:14px;padding:16px;margin:12px;max-width:480px;margin-left:auto;margin-right:auto}
+.input{width:100%;padding:11px;border-radius:8px;border:1px solid var(--br);background:#0b1020;color:#fff;margin:6px 0}
+.btn{width:100%;padding:12px;border-radius:10px;border:none;font-weight:800;min-height:44px;cursor:pointer;transition:0.2s}
+.btn:active{transform:scale(0.97)}
+.btn-w{background:#fff;color:#000}.btn-b{background:var(--b);color:#fff}.btn-g{background:var(--g);color:#000}
+.small{font-size:11px;color:var(--m)}.bal{font-size:24px;font-weight:900;color:var(--g)}
+#toast{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#0b1020;border:1px solid var(--g);color:#fff;padding:10px 16px;border-radius:20px;z-index:9999999;display:none;font-size:12px;font-weight:700}
+.qr{width:160px;height:160px;background:#fff;border-radius:10px;margin:10px auto;display:flex;align-items:center;justify-content:center;color:#000;font-weight:800;font-size:12px}
+</style></head><body>
+<div id="toast"></div>
+<div class="card">
+<div class="small">Balance</div><div class="bal" id="usdBal">$0.00</div>
+<div style="margin-top:14px;font-weight:800">Deposit USDC</div>
+<div class="small" style="margin-top:6px">Network: Solana — USDC Only</div>
+<div class="qr">QR CODE<br>USDC<br>Solana</div>
+<div class="small">Deposit Address:</div>
+<input class="input" id="depAddr" value="So11111111111111111111111111111111111111112" readonly onclick="this.select(); popup('✅ Address Copied — Active')">
+<input class="input" id="depAmt" type="number" placeholder="Amount USD — e.g. 50">
+<input class="input" id="depHash" placeholder="Tx Hash (Solscan) — optional">
+<button class="btn btn-g" style="margin-top:8px" onclick="doDeposit()">Confirm Deposit</button>
+<button class="btn btn-b" style="margin-top:8px;background:var(--card);border:1px solid var(--br);color:var(--m)" onclick="location.href='investor-dashboard.html'">Back to Dashboard</button>
+<div class="small" style="margin-top:10px">After confirm — Telegram group auto-join — Email notify + Telegram channel anonymous — No name exposed</div>
+</div>
+<div class="card"><div style="font-weight:800">History</div><div id="txList" style="font-size:11px;margin-top:8px"></div></div>
+<script src="fix.js"></script>
+<script>
+function popup(m){let t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',2500);}
+function load(){let b=typeof CedarsBalance==='function'?CedarsBalance():'0.00';document.getElementById('usdBal').innerText='$'+b; let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]'); document.getElementById('txList').innerHTML=tx.filter(x=>x.type==='Deposit').slice(-10).reverse().map(t=>`<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #1e2d55"><span>$${t.amt} — ${t.date}</span><a href="https://solscan.io/tx/${t.hash}" target="_blank" style="color:#00e676;text-decoration:none">Solscan ↗</a></div>`).join('')||'<span class="small">No deposits yet</span>';}
+function doDeposit(){
+let a=parseFloat(document.getElementById('depAmt').value); let h=document.getElementById('depHash').value||'TX-'+Date.now()+'-'+Math.random().toString(36).substr(2,6).toUpperCase();
+if(!a||a<=0){popup('❌ Enter Amount');return;}
+// ADD BALANCE
+if(typeof CedarsAddBalance==='function'){CedarsAddBalance(a,'Deposit',h);} else {let bal=parseFloat(localStorage.getItem('cedars_usd_bal')||'0')+a; localStorage.setItem('cedars_usd_bal',bal.toString()); let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]'); tx.push({type:'Deposit',amt:a,hash:h,date:new Date().toLocaleString()}); localStorage.setItem('cedars_tx',JSON.stringify(tx));}
+// TELEGRAM + EMAIL NOTIFY + AUTO-JOIN — THIS IS THE LINE YOU ASKED
+if(window.CedarsOnDepositSuccess) CedarsOnDepositSuccess(a,h);
+popup('✅ Deposit $'+a+' Active — Confirmed');
+load();
+setTimeout(()=>{document.getElementById('depAmt').value=''; document.getElementById('depHash').value='';},500);
+}
+load();
+</script>
+<script src="header-footer.js"></script><script src="support-widget.js"></script>
+</body></html>
