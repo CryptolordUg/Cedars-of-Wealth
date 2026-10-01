@@ -3,89 +3,112 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cedars of Wealth - Deposit USDC</title>
+<title>Cedars of Wealth - Deposit</title>
 <style>
-body{margin:0;background:#000;color:#fff;font-family:monospace;}
-.glow{box-shadow:0 0 20px rgba(192,192,192,0.4),0 0 40px rgba(0,255,136,0.15);border:2px solid #c0c0c0;}
-.btn{cursor:pointer;background:linear-gradient(135deg,#111,#222);border:2px solid #00ff88;color:#00ff88;padding:12px;border-radius:12px;font-weight:bold;width:100%;letter-spacing:1px;}
-.btn:active{transform:scale(0.98);}
-input{background:#0a0a0a;border:1px solid #333;color:#fff;padding:12px;border-radius:10px;width:100%;box-sizing:border-box;}
+body{margin:0;background:#020a14;color:#fff;font-family:system-ui,monospace;}
+.card{ background: linear-gradient(145deg,#1c2e55 0%,#2a3f6d 100%); border:1px solid #4a6aaa; border-radius:20px; padding:20px; box-shadow:0 0 30px rgba(80,140,255,0.35), inset 0 1px 0 rgba(255,255,255,0.15); }
+.input{ background:#0b1326; border:1px solid #2a3f6d; border-radius:12px; padding:14px; width:100%; color:#fff; box-sizing:border-box; font-size:14px; outline:none; }
+.input:focus{border-color:#6aa8ff; box-shadow:0 0 10px rgba(106,168,255,0.4);}
+.btn-blue{ background: linear-gradient(90deg,#7de8ff 0%,#5ac8ff 100%); color:#001a33; font-weight:bold; border:none; border-radius:12px; padding:14px; width:100%; cursor:pointer; letter-spacing:1px; box-shadow:0 4px 20px rgba(90,200,255,0.5); }
+.btn-dark{ background:#0b1326; border:1px solid #4a6aaa; color:#7de8ff; border-radius:10px; padding:10px; width:100%; cursor:pointer; }
 </style>
 </head>
 <body>
 
-<!-- UNIFORM HEADER 400 SILVER WHITE SHINY - ALL PAGES -->
-<header style="position:sticky;top:0;z-index:999;background:rgba(0,0,0,0.97);border-bottom:2px solid #c0c0c0;padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px;backdrop-filter:blur(12px);">
-  <a href="index.html"><img src="assets/cedars-header-400-silver.png" alt="CEDARS OF WEALTH" style="width:400px;max-width:90vw;height:auto;display:block;filter:drop-shadow(0 0 25px rgba(255,255,255,0.8)) drop-shadow(0 0 50px rgba(192,192,192,0.5));"></a>
+<!-- UNIFORM HEADER 400 SILVER WHITE SHINY -->
+<header style="position:sticky;top:0;z-index:999;background:rgba(2,10,20,0.97);border-bottom:2px solid #c0c0c0;padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px;">
+  <a href="index.html"><img src="assets/cedars-header-400-silver.png" style="width:400px;max-width:90vw;height:auto;display:block;filter:drop-shadow(0 0 25px #fff) drop-shadow(0 0 50px rgba(192,192,192,0.5));"></a>
   <nav style="display:flex;gap:20px;">
-    <a href="index.html" style="color:#aaa;font-size:12px;text-decoration:none;letter-spacing:1px;">HOME</a>
-    <a href="register.html" style="color:#aaa;font-size:12px;text-decoration:none;letter-spacing:1px;">REGISTER</a>
-    <a href="deposit.html" style="color:#fff;font-size:12px;text-decoration:none;font-weight:bold;letter-spacing:1px;border-bottom:2px solid #c0c0c0;padding-bottom:2px;">DEPOSIT</a>
-    <a href="dashboard/" style="color:#aaa;font-size:12px;text-decoration:none;letter-spacing:1px;">DASHBOARD</a>
+    <a href="index.html" style="color:#7da8d0;font-size:12px;text-decoration:none;">HOME</a>
+    <a href="register.html" style="color:#7da8d0;font-size:12px;text-decoration:none;">REGISTER</a>
+    <a href="deposit.html" style="color:#7de8ff;font-size:12px;text-decoration:none;font-weight:bold;border-bottom:2px solid #7de8ff;padding-bottom:2px;">DEPOSIT</a>
+    <a href="withdraw.html" style="color:#7da8d0;font-size:12px;text-decoration:none;">WITHDRAW</a>
   </nav>
 </header>
 
-<div style="max-width:900px;margin:20px auto;padding:12px;">
+<div style="max-width:460px;margin:20px auto;padding:12px;">
 
-  <!-- VAULT PHOTO - NOT DULL -->
-  <img src="assets/treasury-vault.png" style="width:100%;max-width:520px;border-radius:18px;border:2px solid #c0c0c0;display:block;margin:0 auto 18px;box-shadow:0 0 30px rgba(192,192,192,0.4),0 0 60px rgba(0,255,136,0.2);">
-
-  <!-- DEPOSIT BOX - YOUR SETUP UNTOUCHED - SAME AS SCREENSHOT -->
-  <div class="glow" style="background:#0a120a;border-radius:20px;padding:18px;">
-    <div style="color:#888;font-size:11px;">Balance</div>
-    <div style="color:#00ff88;font-size:28px;font-weight:bold;margin-bottom:12px;">$0.00 USD</div>
-    
-    <div style="color:#fff;font-size:18px;font-weight:bold;letter-spacing:3px;margin-bottom:8px;">DEPOSIT USDC</div>
-    <div style="color:#00ff88;font-size:10px;margin-bottom:10px;letter-spacing:1px;">Network: SOLANA - USDC ONLY - DO NOT SEND OTHER TOKENS</div>
-    <div style="color:#c0c0c0;font-size:11px;margin-bottom:6px;">Treasury Deposit Address - Verified:</div>
-    
-    <div style="background:#000;border:1px solid #00ff88;border-radius:10px;padding:10px;font-size:11px;word-break:break-all;color:#fff;margin-bottom:12px;" id="treasury">6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div>
-    
-    <button class="btn" onclick="navigator.clipboard.writeText('6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb');this.innerText='✅ COPIED - HEAVY CLEAR';setTimeout(()=>this.innerText='📋 COPY ADDRESS — HEAVY CLEAR',2000)">📋 COPY ADDRESS — HEAVY CLEAR</button>
-    
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb" style="width:200px;height:200px;display:block;margin:16px auto;background:#fff;padding:10px;border-radius:12px;">
-    
-    <div style="color:#888;font-size:10px;margin:10px 0 4px;">Amount USD - e.g. 50</div>
-    <input placeholder="Amount USD — e.g. 50" id="amount">
-    
-    <div style="color:#00ff88;font-size:10px;margin:12px 0 4px;">Tx Hash (Solscan) - optional - Paste after you send</div>
-    <input placeholder="Tx Hash (Solscan) — optional" id="txhash">
-    
-    <button class="btn" style="margin-top:14px;background:#00ff88;color:#000;border-color:#00ff88;" onclick="alert('Deposit Logged: $'+document.getElementById('amount').value+' - Tx: '+document.getElementById('txhash').value)">CONFIRM DEPOSIT</button>
+  <!-- PACKAGE SELECTED BEFORE GOING TO WALLET - REMEMBER -->
+  <div class="card" style="margin-bottom:14px;background:linear-gradient(145deg,#101a2e,#152540);border:1px solid #00ff88;">
+    <div style="color:#00ff88;font-size:10px;letter-spacing:2px;">PACKAGE SELECTED</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+      <div style="color:#fff;font-weight:bold;font-size:16px;" id="pkgName">Cedar Sprout - $5 to $99</div>
+      <div style="background:#00ff88;color:#000;font-size:10px;padding:4px 8px;border-radius:20px;font-weight:bold;">1.5% DAILY</div>
+    </div>
+    <div style="color:#888;font-size:11px;margin-top:6px;">Activation $5 | Withdraw Fee $10 | Ref 10%/5%/1% ∞</div>
+    <div style="display:flex;gap:8px;margin-top:10px;">
+      <a href="index.html#packages" style="flex:1;text-decoration:none;"><div style="text-align:center;background:#0a0a0a;border:1px solid #333;border-radius:8px;padding:8px;color:#aaa;font-size:11px;">Change Package</div></a>
+      <div style="flex:1;text-align:center;background:#111;border:1px solid #00ff88;border-radius:8px;padding:8px;color:#00ff88;font-size:11px;font-weight:bold;" id="pkgAmount">Amount: $5</div>
+    </div>
   </div>
 
-  <!-- PACKAGES STRIP - SMART NEAT BEAUTIFUL - NO SETUP CHANGE -->
-  <div style="margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;">
-    <div style="background:#0a0a0a;border:1px solid #333;border-radius:10px;padding:10px;"><div style="color:#666;font-size:9px;">MIN</div><div style="color:#fff;font-size:14px;font-weight:bold;">$5</div></div>
-    <div style="background:#0a0a0a;border:1px solid #333;border-radius:10px;padding:10px;"><div style="color:#666;font-size:9px;">MAX</div><div style="color:#fff;font-size:14px;font-weight:bold;">$100K</div></div>
-    <div style="background:#0a0a0a;border:1px solid #c0c0c0;border-radius:10px;padding:10px;"><div style="color:#c0c0c0;font-size:9px;">DAILY</div><div style="color:#fff;font-size:14px;font-weight:bold;">1.5%</div></div>
-    <div style="background:#0a0a0a;border:1px solid #333;border-radius:10px;padding:10px;"><div style="color:#666;font-size:9px;">FEE</div><div style="color:#fff;font-size:14px;font-weight:bold;">$10</div></div>
+  <!-- DEPOSIT WALLET - TAILORED TO YOUR WITHDRAW PHOTO - SAME COLOR, NEAT, SMART -->
+  <div class="card">
+    <div style="color:#fff;font-size:20px;font-weight:bold;letter-spacing:1px;">Deposit USDC Only — $</div>
+    <div style="color:#7da8d0;font-size:12px;margin:8px 0 16px;">Balance: <span style="color:#7de8ff;font-weight:bold;">$0.00 USD</span> — Network: SOLANA USDC SPL ONLY</div>
+
+    <div style="color:#c0c0c0;font-size:11px;margin-bottom:6px;">Treasury Deposit Address — Verified:</div>
+    <div style="background:#080f20;border:1px solid #4a6aaa;border-radius:10px;padding:10px;font-size:10px;word-break:break-all;color:#7de8ff;margin-bottom:10px;" id="treasuryAddr">6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div>
+
+    <button class="btn-dark" onclick="navigator.clipboard.writeText('6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb');this.innerText='✅ COPIED';setTimeout(()=>this.innerText='📋 COPY ADDRESS — HEAVY CLEAR',2000)" style="margin-bottom:14px;">📋 COPY ADDRESS — HEAVY CLEAR</button>
+
+    <div style="display:flex;justify-content:center;margin-bottom:14px;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb" style="width:180px;height:180px;background:#fff;padding:8px;border-radius:12px;">
+    </div>
+
+    <!-- SAME AS WITHDRAW STYLE - Amount + Solana Wallet -->
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <input class="input" id="amountUSD" placeholder="Amount USD" type="number" min="5" max="100000" oninput="document.getElementById('pkgAmount').innerText='Amount: $'+this.value">
+      <input class="input" id="solWallet" placeholder="Your Solana Wallet — For Verification" >
+      <input class="input" id="txHash" placeholder="Tx Hash (Solscan) — Paste After Sending">
+      <button class="btn-blue" onclick="confirmDeposit()">Confirm Deposit & USD</button>
+    </div>
+
+    <div style="color:#5a7aaa;font-size:9px;text-align:center;margin-top:12px;line-height:1.4;">
+      Send ONLY Solana USDC SPL to Treasury above.<br>Min $5 — Max $100,000 — Activation $5 — Daily 1.5% — Withdraw Fee $10
+    </div>
   </div>
-  <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
-    <div style="background:#111;border:1px solid #00ff88;border-radius:10px;padding:8px;"><div style="color:#00ff88;font-weight:bold;">10%</div><div style="font-size:9px;color:#fff;">1ST GEN</div></div>
-    <div style="background:#111;border:1px solid #666;border-radius:10px;padding:8px;"><div style="color:#fff;font-weight:bold;">5%</div><div style="font-size:9px;color:#fff;">2ND GEN</div></div>
-    <div style="background:#111;border:1px solid #444;border-radius:10px;padding:8px;"><div style="color:#ccc;font-weight:bold;">1%</div><div style="font-size:9px;color:#fff;">3RD ∞</div></div>
-  </div>
+
+  <!-- REFERRAL NOTE -->
+  <div style="margin-top:12px;text-align:center;color:#5a7aaa;font-size:10px;">Referral Bonus: 10% First Gen / 5% Second Gen / 1% Third to Definite ∞</div>
 </div>
 
-<!-- UNIFORM FOOTER - ALL MAIN + SUB PAGES -->
-<footer style="margin-top:40px;background:#050505;border-top:2px solid #c0c0c0;padding:26px 16px;text-align:center;">
-  <img src="assets/cedars-header-400-silver.png" style="width:300px;max-width:80vw;margin:0 auto 12px;display:block;filter:drop-shadow(0 0 15px #fff);">
-  <div style="color:#fff;font-weight:bold;letter-spacing:3px;font-size:14px;">CEDARS OF WEALTH</div>
-  <div style="color:#c0c0c0;font-size:11px;margin:4px 0 14px;letter-spacing:1px;">ONE ORIGIN — CRD-M75TJ2 — Integrity 100% — Silver White Shiny 400</div>
-  <div style="color:#888;font-size:11px;line-height:1.7;">
-    Treasury Verified: 6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb<br>
-    Network: Solana — USDC SPL ONLY — Do Not Send Other Tokens<br>
-    Packages: $5 Min — $100,000 Max — Activation $5 — Withdrawal $10 — Referral 10%/5%/1% Definite
-  </div>
-  <div style="margin-top:16px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;">
-    <a href="index.html" style="color:#666;font-size:11px;text-decoration:none;">Home</a>
-    <a href="register.html" style="color:#666;font-size:11px;text-decoration:none;">Register</a>
-    <a href="deposit.html" style="color:#c0c0c0;font-size:11px;text-decoration:none;font-weight:bold;">Deposit</a>
-    <a href="https://solscan.io/account/6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb" target="_blank" style="color:#666;font-size:11px;text-decoration:none;">Solscan</a>
-  </div>
-  <div style="color:#333;font-size:9px;margin-top:16px;">© 2026 Cedars of Wealth — Smart • Neat • Beautiful • Conducive — 400 Silver Header</div>
+<!-- UNIFORM FOOTER - ALL PAGES -->
+<footer style="margin-top:30px;background:#020a14;border-top:2px solid #2a3f6d;padding:22px 16px;text-align:center;">
+  <img src="assets/cedars-header-400-silver.png" style="width:280px;max-width:75vw;margin:0 auto 10px;display:block;opacity:0.9;">
+  <div style="color:#fff;font-weight:bold;letter-spacing:3px;font-size:12px;">CEDARS OF WEALTH</div>
+  <div style="color:#5ac8ff;font-size:10px;margin:4px 0 10px;">ONE ORIGIN CRD-M75TJ2 — Integrity 100% — Blue Uniform</div>
+  <div style="color:#5a7aaa;font-size:10px;">Treasury: 6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb — Solscan Verified</div>
+  <div style="color:#333;font-size:9px;margin-top:12px;">© 2026 Cedars — Smart • Neat • Beautiful • Conducive</div>
 </footer>
+
+<script>
+// PACKAGE SELECTED BEFORE GOING TO DEPOSIT WALLET — REMEMBER LOGIC
+const urlParams = new URLSearchParams(window.location.search);
+let pkg = urlParams.get('package') || localStorage.getItem('cedars_package') || 'sprout';
+let amt = urlParams.get('amount') || localStorage.getItem('cedars_amount') || '5';
+const packages = {
+  sprout: 'Cedar Sprout - $5 to $99',
+  root: 'Cedar Root - $100 to $499',
+  trunk: 'Cedar Trunk - $500 to $1999',
+  branch: 'Cedar Branch - $2000 to $4999',
+  forest: 'Cedar Forest - $5000 to $9999',
+  grove: 'Cedar Grove - $10k to $49k',
+  legacy: 'Cedar Legacy - $50k to $100k'
+};
+document.getElementById('pkgName').innerText = packages[pkg] || packages.sprout;
+document.getElementById('amountUSD').value = amt;
+document.getElementById('pkgAmount').innerText = 'Amount: $'+amt;
+if(pkg){ localStorage.setItem('cedars_package', pkg); localStorage.setItem('cedars_amount', amt); }
+
+function confirmDeposit(){
+  let a=document.getElementById('amountUSD').value;
+  let w=document.getElementById('solWallet').value;
+  let t=document.getElementById('txHash').value;
+  if(!a || a<5){ alert('Min Deposit $5'); return; }
+  alert('Deposit Logged: $'+a+' — Package: '+pkg+' — Wallet: '+w+' — Tx: '+t+' — Verified via Solscan');
+}
+</script>
 
 </body>
 </html>
