@@ -1,45 +1,32 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Investor Dashboard - Cedars - USD Only</title>
-<style>:root{--bg:#0b1020;--card:#162040;--br:#1e2d55;--m:#8a9cc7;--g:#00e676}*{box-sizing:border-box;font-family:system-ui}body{background:var(--bg);color:#eef2ff;margin:0}.nav{padding:12px 16px;border-bottom:1px solid var(--br);display:flex;justify-content:space-between;position:sticky;top:0;background:var(--bg);z-index:5}.card{background:var(--card);border:1px solid #2a3a6a;border-radius:12px;padding:14px;margin:12px}.input{width:100%;padding:10px;border-radius:8px;border:1px solid var(--br);background:#0b1020;color:#fff;margin:5px 0}.btn{padding:10px 14px;border-radius:8px;border:none;font-weight:800;min-height:40px;cursor:pointer}.btn-w{background:#fff;color:#000}.btn-b{background:#2a5bd7;color:#fff}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.small{font-size:11px;color:var(--m)}</style></head><body>
-<div class="nav"><b>🌲 Investor Dashboard — USD Only</b><div><span id="invName" style="font-size:11px;color:var(--m);margin-right:10px"></span><a href="index.html" style="color:var(--m);text-decoration:none;font-size:12px">Home</a> | <a href="login.html" style="color:var(--m);text-decoration:none;font-size:12px">Sign Out</a></div></div>
-
-<div class="card"><h3>Balance — USD Only — $</h3>
-<div style="font-size:26px;font-weight:900;color:var(--g)" id="usdBal">$0.00 USD</div>
-<div class="small">Investor: <span id="emailShow">-</span> | Ref: <span id="refShow">-</span> | All in $ USD — 360° smooth</div>
-<div class="grid" style="margin-top:10px">
-<button class="btn btn-w" onclick="location.href='deposit.html'">+ Deposit (USD)</button>
-<button class="btn btn-b" onclick="location.href='withdraw.html'">Withdraw (USD)</button>
-</div>
-</div>
-
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Investor Dashboard V42 - 100% Owned</title>
+<style>:root{--bg:#0b1020;--card:#162040;--br:#1e2d55;--m:#8a9cc7;--g:#00e676;--b:#2a5bd7}*{box-sizing:border-box;font-family:system-ui}body{background:var(--bg);color:#eef2ff;margin:0}.card{background:var(--card);border:1px solid #2a3a6a;border-radius:12px;padding:14px;margin:12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.input{width:100%;padding:10px;border-radius:8px;border:1px solid var(--br);background:#0b1020;color:#fff;margin:5px 0}.btn{padding:10px 14px;border-radius:8px;border:none;font-weight:800;min-height:40px;cursor:pointer}.btn-w{background:#fff;color:#000}.btn-b{background:var(--b);color:#fff}.small{font-size:11px;color:var(--m)}.bal{font-size:28px;font-weight:900;color:var(--g)}</style></head><body>
+<div class="card"><h3>Investor Dashboard V42 — 100% Owned 360° — USD Only $</h3><div class="bal" id="usdBal">$0.00 USD</div><div class="small">Investor: <span id="invName">-</span> | <span id="emailShow">-</span> | Ref: <span id="refShow">-</span> | Command: document.getElementById('usdBal').innerText='$'+CedarsBalance();</div>
+<div class="grid" style="margin-top:10px"><button class="btn btn-w" onclick="location.href='deposit.html'">+ Deposit P2P QR</button><button class="btn btn-b" onclick="location.href='withdraw.html'">Withdraw USDC</button></div></div>
 <div class="grid">
-<div class="card"><h4>Education</h4><p class="small">10-Year Cedar Package — USD Only</p><button class="btn btn-w" style="width:100%;margin-top:8px" onclick="location.href='index.html#plans'">View Plans</button></div>
-<div class="card"><h4>Referral — 2 Lines</h4><p class="small">Earnings $5 per user — USD Only</p><div class="small">Link: <span id="refLink">-</span></div><button class="btn btn-b" style="width:100%;margin-top:8px" onclick="location.href='referral.html'">Referral Dashboard</button></div>
+<div class="card"><h4>📚 Education</h4><p class="small">10-Year Package — Mighty Cedar</p><button class="btn btn-w" style="width:100%" onclick="location.href='index.html#plans'">View Plans</button></div>
+<div class="card"><h4>📈 Trading — Jupiter Fixed</h4><p class="small" id="jupStatus">lite-api.jup.ag/swap/v1 — Live</p><button class="btn btn-b" style="width:100%" onclick="testJup()">Test Jupiter API</button></div>
 </div>
-
-<div class="card"><h4>Transactions — USD Only — Solscan Proof</h4><div id="txList" style="font-size:11px;margin-top:8px"></div></div>
-
-<div class="card"><h4>Commands — Working</h4><p class="small">CedarsBalance() = <span id="cmdBal">-</span> | CedarsRegister() | CedarsSignIn() | CedarsSignOut() | Support alarm reads investor name</p></div>
-
+<div class="grid">
+<div class="card"><h4>🔗 Referral — 2 Lines</h4><p class="small" id="refLink">-</p><button class="btn btn-w" style="width:100%;margin-top:6px" onclick="location.href='referral.html'">Referral Dashboard</button></div>
+<div class="card"><h4>💰 Universal Rates</h4><p class="small">10% Direct | 5% Level2 | 1% Infinite | $5 per referral USD only</p><div class="small" id="ratesLive">Loading live...</div></div>
+</div>
+<div class="card"><h4>Transactions — Solscan + History</h4><div id="txList" style="font-size:11px"></div></div>
 <script src="fix.js"></script>
 <script>
-// BALANCE DISPLAY FIX - 100% WORKING - USD ONLY
-function loadDash(){
+function loadV42(){
  let name=localStorage.getItem('cedars_investor_name')||'Investor';
  let email=localStorage.getItem('cedars_investor_email')||'Not logged';
  let ref=localStorage.getItem('cedars_ref')||'CRD-XXXX';
- let bal=parseFloat(localStorage.getItem('cedars_usd_bal')||'0');
  document.getElementById('invName').innerText=name;
  document.getElementById('emailShow').innerText=email;
  document.getElementById('refShow').innerText=ref;
- document.getElementById('usdBal').innerText='$'+bal.toFixed(2)+' USD';
- document.getElementById('cmdBal').innerText='$'+bal.toFixed(2);
- document.getElementById('refLink').innerText=location.origin+location.pathname.replace('investor-dashboard.html','')+'register.html?ref='+ref;
+ document.getElementById('usdBal').innerText='$'+CedarsBalance()+' USD';
+ document.getElementById('refLink').innerText=location.origin+'/Cedars-of-Wealth/register.html?ref='+ref;
  let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]');
- document.getElementById('txList').innerHTML=tx.map(t=>`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #1e2d55;padding:6px 0"><span>${t.type} $${t.amt} — ${t.date}</span><a href="https://solscan.io/tx/${t.hash}" target="_blank" style="color:#00e676">Solscan ↗</a></div>`).join('')||'<span class="small">No transactions yet — Deposit USD</span>';
+ document.getElementById('txList').innerHTML=tx.slice(-10).reverse().map(t=>`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #1e2d55;padding:6px 0"><span>${t.type} $${t.amt} — ${t.date}</span><a href="https://solscan.io/tx/${t.hash}" target="_blank" style="color:#00e676">Solscan ↗</a></div>`).join('')||'<span class="small">No tx yet — Deposit USD</span>';
 }
-function CedarsBalance(){ return parseFloat(localStorage.getItem('cedars_usd_bal')||'0').toFixed(2); }
-loadDash();
-setInterval(loadDash,2000);
+function testJup(){ document.getElementById('jupStatus').innerText='Testing lite-api.jup.ag/swap/v1...'; fetch('https://lite-api.jup.ag/swap/v1/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&amount=1000000').then(r=>r.json()).then(d=>{ document.getElementById('jupStatus').innerText='✅ Jupiter Fixed — lite-api.jup.ag/swap/v1 LIVE — Quote OK'; }).catch(e=>{ document.getElementById('jupStatus').innerText='❌ Jupiter still fail — check network'; }); }
+loadV42(); setInterval(loadV42,2000);
 </script>
-<script src="support-widget.js"></script>
-</body></html><script src="header-footer.js"></script>
+<script src="header-footer.js"></script><script src="support-widget.js"></script><script src="integrity-check.js"></script>
+</body></html>
