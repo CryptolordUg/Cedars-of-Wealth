@@ -2,82 +2,101 @@
 <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CEDARS OF WEALTH — COMMAND CENTER 360</title>
 <style>
-body{margin:0;background:#020805;color:#d0ffd9;font-family:monospace;overflow-x:hidden;}
-/* BILLBOARD */
-.billboard{width:100%;background:linear-gradient(180deg, #001a0f 0%, #020805 100%);border-bottom:3px solid #00ff88;padding:18px 15px;text-align:center;position:sticky;top:0;z-index:99;box-shadow:0 0 35px rgba(0,255,136,0.25);}
-.bill-title{font-size:38px;font-weight:900;letter-spacing:6px;color:#00ff88;text-shadow:0 0 15px #00ff88, 0 0 30px #00ff88;line-height:1;}
-@media(max-width:600px){.bill-title{font-size:22px;letter-spacing:3px;}}
-.bill-sub{font-size:13px;letter-spacing:4px;color:#fff;margin-top:6px;font-weight:bold;}
-.bill-line{height:2px;background:linear-gradient(90deg, transparent, #00ff88, transparent);margin:10px 0;}
-.origin-badge{display:inline-block;padding:5px 12px;border:1px dashed #00ff88;border-radius:20px;background:#001a0f;font-size:10px;word-break:break-all;}
-/* MILITARY NAV DROPDOWN */
-.nav-wrap{position:absolute;top:15px;right:15px;}
-.drop-btn{padding:8px 14px;background:#000;color:#00ff88;border:1px solid #00ff88;border-radius:6px;cursor:pointer;font-weight:bold;font-size:12px;}
-.dropdown{position:absolute;right:0;top:38px;background:#000a06;border:1px solid #00ff88;border-radius:10px;width:180px;display:none;box-shadow:0 0 20px rgba(0,255,136,0.4);overflow:hidden;}
+body{margin:0;background:#000;color:#d0ffd9;font-family:monospace;}
+.billboard{width:100%;background:#000;border-bottom:3px solid #00ff88;padding:12px 10px;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 0 30px rgba(0,255,136,0.3);}
+.bill-title{font-size:40px;font-weight:900;letter-spacing:8px;color:#00ff88;text-shadow:0 0 12px #00ff88, 0 0 25px #00ff88;line-height:1;}
+@media(max-width:600px){.bill-title{font-size:24px;letter-spacing:4px;}}
+.bill-sub{font-size:12px;letter-spacing:5px;color:#fff;margin-top:4px;font-weight:800;}
+/* NEW BOLD TACTICAL BAR - BELOW HEADER - SHIFTED CONTROLS SPACE */
+.tactical-bar{width:100%;background:linear-gradient(90deg, #001a0f, #000, #001a0f);border-bottom:2px solid #00ff88;padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between;}
+.left-group{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.badge{padding:5px 10px;border:1px solid #00ff88;border-radius:6px;background:#000;color:#00ff88;font-size:11px;font-weight:bold;}
+.badge-white{border-color:#fff;color:#fff;background:#111;}
+.badge-gold{border-color:#ffcc00;color:#ffcc00;background:#111;}
+.dot{width:8px;height:8px;border-radius:50%;background:#00ff88;box-shadow:0 0 8px #00ff88;display:inline-block;animation:blink 1s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.2;}}
+.btn-action{padding:6px 12px;border-radius:6px;border:1px solid #00ff88;background:#00ff88;color:#000;font-weight:900;cursor:pointer;font-size:11px;}
+.btn-dark{padding:6px 12px;border-radius:6px;border:1px solid #00ff88;background:#111;color:#00ff88;cursor:pointer;font-size:11px;}
+/* NAV DROPDOWN */
+.nav-wrap{position:absolute;top:12px;right:12px;}
+.drop-btn{padding:7px 12px;background:#000;color:#00ff88;border:1px solid #00ff88;border-radius:6px;cursor:pointer;font-weight:bold;font-size:12px;}
+.dropdown{position:absolute;right:0;top:36px;background:#000a06;border:1px solid #00ff88;border-radius:10px;width:190px;display:none;box-shadow:0 0 20px rgba(0,255,136,0.5);overflow:hidden;z-index:200;}
 .dropdown a{display:block;padding:10px 14px;color:#9effc4;text-decoration:none;font-size:12px;border-bottom:1px solid rgba(0,255,136,0.1);}
 .dropdown a:hover{background:rgba(0,255,136,0.15);color:#00ff88;}
 .show{display:block;}
-/* MILITARY SIMULATION FRAME */
-.mil-frame{border:2px solid #00ff88;margin:10px;border-radius:12px;background:#000;position:relative;overflow:hidden;}
-.mil-frame::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg, #00ff88, transparent, #00ff88);animation:scan 3s linear infinite;}
-@keyframes scan{0%{transform:translateY(0);}100%{transform:translateY(88vh);}}
-.frame{width:100%;height:90vh;border:none;background:#000;}
-.status-bar{display:flex;gap:8px;flex-wrap:wrap;padding:8px 12px;background:#001008;border-top:1px solid #00ff88;font-size:10px;}
-.dot{width:8px;height:8px;border-radius:50%;background:#00ff88;box-shadow:0 0 8px #00ff88;display:inline-block;animation:blink 1.2s infinite;}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.2;}}
-.btn{padding:7px 14px;background:#00ff88;color:#000;border:none;border-radius:6px;font-weight:bold;cursor:pointer;font-size:11px;}
-.btn2{padding:7px 14px;background:#111;color:#00ff88;border:1px solid #00ff88;border-radius:6px;cursor:pointer;font-size:11px;}
+/* ENLARGED MILITARY FRAME */
+.mil-frame{width:100%;height:calc(100vh - 112px);border:none;background:#000;position:relative;}
+.frame{width:100%;height:100%;border:none;background:#000;}
+.scanline{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg, transparent, #00ff88, transparent);animation:scan 4s linear infinite;z-index:10;pointer-events:none;}
+@keyframes scan{0%{transform:translateY(0);}100%{transform:translateY(calc(100vh - 112px));}}
 </style></head><body>
 
-<!-- BIG BILLBOARD - REPLACES UNIVERSAL VIEW TEXT -->
+<!-- BIG BILLBOARD ONLY -->
 <div class="billboard">
 <div class="bill-title">CEDARS OF WEALTH</div>
-<div class="bill-sub">COMMAND CENTER 360 — MILITARY SIMULATION — READY TO HIT WORLDWIDE</div>
-<div class="bill-line"></div>
-<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;align-items:center;">
-<span style="font-size:10px;color:#7abf9a;"><span class="dot"></span> LIVE OPERATOR: cryptomeme2030@gmail.com | GATE-360 | 55% PAYOUT | 720 DAYS | AUDIO ROI</span>
-<span class="origin-badge" id="originBadge">ORIGIN: https://cryptolordug.github.io/Cedars-of-Wealth/register.html?ref=CRD-M75TJ2</span>
-<button class="btn" onclick="openOrigin()">🚀 HIT — OPEN REGISTER</button>
-<button class="btn2" onclick="copyOrigin()">📤 COPY ORIGIN</button>
-</div>
+<div class="bill-sub">COMMAND CENTER 360 — MILITARY SIMULATION — GLOBAL DOMINATION</div>
 
-<!-- DROPDOWN - HIDDEN NAV -->
+<!-- MENU DROPDOWN -->
 <div class="nav-wrap">
 <button class="drop-btn" onclick="toggleDrop()">☰ MENU ▾</button>
 <div class="dropdown" id="mainDrop">
 <a href="https://cryptolordug.github.io/Cedars-of-Wealth/" target="_blank">🏠 Home</a>
 <a href="https://cryptolordug.github.io/Cedars-of-Wealth/about.html" target="_blank">ℹ️ About us</a>
-<a href="#" onclick="alert('Calendar — Locked in Command Center');return false;">📅 Calendar</a>
-<a href="https://cryptolordug.github.io/Cedars-of-Wealth/register.html?ref=CRD-M75TJ2" target="_blank">📝 Register — One Origin</a>
-<a href="#" onclick="alert('Plans — View in Command Center');document.getElementById('cmd').scrollIntoView();return false;">📊 Plans</a>
-<a href="#" onclick="alert('Deposit — View in Command Center');document.getElementById('cmd').scrollIntoView();return false;">💰 Deposit</a>
-<a href="#" onclick="alert('Withdraw — View in Command Center');document.getElementById('cmd').scrollIntoView();return false;">💸 Withdraw</a>
-<a href="#" onclick="alert('Referral — Origin: CRD-M75TJ2');return false;">🔗 Referral</a>
-<a href="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-global-branches.html" target="_blank">🌍 4 Branches — Global</a>
-<a href="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-builders-innovation-hub.html" target="_blank">💡 Innovation Hub</a>
+<a href="#">📅 Calendar</a>
+<a href="https://cryptolordug.github.io/Cedars-of-Wealth/register.html?ref=CRD-M75TJ2" target="_blank">📝 Register — CRD-M75TJ2</a>
+<a href="#">📊 Plans</a>
+<a href="#">💰 Deposit</a>
+<a href="#">💸 Withdraw</a>
+<a href="#">🔗 Referral</a>
+<a href="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-global-branches.html" target="_blank">🌍 4 Branches</a>
+<a href="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-builders-innovation-hub.html" target="_blank">💡 Innovations</a>
+</div>
 </div>
 </div>
 
+<!-- NEW LOCATION - SHIFTED CONTROLS FROM COMMAND CENTER - BOLD & STRONG -->
+<div class="tactical-bar">
+<div class="left-group">
+<span class="badge"><span class="dot"></span> COMMAND CENTER 360 — AUDIO ROI 1.5% 12PM ET — 720 DAYS</span>
+<span class="badge badge-white">● COMMAND CENTER 360 — 360° LIVE — <span id="liveTime"></span></span>
+<span class="badge badge-gold">V16 — $0.00 — GLOBAL BUILD</span>
+<span class="badge">🏦 🌐 👤 💰 💸 🛡️ ✈️ 🎯</span>
+</div>
+<div class="left-group">
+<button class="btn-action" onclick="sendCmd('withdraw')">💸 WITHDRAW</button>
+<button class="btn-dark" onclick="sendCmd('signout')">SIGN OUT</button>
+<button class="btn-dark" onclick="sendCmd('audio')">AUDIO ROI 🔊</button>
+<button class="btn-dark" onclick="window.open('https://t.me/CedarsOfWealth','_blank')">✈️ TELEGRAM</button>
+</div>
 </div>
 
-<!-- MILITARY SIMULATION COMMAND CENTER - WRAPPED, NOT EDITED -->
-<div class="mil-frame" id="cmd">
-<iframe class="frame" src="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-control-center.html?v=CLEAN-100-AUDIO-LOCKED"></iframe>
-<div class="status-bar">
-<span><span class="dot"></span> COMMAND CENTER 360 — MIL SIM ACTIVE — CLEAN — NEAT — SMART</span>
-<span>THREAT: LOW</span>
-<span>RADAR: 360° SCANNING</span>
-<span>STREAK: READY</span>
-<span>SYSTEM: NO CHANGE — WRAPPER ONLY</span>
-<span id="copyStatus" style="color:#00ff88;">Ready to hit investors worldwide</span>
-</div>
+<!-- ENLARGED COMMAND CENTER - NO CLUTTER - BOLD GLOBAL -->
+<div class="mil-frame">
+<div class="scanline"></div>
+<iframe class="frame" id="cmdFrame" src="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-control-center.html?v=CLEAN-100-AUDIO-LOCKED"></iframe>
 </div>
 
 <script>
-const ORIGIN='https://cryptolordug.github.io/Cedars-of-Wealth/register.html?ref=CRD-M75TJ2';
-function openOrigin(){window.open(ORIGIN,'_blank');}
-function copyOrigin(){navigator.clipboard.writeText(ORIGIN).then(()=>{document.getElementById('copyStatus').textContent='✅ Origin Copied — Universal — '+ORIGIN; document.getElementById('originBadge').textContent='COPIED: '+ORIGIN;});}
 function toggleDrop(){document.getElementById('mainDrop').classList.toggle('show');}
-window.onclick=function(e){if(!e.target.matches('.drop-btn')){var d=document.getElementById('mainDrop'); if(d.classList.contains('show')) d.classList.remove('show');}}
+window.onclick=function(e){if(!e.target.matches('.drop-btn')){var d=document.getElementById('mainDrop'); if(d&&d.classList.contains('show')) d.classList.remove('show');}}
+function updateTime(){var n=new Date(); document.getElementById('liveTime').textContent=n.toLocaleString();} setInterval(updateTime,1000); updateTime();
+// Send commands to iframe without changing dashboard file — Wrapper to inner communication — No edit
+function sendCmd(cmd){
+  var f=document.getElementById('cmdFrame');
+  try{
+    // Try to trigger buttons inside iframe if same origin — No file edit — Just wrapper control
+    var innerDoc=f.contentDocument || f.contentWindow.document;
+    if(cmd==='withdraw'){ var b=innerDoc.querySelector('[data-action=\"withdraw\"]') || Array.from(innerDoc.querySelectorAll('button')).find(x=>x.textContent.includes('WITHDRAW')); if(b) b.click(); else alert('Withdraw — Inside Command Center — Scroll down in frame'); f.contentWindow.focus(); }
+    if(cmd==='signout'){ var b=innerDoc.querySelector('[data-action=\"signout\"]') || Array.from(innerDoc.querySelectorAll('button')).find(x=>x.textContent.includes('SIGN OUT')); if(b) b.click(); else { if(confirm('Sign Out from Command Center?')){ localStorage.clear(); sessionStorage.clear(); location.reload(); } } }
+    if(cmd==='audio'){ var b=Array.from(innerDoc.querySelectorAll('button')).find(x=>x.textContent.includes('AUDIO')); if(b) b.click(); else f.contentWindow.postMessage({type:'AUDIO_ROI'},'*'); }
+  }catch(err){ 
+    // Cross-origin fallback — Still no edit — Just alert + focus
+    if(cmd==='withdraw') f.contentWindow.postMessage({type:'WITHDRAW'},'*');
+    if(cmd==='audio') f.contentWindow.postMessage({type:'AUDIO_ROI'},'*');
+    document.getElementById('cmdFrame').scrollIntoView();
+  }
+}
+// Keep origin hidden but working — No display to enlarge screen — Still same ref for all branches
+const ORIGIN='https://cryptolordug.github.io/Cedars-of-Wealth/register.html?ref=CRD-M75TJ2';
 </script>
 </body></html>
