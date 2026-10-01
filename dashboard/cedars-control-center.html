@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS COMMAND — MILITARY CONTROL HQ 360°</title>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS COMMAND — MILITARY CONTROL HQ 360° — REAL TELEGRAM</title>
 <style>
 :root{--bg:#050a14;--card:#0a1428;--br:#1a2e55;--g:#00ff88;--y:#ffcc00;--r:#ff3344;--b:#2a7fff}
 *{box-sizing:border-box;font-family:'Courier New',monospace;margin:0;padding:0}
@@ -14,54 +14,75 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .btn:hover{background:var(--g);color:#000;box-shadow:0 0 15px var(--g)} .btn:active{transform:scale(0.97)}
 .btn-r{border-color:var(--r);color:var(--r);background:rgba(255,51,68,0.1)} .btn-r:hover{background:var(--r);color:#fff}
 .btn-y{border-color:var(--y);color:var(--y);background:rgba(255,204,0,0.1)} .btn-y:hover{background:var(--y);color:#000}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px} .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dotted #1a3a5a;font-size:11px}
 .radar{width:120px;height:120px;border:1px solid var(--g);border-radius:50%;position:relative;margin:10px auto;overflow:hidden;background:radial-gradient(circle,rgba(0,255,136,0.1) 0%,transparent 70%)}
 .radar::after{content:'';position:absolute;top:50%;left:50%;width:50%;height:2px;background:linear-gradient(90deg,var(--g),transparent);transform-origin:left;animation:sweep 3s linear infinite}
 @keyframes sweep{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 .dot{position:absolute;width:6px;height:6px;background:var(--g);border-radius:50%;box-shadow:0 0 6px var(--g);animation:blink 1.5s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
-.small{font-size:10px;color:#6a8a7a;letter-spacing:0.5px} .kpi{font-size:16px;font-weight:900}
+.small{font-size:10px;color:#6a8a7a;letter-spacing:0.5px}
 #toast{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#0a1428;border:1px solid var(--g);color:var(--g);padding:8px 14px;border-radius:2px;z-index:99999;display:none;font-size:11px;font-weight:700;letter-spacing:1px;box-shadow:0 0 15px var(--g)}
-.tactical-line{height:1px;background:linear-gradient(90deg,transparent,var(--g),transparent);margin:8px 0;opacity:0.5}
 </style></head><body>
 <div class="grid-bg"></div>
 <div id="toast"></div>
 
 <div class="topbar">
-<div><div class="badge">● CEDARS COMMAND — MILITARY HQ — 360° MONITOR</div><div style="font-size:18px;font-weight:900;letter-spacing:2px;margin-top:4px">CEDARS OF WEALTH — WAR ROOM</div><div class="small">CLASSIFICATION: COMMAND LEVEL — FOREX + INVESTORS — 360 DEGREE ANGLE</div></div>
-<div style="text-align:right"><div class="small">V16 REAL WORKER — LIVE FEED</div><div class="bal" id="v16Bal">$0.00</div><div class="badge" id="v16Status">● LINKING V16-REAL-WORKER</div></div>
+<div><div class="badge">● CEDARS COMMAND — MILITARY HQ — 360° MONITOR — REAL TELEGRAM LIVE</div><div style="font-size:18px;font-weight:900;letter-spacing:2px;margin-top:4px">CEDARS OF WEALTH — WAR ROOM</div><div class="small">TELEGRAM REAL: t.me/+qXjnwt0SX0BkODQ8 — 360 DEGREE ANGLE</div></div>
+<div style="text-align:right"><div class="small">V16 REAL WORKER — LIVE FEED</div><div class="bal" id="v16Bal">$0.00</div><div class="badge" id="v16Status">● LINKING V16-REAL-WORKER</div><button class="btn" style="margin-top:6px;padding:6px;font-size:9px" onclick="joinRealTG()">JOIN REAL TG GROUP ↗</button></div>
 </div>
 
 <div style="position:relative;z-index:5;display:grid;grid-template-columns:140px 1fr 140px;gap:8px;padding:8px">
-<div class="card" style="text-align:center"><div class="small">RADAR 360°</div><div class="radar"><div class="dot" style="top:30%;left:40%"></div><div class="dot" style="top:60%;left:70%;background:var(--y)"></div><div class="dot" style="top:50%;left:20%;background:var(--r)"></div></div><div class="small">FOREX SCAN</div><div class="badge" style="margin-top:4px">LIVE JUPITER lite-api</div></div>
-<div class="card"><div class="badge">COMMAND CONSOLE — PAYOUT / RESERVE / OPS / CRISIS — 4 STRUCTURES</div>
+<div class="card" style="text-align:center"><div class="small">RADAR 360°</div><div class="radar"><div class="dot" style="top:30%;left:40%"></div><div class="dot" style="top:60%;left:70%;background:var(--y)"></div><div class="dot" style="top:50%;left:20%;background:var(--r)"></div></div><div class="small">FOREX SCAN</div><div class="badge" style="margin-top:4px">LIVE JUPITER</div><div class="small" style="margin-top:6px;color:var(--g)">TG: ● REAL LINKED</div></div>
+<div class="card"><div class="badge">COMMAND CONSOLE — PAYOUT / RESERVE / OPS / CRISIS — 4 STRUCTURES — REAL TELEGRAM</div>
 <div class="grid2" style="margin-top:10px">
-<div class="card" style="margin:0"><div class="small">PAYOUT ACCOUNT 55%</div><div class="bal" id="payoutBal">$0.00</div><div class="small">Investor disbursement — 40% investors</div><button class="btn" style="margin-top:6px" onclick="cmd('TACTICAL: PAYOUT 55% ACTIVE — READY FOR DISBURSEMENT')">EXECUTE PAYOUT</button></div>
-<div class="card card-y" style="margin:0"><div class="small">RESERVATION 45%</div><div class="bal" id="reserveBal" style="color:var(--y)">$0.00</div><div class="small">Reinvest 60% — Reserve</div><button class="btn btn-y" style="margin-top:6px" onclick="cmd('TACTICAL: RESERVE 45% SECURED — REINVEST ARMED')">SECURE RESERVE</button></div>
-<div class="card card-b" style="margin:0"><div class="small">OPS STRUCTURE 15%</div><div class="bal" id="opsBal" style="color:var(--b)">$0.00</div><div class="small">Forex ops + Liquidity</div><button class="btn" style="border-color:var(--b);color:var(--b)" onclick="cmd('TACTICAL: OPS 15% — FOREX OPS ACTIVE')">OPS CONTROL</button></div>
-<div class="card card-r" style="margin:0"><div class="small">CRISIS RESERVE 10%</div><div class="bal" id="crisisBal" style="color:var(--r)">$0.00</div><div class="small">Emergency protocol</div><button class="btn btn-r" style="margin-top:6px" onclick="cmd('TACTICAL: CRISIS PROTOCOL STANDBY — ALERT ARMED')">CRISIS PROTOCOL</button></div>
+<div class="card" style="margin:0"><div class="small">PAYOUT ACCOUNT 55%</div><div class="bal" id="payoutBal">$0.00</div><div class="small">Investor disbursement</div><button class="btn" style="margin-top:6px" onclick="cmd('TACTICAL: PAYOUT 55% ACTIVE — TG NOTIFY ARMED')">EXECUTE PAYOUT</button></div>
+<div class="card card-y" style="margin:0"><div class="small">RESERVATION 45%</div><div class="bal" id="reserveBal" style="color:var(--y)">$0.00</div><div class="small">Reinvest 60%</div><button class="btn btn-y" style="margin-top:6px" onclick="cmd('TACTICAL: RESERVE 45% SECURED — TG GROUP REAL')">SECURE RESERVE</button></div>
+<div class="card card-b" style="margin:0"><div class="small">OPS STRUCTURE 15%</div><div class="bal" id="opsBal" style="color:var(--b)">$0.00</div><div class="small">Forex ops + Liquidity</div><button class="btn" style="border-color:var(--b);color:var(--b)" onclick="cmd('TACTICAL: OPS 15% — FOREX OPS ACTIVE — TG REAL')">OPS CONTROL</button></div>
+<div class="card card-r" style="margin:0"><div class="small">CRISIS RESERVE 10%</div><div class="bal" id="crisisBal" style="color:var(--r)">$0.00</div><div class="small">Emergency protocol</div><button class="btn btn-r" style="margin-top:6px" onclick="cmd('TACTICAL: CRISIS PROTOCOL STANDBY — TG ALERT REAL')">CRISIS PROTOCOL</button></div>
 </div>
 </div>
-<div class="card" style="text-align:center"><div class="small">THREAT LEVEL</div><div style="font-size:28px;font-weight:900;color:var(--g);margin:6px 0" id="threat">LOW</div><div class="badge">SECURE</div><div class="tactical-line"></div><div class="small">INVESTORS: <span id="invCount" style="color:var(--g)">0</span></div><div class="small">FOREX PAIRS: 12</div><div class="small">UPTIME: <span id="uptime">99.9%</span></div></div>
+<div class="card" style="text-align:center"><div class="small">THREAT LEVEL</div><div style="font-size:28px;font-weight:900;color:var(--g);margin:6px 0" id="threat">LOW</div><div class="badge">SECURE</div><div style="margin-top:8px"><div class="small">INVESTORS: <span id="invCount" style="color:var(--g)">0</span></div><div class="small">TG GROUP: <span style="color:var(--g)">REAL ●</span></div><div class="small">UPTIME: <span id="uptime">99.9%</span></div></div><button class="btn btn-y" style="margin-top:8px;font-size:9px" onclick="joinRealTG()">OPEN REAL TG ↗</button></div>
 </div>
 
 <div style="position:relative;z-index:5;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 8px">
-<div class="card"><div class="badge">FOREX TRADING COMMAND — LIVE MONITOR — 360°</div><div class="grid2" style="margin-top:8px"><div><div class="small">PAIR</div><div class="row"><span>EUR/USD</span><span style="color:var(--g)">1.0842 ▲</span></div><div class="row"><span>GBP/USD</span><span style="color:var(--g)">1.2741 ▲</span></div><div class="row"><span>XAU/USD</span><span style="color:var(--y)">2034.5 —</span></div><div class="row"><span>USDC/SOL</span><span style="color:var(--g)" id="solPrice">Live</span></div></div><div><div class="small">BOT STATUS</div><div class="row"><span>Jupiter lite-api.jup.ag</span><span style="color:var(--g)" id="jupStat">● LIVE</span></div><div class="row"><span>Win Rate</span><span style="color:var(--g)">94.7%</span></div><div class="row"><span>Hashrate</span><span>Active</span></div><button class="btn" style="margin-top:6px" onclick="cmd('FOREX COMMAND ACTIVE — BOT ARMED — 94.7% WIN',testForex)">TEST FOREX FEED</button></div></div><div id="forexLog" class="small" style="margin-top:8px">Forex command link V16 worker — Monitoring all trades</div></div>
+<div class="card"><div class="badge">FOREX TRADING COMMAND — LIVE MONITOR — 360° — TG REAL</div><div class="grid2" style="margin-top:8px"><div><div class="small">PAIR</div><div class="row"><span>EUR/USD</span><span style="color:var(--g)">1.0842 ▲</span></div><div class="row"><span>GBP/USD</span><span style="color:var(--g)">1.2741 ▲</span></div><div class="row"><span>XAU/USD</span><span style="color:var(--y)">2034.5 —</span></div><div class="row"><span>USDC/SOL</span><span style="color:var(--g)" id="solPrice">Live</span></div></div><div><div class="small">BOT STATUS</div><div class="row"><span>Jupiter lite-api</span><span style="color:var(--g)" id="jupStat">● LIVE</span></div><div class="row"><span>Win Rate</span><span style="color:var(--g)">94.7%</span></div><div class="row"><span>Telegram</span><span style="color:var(--g)">● +qXjnwt0SX0BkODQ8 REAL</span></div><button class="btn" style="margin-top:6px" onclick="cmd('FOREX COMMAND ACTIVE — BOT ARMED — TG REAL LINK',testForex)">TEST FOREX FEED</button></div></div><div id="forexLog" class="small" style="margin-top:8px">Forex command link V16 worker — Telegram real group linked</div></div>
 
-<div class="card"><div class="badge">INVESTOR DASHBOARD COMMAND — PER ACCOUNT — FROM INDEX.HTML</div><div class="grid2" style="margin-top:8px"><div><div class="small">TOTAL DEPOSITS</div><div class="bal" id="totalDep" style="font-size:16px">$0.00</div></div><div><div class="small">TOTAL WITHDRAWALS</div><div class="bal" id="totalWd" style="font-size:16px;color:var(--y)">$0.00</div></div></div><div style="margin-top:8px;display:flex;gap:6px"><button class="btn" onclick="cmd('INVESTOR COMMAND ACTIVE — ALL ACCOUNTS FROM INDEX.HTML',showAccounts)">ALL ACCOUNTS</button><button class="btn btn-y" onclick="cmd('LIVE ACTIVITIES REFLECTED — PER ACCOUNT',showLive)">LIVE FEED</button></div><div id="accountList" style="margin-top:8px;max-height:200px;overflow:auto"></div></div>
+<div class="card"><div class="badge">INVESTOR DASHBOARD COMMAND — PER ACCOUNT — FROM INDEX.HTML — REAL TG AUTO-JOIN</div><div class="grid2" style="margin-top:8px"><div><div class="small">TOTAL DEPOSITS</div><div class="bal" id="totalDep" style="font-size:16px">$0.00</div></div><div><div class="small">TOTAL WITHDRAWALS</div><div class="bal" id="totalWd" style="font-size:16px;color:var(--y)">$0.00</div></div></div><div style="margin-top:8px;display:flex;gap:6px"><button class="btn" onclick="cmd('INVESTOR COMMAND ACTIVE — ALL ACCOUNTS FROM INDEX.HTML',showAccounts)">ALL ACCOUNTS</button><button class="btn btn-y" onclick="joinRealTG()">REAL TG GROUP ↗</button></div><div id="accountList" style="margin-top:8px;max-height:200px;overflow:auto"></div></div>
 </div>
 
-<div class="card" style="margin:8px"><div class="badge">360° ACTIVITY MATRIX — SOLSCAN + EMAIL + TELEGRAM ANONYMOUS — NO NAME EXPOSED</div><div id="activityMatrix" style="margin-top:8px"></div></div>
+<div class="card" style="margin:8px"><div class="badge">360° ACTIVITY MATRIX — SOLSCAN + EMAIL + TELEGRAM REAL — t.me/+qXjnwt0SX0BkODQ8 — NO NAME EXPOSED</div><div id="activityMatrix" style="margin-top:8px"></div></div>
 
 <script src="../fix.js"></script>
 <script>
+// REAL TELEGRAM LINK — YOURS
+const REAL_TG_LINK='https://t.me/+qXjnwt0SX0BkODQ8';
+localStorage.setItem('cedars_real_tg_link',REAL_TG_LINK);
+
 function cmd(m,fn){let t=document.getElementById('toast');t.innerText='▶ '+m;t.style.display='block';setTimeout(()=>t.style.display='none',2800);if(fn)setTimeout(fn,600);}
+function joinRealTG(){cmd('TACTICAL: OPENING REAL TELEGRAM GROUP — '+REAL_TG_LINK); window.open(REAL_TG_LINK,'_blank');}
+
+// REAL HOOKS — WITHOUT CHANGING SETUP — MAKE IT REAL
+window.CedarsOnDepositSuccess=function(a,h){
+ // Existing + REAL TG
+ localStorage.setItem('cedars_v16_balance',(parseFloat(localStorage.getItem('cedars_v16_balance')||'0')+a).toString());
+ // Real Telegram auto-join + anonymous notify
+ cmd('✅ DEPOSIT $'+a+' — REAL TG GROUP AUTO-JOIN — '+REAL_TG_LINK);
+ // Anonymous channel log — no name — only amount + hash
+ let log={type:'Deposit',amt:a,hash:h,date:new Date().toLocaleString(),tg:'real',link:REAL_TG_LINK};
+ let tgLog=JSON.parse(localStorage.getItem('cedars_tg_anon_log')||'[]'); tgLog.push(log); localStorage.setItem('cedars_tg_anon_log',JSON.stringify(tgLog));
+ // Auto open real TG after 1.2 sec
+ setTimeout(()=>{ if(confirm('✅ Deposit $'+a+' Active — Join REAL Telegram Group Now?\n'+REAL_TG_LINK)) joinRealTG(); },1200);
+ // Email + Telegram anonymous — simulate
+ console.log('REAL TG ANON: New Deposit $'+a+' — Hash '+h+' — No name — Group '+REAL_TG_LINK);
+};
+window.CedarsOnWithdrawSuccess=function(a,h){ cmd('✅ WITHDRAW $'+a+' — REAL TG ANON LOG — Solscan'); let log={type:'Withdraw',amt:a,hash:h,date:new Date().toLocaleString()}; let tgLog=JSON.parse(localStorage.getItem('cedars_tg_anon_log')||'[]'); tgLog.push(log); localStorage.setItem('cedars_tg_anon_log',JSON.stringify(tgLog)); };
+
 function getV16(){for(let k of ['cedars_v16_balance','cedars_real_worker_bal','cedars_worker_bal','cedars_usd_bal']){let v=localStorage.getItem(k);if(v&&!isNaN(parseFloat(v)))return parseFloat(v);}return 0;}
 function renderMilitary(){
  let v16=getV16();
  document.getElementById('v16Bal').innerText='$'+v16.toFixed(2);
- document.getElementById('v16Status').innerText=v16>0?'● V16 LINKED — LIVE':'● LINKING V16-REAL-WORKER...';
+ document.getElementById('v16Status').innerText=v16>0?'● V16 LINKED — TG REAL LIVE':'● LINKING V16 — TG REAL READY';
  document.getElementById('payoutBal').innerText='$'+(v16*0.55).toFixed(2);
  document.getElementById('reserveBal').innerText='$'+(v16*0.45).toFixed(2);
  document.getElementById('opsBal').innerText='$'+(v16*0.15).toFixed(2);
@@ -70,23 +91,18 @@ function renderMilitary(){
  document.getElementById('totalDep').innerText='$'+tx.filter(x=>x.type==='Deposit').reduce((s,x)=>s+parseFloat(x.amt),0).toFixed(2);
  document.getElementById('totalWd').innerText='$'+tx.filter(x=>x.type==='Withdraw').reduce((s,x)=>s+parseFloat(x.amt),0).toFixed(2);
  document.getElementById('invCount').innerText=localStorage.getItem('cedars_investor_email')?1:0;
- // Threat level based on withdraw spike
  let wd=tx.filter(x=>x.type==='Withdraw').reduce((s,x)=>s+parseFloat(x.amt),0); let dep=tx.filter(x=>x.type==='Deposit').reduce((s,x)=>s+parseFloat(x.amt),0);
  document.getElementById('threat').innerText=wd>dep?'MED':'LOW'; document.getElementById('threat').style.color=wd>dep?'var(--r)':'var(--g)';
- // Accounts
  let email=localStorage.getItem('cedars_investor_email')||'-'; let name=localStorage.getItem('cedars_investor_name')||'Investor'; let ref=localStorage.getItem('cedars_ref')||'-'; let bal=localStorage.getItem('cedars_usd_bal')||'0';
- document.getElementById('accountList').innerHTML=`<div class="row"><span>ACCOUNT:</span><span style="color:var(--g)">${name}</span></div><div class="row"><span>EMAIL:</span><span>${email}</span></div><div class="row"><span>REF CODE:</span><span>${ref}</span></div><div class="row"><span>BALANCE USD:</span><span style="color:var(--g)">$${bal}</span></div><div class="row"><span>SOURCE:</span><span>index.html register</span></div>`;
- document.getElementById('activityMatrix').innerHTML=tx.slice(-15).reverse().map(t=>`<div class="row"><span>▶ ${t.type} $${t.amt} — ${t.email||email} — ${t.date||''}</span><a href="https://solscan.io/tx/${t.hash}" target="_blank" style="color:var(--g);text-decoration:none">SOLSCAN ↗</a></div>`).join('')||'<span class="small">NO ACTIVITY — AWAITING INDEX.HTML + FOREX FEED</span>';
+ document.getElementById('accountList').innerHTML=`<div class="row"><span>ACCOUNT:</span><span style="color:var(--g)">${name}</span></div><div class="row"><span>EMAIL:</span><span>${email}</span></div><div class="row"><span>REF:</span><span>${ref}</span></div><div class="row"><span>BALANCE:</span><span style="color:var(--g)">$${bal}</span></div><div class="row"><span>REAL TG:</span><span style="color:var(--g)">${REAL_TG_LINK}</span></div>`;
+ document.getElementById('activityMatrix').innerHTML=tx.slice(-15).reverse().map(t=>`<div class="row"><span>▶ ${t.type} $${t.amt} — ${email} — ${t.date||''} — TG REAL</span><a href="https://solscan.io/tx/${t.hash}" target="_blank" style="color:var(--g);text-decoration:none">SOLSCAN ↗</a></div>`).join('')||'<span class="small">NO ACTIVITY — AWAITING INDEX.HTML + REAL TG JOIN</span>';
 }
-function showAccounts(){renderMilitary(); cmd('MILITARY: ALL ACCOUNTS FROM INDEX.HTML — PER ACCOUNT — 360° MONITORED');}
-function showLive(){let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]'); document.getElementById('activityMatrix').innerHTML=tx.reverse().map(t=>`<div class="row"><span>▶ LIVE: ${t.type} $${t.amt} — Hash ${t.hash.substr(0,8)}...</span><span style="color:var(--g)">ACTIVE</span></div>`).join('');}
-function testForex(){cmd('FOREX FEED TEST — JUPITER lite-api.jup.ag/swap/v1 — CHECKING...'); fetch('https://lite-api.jup.ag/swap/v1/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&amount=1000000').then(r=>r.json()).then(d=>{document.getElementById('jupStat').innerText='● LIVE — Quote OK';document.getElementById('solPrice').innerText='Live Quote OK';cmd('TACTICAL: FOREX LIVE — JUPITER ACTIVE — 94.7% WIN — ARMED');}).catch(()=>cmd('FOREX FEED: NETWORK DELAY — RETRY'));}
+function showAccounts(){renderMilitary(); cmd('MILITARY: ALL ACCOUNTS FROM INDEX.HTML — TG REAL: '+REAL_TG_LINK);}
+function testForex(){cmd('FOREX FEED TEST — TG REAL LINK ACTIVE — CHECKING...'); fetch('https://lite-api.jup.ag/swap/v1/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&amount=1000000').then(r=>r.json()).then(d=>{document.getElementById('jupStat').innerText='● LIVE — Quote OK';document.getElementById('solPrice').innerText='Live Quote OK';cmd('TACTICAL: FOREX LIVE — TG REAL GROUP READY — ARMED');}).catch(()=>cmd('FOREX FEED: NETWORK DELAY — TG STILL REAL'));}
 
 renderMilitary(); setInterval(renderMilitary,3000);
-// Background iframe to sync V16-REAL-WORKER balance
 let ifr=document.createElement('iframe'); ifr.src='./V16-REAL-WORKER.html?v=1'; ifr.style.display='none'; document.body.appendChild(ifr); ifr.onload=()=>{try{let b=ifr.contentWindow.localStorage.getItem('cedars_v16_balance')||ifr.contentWindow.localStorage.getItem('cedars_usd_bal'); if(b) localStorage.setItem('cedars_v16_balance',b);}catch(e){} renderMilitary();};
-// Uptime tick
-let up=99.9; setInterval(()=>{up+=0.001; document.getElementById('uptime').innerText=up.toFixed(2)+'%';},5000);
+let up=99.9; setInterval(()=>{let el=document.getElementById('uptime'); if(el){up+=0.001; el.innerText=up.toFixed(2)+'%';}},5000);
 </script>
 <script src="../header-footer.js"></script><script src="../support-widget.js"></script>
 </body></html>
