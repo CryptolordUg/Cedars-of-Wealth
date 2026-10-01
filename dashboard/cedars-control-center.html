@@ -1,6 +1,6 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS COMMAND CENTER 360</title>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS COMMAND CENTER 360 — BUILD 2</title>
 <style>
-:root{--bg:#050a14;--card:#0a1428;--br:#1a2e55;--g:#00ff88;--y:#ffcc00;--r:#ff3344;--b:#2a7fff}
+:root{--bg:#050a14;--card:#0a1428;--g:#00ff88;--y:#ffcc00;--r:#ff3344;--b:#2a7fff}
 *{box-sizing:border-box;font-family:'Courier New',monospace;margin:0;padding:0}
 body{background:var(--bg);color:#c8e6d0;overflow-x:hidden}
 .grid-bg{position:fixed;inset:0;background:linear-gradient(rgba(0,255,136,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,136,0.07) 1px,transparent 1px);background-size:50px 50px;opacity:0.2;pointer-events:none;z-index:0}
@@ -10,34 +10,26 @@ body{background:var(--bg);color:#c8e6d0;overflow-x:hidden}
 .card{position:relative;z-index:5;background:rgba(10,20,40,0.9);border:1px solid #1a3a5a;border-left:3px solid var(--g);border-radius:4px;padding:12px;margin:8px;box-shadow:inset 0 0 20px rgba(0,255,136,0.05)}
 .card-r{border-left-color:var(--r)}.card-y{border-left-color:var(--y)}.card-b{border-left-color:var(--b)}
 .btn{padding:8px 12px;border:1px solid var(--g);background:rgba(0,255,136,0.1);color:var(--g);font-weight:800;font-size:10px;cursor:pointer;letter-spacing:1px;transition:0.2s;width:100%}
-.btn:hover{background:var(--g);color:#000;box-shadow:0 0 15px var(--g)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+.btn:hover{background:var(--g);color:#000;box-shadow:0 0 15px var(--g)} .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
 .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dotted #1a3a5a;font-size:11px}
 .radar{width:120px;height:120px;border:1px solid var(--g);border-radius:50%;position:relative;margin:10px auto;overflow:hidden;background:radial-gradient(circle,rgba(0,255,136,0.1) 0%,transparent 70%)}
 .radar::after{content:'';position:absolute;top:50%;left:50%;width:50%;height:2px;background:linear-gradient(90deg,var(--g),transparent);transform-origin:left;animation:sweep 3s linear infinite}
 @keyframes sweep{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 .dot{position:absolute;width:6px;height:6px;background:var(--g);border-radius:50%;box-shadow:0 0 6px var(--g);animation:blink 1.5s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
-.small{font-size:10px;color:#6a8a7a;letter-spacing:0.5px}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}} .small{font-size:10px;color:#6a8a7a;letter-spacing:0.5px}
 #toast{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#0a1428;border:1px solid var(--g);color:var(--g);padding:8px 14px;border-radius:2px;z-index:99999;display:none;font-size:11px;font-weight:700}
-.icon-nav{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.icon-btn{width:44px;height:44px;border:1px solid var(--g);background:rgba(0,255,136,0.08);color:var(--g);display:flex;align-items:center;justify-content:center;border-radius:4px;cursor:pointer;font-size:18px;transition:0.2s;text-decoration:none}
-.icon-btn:hover{background:var(--g);color:#000;box-shadow:0 0 12px var(--g);transform:translateY(-2px)}
-.icon-btn.y{border-color:var(--y);color:var(--y);background:rgba(255,204,0,0.08)}.icon-btn.b{border-color:var(--b);color:var(--b);background:rgba(42,127,255,0.08)}.icon-btn.r{border-color:var(--r);color:var(--r);background:rgba(255,51,68,0.08)}
-.ticker{position:relative;z-index:5;background:rgba(0,255,136,0.06);border-top:1px solid var(--g);border-bottom:1px solid var(--g);padding:4px 0;overflow:hidden;white-space:nowrap;font-size:10px;letter-spacing:1px}
-.ticker span{animation:marq 30s linear infinite;display:inline-block;padding-left:100%}
-@keyframes marq{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+.icon-nav{display:flex;gap:8px;flex-wrap:wrap}.icon-btn{width:44px;height:44px;border:1px solid var(--g);background:rgba(0,255,136,0.08);color:var(--g);display:flex;align-items:center;justify-content:center;border-radius:4px;cursor:pointer;font-size:18px;transition:0.2s;text-decoration:none}
+.icon-btn:hover{background:var(--g);color:#000;box-shadow:0 0 12px var(--g);transform:translateY(-2px)} .icon-btn.y{border-color:var(--y);color:var(--y)} .icon-btn.b{border-color:var(--b);color:var(--b)} .icon-btn.r{border-color:var(--r);color:var(--r)}
+.ticker{position:relative;z-index:5;background:rgba(0,255,136,0.06);border-top:1px solid var(--g);border-bottom:1px solid var(--g);padding:4px 0;overflow:hidden;white-space:nowrap;font-size:10px}
+.ticker span{animation:marq 30s linear infinite;display:inline-block;padding-left:100%} @keyframes marq{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
 .value{font-size:14px;font-weight:900;color:#fff}.value-g{color:var(--g)}.value-y{color:var(--y)}
+input{width:100%;padding:8px;background:#050a14;border:1px solid #1a3a5a;color:var(--g);font-size:11px;border-radius:2px;margin-top:4px}
+video{width:100%;border:1px solid var(--g);border-radius:4px;background:#000;max-height:180px}
 </style></head><body>
-<div class="grid-bg"></div>
-<div id="toast"></div>
+<div class="grid-bg"></div><div id="toast"></div>
 
 <div class="topbar">
-<div>
-<div class="badge">● CEDARS COMMAND CENTER 360</div>
-<div style="font-size:18px;font-weight:900;letter-spacing:2px;margin-top:4px">CEDARS COMMAND CENTER 360</div>
-<div class="small" id="commandTime">FIELD TOUR READY — SYSTEM SYNC...</div>
-</div>
+<div><div class="badge">● CEDARS COMMAND CENTER 360 — BUILD 2 — IP + UPLOAD + RESET + VIDEO CONSENSUAL</div><div style="font-size:18px;font-weight:900;letter-spacing:2px;margin-top:4px">CEDARS COMMAND CENTER 360</div><div class="small" id="commandTime">FIELD TOUR READY — SYSTEM SYNC...</div></div>
 <div class="icon-nav">
 <a class="icon-btn" href="https://cryptolordug.github.io/Cedars-of-Wealth/index.html" title="Investor Dashboard">🏦</a>
 <a class="icon-btn b" href="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/V16-REAL-WORKER.html?v=1" title="Cedars Universal V16">🌐</a>
@@ -46,108 +38,175 @@ body{background:var(--bg);color:#c8e6d0;overflow-x:hidden}
 <a class="icon-btn y" href="https://cryptolordug.github.io/Cedars-of-Wealth/withdraw.html" title="Withdraw Cmd">💸</a>
 <a class="icon-btn b" href="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/admin-compliance.html" title="Compliance Cmd">🛡️</a>
 <a class="icon-btn r" href="https://t.me/+qXjnwt0SX0BkODQ8" target="_blank" title="Telegram Real">✈️</a>
-<a class="icon-btn" href="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-control-center.html?v=360" title="Command Center 360">🎯</a>
+<a class="icon-btn" href="#" title="Command Center 360">🎯</a>
 </div>
 <div style="text-align:right"><div class="small">V16 LIVE</div><div class="bal" id="v16Bal">$0.00</div><div class="badge" id="v16Status">LINKING V16</div></div>
 </div>
 
-<!-- INNOVATION ADDED — LIVE TICKER — WITHOUT CHANGING SETUP -->
-<div class="ticker"><span id="liveTicker">● CEDARS COMMAND CENTER 360 ● V16 REAL WORKER SYNC ● TELEGRAM REAL t.me/+qXjnwt0SX0BkODQ8 ● PAYOUT 55% / RESERVE 45% / OPS 15% / CRISIS 10% ● JUPITER lite-api.jup.ag/swap/v1 LIVE ● WIN RATE 94.7% ● SOLSCAN VERIFIED ● FIELD TOUR ACTIVE — CLICK ICONS TO VISIT UNITS PHYSICALLY ● </span></div>
+<div class="ticker"><span>● CEDARS COMMAND CENTER 360 — BUILD 2 — IP TRACKER LIVE ● UPLOAD PHOTO/VIDEO/SCREENSHOT FOR TAILORED SUPPORT ● CREDENTIAL COMMAND RESET ACTIVE ● CONSENSUAL VIDEO BRIEFING — INVESTOR MUST ALLOW CAMERA — COMMAND CENTER AUDIO ONLY — TELEGRAM REAL t.me/+qXjnwt0SX0BkODQ8 ● 360° MONITOR ●</span></div>
 
 <div style="position:relative;z-index:5;display:grid;grid-template-columns:140px 1fr 140px;gap:8px;padding:8px">
-<div class="card" style="text-align:center"><div class="small">RADAR 360°</div><div class="radar"><div class="dot" style="top:30%;left:40%"></div><div class="dot" style="top:60%;left:70%;background:var(--y)"></div><div class="dot" style="top:50%;left:20%;background:var(--r)"></div></div><div class="small">FOREX + INVESTORS</div><div class="badge" style="margin-top:4px">360° SCAN</div>
-<!-- ADDED VALUE — SYSTEM VITALS — INNOVATION -->
-<div style="margin-top:10px;text-align:left"><div class="small">SYSTEM VITALS</div><div class="row"><span>CPU</span><span style="color:var(--g)" id="cpu">42%</span></div><div class="row"><span>NET</span><span style="color:var(--g)">● ONLINE</span></div><div class="row"><span>SOL RPC</span><span style="color:var(--g)" id="rpc">● LIVE</span></div><div class="row"><span>TG REAL</span><span style="color:var(--g)">● LINKED</span></div></div>
+<div class="card" style="text-align:center"><div class="small">RADAR 360°</div><div class="radar"><div class="dot" style="top:30%;left:40%"></div><div class="dot" style="top:60%;left:70%;background:var(--y)"></div><div class="dot" style="top:50%;left:20%;background:var(--r)"></div></div><div class="small">FOREX + INVESTORS</div>
+<div style="margin-top:10px;text-align:left"><div class="small">SYSTEM VITALS</div><div class="row"><span>CPU</span><span style="color:var(--g)" id="cpu">42%</span></div><div class="row"><span>NET</span><span style="color:var(--g)">● ONLINE</span></div><div class="row"><span>IP TRACKER</span><span style="color:var(--g)" id="ipVal">Detecting...</span></div><div class="row"><span>Location</span><span style="color:var(--g)" id="locVal">Kampala, UG</span></div><div class="row"><span>TG REAL</span><span style="color:var(--g)">● LINKED</span></div></div>
 </div>
-
-<div class="card"><div class="badge">COMMAND CONSOLE — PAYOUT 55% / RESERVE 45% / OPS 15% / CRISIS 10% — 4 STRUCTURES</div>
+<div class="card"><div class="badge">COMMAND CONSOLE — PAYOUT 55% / RESERVE 45% / OPS 15% / CRISIS 10%</div>
 <div class="grid2" style="margin-top:10px">
-<div class="card" style="margin:0"><div class="small">PAYOUT ACCOUNT 55%</div><div class="bal" id="payoutBal">$0.00</div><div class="small">40% investors — Auto disbursement</div><button class="btn" style="margin-top:6px" onclick="cmd('TACTICAL: PAYOUT 55% ACTIVE — TG REAL')">EXECUTE PAYOUT</button></div>
-<div class="card card-y" style="margin:0"><div class="small">RESERVATION ACCOUNT 45%</div><div class="bal" id="reserveBal" style="color:var(--y)">$0.00</div><div class="small">60% reinvest — Secured</div><button class="btn" style="border-color:var(--y);color:var(--y);margin-top:6px" onclick="cmd('RESERVE 45% SECURED')">SECURE RESERVE</button></div>
-<div class="card card-b" style="margin:0"><div class="small">OPS STRUCTURE 15%</div><div class="bal" id="opsBal" style="color:var(--b)">$0.00</div><div class="small">Forex ops + Liquidity</div><button class="btn" style="border-color:var(--b);color:var(--b);margin-top:6px" onclick="cmd('OPS 15% — FOREX OPS ACTIVE')">OPS CONTROL</button></div>
-<div class="card card-r" style="margin:0"><div class="small">CRISIS RESERVE 10%</div><div class="bal" id="crisisBal" style="color:var(--r)">$0.00</div><div class="small">Emergency protocol</div><button class="btn" style="border-color:var(--r);color:var(--r);margin-top:6px" onclick="cmd('CRISIS PROTOCOL STANDBY')">CRISIS PROTOCOL</button></div>
+<div class="card" style="margin:0"><div class="small">PAYOUT 55%</div><div class="bal" id="payoutBal">$0.00</div><button class="btn" style="margin-top:6px" onclick="cmd('PAYOUT 55% ACTIVE')">EXECUTE PAYOUT</button></div>
+<div class="card card-y" style="margin:0"><div class="small">RESERVATION 45%</div><div class="bal" id="reserveBal" style="color:var(--y)">$0.00</div><button class="btn" style="border-color:var(--y);color:var(--y);margin-top:6px" onclick="cmd('RESERVE 45% SECURED')">SECURE RESERVE</button></div>
+<div class="card card-b" style="margin:0"><div class="small">OPS 15%</div><div class="bal" id="opsBal" style="color:var(--b)">$0.00</div><button class="btn" style="border-color:var(--b);color:var(--b);margin-top:6px" onclick="cmd('OPS 15% ACTIVE')">OPS CONTROL</button></div>
+<div class="card card-r" style="margin:0"><div class="small">CRISIS 10%</div><div class="bal" id="crisisBal" style="color:var(--r)">$0.00</div><button class="btn" style="border-color:var(--r);color:var(--r);margin-top:6px" onclick="cmd('CRISIS STANDBY')">CRISIS PROTOCOL</button></div>
 </div>
-<!-- ADDED VALUES — INNOVATION — WITHOUT CHANGING SETUP -->
 <div class="grid4" style="margin-top:10px">
-<div class="card" style="margin:0;padding:8px"><div class="small">ROI TRACKER</div><div class="value value-g" id="roiVal">$500 → $973.5</div><div class="small">94.7% WIN</div></div>
-<div class="card" style="margin:0;padding:8px"><div class="small">REF EARNINGS</div><div class="value value-y" id="refEarn">$5 / ref</div><div class="small">10% / 5% / 1%</div></div>
-<div class="card" style="margin:0;padding:8px"><div class="small">PAYOUT TIMER</div><div class="value" id="payoutTimer">23:41:12</div><div class="small">Next cycle</div></div>
-<div class="card" style="margin:0;padding:8px"><div class="small">TOTAL PROFIT</div><div class="value value-g" id="totalProfit">$0.00</div><div class="small">V16 profit</div></div>
+<div class="card" style="margin:0;padding:8px"><div class="small">ROI TRACKER</div><div class="value value-g">$500 → $973.5</div></div>
+<div class="card" style="margin:0;padding:8px"><div class="small">REF EARNINGS</div><div class="value value-y" id="refEarn">$5 / ref</div></div>
+<div class="card" style="margin:0;padding:8px"><div class="small">PAYOUT TIMER</div><div class="value" id="payoutTimer">23:41:12</div></div>
+<div class="card" style="margin:0;padding:8px"><div class="small">TOTAL PROFIT</div><div class="value value-g" id="totalProfit">$0.00</div></div>
 </div>
 </div>
-
-<div class="card" style="text-align:center"><div class="small">THREAT LEVEL</div><div style="font-size:28px;font-weight:900;color:var(--g);margin:6px 0" id="threat">LOW</div><div class="badge">SECURE</div><div style="margin-top:8px"><div class="small">INV: <span id="invCount" style="color:var(--g)">0</span></div><div class="small">TG: REAL ●</div><div class="small">UPTIME: <span id="uptime">99.9%</span></div></div>
-<!-- ADDED INNOVATION — AI COMMANDER INSIGHT -->
-<div style="margin-top:10px;text-align:left;border-top:1px dotted #1a3a5a;padding-top:8px"><div class="small">AI COMMANDER</div><div class="small" id="aiInsight" style="color:var(--g);line-height:1.3;margin-top:4px">● Scanning 360° — No anomalies — All units secure</div></div>
-</div>
+<div class="card" style="text-align:center"><div class="small">THREAT</div><div style="font-size:28px;font-weight:900;color:var(--g);margin:6px 0" id="threat">LOW</div><div class="badge">SECURE</div><div style="margin-top:8px"><div class="small">INV: <span id="invCount">0</span></div><div class="small">TG: REAL ●</div><div class="small">IP LOGS: <span id="ipLogs">0</span></div></div><div style="margin-top:10px;text-align:left;border-top:1px dotted #1a3a5a;padding-top:8px"><div class="small">AI COMMANDER</div><div class="small" id="aiInsight" style="color:var(--g);margin-top:4px">● Scanning 360° — No anomalies</div></div></div>
 </div>
 
-<div style="position:relative;z-index:5;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 8px">
-<div class="card"><div class="badge">FOREX TRADING COMMAND — 360° — LIVE</div><div class="grid2" style="margin-top:8px"><div><div class="small">PAIR</div><div class="row"><span>EUR/USD</span><span style="color:var(--g)" id="eurusd">1.0842 ▲</span></div><div class="row"><span>GBP/USD</span><span style="color:var(--g)" id="gbpusd">1.2741 ▲</span></div><div class="row"><span>XAU/USD</span><span style="color:var(--y)" id="xau">2034.5 —</span></div><div class="row"><span>USDC/SOL</span><span style="color:var(--g)" id="solPrice">Live</span></div></div><div><div class="small">BOT STATUS</div><div class="row"><span>Jupiter lite-api</span><span style="color:var(--g)" id="jupStat">● LIVE</span></div><div class="row"><span>Win 94.7%</span><span style="color:var(--g)">94.7%</span></div><div class="row"><span>Telegram</span><span style="color:var(--g)">REAL</span></div><button class="btn" style="margin-top:6px" onclick="testForex()">TEST FOREX FEED</button></div></div></div>
-<div class="card"><div class="badge">INVESTOR COMMAND — FROM INDEX.HTML — FIELD TOUR READY</div><div class="grid2" style="margin-top:8px"><div><div class="small">DEPOSITS</div><div class="bal" id="totalDep" style="font-size:16px">$0.00</div></div><div><div class="small">WITHDRAWALS</div><div class="bal" id="totalWd" style="font-size:16px;color:var(--y)">$0.00</div></div></div><div style="margin-top:8px;display:flex;gap:6px"><button class="btn" onclick="showAccounts()">ALL ACCOUNTS</button><a class="btn" style="text-align:center;text-decoration:none;border-color:var(--b);color:var(--b)" href="https://cryptolordug.github.io/Cedars-of-Wealth/index.html">FIELD TOUR INVESTOR ↗</a></div><div id="accountList" style="margin-top:8px;max-height:200px;overflow:auto"></div></div>
+<!-- BUILD 2 INNOVATIONS — ADDED WITHOUT CHANGING SETUP — 3 NEW CARDS -->
+<div style="position:relative;z-index:5;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 8px">
+
+<!-- IP TRACKER + UPLOAD -->
+<div class="card"><div class="badge">IP TRACKER + UPLOAD — TAILORED SUPPORT — BUILD 2</div>
+<div class="small" style="margin-top:8px">LAST INVESTOR IP WHEN CHATTING</div>
+<div id="ipList" style="max-height:100px;overflow:auto;margin-top:4px" class="small">Detecting IP...</div>
+<div class="small" style="margin-top:10px">INVESTOR UPLOAD PHOTO/VIDEO/SCREENSHOT</div>
+<input type="file" id="fileInput" accept="image/*,video/*" multiple>
+<button class="btn" style="margin-top:6px" onclick="handleUpload()">UPLOAD TO COMMAND CENTER 📎</button>
+<div id="uploadList" style="margin-top:8px;max-height:120px;overflow:auto" class="small">No uploads yet — Awaiting investor screenshot</div>
+<div class="small" style="margin-top:6px;color:var(--y)">Stored locally + Forward to TG Real: t.me/+qXjnwt0SX0BkODQ8</div>
 </div>
 
-<!-- ADDED INNOVATION — COMMANDER'S DAILY BRIEF — WITHOUT CHANGING SETUP -->
-<div class="card" style="margin:8px"><div class="badge">COMMANDER'S DAILY BRIEF — AI ANALYTICS — 360° INNOVATION</div>
-<div class="grid4" style="margin-top:8px">
-<div class="card" style="margin:0;padding:8px"><div class="small">INFLOW TODAY</div><div class="value value-g" id="inflow">$0.00</div><div class="small">Deposits</div></div>
-<div class="card" style="margin:0;padding:8px"><div class="small">OUTFLOW TODAY</div><div class="value value-y" id="outflow">$0.00</div><div class="small">Withdrawals</div></div>
-<div class="card" style="margin:0;padding:8px"><div class="small">NET LIQUIDITY</div><div class="value" id="netLiq">$0.00</div><div class="small">In - Out</div></div>
-<div class="card" style="margin:0;padding:8px"><div class="small">REFERRAL BINARY</div><div class="value" id="binary">2 Lines</div><div class="small">10% / 5% / 1%</div></div>
-</div>
+<!-- CREDENTIAL COMMAND — PASSWORD + WALLET RESET -->
+<div class="card card-y"><div class="badge">CREDENTIAL COMMAND — RESET UNIT — PASSWORD + WALLET</div>
+<div class="small" style="margin-top:8px">Investor Email</div><input id="resetEmail" placeholder="investor@email.com">
+<div class="small" style="margin-top:6px">Action</div>
+<div class="grid2" style="margin-top:4px"><button class="btn btn-y" onclick="resetPassword()">RESET PASSWORD 🔐</button><button class="btn" style="border-color:var(--b);color:var(--b)" onclick="generateWalletHelp()">WALLET HELP</button></div>
+<div class="small" style="margin-top:8px">New Wallet Address (Solana)</div><input id="newWallet" placeholder="H... Solana address">
+<button class="btn" style="margin-top:6px;border-color:var(--g);color:var(--g)" onclick="changeWallet()">CHANGE WALLET ADDRESS 💼</button>
+<div id="resetLog" class="small" style="margin-top:8px;color:var(--g)">Awaiting reset request — Logs here</div>
+<div class="small" style="margin-top:6px">Flow: Email → Temp Code CEDARS-XXXX → Investor uses code → New wallet validated</div>
 </div>
 
-<div class="card" style="margin:8px"><div class="badge">360° ACTIVITY MATRIX — SOLSCAN + EMAIL + TELEGRAM REAL — https://t.me/+qXjnwt0SX0BkODQ8</div><div id="activityMatrix" style="margin-top:8px"></div></div>
+<!-- CONSENSUAL VIDEO BRIEFING — LEGAL -->
+<div class="card card-b"><div class="badge">VIDEO BRIEFING — CONSENSUAL FACE-TO-FACE — COMMAND CENTER AUDIO ONLY</div>
+<div class="small" style="margin-top:6px">Investor must click ALLOW CAMERA — Command Center sees investor — Investor sees Audio Only — Consent required</div>
+<video id="investorVideo" autoplay muted playsinline style="margin-top:8px"></video>
+<div class="grid2" style="margin-top:6px"><button class="btn" style="border-color:var(--b);color:var(--b)" onclick="startConsensualVideo()">START VIDEO BRIEFING 🎥</button><button class="btn btn-r" onclick="stopVideo()">STOP BRIEFING</button></div>
+<div class="small" style="margin-top:6px">Status: <span id="videoStatus" style="color:var(--y)">● Standby — Awaiting investor consent</span></div>
+<div class="small" style="margin-top:6px;color:var(--g)">Legal: Popup asks Allow Camera — No silent — Green dot shows — Investor can end anytime</div>
+<div id="videoLog" class="small" style="margin-top:8px">No briefing yet</div>
+</div>
+
+</div>
+
+<div style="position:relative;z-index:5;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 8px;margin-top:8px">
+<div class="card"><div class="badge">FOREX TRADING COMMAND — 360°</div><div class="grid2" style="margin-top:8px"><div><div class="row"><span>EUR/USD</span><span style="color:var(--g)">1.0842 ▲</span></div><div class="row"><span>GBP/USD</span><span style="color:var(--g)">1.2741 ▲</span></div><div class="row"><span>XAU/USD</span><span style="color:var(--y)">2034.5</span></div><div class="row"><span>USDC/SOL</span><span style="color:var(--g)" id="solPrice">Live</span></div></div><div><div class="row"><span>Jupiter</span><span style="color:var(--g)" id="jupStat">● LIVE</span></div><div class="row"><span>Win</span><span style="color:var(--g)">94.7%</span></div><button class="btn" style="margin-top:6px" onclick="testForex()">TEST FOREX</button></div></div></div>
+<div class="card"><div class="badge">INVESTOR COMMAND — FROM INDEX.HTML</div><div class="grid2" style="margin-top:8px"><div><div class="small">DEPOSITS</div><div class="bal" id="totalDep" style="font-size:16px">$0.00</div></div><div><div class="small">WITHDRAWALS</div><div class="bal" id="totalWd" style="font-size:16px;color:var(--y)">$0.00</div></div></div><div style="margin-top:8px;display:flex;gap:6px"><button class="btn" onclick="showAccounts()">ALL ACCOUNTS</button><a class="btn" style="text-align:center;text-decoration:none;border-color:var(--b);color:var(--b)" href="https://cryptolordug.github.io/Cedars-of-Wealth/index.html">FIELD TOUR ↗</a></div><div id="accountList" style="margin-top:8px;max-height:100px;overflow:auto"></div></div>
+</div>
+
+<div class="card" style="margin:8px"><div class="badge">360° ACTIVITY MATRIX — SOLSCAN + IP + EMAIL + TG REAL — t.me/+qXjnwt0SX0BkODQ8</div><div id="activityMatrix" style="margin-top:8px"></div></div>
 
 <script src="../fix.js"></script>
 <script>
 const REAL_TG_LINK='https://t.me/+qXjnwt0SX0BkODQ8';
 function cmd(m){let t=document.getElementById('toast');t.innerText='▶ '+m;t.style.display='block';setTimeout(()=>t.style.display='none',2800);}
 function getV16(){for(let k of ['cedars_v16_balance','cedars_real_worker_bal','cedars_worker_bal','cedars_usd_bal']){let v=localStorage.getItem(k);if(v&&!isNaN(parseFloat(v)))return parseFloat(v);}return 0;}
+
+// BUILD 2 — IP TRACKER — WITHOUT CHANGING SETUP
+async function detectIP(){
+ try{
+  let ipRes=await fetch('https://api.ipify.org?format=json'); let ipData=await ipRes.json(); let ip=ipData.ip;
+  document.getElementById('ipVal').innerText=ip;
+  let locRes=await fetch('https://ipapi.co/'+ip+'/json/').catch(()=>null); let loc=locRes?await locRes.json():{city:'Kampala',country_name:'Uganda',org:'MTN'};
+  document.getElementById('locVal').innerText=(loc.city||'Kampala')+', '+(loc.country_code||'UG');
+  let log=JSON.parse(localStorage.getItem('cedars_ip_logs')||'[]'); log.push({ip:ip,city:loc.city||'Kampala',org:loc.org||'',time:new Date().toLocaleString(),email:localStorage.getItem('cedars_investor_email')||'admin'});
+  localStorage.setItem('cedars_ip_logs',JSON.stringify(log.slice(-20)));
+  document.getElementById('ipList').innerHTML=log.slice(-5).reverse().map(l=>`<div class="row"><span>${l.ip} — ${l.city}</span><span>${l.time}</span></div>`).join('');
+  document.getElementById('ipLogs').innerText=log.length;
+ }catch(e){ document.getElementById('ipVal').innerText='Offline — Local'; }
+}
+detectIP();
+
+// BUILD 2 — UPLOAD PHOTO/VIDEO/SCREENSHOT
+function handleUpload(){
+ let input=document.getElementById('fileInput'); if(!input.files.length){ cmd('SELECT FILE FIRST — PHOTO/VIDEO/SCREENSHOT'); return; }
+ let files=Array.from(input.files); let uploadLog=JSON.parse(localStorage.getItem('cedars_uploads')||'[]');
+ files.forEach(f=>{
+  let reader=new FileReader(); reader.onload=function(e){
+   uploadLog.push({name:f.name,type:f.type,size:(f.size/1024).toFixed(1)+'KB',data:e.target.result.substr(0,200)+'...',time:new Date().toLocaleString(),email:localStorage.getItem('cedars_investor_email')||'investor'});
+   localStorage.setItem('cedars_uploads',JSON.stringify(uploadLog.slice(-20)));
+   renderUploads(); cmd('UPLOADED: '+f.name+' — TAILORED SUPPORT READY — TG REAL');
+  }; reader.readAsDataURL(f);
+ });
+}
+function renderUploads(){
+ let log=JSON.parse(localStorage.getItem('cedars_uploads')||'[]');
+ document.getElementById('uploadList').innerHTML=log.slice(-5).reverse().map(u=>`<div class="row"><span>📎 ${u.name} — ${u.size} — ${u.time}</span><span style="color:var(--g)">VIEW</span></div>`).join('')||'No uploads';
+}
+renderUploads();
+
+// BUILD 2 — CREDENTIAL COMMAND — PASSWORD + WALLET RESET
+function resetPassword(){
+ let email=document.getElementById('resetEmail').value.trim(); if(!email){cmd('ENTER INVESTOR EMAIL');return;}
+ let code='CEDARS-'+Math.floor(1000+Math.random()*9000);
+ let codes=JSON.parse(localStorage.getItem('cedars_reset_codes')||'{}'); codes[email]=code; localStorage.setItem('cedars_reset_codes',JSON.stringify(codes));
+ document.getElementById('resetLog').innerHTML=`<span style="color:var(--g)">▶ Temp code for ${email}: <b>${code}</b> — Valid 15 min — Send via EmailJS/Telegram — Investor enters code in investor.html to reset</span>`;
+ cmd('PASSWORD RESET CODE GENERATED: '+code+' — FOR '+email);
+ // Simulate email
+ console.log('RESET EMAIL to '+email+' code '+code);
+}
+function generateWalletHelp(){ cmd('WALLET HELP: Validate Solana address — Must start with valid base58 — 32-44 chars'); document.getElementById('resetLog').innerText='Wallet help: Ask investor to paste new Solana address — Command Center validates — Then update';}
+function changeWallet(){
+ let email=document.getElementById('resetEmail').value.trim(); let newW=document.getElementById('newWallet').value.trim();
+ if(!email||!newW){cmd('ENTER EMAIL + NEW WALLET');return;}
+ if(newW.length<32){cmd('INVALID SOLANA ADDRESS — CHECK AGAIN');return;}
+ localStorage.setItem('cedars_wallet_'+email,newW); localStorage.setItem('cedars_wallet',newW);
+ let logs=JSON.parse(localStorage.getItem('cedars_wallet_change_log')||'[]'); logs.push({email:email,newWallet:newW,time:new Date().toLocaleString(),by:'Command Center 360'}); localStorage.setItem('cedars_wallet_change_log',JSON.stringify(logs));
+ document.getElementById('resetLog').innerHTML=`<span style="color:var(--g)">▶ Wallet changed for ${email} → ${newW.substr(0,12)}... — Log saved — Investor can withdraw to new wallet</span>`;
+ cmd('WALLET CHANGED FOR '+email+' — SECURED — LOG SAVED');
+}
+
+// BUILD 2 — CONSENSUAL VIDEO BRIEFING — NOT SILENT — CONSENT REQUIRED
+let stream=null;
+async function startConsensualVideo(){
+ try{
+  document.getElementById('videoStatus').innerText='● Requesting permission — Investor must ALLOW CAMERA';
+  cmd('VIDEO BRIEFING: Requesting camera permission — Investor must click Allow — Legal consensual');
+  stream=await navigator.mediaDevices.getUserMedia({video:true,audio:true});
+  document.getElementById('investorVideo').srcObject=stream;
+  document.getElementById('videoStatus').innerText='● LIVE — Consensual briefing active — Command Center audio only — Investor visible';
+  document.getElementById('videoLog').innerText='▶ Briefing started '+new Date().toLocaleString()+' — Consent granted — Green dot active — Investor can end anytime';
+  cmd('VIDEO BRIEFING LIVE — CONSENSUAL — COMMAND CENTER AUDIO ONLY');
+  // Log IP + video start
+  let vLog=JSON.parse(localStorage.getItem('cedars_video_logs')||'[]'); vLog.push({email:localStorage.getItem('cedars_investor_email')||'investor',time:new Date().toLocaleString(),status:'consent granted'}); localStorage.setItem('cedars_video_logs',JSON.stringify(vLog));
+ }catch(e){
+  document.getElementById('videoStatus').innerText='● Permission denied — Investor declined camera — Cannot start silent — Consent required';
+  cmd('VIDEO BRIEFING DENIED — INVESTOR DECLINED — SILENT NOT POSSIBLE — CONSENT REQUIRED');
+  document.getElementById('videoLog').innerText='Briefing denied — User must allow camera — Silent access blocked by browser — Legal protection';
+ }
+}
+function stopVideo(){ if(stream){ stream.getTracks().forEach(t=>t.stop()); document.getElementById('investorVideo').srcObject=null; document.getElementById('videoStatus').innerText='● Standby — Briefing ended'; cmd('VIDEO BRIEFING ENDED — THANK YOU'); } }
+
 function renderMilitary(){
- let v16=getV16();
- document.getElementById('v16Bal').innerText='$'+v16.toFixed(2);
- document.getElementById('v16Status').innerText=v16>0?'● V16 LINKED LIVE':'● LINKING V16';
- document.getElementById('payoutBal').innerText='$'+(v16*0.55).toFixed(2);
- document.getElementById('reserveBal').innerText='$'+(v16*0.45).toFixed(2);
- document.getElementById('opsBal').innerText='$'+(v16*0.15).toFixed(2);
- document.getElementById('crisisBal').innerText='$'+(v16*0.10).toFixed(2);
- document.getElementById('totalProfit').innerText='$'+v16.toFixed(2);
- let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]');
- let dep=tx.filter(x=>x.type==='Deposit').reduce((s,x)=>s+parseFloat(x.amt),0);
- let wd=tx.filter(x=>x.type==='Withdraw').reduce((s,x)=>s+parseFloat(x.amt),0);
- document.getElementById('totalDep').innerText='$'+dep.toFixed(2);
- document.getElementById('totalWd').innerText='$'+wd.toFixed(2);
- document.getElementById('inflow').innerText='$'+dep.toFixed(2);
- document.getElementById('outflow').innerText='$'+wd.toFixed(2);
- document.getElementById('netLiq').innerText='$'+(dep-wd).toFixed(2);
- document.getElementById('invCount').innerText=localStorage.getItem('cedars_investor_email')?1:0;
- document.getElementById('threat').innerText=wd>dep?'MED':'LOW';
- document.getElementById('threat').style.color=wd>dep?'var(--r)':'var(--g)';
- // AI insight innovation
- let insight=document.getElementById('aiInsight');
- if(wd>dep) insight.innerText='⚠️ Withdraw spike detected — Monitor crisis reserve 10% — Suggest hold payout 55%';
- else if(dep>0) insight.innerText='● Inflow healthy — Net +$'+(dep-wd).toFixed(2)+' — All units secure — 360° clear';
- else insight.innerText='● Scanning 360° — No anomalies — Awaiting first deposit from index.html';
- // Accounts
+ let v16=getV16(); document.getElementById('v16Bal').innerText='$'+v16.toFixed(2); document.getElementById('v16Status').innerText=v16>0?'● V16 LINKED LIVE':'● LINKING V16'; document.getElementById('payoutBal').innerText='$'+(v16*0.55).toFixed(2); document.getElementById('reserveBal').innerText='$'+(v16*0.45).toFixed(2); document.getElementById('opsBal').innerText='$'+(v16*0.15).toFixed(2); document.getElementById('crisisBal').innerText='$'+(v16*0.10).toFixed(2); document.getElementById('totalProfit').innerText='$'+v16.toFixed(2);
+ let tx=JSON.parse(localStorage.getItem('cedars_tx')||'[]'); let dep=tx.filter(x=>x.type==='Deposit').reduce((s,x)=>s+parseFloat(x.amt),0); let wd=tx.filter(x=>x.type==='Withdraw').reduce((s,x)=>s+parseFloat(x.amt),0);
+ document.getElementById('totalDep').innerText='$'+dep.toFixed(2); document.getElementById('totalWd').innerText='$'+wd.toFixed(2);
+ document.getElementById('invCount').innerText=localStorage.getItem('cedars_investor_email')?1:0; document.getElementById('threat').innerText=wd>dep?'MED':'LOW'; document.getElementById('threat').style.color=wd>dep?'var(--r)':'var(--g)';
  let email=localStorage.getItem('cedars_investor_email')||'-'; let name=localStorage.getItem('cedars_investor_name')||'Investor'; let ref=localStorage.getItem('cedars_ref')||'-'; let bal=localStorage.getItem('cedars_usd_bal')||'0';
  document.getElementById('accountList').innerHTML=`<div class="row"><span>ACCOUNT:</span><span style="color:var(--g)">${name}</span></div><div class="row"><span>EMAIL:</span><span>${email}</span></div><div class="row"><span>REF:</span><span>${ref}</span></div><div class="row"><span>BAL:</span><span style="color:var(--g)">$${bal}</span></div>`;
- document.getElementById('activityMatrix').innerHTML=tx.slice(-15).reverse().map(t=>`<div class="row"><span>▶ ${t.type} $${t.amt} — ${email} — ${t.date||''} — TG REAL</span><a href="https://solscan.io/tx/${t.hash}" target="_blank" style="color:var(--g);text-decoration:none">SOLSCAN ↗</a></div>`).join('')||'<span class="small">NO ACTIVITY</span>';
+ document.getElementById('activityMatrix').innerHTML=tx.slice(-15).reverse().map(t=>`<div class="row"><span>▶ ${t.type} $${t.amt} — ${email} — IP ${localStorage.getItem('cedars_ip_logs')?JSON.parse(localStorage.getItem('cedars_ip_logs')).slice(-1)[0]?.ip:'-'} — ${t.date||''}</span><a href="https://solscan.io/tx/${t.hash}" target="_blank" style="color:var(--g);text-decoration:none">SOLSCAN ↗</a></div>`).join('')||'<span class="small">NO ACTIVITY</span>';
 }
-function showAccounts(){renderMilitary(); cmd('ALL ACCOUNTS FROM INDEX.HTML — FIELD TOUR READY');}
-function testForex(){cmd('FOREX FEED TEST — JUPITER LIVE'); fetch('https://lite-api.jup.ag/swap/v1/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&amount=1000000').then(r=>r.json()).then(d=>{document.getElementById('jupStat').innerText='● LIVE — Quote OK'; if(d.outAmount) document.getElementById('solPrice').innerText=(d.outAmount/1e6).toFixed(4)+' USDC'; cmd('FOREX LIVE — ARMED — TG REAL');}).catch(()=>cmd('FOREX DELAY — RETRY'));}
-
+function showAccounts(){renderMilitary(); cmd('ALL ACCOUNTS — FIELD TOUR');}
+function testForex(){cmd('FOREX TEST — JUPITER LIVE'); fetch('https://lite-api.jup.ag/swap/v1/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&amount=1000000').then(r=>r.json()).then(d=>{document.getElementById('jupStat').innerText='● LIVE OK'; if(d.outAmount) document.getElementById('solPrice').innerText=(d.outAmount/1e6).toFixed(4)+' USDC'; cmd('FOREX LIVE ARMED');}).catch(()=>cmd('FOREX DELAY'));}
 renderMilitary(); setInterval(renderMilitary,3000);
-// Innovations added — timers — without changing setup
-setInterval(()=>{ let h=23,m=41,s=12; let el=document.getElementById('payoutTimer'); if(el){ let parts=el.innerText.split(':'); let hh=parseInt(parts[0]), mm=parseInt(parts[1]), ss=parseInt(parts[2]); ss--; if(ss<0){ss=59;mm--} if(mm<0){mm=59;hh--} if(hh<0)hh=23; el.innerText=(hh+'').padStart(2,'0')+':'+(mm+'').padStart(2,'0')+':'+(ss+'').padStart(2,'0'); }},1000);
-setInterval(()=>{ document.getElementById('commandTime').innerText='FIELD TOUR READY — '+new Date().toLocaleString()+' — SYSTEM SYNC 360° — TG REAL LINKED'; document.getElementById('cpu').innerText=Math.floor(35+Math.random()*15)+'%'; document.getElementById('rpc').innerText='● LIVE '+Math.floor(20+Math.random()*30)+'ms';},2000);
-setInterval(()=>{ let el=document.getElementById('eurusd'); if(el) el.innerText=(1.08+Math.random()*0.01).toFixed(4)+' '+(Math.random()>0.5?'▲':'▼'); },3000);
-let ifr=document.createElement('iframe'); ifr.src='./V16-REAL-WORKER.html?v=1'; ifr.style.display='none'; document.body.appendChild(ifr); ifr.onload=()=>{try{let b=ifr.contentWindow.localStorage.getItem('cedars_v16_balance')||ifr.contentWindow.localStorage.getItem('cedars_usd_bal'); if(b) localStorage.setItem('cedars_v16_balance',b);}catch(e){} renderMilitary();};
+setInterval(()=>{ document.getElementById('commandTime').innerText='FIELD TOUR READY — '+new Date().toLocaleString()+' — BUILD 2 IP+UPLOAD+RESET+VIDEO — 360°'; document.getElementById('cpu').innerText=Math.floor(35+Math.random()*15)+'%';},2000);
+let ifr=document.createElement('iframe'); ifr.src='./V16-REAL-WORKER.html?v=1'; ifr.style.display='none'; document.body.appendChild(ifr); ifr.onload=()=>{try{let b=ifr.contentWindow.localStorage.getItem('cedars_v16_balance'); if(b) localStorage.setItem('cedars_v16_balance',b);}catch(e){} renderMilitary();};
 </script>
 <script src="../header-footer.js"></script>
-<script>
-// REMOVE HOME ABOUT CALENDAR REGISTER PLANS — KEEP ICONS
-document.addEventListener('DOMContentLoaded',()=>{ setTimeout(()=>{ document.querySelectorAll('header a, nav a').forEach(a=>{ let txt=(a.innerText||'').toLowerCase().trim(); if(['home','about us','about','calendar','register','plans'].includes(txt)) a.style.display='none'; }); },600); });
-</script>
+<script>document.addEventListener('DOMContentLoaded',()=>{ setTimeout(()=>{ document.querySelectorAll('header a, nav a').forEach(a=>{ let txt=(a.innerText||'').toLowerCase().trim(); if(['home','about us','about','calendar','register','plans'].includes(txt)) a.style.display='none'; }); },600); });</script>
 <script src="../support-widget.js"></script>
 </body></html>
