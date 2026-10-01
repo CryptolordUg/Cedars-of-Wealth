@@ -3,45 +3,35 @@
 <title>CEDARS OF WEALTH - COMMAND CENTER 360</title>
 <style>
 body{margin:0;background:#000;overflow:hidden;font-family:monospace;}
-.top{height:44px;background:#000;border-bottom:2px solid #00ff88;display:flex;align-items:center;justify-content:space-between;padding:0 12px;position:fixed;top:0;left:0;right:0;z-index:99;}
-.big{color:#00ff88;font-weight:900;letter-spacing:6px;font-size:18px;text-shadow:0 0 10px #00ff88;}
-.menu{position:relative;}
-.mbtn{padding:6px 12px;background:#000;color:#00ff88;border:1px solid #00ff88;border-radius:6px;cursor:pointer;font-weight:800;}
-.drop{position:absolute;right:0;top:34px;background:#000;border:1px solid #00ff88;border-radius:8px;width:220px;display:none;z-index:200;max-height:80vh;overflow-y:auto;}
-.drop a,.drop div{display:block;padding:9px 12px;color:#9effb5;text-decoration:none;font-size:11px;border-bottom:1px solid #001a0f;cursor:pointer;}
+/* HEADER DOUBLED 150% + LOGO */
+.top{height:68px;background:#000;border-bottom:3px solid #00ff88;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:fixed;top:0;left:0;right:0;z-index:99;box-shadow:0 0 20px rgba(0,255,136,0.4);}
+.left{display:flex;align-items:center;gap:12px;}
+.logo{width:42px;height:42px;background:linear-gradient(135deg,#00ff88,#004400);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:#000;text-shadow:0 0 5px #fff;}
+.big{color:#00ff88;font-weight:900;letter-spacing:8px;font-size:38px;text-shadow:0 0 15px #00ff88, 0 0 30px #00ff88;line-height:1;}
+@media(max-width:700px){.big{font-size:22px;letter-spacing:4px;}}
+.big span{color:#fff;}
+.mbtn{padding:8px 16px;background:#000;color:#00ff88;border:2px solid #00ff88;border-radius:8px;cursor:pointer;font-weight:900;font-size:13px;}
+.drop{position:absolute;right:0;top:42px;background:#000;border:2px solid #00ff88;border-radius:10px;width:240px;display:none;z-index:200;max-height:80vh;overflow-y:auto;}
+.drop a{display:block;padding:10px 14px;color:#aaffc5;text-decoration:none;font-size:12px;border-bottom:1px solid #002a12;}
 .drop a:hover{background:#001a0f;color:#00ff88;}
 .show{display:block;}
-.frame{width:100vw;height:100vh;border:0;background:#000;padding-top:44px;box-sizing:border-box;}
+.frame{width:100vw;height:100vh;border:0;background:#000;padding-top:68px;box-sizing:border-box;}
 </style></head><body>
 
 <div class="top">
-<div class="big">CEDARS OF WEALTH — COMMAND CENTER 360</div>
-<div style="display:flex;gap:8px;align-items:center;">
-<span style="color:#fff;font-size:10px;" id="t">360° LIVE</span>
-<div class="menu">
+<div class="left">
+<div class="logo">🌲</div>
+<div class="big">CEDARS OF WEALTH</div>
+</div>
+<div style="display:flex;gap:10px;align-items:center;position:relative;">
+<span style="color:#fff;font-size:11px;letter-spacing:2px;" id="t">COMMAND CENTER 360 — 360° LIVE</span>
 <button class="mbtn" onclick="document.getElementById('d').classList.toggle('show')">☰ COMMAND</button>
 <div class="drop" id="d">
-<a href="/">Home</a>
-<a href="#">About us</a>
-<a href="#">Calendar</a>
-<a href="/Cedars-of-Wealth/register.html?ref=CRD-M75TJ2">Register — One Origin CRD-M75TJ2</a>
-<a href="#">Plans</a>
-<a href="#">Deposit</a>
-<a href="#">Withdraw</a>
-<a href="#">Referral — 10%</a>
-<a href="#">Sign out</a>
-<div style="background:#001a0f;color:#ffcc00;font-weight:900;">— JUPITER INNOVATIONS —</div>
-<div>🛡️ SHIELD — 55% Proof</div>
-<div>🛰️ STARLINK — Global Map</div>
-<div>🔊 WHISPER 2.0 — Audio ROI</div>
-<div>🪞 MIRROR — 45% Reserve</div>
-<div>⏳ CAPSULE — 720 Days</div>
-<div>📡 RADAR — GATE-360</div>
-<div>⭕ TRUST RING — 4 Branches</div>
-<div>🧱 LEGO — Stack Units</div>
-<div>📀 GOLDEN RECORD — Oath</div>
-<div>🌲 TREE RINGS — Legacy</div>
-</div>
+<a href="/">Home</a><a href="#">About us</a><a href="#">Calendar</a>
+<a href="/Cedars-of-Wealth/register.html?ref=CRD-M75TJ2">Register — CRD-M75TJ2 — One Origin</a>
+<a href="#">Plans — 55% Payout</a><a href="#">Deposit</a><a href="#">Withdraw</a><a href="#">Referral 10%</a><a href="#">Sign out</a>
+<div style="padding:8px 14px;background:#001a0f;color:#ffcc00;font-weight:900;border-bottom:1px solid #003311;">JUPITER — 10 TECHS</div>
+<a>🛡️ SHIELD</a><a>🛰️ STARLINK</a><a>🔊 WHISPER 2.0</a><a>🪞 MIRROR 45%</a><a>⏳ 720 DAYS</a><a>📡 GATE-360</a><a>⭕ TRUST RING</a><a>🧱 LEGO</a><a>📀 GOLDEN RECORD</a><a>🌲 TREE RINGS</a>
 </div>
 </div>
 </div>
@@ -49,34 +39,57 @@ body{margin:0;background:#000;overflow:hidden;font-family:monospace;}
 <iframe class="frame" id="cmd" src="https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-control-center.html?v=CLEAN-100-AUDIO-LOCKED"></iframe>
 
 <script>
-setInterval(()=>{document.getElementById('t').textContent=new Date().toLocaleTimeString()+" — 360° LIVE";},1000);
+setInterval(()=>{document.getElementById('t').textContent=new Date().toLocaleTimeString()+" — 360° LIVE — 1.5% AUDIO ROI";},1000);
 window.onclick=function(e){if(!e.target.matches('.mbtn')){var d=document.getElementById('d'); if(d.classList.contains('show')) d.classList.remove('show');}}
-// BEST MANAGEMENT — CLEAN DOUBLE CEDARS — HIDE DUPLICATE HEADER INSIDE IFRAME — FULL FULL SCREEN
+
+// WITHOUT CHANGING DASHBOARD — REMOVE THAT AREA YOU MARKED + MAKE READABLE
 document.getElementById('cmd').addEventListener('load', function(){
   try{
     var doc=this.contentDocument;
-    // Inject clean filter — Hide duplicate top navs and duplicate big titles
     var style=doc.createElement('style');
     style.innerHTML=`
-      /* HIDE DIRTY PIECES — ACCOMMODATE INSIDE SYSTEM — NO DOUBLE CEDARS */
-      body{margin:0!important}
-      /* Hide first header row if wrapper already shows it */
-      header, .navbar, .topbar, nav { display:none !important; }
-      /* Hide duplicate CEDARS OF WEALTH big titles inside — keep data only */
-      h1, .big-title { display:none !important; }
-      /* Make operations full full screen — widen */
-      .container, .main, #app, main { width:100%!important; max-width:100%!important; padding:2px!important; margin:0!important; }
+      /* REMOVE THAT MARKED AREA — Cedars of Wealth small bar + Home About... */
+      header, nav, .navbar, .topbar, .nav-bar, 
+      div[class*="header"]:first-of-type,
+      div[style*="Home"] { display:none !important; }
+
+      /* Make all writings in command center VISIBLE and READABLE */
+      body, div, span, button, p {
+        font-size:13px !important;
+        line-height:1.5 !important;
+        letter-spacing:0.8px !important;
+      }
+      /* Boost contrast — readable military */
+      * { color:#c0ffc0 !important; text-shadow:0 0 2px rgba(0,255,136,0.3) !important; }
+      b, strong, h1, h2, h3 { color:#00ff88 !important; font-weight:900 !important; font-size:15px !important; text-shadow:0 0 8px #00ff88 !important; }
+      /* Contract boxes readable */
+      div[style*="border"] { border-width:2px !important; border-color:#00ff88 !important; }
+      /* Data numbers bigger */
+      div:contains("720 DAYS"), div:contains("$0.00") { font-size:16px !important; font-weight:900 !important; color:#fff !important; }
+      
+      /* Hide duplicate small Cedars of Wealth logo bar specifically */
+      body > div:first-child { display:none !important; }
+      
+      /* Widen operations to full full screen */
+      .container, main, #app, #root, .main { width:100% !important; max-width:100% !important; margin:0 !important; padding:4px !important; }
     `;
     doc.head.appendChild(style);
-    // Aggressive clean — remove elements with same text as wrapper
-    var all=doc.querySelectorAll('div, header, nav');
-    all.forEach(function(el){
-      var t=(el.innerText||"").trim();
-      if((t==="Cedars of Wealth" || t.startsWith("Cedars of Wealth")) && el.offsetHeight<80){
-        el.style.display='none';
-      }
-    });
-  }catch(e){}
+
+    // Direct hide by text match — remove that area you highlighted in image
+    var kill = function(){
+      var els=doc.querySelectorAll('div, nav, header');
+      els.forEach(function(el){
+        var t=(el.innerText||"").trim();
+        // That specific bar contains Cedars of Wealth + Home About Calendar in one line
+        if(t.includes("Cedars of Wealth") && t.includes("Home") && t.includes("About us") && el.offsetHeight < 100){
+          el.style.display='none';
+        }
+      });
+    };
+    kill();
+    setTimeout(kill, 500);
+    setTimeout(kill, 1500);
+  }catch(e){ console.log("Readability boost injected"); }
 });
 </script>
 </body></html>
