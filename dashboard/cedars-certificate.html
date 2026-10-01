@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cedars of Wealth — Legacy Certificate — Bonny 1990</title>
+<style>
+body{background:#050505;color:#d4af37;font-family:serif;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0;padding:20px;}
+.cert{width:900px;max-width:95%;border:4px double #d4af37;padding:30px;background:radial-gradient(ellipse at center,#1a1a1a 0%,#000 100%);box-shadow:0 0 40px rgba(212,175,55,0.3);position:relative;text-align:center;}
+.cert:before{content:'';position:absolute;top:10px;left:10px;right:10px;bottom:10px;border:1px solid rgba(212,175,55,0.2);pointer-events:none;}
+h1{font-size:42px;margin:10px 0;letter-spacing:3px;text-transform:uppercase;}
+.gold{color:#d4af37;}.dim{color:#888;font-size:12px;}
+.row{display:flex;justify-content:space-between;text-align:left;margin:15px 0;flex-wrap:wrap;}
+.box{border:1px solid rgba(212,175,55,0.3);padding:12px;flex:1;margin:5px;min-width:200px;background:rgba(212,175,55,0.05);}
+.seal{width:120px;height:120px;border-radius:50%;border:3px solid #d4af37;margin:20px auto;display:flex;align-items:center;justify-content:center;font-weight:bold;background:radial-gradient(#d4af37,#8a6d00);color:#000;}
+.btn{padding:12px 25px;background:#d4af37;color:#000;border:none;font-weight:bold;cursor:pointer;border-radius:6px;margin-top:20px;}
+</style>
+</head>
+<body>
+<div class="cert" id="cert">
+<div class="dim">PREMIUM • LEGACY ACCESS CERTIFICATE • CLASS 360</div>
+<div style="font-size:60px;">🌲</div>
+<div class="dim">LEGACY CERTIFICATE</div>
+<h1>Cedars of Wealth</h1>
+<div class="dim">BONNY 1990 LEGACY KEY • EST. 1990 • CYCLE 001</div>
+
+<div class="row">
+<div class="box">
+<div class="dim">OPERATOR:</div><div id="opName" style="font-size:18px;font-weight:bold;">cryptomeme2030</div>
+<div class="dim" style="margin-top:10px;">LEGACY KEY:</div><div id="legacyKey" style="font-size:18px;font-weight:bold;">1990@Bonny</div>
+<div class="dim" style="margin-top:10px;">DAY:</div><div id="dayCount">1/720</div>
+</div>
+<div class="box" style="text-align:center;">
+<div class="dim">THIS CERTIFICATE ACKNOWLEDGES LEGACY ACCESS GRANTED TO THE OPERATOR, ENTITLING THEM TO COMMAND CENTER 360 PRIVILEGES AND GATE 360 ACCESS FOR THE FULL 720-DAY TERM.</div>
+<div class="seal">VERIFIED<br>🌲<br>AUTHENTIC</div>
+<div class="dim">CEDARS OF WEALTH • OFFICIAL SEAL</div>
+</div>
+<div class="box">
+<div class="dim">STATUS:</div><div style="color:#00ff88;font-weight:bold;">🔓 GATE 360 UNLOCKED</div>
+<div class="dim" style="margin-top:10px;">LOCATION:</div><div>COMMAND CENTER 360</div>
+<div class="dim" style="margin-top:10px;">AUTHORIZATION:</div><div style="color:#00ff88;">GRANTED • ACTIVE</div>
+<div class="dim" style="margin-top:10px;">ISSUED:</div><div>EST. 1990 • <span id="dateNow"></span></div>
+</div>
+</div>
+
+<div class="dim">CERTIFICATE NO. LX-CT-0001 • SECURITY WATERMARK • NON-TRANSFERABLE</div>
+<button class="btn" onclick="window.print()">🖨️ PRINT / SAVE PDF — For BALAL</button>
+<button class="btn" style="background:#111;color:#d4af37;border:1px solid #d4af37;margin-left:10px;" onclick="shareCert()">📤 Share to Telegram</button>
+</div>
+
+<script>
+document.getElementById('dateNow').textContent = new Date().toLocaleDateString();
+// Auto-fill from localStorage if exists
+try{
+  const email = localStorage.getItem('cedars_last_email') || 'cryptomeme2030@gmail.com';
+  document.getElementById('opName').textContent = email.split('@')[0];
+  const pwd = localStorage.getItem('cedars_pwd_' + email) || '1990@Bonny';
+  document.getElementById('legacyKey').textContent = pwd;
+  const day = localStorage.getItem('cedars_day_' + email) || '1';
+  document.getElementById('dayCount').textContent = day + '/720';
+}catch(e){}
+function shareCert(){
+  const text = `🌲 CEDARS OF WEALTH — LEGACY CERTIFICATE\nOperator: cryptomeme2030\nLegacy Key: 1990@Bonny\nGate 360 Unlocked • Command Center 360\nDay 1/720 • EST. 1990\n\nCommand Center: https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/cedars-control-center.html`;
+  if(navigator.share){ navigator.share({title:'Cedars Legacy Certificate',text:text}); }
+  else { navigator.clipboard.writeText(text); alert('Certificate text copied — Paste in Telegram Real'); }
+}
+</script>
+</body>
+</html>
