@@ -1,0 +1,46 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Deposit TRC20 - Cedars</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#070a07;color:#e8f0d8;font-family:Arial}
+.top{position:sticky;top:0;z-index:99;background:#0f1a0a;border-bottom:2px solid #c9a86a;padding:8px 3%;display:flex;justify-content:space-between;align-items:center}
+.top b{font-size:12px;color:#c9a86a}.nav{display:flex;gap:6px}.nav a{padding:7px 12px;border-radius:20px;font-size:11px;font-weight:700;text-decoration:none;background:#1a2e0a;color:#c9a86a;border:1px solid #2a3a1a}.nav a.active{background:#c9a86a;color:#000}
+.wrap{max-width:500px;margin:0 auto;padding:16px}.card{background:#10180c;border:1px solid #2a3a1a;border-radius:12px;padding:16px;margin-bottom:12px;text-align:center}
+.card h2{font-size:12px;color:#c9a86a;letter-spacing:1px}.addr{background:#000;border:2px solid #c9a86a;padding:14px;border-radius:10px;font-family:monospace;color:#f9e2a0;word-break:break-all;font-size:13px;margin:12px 0}
+.btn{padding:12px;border-radius:8px;font-weight:800;font-size:13px;background:#c9a86a;color:#000;border:0;cursor:pointer;display:block;text-align:center;text-decoration:none;width:100%;margin-top:8px}
+.warn{background:#1a1000;border:1px solid #c97a5a;border-radius:8px;padding:10px;font-size:10px;color:#e8c0a0;margin-top:10px;text-align:left}
+</style></head><body>
+<div class="top"><b>▲ CEDARS</b><div class="nav"><a href="../index.html?v=TRC20">Home</a><a href="dashboard.html?v=TRC20" >Dashboard</a><a href="deposit.html?v=TRC20" class="active">Deposit</a></div></div>
+<div class="wrap">
+<div class="card" style="border-color:#c9a86a;border-width:2px">
+<h2>DEPOSIT USDT TRC20 ONLY</h2>
+<div style="font-size:20px;font-weight:800;color:#fff;margin-top:8px">TRC20 NETWORK ONLY</div>
+<div style="font-size:10px;color:#7a8a5f;margin-top:4px">$20 Minimum • 1.5% Daily • 30 Day Lock</div>
+
+<div class="addr" id="tAddr">TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u</div>
+
+<a class="btn" onclick="copyT()">⎙ COPY ADDRESS</a>
+<a class="btn" style="background:#10b981;margin-top:8px" onclick="copied()">I HAVE SENT - CHECK BALANCE</a>
+
+<div class="warn">
+<b style="color:#f9a86a">⚠ IMPORTANT - TRC20 ONLY:</b><br>
+• Send <b>USDT TRC20 ONLY</b> - Not ERC20, Not Solana<br>
+• Minimum <b>$20</b> - Less than $20 will be lost<br>
+• After sending, wait <b>2 mins</b> for confirmation<br>
+• Balance updates after admin verification<br>
+• Solana vault is <b>managed internally</b> - Don't send to Solana address
+</div>
+
+<div style="margin-top:12px;font-size:11px;color:#fff">Your deposits:</div>
+<div id="depList" style="font-size:10px;color:#7a8a5f;margin-top:6px">No deposits yet</div>
+
+</div>
+<div style="text-align:center;font-size:9px;color:#4a5a2a">TRC20 ONLY • No Solana deposits • v=TRC20LOCK</div>
+</div>
+<script>
+function copyT(){navigator.clipboard.writeText(document.getElementById('tAddr').innerText);alert('TRC20 Address copied:\nTE26B7z...Hcz1u\n\nSend USDT TRC20 ONLY')}
+function copied(){alert('We are checking Tronscan for your deposit to TE26B7z...\nIf confirmed, your balance will show in Dashboard in 2-5 mins.\n\nKeep your TX hash.');location.href='dashboard.html?v=TRC20'}
+const deposits=JSON.parse(localStorage.getItem('cedars_deposits')||'[]');
+if(deposits.length>0){let h='';deposits.forEach(d=>{h+='<div style="background:#000;padding:6px;border-radius:6px;margin-top:4px;border:1px solid #222">$'+d.amount+' • '+new Date(d.date).toLocaleDateString()+' • '+d.tx+'</div>'});document.getElementById('depList').innerHTML=h;}
+</script>
+</body></html>
