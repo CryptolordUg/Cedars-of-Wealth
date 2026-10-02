@@ -1,95 +1,36 @@
 <!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
-<title>Dashboard - Cedars</title>
+<title>Dashboard - Cedars TRC20 Only</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}body{background:#070a07;color:#e8f0d8;font-family:Arial}
 .top{position:sticky;top:0;z-index:99;background:#0f1a0a;border-bottom:2px solid #c9a86a;padding:8px 3%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
-.top b{font-size:12px;letter-spacing:1px;color:#c9a86a}
-.nav{display:flex;gap:6px;flex-wrap:wrap}
-.nav a{padding:7px 12px;border-radius:20px;font-size:11px;font-weight:700;text-decoration:none;background:#1a2e0a;color:#c9a86a;border:1px solid #2a3a1a;cursor:pointer}
+.top b{font-size:12px;color:#c9a86a}.nav{display:flex;gap:6px;flex-wrap:wrap}
+.nav a{padding:7px 12px;border-radius:20px;font-size:11px;font-weight:700;text-decoration:none;background:#1a2e0a;color:#c9a86a;border:1px solid #2a3a1a}
 .nav a.active{background:#c9a86a;color:#000}
 .wrap{max-width:900px;margin:0 auto;padding:12px}.card{background:#10180c;border:1px solid #2a3a1a;border-radius:12px;padding:14px;margin-bottom:10px}
 .card h2{font-size:10px;letter-spacing:1px;color:#c9a86a;margin-bottom:8px}.val{font-size:22px;font-weight:800;color:#fff}
 .addr{background:#000;border:1px solid #333;padding:8px;border-radius:8px;font-family:monospace;color:#e8c87a;word-break:break-all;font-size:11px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:600px){.grid{grid-template-columns:1fr}}
-.bal-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}@media(max-width:600px){.bal-grid{grid-template-columns:1fr 1fr 1fr}}
+.bal-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
 .bal{background:#000;border:1px solid #1a2a0a;border-radius:8px;padding:8px;text-align:center}
 .bal b{font-size:14px;color:#fff;display:block}.bal span{font-size:9px;color:#6a7a4f}
 .btn{padding:8px 12px;border-radius:8px;font-weight:700;font-size:11px;background:#c9a86a;color:#000;border:0;cursor:pointer;display:block;text-align:center;text-decoration:none}
+.hidden{display:none!important}
 </style></head><body>
-<div class="top">
-<b>▲ CEDARS</b>
-<div class="nav">
-<a href="../index.html?v=<?=Date.now()?>">Home</a>
-<a href="deposit.html?v=<?=Date.now()?>" class="active">Deposit</a>
-<a href="#withdraw" onclick="document.getElementById('withdrawBox').scrollIntoView({behavior:'smooth'})">Withdraw</a>
-<a href="#ref" onclick="document.getElementById('refBox').scrollIntoView({behavior:'smooth'})">Referral</a>
-<a href="#" onclick="location.reload(true)" style="background:#000;color:#10b981">↻ Refresh</a>
-</div>
-</div>
-
+<div class="top"><b>▲ CEDARS</b><div class="nav"><a href="../index.html?v=TRC20">Home</a><a href="deposit.html?v=TRC20" class="active">Deposit</a><a href="#withdraw" onclick="document.getElementById('wBox').scrollIntoView({behavior:'smooth'})">Withdraw</a><a href="#ref" onclick="document.getElementById('refBox').scrollIntoView({behavior:'smooth'})">Referral</a><a href="#" onclick="location.reload(true)" style="background:#000;color:#10b981">↻</a></div></div>
 <div class="wrap">
-
-<div class="card" style="border-color:#c9a86a">
-<h2>BALANCE <span id="dot" style="color:#10b981;font-size:9px">● LIVE</span></h2>
-<div class="val" id="totalBal">$0.00</div>
-<div style="font-size:10px;color:#7a8a5f" id="uEmail">Checking...</div>
-<div id="hasBox" style="display:none">
-<div class="bal-grid">
-<div class="bal"><span>INVESTED</span><b id="inv">$0</b></div>
-<div class="bal"><span>DAILY 1.5%</span><b id="daily" style="color:#10b981">$0</b></div>
-<div class="bal"><span>EARNINGS</span><b id="earn" style="color:#c9a86a">$0</b></div>
-</div>
-<div class="bal-grid" style="grid-template-columns:1fr 1fr">
-<div class="bal"><span>LOCKED</span><b id="locked" style="font-size:10px">-</b></div>
-<div class="bal"><span>AVAILABLE</span><b id="avail" style="color:#10b981">$0</b></div>
-</div>
-</div>
-<div id="noBox" style="display:none;text-align:center;padding:10px;border:1px dashed #c9a86a;border-radius:8px;margin-top:10px">
-<div style="font-size:11px;color:#c9a86a">No deposit yet • Balance $0.00</div>
-<a href="deposit.html?v=NEW" class="btn" style="margin-top:8px">Deposit to Activate</a>
-</div>
-</div>
-
-<div class="grid">
-<div class="card" id="withdrawBox"><h2>WITHDRAW</h2><div class="addr"><input id="wAddr" placeholder="T... address" style="background:transparent;border:0;color:#e8c87a;width:100%;outline:none;font-size:11px"></div><a class="btn" style="margin-top:8px;background:#10b981" onclick="doW()">Withdraw</a><div style="font-size:9px;color:#6a7a4f;margin-top:4px">$20 min • 5% fee</div></div>
-<div class="card" id="refBox"><h2>REFERRAL</h2><div style="font-size:11px;color:#fff">10% / 5% / 2% / 1%</div><div class="addr" style="margin-top:6px" id="refL">...</div><a class="btn" style="margin-top:8px" onclick="copyR()">Copy Link</a></div>
-</div>
-
-<div class="card"><h2>SOLANA VAULT 12% APY</h2><div style="font-size:10px;color:#6a7a4f">Secured • Treasury hidden • Auto-compound</div></div>
-
-<div style="text-align:center;font-size:9px;color:#4a5a2a;margin-top:10px">v=REAL-HEADER-FIX • No cache • Updated <span id="time"></span></div>
-</div>
-
+<div class="card" style="border-color:#c9a86a"><h2>BALANCE <span id="dot" style="color:#10b981;font-size:9px">● TRC20 LIVE</span></h2><div class="val" id="totalBal">$0.00</div><div style="font-size:10px;color:#7a8a5f" id="uEmail">Checking...</div>
+<div id="hasBox" style="display:none"><div class="bal-grid"><div class="bal"><span>INVESTED</span><b id="inv">$0</b></div><div class="bal"><span>DAILY 1.5%</span><b id="daily" style="color:#10b981">$0</b></div><div class="bal"><span>EARNINGS</span><b id="earn" style="color:#c9a86a">$0</b></div></div><div class="bal-grid" style="grid-template-columns:1fr 1fr"><div class="bal"><span>LOCKED</span><b id="locked" style="font-size:10px">-</b></div><div class="bal"><span>AVAILABLE</span><b id="avail" style="color:#10b981">$0</b></div></div></div>
+<div id="noBox" style="display:none;text-align:center;padding:10px;border:1px dashed #c9a86a;border-radius:8px;margin-top:10px"><div style="font-size:11px;color:#c9a86a">No TRC20 deposit yet • $0.00</div><a href="deposit.html?v=TRC20" class="btn" style="margin-top:8px">Deposit TRC20 Now</a></div></div>
+<div class="grid"><div class="card" id="wBox"><h2>WITHDRAW TRC20</h2><div class="addr"><input id="wAddr" placeholder="Your T... address" style="background:transparent;border:0;color:#e8c87a;width:100%;outline:none;font-size:11px"></div><a class="btn" style="margin-top:8px;background:#10b981" onclick="doW()">Withdraw USDT</a><div style="font-size:9px;color:#6a7a4f;margin-top:4px">$20 min • 5% fee • TRC20 only</div></div><div class="card" id="refBox"><h2>REFERRAL TRC20</h2><div style="font-size:11px;color:#fff">10% / 5% / 2% / 1% USDT</div><div class="addr" style="margin-top:6px" id="refL">...</div><a class="btn" style="margin-top:8px" onclick="copyR()">Copy Link</a></div></div>
+<div class="hidden" id="solanaBox">SOLANA HIDDEN FROM INVESTORS - ADMIN ONLY</div>
+<div style="text-align:center;font-size:9px;color:#4a5a2a;margin-top:10px">TRC20 ONLY • v=TRC20LOCK • <span id="time"></span></div></div>
 <script>
 document.getElementById('time').innerText=new Date().toLocaleString();
-function copyR(){navigator.clipboard.writeText(document.getElementById('refL').innerText);alert('Referral copied')}
-function doW(){const a=document.getElementById('wAddr').value;const av=document.getElementById('avail').innerText;if(!a)return alert('Enter T... address');if(av==='$0.00'||av==='$0')return alert('No earnings yet');alert('Withdraw '+av+' to '+a)}
-// REAL BALANCE - NO CHANGE TO STORAGE LOGIC
-const users=JSON.parse(localStorage.getItem('cedars_users')||'[]');
-const deposits=JSON.parse(localStorage.getItem('cedars_deposits')||'[]');
-const cur=users.length?users[users.length-1]:null;
-const curId=cur?(cur.email||cur.wallet||cur.ref):null;
-let userDeposits=curId?deposits.filter(d=>d.userId===curId||d.email===curId||d.ref===curId):[];
-let total=0;userDeposits.forEach(d=>total+=parseFloat(d.amount||0));
-const has=total>0;
-document.getElementById('uEmail').innerText=cur?'Investor: '+(cur.email||cur.wallet||cur.ref):'Guest';
-if(has){
-document.getElementById('hasBox').style.display='block';document.getElementById('noBox').style.display='none';
-const days=Math.max(1,Math.floor((Date.now()-new Date(userDeposits[0].date).getTime())/86400000));
-const daily=total*0.015;const earn=daily*days;
-document.getElementById('totalBal').innerText='$'+(total+earn).toFixed(2);
-document.getElementById('inv').innerText='$'+total.toFixed(2);
-document.getElementById('daily').innerText='$'+daily.toFixed(2);
-document.getElementById('earn').innerText='$'+earn.toFixed(2);
-document.getElementById('avail').innerText='$'+earn.toFixed(2);
-const ld=new Date(userDeposits[0].date);ld.setDate(ld.getDate()+30);document.getElementById('locked').innerText=ld.toLocaleDateString();
-}else{
-document.getElementById('totalBal').innerText='$0.00';document.getElementById('hasBox').style.display='none';document.getElementById('noBox').style.display='block';
-document.getElementById('dot').innerText='● NO DEPOSIT';document.getElementById('dot').style.color='#c97a5a';
-}
-document.getElementById('refL').innerText=cur?'https://cryptolordug.github.io/Cedars-of-Wealth/?ref='+(cur.ref||'USER1'):'Deposit to get link';
-// FORCE REFRESH FIX FOR PHONES - clear old cache
-if('caches' in window){caches.keys().then(k=>k.forEach(n=>caches.delete(n)))};
-</script>
-</body></html>
+function copyR(){navigator.clipboard.writeText(document.getElementById('refL').innerText);alert('Copied')}
+function doW(){const a=document.getElementById('wAddr').value;const av=document.getElementById('avail').innerText;if(!a)return alert('Enter T... address');if(av==='$0.00'||av==='$0')return alert('No earnings yet - deposit TRC20 first');alert('Withdraw '+av+' to '+a)}
+const users=JSON.parse(localStorage.getItem('cedars_users')||'[]');const deposits=JSON.parse(localStorage.getItem('cedars_deposits')||'[]');const cur=users.length?users[users.length-1]:null;const curId=cur?(cur.email||cur.wallet||cur.ref):null;let userDeposits=curId?deposits.filter(d=>d.userId===curId||d.email===curId||d.ref===curId):[];let total=0;userDeposits.forEach(d=>total+=parseFloat(d.amount||0));const has=total>0;
+document.getElementById('uEmail').innerText=cur?'Investor: '+(cur.email||cur.wallet||cur.ref):'Guest - No deposit';
+if(has){document.getElementById('hasBox').style.display='block';document.getElementById('noBox').style.display='none';const days=Math.max(1,Math.floor((Date.now()-new Date(userDeposits[0].date).getTime())/86400000));const daily=total*0.015;const earn=daily*days;document.getElementById('totalBal').innerText='$'+(total+earn).toFixed(2);document.getElementById('inv').innerText='$'+total.toFixed(2);document.getElementById('daily').innerText='$'+daily.toFixed(2);document.getElementById('earn').innerText='$'+earn.toFixed(2);document.getElementById('avail').innerText='$'+earn.toFixed(2);const ld=new Date(userDeposits[0].date);ld.setDate(ld.getDate()+30);document.getElementById('locked').innerText=ld.toLocaleDateString();}else{document.getElementById('totalBal').innerText='$0.00';document.getElementById('hasBox').style.display='none';document.getElementById('noBox').style.display='block';document.getElementById('dot').innerText='● NO TRC20 DEPOSIT';document.getElementById('dot').style.color='#c97a5a';}
+document.getElementById('refL').innerText=cur?'https://cryptolordug.github.io/Cedars-of-Wealth/?ref='+(cur.ref||'USER1'):'Deposit TRC20 to get referral link';
+</script></body></html>
