@@ -1,48 +1,27 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS - Verify Deposit</title>
-<style>body{background:#000;color:#f5c518;font-family:monospace;padding:20px;text-align:center}.box{max-width:500px;margin:30px auto;background:#111;border:2px solid #f5c518;border-radius:16px;padding:20px}.btn{background:#f5c518;color:#000;border:0;padding:12px 20px;border-radius:10px;font-weight:900;width:100%;margin-top:10px;cursor:pointer}.addr{background:#000;padding:10px;border-radius:8px;word-break:break-all;font-size:12px;border:1px solid #333;margin:10px 0}#status{font-size:22px;font-weight:900;margin:15px 0}</style></head><body>
-<h2>🌲 CEDARS OF WEALTH — DEPOSIT VERIFY</h2>
-<div class="box">
-<div>Send SOL to Vault:</div>
-<div class="addr" id="vault">6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div>
-<button class="btn" onclick="navigator.clipboard.writeText('6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb');alert('Copied')">📋 COPY VAULT ADDRESS</button>
-<div id="status">⏳ Waiting for payment...</div>
-<div id="detail" style="font-size:12px;opacity:.7">Enter your sender wallet to verify</div>
-<input id="userWallet" placeholder="Your Phantom Wallet Address (sender)" style="width:100%;padding:10px;background:#000;color:#f5c518;border:1px solid #333;border-radius:8px;margin-top:10px">
-<button class="btn" onclick="start()">🔍 START VERIFYING</button>
-<button class="btn" onclick="window.open('https://solscan.io/account/6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb','_blank')">🔎 VIEW VAULT ON SOLSCAN</button>
-<div id="txs" style="text-align:left;margin-top:15px;font-size:10px"></div>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS OF WEALTH</title>
+<style>body{background:#000;color:#f5c518;font-family:monospace;margin:0;padding:0;text-align:center}.hero{padding:60px 20px;background:radial-gradient(circle at top,#111,#000)}.btn{background:#f5c518;color:#000;padding:14px 22px;border-radius:10px;font-weight:900;text-decoration:none;display:inline-block;margin:8px;border:0;cursor:pointer}.card{background:#0a0a0a;border:1px solid #333;border-radius:16px;padding:20px;margin:20px auto;max-width:700px}</style></head><body>
+<div class="hero">
+<h1 style="font-size:42px">🌲 CEDARS OF WEALTH</h1>
+<p>Solana Vault — Secure Deposits — 360° Integrity</p>
+<div class="card">
+<h3>💰 DEPOSIT TO UNLOCK</h3>
+<div style="background:#000;padding:10px;border-radius:8px;word-break:break-all;font-size:11px;border:1px solid #333">6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div>
+<a class="btn" href="dashboard/verify.html">💰 VERIFY DEPOSIT & UNLOCK ACCESS</a>
+<a class="btn" href="dashboard/admin-6XQvi.html" style="background:transparent;color:#f5c518;border:1px solid #f5c518">🔐 ADMIN 360°</a>
+<a class="btn" href="https://solscan.io/account/6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb" target="_blank" style="background:transparent;color:#f5c518;border:1px solid #333">🔎 VIEW VAULT</a>
+</div>
+<div class="card">
+<h3>How it Works</h3>
+<div style="text-align:left;font-size:13px;line-height:1.8">
+1. Copy Vault Address<br>
+2. Send SOL from Phantom<br>
+3. Click Verify Deposit → Enter your wallet<br>
+4. Auto-detected in 15s → Unlocked<br>
+5. Telegram alert to Admin (1884572429)
+</div>
+</div>
 </div>
 <script>
-const VAULT="6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb";const RPC="https://api.mainnet-beta.solana.com";let interval=null;
-const BOT_TOKEN=localStorage.getItem("cedars_bot_token")||"8818013074:AAFM3-ovwdS9dq39gdmLrkD_lAx8IayQbSU";const CHAT_ID="1884572429";
-function sendTG(m){fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(m)}`)}
-async function start(){
- let userW=document.getElementById("userWallet").value.trim();if(!userW){alert("Enter your wallet");return;}
- document.getElementById("status").innerText="🔄 Scanning every 15s...";document.getElementById("detail").innerText="Watching vault for TX from: "+userW.slice(0,10)+"...";
- if(interval)clearInterval(interval);
- interval=setInterval(()=>check(userW),15000);check(userW);
-}
-async function check(userW){
- try{
-  let r=await fetch(RPC,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getSignaturesForAddress",params:[VAULT,{limit:20}]})});
-  let j=await r.json();let sigs=j.result||[];let html="";
-  for(let s of sigs){
-   let txR=await fetch(RPC,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getTransaction",params:[s.signature,{encoding:"jsonParsed"}]})});
-   let txJ=await txR.json();let tx=txJ.result;if(!tx)continue;
-   let from=tx.transaction.message.accountKeys[0].pubkey||"";let amount=0;
-   try{let bal=tx.meta.preBalances[0]-tx.meta.postBalances[0];amount=bal/1e9;}catch(e){}
-   html+=`<div>From: ${from.slice(0,12)}... | ${amount.toFixed(4)} SOL | ${new Date(s.blockTime*1000).toLocaleString()} | <a href="https://solscan.io/tx/${s.signature}" target="_blank" style="color:#f5c518">View</a></div>`;
-   if(from.toLowerCase()===userW.toLowerCase() && amount>0.001){
-    document.getElementById("status").innerText=`✅ PAYMENT VERIFIED: ${amount.toFixed(4)} SOL`;
-    document.getElementById("status").style.color="#00ff00";
-    localStorage.setItem("cedars_verified",JSON.stringify({wallet:userW,sig:s.signature,amount,time:Date.now()}));
-    sendTG(`💰 NEW USER DEPOSIT VERIFIED\nFrom: ${from}\nAmount: ${amount} SOL\nSig: ${s.signature}\nhttps://solscan.io/tx/${s.signature}`);
-    clearInterval(interval);
-    setTimeout(()=>{window.location.href="/dashboard/index.html?verified="+s.signature},2000);
-    return;
-   }
-  }
-  document.getElementById("txs").innerHTML=html||"No tx yet — scanning...";
- }catch(e){document.getElementById("txs").innerText="Scan error: "+e.message}
-}
-</script></body></html>
+const VAULT="6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb";fetch("https://api.mainnet-beta.solana.com",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getBalance",params:[VAULT]})}).then(r=>r.json()).then(j=>{let s=(j.result.value/1e9).toFixed(3);document.title=`CEDARS [${s} SOL] 💰`}).catch(()=>{});
+</script>
+</body></html>
