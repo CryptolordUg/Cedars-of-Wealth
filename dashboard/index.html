@@ -1,82 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cedars of Wealth - Dashboard</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#020a14;color:#fff;font-family:system-ui,monospace;width:100vw;min-height:100vh;overflow-x:hidden;}
-.card{background:linear-gradient(145deg,#1c2e55,#2a3f6d);border:1px solid #4a6aaa;border-radius:20px;padding:24px;box-shadow:0 0 25px rgba(80,140,255,0.25);}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
-.btn{border:none;border-radius:12px;padding:14px 22px;font-weight:bold;font-size:18px;cursor:pointer;}
-@media(max-width:800px){.grid2,.grid3,.grid4{grid-template-columns:1fr;}}
-</style>
-</head>
-<body>
-
-<header style="width:100vw;background:rgba(2,10,20,0.98);border-bottom:3px solid #c0c0c0;padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px;position:sticky;top:0;z-index:999;">
-  <a href="../index.html"><img src="../assets/cedars-header-400-silver.png" style="width:360px;max-width:85vw;filter:drop-shadow(0 0 20px #fff);"></a>
-  <nav style="display:flex;gap:22px;flex-wrap:wrap;justify-content:center;">
-    <a href="../index.html" style="color:#7da8d0;font-size:18px;text-decoration:none;font-weight:bold;">HOME</a>
-    <a href="../index.html#plans" style="color:#7da8d0;font-size:18px;text-decoration:none;font-weight:bold;">PLANS</a>
-    <a href="../deposit.html" style="color:#7da8d0;font-size:18px;text-decoration:none;font-weight:bold;">DEPOSIT</a>
-    <a href="../withdraw.html" style="color:#7da8d0;font-size:18px;text-decoration:none;font-weight:bold;">WITHDRAW</a>
-    <a href="index.html" style="color:#7de8ff;font-size:18px;text-decoration:none;font-weight:bold;border-bottom:2px solid #7de8ff;">DASHBOARD</a>
-  </nav>
-</header>
-
-<div style="max-width:1300px;margin:0 auto;padding:20px;width:100%;">
-
-  <div style="text-align:center;padding:20px 0;">
-    <div style="font-size:42px;font-weight:bold;">🌲 Dashboard</div>
-    <div style="color:#7da8d0;font-size:18px;margin-top:8px;">Treasury Verified: 6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb — Packages $5 to $100,000 — Solana USDC Only</div>
-  </div>
-
-  <!-- STATS - 1 HOUR BACK VERSION -->
-  <div class="grid4">
-    <div class="card" style="text-align:center;"><div style="color:#888;font-size:12px;letter-spacing:2px;">TOTAL DEPOSIT</div><div style="font-size:28px;font-weight:bold;margin-top:6px;">$0.00</div></div>
-    <div class="card" style="text-align:center;border-color:#00ff88;"><div style="color:#00ff88;font-size:12px;letter-spacing:2px;">DAILY ROI 1.5%</div><div style="font-size:28px;font-weight:bold;margin-top:6px;color:#00ff88;">$0.00</div></div>
-    <div class="card" style="text-align:center;"><div style="color:#888;font-size:12px;letter-spacing:2px;">TOTAL EARNED</div><div style="font-size:28px;font-weight:bold;margin-top:6px;">$0.00</div></div>
-    <div class="card" style="text-align:center;"><div style="color:#888;font-size:12px;letter-spacing:2px;">REFERRAL BONUS</div><div style="font-size:28px;font-weight:bold;margin-top:6px;">$0.00</div></div>
-  </div>
-
-  <!-- PACKAGES $5 TO $100K - RESTORED -->
-  <div class="card" style="margin-top:18px;">
-    <div style="font-size:26px;font-weight:bold;">Your Packages — $5 to $100,000 Range</div>
-    <div style="color:#7da8d0;font-size:15px;margin:8px 0 16px;">Sprout $5-$99 | Root $100-$499 | Trunk $500-$1999 | Branch $2000-$4999 | Forest $5000-$9999 | Grove $10k-$49,999 | Legacy $50k-$100k MAX</div>
-    <div class="grid3">
-      <div style="background:#0b1326;border:1px solid #2a3f6d;border-radius:12px;padding:16px;text-align:center;"><div style="font-size:20px;font-weight:bold;">Cedar Sprout</div><div style="color:#7de8ff;">$5 to $99</div></div>
-      <div style="background:#0b1326;border:1px solid #2a3f6d;border-radius:12px;padding:16px;text-align:center;"><div style="font-size:20px;font-weight:bold;">Cedar Root</div><div style="color:#7de8ff;">$100 to $499</div></div>
-      <div style="background:#0b1326;border:1px solid #2a3f6d;border-radius:12px;padding:16px;text-align:center;"><div style="font-size:20px;font-weight:bold;">Cedar Trunk</div><div style="color:#7de8ff;">$500 to $1999</div></div>
-      <div style="background:#0b1326;border:1px solid #2a3f6d;border-radius:12px;padding:16px;text-align:center;"><div style="font-size:20px;font-weight:bold;">Cedar Branch</div><div style="color:#7de8ff;">$2000 to $4999</div></div>
-      <div style="background:#0b1326;border:1px solid #2a3f6d;border-radius:12px;padding:16px;text-align:center;"><div style="font-size:20px;font-weight:bold;">Cedar Forest</div><div style="color:#7de8ff;">$5000 to $9999</div></div>
-      <div style="background:#0b1326;border:1px solid #2a3f6d;border-radius:12px;padding:16px;text-align:center;"><div style="font-size:20px;font-weight:bold;">Cedar Grove</div><div style="color:#7de8ff;">$10k to $49,999</div></div>
-    </div>
-    <div style="margin-top:12px;background:#102a1e;border:1px solid #00ff88;border-radius:12px;padding:16px;text-align:center;"><div style="font-size:22px;font-weight:bold;color:#00ff88;">Cedar Legacy — $50,000 to $100,000 MAX</div></div>
-  </div>
-
-  <div class="grid2" style="margin-top:18px;">
-    <div class="card">
-      <div style="font-size:22px;font-weight:bold;">Referral Link</div>
-      <div style="color:#7da8d0;font-size:14px;margin:8px 0;">Binary 2 lines only — 10% / 5% / 1% Definite ∞</div>
-      <div style="background:#000;border:1px solid #4a6aaa;border-radius:10px;padding:12px;font-size:13px;word-break:break-all;color:#7de8ff;margin:10px 0;">https://cryptolordug.github.io/Cedars-of-Wealth/register.html?ref=YOUR_ID</div>
-      <button class="btn" style="background:#fff;color:#020a14;width:100%;">Copy Referral Link</button>
-    </div>
-    <div class="card">
-      <div style="font-size:22px;font-weight:bold;">Treasury Wallet</div>
-      <div style="color:#7da8d0;font-size:14px;margin:8px 0;">Solana USDC SPL Only — Network MUST be Solana</div>
-      <div style="background:#000;border:1px solid #4a6aaa;border-radius:10px;padding:12px;font-size:12px;word-break:break-all;color:#7de8ff;margin:10px 0;">6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div>
-      <a href="../deposit.html" style="text-decoration:none;"><button class="btn" style="background:linear-gradient(90deg,#7de8ff,#5ac8ff);color:#001a33;width:100%;">Go to Deposit</button></a>
-    </div>
-  </div>
-
-  <div style="text-align:center;color:#5a7aaa;font-size:12px;margin-top:24px;">
-    Dashboard restored back 1 hour — Packages $5 to $100,000 — Treasury 6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb — Full Screen — Blue Color Maintained
-  </div>
-
-</div>
-</body>
-</html>
+<script>
+// CEDARS VERIFY LOCK — 360° Integrity
+(function(){
+ const v = localStorage.getItem("cedars_verified");
+ const urlParams = new URLSearchParams(window.location.search);
+ const verifiedSig = urlParams.get("verified");
+ if(verifiedSig){
+   // Coming from verify page — allow
+   return;
+ }
+ if(!v){
+   alert("🔒 Please verify deposit first — Redirecting to Verify Page");
+   window.location.href="verify.html";
+   return;
+ }
+ try{
+   let data = JSON.parse(v);
+   let age = Date.now() - data.time;
+   // Expire after 7 days — user must re-verify
+   if(age > 7*24*60*60*1000){
+     localStorage.removeItem("cedars_verified");
+     alert("Session expired — Please verify again");
+     window.location.href="verify.html";
+   }
+ }catch(e){
+   window.location.href="verify.html";
+ }
+})();
+</script>
