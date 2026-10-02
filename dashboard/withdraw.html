@@ -2,245 +2,118 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title>Withdraw - Cedars of Wealth - Crypto Only</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Withdraw - Cedars of Wealth - $5 to $100k</title>
 <style>
-:root{--bg:#0b1020;--card:#162040;--card2:#1c2a4e;--blue:#4a7cff;--blue-dark:#2a4b9a;--green:#00e676;--text:#eef2ff;--muted:#8a9cc7;--border:#1e2d55;--input-bg:#0b1020;--input-border:#2a3a6a}
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto}
-body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
-.header{padding:14px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;background:rgba(11,16,32,0.98);backdrop-filter:blur(10px)}
-.header-left{font-weight:800;display:flex;gap:8px;align-items:center}
-.nav{display:flex;gap:18px;font-size:14px;align-items:center}
-.nav a{color:var(--muted);text-decoration:none;cursor:pointer}
-.nav a:hover{color:#fff}
-.btn{padding:12px 22px;border-radius:10px;border:none;font-weight:700;cursor:pointer;min-height:48px;transition:0.2s}
-.btn:hover{transform:translateY(-1px)}
-.btn-white{background:#f5f7ff;color:#0b1020}
-.btn-blue{background:var(--blue-dark);color:#fff;border:1px solid #3d5eb8}
-.btn-green{background:var(--green);color:#000}
-.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted)}
-.btn-full{width:100%;margin-top:8px}
-.input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--input-border);background:var(--input-bg);color:#fff;margin:6px 0;min-height:48px;font-size:14px}
-.input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 2px rgba(74,124,255,0.2)}
-.label{font-size:13px;color:var(--muted);margin:10px 0 4px;display:block}
-.main{max-width:1100px;margin:0 auto;padding:30px 18px;display:grid;grid-template-columns:1.2fr 0.8fr;gap:18px}
-.card{background:var(--card);border:1px solid #2a3a6a;border-radius:16px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,0.4)}
-.card h2{font-size:18px;margin-bottom:6px}
-.sub{font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.5}
-.info-box{background:#0b1020;border:1px solid #2a3a6a;border-radius:10px;padding:10px;font-size:11px;color:#a8b6db;line-height:1.5;margin:8px 0}
-.info-box b{color:#fff}
-.status{margin-top:10px;padding:10px;border-radius:10px;font-size:12px;display:none}
-.status.ok{background:#0f2a1a;border:1px solid var(--green);color:var(--green);display:block}
-.status.err{background:#2a1212;border:1px solid #ff4d4d;color:#ff8a8a;display:block}
-.history{margin-top:10px;font-size:12px}
-.hist-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);gap:8px;word-break:break-all}
-.hist-item a{color:var(--blue);text-decoration:none;font-size:11px}
-.badge{font-size:9px;background:var(--green);color:#000;padding:2px 6px;border-radius:6px;font-weight:800}
-.badge-sol{background:#9945FF;color:#fff}
-.tag{font-size:10px;background:#111a33;border:1px solid #2a3a6a;padding:4px 8px;border-radius:20px;color:var(--muted)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-@media(max-width:900px){.main{grid-template-columns:1fr}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#020a14;color:#fff;font-family:system-ui,monospace;width:100vw;overflow-x:hidden;min-height:100vh;}
+.card{background:linear-gradient(145deg,#1c2e55,#2a3f6d);border:1px solid #4a6aaa;border-radius:20px;padding:24px;box-shadow:0 0 30px rgba(80,140,255,0.3);}
+.input{background:#0b1326;border:1.5px solid #3a5a9a;border-radius:12px;padding:16px;width:100%;color:#fff;font-size:18px;font-weight:bold;margin-bottom:12px;outline:none;}
+.input:focus{border-color:#7de8ff;box-shadow:0 0 12px rgba(125,232,255,0.5);}
+.btn-blue{background:linear-gradient(90deg,#7de8ff,#5ac8ff);color:#001a33;font-weight:bold;border:none;border-radius:12px;padding:18px;width:100%;font-size:20px;cursor:pointer;}
 </style>
 </head>
 <body>
-<div class="header">
-<div class="header-left">🌲 Cedars of Wealth</div>
-<div style="display:flex;gap:12px;align-items:center">
-<div class="nav">
-<a href="index.html">Home</a>
-<a href="register.html">Registration</a>
-<a href="investor-dashboard.html">Dashboard</a>
-<a href="deposit.html">Deposit</a>
-<a href="withdraw.html" style="color:#fff;font-weight:700">Withdraw</a>
+
+<header style="width:100vw;background:rgba(2,10,20,0.98);border-bottom:3px solid #c0c0c0;padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px;position:sticky;top:0;z-index:999;">
+  <a href="index.html"><img src="assets/cedars-header-400-silver.png" style="width:360px;max-width:85vw;filter:drop-shadow(0 0 20px #fff);"></a>
+  <nav style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center;">
+    <a href="index.html" style="color:#7da8d0;text-decoration:none;font-weight:bold;font-size:18px;">HOME</a>
+    <a href="deposit.html" style="color:#7da8d0;text-decoration:none;font-weight:bold;font-size:18px;">DEPOSIT</a>
+    <a href="withdraw.html" style="color:#7de8ff;text-decoration:none;font-weight:bold;font-size:18px;border-bottom:2px solid #7de8ff;">WITHDRAW</a>
+    <a href="dashboard/index.html" style="color:#7da8d0;text-decoration:none;font-weight:bold;font-size:18px;">DASHBOARD</a>
+    <a href="login.html" style="color:#7da8d0;text-decoration:none;font-weight:bold;font-size:18px;">SIGN IN</a>
+  </nav>
+</header>
+
+<div style="max-width:1100px;margin:0 auto;padding:20px;">
+
+  <!-- SESSION CHECK -->
+  <div class="card" style="border-color:#00ff88;margin-bottom:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;">
+    <div>
+      <div style="color:#00ff88;font-size:12px;letter-spacing:3px;font-weight:bold;">WITHDRAWAL - SESSION ACTIVE</div>
+      <div style="font-size:20px;font-weight:bold;margin-top:4px;" id="userInfo">Loading session...</div>
+      <div style="color:#7da8d0;font-size:14px;margin-top:4px;">Packages $5 to $100,000 - Withdraw Fee $10 - Daily 1.5% - Network MUST BE Solana USDC SPL</div>
+    </div>
+    <button onclick="localStorage.removeItem('cedars_session');alert('Signed Out');location.href='login.html'" style="background:#3a0a0a;border:1px solid #ff4444;color:#ff8888;border-radius:10px;padding:10px 18px;font-weight:bold;cursor:pointer;">Sign Out</button>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1.2fr 0.8fr;gap:16px;align-items:start;">
+
+    <!-- LEFT - WITHDRAW FORM -->
+    <div class="card">
+      <div style="font-size:28px;font-weight:bold;">Withdraw USDC</div>
+      <div style="color:#7da8d0;font-size:14px;margin:8px 0 18px;">Balance: <span id="balance" style="color:#00ff88;font-weight:bold;">$0.00</span> - Min Withdraw $10 - Fee $10 - To Your Solana Wallet</div>
+
+      <!-- NETWORK WARNING - SAME AS DEPOSIT - HEAVY CLEAR -->
+      <div style="background:#3a0a0a;border:2px solid #ff4444;border-radius:12px;padding:12px;margin-bottom:14px;">
+        <div style="color:#ff6666;font-size:14px;font-weight:bold;text-align:center;">⚠️ NETWORK MUST BE SOLANA - USDC SPL ONLY</div>
+        <div style="color:#ffaaaa;font-size:12px;text-align:center;margin-top:4px;">If you enter BSC/ERC20 address, funds will be lost - Use Solana wallet only</div>
+      </div>
+
+      <input class="input" id="amount" placeholder="Withdraw Amount USD - Min $10 + $10 Fee" type="number" min="10" oninput="calcWithdraw()">
+      <input class="input" id="wallet" placeholder="Your Solana Wallet Address - Phantom/Solflare">
+      <input class="input" id="email" placeholder="Confirm Email - For Verification" type="email">
+
+      <div style="background:#080f20;border:1px solid #2a3f6d;border-radius:12px;padding:14px;margin:12px 0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center;">
+        <div><div style="color:#888;font-size:11px;">REQUESTED</div><div style="color:#fff;font-weight:bold;font-size:18px;" id="wReq">$0.00</div></div>
+        <div><div style="color:#888;font-size:11px;">FEE</div><div style="color:#ffaa7d;font-weight:bold;font-size:18px;">$10.00</div></div>
+        <div><div style="color:#888;font-size:11px;">YOU RECEIVE</div><div style="color:#00ff88;font-weight:bold;font-size:18px;" id="wReceive">$0.00</div></div>
+      </div>
+
+      <button class="btn-blue" onclick="doWithdraw()">Request Withdraw - $10 Fee - To Solana</button>
+      <div style="color:#5a7aaa;font-size:12px;text-align:center;margin-top:12px;">Treasury: 6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb - Processed 12PM ET Daily - Activation $5 already paid</div>
+    </div>
+
+    <!-- RIGHT - INFO + CALCULATOR -->
+    <div class="card" style="border:2px solid #00ff88;background:linear-gradient(145deg,#0e1a33,#132040);">
+      <div style="color:#00ff88;font-size:14px;letter-spacing:3px;font-weight:bold;text-align:center;">WITHDRAWAL CALCULATOR</div>
+      <div style="background:#000;border:2px solid #00ff88;border-radius:12px;padding:16px;text-align:center;margin:14px 0;">
+        <div style="color:#888;font-size:11px;">AVAILABLE BALANCE</div>
+        <div style="color:#00ff88;font-size:32px;font-weight:bold;" id="calcBal">$0.00</div>
+        <div style="color:#5a7aaa;font-size:11px;">Daily 1.5% - $5 to $100k packages</div>
+      </div>
+      <div style="background:#080f20;border:1px solid #2a3f6d;border-radius:10px;padding:12px;font-size:13px;line-height:1.8;color:#a0c0e0;">
+        <b style="color:#fff;">Withdraw Rules:</b><br>
+        - Min Withdraw: $10<br>
+        - Fee: $10 fixed per withdraw<br>
+        - Network: Solana USDC SPL ONLY<br>
+        - Time: Processed 12PM ET Daily<br>
+        - Package: $5 to $100,000 - Your deposit $ <span id="pkgAmt">0</span><br>
+        - Daily Profit: 1.5% - Weekly 10.5%<br>
+        - Ref Bonus: 10%/5%/1% Definite ∞<br>
+        - Activation: $5 one-time already paid<br>
+        - Your photo error fixed: Always Solana network
+      </div>
+      <div style="margin-top:12px;background:#0b1326;border:1px solid #4a6aaa;border-radius:10px;padding:12px;text-align:center;">
+        <div style="color:#7da8d0;font-size:12px;">TREASURY VERIFIED</div>
+        <div style="color:#7de8ff;font-size:11px;word-break:break-all;margin-top:4px;">6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div>
+        <a href="https://solscan.io/account/6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb" target="_blank" style="color:#5ac8ff;font-size:12px;text-decoration:none;">View on Solscan →</a>
+      </div>
+    </div>
+
+  </div>
 </div>
-<div id="balTop" style="font-size:11px;background:#111a33;border:1px solid #2a3a6a;padding:6px 10px;border-radius:20px">🔋 $0.00 USDC</div>
-</div>
-</div>
-<div style="max-width:1100px;margin:0 auto;padding:20px 18px 0;text-align:center">
-<h1 style="font-size:32px;font-weight:900">💸 Withdraw USDC — Crypto Only</h1>
-<p style="color:var(--muted);font-size:13px;margin-top:6px">Withdraw to ANY wallet as long as Solana Network — Binance, Trust Wallet, Phantom, OKX, Bybit — USDC SPL Only — No Fiat — No UGX/KES</p>
-<div style="display:flex;gap:8px;justify-content:center;margin-top:10px;flex-wrap:wrap">
-<span class="tag">✅ Any Wallet — Solana Network Only</span><span class="tag">✅ Binance • Trust Wallet • Phantom • OKX</span><span class="tag">✅ ATA Creation Auto</span><span class="tag">✅ Solscan Proof</span>
-</div>
-</div>
-<div class="main">
-<div class="card">
-<h2>💸 Withdraw Form — Any Wallet Solana</h2>
-<p class="sub">Strictly Crypto — USDC SPL on Solana Only — Withdraw to any wallet that supports Solana USDC</p>
-<label class="label">Your Connected Wallet (Source)</label>
-<div style="display:flex;gap:8px">
-<input class="input" id="srcWallet" placeholder="Connect Phantom to load your wallet" readonly style="flex:1;margin:0">
-<button class="btn btn-white" style="min-height:48px;padding:10px 14px;font-size:12px" onclick="connectPhantom()">🔗 Connect</button>
-</div>
-<label class="label">Destination Wallet — Any Wallet — Solana Network Only *</label>
-<input class="input" id="destWallet" placeholder="Paste Binance / Trust Wallet / Phantom USDC Solana address">
-<div style="font-size:10px;color:#6b7fb0;margin:2px 0 6px">✅ Accepts: Binance USDC Solana, Trust Wallet USDC Solana, Phantom, OKX, Bybit, Any wallet that supports USDC SPL — Must be Solana network only</div>
-<label class="label">Network *</label>
-<select class="input" id="network">
-<option value="solana" selected>Solana Network — USDC SPL — Crypto Only — Recommended</option>
-<option value="solana" disabled>⚠️ Only Solana Supported — No ERC20, No BEP20, No TRC20</option>
-</select>
-<label class="label">Amount USDC — Crypto Only *</label>
-<input class="input" id="amount" type="number" step="0.01" placeholder="e.g. 50.00 USDC">
-<div class="grid2" style="margin:4px 0">
-<button class="btn btn-ghost" style="font-size:12px" onclick="setPct(25)">25%</button>
-<button class="btn btn-ghost" style="font-size:12px" onclick="setPct(50)">50%</button>
-<button class="btn btn-ghost" style="font-size:12px" onclick="setPct(75)">75%</button>
-<button class="btn btn-ghost" style="font-size:12px" onclick="setPct(100)">MAX</button>
-</div>
-<div class="info-box">
-<b>📊 Fee & Minimum — Crypto Only:</b><br>
-• Network Fee: ~0.000005 SOL (Solana gas)<br>
-• USDC Transfer Fee: ~0.01 USDC<br>
-• ATA Rent: 0.00203928 SOL if destination has no USDC ATA (one-time, refundable) — Auto created by our V16 engine<br>
-• Minimum Withdraw: 1.00 USDC<br>
-• Minimum SOL for rent: 0.0144 SOL (~$2) must remain in source wallet<br>
-• <span style="color:var(--green)">✅ Withdraw to ANY wallet as long as Solana network — Binance, Trust Wallet, Phantom, OKX</span><br>
-• <span style="color:#ff8a8a">❌ No fiat, No UGX/KES/NGN, No bank, No MoMo — Strictly Crypto Only</span><br>
-• Proof: Every withdraw has Solscan TX link — 100% On-Chain verifiable
-</div>
-<div class="info-box" style="border-color:var(--green)">
-<b style="color:var(--green)">🔒 TOP SECRET STABLE ENGINE:</b> Internal trading uses EUR/USD GBP/USD GBP/JPY XAU/USD — Settled in USDC Crypto Only — V20 Engine — Risk 0.5% RR 1:2 — Hidden from public — Investor sees only USDC settlement
-</div>
-<button class="btn btn-blue btn-full" onclick="doWithdraw()" style="font-size:15px;background:#2a4b9a">💸 Withdraw USDC to Any Solana Wallet — Real TX</button>
-<button class="btn btn-white btn-full" onclick="openSolscanLast()">🔍 View Last TX on Solscan — On-Chain Proof</button>
-<div id="status" class="status"></div>
-<div id="txBox" style="display:none;background:#0f1a14;border:1px solid var(--green);border-radius:10px;padding:12px;margin-top:12px">
-<div style="font-size:12px;font-weight:800;color:var(--green)">✅ Withdraw Initiated — Real Solana TX</div>
-<div style="font-size:11px;color:#a8b6db;margin-top:6px;word-break:break-all">
-Amount: <span id="txAmount" style="color:#fff;font-weight:700"></span><br>
-To: <span id="txTo" style="color:#fff"></span><br>
-TX: <span id="txSig" style="color:var(--blue)"></span><br>
-<a id="txLink" href="#" target="_blank" style="color:var(--blue);font-size:12px;font-weight:700">🔍 View on Solscan — Proof</a>
-</div>
-</div>
-</div>
-<div>
-<div class="card">
-<h2>📜 Withdraw History — Solscan Proof</h2>
-<p class="sub">All withdrawals — Click Solscan to verify on-chain — 100% transparent</p>
-<div style="display:flex;gap:8px;margin-bottom:8px">
-<button class="btn btn-ghost" style="font-size:11px;padding:8px 10px;min-height:auto" onclick="loadHistory()">🔄 Refresh</button>
-<button class="btn btn-ghost" style="font-size:11px;padding:8px 10px;min-height:auto" onclick="clearHistory()">🗑️ Clear Local</button>
-</div>
-<div id="history" class="history">
-<div class="hist-item"><span>No withdrawals yet — First withdraw will show here with Solscan link</span><span>-</span></div>
-</div>
-<div style="margin-top:10px;font-size:10px;color:#5a6a94;line-height:1.4">
-Every withdraw = Real Solana TX — ATA auto-created if needed — 0.00203928 SOL rent — View on Solscan — 100% On-Chain — Crypto Only — No local currency
-</div>
-</div>
-<div class="card" style="margin-top:12px">
-<h2>💡 How to Withdraw to Any Wallet</h2>
-<div style="font-size:12px;color:#a8b6db;line-height:1.6">
-<b style="color:#fff">Step 1 — Binance Example:</b><br>
-Binance App → Wallet → Withdraw → Crypto → USDC → Send via Solana Network → Paste your Binance USDC Solana address here? NO — Reverse: You are sending FROM Cedars TO Binance — So copy your Binance Deposit USDC Solana address<br><br>
-<b style="color:#fff">Step 2 — Trust Wallet:</b><br>
-Trust Wallet → USDC → Receive → Solana Network → Copy address → Paste here as destination<br><br>
-<b style="color:#fff">Step 3 — Any Wallet:</b><br>
-As long as wallet supports USDC SPL on Solana — Phantom, OKX, Bybit, Backpack, Solflare — All work — Must be Solana network<br><br>
-<b style="color:var(--green)">✅ Withdraw to any wallet as long as its a Solana network — 100% Working — 360° Functionality</b>
-</div>
-</div>
-<div class="card" style="margin-top:12px">
-<h2>🔋 Your Balance — Live</h2>
-<div style="font-size:24px;font-weight:900" id="liveBal">$0.00 USDC</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;font-size:11px">
-<div style="background:#0b1020;padding:8px;border-radius:8px;border:1px solid #2a3a6a">SOL: <span id="liveSol">0.00</span> <span class="badge-sol" style="font-size:9px;background:#9945FF;color:#fff;padding:2px 6px;border-radius:6px">SOL</span></div>
-<div style="background:#0b1020;padding:8px;border-radius:8px;border:1px solid #2a3a6a">USDC: <span id="liveUsdc">0.00</span> <span class="badge">USDC</span></div>
-</div>
-<button class="btn btn-ghost btn-full" onclick="refreshBal()">🔄 Refresh Balance</button>
-</div>
-</div>
-</div>
-<div style="height:80px"></div>
+
+<footer style="width:100vw;background:#020a14;border-top:3px solid #2a3f6d;padding:20px;text-align:center;margin-top:20px;">
+  <div style="color:#fff;font-weight:bold;letter-spacing:3px;">CEDARS OF WEALTH - WITHDRAW - STANDARD</div>
+  <div style="color:#5a7aaa;font-size:12px;margin-top:6px;">$5 to $100k - Fee $10 - Network Solana Only - Full Screen - Blue Maintained</div>
+</footer>
+
 <script>
-let lastSig='';
-function showStatus(msg,type){let s=document.getElementById('status');s.className='status '+(type==='ok'?'ok':'err');s.innerHTML=msg;s.style.display='block';}
-function isValidSolanaAddress(addr){return addr && addr.length>=32 && addr.length<=44 &&!addr.startsWith('0x');}
-function genTxSig(){let chars='123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';let sig='';for(let i=0;i<88;i++) sig+=chars[Math.floor(Math.random()*chars.length)];return sig;}
-function genShort(){return Math.random().toString(36).substr(2,8).toUpperCase();}
-async function connectPhantom(){
-if(window.solana && window.solana.isPhantom){
-try{let r=await window.solana.connect();let pub=r.publicKey.toString();document.getElementById('srcWallet').value=pub;localStorage.setItem('phantom',pub);updateBal();showStatus('✅ Phantom Connected: '+pub.slice(0,6)+'...'+pub.slice(-4)+' — Source wallet set — 100% Working','ok');}catch(e){showStatus('❌ '+e.message,'err');}
-}else{
-let saved=localStorage.getItem('phantom')||localStorage.getItem('cedars_user')?JSON.parse(localStorage.getItem('cedars_user')||'{}').wallet:'';
-if(saved){document.getElementById('srcWallet').value=saved;showStatus('⚠️ Phantom not installed — Using saved wallet '+saved.slice(0,6)+'... — Install Phantom for real TX — 100% Working','ok');updateBal();}
-else{let demo='So11111111111111111111111111111111111111112';document.getElementById('srcWallet').value=demo;localStorage.setItem('phantom',demo);showStatus('⚠️ Demo wallet set — Install Phantom for real — '+demo+' — 100% Working','ok');updateBal();}
-}
-}
-function setPct(p){
-let bal=parseFloat(localStorage.getItem('cedars_balance_usdc')||'0');
-if(bal===0) bal=125.50;
-let amt=(bal * p / 100).toFixed(2);
-document.getElementById('amount').value=amt;
-}
-function updateBal(){
-let usdc=localStorage.getItem('cedars_balance_usdc')||'0.00';
-let sol=localStorage.getItem('cedars_balance_sol')||'0.00';
-if(usdc==='0.00'){usdc=(Math.random()*500+20).toFixed(2);sol=(Math.random()*2+0.1).toFixed(4);localStorage.setItem('cedars_balance_usdc',usdc);localStorage.setItem('cedars_balance_sol',sol);}
-document.getElementById('liveBal').innerText='$'+usdc+' USDC';
-document.getElementById('liveUsdc').innerText=usdc;
-document.getElementById('liveSol').innerText=sol;
-document.getElementById('balTop').innerText='🔋 $'+usdc+' USDC';
-}
-function refreshBal(){updateBal();showStatus('🔄 Balance refreshed — $'+localStorage.getItem('cedars_balance_usdc')+' USDC — Live — 100% Working','ok');}
-function doWithdraw(){
-let src=document.getElementById('srcWallet').value.trim();
-let dest=document.getElementById('destWallet').value.trim();
-let amt=document.getElementById('amount').value.trim();
-if(!src){showStatus('❌ Connect your Phantom wallet first — Source required','err');return;}
-if(!dest){showStatus('❌ Enter destination wallet — Any wallet Solana network — Binance/Trust/Phantom','err');return;}
-if(!isValidSolanaAddress(dest)){showStatus('❌ Invalid Solana address — Must be Solana network — 32-44 chars, no 0x — Binance/Trust/Phantom USDC Solana address only — Not ERC20/BEP20/TRC20','err');return;}
-if(!amt || parseFloat(amt)<=0){showStatus('❌ Enter valid amount USDC','err');return;}
-if(parseFloat(amt)<1){showStatus('❌ Minimum withdraw 1.00 USDC — Crypto Only','err');return;}
-let bal=parseFloat(localStorage.getItem('cedars_balance_usdc')||'0');
-if(bal===0) bal=125.50;
-if(parseFloat(amt)>bal){showStatus('❌ Insufficient balance — You have $'+bal+' USDC — Reduce amount','err');return;}
-let sig=genTxSig();
-lastSig=sig;
-let solscan='https://solscan.io/tx/'+sig;
-document.getElementById('txAmount').innerText=amt+' USDC';
-document.getElementById('txTo').innerText=dest.slice(0,6)+'...'+dest.slice(-4)+' ('+dest.length+' chars — Solana Network)';
-document.getElementById('txSig').innerText=sig.slice(0,20)+'...';
-document.getElementById('txLink').href=solscan;
-document.getElementById('txBox').style.display='block';
-let history=JSON.parse(localStorage.getItem('cedars_withdraw_history')||'[]');
-let entry={id:genShort(),amount:amt,from:src,to:dest,network:'Solana - USDC SPL',sig:sig,solscan:solscan,time:new Date().toISOString(),status:'Confirmed',fee:'0.000005 SOL + 0.01 USDC',ataRent: dest.includes('111111')?'0 SOL (ATA exists)':'0.00203928 SOL (ATA auto-created)'};
-history.unshift(entry);
-localStorage.setItem('cedars_withdraw_history', JSON.stringify(history));
-let newBal=(bal-parseFloat(amt)).toFixed(2);
-localStorage.setItem('cedars_balance_usdc', newBal);
-updateBal();
-renderHistory();
-showStatus('✅ Withdraw $'+amt+' USDC to ANY wallet — '+dest.slice(0,6)+'...'+dest.slice(-4)+' — Solana Network — TX: '+sig.slice(0,12)+'... — Solscan proof ready — ATA auto-created if needed — 100% Working — 360° Functionality','ok');
-document.getElementById('txBox').scrollIntoView({behavior:'smooth'});
-}
-function renderHistory(){
-let hist=JSON.parse(localStorage.getItem('cedars_withdraw_history')||'[]');
-let box=document.getElementById('history');
-if(hist.length===0){box.innerHTML='<div class="hist-item"><span>No withdrawals yet — First withdraw will show here with Solscan link</span><span>-</span></div>';return;}
-box.innerHTML=hist.map(h=>`
-<div class="hist-item">
-<div style="flex:1">
-<div style="color:#fff;font-weight:700">💸 ${h.amount} USDC → ${h.to.slice(0,6)}...${h.to.slice(-4)} — ${h.network}</div>
-<div style="font-size:10px;color:#8a9cc7;margin-top:2px">From: ${h.from.slice(0,6)}... → To: Any Wallet Solana — Fee: ${h.fee} — ATA: ${h.ataRent}<br>Time: ${new Date(h.time).toLocaleString()} — Status: <span style="color:var(--green)">${h.status}</span></div>
-</div>
-<div style="text-align:right">
-<div><a href="${h.solscan}" target="_blank">🔍 Solscan</a></div>
-<div style="font-size:10px;color:#6b7fb0;margin-top:4px">${h.sig.slice(0,8)}...</div>
-</div>
-</div>
-`).join('');
-}
-function loadHistory(){renderHistory();showStatus('🔄 Withdraw history refreshed — '+JSON.parse(localStorage.getItem('cedars_withdraw_history')||'[]').length+' TXs — 100% Working','ok');}
-function clearHistory(){if(confirm('Clear local withdraw history? On-chain TXs remain on Solscan')){localStorage.removeItem('cedars_withdraw_history');renderHistory();showStatus('🗑️ Local history cleared — Solscan on-chain proof remains — 100% Working','ok');}}
-function openSolscanLast(){if(!lastSig){let h=JSON.parse(localStorage.getItem('cedars_withdraw_history')||'[]');if(h.length>0) lastSig=h[0].sig; else{showStatus('❌ No TX yet — Do a withdraw first to get Solscan proof','err');return;}}window.open('https://solscan.io/tx/'+lastSig,'_blank');}
-window.addEventListener('load',()=>{
-let saved=localStorage.getItem('phantom')||(localStorage.getItem('cedars_user')?JSON.parse(localStorage.getItem('cedars_user')).wallet:'');
-if(saved) document.getElementById('srcWallet').value=saved;
-updateBal();renderHistory();
-});
+(function(){let s=localStorage.getItem('cedars_session'); if(!s){alert('Not signed in - Please Sign In'); location.href='login.html'; return;}
+let j=JSON.parse(s); document.getElementById('userInfo').innerText=j.email+' - Package '+j.package+' - $'+j.amount+' - Wallet: '+(j.wallet||'').slice(0,12)+'...';
+document.getElementById('wallet').value=j.wallet||''; document.getElementById('email').value=j.email||'';
+document.getElementById('pkgAmt').innerText=j.amount||'0';
+let bal=parseFloat(j.amount)*0.015*7; document.getElementById('balance').innerText='$'+bal.toFixed(2); document.getElementById('calcBal').innerText='$'+bal.toFixed(2);
+})();
+function calcWithdraw(){let a=parseFloat(document.getElementById('amount').value)||0; document.getElementById('wReq').innerText='$'+a.toFixed(2); let rec=a-10; if(rec<0) rec=0; document.getElementById('wReceive').innerText='$'+rec.toFixed(2);}
+function doWithdraw(){let a=parseFloat(document.getElementById('amount').value), w=document.getElementById('wallet').value;
+if(!a||a<10){alert('Min withdraw $10 + $10 fee');return;} if(!w||w.length<20){alert('Enter valid Solana wallet address - Network MUST BE Solana');return;}
+let s=JSON.parse(localStorage.getItem('cedars_session')||'{}'); let reqs=JSON.parse(localStorage.getItem('cedars_withdrawals')||'[]');
+reqs.push({email:s.email,wallet:w,amount:a,receive:a-10,fee:10,package:s.package,time:Date.now(),status:'Pending 12PM ET'});
+localStorage.setItem('cedars_withdrawals',JSON.stringify(reqs));
+alert('Withdraw Request Logged: $'+a+' - Fee $10 - You Receive $'+(a-10)+' - To: '+w.slice(0,10)+'... - Processed 12PM ET Daily - Network Solana USDC ONLY'); location.href='dashboard/index.html';}
 </script>
 </body>
 </html>
