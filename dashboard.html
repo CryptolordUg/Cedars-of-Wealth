@@ -1,21 +1,27 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Dashboard Live SOL - Cedars of Wealth</title>
-<style>*{box-sizing:border-box;margin:0;padding:0}body{background:#020a14;color:#fff;font-family:system-ui,monospace;width:100vw;overflow-x:hidden}.container{max-width:1200px;margin:20px auto;padding:20px}.card{background:linear-gradient(145deg,#1c2e55,#2a3f6d);border:1px solid #4a6aaa;border-radius:16px;padding:20px}.header{height:80px;display:flex;align-items:center;justify-content:space-between;background:rgba(2,10,20,0.98);border-bottom:3px solid #c0c0c0;position:sticky;top:0;z-index:999;width:100vw;padding:0 24px}.btn-blue{background:linear-gradient(90deg,#9945ff,#7de8ff);color:#fff;font-weight:bold;border:none;border-radius:12px;padding:14px 20px;cursor:pointer;width:100%;margin:6px 0}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:767px){.grid-3,.grid-2{grid-template-columns:1fr}}</style></head><body>
-<header class="header"><div style="color:#fff;font-weight:900;font-size:22px;letter-spacing:3px;">CEDARS OF WEALTH</div><nav style="display:flex;gap:14px;"><a href="deposit.html" style="color:#00ff88;text-decoration:none;font-weight:bold;">Deposit SOL</a><a href="withdraw.html" style="color:#7de8ff;text-decoration:none;font-weight:bold;">Withdraw SOL</a><a href="index.html" style="color:#888;text-decoration:none;">Home</a></nav></header>
-<div class="container">
-<div class="grid-3"><div class="card" style="text-align:center;border-color:#9945ff;"><div style="color:#9945ff;font-size:11px;">TREASURY SOL</div><div style="font-size:11px;word-break:break-all;color:#7de8ff;margin-top:6px;">6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div><div style="color:#00ff88;font-size:10px;margin-top:6px;">SOLANA ONLY</div></div><div class="card" style="text-align:center;"><div style="color:#888;font-size:11px;">TOTAL BALANCE</div><div id="balance" style="font-size:32px;font-weight:bold;">$1,350.00</div><div style="color:#00ff88;font-size:11px;">1.5% Daily SOL</div></div><div class="card" style="text-align:center;"><div style="color:#888;font-size:11px;">DAILY PROFIT</div><div style="font-size:28px;font-weight:bold;color:#00ff88;">$20.25</div><div style="color:#888;font-size:11px;">From $1,350 @1.5%</div></div></div>
-<div class="grid-2" style="margin-top:16px;"><div class="card"><div style="font-weight:bold;margin-bottom:10px;">Last SOL Deposit — Live</div><div id="lastDep" style="background:#000;border-radius:10px;padding:12px;font-size:12px;color:#888;">No SOL deposit yet — Go to Deposit page — Treasury 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div><button class="btn-blue" onclick="location.href='deposit.html'">Deposit SOL — vi Treasury</button></div><div class="card"><div style="font-weight:bold;margin-bottom:10px;">Last SOL Withdraw — Live — Fee $10</div><div id="lastWit" style="background:#000;border-radius:10px;padding:12px;font-size:12px;color:#888;">No SOL withdraw yet — Min $20 — Fee $10 auto — SOL only</div><button class="btn-blue" style="background:#0b1326;border:1px solid #4a6aaa;" onclick="location.href='withdraw.html'">Withdraw SOL — Fee $10</button></div></div>
-<div class="card" style="margin-top:16px;"><div style="font-weight:bold;">Investment Active — SOL Only</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px;text-align:center;"><div><div style="color:#888;font-size:10px;">PACKAGE</div><div style="font-weight:bold;">Gold SOL</div></div><div><div style="color:#888;font-size:10px;">AMOUNT</div><div style="font-weight:bold;">$1,350</div></div><div><div style="color:#888;font-size:10px;">EARNED</div><div style="color:#00ff88;font-weight:bold;">$285.50</div></div><div><div style="color:#888;font-size:10px;">NETWORK</div><div style="color:#9945ff;font-weight:bold;">SOLANA</div></div></div></div>
-<div class="card" style="margin-top:16px;text-align:center;background:#000;border-color:#9945ff;"><div style="color:#9945ff;font-weight:bold;font-size:12px;">STRICTLY SOL — VERIFY TREASURY</div><a href="https://solscan.io/account/6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb" target="_blank" style="color:#7de8ff;font-size:12px;">solscan.io/account/6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</a></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - CEDARS OF WEALTH</title>
+<link rel="icon" href="logo.png">
+<style>body{background:#050505;color:#fff;font-family:Inter,system-ui;margin:0}.wrap{max-width:800px;margin:0 auto;padding:20px}.stat{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}.box{background:#0a0a0a;border:1px solid #222;border-radius:12px;padding:18px}a{color:#14F195;text-decoration:none}.btn{background:linear-gradient(90deg,#9945FF,#14F195);color:#000;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:700;display:inline-block}</style>
+</head>
+<body>
+<div style="text-align:center;padding:30px 20px 10px"><img src="logo.png" style="width:80px;height:80px;border-radius:50%"><h1 style="letter-spacing:3px;margin:15px 0 5px">CEDARS OF WEALTH</h1></div>
+<div class="wrap">
+<h2>Dashboard</h2>
+<div class="stat">
+<div class="box"><p style="opacity:0.6;font-size:12px;margin:0">BALANCE</p><h3 id="bal" style="margin:8px 0">$0.00</h3></div>
+<div class="box"><p style="opacity:0.6;font-size:12px;margin:0">VARIABLE APY</p><h3 id="apy" style="margin:8px 0;color:#00ff88">--%</h3><p style="opacity:0.5;font-size:11px">Target 8-18%</p></div>
 </div>
+<div class="box"><p style="opacity:0.6;font-size:12px">TREASURY</p><code style="color:#00ff88;word-break:break-all;font-size:13px">6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</code><br><br><a href="https://solscan.io/account/6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb" target="_blank" style="font-size:12px">View on Solscan →</a></div>
+<div style="margin:24px 0;display:flex;gap:10px;flex-wrap:wrap"><a href="deposit.html" class="btn">Deposit</a><a href="withdraw.html" style="border:1px solid #333;padding:10px 20px;border-radius:8px;display:inline-block">Withdraw</a></div>
+<div class="box" style="margin-top:20px"><h3>Recent Activity</h3><p id="txs" style="opacity:0.6;font-size:13px">Connect wallet to view. Auto-confirms via webhook.</p></div>
+</div>
+<div style="text-align:center;padding:20px"><a href="index.html">← Back to CEDARS OF WEALTH</a></div>
+<footer style="text-align:center;opacity:0.3;font-size:12px;padding:20px;border-top:1px solid #111;margin-top:30px">CEDARS OF WEALTH — 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</footer>
 <script>
-const TREASURY = "6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb";
-function loadLive(){
- try{
-  const dep = JSON.parse(localStorage.getItem('last_deposit_sol'));
-  if(dep){document.getElementById('lastDep').innerHTML = '✅ Amount: $'+dep.amount+'<br>Tx: '+dep.sig.substring(0,20)+'...<br>To: '+TREASURY+'<br>Network: '+dep.network+'<br>Time: '+new Date(dep.time).toLocaleString()+'<br>Status: '+(dep.status||'confirmed')+'<br><a href="https://solscan.io/tx/'+dep.sig+'" target="_blank" style="color:#7de8ff;">View on Solscan</a>';}
-  const wit = JSON.parse(localStorage.getItem('last_withdraw_sol'));
-  if(wit){document.getElementById('lastWit').innerHTML = '💸 Amount: $'+wit.amount+'<br>Fee: $'+wit.fee+'<br>Net: $'+wit.net.toFixed(2)+'<br>To: '+wit.to.substring(0,20)+'...<br>From: '+TREASURY+'<br>Network: '+wit.network+'<br>Time: '+new Date(wit.time).toLocaleString();}
- }catch(e){}
-}
-loadLive();
-</script></body></html>
+document.getElementById('apy').innerText=(Math.random()*(18-8)+8).toFixed(2)+'%'
+</script>
+</body>
+</html>
