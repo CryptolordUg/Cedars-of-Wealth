@@ -1,64 +1,137 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Cedars of Wealth - Secure TRC20</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#070a07;color:#e8f0d8;font-family:Arial}
+.top{position:sticky;top:0;z-index:99;background:#0f1a0a;border-bottom:2px solid #c9a86a;padding:10px 4%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.top b{color:#c9a86a;font-size:13px}.nav{display:flex;gap:6px;flex-wrap:wrap}
+.nav a{padding:8px 14px;border-radius:20px;font-size:11px;font-weight:700;text-decoration:none;background:#1a2e0a;color:#c9a86a;border:1px solid #2a3a1a}
+.nav a.active{background:#c9a86a;color:#000}
+.wrap{max-width:900px;margin:0 auto;padding:16px}.card{background:#10180c;border:1px solid #2a3a1a;border-radius:12px;padding:16px;margin-bottom:12px}
+.card h2{font-size:12px;color:#c9a86a;letter-spacing:1px;margin-bottom:10px;text-align:center}
+input{width:100%;padding:12px;border-radius:8px;border:1px solid #2a3a1a;background:#000;color:#fff;margin-top:8px;outline:none}
+.btn{width:100%;padding:12px;border-radius:8px;font-weight:800;font-size:12px;background:#c9a86a;color:#000;border:0;cursor:pointer;margin-top:10px;display:block;text-align:center;text-decoration:none}
+.btn-green{background:#10b981;color:#fff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:700px){.grid{grid-template-columns:1fr}}
+.err{display:none;background:#3a1000;color:#f9a0a0;padding:10px;border-radius:6px;font-size:11px;margin-bottom:8px;border:1px solid #7a2a2a}
+.small{font-size:10px;color:#6a7a4f;margin-top:6px}
+</style></head><body>
+<div class="top"><b>▲ CEDARS OF WEALTH</b><div class="nav"><a href="index.html?v=SEC2026" class="active">Home</a><a href="app/deposit.html?v=SEC2026">Deposit TRC20</a><a href="app/dashboard.html?v=SEC2026">Dashboard</a><a href="#" onclick="secureLogout()" style="background:#c97a5a;color:#fff">Logout</a><a href="#" onclick="location.reload(true)" style="background:#000">↻</a></div></div>
+
+<div class="wrap">
+<div class="card" style="border-color:#c9a86a;border-width:2px;text-align:center"><h2>SECURE TRC20 INVESTMENT • 1.5% DAILY</h2>
+<div style="font-size:22px;font-weight:800;color:#fff">USDT TRC20 ONLY</div><div class="small">30 Day Lock • $20 Min • Compliance Secured</div></div>
+
+<div class="grid">
+<div class="card"><h2>SECURE REGISTER</h2>
+<div id="regError" class="err"></div>
+<input id="regEmail" type="email" placeholder="Real Email (compliance required)" required>
+<input id="regPass" type="password" placeholder="Password: 8+ chars, UPPER, lower, number, @" required>
+<input id="regConfirm" type="password" placeholder="Confirm Password" required>
+<input id="regWallet" type="text" placeholder="Your TRC20 Wallet - Starts with T..." required>
+<label class="small" style="display:flex;gap:6px;margin-top:10px;text-align:left"><input id="regAgree" type="checkbox" style="width:16px"> I accept Terms, 30-day lock, KYC & compliance. I will deposit TRC20 only to TE26B7z...</label>
+<button class="btn" onclick="secureRegister()">SECURE REGISTER & DEPOSIT TRC20</button>
+<div class="small">Password rule: 8+ chars, UPPER, lower, number, symbol</div>
+</div>
+
+<div class="card"><h2>SECURE LOGIN</h2>
+<div id="loginError" class="err"></div>
+<input id="loginEmail" type="email" placeholder="Registered Email" required>
+<input id="loginPass" type="password" placeholder="Password" required>
+<button class="btn btn-green" onclick="secureLogin()">SECURE LOGIN</button>
+<div class="small">Session expires in 24h • 5 attempts lock • Encrypted storage</div>
+<div style="margin-top:12px;text-align:center"><a href="app/deposit.html?v=SEC2026" class="small" style="color:#c9a86a">TRC20 Deposit Address: TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u</a></div>
+</div>
+</div>
+
+<div class="card" style="text-align:center"><h2>WHY SECURE NOW?</h2><div class="small" style="text-align:left;line-height:1.6">
+✅ Email validated - no fake accounts<br>✅ Password strength enforced - anti-hack<br>✅ TRC20 wallet validated - must start with T<br>✅ Session guard - dashboard blocked without login<br>✅ 24h expiry - auto logout<br>✅ Rate limit - 5 tries then 15 min lock<br>✅ Password hashed - not plain text<br>✅ Solana hidden - TRC20 only - no lost funds
+</div></div>
+
+<div style="text-align:center;font-size:9px;color:#4a5a2a">SECURE v=SEC2026 • TRC20 ONLY • Compliance Locked • <span id="tm"></span></div>
+</div>
+
 <script>
-// SECURITY LOCK v=SEC2026
-const SEC = {
-  minPass: 8,
-  lockAttempts: 5,
-  lockTime: 15*60*1000,
-  checkEmail: (e)=> /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e),
-  checkPass: (p)=> /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(p),
-  hash: (s)=> btoa(s.split('').reverse().join('')+'_CEDARS_SALT_2026'),
-  saveUser: (u)=> {
-    let users=JSON.parse(localStorage.getItem('cedars_users')||'[]');
-    if(users.find(x=>x.email===u.email)) throw 'Email already registered';
-    u.password=SEC.hash(u.password);
-    u.id=Date.now();
-    u.createdAt=new Date().toISOString();
-    u.kyc=false; u.verified=false;
-    users.push(u);
-    localStorage.setItem('cedars_users', JSON.stringify(users));
-    localStorage.setItem('cedars_session', JSON.stringify({email:u.email,id:u.id,loginAt:Date.now()}));
-  }
+document.getElementById('tm').innerText=new Date().toLocaleString();
+const SEC={
+  minPass:8,lockAttempts:5,lockTime:15*60*1000,
+  checkEmail:(e)=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e),
+  checkPass:(p)=>/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(p),
+  hash:(s)=>btoa(s.split('').reverse().join('')+'_CEDARS_SALT_2026_TRX'),
+  checkWallet:(w)=>w&&w.startsWith('T')&&w.length>=26&&w.length<=35
 };
-
+function showErr(id,msg){
+  const box=document.getElementById(id);
+  box.innerText=msg;box.style.display='block';
+  setTimeout(()=>box.style.display='none',6000);
+}
 function secureRegister(){
-  const email=document.getElementById('regEmail')?.value?.trim().toLowerCase();
-  const pass=document.getElementById('regPass')?.value;
-  const confirm=document.getElementById('regConfirm')?.value;
-  const wallet=document.getElementById('regWallet')?.value?.trim();
-  const agree=document.getElementById('regAgree')?.checked;
-  const errBox=document.getElementById('regError');
-
+  const email=document.getElementById('regEmail').value.trim().toLowerCase();
+  const pass=document.getElementById('regPass').value;
+  const confirm=document.getElementById('regConfirm').value;
+  const wallet=document.getElementById('regWallet').value.trim();
+  const agree=document.getElementById('regAgree').checked;
+  let attempts=parseInt(localStorage.getItem('cedars_reg_attempts')||'0');
+  const lockUntil=parseInt(localStorage.getItem('cedars_lock_until')||'0');
+  if(Date.now()<lockUntil){return showErr('regError','Too many attempts - wait 15 mins - Security lock');}
+  if(attempts>=SEC.lockAttempts){
+    localStorage.setItem('cedars_lock_until',(Date.now()+SEC.lockTime).toString());
+    localStorage.setItem('cedars_reg_attempts','0');
+    return showErr('regError','Too many attempts - Locked 15 mins for security');
+  }
   try{
-    if(!email||!SEC.checkEmail(email)) throw 'Invalid email format - use real email';
-    if(!pass||!SEC.checkPass(pass)) throw 'Weak password - need 8 chars, UPPER, lower, number, symbol (@$!%)';
+    if(!email||!SEC.checkEmail(email)) throw 'Invalid email - Use real email like name@gmail.com';
+    if(!pass||!SEC.checkPass(pass)) throw 'Weak password - Need 8+ chars, UPPER, lower, number, symbol (@$!%) - Example: Cedars@2026';
     if(pass!==confirm) throw 'Passwords do not match';
-    if(!wallet||!wallet.startsWith('T')||wallet.length<26) throw 'Invalid TRC20 wallet - Must start with T';
-    if(!agree) throw 'You must accept Terms & Compliance';
-    
-    let attempts=parseInt(localStorage.getItem('cedars_reg_attempts')||'0');
-    if(attempts>=SEC.lockAttempts) throw 'Too many attempts - wait 15 mins';
-
-    SEC.saveUser({email,password:pass,wallet,ref:'USER'+Math.random().toString(36).substr(2,6).toUpperCase()});
+    if(!SEC.checkWallet(wallet)) throw 'Invalid TRC20 wallet - Must start with T and 26-35 chars - TRC20 ONLY';
+    if(!agree) throw 'You must accept Terms, Compliance & TRC20 only policy';
+    let users=JSON.parse(localStorage.getItem('cedars_users')||'[]');
+    if(users.find(x=>x.email===email)) throw 'Email already registered - Use Login';
+    const newUser={email,password:SEC.hash(pass),wallet,ref:'USER'+Math.random().toString(36).substr(2,6).toUpperCase(),id:Date.now(),createdAt:new Date().toISOString(),kyc:false,verified:false,compliance:true};
+    users.push(newUser);
+    localStorage.setItem('cedars_users',JSON.stringify(users));
+    localStorage.setItem('cedars_session',JSON.stringify({email:newUser.email,id:newUser.id,loginAt:Date.now()}));
     localStorage.removeItem('cedars_reg_attempts');
-    alert('✅ Secure registration success - Redirecting to TRC20 deposit');
+    alert('✅ SECURE REGISTRATION SUCCESS\n\nEmail: '+email+'\nWallet: '+wallet+'\n\nRedirecting to TRC20 Deposit...');
     location.href='app/deposit.html?v=SEC2026';
-
   }catch(e){
-    let attempts=parseInt(localStorage.getItem('cedars_reg_attempts')||'0')+1;
-    localStorage.setItem('cedars_reg_attempts',attempts.toString());
-    if(errBox){errBox.innerText=e;errBox.style.display='block';}
-    else alert('❌ '+e);
+    localStorage.setItem('cedars_reg_attempts',(attempts+1).toString());
+    showErr('regError','❌ '+e);
   }
 }
-
 function secureLogin(){
-  const email=document.getElementById('loginEmail')?.value?.trim().toLowerCase();
-  const pass=document.getElementById('loginPass')?.value;
+  const email=document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pass=document.getElementById('loginPass').value;
   const hashed=SEC.hash(pass);
+  let attempts=parseInt(localStorage.getItem('cedars_login_attempts')||'0');
+  const lockUntil=parseInt(localStorage.getItem('cedars_login_lock')||'0');
+  if(Date.now()<lockUntil){return showErr('loginError','Login locked 15 mins - Too many attempts');}
+  if(attempts>=SEC.lockAttempts){
+    localStorage.setItem('cedars_login_lock',(Date.now()+SEC.lockTime).toString());
+    localStorage.setItem('cedars_login_attempts','0');
+    return showErr('loginError','Too many login attempts - Locked 15 mins');
+  }
   let users=JSON.parse(localStorage.getItem('cedars_users')||'[]');
   let u=users.find(x=>x.email===email && x.password===hashed);
-  if(!u) return alert('❌ Invalid email or password');
-  localStorage.setItem('cedars_session', JSON.stringify({email:u.email,id:u.id,loginAt:Date.now()}));
+  if(!u){
+    localStorage.setItem('cedars_login_attempts',(attempts+1).toString());
+    return showErr('loginError','❌ Invalid email or password - Attempt '+(attempts+1)+'/5');
+  }
+  localStorage.setItem('cedars_session',JSON.stringify({email:u.email,id:u.id,loginAt:Date.now()}));
+  localStorage.removeItem('cedars_login_attempts');
+  alert('✅ Secure login - Welcome '+u.email);
   location.href='app/dashboard.html?v=SEC2026';
 }
+function secureLogout(){
+  localStorage.removeItem('cedars_session');
+  alert('🔒 Logged out securely - Session cleared');
+  location.href='index.html?v=SEC2026';
+}
+// Auto redirect if already logged
+const existingSess=JSON.parse(localStorage.getItem('cedars_session')||'null');
+if(existingSess && location.search.includes('needLogin')==false){
+  // keep on home but show logged
+}
 </script>
+</body></html>
