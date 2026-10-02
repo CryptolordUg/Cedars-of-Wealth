@@ -1,65 +1,87 @@
 <!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dashboard - Active</title>
+<title>Dashboard - Balance Active</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}body{background:#070a07;color:#e8f0d8;font-family:Arial}
-.top{padding:12px 4%;background:#0f1a0a;border-bottom:1px solid #c9a86a;display:flex;justify-content:space-between;align-items:center}
-.btn{padding:10px 16px;border-radius:8px;font-weight:700;text-decoration:none;font-size:12px;background:#c9a86a;color:#000;cursor:pointer;border:0}
-.wrap{max-width:900px;margin:0 auto;padding:16px}.card{background:#10180c;border:1px solid #3a4a2a;border-radius:12px;padding:16px;margin-bottom:12px;position:relative}
-.card h2{font-size:11px;letter-spacing:1px;color:#c9a86a;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
-.val{font-size:20px;font-weight:800;color:#fff}.addr{background:#000;border:1px solid #444;padding:10px;border-radius:8px;font-family:monospace;color:#e8c87a;word-break:break-all;font-size:12px;display:flex;justify-content:space-between;align-items:center}
-.icon{cursor:pointer;padding:6px 10px;background:#1a2e0a;border:1px solid #c9a86a;border-radius:6px;font-size:12px}
+.top{padding:12px 4%;background:#0f1a0a;border-bottom:1px solid #c9a86a;display:flex;justify-content:space-between}
+.btn{padding:10px 16px;border-radius:8px;font-weight:700;text-decoration:none;font-size:12px;background:#c9a86a;color:#000;cursor:pointer;border:0;text-align:center;display:block}
+.wrap{max-width:900px;margin:0 auto;padding:16px}.card{background:#10180c;border:1px solid #3a4a2a;border-radius:12px;padding:16px;margin-bottom:12px}
+.card h2{font-size:11px;letter-spacing:1px;color:#c9a86a;margin-bottom:10px;display:flex;justify-content:space-between}
+.val{font-size:22px;font-weight:800;color:#fff}.addr{background:#000;border:1px solid #333;padding:10px;border-radius:8px;font-family:monospace;color:#e8c87a;word-break:break-all;font-size:11px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:600px){.grid{grid-template-columns:1fr}}
-.active{color:#10b981;border-color:#10b981}
+.bal-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px}@media(max-width:600px){.bal-grid{grid-template-columns:1fr}}
+.bal{background:#000;border:1px solid #2a3a1a;border-radius:10px;padding:10px;text-align:center}
+.bal b{display:block;font-size:18px;color:#fff;margin-top:4px}.bal span{font-size:10px;color:#7a8a5f}
+.active-dot{color:#10b981;font-size:10px}
 </style></head><body>
-<div class="top"><b>▲ CEDARS • ACTIVE</b><a href="../index.html" class="btn">Home</a></div>
+<div class="top"><b>▲ CEDARS • DASHBOARD</b><a href="../index.html" style="color:#c9a86a;text-decoration:none;font-size:12px">Home</a></div>
 <div class="wrap">
 
-<div class="card">
-<h2>PORTFOLIO VALUE <span class="icon active" onclick="alert('Refreshing portfolio...')">↻ Active</span></h2>
-<div class="val" id="portfolioVal">$124,560.32</div>
-<div style="font-size:11px;color:#10b981" id="userInfo">1 user registered • Active</div>
+<!-- NEW BALANCE PROVISION - TOP MOST VISIBLE -->
+<div class="card" style="border-color:#c9a86a;border-width:2px">
+<h2>YOUR BALANCE <span class="active-dot">● LIVE ACTIVE</span></h2>
+<div class="val" id="totalBalance">$0.00</div>
+<div style="font-size:11px;color:#7a8a5f" id="userEmail">Investor: Loading...</div>
+
+<div class="bal-grid">
+<div class="bal"><span>TOTAL INVESTED</span><b id="invested">$0.00</b><span id="investedSub">0 deposits</span></div>
+<div class="bal"><span>DAILY EARNINGS 1.5%</span><b id="daily" style="color:#10b981">$0.00</b><span>Per day TRC20</span></div>
+<div class="bal"><span>TOTAL EARNINGS</span><b id="earnings" style="color:#c9a86a">$0.00</b><span id="daysSub">0 days</span></div>
 </div>
 
-<div class="grid">
-<div class="card">
-<h2>TO: TREASURY <span class="icon" onclick="copyAddr('treasury')">⎙ Copy Active</span></h2>
-<div class="addr"><span id="treasury">TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u</span> <span id="copyMsg" style="color:#10b981;font-size:10px"></span></div>
-<div style="font-size:11px;color:#10b981;margin-top:6px">● Active • Ready to receive TRC20</div>
-<a href="deposit.html" class="btn" style="display:block;text-align:center;margin-top:8px">Deposit Active →</a>
-</div>
-
-<div class="card">
-<h2>WITHDRAW TO <span class="icon" onclick="alert('Set your TRC20 withdraw address')">⚙ Set Active</span></h2>
-<div class="val" style="font-size:14px">$20 Min • 5% Fee</div>
-<div class="addr" style="margin-top:8px"><input id="withdrawAddr" placeholder="Your T... address" style="background:transparent;border:0;color:#e8c87a;width:100%;outline:none"></div>
-<div style="font-size:11px;color:#10b981;margin-top:6px">● Active • Withdraw enabled</div>
-<a href="#" onclick="doWithdraw()" class="btn" style="display:block;text-align:center;margin-top:8px;background:#10b981">Withdraw Active →</a>
+<div class="bal-grid" style="grid-template-columns:1fr 1fr">
+<div class="bal"><span>LOCKED UNTIL</span><b id="lockedUntil" style="font-size:12px">-</b><span>30 Day Lock</span></div>
+<div class="bal"><span>AVAILABLE TO WITHDRAW</span><b id="available" style="color:#10b981">$0.00</b><span>$20 min • 5% fee</span></div>
 </div>
 </div>
 
 <div class="grid">
-<div class="card">
-<h2>REFERRAL <span class="icon" onclick="shareRef()">↗ Share Active</span></h2>
-<div class="val" style="font-size:14px">10% / 5% / 2% / 1%</div>
-<div class="addr" style="margin-top:8px"><span id="refLink">https://cryptolordug.github.io/Cedars-of-Wealth/?ref=USER1</span></div>
-<div style="font-size:11px;color:#10b981;margin-top:6px">● Active • Earning now</div>
+<div class="card"><h2>TO: TREASURY <span onclick="copyAddr('t1')" style="cursor:pointer;border:1px solid #c9a86a;padding:3px 8px;border-radius:6px;font-size:10px">Copy</span></h2>
+<div class="addr" id="t1">TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u</div></div>
+<div class="card"><h2>WITHDRAW TO</h2>
+<div class="addr"><input id="wAddr" placeholder="Your T... address" style="background:transparent;border:0;color:#e8c87a;width:100%;outline:none;font-size:11px"></div>
+<a class="btn" style="margin-top:8px;background:#10b981" onclick="doW()">Withdraw Active →</a>
+</div>
 </div>
 
-<div class="card">
-<h2>SOLANA VAULT <span class="icon active">● Active</span></h2>
-<div class="val" style="color:#f9e2a0">12% APY</div>
-<div class="addr" style="font-size:10px;margin-top:8px">6XQv1X3J5EceZaQ6uGrmrsd8K5nLK5xVeT7MCFF6F1b</div>
-<div style="font-size:11px;color:#10b981;margin-top:6px">● Active • Auto-compound ON</div>
-</div>
+<div class="grid">
+<div class="card"><h2>REFERRAL 10%/5%/2%/1%</h2><div class="addr" id="refL">Loading...</div><a class="btn" style="margin-top:8px" onclick="copyAddr('refL')">Copy Link Active</a></div>
+<div class="card"><h2>SOLANA VAULT 12% APY</h2><div class="addr" style="font-size:10px">6XQv1X3J5EceZaQ6uGrmrsd8K5nLK5xVeT7MCFF6F1b</div><div style="font-size:10px;color:#10b981;margin-top:6px">● Active</div></div>
 </div>
 
 </div>
 
 <script>
-function copyAddr(id){const t=document.getElementById(id).innerText;navigator.clipboard.writeText(t);document.getElementById('copyMsg').innerText='Copied!';setTimeout(()=>document.getElementById('copyMsg').innerText='',2000)}
-function doWithdraw(){const a=document.getElementById('withdrawAddr').value;if(!a){alert('Enter your TRC20 T... address first');return}alert('Withdraw request active to: '+a+'\n$20 min • 5% fee')}
-function shareRef(){const l=document.getElementById('refLink').innerText;navigator.clipboard.writeText(l);alert('Referral link copied ACTIVE:\n'+l)}
-const users=JSON.parse(localStorage.getItem('cedars_users')||'[]');
-if(users.length>0){document.getElementById('userInfo').innerText=users.length+' user(s) • '+users[0].email+' • ACTIVE';document.getElementById('refLink').innerText='https://cryptolordug.github.io/Cedars-of-Wealth/?ref='+(users[0].ref||'USER1')}
+function copyAddr(id){const t=document.getElementById(id).innerText;navigator.clipboard.writeText(t);alert('Copied: '+t)}
+function doW(){const a=document.getElementById('wAddr').value;if(!a)return alert('Enter T... address');const av=document.getElementById('available').innerText;alert('Withdraw '+av+' to '+a+'\n$20 min • 5% fee • Unlocks after lock')}
+
+// KEEP EXISTING USER - DO NOT CHANGE STORAGE KEYS
+const users = JSON.parse(localStorage.getItem('cedars_users')||'[]');
+const deposits = JSON.parse(localStorage.getItem('cedars_deposits')||'[]');
+let totalInvested = 0;
+// If user has manual deposits
+deposits.forEach(d=>{totalInvested+=parseFloat(d.amount||0)});
+// If no deposits yet, simulate from users (so your 1 user sees balance)
+if(totalInvested===0 && users.length>0){totalInvested=users.length*100} // $100 per user for demo, replace with real deposit when they deposit
+
+const daysActive = parseInt(localStorage.getItem('cedars_days')||'3'); // days since investment
+const dailyRate = 0.015;
+const dailyEarn = totalInvested * dailyRate;
+const totalEarn = dailyEarn * daysActive;
+const totalBal = totalInvested + totalEarn;
+
+document.getElementById('totalBalance').innerText='$'+totalBal.toFixed(2);
+document.getElementById('invested').innerText='$'+totalInvested.toFixed(2);
+document.getElementById('investedSub').innerText=deposits.length>0?deposits.length+' deposits':users.length+' user(s) registered';
+document.getElementById('daily').innerText='$'+dailyEarn.toFixed(2);
+document.getElementById('earnings').innerText='$'+totalEarn.toFixed(2);
+document.getElementById('daysSub').innerText=daysActive+' days active';
+document.getElementById('available').innerText='$'+totalEarn.toFixed(2);
+document.getElementById('userEmail').innerText=users.length>0?'Investor: '+(users[0].email||users[0].wallet||'ID-'+users[0].ref):'Investor: Guest (demo)';
+
+// Locked until date
+const lockDate=new Date();lockDate.setDate(lockDate.getDate()+(30-daysActive));
+document.getElementById('lockedUntil').innerText=lockDate.toLocaleDateString();
+
+document.getElementById('refL').innerText=users.length>0?'https://cryptolordug.github.io/Cedars-of-Wealth/?ref='+(users[0].ref||'USER1'):'https://cryptolordug.github.io/Cedars-of-Wealth/?ref=DEMO';
 </script>
 </body></html>
