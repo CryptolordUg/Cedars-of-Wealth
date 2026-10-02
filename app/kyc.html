@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KYC Verification — Cedars of Wealth</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--mil:linear-gradient(135deg,#5a6d33 0%,#8da65b 25%,#4B5320 50%,#6B7F3A 75%,#3c4a1f 100%);--gold:linear-gradient(135deg,#e8c87a 0%,#f9e2a0 25%,#c9a86a 50%,#e8c87a 75%,#a68b4f 100%);--bg:#070a07}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(ellipse at top,#1a2a12 0%,var(--bg) 70%);color:#e8f0d8;font-family:Inter,sans-serif;min-height:100vh}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:14px 5%;background:linear-gradient(90deg,#0f1a0a,#1c2b12);border-bottom:2px solid #c9a86a}
+.logo{font-family:Cinzel;font-size:20px;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}
+.wrap{max-width:900px;margin:0 auto;padding:30px 5%}
+.card{background:rgba(18,28,12,0.96);border:2px solid #c9a86a;border-radius:16px;padding:24px;box-shadow:0 8px 32px rgba(0,0,0,0.7);margin-bottom:16px}
+.label{font-size:11px;letter-spacing:1px;color:#e8c87a;margin:14px 0 6px;display:block}
+.input{width:100%;background:#0f1a0a;border:1px solid #3c4a1f;border-radius:10px;padding:12px;color:#e8f0d8}
+.upload{border:1.5px dashed #4B5320;border-radius:12px;padding:18px;text-align:center;background:#0f1a0a;cursor:pointer;transition:0.2s}
+.upload:hover{border-color:#c9a86a;background:#111d0e}
+.upload.ok{border-color:#10b981;background:rgba(16,185,129,0.1)}
+.btn{background:var(--mil);color:#f5f0d0;border:2px solid #c9a86a;padding:12px 20px;border-radius:10px;font-weight:800;cursor:pointer;width:100%;text-transform:uppercase;letter-spacing:1px}
+.btn:disabled{opacity:0.4;cursor:not-allowed}
+.badge{background:var(--gold);color:#1a1100;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:800}
+.status{padding:10px 14px;border-radius:10px;font-size:13px;margin:12px 0}
+.status.pending{background:rgba(232,200,122,0.15);border:1px solid #c9a86a;color:#e8c87a}
+.status.approved{background:rgba(16,185,129,0.15);border:1px solid #10b981;color:#10b981}
+.small{font-size:11px;color:#7a8a5f}
+.progress{display:flex;gap:8px;margin:16px 0}
+.progress div{flex:1;height:6px;background:#1a2410;border-radius:10px;border:1px solid #2a3a15}
+.progress div.active{background:var(--mil)}
+</style>
+</head>
+<body>
+<div class="nav">
+<div class="logo">🌲 CEDARS OF WEALTH</div>
+<div style="display:flex;gap:8px"><span class="badge">STEP 2 OF 4 — KYC</span><a href="register.html" style="color:#c9a86a;text-decoration:none;font-size:12px">← Register</a></div>
+</div>
+
+<div class="wrap">
+<div class="progress"><div class="active"></div><div class="active"></div><div></div><div></div></div>
+<div class="small">REGISTER ✓ → KYC → DEPOSIT → DASHBOARD</div>
+
+<div class="card" id="userBox" style="display:none">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<div><b id="uName">—</b><br><span class="small" id="uEmail">—</span> • <span class="small" id="uDevice">—</span></div>
+<div class="status pending" id="kycStatus">KYC PENDING</div>
+</div>
+</div>
+
+<div class="card">
+<h2 style="font-family:Cinzel;color:#f0e6c8">KYC Verification 🪖</h2>
+<p class="small">Required before first withdrawal. One Investor One Account enforcement. Military grade verification.</p>
+
+<label class="label">GOVERNMENT ID NUMBER *</label>
+<input id="idNumber" class="input" placeholder="NIN / Passport / National ID">
+
+<label class="label">ID TYPE *</label>
+<select id="idType" class="input">
+<option>National ID</option>
+<option>Passport</option>
+<option>Driving License</option>
+<option>Voters Card</option>
+</select>
+
+<label class="label">FRONT OF ID *</label>
+<div class="upload" id="upFront" onclick="document.getElementById('fFront').click()">
+<div>📄 Click to upload front</div><div class="small">JPG/PNG max 5MB</div>
+<input type="file" id="fFront" hidden accept="image/*" onchange="handleFile(this,'upFront','front')">
+<div id="frontName" class="small" style="margin-top:6px;color:#e8c87a"></div>
+</div>
+
+<label class="label">BACK OF ID *</label>
+<div class="upload" id="upBack" onclick="document.getElementById('fBack').click()">
+<div>📄 Click to upload back</div><input type="file" id="fBack" hidden accept="image/*" onchange="handleFile(this,'upBack','back')">
+<div id="backName" class="small" style="margin-top:6px;color:#e8c87a"></div>
+</div>
+
+<label class="label">SELFIE HOLDING ID *</label>
+<div class="upload" id="upSelfie" onclick="document.getElementById('fSelfie').click()">
+<div>🤳 Selfie holding ID + paper "Cedars + Date"</div><input type="file" id="fSelfie" hidden accept="image/*" onchange="handleFile(this,'upSelfie','selfie')">
+<div id="selfieName" class="small" style="margin-top:6px;color:#e8c87a"></div>
+</div>
+
+<label class="label">PROOF OF ADDRESS (Optional but speeds approval)</label>
+<div class="upload" id="upAddr" onclick="document.getElementById('fAddr').click()">
+<div>🏠 Utility bill / Bank statement</div><input type="file" id="fAddr" hidden accept="image/*,.pdf" onchange="handleFile(this,'upAddr','addr')">
+<div id="addrName" class="small" style="margin-top:6px;color:#e8c87a"></div>
+</div>
+
+<div class="status pending" style="margin-top:16px">
+<b>🪖 Military Lock Rules:</b><br>
+- Same ID cannot register twice<br>
+- Selfie must match ID photo<br>
+- Approval in 2-12 hours via @cedarswealth admin<br>
+- Until approved: you CAN deposit and earn 1.5% daily, but withdrawal locked
+</div>
+
+<button class="btn" id="submitKyc" onclick="submitKyc()">SUBMIT FOR MILITARY VERIFICATION →</button>
+
+<div class="small" style="margin-top:10px;text-align:center">Need help? <a href="https://t.me/cedarswealth" target="_blank" style="color:#e8c87a">Contact @cedarswealth on Telegram</a></div>
+</div>
+
+<div class="card" id="afterSubmit" style="display:none">
+<h3 style="color:#e8c87a">✅ KYC Submitted — Shiny Military Review</h3>
+<p class="small" style="margin:10px 0">Your documents are under military-grade review. You can proceed to deposit and start earning 1.5% daily while we verify.</p>
+<button class="btn" onclick="window.location.href='deposit.html'">PROCEED TO DEPOSIT NOW →</button>
+</div>
+</div>
+
+<script>
+let files = {front:false, back:false, selfie:false, addr:false};
+let currentUser = JSON.parse(localStorage.getItem('cedars_current')||"null");
+
+if(!currentUser){ alert("Register first!"); window.location.href='register.html'; }
+else {
+ document.getElementById('userBox').style.display='block';
+ document.getElementById('uName').textContent = currentUser.name;
+ document.getElementById('uEmail').textContent = currentUser.email;
+ document.getElementById('uDevice').textContent = currentUser.deviceId;
+ if(currentUser.kyc==='approved'){
+  document.getElementById('kycStatus').className='status approved';
+  document.getElementById('kycStatus').textContent='KYC APPROVED ✓';
+ }
+}
+
+function handleFile(input, boxId, key){
+ if(input.files[0]){
+  document.getElementById(boxId).classList.add('ok');
+  document.getElementById(key+'Name').textContent = "✓ " + input.files[0].name + " (" + (input.files[0].size/1024).toFixed(0) + "KB)";
+  files[key]=true;
+  checkReady();
+ }
+}
+function checkReady(){
+ let ready = files.front && files.back && files.selfie && document.getElementById('idNumber').value.trim().length>4;
+ document.getElementById('submitKyc').disabled =!ready;
+ document.getElementById('submitKyc').style.opacity = ready? "1":"0.4";
+}
+document.getElementById('idNumber').addEventListener('input', checkReady);
+
+function submitKyc(){
+ let idNum = document.getElementById('idNumber').value.trim();
+ let idType = document.getElementById('idType').value;
+ if(!idNum){ alert("Enter ID number"); return; }
+
+ // ONE ACCOUNT LOCK — ID duplicate check
+ let all = JSON.parse(localStorage.getItem('cedars_kyc')||"[]");
+ if(all.find(k=>k.idNumber===idNum)){ alert("One Investor One Account — ID already used!"); return; }
+
+ let kycData = { email: currentUser.email, idNumber:idNum, idType, deviceId: currentUser.deviceId, status:"pending", submitted:Date.now() };
+ all.push(kycData);
+ localStorage.setItem('cedars_kyc', JSON.stringify(all));
+
+ // Update user
+ currentUser.kyc = "pending";
+ currentUser.idNumber = idNum;
+ localStorage.setItem('cedars_current', JSON.stringify(currentUser));
+
+ // Update users list
+ let users = JSON.parse(localStorage.getItem('cedars_users')||"[]");
+ let idx = users.findIndex(u=>u.email===currentUser.email);
+ if(idx>-1){ users[idx].kyc="pending"; users[idx].idNumber=idNum; localStorage.setItem('cedars_users', JSON.stringify(users)); }
+
+ document.getElementById('afterSubmit').style.display='block';
+ window.scrollTo(0, document.body.scrollHeight);
+
+ // Simulate Telegram alert to admin
+ console.log("TELEGRAM ALERT TO @cedarswealth: New KYC — " + currentUser.email + " ID:" + idNum);
+ setTimeout(()=>{ alert("📨 KYC sent to Telegram admin @cedarswealth\n\nYou can deposit now while we verify (2-12h).\n\nNext: Deposit"); }, 800);
+}
+</script>
+</body>
+</html>
