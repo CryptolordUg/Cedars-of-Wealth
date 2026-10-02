@@ -1,0 +1,26 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your Referral Link</title>
+<style>body{background:#070a07;color:#e8f0d8;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center}
+.card{background:#121c0c;border:2px solid #c9a86a;border-radius:16px;padding:24px;max-width:500px;width:90%}
+.btn{background:linear-gradient(135deg,#e8c87a,#c9a86a);color:#1a1100;border:0;padding:14px;border-radius:10px;font-weight:800;width:100%;margin-top:12px;cursor:pointer}
+.addr{background:#000;border:1px dashed #c9a86a;padding:12px;border-radius:10px;word-break:break-all;margin:10px 0;color:#e8c87a}</style>
+</head><body>
+<div class="card">
+<h2>🌲 YOUR REFERRAL LINK</h2>
+<div id="code" style="font-size:28px;color:#f9e2a0;margin:12px 0">---</div>
+<div id="link" class="addr">---</div>
+<button class="btn" onclick="copy()">COPY LINK 📋 SEND TO FRIEND NOW</button>
+<div style="font-size:11px;margin-top:12px">L1 10% • L2 5% • L3 2% • L4 1%<br>Vault: TE26B7z...Hcz1u</div>
+<div id="debug" style="font-size:10px;margin-top:10px;color:#7a8a5f"></div>
+</div>
+<script>
+let code = localStorage.getItem('cedars_ref_code');
+if(!code){ code="CEDARS"+Math.floor(1000+Math.random()*9000); localStorage.setItem('cedars_ref_code',code); }
+document.getElementById('code').textContent=code;
+let link="https://cryptolordug.github.io/Cedars-of-Wealth/app/register.html?ref="+code;
+document.getElementById('link').textContent=link;
+let cur=JSON.parse(localStorage.getItem('cedars_current')||"null");
+document.getElementById('debug').textContent=cur?"Logged as: "+cur.email:"Not logged — login first at app/login.html";
+function copy(){ navigator.clipboard.writeText(link); alert("✅ Copied! Send to friend now! 10% bonus"); }
+</script>
+</body></html>
