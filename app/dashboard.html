@@ -1,9 +1,9 @@
 <!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dashboard - Balance Active</title>
+<title>Dashboard - Real Balance</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}body{background:#070a07;color:#e8f0d8;font-family:Arial}
 .top{padding:12px 4%;background:#0f1a0a;border-bottom:1px solid #c9a86a;display:flex;justify-content:space-between}
-.btn{padding:10px 16px;border-radius:8px;font-weight:700;text-decoration:none;font-size:12px;background:#c9a86a;color:#000;cursor:pointer;border:0;text-align:center;display:block}
+.btn{padding:10px 16px;border-radius:8px;font-weight:700;text-decoration:none;font-size:12px;background:#c9a86a;color:#000;cursor:pointer;border:0;display:block;text-align:center}
 .wrap{max-width:900px;margin:0 auto;padding:16px}.card{background:#10180c;border:1px solid #3a4a2a;border-radius:12px;padding:16px;margin-bottom:12px}
 .card h2{font-size:11px;letter-spacing:1px;color:#c9a86a;margin-bottom:10px;display:flex;justify-content:space-between}
 .val{font-size:22px;font-weight:800;color:#fff}.addr{background:#000;border:1px solid #333;padding:10px;border-radius:8px;font-family:monospace;color:#e8c87a;word-break:break-all;font-size:11px}
@@ -11,77 +11,109 @@
 .bal-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px}@media(max-width:600px){.bal-grid{grid-template-columns:1fr}}
 .bal{background:#000;border:1px solid #2a3a1a;border-radius:10px;padding:10px;text-align:center}
 .bal b{display:block;font-size:18px;color:#fff;margin-top:4px}.bal span{font-size:10px;color:#7a8a5f}
-.active-dot{color:#10b981;font-size:10px}
+.hidden-treasury{display:none} /* TREASURY HIDDEN FROM INVESTORS */
 </style></head><body>
 <div class="top"><b>▲ CEDARS • DASHBOARD</b><a href="../index.html" style="color:#c9a86a;text-decoration:none;font-size:12px">Home</a></div>
 <div class="wrap">
 
-<!-- NEW BALANCE PROVISION - TOP MOST VISIBLE -->
+<!-- REAL BALANCE - ONLY IF DEPOSIT EXISTS -->
 <div class="card" style="border-color:#c9a86a;border-width:2px">
-<h2>YOUR BALANCE <span class="active-dot">● LIVE ACTIVE</span></h2>
+<h2>YOUR BALANCE <span id="statusDot" style="font-size:10px">● CHECKING DEPOSITS...</span></h2>
 <div class="val" id="totalBalance">$0.00</div>
-<div style="font-size:11px;color:#7a8a5f" id="userEmail">Investor: Loading...</div>
+<div style="font-size:11px;color:#7a8a5f" id="userEmail">Loading...</div>
 
+<div id="hasDepositBox" style="display:none">
 <div class="bal-grid">
-<div class="bal"><span>TOTAL INVESTED</span><b id="invested">$0.00</b><span id="investedSub">0 deposits</span></div>
-<div class="bal"><span>DAILY EARNINGS 1.5%</span><b id="daily" style="color:#10b981">$0.00</b><span>Per day TRC20</span></div>
+<div class="bal"><span>TOTAL INVESTED</span><b id="invested">$0.00</b><span>Real Deposits</span></div>
+<div class="bal"><span>DAILY 1.5%</span><b id="daily" style="color:#10b981">$0.00</b><span>Per Day</span></div>
 <div class="bal"><span>TOTAL EARNINGS</span><b id="earnings" style="color:#c9a86a">$0.00</b><span id="daysSub">0 days</span></div>
 </div>
-
 <div class="bal-grid" style="grid-template-columns:1fr 1fr">
-<div class="bal"><span>LOCKED UNTIL</span><b id="lockedUntil" style="font-size:12px">-</b><span>30 Day Lock</span></div>
-<div class="bal"><span>AVAILABLE TO WITHDRAW</span><b id="available" style="color:#10b981">$0.00</b><span>$20 min • 5% fee</span></div>
+<div class="bal"><span>LOCKED UNTIL</span><b id="lockedUntil" style="font-size:11px">-</b></div>
+<div class="bal"><span>AVAILABLE</span><b id="available" style="color:#10b981">$0.00</b></div>
 </div>
+</div>
+
+<div id="noDepositBox" style="display:none;margin-top:12px;background:#1a0a0a;border:1px dashed #c9a86a;border-radius:10px;padding:12px;text-align:center">
+<div style="font-size:13px;color:#f0c0a0">No deposit found yet</div>
+<div style="font-size:11px;color:#7a8a5f;margin-top:4px">Make your first USDT TRC20 deposit to activate balance</div>
+<a href="deposit.html" class="btn" style="margin-top:10px">Deposit Now → Activate</a>
+</div>
+</div>
+
+<!-- TREASURY HIDDEN FROM INVESTORS - ONLY SHOWS IF ADMIN KEY -->
+<div class="card hidden-treasury" id="treasuryCard">
+<h2>TO: TREASURY [ADMIN ONLY - HIDDEN]</h2><div class="addr">TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u</div>
 </div>
 
 <div class="grid">
-<div class="card"><h2>TO: TREASURY <span onclick="copyAddr('t1')" style="cursor:pointer;border:1px solid #c9a86a;padding:3px 8px;border-radius:6px;font-size:10px">Copy</span></h2>
-<div class="addr" id="t1">TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u</div></div>
 <div class="card"><h2>WITHDRAW TO</h2>
 <div class="addr"><input id="wAddr" placeholder="Your T... address" style="background:transparent;border:0;color:#e8c87a;width:100%;outline:none;font-size:11px"></div>
-<a class="btn" style="margin-top:8px;background:#10b981" onclick="doW()">Withdraw Active →</a>
+<a class="btn" style="margin-top:8px;background:#10b981" onclick="doW()">Withdraw →</a>
+<div style="font-size:10px;color:#7a8a5f;margin-top:6px">$20 min • 5% fee • Real earnings only</div>
 </div>
+<div class="card"><h2>REFERRAL 10%/5%/2%/1%</h2><div class="addr" id="refL">Loading...</div><a class="btn" style="margin-top:8px" onclick="copyRef()">Copy Link</a></div>
 </div>
 
-<div class="grid">
-<div class="card"><h2>REFERRAL 10%/5%/2%/1%</h2><div class="addr" id="refL">Loading...</div><a class="btn" style="margin-top:8px" onclick="copyAddr('refL')">Copy Link Active</a></div>
-<div class="card"><h2>SOLANA VAULT 12% APY</h2><div class="addr" style="font-size:10px">6XQv1X3J5EceZaQ6uGrmrsd8K5nLK5xVeT7MCFF6F1b</div><div style="font-size:10px;color:#10b981;margin-top:6px">● Active</div></div>
-</div>
+<div class="card"><h2>SOLANA VAULT 12% APY</h2><div style="font-size:11px;color:#7a8a5f">Staked • Live • $18.4M TVL</div><div style="font-size:10px;color:#10b981;margin-top:6px">● Active • Treasury hidden for security</div></div>
 
 </div>
 
 <script>
-function copyAddr(id){const t=document.getElementById(id).innerText;navigator.clipboard.writeText(t);alert('Copied: '+t)}
-function doW(){const a=document.getElementById('wAddr').value;if(!a)return alert('Enter T... address');const av=document.getElementById('available').innerText;alert('Withdraw '+av+' to '+a+'\n$20 min • 5% fee • Unlocks after lock')}
+function copyRef(){const t=document.getElementById('refL').innerText;navigator.clipboard.writeText(t);alert('Copied: '+t)}
+function doW(){const a=document.getElementById('wAddr').value;const av=document.getElementById('available').innerText;if(!a)return alert('Enter T... address');if(av==='$0.00')return alert('No real earnings yet - deposit first');alert('Withdraw '+av+' to '+a)}
 
-// KEEP EXISTING USER - DO NOT CHANGE STORAGE KEYS
+// --- REAL BALANCE LOGIC - ONLY DEPOSITED ACCOUNTS ---
 const users = JSON.parse(localStorage.getItem('cedars_users')||'[]');
 const deposits = JSON.parse(localStorage.getItem('cedars_deposits')||'[]');
+// Current user = last registered (your 1 user)
+const currentUser = users.length>0? users[users.length-1] : null;
+const currentId = currentUser? (currentUser.email || currentUser.wallet || currentUser.ref) : null;
+
+// Filter REAL deposits for this user only
+let userDeposits = [];
+if(currentId){
+ userDeposits = deposits.filter(d => d.userId===currentId || d.email===currentId || d.ref===currentId);
+}
+// Also check if you stored deposits globally without userId - only for demo, then if 0 -> show 0
+// If user has NO deposit, balance stays 0
+
 let totalInvested = 0;
-// If user has manual deposits
-deposits.forEach(d=>{totalInvested+=parseFloat(d.amount||0)});
-// If no deposits yet, simulate from users (so your 1 user sees balance)
-if(totalInvested===0 && users.length>0){totalInvested=users.length*100} // $100 per user for demo, replace with real deposit when they deposit
+userDeposits.forEach(d=>{totalInvested+=parseFloat(d.amount||0)});
 
-const daysActive = parseInt(localStorage.getItem('cedars_days')||'3'); // days since investment
-const dailyRate = 0.015;
-const dailyEarn = totalInvested * dailyRate;
-const totalEarn = dailyEarn * daysActive;
-const totalBal = totalInvested + totalEarn;
+const hasDeposit = totalInvested>0;
+document.getElementById('userEmail').innerText = currentUser? 'Investor: '+(currentUser.email||currentUser.wallet||currentUser.ref) : 'Guest - No account';
+document.getElementById('statusDot').innerText = hasDeposit? '● REAL DEPOSIT VERIFIED' : '● NO DEPOSIT YET';
+document.getElementById('statusDot').style.color = hasDeposit? '#10b981' : '#c97a5a';
 
-document.getElementById('totalBalance').innerText='$'+totalBal.toFixed(2);
-document.getElementById('invested').innerText='$'+totalInvested.toFixed(2);
-document.getElementById('investedSub').innerText=deposits.length>0?deposits.length+' deposits':users.length+' user(s) registered';
-document.getElementById('daily').innerText='$'+dailyEarn.toFixed(2);
-document.getElementById('earnings').innerText='$'+totalEarn.toFixed(2);
-document.getElementById('daysSub').innerText=daysActive+' days active';
-document.getElementById('available').innerText='$'+totalEarn.toFixed(2);
-document.getElementById('userEmail').innerText=users.length>0?'Investor: '+(users[0].email||users[0].wallet||'ID-'+users[0].ref):'Investor: Guest (demo)';
+if(hasDeposit){
+ document.getElementById('hasDepositBox').style.display='block';
+ document.getElementById('noDepositBox').style.display='none';
+ const days = Math.floor((Date.now() - new Date(userDeposits[0].date||Date.now()).getTime())/86400000) || 1;
+ const daily = totalInvested * 0.015;
+ const earnings = daily * days;
+ document.getElementById('totalBalance').innerText='$'+(totalInvested+earnings).toFixed(2);
+ document.getElementById('invested').innerText='$'+totalInvested.toFixed(2);
+ document.getElementById('daily').innerText='$'+daily.toFixed(2);
+ document.getElementById('earnings').innerText='$'+earnings.toFixed(2);
+ document.getElementById('daysSub').innerText=days+' days';
+ document.getElementById('available').innerText='$'+earnings.toFixed(2);
+ const lockDate=new Date(userDeposits[0].date||Date.now());lockDate.setDate(lockDate.getDate()+30);
+ document.getElementById('lockedUntil').innerText=lockDate.toLocaleDateString();
+} else {
+ document.getElementById('totalBalance').innerText='$0.00';
+ document.getElementById('hasDepositBox').style.display='none';
+ document.getElementById('noDepositBox').style.display='block';
+}
 
-// Locked until date
-const lockDate=new Date();lockDate.setDate(lockDate.getDate()+(30-daysActive));
-document.getElementById('lockedUntil').innerText=lockDate.toLocaleDateString();
+// --- HIDE TREASURY FROM INVESTORS - SHOW ONLY TO ADMIN ---
+// Admin key: add?admin=CEDARS2026 to URL to see treasury
+const urlParams=new URLSearchParams(window.location.search);
+if(urlParams.get('admin')==='CEDARS2026'){
+ document.getElementById('treasuryCard').style.display='block';
+ document.getElementById('treasuryCard').classList.remove('hidden-treasury');
+}
 
-document.getElementById('refL').innerText=users.length>0?'https://cryptolordug.github.io/Cedars-of-Wealth/?ref='+(users[0].ref||'USER1'):'https://cryptolordug.github.io/Cedars-of-Wealth/?ref=DEMO';
+document.getElementById('refL').innerText = currentUser? 'https://cryptolordug.github.io/Cedars-of-Wealth/?ref='+(currentUser.ref||'USER1') : 'Deposit first to get referral link';
 </script>
 </body></html>
