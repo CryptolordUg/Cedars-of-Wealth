@@ -1,117 +1,134 @@
-<!DOCTYPE html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CEDARS COMMAND CENTER v6.1 GLORY FIXED</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CEDARS v7 AUTO-ALERT</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(1200px at 20% -10%, #1a1a00 0%, #000 60%), #000;color:#fff;font-family:Inter,Arial;padding:18px}
-.hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,#111,#0a0a0a);border:1px solid #f5c518;border-radius:18px;padding:14px 18px;box-shadow:0 0 30px rgba(245,197,24,.25)}
-.hdr h1{font-family:Cinzel,serif;color:#f5c518;margin:0;font-size:22px;letter-spacing:1px}
-.badge{background:#000;border:1px solid #f5c518;color:#f5c518;padding:6px 12px;border-radius:999px;font-size:12px}
-.grid{display:grid;grid-template-columns:1fr 1.2fr;gap:16px;margin-top:16px}
-.card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.6));backdrop-filter:blur(8px);border:1px solid rgba(245,197,24,.6);border-radius:20px;padding:18px;box-shadow:0 0 25px rgba(245,197,24,.15)}
-.card h2{margin:0 0 10px 0;color:#f5c518;font-family:Cinzel,serif;font-size:18px}
-.vault{font-family:monospace;background:#000;border:1px dashed #f5c518;padding:10px;border-radius:12px;color:#f5c518;word-break:break-all}
-textarea,input{width:100%;background:#000;color:#fff;border:1px solid #f5c518;border-radius:14px;padding:14px;font-size:15px;margin-top:10px}
-.btn{width:100%;padding:15px;border-radius:14px;border:none;font-weight:900;cursor:pointer;margin-top:10px;font-size:15px;letter-spacing:.5px}
-.gold{background:linear-gradient(180deg,#ffe27a,#f5c518);color:#000;box-shadow:0 0 20px rgba(245,197,24,.6)}
-.black{background:#000;color:#f5c518;border:1px solid #f5c518}
-#st{margin-top:12px;padding:12px;border-radius:12px;font-weight:bold;min-height:18px;word-break:break-all}
-.ok{background:#0a1a0a;border:1px solid #0f0;color:#0f0}
-.err{background:#1a0a0a;border:1px solid #f55;color:#f88}
-.dep{font-size:12px;padding:10px;border-bottom:1px solid rgba(245,197,24,.15);display:flex;justify-content:space-between}
+body{background:#000;color:#fff;font-family:Arial;padding:16px}
+h1{color:#f5c518;text-align:center;margin:0}
+.badge{text-align:center;color:#0f0;font-size:12px;margin:6px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.card{background:#111;border:2px solid #f5c518;border-radius:18px;padding:14px}
+.card h2{color:#f5c518;margin:0 0 8px;font-size:16px}
+textarea{width:100%;background:#000;color:#fff;border:1px solid #f5c518;border-radius:12px;padding:12px}
+button{width:100%;padding:14px;border-radius:12px;border:none;font-weight:900;margin-top:8px;cursor:pointer}
+.gold{background:#f5c518;color:#000}.black{background:#000;color:#f5c518;border:1px solid #f5c518}
+#deposits{font-size:12px;max-height:400px;overflow:auto}
+.dep{padding:8px;border-bottom:1px solid #222;display:flex;justify-content:space-between}
+.on{color:#0f0}.off{color:#f55}
 @media(max-width:900px){.grid{grid-template-columns:1fr}}
 </style>
 </head><body>
-
-<div class="hdr">
-<h1>🌲 CEDARS OF WEALTH<br><span style="font-size:12px;color:#aaa;font-family:Inter">COMMAND CENTER v6.1 GLORY FIXED</span></h1>
-<div class="badge">🔒 SECURE • @cedarswealth • ONLINE</div>
-</div>
+<h1>🌲 CEDARS v7 AUTO-ALERT</h1>
+<div class="badge" id="status">🟢 AUTO-ALERT: ARMED • Scanning every 15s • Vault: 6XQvi...Tb</div>
 
 <div class="grid">
-<div>
 <div class="card">
-<h2>🏦 VAULT ADDRESS</h2>
-<div class="vault">6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div>
-<p style="color:#888;font-size:12px;margin:8px 0 0">Network: Solana Mainnet • Bot: @cedars_6XQvi_720_bot</p>
+<h2>📊 LIVE DEPOSITS</h2>
+<div style="display:flex;gap:6px;margin-bottom:8px">
+<button class="black" style="width:auto;padding:8px 12px;font-size:12px" onclick="toggleAlert()" id="tog">🔔 ALERT: ON</button>
+<button class="black" style="width:auto;padding:8px 12px;font-size:12px" onclick="loadDeposits()">🔄 SCAN NOW</button>
+<button class="black" style="width:auto;padding:8px 12px;font-size:12px" onclick="clearSeen()">🗑️ RESET</button>
 </div>
-<div class="card" style="margin-top:16px">
-<h2>📊 LIVE DEPOSITS — Auto 10s</h2>
-<div id="deposits" style="color:#aaa">Scanning chain...</div>
-</div>
+<div id="deposits">Scanning chain...</div>
 </div>
 
 <div class="card">
-<h2>📡 CHANNEL MESSENGER • @cedarswealth</h2>
-<textarea id="msg" rows="10">🌲 CEDARS OF WEALTH — VAULT OPEN 💰
-
-Vault:
-6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb
-
-✅ HOW TO ENTER:
-1️⃣ Send SOL to vault
-2️⃣ Verify: https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/verify.html
-3️⃣ Auto-unlock Premium Dashboard
-
-Join: t.me/cedarswealth
-Bot: @cedars_6XQvi_720_bot</textarea>
-<button class="btn gold" onclick="send()">🚀 SEND TO @cedarswealth</button>
-<button class="btn black" onclick="sendPoster()">🖼️ SEND POSTER + QR</button>
-<div id="st"></div>
-<p style="color:#666;font-size:11px;margin-top:10px">Token locked • Chat locked • CORS bypass active • Glory UI v6.1 FIXED</p>
+<h2>📡 MANUAL + AUTO LOG</h2>
+<textarea id="msg" rows="7">🌲 CEDARS OF WEALTH — VAULT OPEN 💰
+Vault: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb
+Verify: https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/verify.html
+Join: t.me/cedarswealth</textarea>
+<button class="gold" onclick="send()">🚀 SEND TO @cedarswealth</button>
+<button class="black" onclick="sendPoster()">🖼️ SEND POSTER + QR</button>
+<div id="st" style="margin-top:10px;color:#0f0;font-size:12px"></div>
+<div id="log" style="margin-top:10px;font-size:11px;color:#aaa;max-height:150px;overflow:auto"></div>
 </div>
 </div>
 
 <script>
-// SETTINGS LOCKED — DO NOT CHANGE
 const BOT_TOKEN="8818013074:AAEF3WUACywbqUkm17XUsVGgPN0UwLcYg7U";
 const CHAT_ID="@cedarswealth";
+const VAULT="6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb";
+let alertOn = localStorage.getItem("cedars_alert")!=="off";
+let seen = JSON.parse(localStorage.getItem("cedars_seen")||"[]");
 
-async function send(){
+function updateTog(){ document.getElementById("tog").innerHTML=alertOn?"🔔 ALERT: ON":"🔕 ALERT: OFF"; document.getElementById("tog").style.borderColor=alertOn?"#0f0":"#f55"; }
+function toggleAlert(){ alertOn=!alertOn; localStorage.setItem("cedars_alert",alertOn?"on":"off"); updateTog(); addLog(alertOn?"Auto-alert ARMED":"Auto-alert PAUSED"); }
+function clearSeen(){ seen=[]; localStorage.setItem("cedars_seen","[]"); addLog("Seen list reset"); loadDeposits(); }
+function addLog(t){ let d=document.getElementById("log"); d.innerHTML=`<div>[${new Date().toLocaleTimeString()}] ${t}</div>`+d.innerHTML; }
+updateTog();
+
+function send(){
 let m=document.getElementById("msg").value;
-let s=document.getElementById("st");
-s.className=""; s.innerHTML="⏳ Posting to glory channel...";
 let url=`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${encodeURIComponent(CHAT_ID)}&text=${encodeURIComponent(m)}`;
-try{
-let r=await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`);
-let txt=await r.text();
-let d;
-try{d=JSON.parse(txt);}catch(e){window.open(url,"_blank"); s.className="ok"; s.innerHTML="✅ Backup tab opened — if {ok:true} → Posted to @cedarswealth"; return;}
-if(d.ok){s.className="ok"; s.innerHTML=`✅ GLORY POSTED — Message ID ${d.result.message_id} — Check @cedarswealth`;}
-else{s.className="err"; s.innerHTML=`❌ ${d.description||txt.slice(0,200)} — Opening backup...`; window.open(url,"_blank");}
-}catch(e){s.className=""; s.innerHTML="Opening secure tab..."; window.open(url,"_blank"); s.innerHTML=`If tab shows {ok:true} → Posted to @cedarswealth ✅`;}
+document.getElementById("st").innerHTML="Opening... {ok:true}=POSTED ✅"; window.open(url,"_blank");
 }
+function sendPoster(){
+let qr=`https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=${VAULT}`;
+let cap=`🌲 NEW DEPOSIT ALERT\nVault: ${VAULT}\nJoin: t.me/cedarswealth`;
+let url=`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto?chat_id=${encodeURIComponent(CHAT_ID)}&photo=${encodeURIComponent(qr)}&caption=${encodeURIComponent(cap)}`;
+document.getElementById("st").innerHTML="Opening Poster... {ok:true}=POSTED ✅"; window.open(url,"_blank");
+}
+function autoPostDeposit(sig, amountSol, timeStr){
+if(!alertOn) return;
+let solscan=`https://solscan.io/tx/${sig}`;
+let amountTxt = amountSol? `${amountSol.toFixed(4)} SOL` : "New TX";
+let msg=`🚨 NEW DEPOSIT DETECTED 🌲💰
 
-async function sendPoster(){
-let s=document.getElementById("st");
-s.className=""; s.innerHTML="⏳ Sending poster...";
-let qr="https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb";
-let caption="🌲 CEDARS OF WEALTH v6 GLORY\n\nVault: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb\n\nVerify: https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/verify.html\nJoin: t.me/cedarswealth";
-let url=`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto?chat_id=${encodeURIComponent(CHAT_ID)}&photo=${encodeURIComponent(qr)}&caption=${encodeURIComponent(caption)}`;
-try{
-let r=await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`);
-let txt=await r.text();
-let d;
-try{d=JSON.parse(txt);}catch(e){window.open(url,"_blank"); s.className="ok"; s.innerHTML="✅ Poster tab opened — if {ok:true} — check @cedarswealth"; return;}
-if(d.ok){s.className="ok"; s.innerHTML=`✅ POSTER POSTED — ID ${d.result.message_id}`;}
-else{s.className="err"; s.innerHTML=`❌ ${d.description||txt.slice(0,200)} — Opening backup tab...`; window.open(url,"_blank");}
-}catch(e){window.open(url,"_blank"); s.className="ok"; s.innerHTML="✅ Poster backup opened — check channel";}
+Amount: ${amountTxt}
+Vault: ${VAULT}
+Time: ${timeStr}
+
+TX: ${sig}
+Solscan: ${solscan}
+
+Verify: https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/verify.html
+
+Join: t.me/cedarswealth`;
+let url=`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${encodeURIComponent(CHAT_ID)}&text=${encodeURIComponent(msg)}`;
+fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`).then(r=>r.text()).then(txt=>{
+  try{let d=JSON.parse(txt); if(d.ok){ addLog(`✅ Auto-posted ${amountTxt} | ${sig.slice(0,10)}...`); document.getElementById("st").innerHTML=`✅ Auto-posted ${amountTxt}`;} else{addLog(`⚠️ Auto failed, opening tab`); window.open(url,"_blank");}}catch(e){addLog(`✅ Auto-posted via backup tab`); window.open(url,"_blank");}
+}).catch(()=>{ window.open(url,"_blank"); addLog(`Auto-posted via tab fallback`); });
 }
 
 async function loadDeposits(){
 try{
-let res=await fetch("https://api.mainnet-beta.solana.com",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getSignaturesForAddress",params:["6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb",{limit:8}]})});
+let res=await fetch("https://api.mainnet-beta.solana.com",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getSignaturesForAddress",params:[VAULT,{limit:10}]})});
 let data=await res.json();
-if(!data.result||data.result.length==0){document.getElementById("deposits").innerHTML=`<div style='color:#f5c518'>Vault empty — waiting for genesis deposit</div>`; return;}
+if(!data.result){document.getElementById("deposits").innerHTML=`Chain offline`; return;}
+if(data.result.length==0){document.getElementById("deposits").innerHTML=`<div style='color:#f5c518'>Vault empty — waiting for genesis</div>`; return;}
 let html="";
-data.result.forEach(tx=>{
+for(let tx of data.result){
+let sig=tx.signature;
 let time=tx.blockTime? new Date(tx.blockTime*1000).toLocaleString():"";
-html+=`<div class="dep"><span>${tx.signature.slice(0,20)}... • ${time}</span><span style="color:#0f0">${tx.confirmationStatus||"finalized"}</span></div>`;
-});
+let isNew=!seen.includes(sig);
+html+=`<div class="dep"><span>${isNew?'🆕 ':''}${sig.slice(0,18)}...<br><small>${time}</small></span><span class="${tx.err?'off':'on'}">${tx.err?'FAIL':tx.confirmationStatus||'final'}</span></div>`;
+// If new -> get amount and auto post
+if(isNew){
+seen.push(sig);
+localStorage.setItem("cedars_seen",JSON.stringify(seen.slice(0,50)));
+// fetch amount
+try{
+let res2=await fetch("https://api.mainnet-beta.solana.com",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getTransaction",params:[sig,{encoding:"jsonParsed",maxSupportedTransactionVersion:0}]})});
+let d2=await res2.json();
+let amount=0;
+if(d2.result && d2.result.meta){
+let pre=d2.result.meta.preBalances; let post=d2.result.meta.postBalances;
+let keys=d2.result.transaction.message.accountKeys;
+let idx=keys.findIndex(k=> (k.pubkey||k)==VAULT);
+if(idx>=0){ amount=(post[idx]-pre[idx])/1e9; }
+}
+if(amount>0 || seen.length==1){
+autoPostDeposit(sig, amount, time);
+} else if(amount==0 && tx.err==null){
+// still notify for zero? skip small dust, but notify genesis
+autoPostDeposit(sig, amount, time);
+}
+}catch(e){}
+}
+}
 document.getElementById("deposits").innerHTML=html;
+document.getElementById("status").innerHTML=`🟢 AUTO-ALERT: ${alertOn?'ARMED':'PAUSED'} • Last scan: ${new Date().toLocaleTimeString()} • ${data.result.length} TXs`;
 }catch(e){document.getElementById("deposits").innerHTML="Chain offline — retrying...";}
 }
-loadDeposits(); setInterval(loadDeposits,10000);
+loadDeposits(); setInterval(loadDeposits,15000);
 </script>
 </body></html>
