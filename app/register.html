@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Register — Cedars of Wealth | Shiny Military</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+ --mil:#4B5320; --mil-light:#6B7F3A;
+ --mil-shiny:linear-gradient(135deg,#5a6d33 0%,#8da65b 25%,#4B5320 50%,#6B7F3A 75%,#3c4a1f 100%);
+ --gold:linear-gradient(135deg,#e8c87a 0%,#f9e2a0 25%,#c9a86a 50%,#e8c87a 75%,#a68b4f 100%);
+ --bg:#070a07; --card:#111d0e; --input:#0f1a0a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(ellipse at top,#1a2a12 0%,var(--bg) 70%);color:#e8f0d8;font-family:Inter,sans-serif;min-height:100vh}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:14px 5%;background:linear-gradient(90deg,#0f1a0a,#1c2b12);border-bottom:2px solid #c9a86a}
+.logo{font-family:Cinzel;font-size:20px;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}
+.wrap{display:grid;grid-template-columns:1.1fr 0.9fr;gap:24px;padding:30px 5%;max-width:1300px;margin:0 auto}
+.card{background:rgba(18,28,12,0.96);border:2px solid #c9a86a;border-radius:16px;padding:22px;box-shadow:0 8px 32px rgba(0,0,0,0.7),inset 0 1px 0 rgba(232,200,122,0.2)}
+.card h2{font-family:Cinzel;color:#f0e6c8;margin-bottom:6px}
+.label{font-size:11px;letter-spacing:1px;color:#e8c87a;margin:12px 0 6px;display:block}
+.input{width:100%;background:var(--input);border:1px solid #3c4a1f;border-radius:10px;padding:12px 14px;color:#e8f0d8;outline:none;font-size:14px}
+.input:focus{border-color:#c9a86a;box-shadow:0 0 0 3px rgba(201,168,106,0.2)}
+.btn{background:var(--mil-shiny);color:#f5f0d0;border:2px solid #c9a86a;padding:12px 20px;border-radius:10px;font-weight:800;cursor:pointer;width:100%;text-transform:uppercase;letter-spacing:1px;box-shadow:0 0 15px rgba(201,168,106,0.35),inset 0 1px 0 rgba(255,255,255,0.25)}
+.btn:hover{filter:brightness(1.15)}
+.badge{background:var(--gold);color:#1a1100;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:800;display:inline-block}
+.bar{height:6px;background:#1a2410;border-radius:10px;border:1px solid #4B5320;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--mil-shiny)}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.calc-item{background:#0f1a0a;border:1px solid #2a3a15;border-radius:10px;padding:10px;text-align:center}
+.calc-item b{display:block;font-size:18px;color:#e8c87a}
+.ref-box{background:linear-gradient(90deg,#1a2a12,#0f1a0a);border:1px dashed #c9a86a;border-radius:10px;padding:12px;margin-top:10px}
+.small{font-size:11px;color:#7a8a5f}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="nav">
+<div class="logo">🌲 CEDARS OF WEALTH</div>
+<div style="display:flex;gap:10px;align-items:center"><span class="badge">SHINY MILITARY LOCKED</span><a href="../index.html" style="color:#c9a86a;text-decoration:none;font-size:12px">← Back to Vaults</a></div>
+</div>
+
+<div class="wrap">
+<!-- REGISTER FORM -->
+<div class="card">
+<h2>Investor Registration</h2>
+<p class="small">One Investor • One Account • Military Grade Lock 🪖</p>
+
+<div id="refAlert" class="ref-box" style="display:none">
+<span class="small">REFERRED BY:</span><br>
+<b id="refBy" style="color:#e8c87a"></b><br>
+<span class="small">You earn bonus, your upline earns 10% L1</span>
+</div>
+
+<label class="label">FULL NAME *</label>
+<input id="fullName" class="input" placeholder="John Doe">
+
+<label class="label">EMAIL *</label>
+<input id="email" type="email" class="input" placeholder="john@email.com">
+
+<label class="label">PHONE (WhatsApp) *</label>
+<input id="phone" class="input" placeholder="+256...">
+
+<label class="label">PASSWORD *</label>
+<input id="pass" type="password" class="input" placeholder="Min 8 characters">
+
+<label class="label">CONFIRM PASSWORD *</label>
+<input id="pass2" type="password" class="input" placeholder="Repeat password">
+
+<label class="label">REFERRAL CODE (Optional)</label>
+<input id="refCode" class="input" placeholder="e.g. CEDARS123">
+
+<div style="margin:14px 0;display:flex;gap:8px;align-items:flex-start">
+<input type="checkbox" id="agree" style="margin-top:3px">
+<label for="agree" class="small" style="cursor:pointer">I agree to 1.5% daily, $20 min withdrawal, One account policy. I understand deposit is not wallet connect, KYC required for withdrawal.</label>
+</div>
+
+<button class="btn" onclick="register()">CREATE SHINY MILITARY ACCOUNT →</button>
+
+<div id="lockInfo" class="small" style="margin-top:12px;background:#0a1406;padding:8px;border-radius:8px;border-left:3px solid #4B5320">
+🔒 Device ID: <span id="deviceId">generating...</span><br>
+IP: Detecting... • Duplicate accounts auto-banned
+</div>
+
+<p class="small" style="margin-top:12px;text-align:center">Already have account? <a href="login.html" style="color:#e8c87a">Login</a> • <a href="../index.html" style="color:#e8c87a">View Vaults</a></p>
+</div>
+
+<!-- CALCULATOR + EARNINGS -->
+<div>
+<div class="card">
+<div style="display:flex;justify-content:space-between"><b style="color:#e8c87a">DEPOSIT CALCULATOR</b><span class="badge">1.5% DAILY</span></div>
+
+<label class="label">DEPOSIT AMOUNT (USD) $100 - $50,000</label>
+<input id="depAmount" type="range" min="100" max="50000" step="100" value="1000" style="width:100%;accent-color:#4B5320" oninput="calc()">
+<div style="display:flex;justify-content:space-between;margin-top:6px">
+<span class="small">$100</span><b id="depDisplay" style="color:#e8c87a;font-size:20px">$1,000</b><span class="small">$50k</span>
+</div>
+
+<div class="calc-grid">
+<div class="calc-item"><span class="small">DAILY</span><b id="daily">$15.00</b><span class="small">1.5%</span></div>
+<div class="calc-item"><span class="small">WEEKLY</span><b id="weekly">$105.00</b><span class="small">7 days</span></div>
+<div class="calc-item"><span class="small">MONTHLY</span><b id="monthly">$450.00</b><span class="small">30 days</span></div>
+<div class="calc-item"><span class="small">100 DAYS</span><b id="hundred">$1,500.00</b><span class="small">150% Profit</span></div>
+</div>
+
+<div style="margin-top:14px">
+<div class="small">REFERRAL EARNINGS ON THIS DEPOSIT</div>
+<div class="ref-box" style="font-size:12px;line-height:1.8">
+L1 (10%): <b id="l1" style="color:#e8c87a">$100.00</b> Direct<br>
+L2 (5%): <b id="l2">$50.00</b> • L3 (2%): <b id="l3">$20.00</b> • L4 (1%): <b id="l4">$10.00</b>
+</div>
+</div>
+
+<button class="btn" style="margin-top:14px" onclick="goDeposit()">PROCEED TO DEPOSIT →</button>
+</div>
+
+<div class="card" style="margin-top:14px">
+<b style="color:#e8c87a;font-size:12px">🪖 SHINY MILITARY RULES</b>
+<div class="small" style="margin-top:8px;line-height:1.7">
+• One Investor = One Account (Device + IP + Email locked)<br>
+• Min Deposit $100 • Min Withdrawal $20 • 5% Fee<br>
+• 1.5% Daily auto-credit 00:00 UTC<br>
+• Principal locked 30 days, earnings withdraw anytime<br>
+• KYC required before first withdrawal<br>
+• Referral bonus instant after deposit confirmed
+</div>
+<div class="bar" style="margin-top:12px"><i style="width:74%"></i></div>
+<div class="small" style="display:flex;justify-content:space-between;margin-top:4px"><span>Vault Capacity 74%</span><span style="color:#e8c87a">$18.4M / $25M</span></div>
+</div>
+</div>
+</div>
+
+<script>
+// === ONE ACCOUNT LOCK ===
+function getDeviceId(){
+ let fp = navigator.userAgent + "|" + screen.width + "x" + screen.height + "|" + navigator.language + "|" + Intl.DateTimeFormat().resolvedOptions().timeZone;
+ let hash=0; for(let i=0;i<fp.length;i++){hash=((hash<<5)-hash)+fp.charCodeAt(i); hash|=0;}
+ return "DEV-" + Math.abs(hash).toString(36).toUpperCase() + "-" + (Math.abs(hash*2)%1000);
+}
+const deviceId = getDeviceId();
+document.getElementById('deviceId').textContent = deviceId;
+
+// REF CAPTURE
+function getRef(){
+ const url = new URLSearchParams(window.location.search);
+ let ref = url.get('ref') || localStorage.getItem('cedars_ref') || "";
+ if(url.get('ref')){ localStorage.setItem('cedars_ref', url.get('ref')); }
+ return ref;
+}
+const refFromUrl = getRef();
+if(refFromUrl){
+ document.getElementById('refAlert').style.display='block';
+ document.getElementById('refBy').textContent = refFromUrl;
+ document.getElementById('refCode').value = refFromUrl;
+}
+
+// CALCULATOR
+function calc(){
+ let amt = parseInt(document.getElementById('depAmount').value);
+ document.getElementById('depDisplay').textContent = "$" + amt.toLocaleString();
+ let daily = amt * 0.015;
+ document.getElementById('daily').textContent = "$" + daily.toFixed(2);
+ document.getElementById('weekly').textContent = "$" + (daily*7).toFixed(2);
+ document.getElementById('monthly').textContent = "$" + (daily*30).toFixed(2);
+ document.getElementById('hundred').textContent = "$" + (daily*100).toFixed(2);
+ document.getElementById('l1').textContent = "$" + (amt*0.10).toFixed(2);
+ document.getElementById('l2').textContent = "$" + (amt*0.05).toFixed(2);
+ document.getElementById('l3').textContent = "$" + (amt*0.02).toFixed(2);
+ document.getElementById('l4').textContent = "$" + (amt*0.01).toFixed(2);
+}
+calc();
+
+function register(){
+ let name = document.getElementById('fullName').value.trim();
+ let email = document.getElementById('email').value.trim().toLowerCase();
+ let phone = document.getElementById('phone').value.trim();
+ let p1 = document.getElementById('pass').value;
+ let p2 = document.getElementById('pass2').value;
+ let ref = document.getElementById('refCode').value.trim();
+ let agree = document.getElementById('agree').checked;
+
+ if(!name || !email || !phone || !p1){ alert("Fill all * fields"); return; }
+ if(p1.length<8){ alert("Password min 8 chars"); return; }
+ if(p1!==p2){ alert("Passwords don't match"); return; }
+ if(!agree){ alert("Agree to rules"); return; }
+
+ // ONE ACCOUNT CHECK
+ let existing = JSON.parse(localStorage.getItem('cedars_users')||"[]");
+ if(existing.find(u=>u.email===email)){ alert("One Investor One Account — Email already registered!"); return; }
+ if(existing.find(u=>u.deviceId===deviceId)){ alert("One Investor One Account — Device already registered! Use Login."); return; }
+
+ let user = { name,email,phone,refBy:ref||refFromUrl||"DIRECT", deviceId, ip:"auto", created:Date.now(), kyc:"pending", balance:0, earnings:0 };
+ existing.push(user);
+ localStorage.setItem('cedars_users', JSON.stringify(existing));
+ localStorage.setItem('cedars_current', JSON.stringify(user));
+ localStorage.setItem('cedars_ref_code', email.split('@')[0].toUpperCase()+Math.floor(Math.random()*999));
+
+ alert("✅ SHINY MILITARY ACCOUNT CREATED!\n\nName: "+name+"\nRef Code: "+localStorage.getItem('cedars_ref_code')+"\nDevice Locked: "+deviceId+"\n\nNext: KYC + Deposit");
+ window.location.href = "kyc.html";
+}
+function goDeposit(){
+ let amt = document.getElementById('depAmount').value;
+ localStorage.setItem('cedars_deposit_intent', amt);
+ window.location.href = "deposit.html?amount="+amt;
+}
+</script>
+</body>
+</html>
