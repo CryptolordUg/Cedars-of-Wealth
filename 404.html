@@ -1,1 +1,27 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>404 Redirect</title><meta http-equiv="refresh" content="2;url=index.html"><style>body{background:#020a14;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;height:100vh;text-align:center}.card{background:linear-gradient(145deg,#1c2e55,#2a3f6d);border:1px solid #4a6aaa;border-radius:20px;padding:30px}</style></head><body><div class="card"><div style="font-size:48px;">🌲</div><div style="font-size:24px;font-weight:bold;">404 - Redirecting to Cedars</div><div style="color:#7da8d0;margin-top:10px;">Treasury 6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb - Solana Only - $5-$100k</div><a href="index.html" style="color:#7de8ff;">Go Home</a></div></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="0; url=/Cedars-of-Wealth/app/login.html">
+<script>
+// Shiny Military 404 Fix — Don't block /app/ folder
+const path = window.location.pathname;
+if(path.includes('/app/')){
+  // If user requested /app/deposit.html etc, let it load — don't redirect to Solana
+  const file = path.split('/app/')[1];
+  if(file){
+    window.location.href = '/Cedars-of-Wealth/app/' + file + window.location.search;
+  } else {
+    window.location.href = '/Cedars-of-Wealth/app/login.html';
+  }
+} else {
+  window.location.href = '/Cedars-of-Wealth/app/login.html';
+}
+</script>
+<title>Redirecting — Cedars of Wealth</title>
+</head>
+<body style="background:#070a07;color:#c9a86a;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh">
+Redirecting to Shiny Military Dashboard...<br>
+Vault: TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u
+</body>
+</html>
