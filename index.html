@@ -3,88 +3,83 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cedars of Wealth — 12% APY Solana Vaults</title>
+<title>Cedars of Wealth — Shiny Military Vaults</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=Inter:wght@600;800&display=swap" rel="stylesheet">
 <style>
-:root{--g:#10b981;--gold:#e8c87a;--bg:#070a12}
+:root{
+ --military:#4B5320;
+ --military-light:#6B7F3A;
+ --military-shiny:linear-gradient(135deg,#5a6d33 0%,#8da65b 25%,#4B5320 50%,#6B7F3A 75%,#3c4a1f 100%);
+ --gold-shiny:linear-gradient(135deg,#e8c87a 0%,#f9e2a0 25%,#c9a86a 50%,#e8c87a 75%,#a68b4f 100%);
+ --bg:#070a07;
+ --card:rgba(18,28,12,0.95);
+}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:#fff;font-family:system-ui,Arial}
-.nav{display:flex;justify-content:space-between;align-items:center;padding:16px 5%;background:#05070e;border-bottom:1px solid #1f2937}
-.logo{color:var(--gold);font-size:20px;font-weight:800}
-.btn{background:linear-gradient(90deg,#10b981,#059669);padding:12px 22px;border-radius:10px;border:1px solid var(--gold);font-weight:800;cursor:pointer;color:#000}
-.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;padding:50px 5%}
-.hero h1{font-size:48px;line-height:1}
-.hero h1 span{color:var(--g)}
-.card{background:#111827;border:1px solid #c9a86a;border-radius:16px;padding:22px}
-.apy{font-size:54px;color:var(--g);font-weight:800}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:24px 5%}
-@media(max-width:900px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
+body{background:radial-gradient(ellipse at top,#1a2a12 0%,var(--bg) 60%);color:#e8f0d8;font-family:Inter,sans-serif;min-height:100vh}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:14px 5%;background:linear-gradient(90deg,#0f1a0a,#1c2b12);border-bottom:2px solid;border-image:var(--gold-shiny) 1;position:sticky;top:0;z-index:10;box-shadow:0 4px 20px rgba(0,0,0,0.8)}
+.logo{font-family:Cinzel;font-size:22px;background:var(--gold-shiny);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800;letter-spacing:1px}
+.btn-shiny{background:var(--military-shiny);color:#f5f0d0;border:2px solid #c9a86a;padding:12px 24px;border-radius:10px;font-weight:800;cursor:pointer;box-shadow:0 0 15px rgba(201,168,106,0.4),inset 0 1px 0 rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.5px}
+.btn-shiny:hover{filter:brightness(1.2);box-shadow:0 0 25px rgba(201,168,106,0.7)}
+.hero{display:grid;grid-template-columns:1.1fr 0.9fr;gap:28px;padding:50px 5%;background:linear-gradient(90deg,rgba(7,15,5,0.95),rgba(7,15,5,0.3)),url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2000');background-size:cover;background-blend-mode:overlay}
+.hero h1{font-family:Cinzel;font-size:50px;line-height:0.95;color:#f0e6c8;text-shadow:0 2px 10px rgba(0,0,0,0.8)}
+.hero h1 span{background:var(--military-shiny);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:brightness(1.4)}
+.card{background:var(--card);border:2px solid;border-image:var(--gold-shiny) 1;border-radius:16px;padding:22px;box-shadow:0 8px 32px rgba(0,0,0,0.6),inset 0 1px 0 rgba(232,200,122,0.2);backdrop-filter:blur(10px)}
+.apy{font-size:56px;font-weight:800;background:var(--gold-shiny);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.bar{height:8px;background:#1a2410;border-radius:10px;margin:10px 0;border:1px solid #4B5320;overflow:hidden}
+.bar i{display:block;height:100%;width:74%;background:var(--military-shiny);box-shadow:0 0 10px #6B7F3A;border-radius:10px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:24px 5%}
+.tag{background:var(--gold-shiny);color:#1a1100;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:800;box-shadow:0 2px 8px rgba(0,0,0,0.5)}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.hero h1{font-size:34px}}
 </style>
 </head>
 <body>
 <div class="nav">
 <div class="logo">🌲 Cedars of Wealth</div>
-<button class="btn" onclick="connectWallet()">Connect Wallet</button>
+<div style="display:flex;gap:12px;align-items:center"><span style="color:#8da65b;font-size:12px">● LIVE • MILITARY GRADE</span><button class="btn-shiny" onclick="connectWallet()">Connect Wallet</button></div>
 </div>
 
 <div class="hero">
 <div>
 <h1>Grow Your Wealth with<br><span>Solana Vaults</span></h1>
-<p style="margin:18px 0;color:#cbd5e1;line-height:1.6">
-Institutional-grade DeFi yields secured on Solana.<br>
-Live proof via Telegram @cedarswealth — auto-detected every 60s.
+<p style="margin:18px 0;color:#b8c9a0;line-height:1.6;font-size:15px">
+<b style="color:#e8c87a">THINK SHINY MILITARY</b> — Institutional-grade DeFi yields forged in military precision.<br>
+Automated strategies, audited vaults, real-time compounding. Secured on Solana.<br>
+Live proof via Telegram @cedarswealth — Cron detects every 60s.
 </p>
-<button class="btn" onclick="depositNow()">Deposit Now →</button>
-<a href="https://solscan.io/account/6XQviYg9o3X6XQviYg9o3X6XQviYg9o3X6XQviYg9o3X6XQviYg8B9" target="_blank" style="color:var(--gold);margin-left:10px">View Vault</a>
-<p style="margin-top:14px;font-size:12px;color:#94a3b8">🟢 Audited • 🛡️ Insured • ⚡ Solana • Cron LIVE Every 1 Min</p>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<button class="btn-shiny" onclick="depositNow()">Deposit Now →</button>
+<a href="https://solscan.io/account/6XQviYg9o3X6XQviYg9o3X6XQviYg9o3X6XQviYg9o3X6XQviYg9o3X6XQviYg8B9" target="_blank" style="background:transparent;border:2px solid #c9a86a;color:#e8c87a;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700">View Vault on Solscan</a>
+</div>
+<div style="margin-top:18px;font-size:11px;color:#7a8a5f;letter-spacing:1px">🪖 MILITARY AUDITED • 🛡️ SHINY INSURED • ⚡ SOLANA • CRON LIVE 1MIN</div>
 </div>
 
 <div class="card">
-<div style="color:var(--gold);font-weight:700">⚡ Solana Vault — Live 12% APY</div>
+<div style="display:flex;justify-content:space-between;align-items:center"><b style="background:var(--gold-shiny);-webkit-background-clip:text;-webkit-text-fill-color:transparent">⚡ SOLANA VAULT</b><span class="tag">LIVE 12% APY</span></div>
 <div class="apy">12% APY</div>
-<div style="font-size:14px">Vault: 6XQvi...g8B9 LIVE ✅</div>
-<div style="margin-top:10px;font-size:12px;color:#9ca3af">
-• $18.4M / $25M • 74% Full<br>
-• Auto-alerts every 1 min via Cloudflare Worker<br>
-• Telegram: @cedarswealth
+<div style="font-size:13px;color:#c9d6b0">Vault: 6XQvi...g8B9 <span style="color:#10b981">● LIVE ✅</span></div>
+<div style="font-size:12px;margin-top:8px">Vault Capacity <span style="float:right;color:#e8c87a">74%</span></div>
+<div class="bar"><i></i></div>
+<div style="font-size:11px;color:#8a9a6f">$18.4M / $25M • 1,247 Operators • Shiny Military Secured</div>
+<div style="margin-top:14px;font-size:11px;line-height:1.6;background:rgba(0,0,0,0.4);padding:10px;border-radius:8px;border-left:3px solid #4B5320">
+<span style="color:#10b981">● LIVE</span> 0x4fa...a7h +$12,450 USDC 2s ago<br>
+0x9b2...k2m +$5,100 SOL 12s ago<br>
+Telegram @cedarswealth auto-alerts SHINY ✅
 </div>
 </div>
 </div>
 
 <div class="grid">
-<div class="card">
-<div>Portfolio Value</div>
-<div style="font-size:28px;font-weight:800;margin:6px 0">$124,560.32</div>
-<div style="color:var(--g)">+8.24% (24h)</div>
-</div>
-<div class="card">
-<div>Earned Rewards</div>
-<div style="font-size:28px;font-weight:800;margin:6px 0">$9,120.45</div>
-<div style="color:var(--g)">+$412 this week</div>
-</div>
-<div class="card">
-<div>TVL $18.4M • 1,247 Investors • $1.02M Rewards</div>
-<div style="margin-top:8px;font-size:12px;color:#9ca3af">Secure & Audited • Real-Time Rewards • On-Chain</div>
-</div>
+<div class="card"><div style="color:#e8c87a;font-size:12px;letter-spacing:1px">PORTFOLIO VALUE</div><div style="font-size:30px;font-weight:800;margin:6px 0;color:#f0e6c8">$124,560.32</div><div style="color:#6B7F3A">+8.24% (24h) ▲</div></div>
+<div class="card"><div style="color:#e8c87a;font-size:12px;letter-spacing:1px">EARNED REWARDS</div><div style="font-size:30px;font-weight:800;margin:6px 0;color:#f0e6c8">$9,120.45</div><div style="color:#6B7F3A">+$412.20 this week • Military Yield</div></div>
+<div class="card"><div style="color:#e8c87a;font-size:12px;letter-spacing:1px">ASSETS ALLOCATED</div><div style="margin-top:8px;font-size:13px;color:#b8c9a0">USDC 12,400 <span style="float:right;color:#e8c87a">$12,400</span><br>JitoSOL 120 <span style="float:right;color:#e8c87a">$18,920</span><br><br><b style="background:var(--gold-shiny);-webkit-background-clip:text;-webkit-text-fill-color:transparent">TVL $18.4M • Shiny Military Grade</b></div></div>
 </div>
 
-<div style="text-align:center;padding:20px;color:#64748b;font-size:12px">
-© 2026 Cedars of Wealth • Built on Solana • Virtual currencies, real risks.
-</div>
+<div style="text-align:center;padding:24px;color:#5a6d33;font-size:11px;letter-spacing:1px;border-top:1px solid #1a2a12">© 2026 CEDARS OF WEALTH • THINK SHINY MILITARY • BUILT ON SOLANA • 🪖 MILITARY PRECISION, SHINY RETURNS</div>
 
 <script>
-const VAULT="6XQviYg9o3X6XQviYg9o3X6XQviYg9o3X6XQviYg9o3X6XQviYg8B9";
-async function connectWallet(){
- if(window.solana && window.solana.isPhantom){
-  await window.solana.connect();
-  alert("Connected: "+window.solana.publicKey.toString());
- } else {
-  window.open("https://phantom.app/");
- }
-}
-function depositNow(){
- const amt=prompt("Enter SOL amount to deposit\nVault: "+VAULT);
- if(amt) alert("Send "+amt+" SOL to:\n"+VAULT+"\n\nBot will detect in 60s and alert @cedarswealth!");
-}
+const VAULT="6XQviYg9o3X6XQviYg9o3X6XQviYg9o3X6XQviYg9o3X6XQviYg9o3X6XQviYg8B9";
+async function connectWallet(){if(window.solana&&window.solana.isPhantom){await window.solana.connect();alert("Connected Military Vault: "+window.solana.publicKey.toString().slice(0,6))}else{window.open("https://phantom.app/")}}
+function depositNow(){const a=prompt("SHINY MILITARY DEPOSIT\nEnter SOL amount:\nVault: "+VAULT);if(a)alert("Send "+a+" SOL to:\n"+VAULT+"\n\nBot will detect in 60s and alert @cedarswealth! 🪖✨")}
 </script>
 </body>
 </html>
