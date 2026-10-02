@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CEDARS COMMAND CENTER v6 GLORY</title>
+<title>CEDARS COMMAND CENTER v6.1 GLORY FIXED</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
@@ -16,7 +16,7 @@ textarea,input{width:100%;background:#000;color:#fff;border:1px solid #f5c518;bo
 .btn{width:100%;padding:15px;border-radius:14px;border:none;font-weight:900;cursor:pointer;margin-top:10px;font-size:15px;letter-spacing:.5px}
 .gold{background:linear-gradient(180deg,#ffe27a,#f5c518);color:#000;box-shadow:0 0 20px rgba(245,197,24,.6)}
 .black{background:#000;color:#f5c518;border:1px solid #f5c518}
-#st{margin-top:12px;padding:12px;border-radius:12px;font-weight:bold;min-height:18px}
+#st{margin-top:12px;padding:12px;border-radius:12px;font-weight:bold;min-height:18px;word-break:break-all}
 .ok{background:#0a1a0a;border:1px solid #0f0;color:#0f0}
 .err{background:#1a0a0a;border:1px solid #f55;color:#f88}
 .dep{font-size:12px;padding:10px;border-bottom:1px solid rgba(245,197,24,.15);display:flex;justify-content:space-between}
@@ -25,10 +25,8 @@ textarea,input{width:100%;background:#000;color:#fff;border:1px solid #f5c518;bo
 </head><body>
 
 <div class="hdr">
-<h1>🌲 CEDARS OF WEALTH<br><span style="font-size:12px;color:#aaa;font-family:Inter">COMMAND CENTER v6 GLORY</span></h1>
-<div style="display:flex;gap:8px;align-items:center">
+<h1>🌲 CEDARS OF WEALTH<br><span style="font-size:12px;color:#aaa;font-family:Inter">COMMAND CENTER v6.1 GLORY FIXED</span></h1>
 <div class="badge">🔒 SECURE • @cedarswealth • ONLINE</div>
-</div>
 </div>
 
 <div class="grid">
@@ -38,7 +36,6 @@ textarea,input{width:100%;background:#000;color:#fff;border:1px solid #f5c518;bo
 <div class="vault">6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div>
 <p style="color:#888;font-size:12px;margin:8px 0 0">Network: Solana Mainnet • Bot: @cedars_6XQvi_720_bot</p>
 </div>
-
 <div class="card" style="margin-top:16px">
 <h2>📊 LIVE DEPOSITS — Auto 10s</h2>
 <div id="deposits" style="color:#aaa">Scanning chain...</div>
@@ -62,7 +59,7 @@ Bot: @cedars_6XQvi_720_bot</textarea>
 <button class="btn gold" onclick="send()">🚀 SEND TO @cedarswealth</button>
 <button class="btn black" onclick="sendPoster()">🖼️ SEND POSTER + QR</button>
 <div id="st"></div>
-<p style="color:#666;font-size:11px;margin-top:10px">Token locked • Chat locked • CORS bypass active • Glory UI v6</p>
+<p style="color:#666;font-size:11px;margin-top:10px">Token locked • Chat locked • CORS bypass active • Glory UI v6.1 FIXED</p>
 </div>
 </div>
 
@@ -78,16 +75,28 @@ s.className=""; s.innerHTML="⏳ Posting to glory channel...";
 let url=`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${encodeURIComponent(CHAT_ID)}&text=${encodeURIComponent(m)}`;
 try{
 let r=await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`);
-let d=await r.json();
+let txt=await r.text();
+let d;
+try{d=JSON.parse(txt);}catch(e){window.open(url,"_blank"); s.className="ok"; s.innerHTML="✅ Backup tab opened — if {ok:true} → Posted to @cedarswealth"; return;}
 if(d.ok){s.className="ok"; s.innerHTML=`✅ GLORY POSTED — Message ID ${d.result.message_id} — Check @cedarswealth`;}
-else{s.className="err"; s.innerHTML=`❌ ${d.description}`;}
+else{s.className="err"; s.innerHTML=`❌ ${d.description||txt.slice(0,200)} — Opening backup...`; window.open(url,"_blank");}
 }catch(e){s.className=""; s.innerHTML="Opening secure tab..."; window.open(url,"_blank"); s.innerHTML=`If tab shows {ok:true} → Posted to @cedarswealth ✅`;}
 }
 
 async function sendPoster(){
 let s=document.getElementById("st");
-let url=`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto?chat_id=${encodeURIComponent(CHAT_ID)}&photo=${encodeURIComponent("https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb")}&caption=${encodeURIComponent("🌲 CEDARS OF WEALTH v6 GLORY\n\nVault: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb\n\nVerify: https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/verify.html\n\nJoin: t.me/cedarswealth")}`;
-window.open(url,"_blank"); s.className="ok"; s.innerHTML="✅ Poster sent — check @cedarswealth";
+s.className=""; s.innerHTML="⏳ Sending poster...";
+let qr="https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb";
+let caption="🌲 CEDARS OF WEALTH v6 GLORY\n\nVault: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb\n\nVerify: https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/verify.html\nJoin: t.me/cedarswealth";
+let url=`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto?chat_id=${encodeURIComponent(CHAT_ID)}&photo=${encodeURIComponent(qr)}&caption=${encodeURIComponent(caption)}`;
+try{
+let r=await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`);
+let txt=await r.text();
+let d;
+try{d=JSON.parse(txt);}catch(e){window.open(url,"_blank"); s.className="ok"; s.innerHTML="✅ Poster tab opened — if {ok:true} — check @cedarswealth"; return;}
+if(d.ok){s.className="ok"; s.innerHTML=`✅ POSTER POSTED — ID ${d.result.message_id}`;}
+else{s.className="err"; s.innerHTML=`❌ ${d.description||txt.slice(0,200)} — Opening backup tab...`; window.open(url,"_blank");}
+}catch(e){window.open(url,"_blank"); s.className="ok"; s.innerHTML="✅ Poster backup opened — check channel";}
 }
 
 async function loadDeposits(){
