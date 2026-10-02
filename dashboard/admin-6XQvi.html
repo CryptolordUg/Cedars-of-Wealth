@@ -1,37 +1,66 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS 360 VAULT COMMAND</title>
-<style>*{margin:0;padding:0;box-sizing:border-box}body{background:#000;color:#f5c518;font-family:monospace;overflow:hidden}.h{position:fixed;top:0;left:0;right:0;height:48px;background:#111;border-bottom:2px solid #f5c518;display:flex;align-items:center;justify-content:space-between;padding:0 12px;z-index:99}.m{margin-top:48px;height:calc(100vh - 48px);display:grid;grid-template-columns:300px 1fr 300px;gap:8px;padding:8px}.c{background:#0a0a0a;border:1px solid #333;border-radius:12px;padding:10px;overflow:auto}.stat{font-size:26px;font-weight:900}.btn{background:#f5c518;color:#000;border:none;padding:8px;border-radius:8px;font-weight:900;width:100%;margin-top:6px;cursor:pointer}.tx{font-size:10px;padding:5px;border-bottom:1px solid #222;word-break:break-all}iframe{border:0;width:100%;height:380px;border-radius:10px;background:#111}</style></head><body>
-<div class="h"><b>🌲 CEDARS VAULT 360° ● LIVE</b><span id="solprice" style="font-size:11px">SOL $0</span></div>
-<div class="m">
-<div>
-<div class="c"><h3>💰 VAULT</h3><div class="stat" id="vBal">0 SOL</div><div id="vUsd" style="font-size:11px;opacity:.7">$0</div><div style="font-size:9px;opacity:.6">6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div><button class="btn" onclick="load()">REFRESH</button><button class="btn" onclick="voiceOn=!voiceOn">🔊 VOICE TOGGLE</button></div>
-<div class="c"><h3>📡 INTEGRITY 0-100°</h3><div class="stat" id="int">100°</div><div id="last" style="font-size:10px">Last: --</div></div>
-<div class="c"><h3>🤖 TELEGRAM</h3><div style="font-size:10px">Chat: 1884572429<br>Bot: cedars_6XQvi_720_bot</div><div id="tg" style="font-size:10px;margin-top:4px">Status: OK</div><button class="btn" onclick="test()">TEST PING</button><button class="btn" onclick="localStorage.removeItem('cedars_bot_token');location.reload()">RESET TOKEN</button></div>
+<!DOCTYPE html>
+<html>
+<head>
+<title>CEDARS COMMAND CENTER | @cedars_6XQvi_720_bot</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>body{background:#000;color:#fff;font-family:Arial;padding:20px} .card{background:#0a0a0a;border:2px solid #f5c518;border-radius:15px;padding:20px;margin:15px 0} input,textarea{width:100%;padding:12px;margin:8px 0;border-radius:8px;background:#111;color:#fff;border:1px solid #f5c518}</style>
+</head>
+<body>
+<h1 style="color:#f5c518;">🌲 CEDARS COMMAND CENTER</h1>
+<p>Vault: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb | Bot: @cedars_6XQvi_720_bot</p>
+
+<div class="card">
+<h3>📊 LIVE DEPOSITS — Auto-refresh 10s</h3>
+<div id="deposits">Loading chain...</div>
 </div>
-<div><div class="c" style="height:100%"><h3>🔄 LIVE TX — 30s AUTO</h3><div id="txs" style="height:92%;overflow:auto">Loading...</div></div></div>
-<div><div class="c"><h3>💱 JUPITER</h3><iframe src="https://jup.ag/swap/SOL-USDC"></iframe></div><div class="c"><h3>📊 SOL</h3><div class="stat" id="vBal2">0 SOL</div></div></div>
-</div>
+
+<div class="card">
+<h2 style="color:#f5c518;">📡 CHANNEL MESSENGER — @cedars_6XQvi_720_bot</h2>
+<input id="tgChatId" value="@YOUR_CHANNEL" placeholder="@YourChannelUsername">
+<textarea id="tgMessage" rows="6">🌲 CEDARS OF WEALTH — VAULT OPEN 💰
+
+Vault: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb
+
+1️⃣ Send SOL
+2️⃣ Verify: https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/verify.html
+3️⃣ Auto-unlock
+
+Bot: @cedars_6XQvi_720_bot</textarea>
+<button onclick="sendTgMessage()" style="background:#f5c518;color:#000;padding:14px;width:100%;border:none;border-radius:10px;font-weight:bold;cursor:pointer;">🚀 SEND TO CHANNEL</button>
+<button onclick="sendPoster()" style="background:#111;color:#f5c518;padding:14px;width:100%;border:1px solid #f5c518;border-radius:10px;margin-top:10px;cursor:pointer;">🖼️ SEND POSTER</button>
+<div id="tgStatus" style="margin-top:10px;color:#0f0;"></div>
 <script>
-const VAULT="6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb";const RPC="https://api.mainnet-beta.solana.com";let lastSig="";let voiceOn=true;
-const CHAT_ID="1884572429";
-let BOT_TOKEN=localStorage.getItem("cedars_bot_token")||"";
-if(!BOT_TOKEN){BOT_TOKEN=prompt("Enter Telegram Bot Token (stored locally only):","8818013074:AAFM3-ovwdS9dq39gdmLrkD_lAx8IayQbSU")||""; if(BOT_TOKEN)localStorage.setItem("cedars_bot_token",BOT_TOKEN);}
-function speak(t){if(!voiceOn)return;try{speechSynthesis.speak(new SpeechSynthesisUtterance(t))}catch(e){}}
-function sendTG(m){if(!BOT_TOKEN)return;fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(m)}`).then(r=>r.json()).then(d=>{document.getElementById("tg").innerText=d.ok?"TG: ✅ LIVE":"TG: "+d.description}).catch(()=>{document.getElementById("tg").innerText="TG: Offline"});}
-function test(){sendTG(`🌲 CEDARS 360 TEST OK\nVault: ${VAULT}\nTime: ${new Date().toLocaleString()}\nBal: ${document.getElementById("vBal").innerText}\nhttps://solscan.io/account/${VAULT}`);speak("Telegram test sent");}
-async function load(){
- try{
-  let r=await fetch(RPC,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getBalance",params:[VAULT]})});let j=await r.json();let sol=(j.result.value/1e9).toFixed(4);
-  document.getElementById("vBal").innerText=sol+" SOL";document.getElementById("vBal2").innerText=sol+" SOL";
-  let pr=await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd").then(x=>x.json()).catch(()=>({solana:{usd:150}}));let p=pr.solana.usd;
-  document.getElementById("solprice").innerText="SOL $"+p;document.getElementById("vUsd").innerText="$"+(parseFloat(sol)*p).toFixed(2);
-  let sR=await fetch(RPC,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getSignaturesForAddress",params:[VAULT,{limit:20}]})});let sJ=await sR.json();let sigs=sJ.result||[];
-  document.getElementById("txs").innerHTML=sigs.map(s=>`<div class="tx">${s.signature.slice(0,20)}...<br>${new Date(s.blockTime*1000).toLocaleString()} | ${s.err?"❌":"✅"} <a href="https://solscan.io/tx/${s.signature}" target="_blank" style="color:#f5c518">View</a></div>`).join("")||"No tx";
-  document.getElementById("last").innerText="Last: "+new Date().toLocaleTimeString();document.getElementById("int").innerText=Math.floor(95+Math.random()*5)+"°";
-  if(sigs[0] && sigs[0].signature!==lastSig){if(lastSig!==""){sendTG(`🌲 VAULT ALERT 360°\nNEW TX IN!\n${sigs[0].signature}\n${new Date(sigs[0].blockTime*1000).toLocaleString()}\nhttps://solscan.io/tx/${sigs[0].signature}`);speak("New vault transaction");}lastSig=sigs[0].signature;}
-  if(!lastSig && sigs[0])lastSig=sigs[0].signature;
- }catch(e){document.getElementById("txs").innerText="Error: "+e.message;}
+const BOT_TOKEN="8818013074:AAFM3-ovwdS9dq39gdmLrkD_lAx8IayQbSU";
+async function sendTgMessage(){
+ let c=document.getElementById("tgChatId").value.trim();
+ let m=document.getElementById("tgMessage").value.trim();
+ let s=document.getElementById("tgStatus");
+ s.innerHTML="⏳ Sending...";
+ let r=await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chat_id:c,text:m})});
+ let d=await r.json();
+ s.innerHTML=d.ok?"✅ SENT to "+c:"❌ "+JSON.stringify(d);
 }
-load();setInterval(load,30000);
-sendTG(`🌲 CEDARS 360 ADMIN ONLINE\nVault: ${VAULT}\nChat: ${CHAT_ID}\n${new Date().toLocaleString()}`);
-speak("Cedars three sixty command online telegram active");
-</script></body></html>
+async function sendPoster(){
+ let c=document.getElementById("tgChatId").value.trim();
+ let s=document.getElementById("tgStatus");
+ s.innerHTML="⏳ Sending poster...";
+ let r=await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chat_id:c,photo:"https://api.qrserver.com/v1/create-qr-code/?size=800x800&data=6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb",caption:"🌲 CEDARS OF WEALTH\nVault: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb\nVerify: https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/verify.html"})});
+ let d=await r.json();
+ s.innerHTML=d.ok?"✅ POSTER SENT":"❌ "+JSON.stringify(d);
+}
+// Live deposits scan
+async function loadDeposits(){
+ try{
+  let res=await fetch("https://api.mainnet-beta.solana.com",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getSignaturesForAddress",params:["6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb",{limit:10}]})});
+  let data=await res.json();
+  let html="";
+  (data.result||[]).forEach(tx=>{html+=`<div style='border-bottom:1px solid #222;padding:8px;'>${tx.signature.slice(0,20)}... | ${new Date(tx.blockTime*1000).toLocaleString()}</div>`;});
+  document.getElementById("deposits").innerHTML=html||"No deposits yet";
+ }catch(e){document.getElementById("deposits").innerHTML="Error loading";}
+}
+loadDeposits(); setInterval(loadDeposits,10000);
+</script>
+</div>
+</div>
+</body>
+</html>
