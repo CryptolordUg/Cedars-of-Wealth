@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investment Plans - CEDARS OF WEALTH</title>
+<link rel="icon" href="logo.png">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui}
+body{background:#050505;color:#fff}
+.header{display:flex;justify-content:space-between;align-items:center;padding:16px 5%;background:#0a0a0a;border-bottom:1px solid #222;position:sticky;top:0;z-index:10}
+.logo{display:flex;align-items:center;gap:10px;width:20%;font-weight:900;font-size:18px}
+.logo img{width:36px;height:36px;border-radius:50%}
+.menu{display:flex;gap:24px;width:60%;justify-content:center;list-style:none}
+.menu a{color:#999;text-decoration:none;font-size:14px}.menu a:hover,.menu a.active{color:#14F195}
+.btns{width:20%;display:flex;justify-content:flex-end;gap:10px}
+.btn{padding:8px 16px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:700}
+.btn-o{border:1px solid #333;color:#fff}.btn-g{background:#14F195;color:#000}
+.hero{text-align:center;padding:60px 20px}
+.hero h1{font-size:42px;font-weight:900}.hero p{opacity:0.6;margin:12px 0 0}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;padding:20px 5% 80px;max-width:1300px;margin:0 auto}
+.card{background:#0F172A;border:1px solid #1e293b;border-radius:16px;padding:24px;position:relative;overflow:hidden}
+.card.popular{border:1px solid #14F195;transform:scale(1.03)}
+.badge{position:absolute;top:12px;right:12px;background:#14F195;color:#000;font-size:10px;padding:4px 10px;border-radius:20px;font-weight:800}
+.card h3{font-size:20px;margin-bottom:6px}.price{font-size:32px;font-weight:900;margin:12px 0;color:#14F195}.price span{font-size:14px;color:#666;font-weight:400}
+.meta{display:flex;justify-content:space-between;margin:8px 0;font-size:13px;opacity:0.7}
+.feat{margin:18px 0;list-style:none;font-size:13px;line-height:2}
+.feat li:before{content:"✓ ";color:#14F195;font-weight:900}
+.cta{width:100%;padding:12px;background:#14F195;color:#000;border:none;border-radius:10px;font-weight:900;cursor:pointer;margin-top:10px;text-align:center;display:block;text-decoration:none}
+.footer{border-top:1px solid #222;padding:30px 5%;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;opacity:0.6;font-size:13px}
+@media(max-width:767px){.menu{display:none}.footer{grid-template-columns:1fr 1fr}.card.popular{transform:none}}
+</style>
+</head>
+<body>
+
+<div class="header">
+<div class="logo"><img src="logo.png"> CEDARS OF WEALTH</div>
+<ul class="menu">
+<li><a href="index.html">Home</a></li>
+<li><a href="plans.html" class="active">Plans</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="faq.html">FAQ</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+<div class="btns">
+<a href="login.html" class="btn btn-o">Login</a>
+<a href="deposit.html" class="btn btn-g">Register</a>
+</div>
+</div>
+
+<div class="hero">
+<h1>Investment Plans</h1>
+<p>Transparent portfolio tracking — Secure withdrawals — Verified Treasury</p>
+<p style="font-size:12px;margin-top:10px;opacity:0.4">Treasury: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</p>
+</div>
+
+<div class="plans">
+<div class="card">
+<h3>🌱 Starter</h3>
+<div class="price">$100 <span>Minimum</span></div>
+<div class="meta"><span>Duration</span><span>90 Days</span></div>
+<div class="meta"><span>APY Target</span><span>8% - 12%</span></div>
+<ul class="feat"><li>Daily Accrual</li><li>Wallet Connect Only</li><li>Verified Treasury</li><li>Cancel Anytime</li></ul>
+<a href="deposit.html" class="cta">Invest Now</a>
+</div>
+
+<div class="card popular">
+<div class="badge">MOST POPULAR</div>
+<h3>💎 Growth</h3>
+<div class="price">$1,000 <span>Minimum</span></div>
+<div class="meta"><span>Duration</span><span>180 Days</span></div>
+<div class="meta"><span>APY Target</span><span>12% - 15%</span></div>
+<ul class="feat"><li>Compounding Option</li><li>Priority Withdrawal</li><li>Portfolio Dashboard</li><li>MEV + Staking Yield</li></ul>
+<a href="deposit.html" class="cta">Invest Now</a>
+</div>
+
+<div class="card">
+<h3>🚀 Wealth</h3>
+<div class="price">$5,000 <span>Minimum</span></div>
+<div class="meta"><span>Duration</span><span>360 Days</span></div>
+<div class="meta"><span>APY Target</span><span>15% - 18%</span></div>
+<ul class="feat"><li>Max Yield Strategy</li><li>Arbitrage + Staking</li><li>Dedicated Analytics</li><li>Solscan Verified</li></ul>
+<a href="deposit.html" class="cta">Invest Now</a>
+</div>
+</div>
+
+<div class="footer">
+<div><b>CEDARS OF WEALTH</b><br>Verified Treasury<br>Built for Wealth Growth</div>
+<div><b>Company</b><br><a href="about.html" style="color:#999">About</a><br><a href="plans.html" style="color:#999">Plans</a></div>
+<div><b>Support</b><br><a href="faq.html" style="color:#999">FAQ</a><br><a href="contact.html" style="color:#999">Help</a></div>
+<div><b>Legal</b><br><a href="privacy.html" style="color:#999">Privacy</a><br><a href="terms.html" style="color:#999">Terms</a><br><a href="risk.html" style="color:#999">Risk</a></div>
+</div>
+
+</body>
+</html>
