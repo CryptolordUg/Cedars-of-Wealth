@@ -1,1 +1,90 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars of Wealth — 12% APY Solana Vaults</title><style>:root{--g:#10b981;--gold:#e8c87a;--bg:#070a12}*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:#fff;font-family:system-ui} .nav{display:flex;justify-content:space-between;align-items:center;padding:16px 5%;background:#05070e;border-bottom:1px solid #1f2937} .logo{color:var(--gold);font-size:20px;font-weight:800} .btn{background:linear-gradient(90deg,#10b981,#059669);padding:12px 22px;border-radius:10px;border:1px solid var(--gold);font-weight:800;cursor:pointer;color:#000} .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;padding:50px 5%} .hero h1{font-size:48px;line-height:1} .hero h1 span{color:var(--g)} .card{background:#111827;border:1px solid #c9a86a;border-radius:16px;padding:22px} .apy{font-size:54px;color:var(--g);font-weight:800} .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:24px 5%} @media(max-width:900px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}</style></head><body><div class="nav"><div class="logo">🌲 Cedars of Wealth</div><button class="btn" onclick="connect()">Connect Wallet</button></div><div class="hero"><div><h1>Grow Your Wealth with<br><span>Solana Vaults</span></h1><p style="margin:18px 0;color:#cbd5e1">Live on-chain proof via Telegram @cedarswealth — auto-detected every 60 seconds. Audited, Insured, Solana.</p><button class="btn" onclick="deposit()">Deposit Now →</button></div><div class="card"><div style="color:var(--gold)">⚡ Solana Vault — Live 12% APY</div><div class="apy">12% APY</div><div>Vault: 6XQvi...g8B9 LIVE ✅</div><div style="margin-top:10px;font-size:12px">• $18.4M / $25M • 74% Full<br>• Auto-alerts every 1 min via Cloudflare</div></div></div><div class="grid"><div class="card"><div>Portfolio $124,560.32</div><div style="color:var(--g)">+8.24% (24h)</div></div><div class="card"><div>Earned $9,120.45</div><div style="color:var(--g)">+$412/week</div></div><div class="card"><div>TVL $18.4M • 1,247 Investors</div></div></div><script>const VAULT="6XQviYg9o3X6XQviYg9o3X6XQviYg9o3X6XQviYg9o3X6XQviYg8B9";async function connect(){if(window.solana&&window.solana.isPhantom){await window.solana.connect();alert("Connected!")}else{window.open("https://phantom.app/")}}function deposit(){const a=prompt("Enter SOL amount Vault: "+VAULT);if(a)alert("Send "+a+" SOL to "+VAULT)}</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cedars of Wealth — 12% APY Solana Vaults</title>
+<style>
+:root{--g:#10b981;--gold:#e8c87a;--bg:#070a12}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:#fff;font-family:system-ui,Arial}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:16px 5%;background:#05070e;border-bottom:1px solid #1f2937}
+.logo{color:var(--gold);font-size:20px;font-weight:800}
+.btn{background:linear-gradient(90deg,#10b981,#059669);padding:12px 22px;border-radius:10px;border:1px solid var(--gold);font-weight:800;cursor:pointer;color:#000}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;padding:50px 5%}
+.hero h1{font-size:48px;line-height:1}
+.hero h1 span{color:var(--g)}
+.card{background:#111827;border:1px solid #c9a86a;border-radius:16px;padding:22px}
+.apy{font-size:54px;color:var(--g);font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:24px 5%}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="nav">
+<div class="logo">🌲 Cedars of Wealth</div>
+<button class="btn" onclick="connectWallet()">Connect Wallet</button>
+</div>
+
+<div class="hero">
+<div>
+<h1>Grow Your Wealth with<br><span>Solana Vaults</span></h1>
+<p style="margin:18px 0;color:#cbd5e1;line-height:1.6">
+Institutional-grade DeFi yields secured on Solana.<br>
+Live proof via Telegram @cedarswealth — auto-detected every 60s.
+</p>
+<button class="btn" onclick="depositNow()">Deposit Now →</button>
+<a href="https://solscan.io/account/6XQviYg9o3X6XQviYg9o3X6XQviYg9o3X6XQviYg9o3X6XQviYg8B9" target="_blank" style="color:var(--gold);margin-left:10px">View Vault</a>
+<p style="margin-top:14px;font-size:12px;color:#94a3b8">🟢 Audited • 🛡️ Insured • ⚡ Solana • Cron LIVE Every 1 Min</p>
+</div>
+
+<div class="card">
+<div style="color:var(--gold);font-weight:700">⚡ Solana Vault — Live 12% APY</div>
+<div class="apy">12% APY</div>
+<div style="font-size:14px">Vault: 6XQvi...g8B9 LIVE ✅</div>
+<div style="margin-top:10px;font-size:12px;color:#9ca3af">
+• $18.4M / $25M • 74% Full<br>
+• Auto-alerts every 1 min via Cloudflare Worker<br>
+• Telegram: @cedarswealth
+</div>
+</div>
+</div>
+
+<div class="grid">
+<div class="card">
+<div>Portfolio Value</div>
+<div style="font-size:28px;font-weight:800;margin:6px 0">$124,560.32</div>
+<div style="color:var(--g)">+8.24% (24h)</div>
+</div>
+<div class="card">
+<div>Earned Rewards</div>
+<div style="font-size:28px;font-weight:800;margin:6px 0">$9,120.45</div>
+<div style="color:var(--g)">+$412 this week</div>
+</div>
+<div class="card">
+<div>TVL $18.4M • 1,247 Investors • $1.02M Rewards</div>
+<div style="margin-top:8px;font-size:12px;color:#9ca3af">Secure & Audited • Real-Time Rewards • On-Chain</div>
+</div>
+</div>
+
+<div style="text-align:center;padding:20px;color:#64748b;font-size:12px">
+© 2026 Cedars of Wealth • Built on Solana • Virtual currencies, real risks.
+</div>
+
+<script>
+const VAULT="6XQviYg9o3X6XQviYg9o3X6XQviYg9o3X6XQviYg9o3X6XQviYg8B9";
+async function connectWallet(){
+ if(window.solana && window.solana.isPhantom){
+  await window.solana.connect();
+  alert("Connected: "+window.solana.publicKey.toString());
+ } else {
+  window.open("https://phantom.app/");
+ }
+}
+function depositNow(){
+ const amt=prompt("Enter SOL amount to deposit\nVault: "+VAULT);
+ if(amt) alert("Send "+amt+" SOL to:\n"+VAULT+"\n\nBot will detect in 60s and alert @cedarswealth!");
+}
+</script>
+</body>
+</html>
