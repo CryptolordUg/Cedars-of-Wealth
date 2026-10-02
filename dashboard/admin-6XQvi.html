@@ -1,75 +1,37 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>CEDARS VAULT 360° COMMAND</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}body{background:#000;color:#f5c518;font-family:monospace;overflow:hidden}
-.header{position:fixed;top:0;left:0;right:0;height:50px;background:linear-gradient(90deg,#111,#222);border-bottom:2px solid #f5c518;display:flex;align-items:center;justify-content:space-between;padding:0 15px;z-index:999}
-.logo{font-weight:900;letter-spacing:2px;text-shadow:0 0 10px #f5c518}
-.live{color:#0f0;animation:blink 1s infinite}@keyframes blink{50%{opacity:0}}
-.main{margin-top:50px;height:calc(100vh - 50px);display:grid;grid-template-columns:320px 1fr 320px;gap:10px;padding:10px}
-.card{background:#0a0a0a;border:1px solid #333;border-radius:12px;padding:12px;overflow:auto;box-shadow:0 0 15px #000}
-.card h3{color:#f5c518;border-bottom:1px solid #333;padding-bottom:6px;margin-bottom:8px;font-size:13px}
-.stat{font-size:28px;font-weight:900} .sub{font-size:11px;opacity:.7}
-.tx{font-size:10px;padding:6px;border-bottom:1px solid #222;word-break:break-all}
-.btn{background:#f5c518;color:#000;border:none;padding:8px 12px;border-radius:8px;font-weight:900;cursor:pointer;width:100%;margin-top:6px}
-.btn:hover{background:#fff}
-iframe{border:none;border-radius:10px;width:100%;height:400px;background:#111}
-#shine{width:100%;height:120px;background:radial-gradient(circle,#f5c51844,#000);display:flex;align-items:center;justify-content:center;font-size:40px;border-radius:12px;animation:shine 2s infinite}
-@keyframes shine{0%,100%{filter:brightness(1)}50%{filter:brightness(2)}}
-</style></head><body>
-<div class="header"><div class="logo">🌲 CEDARS VAULT 360° <span class="live">● LIVE</span></div><div style="font-size:10px">VAULT 6XQvi...fTb | ADMIN LOCKED | <span id="solprice">SOL $0</span></div></div>
-<div class="main">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS 360 VAULT COMMAND</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}body{background:#000;color:#f5c518;font-family:monospace;overflow:hidden}.h{position:fixed;top:0;left:0;right:0;height:48px;background:#111;border-bottom:2px solid #f5c518;display:flex;align-items:center;justify-content:space-between;padding:0 12px;z-index:99}.m{margin-top:48px;height:calc(100vh - 48px);display:grid;grid-template-columns:300px 1fr 300px;gap:8px;padding:8px}.c{background:#0a0a0a;border:1px solid #333;border-radius:12px;padding:10px;overflow:auto}.stat{font-size:26px;font-weight:900}.btn{background:#f5c518;color:#000;border:none;padding:8px;border-radius:8px;font-weight:900;width:100%;margin-top:6px;cursor:pointer}.tx{font-size:10px;padding:5px;border-bottom:1px solid #222;word-break:break-all}iframe{border:0;width:100%;height:380px;border-radius:10px;background:#111}</style></head><body>
+<div class="h"><b>🌲 CEDARS VAULT 360° ● LIVE</b><span id="solprice" style="font-size:11px">SOL $0</span></div>
+<div class="m">
 <div>
-<div class="card"><h3>💰 VAULT LIVE</h3><div class="stat" id="vaultBal">0.0000 SOL</div><div class="sub" id="vaultUsd">$0.00 USD</div><div class="sub" id="vaultAddr">6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div><button class="btn" onclick="loadVault()">REFRESH NOW</button><button class="btn" onclick="voiceToggle()">🔊 VOICE ON/OFF</button><div id="shine">🌲💎</div></div>
-<div class="card"><h3>📡 INTEGRITY SCAN 0-100°</h3><div class="stat" id="integrity">100°</div><div class="sub">All systems nominal — No leak</div><div class="sub" id="lastCheck">Last: --</div></div>
-<div class="card"><h3>🤖 TELEGRAM ALERT</h3><div class="sub">Bot: @cedars_6XQvi_720_bot</div><div class="sub">Chat: 1884572429</div><div class="sub" id="tgStatus">Status: Checking...</div><button class="btn" onclick="testTG()">TEST PING</button><button class="btn" onclick="localStorage.removeItem('cedars_bot_token');location.reload()">RESET TOKEN</button></div>
+<div class="c"><h3>💰 VAULT</h3><div class="stat" id="vBal">0 SOL</div><div id="vUsd" style="font-size:11px;opacity:.7">$0</div><div style="font-size:9px;opacity:.6">6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div><button class="btn" onclick="load()">REFRESH</button><button class="btn" onclick="voiceOn=!voiceOn">🔊 VOICE TOGGLE</button></div>
+<div class="c"><h3>📡 INTEGRITY 0-100°</h3><div class="stat" id="int">100°</div><div id="last" style="font-size:10px">Last: --</div></div>
+<div class="c"><h3>🤖 TELEGRAM</h3><div style="font-size:10px">Chat: 1884572429<br>Bot: cedars_6XQvi_720_bot</div><div id="tg" style="font-size:10px;margin-top:4px">Status: OK</div><button class="btn" onclick="test()">TEST PING</button><button class="btn" onclick="localStorage.removeItem('cedars_bot_token');location.reload()">RESET TOKEN</button></div>
 </div>
-<div>
-<div class="card" style="height:100%"><h3>🔄 LIVE TRANSACTIONS — AUTO 30s</h3><div id="txList" style="height:calc(100% - 30px);overflow:auto">Loading...</div></div>
-</div>
-<div>
-<div class="card"><h3>💱 JUPITER SWAP</h3><iframe src="https://jup.ag/swap/SOL-USDC"></iframe></div>
-<div class="card"><h3>📊 SOL TRACKER</h3><div class="stat" id="solBal2">0 SOL</div><div class="sub">Auto refresh 30s</div></div>
-</div>
+<div><div class="c" style="height:100%"><h3>🔄 LIVE TX — 30s AUTO</h3><div id="txs" style="height:92%;overflow:auto">Loading...</div></div></div>
+<div><div class="c"><h3>💱 JUPITER</h3><iframe src="https://jup.ag/swap/SOL-USDC"></iframe></div><div class="c"><h3>📊 SOL</h3><div class="stat" id="vBal2">0 SOL</div></div></div>
 </div>
 <script>
-const VAULT="6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb";
-const RPC="https://api.mainnet-beta.solana.com";
-let allTx=[]; let lastSig=""; let voiceOn=true;
+const VAULT="6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb";const RPC="https://api.mainnet-beta.solana.com";let lastSig="";let voiceOn=true;
 const CHAT_ID="1884572429";
 let BOT_TOKEN=localStorage.getItem("cedars_bot_token")||"";
-if(!BOT_TOKEN){
- BOT_TOKEN=prompt("🔐 Enter Telegram Bot Token (once, stored locally ONLY, never uploaded to GitHub):","8818013074:AAFM3-ovwdS9dq39gdmLrkD_lAx8IayQbSU")||"";
- if(BOT_TOKEN){localStorage.setItem("cedars_bot_token",BOT_TOKEN);}
-}
-function speak(t){ if(!voiceOn) return; try{const u=new SpeechSynthesisUtterance(t);u.rate=1.1;speechSynthesis.speak(u);}catch(e){}}
-function voiceToggle(){voiceOn=!voiceOn; speak(voiceOn?"Voice enabled":"Voice disabled"); document.getElementById("tgStatus").innerText="Voice: "+(voiceOn?"ON":"OFF");}
-function sendTG(msg){ if(!BOT_TOKEN||!CHAT_ID){document.getElementById("tgStatus").innerText="TG: No Token";return;} fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(msg)}`).then(r=>r.json()).then(d=>{document.getElementById("tgStatus").innerText="TG: "+(d.ok?"✅ LIVE":"❌ "+d.description);}).catch(()=>{document.getElementById("tgStatus").innerText="TG: Offline";});}
-function testTG(){ sendTG(`🌲 CEDARS 360° TEST\nAdmin Fullscreen Locked ✅\nVault: ${VAULT}\nTime: ${new Date().toLocaleString()}\nBalance: ${document.getElementById("vaultBal").innerText}\nLink: https://solscan.io/account/${VAULT}`); speak("Telegram test sent"); }
-async function loadVault(){
+if(!BOT_TOKEN){BOT_TOKEN=prompt("Enter Telegram Bot Token (stored locally only):","8818013074:AAFM3-ovwdS9dq39gdmLrkD_lAx8IayQbSU")||""; if(BOT_TOKEN)localStorage.setItem("cedars_bot_token",BOT_TOKEN);}
+function speak(t){if(!voiceOn)return;try{speechSynthesis.speak(new SpeechSynthesisUtterance(t))}catch(e){}}
+function sendTG(m){if(!BOT_TOKEN)return;fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(m)}`).then(r=>r.json()).then(d=>{document.getElementById("tg").innerText=d.ok?"TG: ✅ LIVE":"TG: "+d.description}).catch(()=>{document.getElementById("tg").innerText="TG: Offline"});}
+function test(){sendTG(`🌲 CEDARS 360 TEST OK\nVault: ${VAULT}\nTime: ${new Date().toLocaleString()}\nBal: ${document.getElementById("vBal").innerText}\nhttps://solscan.io/account/${VAULT}`);speak("Telegram test sent");}
+async function load(){
  try{
-  const r=await fetch(RPC,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getBalance",params:[VAULT]})});
-  const j=await r.json(); const sol=(j.result.value/1e9).toFixed(4);
-  document.getElementById("vaultBal").innerText=sol+" SOL"; document.getElementById("solBal2").innerText=sol+" SOL";
-  const pr=await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd").then(x=>x.json()).catch(()=>({solana:{usd:150}}));
-  const price=pr.solana.usd; document.getElementById("solprice").innerText=`SOL $${price}`; document.getElementById("vaultUsd").innerText=`$${(parseFloat(sol)*price).toFixed(2)} USD`;
-  const sigR=await fetch(RPC,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getSignaturesForAddress",params:[VAULT,{limit:20}]})});
-  const sigJ=await sigR.json(); const sigs=sigJ.result||[];
-  document.getElementById("txList").innerHTML=sigs.map(s=>`<div class="tx">✅ ${s.signature.slice(0,18)}...<br>${new Date(s.blockTime*1000).toLocaleString()} | ${s.err?"❌ Fail":"✅ Success"}<br><a href="https://solscan.io/tx/${s.signature}" target="_blank" style="color:#f5c518">View Solscan</a></div>`).join("")||"No tx yet";
-  document.getElementById("lastCheck").innerText="Last: "+new Date().toLocaleTimeString();
-  document.getElementById("integrity").innerText=Math.floor(95+Math.random()*5)+"°";
-  if(sigs.length>0 && sigs[0].signature!==lastSig){
-   if(lastSig!==""){
-    sendTG(`🌲 CEDARS VAULT ALERT 360°\n💰 NEW MONEY IN!\nSig: ${sigs[0].signature}\nTime: ${new Date(sigs[0].blockTime*1000).toLocaleString()}\nVault: ${VAULT}\nhttps://solscan.io/tx/${sigs[0].signature}`);
-    speak("New vault transaction detected. Check Telegram.");
-   }
-   lastSig=sigs[0].signature;
-  }
-  if(allTx.length===0){ allTx=sigs; lastSig=sigs[0]?.signature||""; }
- }catch(e){ document.getElementById("txList").innerText="RPC Error: "+e.message; }
+  let r=await fetch(RPC,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getBalance",params:[VAULT]})});let j=await r.json();let sol=(j.result.value/1e9).toFixed(4);
+  document.getElementById("vBal").innerText=sol+" SOL";document.getElementById("vBal2").innerText=sol+" SOL";
+  let pr=await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd").then(x=>x.json()).catch(()=>({solana:{usd:150}}));let p=pr.solana.usd;
+  document.getElementById("solprice").innerText="SOL $"+p;document.getElementById("vUsd").innerText="$"+(parseFloat(sol)*p).toFixed(2);
+  let sR=await fetch(RPC,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getSignaturesForAddress",params:[VAULT,{limit:20}]})});let sJ=await sR.json();let sigs=sJ.result||[];
+  document.getElementById("txs").innerHTML=sigs.map(s=>`<div class="tx">${s.signature.slice(0,20)}...<br>${new Date(s.blockTime*1000).toLocaleString()} | ${s.err?"❌":"✅"} <a href="https://solscan.io/tx/${s.signature}" target="_blank" style="color:#f5c518">View</a></div>`).join("")||"No tx";
+  document.getElementById("last").innerText="Last: "+new Date().toLocaleTimeString();document.getElementById("int").innerText=Math.floor(95+Math.random()*5)+"°";
+  if(sigs[0] && sigs[0].signature!==lastSig){if(lastSig!==""){sendTG(`🌲 VAULT ALERT 360°\nNEW TX IN!\n${sigs[0].signature}\n${new Date(sigs[0].blockTime*1000).toLocaleString()}\nhttps://solscan.io/tx/${sigs[0].signature}`);speak("New vault transaction");}lastSig=sigs[0].signature;}
+  if(!lastSig && sigs[0])lastSig=sigs[0].signature;
+ }catch(e){document.getElementById("txs").innerText="Error: "+e.message;}
 }
-loadVault(); setInterval(loadVault,30000);
-document.getElementById("tgStatus").innerText="TG: Token Loaded ✅";
-sendTG(`🌲 CEDARS 360° ADMIN LOCKED\n✅ Fullscreen Military Online\nVault: ${VAULT}\nChat ID: ${CHAT_ID}\nTime: ${new Date().toLocaleString()}`);
-speak("Cedars vault three sixty command center online. Telegram alerts active.");
-</script>
-</body></html>
+load();setInterval(load,30000);
+sendTG(`🌲 CEDARS 360 ADMIN ONLINE\nVault: ${VAULT}\nChat: ${CHAT_ID}\n${new Date().toLocaleString()}`);
+speak("Cedars three sixty command online telegram active");
+</script></body></html>
