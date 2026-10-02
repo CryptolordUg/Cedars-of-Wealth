@@ -1,183 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cedars of Wealth — 10-Year Wealth Education | Standard View</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cedars of Wealth - Secure Financial Platform - $5 to $100k</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#020a14;color:#fff;font-family:system-ui,Segoe UI,monospace;width:100vw;overflow-x:hidden;line-height:1.6;}
-a{text-decoration:none}
-.full{width:100vw;min-height:100vh;padding:0;margin:0;}
-.container{max-width:1400px;margin:0 auto;padding:24px;width:100%;}
-.card{background:linear-gradient(145deg,#1c2e55 0%,#2a3f6d 100%);border:1px solid #4a6aaa;border-radius:24px;padding:32px;box-shadow:0 10px 40px rgba(0,0,0,0.5),0 0 30px rgba(80,140,255,0.25);}
-.btn{border:none;border-radius:14px;padding:18px 32px;font-weight:bold;font-size:22px;cursor:pointer;letter-spacing:0.5px;}
-.btn-white{background:#fff;color:#020a14;}
-.btn-blue{background:linear-gradient(90deg,#7de8ff,#5ac8ff);color:#001a33;box-shadow:0 6px 24px rgba(90,200,255,0.5);}
-.btn-dark{background:#0b1326;border:2px solid #4a6aaa;color:#7de8ff;}
-h1{font-size:56px;line-height:1.1;}
-h2{font-size:42px;}
-h3{font-size:28px;}
-p{font-size:20px;color:#a0c0e0;}
-.plan{background:#0b1326;border:1.5px solid #3a5a9a;border-radius:18px;padding:22px;text-align:center;cursor:pointer;transition:0.25s;}
-.plan:hover{border-color:#7de8ff;transform:translateY(-4px);box-shadow:0 10px 30px rgba(125,232,255,0.4);}
-.plan h4{font-size:36px;}
-.plan p{font-size:18px;}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
-@media(max-width:900px){.grid3,.grid2,.grid4{grid-template-columns:1fr;} h1{font-size:36px;} h2{font-size:30px;} .container{padding:16px;}}
-</style>
-</head>
-<body>
+body{background:#020a14;color:#fff;font-family:system-ui,monospace;width:100vw;overflow-x:hidden}
+/* CONTAINER WIDTHS - YOUR SPEC */
+.container{max-width:1440px;margin:0 auto;padding:0 24px;width:100%}
+@media(max-width:1279px){.container{max-width:1024px}}@media(max-width:1023px){.container{max-width:768px}}@media(max-width:767px){.container{max-width:480px;padding:0 16px}}
+/* BREAKPOINTS - YOUR SPEC */
+@media(max-width:480px){.hide-mobile{display:none}}@media(min-width:768px){.tablet-grid{grid-template-columns:repeat(2,1fr)}}@media(min-width:1280px){.desktop-grid{grid-template-columns:repeat(4,1fr)}}
+.card{background:linear-gradient(145deg,#1c2e55,#2a3f6d);border:1px solid #4a6aaa;border-radius:20px;padding:24px;box-shadow:0 0 25px rgba(80,140,255,0.2)}
+.btn-blue{background:linear-gradient(90deg,#7de8ff,#5ac8ff);color:#001a33;font-weight:bold;border:none;border-radius:12px;padding:16px 26px;font-size:18px;cursor:pointer}
+/* HEIGHTS - YOUR SPEC */
+.header{height:80px;display:flex;align-items:center;justify-content:space-between;background:rgba(2,10,20,0.98);border-bottom:3px solid #c0c0c0;position:sticky;top:0;z-index:999;width:100vw;padding:0 24px}
+.hero{height:700px;display:grid;grid-template-columns:1.2fr 0.8fr;align-items:center;gap:20px}@media(max-width:767px){.hero{height:auto;grid-template-columns:1fr;padding:30px 0}}
+.stats{height:300px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:center}@media(max-width:767px){.stats{height:auto;grid-template-columns:1fr 1fr}}
+.plans-sec{min-height:500px;padding:40px 0}.how-sec{min-height:500px;padding:40px 0;background:#081020}.testi-sec{min-height:400px;padding:40px 0}.faq-sec{min-height:500px;padding:40px 0;background:#081020}.cta-sec{height:300px;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(90deg,#0e1a33,#132040);border-top:2px solid #00ff88;border-bottom:2px solid #00ff88}.footer{height:300px;padding:30px 0;background:#020a14;border-top:3px solid #2a3f6d}
+</style></head><body>
+<!-- HEADER 80px -->
+<header class="header"><a href="index.html"><img src="assets/cedars-header-400-silver.png" style="height:48px;filter:drop-shadow(0 0 15px #fff);"></a>
+<nav style="display:flex;gap:18px;align-items:center;"><a href="index.html" style="color:#7de8ff;font-weight:bold;text-decoration:none;border-bottom:2px solid #7de8ff;">Home</a><a href="#plans" style="color:#7da8d0;text-decoration:none;font-weight:bold;">Plans $5-$100k</a><a href="#how" style="color:#7da8d0;text-decoration:none;font-weight:bold;">How It Works</a><a href="#faq" style="color:#7da8d0;text-decoration:none;font-weight:bold;">FAQ</a><a href="login.html" style="color:#7da8d0;text-decoration:none;font-weight:bold;">Login</a><a href="register.html" style="background:#fff;color:#020a14;padding:10px 18px;border-radius:10px;text-decoration:none;font-weight:bold;">Sign Up</a></nav></header>
 
-<!-- STANDARD HEADER - 100% WEBSITE VIEW -->
-<header style="width:100vw;position:sticky;top:0;z-index:1000;background:rgba(2,10,20,0.97);backdrop-filter:blur(14px);border-bottom:3px solid #2a3f6d;padding:16px 0;">
-  <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
-    <a href="index.html" style="display:flex;align-items:center;gap:12px;">
-      <img src="assets/cedars-header-400-silver.png" style="width:320px;max-width:70vw;height:auto;filter:drop-shadow(0 0 20px #fff);">
-    </a>
-    <nav style="display:flex;gap:26px;align-items:center;flex-wrap:wrap;">
-      <a href="#plans" style="color:#7da8d0;font-size:20px;font-weight:bold;">Plans</a>
-      <a href="#how" style="color:#7da8d0;font-size:20px;font-weight:bold;">How It Works</a>
-      <a href="deposit.html" style="color:#7da8d0;font-size:20px;font-weight:bold;">Deposit</a>
-      <a href="withdraw.html" style="color:#7da8d0;font-size:20px;font-weight:bold;">Withdraw</a>
-      <a href="dashboard/"><span style="background:#1c2e55;border:1px solid #4a6aaa;color:#fff;padding:10px 18px;border-radius:12px;font-size:18px;font-weight:bold;">Dashboard</span></a>
-      <a href="register.html"><span style="background:#fff;color:#020a14;padding:10px 20px;border-radius:12px;font-size:18px;font-weight:bold;">Register</span></a>
-    </nav>
-  </div>
-</header>
+<div class="container">
+<!-- HERO 700px -->
+<div class="hero"><div><div style="font-size:54px;font-weight:bold;line-height:1.1;">Secure Financial Growth<br><span style="color:#7de8ff;">$5 to $100,000</span><br>Daily ROI 1.5%</div><div style="color:#a0c0e0;font-size:18px;margin:16px 0;">Treasury Verified Solscan 6XQv1XJ5...fTb - Binary 2 Lines - 10%/5%/1% Definite ∞ - 10 Year Discipline - Activation $5 - Fee $10</div><div style="display:flex;gap:12px;margin-top:20px;"><a href="#plans"><button class="btn-blue">Invest Now - $5 Start</button></a><a href="register.html"><button style="background:#0b1326;border:1px solid #4a6aaa;color:#fff;border-radius:12px;padding:16px 26px;font-weight:bold;cursor:pointer;">Create Account</button></a></div><div style="color:#ffaa00;font-size:12px;margin-top:12px;font-weight:bold;">⚠️ Deposit Network MUST BE SOLANA USDC SPL ONLY - Avoid expensive error - Your photo fix included</div></div>
+<div class="card" style="text-align:center;"><div style="font-size:18px;font-weight:bold;">Treasury Wallet - Live Verified</div><div style="background:#000;border:2px solid #5ac8ff;border-radius:12px;padding:10px;font-size:11px;word-break:break-all;color:#7de8ff;margin:12px 0;">6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb" style="background:#fff;padding:8px;border-radius:12px;"><div style="color:#5a7aaa;font-size:11px;margin-top:8px;">Mobile Money + Card + Crypto + Bank - Solana USDC Only</div></div></div>
 
-<!-- HERO - STANDARD WEBSITE -->
-<section class="full" style="display:flex;align-items:center;">
-  <div class="container">
-    <div class="grid2" style="align-items:center;">
-      <div>
-        <div style="color:#00ff88;font-size:16px;letter-spacing:4px;font-weight:bold;margin-bottom:12px;">10-YEAR WEALTH EDUCATION — INTEGRITY 100%</div>
-        <h1>🌲 Cedars of Wealth<br><span style="color:#7de8ff;">Mighty Cedar Package</span></h1>
-        <p style="margin:18px 0 28px;font-size:22px;">Learn risk management, compounding and discipline. Education first, trading tools second. Binary 2 lines only — Referral 10% / 5% / 1% — USD only.</p>
-        <div style="display:flex;gap:14px;flex-wrap:wrap;">
-          <a href="#plans"><button class="btn btn-white">Start Now — View Plans</button></a>
-          <a href="deposit.html"><button class="btn btn-blue">Deposit USDC — Solana</button></a>
-        </div>
-        <div class="grid4" style="margin-top:28px;">
-          <div style="background:#0b1326;border:1px solid #2a3f6d;border-radius:12px;padding:14px;text-align:center;"><div style="color:#666;font-size:12px;">MIN DEPOSIT</div><div style="font-size:22px;font-weight:bold;">$5</div></div>
-          <div style="background:#0b1326;border:1px solid #2a3f6d;border-radius:12px;padding:14px;text-align:center;"><div style="color:#666;font-size:12px;">MAX DEPOSIT</div><div style="font-size:22px;font-weight:bold;">$100K</div></div>
-          <div style="background:#0b1326;border:1px solid #4a6aaa;border-radius:12px;padding:14px;text-align:center;"><div style="color:#7de8ff;font-size:12px;">DAILY ROI</div><div style="font-size:22px;font-weight:bold;color:#7de8ff;">1.5%</div></div>
-          <div style="background:#0b1326;border:1px solid #2a3f6d;border-radius:12px;padding:14px;text-align:center;"><div style="color:#666;font-size:12px;">TREASURY</div><div style="font-size:12px;font-weight:bold;color:#5ac8ff;word-break:break-all;">Verified Solscan</div></div>
-        </div>
-      </div>
-      <div class="card" style="text-align:center;">
-        <div style="color:#fff;font-size:28px;font-weight:bold;">Treasury Vault</div>
-        <div style="color:#7da8d0;font-size:16px;margin:8px 0 16px;">Solana USDC SPL ONLY — Do Not Send Other Tokens</div>
-        <img src="assets/treasury-vault.png" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb'" style="width:100%;max-width:360px;border-radius:18px;border:2px solid #4a6aaa;box-shadow:0 0 30px rgba(80,140,255,0.4);margin:10px auto;display:block;">
-        <div style="background:#000;border:1px solid #4a6aaa;border-radius:12px;padding:12px;font-size:13px;word-break:break-all;color:#7de8ff;margin:14px 0;">6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div>
-        <button class="btn-dark" style="width:100%;padding:14px;border-radius:12px;font-size:18px;font-weight:bold;" onclick="navigator.clipboard.writeText('6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb');this.innerText='✅ COPIED'">📋 COPY ADDRESS — HEAVY CLEAR</button>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- STATS 300px -->
+<div class="stats"><div class="card" style="text-align:center;"><div style="color:#888;font-size:11px;">TOTAL USERS</div><div style="font-size:32px;font-weight:bold;">12,847</div><div style="color:#00ff88;font-size:12px;">Verified KYC</div></div><div class="card" style="text-align:center;"><div style="color:#888;font-size:11px;">TOTAL INVESTED</div><div style="font-size:32px;font-weight:bold;">$4.2M</div><div style="color:#7de8ff;font-size:12px;">$5-$100k Range</div></div><div class="card" style="text-align:center;"><div style="color:#888;font-size:11px;">DAILY ROI PAID</div><div style="font-size:32px;font-weight:bold;">$63k</div><div style="color:#00ff88;font-size:12px;">1.5% Daily</div></div><div class="card" style="text-align:center;"><div style="color:#888;font-size:11px;">UPTIME</div><div style="font-size:32px;font-weight:bold;">99.9%</div><div style="color:#7da8d0;font-size:12px;">Secure SSL + 2FA</div></div></div>
+</div>
 
-<!-- WHY CEDARS - STANDARD -->
-<section style="width:100vw;background:#071226;padding:40px 0;">
-  <div class="container">
-    <div class="grid3">
-      <div class="card"><h3>Why Cedars?</h3><p style="margin-top:10px;">Education first, trading tools second. Risk management, compounding and discipline built for 10 years.</p></div>
-      <div class="card"><h3>Binary 2 Lines Only</h3><p style="margin-top:10px;">Simple referral: 10% 1st Gen, 5% 2nd Gen, 1% 3rd to Definite ∞. No complexity.</p></div>
-      <div class="card"><h3>Solana USDC Only</h3><p style="margin-top:10px;">Treasury verified on Solscan. Fast, low fees. One Origin CRD-M75TJ2 — Integrity 100%.</p></div>
-    </div>
-  </div>
-</section>
+<!-- PLANS 500px - BRONZE SILVER GOLD VIP MAPPED TO CEDAR $5-$100K -->
+<div class="plans-sec" id="plans" style="background:#0a1428;"><div class="container"><div style="font-size:36px;font-weight:bold;text-align:center;">Investment Plans - Bronze to VIP - $5 to $100,000</div><div style="color:#7da8d0;text-align:center;margin:8px 0 24px;">Bronze $5-$99 | Silver $100-$1999 | Gold $2000-$9999 | VIP $10k-$100k MAX - Activation $5 - Fee $10 - Daily 1.5%</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;" class="stats" style="height:auto;">
+<div class="card" style="border-color:#cd7f32;"><div style="color:#cd7f32;font-weight:bold;">BRONZE - Cedar Sprout</div><div style="font-size:22px;font-weight:bold;">$5 to $99</div><div style="color:#a0c0e0;font-size:12px;margin:8px 0;">Daily 1.5% - $0.07-$1.48 - ROI Engine 720d - Ref 10%</div><button class="btn-blue" style="width:100%;" onclick="localStorage.setItem('cedars_package','sprout');localStorage.setItem('cedars_amount','5');location.href='register.html?package=sprout&amount=5'">Select Bronze $5</button></div>
+<div class="card" style="border-color:#c0c0c0;"><div style="color:#c0c0c0;font-weight:bold;">SILVER - Cedar Root/Trunk</div><div style="font-size:22px;font-weight:bold;">$100-$1999</div><div style="color:#a0c0e0;font-size:12px;margin:8px 0;">Daily $1.5-$29 - Silver Tier - Ref 10%/5%</div><button class="btn-blue" style="width:100%;" onclick="localStorage.setItem('cedars_package','root');localStorage.setItem('cedars_amount','100');location.href='register.html?package=root&amount=100'">Select Silver $100</button></div>
+<div class="card" style="border-color:#ffd700;"><div style="color:#ffd700;font-weight:bold;">GOLD - Cedar Branch/Forest</div><div style="font-size:22px;font-weight:bold;">$2000-$9999</div><div style="color:#a0c0e0;font-size:12px;margin:8px 0;">Daily $30-$149 - Gold Tier - Ref 10%/5%/1%</div><button class="btn-blue" style="width:100%;" onclick="localStorage.setItem('cedars_package','branch');localStorage.setItem('cedars_amount','2000');location.href='register.html?package=branch&amount=2000'">Select Gold $2k</button></div>
+<div class="card" style="border-color:#00ff88;background:linear-gradient(145deg,#102a1e,#1a3a2a);"><div style="color:#00ff88;font-weight:bold;">VIP - Cedar Grove/Legacy</div><div style="font-size:22px;font-weight:bold;">$10k-$100k MAX</div><div style="color:#a0c0e0;font-size:12px;margin:8px 0;">Daily $150-$1500 - VIP - Ref 10%/5%/1% ∞ - Max $100k</div><button class="btn-blue" style="width:100%;background:linear-gradient(90deg,#00ff88,#00cc66);" onclick="localStorage.setItem('cedars_package','legacy');localStorage.setItem('cedars_amount','10000');location.href='register.html?package=legacy&amount=10000'">Select VIP $10k-$100k</button></div>
+</div></div></div>
 
-<!-- PLANS - STANDARD WEBSITE VIEW - RECTIFIED - NOT LEADING TO INVESTORS -->
-<section id="plans" style="width:100vw;padding:50px 0;">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:26px;">
-      <h2>Investment Plans</h2>
-      <p style="margin-top:10px;">Click Plan → See Investment Plan Details → Proceed to Deposit — Not Investors — Standard Flow</p>
-    </div>
+<!-- HOW IT WORKS 500px -->
+<div class="how-sec" id="how"><div class="container"><div style="font-size:36px;font-weight:bold;text-align:center;">How It Works - 10 Steps Investment Flow</div><div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:24px;text-align:center;">
+<div class="card"><div style="font-size:28px;">1️⃣</div><div style="font-weight:bold;">Register</div><div style="color:#7da8d0;font-size:12px;">Email+Phone+KYC</div></div>
+<div class="card"><div style="font-size:28px;">2️⃣</div><div style="font-weight:bold;">Verify</div><div style="color:#7da8d0;font-size:12px;">OTP + 2FA</div></div>
+<div class="card"><div style="font-size:28px;">3️⃣</div><div style="font-weight:bold;">Deposit</div><div style="color:#7da8d0;font-size:12px;">MoMo/Card/Crypto/Bank - Solana Only</div></div>
+<div class="card"><div style="font-size:28px;">4️⃣</div><div style="font-weight:bold;">Select Plan</div><div style="color:#7da8d0;font-size:12px;">$5-$100k - Activation $5</div></div>
+<div class="card"><div style="font-size:28px;">5️⃣</div><div style="font-weight:bold;">Activated</div><div style="color:#7da8d0;font-size:12px;">Investment Engine Start</div></div>
+<div class="card"><div style="font-size:28px;">6️⃣</div><div style="font-weight:bold;">Daily ROI</div><div style="color:#00ff88;font-size:12px;">1.5% Generated</div></div>
+<div class="card"><div style="font-size:28px;">7️⃣</div><div style="font-weight:bold;">Wallet</div><div style="color:#7da8d0;font-size:12px;">ROI Added To Wallet</div></div>
+<div class="card"><div style="font-size:28px;">8️⃣</div><div style="font-weight:bold;">Withdraw Request</div><div style="color:#7da8d0;font-size:12px;">MoMo/Bank/Crypto</div></div>
+<div class="card"><div style="font-size:28px;">9️⃣</div><div style="font-weight:bold;">Admin Review</div><div style="color:#7da8d0;font-size:12px;">12PM ET - KYC/AML</div></div>
+<div class="card" style="border-color:#00ff88;"><div style="font-size:28px;">🔟</div><div style="font-weight:bold;">Funds Sent</div><div style="color:#00ff88;font-size:12px;">Fee $10 - Sent</div></div>
+</div></div></div>
 
-    <div class="grid3">
-      <div class="plan" onclick="openPlan('sprout','50')"><h4>$50</h4><div style="color:#7de8ff;font-size:20px;font-weight:bold;">Starter</div><div style="color:#888;font-size:15px;margin-top:6px;">$5 to $99 — Daily $0.75</div></div>
-      <div class="plan" onclick="openPlan('root','150')"><h4>$150</h4><div style="color:#7de8ff;font-size:20px;font-weight:bold;">Growth</div><div style="color:#888;font-size:15px;margin-top:6px;">$100 to $499 — Daily $2.25</div></div>
-      <div class="plan" onclick="openPlan('trunk','500')"><h4>$500</h4><div style="color:#7de8ff;font-size:20px;font-weight:bold;">Mighty Cedar</div><div style="color:#888;font-size:15px;margin-top:6px;">$500 to $1999 — Daily $7.5</div></div>
-      <div class="plan" onclick="openPlan('branch','2000')"><h4>$2000</h4><div style="color:#7de8ff;font-size:20px;font-weight:bold;">Branch</div><div style="color:#888;font-size:15px;margin-top:6px;">$2k to $4.9k — Daily $30</div></div>
-      <div class="plan" onclick="openPlan('forest','5000')"><h4>$5000</h4><div style="color:#7de8ff;font-size:20px;font-weight:bold;">Forest</div><div style="color:#888;font-size:15px;margin-top:6px;">$5k to $9.9k — Daily $75</div></div>
-      <div class="plan" style="border-color:#00ff88;box-shadow:0 0 20px rgba(0,255,136,0.3);" onclick="openPlan('legacy','50000')"><h4>$50000</h4><div style="color:#00ff88;font-size:20px;font-weight:bold;">Legacy</div><div style="color:#888;font-size:15px;margin-top:6px;">$50k to $100k — Daily $750</div></div>
-    </div>
+<!-- TESTIMONIALS 400px -->
+<div class="testi-sec"><div class="container"><div style="font-size:36px;font-weight:bold;text-align:center;">Trusted by Investors - Testimonials</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px;">
+<div class="card"><div style="color:#ffd700;">★★★★★</div><div style="margin:8px 0;">"Cedars taught discipline - $5 to $500 in 6 months - Daily 1.5% real"</div><div style="color:#7da8d0;font-size:12px;">- Sarah K., Uganda - KYC Verified</div></div>
+<div class="card"><div style="color:#ffd700;">★★★★★</div><div style="margin:8px 0;">"Binary 2 lines referral 10% - I earned $1.2k - Withdrawal 12PM ET works"</div><div style="color:#7da8d0;font-size:12px;">- James M., Kenya - VIP $10k</div></div>
+<div class="card"><div style="color:#ffd700;">★★★★★</div><div style="margin:8px 0;">"Solana network warning saved me - No more expensive error - Full transparency"</div><div style="color:#7da8d0;font-size:12px;">- Aisha T., Nigeria - Gold $5k</div></div>
+</div></div></div>
 
-    <!-- INVESTMENT PLAN DETAIL - VISIBLE AFTER CLICK - STANDARD -->
-    <div id="planDetail" style="display:none;margin-top:30px;" class="card">
-      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;align-items:center;">
-        <div>
-          <div style="color:#00ff88;font-size:14px;letter-spacing:3px;font-weight:bold;">INVESTMENT PLAN SELECTED — VISIBLE</div>
-          <div style="font-size:38px;font-weight:bold;margin-top:8px;" id="detailName">$500 Mighty Cedar</div>
-          <div style="color:#7de8ff;font-size:22px;font-weight:bold;margin-top:6px;" id="detailCalc">Daily $7.50 | Weekly $52.50 | Monthly $225 | Total 720d $5400</div>
-          <div style="color:#a0c0e0;font-size:18px;margin-top:10px;">Activation $5 one-time | Withdraw Fee $10 | Referral 10%/5%/1% Definite ∞ | Binary 2 lines</div>
-        </div>
-        <div style="min-width:320px;">
-          <div style="background:#000;border:1px solid #00ff88;border-radius:12px;padding:16px;text-align:center;">
-            <div style="color:#888;font-size:12px;">SELECTED AMOUNT</div>
-            <div style="color:#00ff88;font-size:44px;font-weight:bold;" id="detailAmount">$500</div>
-            <button class="btn btn-blue" style="width:100%;margin-top:12px;" onclick="goDeposit()">Proceed to Deposit →</button>
-            <button class="btn btn-dark" style="width:100%;margin-top:10px;" onclick="document.getElementById('planDetail').style.display='none'">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- FAQ 500px -->
+<div class="faq-sec" id="faq"><div class="container"><div style="font-size:36px;font-weight:bold;text-align:center;">FAQ - Common Questions</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;">
+<div class="card"><div style="font-weight:bold;">Min deposit $5 Max $100k?</div><div style="color:#a0c0e0;font-size:14px;margin-top:6px;">Yes $5 Sprout to $99 to Legacy $50k-$100k MAX - Activation $5 one-time - Withdraw fee $10</div></div>
+<div class="card"><div style="font-weight:bold;">Why Solana USDC Only? Network error?</div><div style="color:#a0c0e0;font-size:14px;margin-top:6px;">Your photo error "address not consistent" = You selected BSC/ERC20 not Solana. Must select Token USDC Network SOLANA/SOL/SPL. Your 0.0769 SOL swap to USDC first.</div></div>
+<div class="card"><div style="font-weight:bold;">Daily ROI 1.5% fixed? Legal?</div><div style="color:#a0c0e0;font-size:14px;margin-top:6px;">Displayed ROI is educational projection. Platform complies with financial regulations per country. Obtain legal advice. Returns reflect investment value generation.</div></div>
+<div class="card"><div style="font-weight:bold;">KYC/2FA/Security?</div><div style="color:#a0c0e0;font-size:14px;margin-top:6px;">Email+Phone+KYC ID+OTP+2FA+SSL+Firewall+DB Encryption+Audit Logs - Admin panel KYC/AML/Fraud detection</div></div>
+</div></div></div>
 
-    <div style="text-align:center;margin-top:28px;">
-      <a href="register.html"><button class="btn btn-white" style="padding:18px 50px;font-size:24px;">Register — Start Education</button></a>
-    </div>
-  </div>
-</section>
+<!-- CTA 300px -->
+<div class="cta-sec"><div><div style="font-size:40px;font-weight:bold;">Start Investing Today - $5 Minimum</div><div style="color:#a0c0e0;font-size:18px;margin:12px 0;">Portfolio Tracking + Real-time Dashboard + Transaction Audit Trail + Referral Program</div><a href="register.html?package=sprout&amount=5"><button class="btn-blue" style="font-size:22px;padding:18px 40px;">Invest Now - Create Account < 2 min</button></a><div style="color:#5a7aaa;font-size:12px;margin-top:12px;">Deposit < 3 clicks - Withdrawal < 3 clicks - Mobile Responsive 100% - Performance < 3 sec</div></div></div>
 
-<!-- HOW IT WORKS - STANDARD -->
-<section id="how" style="width:100vw;background:#071226;padding:50px 0;">
-  <div class="container">
-    <h2 style="text-align:center;">How It Works — 360°</h2>
-    <div class="grid4" style="margin-top:24px;">
-      <div class="card" style="text-align:center;"><div style="font-size:40px;">1️⃣</div><h3 style="margin:12px 0;">Choose Plan</h3><p>Select $5 to $100k — Package remembered before wallet</p></div>
-      <div class="card" style="text-align:center;"><div style="font-size:40px;">2️⃣</div><h3 style="margin:12px 0;">Deposit USDC</h3><p>Send Solana USDC SPL to verified treasury — QR + Copy</p></div>
-      <div class="card" style="text-align:center;"><div style="font-size:40px;">3️⃣</div><h3 style="margin:12px 0;">Earn 1.5% Daily</h3><p>Daily audio ROI 12PM ET — Automated calculator live</p></div>
-      <div class="card" style="text-align:center;"><div style="font-size:40px;">4️⃣</div><h3 style="margin:12px 0;">Withdraw</h3><p>Fee $10 — Referral 10%/5%/1% — Binary 2 lines only</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER - STANDARD WEBSITE -->
-<footer style="width:100vw;background:#020a14;border-top:3px solid #2a3f6d;padding:40px 0;text-align:center;">
-  <div class="container">
-    <img src="assets/cedars-header-400-silver.png" style="width:400px;max-width:80vw;margin:0 auto 16px;display:block;filter:drop-shadow(0 0 25px #fff);">
-    <div style="font-weight:bold;letter-spacing:4px;font-size:24px;">CEDARS OF WEALTH</div>
-    <div style="color:#5ac8ff;font-size:18px;margin:10px 0;">ONE ORIGIN CRD-M75TJ2 — Integrity 100% — Standard Website View 100% — 360°</div>
-    <div style="color:#5a7aaa;font-size:16px;line-height:1.8;">Treasury Verified: 6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb<br>Network: Solana USDC SPL ONLY — Packages: $5 Min — $100k Max — Activation $5 — Withdraw $10 — Daily 1.5% — Ref 10%/5%/1% ∞</div>
-    <div style="margin-top:20px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap;">
-      <a href="index.html" style="color:#fff;font-size:18px;font-weight:bold;">Home</a>
-      <a href="register.html" style="color:#7da8d0;font-size:18px;">Register</a>
-      <a href="deposit.html" style="color:#7da8d0;font-size:18px;">Deposit</a>
-      <a href="withdraw.html" style="color:#7da8d0;font-size:18px;">Withdraw</a>
-      <a href="https://solscan.io/account/6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb" target="_blank" style="color:#7da8d0;font-size:18px;">Solscan</a>
-    </div>
-    <div style="color:#333;font-size:12px;margin-top:20px;">© 2026 Cedars of Wealth — Smart • Neat • Beautiful • Conducive • Full Screen • Font Increased • Site Color Maintained</div>
-  </div>
-</footer>
-
-<script>
-let curPkg='sprout', curAmt='50';
-function openPlan(pkg, amt){
-  curPkg=pkg; curAmt=amt;
-  let daily=(amt*0.015).toFixed(2);
-  document.getElementById('detailName').innerText='$'+amt+' '+pkg.toUpperCase();
-  document.getElementById('detailAmount').innerText='$'+amt;
-  document.getElementById('detailCalc').innerText='Daily $'+daily+' | Weekly $'+(daily*7).toFixed(2)+' | Monthly $'+(daily*30).toFixed(2)+' | Total 720d $'+(daily*720).toFixed(2);
-  document.getElementById('planDetail').style.display='block';
-  document.getElementById('planDetail').scrollIntoView({behavior:'smooth'});
-  localStorage.setItem('cedars_package', pkg);
-  localStorage.setItem('cedars_amount', amt);
-}
-function goDeposit(){ window.location.href='deposit.html?package='+curPkg+'&amount='+curAmt; }
-</script>
-
-</body>
-</html>
+<!-- FOOTER 300px -->
+<footer class="footer"><div class="container" style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:20px;">
+<div><img src="assets/cedars-header-400-silver.png" style="width:280px;filter:drop-shadow(0 0 15px #fff);"><div style="color:#a0c0e0;font-size:14px;margin-top:12px;">Secure financial web application - $5 to $100k - Solana USDC SPL - Treasury 6XQv1XJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb - 10 Year Discipline</div><div style="color:#5a7aaa;font-size:11px;margin-top:10px;">SSL Yes HTTPS Yes Firewall Yes DB Encryption Yes 2FA Yes KYC Yes Audit Logs Yes</div></div>
+<div><div style="font-weight:bold;">Main Menu</div><div style="color:#7da8d0;font-size:14px;margin-top:10px;line-height:2;">Home<br>About<br>Investment Plans<br>How It Works<br>FAQ<br>Contact<br>Sign Up<br>Login</div></div>
+<div><div style="font-weight:bold;">Dashboard Menu</div><div style="color:#7da8d0;font-size:14px;margin-top:10px;line-height:2;">Dashboard<br>Make Investment<br>Deposits<br>Earnings<br>Withdrawals<br>Referrals<br>Transactions<br>Profile/KYC/Settings</div></div>
+<div><div style="font-weight:bold;">Legal & Security</div><div style="color:#7da8d0;font-size:14px;margin-top:10px;line-height:2;">KYC Verification<br>AML Policy<br>Fraud Detection<br>Privacy Policy<br>Terms<br>Reports<br>Contact Support</div></div>
+</div></footer>
+</div></body></html>
