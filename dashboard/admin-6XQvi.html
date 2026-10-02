@@ -1,91 +1,56 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>CEDARS COMMAND CENTER | LOCKED</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-*{box-sizing:border-box}
-body{margin:0;background:#050505;color:#fff;font-family:Arial;padding:15px}
-h1{color:#f5c518;text-align:center;margin-bottom:5px}
-.card{background:#101010;border:2px solid #f5c518;border-radius:15px;padding:20px;margin:15px 0}
-input,textarea{width:100%;padding:14px;margin:10px 0;border-radius:10px;background:#000;color:#fff;border:1px solid #f5c518;font-size:16px}
-button{width:100%;padding:16px;margin:8px 0;border:none;border-radius:12px;font-weight:bold;font-size:16px;cursor:pointer}
-.btn-gold{background:#f5c518;color:#000}
-.btn-black{background:#000;color:#f5c518;border:1px solid #f5c518}
-#tgStatus{margin-top:15px;padding:12px;border-radius:8px;font-weight:bold;word-break:break-all}
-.ok{background:#0f2e0f;color:#0f0;border:1px solid #0f0}
-.err{background:#2e0f0f;color:#ff4444;border:1px solid #ff4444}
-</style>
-</head>
-<body>
-<h1>🌲 CEDARS COMMAND CENTER</h1>
-<p style="text-align:center;color:#888;font-size:13px;">Vault: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb<br>Bot: @cedars_6XQvi_720_bot | Status: LOCKED ✅</p>
-
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CEDARS COMMAND — FIXED</title>
+<style>body{background:#000;color:#fff;font-family:Arial;padding:15px}h1{color:#f5c518;text-align:center}.card{background:#111;border:2px solid #f5c518;border-radius:15px;padding:20px;margin:15px 0}input,textarea{width:100%;padding:14px;margin:10px 0;border-radius:10px;background:#000;color:#fff;border:1px solid #f5c518}button{width:100%;padding:16px;margin:8px 0;border:none;border-radius:12px;font-weight:bold;cursor:pointer}.gold{background:#f5c518;color:#000}.blk{background:#000;color:#f5c518;border:1px solid #f5c518}#st{margin-top:12px;padding:12px;border-radius:8px;font-weight:bold;word-break:break-all}</style>
+</head><body>
+<h1>🌲 CEDARS COMMAND CENTER v4</h1>
+<p style="text-align:center;color:#888">Vault: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</p>
 <div class="card">
-<h3 style="color:#f5c518;">📊 LIVE DEPOSITS — Auto 10s</h3>
-<div id="deposits" style="color:#aaa;">Scanning Solana chain...</div>
-</div>
+<input id="chat" value="@YOUR_CHANNEL" placeholder="@your_channel">
+<textarea id="msg" rows="7">🌲 CEDARS OF WEALTH — VAULT OPEN 💰
 
-<div class="card">
-<h2 style="color:#f5c518;">📡 CHANNEL MESSENGER</h2>
-<input id="tgChatId" value="@YOUR_CHANNEL" placeholder="@your_channel">
-<textarea id="tgMessage" rows="7">🌲 CEDARS OF WEALTH — VAULT OPEN 💰
+Vault: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb
 
-Vault Address:
-6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb
-
-✅ How to Enter:
 1️⃣ Send SOL to vault
 2️⃣ Verify: https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/verify.html
-3️⃣ Auto-unlock Dashboard
+3️⃣ Auto-unlock
 
 Bot: @cedars_6XQvi_720_bot</textarea>
-<button class="btn-gold" onclick="sendTgMessage()">🚀 SEND TO CHANNEL</button>
-<button class="btn-black" onclick="sendPoster()">🖼️ SEND POSTER + QR</button>
-<div id="tgStatus"></div>
+<button class="gold" onclick="send()">🚀 SEND TO CHANNEL (BYPASS)</button>
+<button class="blk" onclick="openManual()">📱 OPEN IN TELEGRAM MANUALLY (If Bypass Fails)</button>
+<div id="st"></div>
+<div id="manual" style="margin-top:15px"></div>
 </div>
-
 <script>
-const BOT_TOKEN = "8818013074:AAEF3WUACywbqUkm17XUsVGgPN0UwLcYg7U";
-
-async function sendTgMessage(){
- let c=document.getElementById("tgChatId").value.trim();
- let m=document.getElementById("tgMessage").value.trim();
- let s=document.getElementById("tgStatus");
- if(!c.startsWith("@")){s.className="err"; s.innerHTML="❌ Must start with @"; return;}
- s.className=""; s.innerHTML="⏳ Sending via @cedars_6XQvi_720_bot...";
- try{
-  let r=await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chat_id:c,text:m})});
-  let d=await r.json();
-  if(d.ok){s.className="ok"; s.innerHTML="✅ SENT TO "+c+" | ID: "+d.result.message_id;}
-  else{s.className="err"; s.innerHTML="❌ "+d.description+" | Code: "+d.error_code;}
- }catch(e){s.className="err"; s.innerHTML="❌ "+e.message;}
+const BOT_TOKEN="8818013074:AAEF3WUACywbqUkm17XUsVGgPN0UwLcYg7U";
+async function send(){
+let c=document.getElementById("chat").value.trim();
+let m=document.getElementById("msg").value.trim();
+let s=document.getElementById("st");
+if(!c.startsWith("@")){s.innerHTML="❌ Must start with @"; return;}
+s.innerHTML="⏳ Sending with CORS bypass...";
+let tgUrl=`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${encodeURIComponent(c)}&text=${encodeURIComponent(m)}`;
+let proxy=`https://corsproxy.io/?${encodeURIComponent(tgUrl)}`;
+try{
+let r=await fetch(proxy);
+let d=await r.json();
+if(d.ok){s.style.background="#0f2e0f";s.style.color="#0f0";s.innerHTML="✅ SENT TO "+c+" — ID: "+d.result.message_id;}
+else{s.style.background="#2e0f0f";s.style.color="#ff4444";s.innerHTML="❌ "+d.description+" — Try MANUAL button below";}
+}catch(e){
+s.style.background="#2e0f0f";s.style.color="#ff4444";
+s.innerHTML="❌ Network still blocked: "+e.message+"<br>👇 Use MANUAL button below — 100% works";
+showManual(c,m);
 }
-
-async function sendPoster(){
- let c=document.getElementById("tgChatId").value.trim();
- let s=document.getElementById("tgStatus");
- s.className=""; s.innerHTML="⏳ Sending poster...";
- try{
-  let r=await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chat_id:c,photo:"https://api.qrserver.com/v1/create-qr-code/?size=800x800&data=6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb",caption:"🌲 CEDARS OF WEALTH\n\nVault: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb\n\nVerify: https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/verify.html"})});
-  let d=await r.json();
-  if(d.ok){s.className="ok"; s.innerHTML="✅ POSTER SENT TO "+c;}
-  else{s.className="err"; s.innerHTML="❌ "+d.description;}
- }catch(e){s.className="err"; s.innerHTML="❌ "+e.message;}
 }
-
-async function loadDeposits(){
- try{
-  let res=await fetch("https://api.mainnet-beta.solana.com",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getSignaturesForAddress",params:["6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb",{limit:5}]})});
-  let data=await res.json();
-  if(!data.result || data.result.length==0){document.getElementById("deposits").innerHTML="Vault empty — waiting for first deposit"; return;}
-  let html="";
-  data.result.forEach(tx=>{html+=`<div style='padding:8px;border-bottom:1px solid #222;font-size:12px;'>${tx.signature.slice(0,35)}...<br>${new Date(tx.blockTime*1000).toLocaleString()}</div>`;});
-  document.getElementById("deposits").innerHTML=html;
- }catch(e){document.getElementById("deposits").innerHTML="Error loading chain";}
+function showManual(c,m){
+let man=document.getElementById("manual");
+let link=`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${encodeURIComponent(c)}&text=${encodeURIComponent(m)}`;
+man.innerHTML=`<p style="color:#f5c518">🔥 MANUAL SEND — Click this link — it will post:</p><a href="${link}" target="_blank" style="color:#00ff00;word-break:break-all;background:#111;padding:12px;display:block;border-radius:10px;border:1px solid #0f0">👉 CLICK HERE TO POST TO ${c}</a><p style="color:#888;font-size:12px">If Telegram opens and shows {ok:true} — check your channel — message is there ✅</p>`;
 }
-loadDeposits(); setInterval(loadDeposits,10000);
-</script>
-</body>
-</html>
+function openManual(){
+let c=document.getElementById("chat").value.trim();
+let m=document.getElementById("msg").value.trim();
+showManual(c,m);
+window.open(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${encodeURIComponent(c)}&text=${encodeURIComponent(m)}`,"_blank");
+}
+</script></body></html>
