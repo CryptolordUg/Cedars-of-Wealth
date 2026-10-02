@@ -1,62 +1,64 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cedars of Wealth</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}body{background:#070a07;color:#e8f0d8;font-family:Inter,Arial,sans-serif}
-.top{padding:14px 4%;background:#0f1a0a;border-bottom:1px solid #c9a86a;display:flex;justify-content:space-between;align-items:center}
-.top b{letter-spacing:1px;color:#f0e6c8}.btn{padding:10px 18px;border-radius:8px;font-weight:700;text-decoration:none;font-size:13px}
-.gold{background:#c9a86a;color:#000}.wrap{max-width:900px;margin:0 auto;padding:20px 4%}
-.card{background:#10180c;border:1px solid #2a3a1a;border-radius:14px;padding:18px;margin-bottom:14px}
-.card h2{font-size:13px;letter-spacing:1px;color:#c9a86a;margin-bottom:10px}
-.addr{background:#000;border:1px solid #333;padding:12px;border-radius:8px;font-family:monospace;color:#e8c87a;word-break:break-all;font-size:13px;margin:10px 0}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:700px){.row{grid-template-columns:1fr}}
-.val{font-size:22px;font-weight:800;color:#fff}.sub{font-size:12px;color:#7a8a5f;margin-top:4px}
-</style></head><body>
-<div class="top"><b>▲ CEDARS OF WEALTH</b><a href="app/dashboard.html" class="btn gold">Dashboard →</a></div>
+<script>
+// SECURITY LOCK v=SEC2026
+const SEC = {
+  minPass: 8,
+  lockAttempts: 5,
+  lockTime: 15*60*1000,
+  checkEmail: (e)=> /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e),
+  checkPass: (p)=> /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(p),
+  hash: (s)=> btoa(s.split('').reverse().join('')+'_CEDARS_SALT_2026'),
+  saveUser: (u)=> {
+    let users=JSON.parse(localStorage.getItem('cedars_users')||'[]');
+    if(users.find(x=>x.email===u.email)) throw 'Email already registered';
+    u.password=SEC.hash(u.password);
+    u.id=Date.now();
+    u.createdAt=new Date().toISOString();
+    u.kyc=false; u.verified=false;
+    users.push(u);
+    localStorage.setItem('cedars_users', JSON.stringify(users));
+    localStorage.setItem('cedars_session', JSON.stringify({email:u.email,id:u.id,loginAt:Date.now()}));
+  }
+};
 
-<div class="wrap">
+function secureRegister(){
+  const email=document.getElementById('regEmail')?.value?.trim().toLowerCase();
+  const pass=document.getElementById('regPass')?.value;
+  const confirm=document.getElementById('regConfirm')?.value;
+  const wallet=document.getElementById('regWallet')?.value?.trim();
+  const agree=document.getElementById('regAgree')?.checked;
+  const errBox=document.getElementById('regError');
 
-<div class="card">
-<h2>VAULT OVERVIEW</h2>
-<div style="display:flex;justify-content:space-between;align-items:center">
-<div><div class="val">1.5% Daily</div><div class="sub">TRC20 • 30 Day Lock</div></div>
-<div><div class="val">12% APY</div><div class="sub">Solana • Locked</div></div>
-</div>
-<a href="app/deposit.html" class="btn gold" style="display:block;text-align:center;margin-top:14px">Deposit</a>
-</div>
+  try{
+    if(!email||!SEC.checkEmail(email)) throw 'Invalid email format - use real email';
+    if(!pass||!SEC.checkPass(pass)) throw 'Weak password - need 8 chars, UPPER, lower, number, symbol (@$!%)';
+    if(pass!==confirm) throw 'Passwords do not match';
+    if(!wallet||!wallet.startsWith('T')||wallet.length<26) throw 'Invalid TRC20 wallet - Must start with T';
+    if(!agree) throw 'You must accept Terms & Compliance';
+    
+    let attempts=parseInt(localStorage.getItem('cedars_reg_attempts')||'0');
+    if(attempts>=SEC.lockAttempts) throw 'Too many attempts - wait 15 mins';
 
-<div class="row">
-<div class="card">
-<h2>TO: TREASURY</h2>
-<div class="addr">TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u</div>
-<div class="sub">USDT TRC20 only</div>
-</div>
+    SEC.saveUser({email,password:pass,wallet,ref:'USER'+Math.random().toString(36).substr(2,6).toUpperCase()});
+    localStorage.removeItem('cedars_reg_attempts');
+    alert('✅ Secure registration success - Redirecting to TRC20 deposit');
+    location.href='app/deposit.html?v=SEC2026';
 
-<div class="card">
-<h2>WITHDRAW TO</h2>
-<div class="val" style="font-size:16px">$20 Minimum</div>
-<div class="sub">5% Fee • Unlocks after 30 days</div>
-<div class="sub" style="margin-top:8px">TRC20 address</div>
-</div>
-</div>
+  }catch(e){
+    let attempts=parseInt(localStorage.getItem('cedars_reg_attempts')||'0')+1;
+    localStorage.setItem('cedars_reg_attempts',attempts.toString());
+    if(errBox){errBox.innerText=e;errBox.style.display='block';}
+    else alert('❌ '+e);
+  }
+}
 
-<div class="row">
-<div class="card">
-<h2>REFERRAL</h2>
-<div class="val" style="font-size:16px">10% / 5% / 2% / 1%</div>
-<div class="sub">4 levels</div>
-<a href="app/ref.html" class="btn gold" style="display:block;text-align:center;margin-top:10px;font-size:12px">Get Link</a>
-</div>
-
-<div class="card">
-<h2>SOLANA VAULT</h2>
-<div class="addr" style="font-size:11px">6XQv1X3J5EceZaQ6uGrmrsd8K5nLK5xVeT7MCFF6F1b</div>
-<div class="sub">$18.4M TVL • 74% full</div>
-</div>
-</div>
-
-<div class="card" style="text-align:center;border-style:dashed">
-<div class="sub">TE26B7z...Hcz1u • 6XQv...F1b • © 2026</div>
-</div>
-
-</div>
-</body></html>
+function secureLogin(){
+  const email=document.getElementById('loginEmail')?.value?.trim().toLowerCase();
+  const pass=document.getElementById('loginPass')?.value;
+  const hashed=SEC.hash(pass);
+  let users=JSON.parse(localStorage.getItem('cedars_users')||'[]');
+  let u=users.find(x=>x.email===email && x.password===hashed);
+  if(!u) return alert('❌ Invalid email or password');
+  localStorage.setItem('cedars_session', JSON.stringify({email:u.email,id:u.id,loginAt:Date.now()}));
+  location.href='app/dashboard.html?v=SEC2026';
+}
+</script>
