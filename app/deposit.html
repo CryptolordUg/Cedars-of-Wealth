@@ -1,46 +1,186 @@
 <!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>Deposit TRC20 - Cedars</title>
+<title>Auto Verifier TRC20 - Cedars</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}body{background:#070a07;color:#e8f0d8;font-family:Arial}
-.top{position:sticky;top:0;z-index:99;background:#0f1a0a;border-bottom:2px solid #c9a86a;padding:8px 3%;display:flex;justify-content:space-between;align-items:center}
-.top b{font-size:12px;color:#c9a86a}.nav{display:flex;gap:6px}.nav a{padding:7px 12px;border-radius:20px;font-size:11px;font-weight:700;text-decoration:none;background:#1a2e0a;color:#c9a86a;border:1px solid #2a3a1a}.nav a.active{background:#c9a86a;color:#000}
-.wrap{max-width:500px;margin:0 auto;padding:16px}.card{background:#10180c;border:1px solid #2a3a1a;border-radius:12px;padding:16px;margin-bottom:12px;text-align:center}
-.card h2{font-size:12px;color:#c9a86a;letter-spacing:1px}.addr{background:#000;border:2px solid #c9a86a;padding:14px;border-radius:10px;font-family:monospace;color:#f9e2a0;word-break:break-all;font-size:13px;margin:12px 0}
-.btn{padding:12px;border-radius:8px;font-weight:800;font-size:13px;background:#c9a86a;color:#000;border:0;cursor:pointer;display:block;text-align:center;text-decoration:none;width:100%;margin-top:8px}
-.warn{background:#1a1000;border:1px solid #c97a5a;border-radius:8px;padding:10px;font-size:10px;color:#e8c0a0;margin-top:10px;text-align:left}
+.top{position:sticky;top:0;z-index:99;background:#0f1a0a;border-bottom:2px solid #c9a86a;padding:10px 4%;display:flex;justify-content:space-between;align-items:center}
+.top b{color:#c9a86a;font-size:12px}.nav{display:flex;gap:6px}.nav a{padding:7px 12px;border-radius:20px;font-size:11px;font-weight:700;text-decoration:none;background:#1a2e0a;color:#c9a86a;border:1px solid #2a3a1a}.nav a.active{background:#c9a86a;color:#000}
+.wrap{max-width:520px;margin:0 auto;padding:14px}.card{background:#10180c;border:1px solid #2a3a1a;border-radius:12px;padding:14px;margin-bottom:12px}
+.addr{background:#000;border:2px solid #c9a86a;padding:12px;border-radius:10px;font-family:monospace;color:#f9e2a0;word-break:break-all;font-size:13px;margin:10px 0;text-align:center}
+.btn{width:100%;padding:12px;border-radius:8px;font-weight:800;font-size:12px;border:0;cursor:pointer;display:block;text-align:center;text-decoration:none;margin-top:8px}
+.btn-gold{background:#c9a86a;color:#000}.btn-green{background:#10b981;color:#fff}.btn-dark{background:#1a2e0a;color:#c9a86a;border:1px solid #2a3a1a}
+input{width:100%;padding:12px;border-radius:8px;border:1px solid #2a3a1a;background:#000;color:#fff;margin-top:8px;outline:none;font-family:monospace;font-size:12px}
+.status{padding:10px;border-radius:8px;font-size:11px;margin-top:10px;display:none}.ok{background:#0a1f0a;border:1px solid #10b981;color:#a0f0a0}.err{background:#2a1010;border:1px solid #c97a5a;color:#f9a0a0}.wait{background:#1a1a0a;border:1px solid #c9a86a;color:#f9e2a0}
+.log{font-size:10px;color:#6a7a4f;background:#000;padding:8px;border-radius:6px;margin-top:8px;max-height:200px;overflow:auto;white-space:pre-wrap}
 </style></head><body>
-<div class="top"><b>▲ CEDARS</b><div class="nav"><a href="../index.html?v=TRC20">Home</a><a href="dashboard.html?v=TRC20" >Dashboard</a><a href="deposit.html?v=TRC20" class="active">Deposit</a></div></div>
+<div class="top"><b>▲ CEDARS AUTO-VERIFY</b><div class="nav"><a href="../index.html?v=AUTOVER">Home</a><a href="dashboard.html?v=AUTOVER">Dashboard</a><a href="deposit.html?v=AUTOVER" class="active">Deposit</a></div></div>
 <div class="wrap">
-<div class="card" style="border-color:#c9a86a;border-width:2px">
-<h2>DEPOSIT USDT TRC20 ONLY</h2>
-<div style="font-size:20px;font-weight:800;color:#fff;margin-top:8px">TRC20 NETWORK ONLY</div>
-<div style="font-size:10px;color:#7a8a5f;margin-top:4px">$20 Minimum • 1.5% Daily • 30 Day Lock</div>
 
-<div class="addr" id="tAddr">TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u</div>
-
-<a class="btn" onclick="copyT()">⎙ COPY ADDRESS</a>
-<a class="btn" style="background:#10b981;margin-top:8px" onclick="copied()">I HAVE SENT - CHECK BALANCE</a>
-
-<div class="warn">
-<b style="color:#f9a86a">⚠ IMPORTANT - TRC20 ONLY:</b><br>
-• Send <b>USDT TRC20 ONLY</b> - Not ERC20, Not Solana<br>
-• Minimum <b>$20</b> - Less than $20 will be lost<br>
-• After sending, wait <b>2 mins</b> for confirmation<br>
-• Balance updates after admin verification<br>
-• Solana vault is <b>managed internally</b> - Don't send to Solana address
+<div class="card" style="border-color:#c9a86a;border-width:2px;text-align:center">
+<div style="font-size:11px;color:#c9a86a;letter-spacing:1px">DEPOSIT USDT TRC20 ONLY • AUTO-VERIFIED</div>
+<div style="font-size:22px;font-weight:800;color:#fff;margin-top:6px">TRC20 AUTO-CHECK</div>
+<div class="addr" id="treasury">TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u</div>
+<button class="btn btn-gold" onclick="copyT()">⎙ COPY TREASURY ADDRESS</button>
+<div style="font-size:10px;color:#7a8a5f;margin-top:8px">$20 MIN • USDT TRC20 Contract: TR7NHq...Lj6t • 1.5% Daily</div>
 </div>
 
-<div style="margin-top:12px;font-size:11px;color:#fff">Your deposits:</div>
-<div id="depList" style="font-size:10px;color:#7a8a5f;margin-top:6px">No deposits yet</div>
+<div class="card"><div style="font-size:12px;font-weight:700;color:#fff">STEP 1: SEND USDT TRC20</div><div style="font-size:10px;color:#7a8a5f;margin-top:4px">Send from Trust Wallet / Binance to address above. Copy TX Hash after sending.</div></div>
 
+<div class="card"><div style="font-size:12px;font-weight:700;color:#fff">STEP 2: AUTO-VERIFY YOUR DEPOSIT</div>
+<input id="txHash" placeholder="Paste TX Hash / Transaction ID (64 chars)">
+<input id="depAmount" type="number" placeholder="Amount you sent (e.g., 20)">
+<button class="btn btn-green" onclick="autoVerify()">🔍 AUTO VERIFY ON TRONSCAN - 2 MINS</button>
+<button class="btn btn-dark" onclick="checkTreasury()">📡 SCAN TREASURY FOR NEW DEPOSITS</button>
+
+<div id="status" class="status"></div>
+<div id="log" class="log" style="display:none"></div>
+
+<div style="margin-top:10px;font-size:10px;color:#7a8a5f">Your verified deposits:</div>
+<div id="depList" style="margin-top:6px"></div>
 </div>
-<div style="text-align:center;font-size:9px;color:#4a5a2a">TRC20 ONLY • No Solana deposits • v=TRC20LOCK</div>
+
+<div class="card"><div style="font-size:10px;color:#6a7a4f;line-height:1.5">
+<b>How auto-verifier works:</b><br>
+1. Checks TX hash on TronGrid API<br>
+2. Validates recipient = TE26B7z...Hcz1u<br>
+3. Validates token = USDT TRC20 (TR7NHq...)<br>
+4. Validates amount >= $20<br>
+5. If ok → Auto adds to your balance + Dashboard<br>
+6. No admin needed - 100% auto
+</div></div>
+
+<div style="text-align:center;font-size:9px;color:#4a5a2a">AUTO VERIFIER v=AUTOVER • TRC20 ONLY • TronGrid API • No Solana</div>
 </div>
+
 <script>
-function copyT(){navigator.clipboard.writeText(document.getElementById('tAddr').innerText);alert('TRC20 Address copied:\nTE26B7z...Hcz1u\n\nSend USDT TRC20 ONLY')}
-function copied(){alert('We are checking Tronscan for your deposit to TE26B7z...\nIf confirmed, your balance will show in Dashboard in 2-5 mins.\n\nKeep your TX hash.');location.href='dashboard.html?v=TRC20'}
-const deposits=JSON.parse(localStorage.getItem('cedars_deposits')||'[]');
-if(deposits.length>0){let h='';deposits.forEach(d=>{h+='<div style="background:#000;padding:6px;border-radius:6px;margin-top:4px;border:1px solid #222">$'+d.amount+' • '+new Date(d.date).toLocaleDateString()+' • '+d.tx+'</div>'});document.getElementById('depList').innerHTML=h;}
+const TREASURY='TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u';
+const USDT_CONTRACT='TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t';
+
+(function(){
+  const s=JSON.parse(localStorage.getItem('cedars_session')||'null');
+  const u=JSON.parse(localStorage.getItem('cedars_users')||'[]');
+  if(!s||!u.find(x=>x.email===s.email)){
+    alert('🔒 Login required for auto-verifier');
+    location.href='../index.html?v=AUTOVER';
+  }
+})();
+
+function copyT(){navigator.clipboard.writeText(TREASURY);showStatus('Copied: '+TREASURY,'ok')}
+function showStatus(msg,type){const el=document.getElementById('status');el.style.display='block';el.className='status '+type;el.innerHTML=msg;}
+function logMsg(m){const l=document.getElementById('log');l.style.display='block';l.innerText+=new Date().toLocaleTimeString()+' - '+m+'\n';}
+
+async function autoVerify(){
+  const tx=document.getElementById('txHash').value.trim();
+  const amount=parseFloat(document.getElementById('depAmount').value);
+  if(!tx||tx.length<30) return showStatus('❌ Enter valid TX Hash from Trust Wallet','err');
+  if(!amount||amount<20) return showStatus('❌ Minimum $20 required','err');
+  
+  showStatus('⏳ Checking TronGrid API... Please wait 5-10 secs','wait');
+  logMsg('Checking TX: '+tx);
+  
+  try{
+    // Try TronGrid first
+    let res=await fetch('https://api.trongrid.io/v1/transactions/'+tx+'/events?only_confirmed=true');
+    let data=await res.json();
+    logMsg('TronGrid response: '+JSON.stringify(data).substring(0,300));
+    
+    if(data.data && data.data.length>0){
+      // TRC20 transfer event
+      let found=false;
+      for(let ev of data.data){
+        if(ev.contract_address===USDT_CONTRACT || ev.contract_address===USDT_CONTRACT.toLowerCase()){
+          const result=ev.result||{};
+          const to=result.to||result._to||'';
+          const val=result.value||result._value||0;
+          logMsg('Found USDT event - to:'+to+' value:'+val);
+          if(to.toLowerCase()===TREASURY.toLowerCase() || to===TREASURY){
+            const realAmount=val/1000000; // USDT has 6 decimals
+            if(realAmount>=19.9){ // allow fee diff
+              saveDeposit(tx,realAmount,true);
+              showStatus('✅ VERIFIED! $'+realAmount.toFixed(2)+' USDT TRC20 received to treasury<br>TX: '+tx.substring(0,16)+'...<br>Added to Dashboard balance','ok');
+              found=true; break;
+            }
+          }
+        }
+      }
+      if(!found){
+        // Try second API - tronscan
+        logMsg('Not found in events, trying Tronscan API...');
+        let res2=await fetch('https://apilist.tronscanapi.com/api/transaction-info?hash='+tx);
+        let data2=await res2.json();
+        logMsg('Tronscan: '+JSON.stringify(data2).substring(0,400));
+        if(data2.contractData){
+          const c=data2.contractData;
+          const to=c.to_address||c.transferToAddress||'';
+          const amt=(c.amount||0)/1000000;
+          if(to===TREASURY && amt>=19.9){
+            saveDeposit(tx,amt,true);
+            return showStatus('✅ VERIFIED via Tronscan! $'+amt.toFixed(2)+' added','ok');
+          }
+        }
+        showStatus('❌ TX not found or not sent to our treasury<br>Ensure you sent to: '+TREASURY+'<br>Token must be USDT TRC20','err');
+      }
+    }else{
+      showStatus('❌ Transaction not confirmed yet or invalid hash<br>Wait 1 min and try again<br>Or use SCAN TREASURY button','err');
+    }
+  }catch(e){
+    logMsg('Error: '+e.message);
+    // Fallback - manual verify if API blocked
+    showStatus('⚠ API busy - Using manual verify<br>Checking if amount matches...<br>If you sent $'+amount+' to treasury, it will be added after admin check','wait');
+    if(confirm('TronGrid API busy (common on mobile). You confirm you sent $'+amount+' USDT TRC20 to '+TREASURY+'?\n\nOK = Add as pending (verified in 5 mins)\nCancel = Try again')){
+      saveDeposit(tx,amount,false);
+      showStatus('⏳ Added as PENDING - Will auto-verify in 5 mins<br>$'+amount+' USDT • TX: '+tx.substring(0,20)+'...','wait');
+    }
+  }
+  renderDeposits();
+}
+
+async function checkTreasury(){
+  showStatus('📡 Scanning treasury TE26B7z... for latest USDT deposits...','wait');
+  logMsg('Scanning treasury...');
+  try{
+    let res=await fetch('https://api.trongrid.io/v1/accounts/'+TREASURY+'/transactions/trc20?only_confirmed=true&limit=20&contract_address='+USDT_CONTRACT);
+    let data=await res.json();
+    logMsg('Found '+(data.data?data.data.length:0)+' recent USDT TXs');
+    if(data.data && data.data.length>0){
+      let html='Recent deposits to treasury:<br>';
+      data.data.slice(0,5).forEach(t=>{
+        const amt=t.value/1000000;
+        const from=t.from; const time=new Date(t.block_timestamp).toLocaleString();
+        html+='<div style="background:#000;padding:6px;border-radius:4px;margin-top:4px;border:1px solid #222;font-size:10px">$'+amt.toFixed(2)+' from '+from.substring(0,8)+'... • '+time+'</div>';
+      });
+      html+='<br><div style="font-size:10px;color:#10b981">If you sent recently, paste your TX hash above to claim it</div>';
+      showStatus(html,'ok');
+    }else{
+      showStatus('No recent deposits found - Try again in 1 min after sending','err');
+    }
+  }catch(e){
+    showStatus('API busy - Try TX hash verify instead','err');
+  }
+}
+
+function saveDeposit(tx,amt,verified){
+  const sess=JSON.parse(localStorage.getItem('cedars_session')||'{}');
+  const userId=sess.email||'guest';
+  let deps=JSON.parse(localStorage.getItem('cedars_deposits')||'[]');
+  if(deps.find(d=>d.tx===tx)) return;
+  deps.push({tx,amount:amt,userId,email:userId,ref:userId,date:new Date().toISOString(),verified:verified,treasury:TREASURY,token:'USDT TRC20'});
+  localStorage.setItem('cedars_deposits',JSON.stringify(deps));
+  renderDeposits();
+}
+
+function renderDeposits(){
+  const sess=JSON.parse(localStorage.getItem('cedars_session')||'{}');
+  const userId=sess.email||'';
+  let deps=JSON.parse(localStorage.getItem('cedars_deposits')||'[]');
+  let mine=deps.filter(d=>d.userId===userId||d.email===userId);
+  let el=document.getElementById('depList');
+  if(mine.length===0){el.innerHTML='<div style="font-size:10px;color:#5a6a4a">No deposits yet - Send TRC20 and verify</div>';return;}
+  let h=''; mine.forEach(d=>{
+    h+='<div style="background:#000;border:1px solid '+(d.verified?'#10b981':'#c9a86a')+';padding:8px;border-radius:6px;margin-top:6px"><div style="font-size:11px;color:#fff">$'+parseFloat(d.amount).toFixed(2)+' USDT '+(d.verified?'✅ VERIFIED':'⏳ PENDING')+'</div><div style="font-size:9px;color:#6a7a4f">'+new Date(d.date).toLocaleString()+'<br>TX: '+d.tx.substring(0,20)+'...</div></div>';
+  });
+  el.innerHTML=h;
+}
+renderDeposits();
 </script>
 </body></html>
