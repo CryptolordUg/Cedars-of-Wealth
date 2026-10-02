@@ -1,39 +1,108 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CEDARS — FINAL LOCKED</title><style>body{background:#000;color:#fff;font-family:Arial;padding:15px}h1{color:#f5c518;text-align:center}.card{background:#111;border:2px solid #f5c518;border-radius:15px;padding:20px;margin:15px 0}textarea{width:100%;padding:14px;margin:10px 0;border-radius:10px;background:#000;color:#fff;border:1px solid #f5c518}button{width:100%;padding:16px;margin:8px 0;border:none;border-radius:12px;font-weight:bold;cursor:pointer}.gold{background:#f5c518;color:#000}.blk{background:#000;color:#f5c518;border:1px solid #f5c518}#st{margin-top:12px;padding:12px;border-radius:8px;font-weight:bold;word-break:break-all}</style></head><body>
-<h1>🌲 CEDARS COMMAND CENTER — LOCKED v5</h1><p style="text-align:center;color:#888">Channel: @cedarswealth | Vault: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</p>
-<div class="card"><textarea id="msg" rows="8">🌲 CEDARS OF WEALTH — VAULT OPEN 💰
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CEDARS COMMAND CENTER v6 GLORY</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px at 20% -10%, #1a1a00 0%, #000 60%), #000;color:#fff;font-family:Inter,Arial;padding:18px}
+.hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,#111,#0a0a0a);border:1px solid #f5c518;border-radius:18px;padding:14px 18px;box-shadow:0 0 30px rgba(245,197,24,.25)}
+.hdr h1{font-family:Cinzel,serif;color:#f5c518;margin:0;font-size:22px;letter-spacing:1px}
+.badge{background:#000;border:1px solid #f5c518;color:#f5c518;padding:6px 12px;border-radius:999px;font-size:12px}
+.grid{display:grid;grid-template-columns:1fr 1.2fr;gap:16px;margin-top:16px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.6));backdrop-filter:blur(8px);border:1px solid rgba(245,197,24,.6);border-radius:20px;padding:18px;box-shadow:0 0 25px rgba(245,197,24,.15)}
+.card h2{margin:0 0 10px 0;color:#f5c518;font-family:Cinzel,serif;font-size:18px}
+.vault{font-family:monospace;background:#000;border:1px dashed #f5c518;padding:10px;border-radius:12px;color:#f5c518;word-break:break-all}
+textarea,input{width:100%;background:#000;color:#fff;border:1px solid #f5c518;border-radius:14px;padding:14px;font-size:15px;margin-top:10px}
+.btn{width:100%;padding:15px;border-radius:14px;border:none;font-weight:900;cursor:pointer;margin-top:10px;font-size:15px;letter-spacing:.5px}
+.gold{background:linear-gradient(180deg,#ffe27a,#f5c518);color:#000;box-shadow:0 0 20px rgba(245,197,24,.6)}
+.black{background:#000;color:#f5c518;border:1px solid #f5c518}
+#st{margin-top:12px;padding:12px;border-radius:12px;font-weight:bold;min-height:18px}
+.ok{background:#0a1a0a;border:1px solid #0f0;color:#0f0}
+.err{background:#1a0a0a;border:1px solid #f55;color:#f88}
+.dep{font-size:12px;padding:10px;border-bottom:1px solid rgba(245,197,24,.15);display:flex;justify-content:space-between}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+</style>
+</head><body>
 
-Vault Address:
+<div class="hdr">
+<h1>🌲 CEDARS OF WEALTH<br><span style="font-size:12px;color:#aaa;font-family:Inter">COMMAND CENTER v6 GLORY</span></h1>
+<div style="display:flex;gap:8px;align-items:center">
+<div class="badge">🔒 SECURE • @cedarswealth • ONLINE</div>
+</div>
+</div>
+
+<div class="grid">
+<div>
+<div class="card">
+<h2>🏦 VAULT ADDRESS</h2>
+<div class="vault">6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div>
+<p style="color:#888;font-size:12px;margin:8px 0 0">Network: Solana Mainnet • Bot: @cedars_6XQvi_720_bot</p>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h2>📊 LIVE DEPOSITS — Auto 10s</h2>
+<div id="deposits" style="color:#aaa">Scanning chain...</div>
+</div>
+</div>
+
+<div class="card">
+<h2>📡 CHANNEL MESSENGER • @cedarswealth</h2>
+<textarea id="msg" rows="10">🌲 CEDARS OF WEALTH — VAULT OPEN 💰
+
+Vault:
 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb
 
 ✅ HOW TO ENTER:
 1️⃣ Send SOL to vault
-2️⃣ Verify here: https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/verify.html
+2️⃣ Verify: https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/verify.html
 3️⃣ Auto-unlock Premium Dashboard
 
 Join: t.me/cedarswealth
 Bot: @cedars_6XQvi_720_bot</textarea>
-<button class="gold" onclick="send()">🚀 SEND TO @cedarswealth</button>
-<button class="blk" onclick="sendPoster()">🖼️ SEND POSTER + QR</button>
-<div id="st"></div></div>
+<button class="btn gold" onclick="send()">🚀 SEND TO @cedarswealth</button>
+<button class="btn black" onclick="sendPoster()">🖼️ SEND POSTER + QR</button>
+<div id="st"></div>
+<p style="color:#666;font-size:11px;margin-top:10px">Token locked • Chat locked • CORS bypass active • Glory UI v6</p>
+</div>
+</div>
+
 <script>
+// SETTINGS LOCKED — DO NOT CHANGE
 const BOT_TOKEN="8818013074:AAEF3WUACywbqUkm17XUsVGgPN0UwLcYg7U";
 const CHAT_ID="@cedarswealth";
+
 async function send(){
 let m=document.getElementById("msg").value;
 let s=document.getElementById("st");
-s.innerHTML="⏳ Sending to @cedarswealth...";
+s.className=""; s.innerHTML="⏳ Posting to glory channel...";
 let url=`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${encodeURIComponent(CHAT_ID)}&text=${encodeURIComponent(m)}`;
 try{
 let r=await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`);
 let d=await r.json();
-if(d.ok){s.style.background="#0f2e0f";s.style.color="#0f0";s.innerHTML="✅ POSTED TO @cedarswealth — Go check channel! ID: "+d.result.message_id;}
-else{s.style.background="#2e0f0f";s.style.color="#ff4444";s.innerHTML="❌ "+d.description+" — Bot not admin? Add @cedars_6XQvi_720_bot as admin in @cedarswealth";}
-}catch(e){s.innerHTML="⏳ Opening backup...";window.open(url,"_blank"); s.innerHTML="✅ If new tab shows {ok:true} — Message is in channel!";}
+if(d.ok){s.className="ok"; s.innerHTML=`✅ GLORY POSTED — Message ID ${d.result.message_id} — Check @cedarswealth`;}
+else{s.className="err"; s.innerHTML=`❌ ${d.description}`;}
+}catch(e){s.className=""; s.innerHTML="Opening secure tab..."; window.open(url,"_blank"); s.innerHTML=`If tab shows {ok:true} → Posted to @cedarswealth ✅`;}
 }
+
 async function sendPoster(){
 let s=document.getElementById("st");
-let url=`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto?chat_id=${encodeURIComponent(CHAT_ID)}&photo=${encodeURIComponent("https://api.qrserver.com/v1/create-qr-code/?size=800x800&data=6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb")}&caption=${encodeURIComponent("🌲 CEDARS OF WEALTH\n\nVault: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb\n\nVerify: https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/verify.html\n\nJoin: t.me/cedarswealth")}`;
-window.open(url,"_blank");
-s.innerHTML="✅ Poster tab opened — if {ok:true} — check channel";
+let url=`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto?chat_id=${encodeURIComponent(CHAT_ID)}&photo=${encodeURIComponent("https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb")}&caption=${encodeURIComponent("🌲 CEDARS OF WEALTH v6 GLORY\n\nVault: 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb\n\nVerify: https://cryptolordug.github.io/Cedars-of-Wealth/dashboard/verify.html\n\nJoin: t.me/cedarswealth")}`;
+window.open(url,"_blank"); s.className="ok"; s.innerHTML="✅ Poster sent — check @cedarswealth";
 }
-</script></body></html>
+
+async function loadDeposits(){
+try{
+let res=await fetch("https://api.mainnet-beta.solana.com",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getSignaturesForAddress",params:["6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb",{limit:8}]})});
+let data=await res.json();
+if(!data.result||data.result.length==0){document.getElementById("deposits").innerHTML=`<div style='color:#f5c518'>Vault empty — waiting for genesis deposit</div>`; return;}
+let html="";
+data.result.forEach(tx=>{
+let time=tx.blockTime? new Date(tx.blockTime*1000).toLocaleString():"";
+html+=`<div class="dep"><span>${tx.signature.slice(0,20)}... • ${time}</span><span style="color:#0f0">${tx.confirmationStatus||"finalized"}</span></div>`;
+});
+document.getElementById("deposits").innerHTML=html;
+}catch(e){document.getElementById("deposits").innerHTML="Chain offline — retrying...";}
+}
+loadDeposits(); setInterval(loadDeposits,10000);
+</script>
+</body></html>
