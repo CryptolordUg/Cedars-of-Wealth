@@ -1,23 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deposit - CEDARS OF WEALTH</title>
-<link rel="icon" href="logo.png">
-<style>body{background:#050505;color:#fff;font-family:Inter,system-ui;margin:0}.card{max-width:600px;margin:30px auto;background:#0a0a0a;border:1px solid #222;border-radius:12px;padding:24px}code{color:#00ff88;word-break:break-all}.btn{background:linear-gradient(90deg,#9945FF,#14F195);color:#000;padding:12px 24px;border:none;border-radius:8px;font-weight:700;width:100%;cursor:pointer;margin-top:12px}a{color:#14F195;text-decoration:none}</style>
-</head>
-<body>
-<div style="text-align:center;padding:30px 20px 10px"><img src="logo.png" style="width:80px;height:80px;border-radius:50%"><h1 style="letter-spacing:3px;margin:15px 0 5px">CEDARS OF WEALTH</h1></div>
-<div class="card">
-<h2>Deposit</h2>
-<p style="opacity:0.7;font-size:14px">Send to treasury below. Auto-confirms in seconds via webhook.</p>
-<p style="font-size:13px;opacity:0.6">TREASURY — VERIFIABLE</p>
-<code>6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</code>
-<button class="btn" onclick="navigator.clipboard.writeText('6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb');alert('Treasury copied')">Copy Treasury Address</button>
-<button class="btn" style="background:#111;color:#fff;border:1px solid #333" onclick="window.open('https://solscan.io/account/6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb','_blank')">View on Solscan</button>
-<p style="margin-top:20px;font-size:12px;opacity:0.5">1. Copy treasury — 2. Send from wallet — 3. Dashboard updates auto.</p>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Deploy Capital - CEDARS OF WEALTH</title><link rel="icon" href="logo.png"><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Inter}body{background:#0B1106;color:#D8E8C8}.header{display:flex;justify-content:space-between;align-items:center;padding:16px 5%;background:#121D0A;border-bottom:2px solid #2E4A12}.logo{display:flex;align-items:center;gap:10px;font-weight:900;color:#8BC34A}.logo img{width:36px;height:36px;border-radius:50%;border:2px solid #5A8F29}.box{max-width:600px;margin:40px auto;padding:0 5%}.card{background:#121D0A;border:1px solid #2E4A12;border-radius:8px;padding:24px;margin-bottom:16px}.label{font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.6;margin-bottom:8px}.addr{background:#050A02;border:1px dashed #5A8F29;padding:14px;border-radius:6px;color:#8BC34A;font-size:12px;word-break:break-all;text-align:center}.btn{width:100%;padding:14px;background:linear-gradient(135deg,#2E4A12,#5A8F29);color:#fff;border:1px solid #8BC34A;border-radius:6px;font-weight:900;cursor:pointer;text-transform:uppercase;letter-spacing:2px;margin-top:14px;box-shadow:0 0 20px rgba(90,143,41,0.4)}.input{width:100%;padding:12px;background:#050A02;border:1px solid #2E4A12;border-radius:6px;color:#fff;margin:8px 0}.qr{width:160px;height:160px;background:#fff;margin:16px auto;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#000;font-weight:900}</style></head><body>
+<div class="header"><div class="logo"><img src="logo.png"> CEDARS OF WEALTH</div><a href="index.html" style="color:#8BC34A;text-decoration:none;font-size:12px">← BASE</a></div>
+<div class="box">
+<div class="card"><div class="label">Tactical Deployment — Verified Vault</div><div class="addr" id="addr">6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</div><div class="qr">QR CODE</div><button class="btn" onclick="navigator.clipboard.writeText('6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb');alert('Treasury Copied')">Copy Treasury Address</button><p style="font-size:11px;opacity:0.5;margin-top:10px;text-align:center">SOLANA NETWORK ONLY — VERIFY ON SOLSCAN</p></div>
+<div class="card"><div class="label">Deploy Amount (USDT / SOL)</div><input class="input" placeholder="Amount e.g. 500"><select class="input"><option>USDT (SPL)</option><option>SOL</option><option>USDC</option></select><input class="input" placeholder="Tx Hash after sending"><button class="btn" onclick="alert('Deployment Logged — Awaiting Confirmation')">Confirm Deployment</button></div>
+<div class="card" style="text-align:center"><p style="font-size:11px;opacity:0.5">VIEW VAULT ON SOLSCAN</p><a href="https://solscan.io/account/6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb" target="_blank" style="color:#8BC34A;font-size:12px">6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb →</a></div>
 </div>
-<div style="text-align:center;padding:20px"><a href="index.html">← Back to CEDARS OF WEALTH</a> | <a href="dashboard.html">Dashboard</a></div>
-<footer style="text-align:center;opacity:0.3;font-size:12px;padding:20px;border-top:1px solid #111;margin-top:30px">CEDARS OF WEALTH — 6XQviXJ5EceCmZq6uGrnrsxBKSnLKSvXeT7MCFF6fTb</footer>
-</body>
-</html>
+</body></html>
