@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login — Cedars of Wealth</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--mil:linear-gradient(135deg,#5a6d33 0%,#8da65b 25%,#4B5320 50%,#6B7F3A 75%,#3c4a1f 100%);--gold:linear-gradient(135deg,#e8c87a 0%,#f9e2a0 25%,#c9a86a 50%,#e8c87a 75%,#a68b4f 100%)}
+*{margin:0;padding:0;box-sizing:border-box}body{background:radial-gradient(ellipse at top,#1a2a12 0%,#070a07 70%);color:#e8f0d8;font-family:Inter,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh}
+.card{background:rgba(18,28,12,0.96);border:2px solid #c9a86a;border-radius:16px;padding:28px;width:100%;max-width:420px;box-shadow:0 8px 32px rgba(0,0,0,0.7)}
+.input{width:100%;background:#0f1a0a;border:1px solid #3c4a1f;border-radius:10px;padding:12px;color:#e8f0d8;margin-top:10px}
+.btn{background:var(--mil);color:#f5f0d0;border:2px solid #c9a86a;padding:12px;border-radius:10px;font-weight:800;width:100%;cursor:pointer;text-transform:uppercase;margin-top:14px}
+.logo{font-family:Cinzel;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800;text-align:center;font-size:22px;margin-bottom:10px}
+.small{font-size:11px;color:#7a8a5f;text-align:center;margin-top:10px}
+.badge{background:var(--gold);color:#1a1100;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:800}
+</style>
+</head>
+<body>
+<div class="card">
+<div class="logo">🌲 CEDARS OF WEALTH</div>
+<div style="text-align:center"><span class="badge">SHINY MILITARY LOGIN</span></div>
+<h2 style="font-family:Cinzel;color:#f0e6c8;margin-top:16px;text-align:center">Welcome Back 🪖</h2>
+
+<label class="small" style="text-align:left;display:block;margin-top:14px">EMAIL</label>
+<input id="email" class="input" placeholder="john@email.com" type="email">
+
+<label class="small" style="text-align:left;display:block;margin-top:10px">PASSWORD</label>
+<input id="pass" class="input" placeholder="Your password" type="password">
+
+<button class="btn" onclick="login()">ENTER DASHBOARD →</button>
+
+<div id="msg" class="small" style="margin-top:12px;color:#e8c87a"></div>
+
+<div class="small">No account? <a href="register.html" style="color:#e8c87a">Register</a> • <a href="../index.html" style="color:#e8c87a">Vaults</a><br><br>One Investor One Account • Device lock active<br>Vault: TE26B7z...Hcz1u</div>
+
+<div style="margin-top:12px;background:#0f1a0a;border-radius:8px;padding:8px" class="small">
+<b>DEBUG — Saved accounts:</b><br><span id="debug"></span>
+</div>
+</div>
+
+<script>
+function login(){
+ let email=document.getElementById('email').value.trim().toLowerCase();
+ let pass=document.getElementById('pass').value;
+ if(!email){ alert("Enter email"); return; }
+
+ let users=JSON.parse(localStorage.getItem('cedars_users')||"[]");
+ let found=users.find(u=>u.email===email);
+
+ if(!found){
+   document.getElementById('msg').innerHTML = "❌ Email not found on this device.<br>Accounts are device-locked. If you registered on different phone/browser, clear and register again.<br><br>Try email: <b>"+(users[0]?users[0].email:"none")+"</b>";
+   return;
+ }
+
+ // For MVP we don't check password hash — just allow (later Firebase will)
+ localStorage.setItem('cedars_current', JSON.stringify(found));
+ document.getElementById('msg').textContent = "✅ Login success! Redirecting to dashboard... Device: "+found.deviceId;
+ setTimeout(()=>{ window.location.href='dashboard.html'; }, 800);
+}
+
+// Debug show
+let users=JSON.parse(localStorage.getItem('cedars_users')||"[]");
+document.getElementById('debug').textContent = users.length? users.map(u=>u.email+" | "+u.deviceId).join('\n') : "No accounts on this browser. Register first.";
+</script>
+</body>
+</html>
