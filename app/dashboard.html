@@ -1,193 +1,122 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>Dashboard Auto-Balance - Cedars</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}body{background:#070a07;color:#e8f0d8;font-family:Arial}
-.top{position:sticky;top:0;z-index:99;background:#0f1a0a;border-bottom:2px solid #c9a86a;padding:8px 3%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
-.top b{font-size:12px;color:#c9a86a}.nav{display:flex;gap:6px;flex-wrap:wrap}
-.nav a{padding:7px 12px;border-radius:20px;font-size:11px;font-weight:700;text-decoration:none;background:#1a2e0a;color:#c9a86a;border:1px solid #2a3a1a}
-.nav a.active{background:#c9a86a;color:#000}
-.wrap{max-width:900px;margin:0 auto;padding:12px}.card{background:#10180c;border:1px solid #2a3a1a;border-radius:12px;padding:14px;margin-bottom:10px}
-.card h2{font-size:10px;letter-spacing:1px;color:#c9a86a;margin-bottom:8px}.val{font-size:24px;font-weight:800;color:#fff}
-.addr{background:#000;border:1px solid #333;padding:8px;border-radius:8px;font-family:monospace;color:#e8c87a;word-break:break-all;font-size:11px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:600px){.grid{grid-template-columns:1fr}}
-.bal-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
-.bal{background:#000;border:1px solid #1a2a0a;border-radius:8px;padding:8px;text-align:center}
-.bal b{font-size:14px;color:#fff;display:block}.bal span{font-size:9px;color:#6a7a4f}
-.btn{padding:10px 12px;border-radius:8px;font-weight:700;font-size:11px;border:0;cursor:pointer;display:block;text-align:center;text-decoration:none;width:100%;margin-top:8px}
-.btn-gold{background:#c9a86a;color:#000}.btn-green{background:#10b981;color:#fff}.btn-dark{background:#1a2e0a;color:#c9a86a;border:1px solid #2a3a1a}
-input{width:100%;padding:10px;border-radius:8px;border:1px solid #2a3a1a;background:#000;color:#fff;outline:none;font-size:11px;margin-top:6px}
-.status{padding:8px;border-radius:6px;font-size:10px;margin-top:8px;display:none}.ok{background:#0a1f0a;border:1px solid #10b981;color:#a0f0a0}.err{background:#2a1010;border:1px solid #c97a5a;color:#f9a0a0}
-.dep{background:#000;border:1px solid #222;padding:8px;border-radius:6px;margin-top:6px;font-size:10px}
-</style></head><body>
-<div class="top"><b>▲ CEDARS AUTO-BALANCE</b><div class="nav"><a href="../index.html?v=AUTOBAL">Home</a><a href="deposit.html?v=AUTOBAL" class="active">Deposit</a><a href="#" onclick="doRefresh()">↻ Refresh</a><a href="#" onclick="secureLogout()" style="background:#c97a5a;color:#fff">Logout</a></div></div>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><title>Cedars of Wealth - Shake The Tree</title><style>*{margin:0;padding:0;box-sizing:border-box}body{background:linear-gradient(#0a1a05,#070a07);color:#e8f0d8;font-family:Arial;overflow-x:hidden}.top{position:sticky;top:0;z-index:99;background:#0f1a0a;border-bottom:2px solid #c9a86a;padding:10px 4%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}.top b{color:#c9a86a;font-size:13px}.nav a{padding:7px 12px;border-radius:20px;font-size:11px;font-weight:700;text-decoration:none;background:#1a2e0a;color:#c9a86a;border:1px solid #2a3a1a}.nav a.active{background:#c9a86a;color:#000}.wrap{max-width:900px;margin:0 auto;padding:12px}.card{background:#10180c;border:1px solid #2a3a1a;border-radius:16px;padding:14px;margin-bottom:12px;position:relative;overflow:hidden}.val{font-size:26px;font-weight:800;color:#fff}.tree-area{text-align:center;padding:20px 10px;background:radial-gradient(circle at 50% 20%,#1a2e0a,#10180c);border-radius:16px;border:2px solid #c9a86a;position:relative;min-height:280px;cursor:pointer}.tree{font-size:110px;transition:transform 0.3s;user-select:none}.shake{animation:shake 0.6s ease-in-out}.@keyframes shake{0%,100%{transform:rotate(0) scale(1)}25%{transform:rotate(-8deg) scale(1.05)}50%{transform:rotate(8deg) scale(1.05)}75%{transform:rotate(-5deg) scale(1.05)}}.cone{position:absolute;font-size:22px;animation:fall 1.2s ease-in forwards}.@keyframes fall{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(180px) rotate(360deg);opacity:0}}.btn{padding:12px;border-radius:12px;font-weight:800;font-size:12px;border:0;cursor:pointer;width:100%;margin-top:8px;display:block;text-align:center;text-decoration:none}.btn-gold{background:linear-gradient(#c9a86a,#a08040);color:#000;box-shadow:0 4px 0 #6a5020}.btn-green{background:linear-gradient(#10b981,#0a8a5a);color:#fff}.btn-dark{background:#1a2e0a;color:#c9a86a;border:1px solid #2a3a1a}.bal-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}.bal{background:#000;border:1px solid #1a2a0a;border-radius:10px;padding:10px;text-align:center}.bal b{display:block;font-size:14px;color:#fff}.bal span{font-size:9px;color:#6a7a4f}.ledger{max-height:260px;overflow:auto;background:#000;border-radius:10px;padding:8px;margin-top:8px}.entry{padding:8px;border-bottom:1px solid #1a1a1a;font-size:10px;display:flex;justify-content:space-between}.entry:last-child{border:0}.miss{background:#2a1010;border:1px solid #c97a5a;border-radius:8px;padding:10px;margin-top:8px;font-size:10px;color:#f9a0a0;display:none}.notify{position:fixed;top:20px;right:10px;z-index:999;background:#10180c;border:2px solid #c9a86a;border-radius:12px;padding:12px;min-width:200px;max-width:300px;box-shadow:0 8px 20px rgba(0,0,0,0.8);display:none;animation:slideIn 0.4s}.@keyframes slideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}input{width:100%;padding:10px;border-radius:8px;border:1px solid #2a3a1a;background:#000;color:#fff;outline:none;font-size:11px;margin-top:6px}.confetti{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:998}</style></head><body>
+<div id="confetti" class="confetti"></div>
+<div id="notify" class="notify"></div>
+<div class="top"><b>▲ CEDARS OF WEALTH 🌲</b><div class="nav"><a href="../index.html?v=SHAKE">Home</a><a href="deposit.html?v=SHAKE">Deposit</a><a href="#" onclick="location.reload()" style="background:#000">↻</a><a href="#" onclick="localStorage.removeItem('cedars_session');location.href='../index.html?v=SHAKE'" style="background:#c97a5a;color:#fff">Logout</a></div></div>
 <div class="wrap">
 
-<div class="card" style="border-color:#c9a86a"><h2>BALANCE <span id="dot" style="color:#10b981;font-size:9px">● AUTO-SYNC LIVE</span></h2>
-<div class="val" id="totalBal">$0.00</div><div style="font-size:10px;color:#7a8a5f" id="uEmail">Checking session...</div>
+<div class="card" style="border-color:#c9a86a;border-width:2px"><div style="font-size:10px;color:#c9a86a;letter-spacing:1px;text-align:center">CEDARS OF WEALTH • SHAKE THE TREE TO REDEEM</div><div class="val" id="totalBal" style="text-align:center">$0.00 Total Value</div><div style="text-align:center;font-size:10px;color:#7a8a5f" id="uEmail">Loading your tree...</div>
+<div class="bal-grid"><div class="bal"><span>🌲 YOUR TREE VALUE</span><b id="inv">$0</b></div><div class="bal"><span>🍯 DAILY CONES</span><b id="daily" style="color:#10b981">$0</b></div><div class="bal"><span>💰 COLLECTED</span><b id="earn" style="color:#c9a86a">$0</b></div></div>
+<div class="bal-grid"><div class="bal"><span>⏳ CONTRACT ENDS</span><b id="locked" style="font-size:9px">-</b></div><div class="bal"><span>📤 WITHDRAWN</span><b id="withd" style="color:#c97a5a">$0</b></div><div class="bal"><span>✅ AVAILABLE</span><b id="avail" style="color:#10b981">$0</b></div></div></div>
 
-<div id="hasBox" style="display:none">
-<div class="bal-grid"><div class="bal"><span>INVESTED (Verified)</span><b id="inv">$0</b></div><div class="bal"><span>DAILY 1.5%</span><b id="daily" style="color:#10b981">$0</b></div><div class="bal"><span>EARNINGS</span><b id="earn" style="color:#c9a86a">$0</b></div></div>
-<div class="bal-grid" style="grid-template-columns:1fr 1fr 1fr"><div class="bal"><span>LOCKED UNTIL</span><b id="locked" style="font-size:10px">-</b></div><div class="bal"><span>WITHDRAWN</span><b id="withd" style="font-size:10px;color:#c97a5a">$0</b></div><div class="bal"><span>AVAILABLE NOW</span><b id="avail" style="color:#10b981">$0</b></div></div>
+<div class="card" id="treeCard"><h2 style="font-size:11px;color:#c9a86a;letter-spacing:1px;text-align:center">🌲 YOUR CEDAR TREE FARM - DAILY REDEMPTION</h2>
+<div class="tree-area" id="treeArea" onclick="shakeTree()">
+<div style="font-size:11px;color:#7a8a5f" id="treeStatus">Loading tree...</div>
+<div class="tree" id="treeEmoji">🌲</div>
+<div style="font-size:12px;color:#c9a86a;font-weight:700" id="coneCount">0 cones ready</div>
+<div style="font-size:10px;color:#6a7a4f;margin-top:4px" id="nextShake">Next cones in: --:--:--</div>
+<button class="btn btn-gold" id="shakeBtn" onclick="shakeTree()">🤲 SHAKE TREE TO COLLECT 1.5% TODAY!</button>
+<div class="miss" id="missBox"></div>
 </div>
+<div style="font-size:9px;color:#6a7a4f;margin-top:8px;text-align:center">🎮 Fun for family: Shake daily, if you miss, cones rot! Children love collecting! Notification if missed.</div></div>
 
-<div id="noBox" style="display:none;text-align:center;padding:12px;border:1px dashed #c9a86a;border-radius:8px;margin-top:10px"><div style="font-size:11px;color:#c9a86a">No verified TRC20 deposits yet</div><div style="font-size:10px;color:#6a7a4f;margin-top:4px" id="scanInfo">Auto-scanning treasury...</div><a href="deposit.html?v=AUTOBAL" class="btn btn-gold" style="margin-top:8px">Deposit TRC20 Now - Auto Verify</a></div>
-</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="card"><h2 style="font-size:10px;color:#c9a86a">💸 WITHDRAW 24/7 - COLLECTED PROFITS ONLY</h2>
+<div class="bal"><span>AVAILABLE TO WITHDRAW</span><b id="wAvail" style="color:#10b981">$0.00</b></div>
+<input id="wAddr" placeholder="Your TRC20 Address T..."><input id="wAmt" type="number" placeholder="Min $20 - From collected only">
+<button class="btn btn-green" onclick="doWithdraw()">💸 WITHDRAW TO TRC20</button><div id="wStatus" style="font-size:10px;margin-top:8px;display:none;padding:8px;border-radius:6px"></div><div id="wHistory" style="margin-top:8px"></div></div>
+<div class="card"><h2 style="font-size:10px;color:#c9a86a">📜 TRANSACTION LEDGER - PER ACCOUNT</h2><div style="font-size:9px;color:#6a7a4f">Every deposit, daily cone, redemption, miss, withdrawal stored</div><div class="ledger" id="ledger"></div><button class="btn btn-dark" onclick="exportLedger()">📥 Export My Records CSV</button></div></div>
 
-<div class="grid">
-<div class="card" id="wBox"><h2>WITHDRAW TRC20 - AUTO BALANCE</h2>
-<div style="font-size:10px;color:#7a8a5f">Available earnings to withdraw (5% fee)</div>
-<div class="bal" style="margin-top:8px"><span>AVAILABLE</span><b id="wAvail" style="color:#10b981">$0.00</b></div>
-<input id="wAddr" placeholder="Your TRC20 Address T... (26-35 chars)">
-<input id="wAmt" type="number" placeholder="Amount to withdraw - Min $20">
-<button class="btn btn-green" onclick="doWithdraw()">💸 WITHDRAW USDT TRC20 NOW</button>
-<div id="wStatus" class="status"></div>
-<div style="font-size:9px;color:#6a7a4f;margin-top:6px">• $20 min • 5% fee • Only earnings withdrawable • Principal locked 30 days • Auto-deducts from available</div>
-<div id="wHistory" style="margin-top:10px"></div>
-</div>
+<div class="card"><h2 style="font-size:10px;color:#c9a86a">FAQ - CEDARS OF WEALTH</h2><div style="font-size:10px;color:#6a7a4f;line-height:1.6">
+<b style="color:#fff">How to earn?</b> Tree grows 1.5% daily cones. SHAKE to collect. If miss 24h, cones rot = missed profit.<br>
+<b style="color:#fff">Min?</b> $20 USDT TRC20<br><b style="color:#fff">Contract?</b> 720 days<br><b style="color:#fff">Capital?</b> Locked & covered in profits<br><b style="color:#fff">Withdrawal?</b> 24/7 on collected only<br><b style="color:#fff">Treasury:</b> TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u
+</div></div>
 
-<div class="card" id="refBox"><h2>REFERRAL + DEPOSITS</h2>
-<div style="font-size:11px;color:#fff">Earn 10% / 5% / 2% / 1% on verified deposits</div>
-<div class="addr" style="margin-top:6px" id="refL">...</div><button class="btn btn-dark" onclick="copyR()">Copy Referral Link</button>
-<div style="margin-top:12px"><div style="font-size:10px;color:#c9a86a;font-weight:700">VERIFIED DEPOSITS (Auto-Synced)</div><div id="depList"></div></div>
-<div style="margin-top:12px"><div style="font-size:10px;color:#6a7a4f">Treasury: TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u</div></div>
-</div>
-</div>
-
-<div style="text-align:center;font-size:9px;color:#4a5a2a;margin-top:10px">AUTO-BALANCE v=AUTOBAL • Deposits + Withdrawals Auto-Sync • <span id="time"></span></div>
-</div>
+<div style="text-align:center;font-size:9px;color:#4a5a2a">SHAKE THE TREE v=SHAKE • Fun Redemption • Miss = Lose Day • Ledger Stored • Cedars of Wealth</div></div>
 
 <script>
-// SESSION GUARD - SECURITY LOCK
-(function(){const s=JSON.parse(localStorage.getItem('cedars_session')||'null');const u=JSON.parse(localStorage.getItem('cedars_users')||'[]');if(!s||!u.find(x=>x.email===s.email)){alert('🔒 Security: Login required');location.href='../index.html?needLogin=1&v=AUTOBAL';throw 'No session';}if(Date.now()-s.loginAt>86400000){localStorage.removeItem('cedars_session');alert('Session expired - Login again');location.href='../index.html?needLogin=1&v=AUTOBAL';}})();
-function secureLogout(){localStorage.removeItem('cedars_session');location.href='../index.html?v=AUTOBAL';}
-function doRefresh(){location.reload(true);}
-document.getElementById('time').innerText=new Date().toLocaleString();
+// SESSION GUARD
+(function(){const s=JSON.parse(localStorage.getItem('cedars_session')||'null');const u=JSON.parse(localStorage.getItem('cedars_users')||'[]');if(!s||!u.find(x=>x.email===s.email)){alert('🔒 Login required');location.href='../index.html?v=SHAKE';}})();
 
-function copyR(){navigator.clipboard.writeText(document.getElementById('refL').innerText);alert('Copied referral link');}
-function showWStatus(msg,type){const el=document.getElementById('wStatus');el.style.display='block';el.className='status '+type;el.innerHTML=msg;}
+const TREASURY='TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u';
+let curUserId=JSON.parse(localStorage.getItem('cedars_session')||'{}').email||'';
 
-let TREASURY='TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u';
+function getData(){return {deposits:JSON.parse(localStorage.getItem('cedars_deposits')||'[]'),redemptions:JSON.parse(localStorage.getItem('cedars_redemptions')||'[]'),missed:JSON.parse(localStorage.getItem('cedars_missed')||'[]'),withdrawals:JSON.parse(localStorage.getItem('cedars_withdrawals')||'[]'),ledger:JSON.parse(localStorage.getItem('cedars_ledger')||'[]')}}
+function save(k,v){localStorage.setItem(k,JSON.stringify(v));}
+function addLedger(type,amount,note){let l=getData().ledger;l.push({id:Date.now()+Math.random(),userId:curUserId,type,amount,note,date:new Date().toISOString()});save('cedars_ledger',l);}
 
-function loadData(){
-  const sess=JSON.parse(localStorage.getItem('cedars_session')||'{}');
-  const userId=sess.email||'';
-  const users=JSON.parse(localStorage.getItem('cedars_users')||'[]');
-  const curUser=users.find(u=>u.email===userId);
-  document.getElementById('uEmail').innerText=userId?'Investor: '+userId+' • Wallet: '+(curUser?.wallet||'T...'):'Guest';
-  document.getElementById('refL').innerText=curUser?'https://cryptolordug.github.io/Cedars-of-Wealth/?ref='+(curUser.ref||'USER1'):'Deposit to get referral';
+function loadAll(){
+  const d=getData();
+  let myDeps=d.deposits.filter(x=>x.userId===curUserId||x.email===curUserId);let myRed=d.redemptions.filter(x=>x.userId===curUserId);let myMiss=d.missed.filter(x=>x.userId===curUserId);let myWith=d.withdrawals.filter(x=>x.userId===curUserId||x.email===curUserId);
+  let total=0;myDeps.forEach(x=>{if(x.verified!==false) total+=parseFloat(x.amount||0);});
+  document.getElementById('uEmail').innerText=curUserId+' • Tree #'+(total>0?'Growing 🌲':'Seed 🌱');
+  let daily=total*0.015;let collected=0;myRed.forEach(r=>collected+=parseFloat(r.amount||0));let withdrawn=0;myWith.forEach(w=>withdrawn+=parseFloat(w.amountNet||w.amount||0));let available=Math.max(0,collected-withdrawn);
+  let totalVal=total+collected-withdrawn;
+  document.getElementById('inv').innerText='$'+total.toFixed(2);document.getElementById('daily').innerText='$'+daily.toFixed(2);document.getElementById('earn').innerText='$'+collected.toFixed(2);document.getElementById('withd').innerText='$'+withdrawn.toFixed(2);document.getElementById('avail').innerText='$'+available.toFixed(2);document.getElementById('wAvail').innerText='$'+available.toFixed(2);document.getElementById('totalBal').innerText='$'+totalVal.toFixed(2)+' Total Value';
+  if(total>0){const first=new Date(myDeps[0].date);const end=new Date(first);end.setDate(end.getDate()+720);document.getElementById('locked').innerText=end.toLocaleDateString();}else{document.getElementById('locked').innerText='No tree yet';}
 
-  let deposits=JSON.parse(localStorage.getItem('cedars_deposits')||'[]');
-  let withdrawals=JSON.parse(localStorage.getItem('cedars_withdrawals')||'[]');
+  // Check redemption eligibility - 24h logic
+  checkRedemptionEligibility(total,daily,collected,myRed,myMiss);
 
-  let userDeposits=deposits.filter(d=>d.userId===userId||d.email===userId);
-  let userWithdrawals=withdrawals.filter(w=>w.userId===userId||w.email===userId);
+  // Ledger
+  let myLedger=d.ledger.filter(x=>x.userId===curUserId).slice().reverse().slice(0,30);
+  let ledgerEl=document.getElementById('ledger');
+  if(myLedger.length===0) ledgerEl.innerHTML='<div style="color:#5a6a4a;font-size:10px">No records yet - Deposit & shake tree</div>';
+  else{let h='';myLedger.forEach(e=>{let icon=e.type==='DEPOSIT'?'📥':e.type==='REDEEM'?'🍯':e.type==='MISS'?'🥀':e.type==='WITHDRAW'?'📤':'📝';let color=e.type==='MISS'?'#c97a5a':e.type==='REDEEM'?'#10b981':'#c9a86a';h+='<div class="entry"><span>'+icon+' '+e.type+' <b style="color:'+color+'">$'+parseFloat(e.amount||0).toFixed(2)+'</b><br><span style="color:#5a6a4a">'+new Date(e.date).toLocaleString()+' • '+e.note+'</span></span></div>';});ledgerEl.innerHTML=h;}
 
-  // Calculate total verified invested
-  let totalInvested=0;
-  userDeposits.forEach(d=>{ if(d.verified!==false) totalInvested+=parseFloat(d.amount||0); });
+  // Withdraw history
+  let wEl=document.getElementById('wHistory');if(myWith.length===0) wEl.innerHTML='<div style="font-size:9px;color:#5a6a4a">No withdrawals</div>';else{let wh='';myWith.slice().reverse().forEach(w=>{wh+='<div style="background:#000;border:1px solid #c97a5a;padding:6px;border-radius:6px;margin-top:6px;font-size:10px">-$'+parseFloat(w.amount).toFixed(2)+' → $'+parseFloat(w.amountNet).toFixed(2)+' net • '+new Date(w.date).toLocaleDateString()+'</div>';});wEl.innerHTML=wh;}
+}
 
-  // Calculate earnings - days since first deposit
-  let total=totalInvested;
-  let has=total>0;
-  let days=0; let daily=0; let earnings=0; let withdrawn=0;
-
-  if(has){
-    const firstDate=new Date(userDeposits[0].date);
-    days=Math.max(0,Math.floor((Date.now()-firstDate.getTime())/86400000));
-    daily=total*0.015;
-    earnings=daily*days;
-    // Sum withdrawn
-    userWithdrawals.forEach(w=>withdrawn+=parseFloat(w.amountNet||w.amount||0));
+function checkRedemptionEligibility(total,daily,collected,myRed,myMiss){
+  const area=document.getElementById('treeArea');const btn=document.getElementById('shakeBtn');const status=document.getElementById('treeStatus');const coneEl=document.getElementById('coneCount');const nextEl=document.getElementById('nextShake');const missBox=document.getElementById('missBox');
+  if(total<=0){status.innerText='🌱 Plant your tree - Deposit $20 TRC20';coneEl.innerText='No cones - No tree yet';btn.innerText='🌱 DEPOSIT TO GROW TREE';btn.onclick=()=>location.href='deposit.html?v=SHAKE';return;}
+  // Find last redemption
+  let lastRed=myRed.length>0?new Date(myRed[myRed.length-1].date):null;
+  let now=new Date();let hoursSince=lastRed? (now-lastRed)/3600000 : 999;
+  // Check for missed days
+  if(lastRed){
+    let daysMissed=Math.floor(hoursSince/24)-1;
+    if(daysMissed>=1){
+      // Record missed profits
+      let d=getData();let alreadyMissed=d.missed;for(let i=0;i<daysMissed;i++){let missDate=new Date(lastRed);missDate.setDate(missDate.getDate()+i+1);if(!alreadyMissed.find(m=>new Date(m.date).toDateString()===missDate.toDateString()&&m.userId===curUserId)){let miss={userId:curUserId,amount:daily,date:missDate.toISOString(),note:'Missed - Did not shake tree'};alreadyMissed.push(miss);addLedger('MISS',daily,'Missed - Did not shake tree on '+missDate.toDateString());}}
+      save('cedars_missed',alreadyMissed);showNotify('🥀 You missed '+daysMissed+' day(s)! $'+(daily*daysMissed).toFixed(2)+' cones rotted! Shake now to not miss more!','miss');missBox.style.display='block';missBox.innerHTML='🥀 MISSED '+daysMissed+' DAY(S): $'+(daily*daysMissed).toFixed(2)+' rotted - Cones fell because you did not shake!';}
   }
-
-  let available=Math.max(0,earnings-withdrawn);
-  let totalBal=total+earnings-withdrawn;
-
-  // Update UI
-  document.getElementById('totalBal').innerText='$'+totalBal.toFixed(2);
-  document.getElementById('inv').innerText='$'+total.toFixed(2);
-  document.getElementById('daily').innerText='$'+daily.toFixed(2);
-  document.getElementById('earn').innerText='$'+earnings.toFixed(2);
-  document.getElementById('withd').innerText='$'+withdrawn.toFixed(2);
-  document.getElementById('avail').innerText='$'+available.toFixed(2);
-  document.getElementById('wAvail').innerText='$'+available.toFixed(2);
-
-  if(has){
-    document.getElementById('hasBox').style.display='block';
-    document.getElementById('noBox').style.display='none';
-    const ld=new Date(userDeposits[0].date); ld.setDate(ld.getDate()+30);
-    document.getElementById('locked').innerText=ld.toLocaleDateString();
-    document.getElementById('dot').innerText='● '+userDeposits.length+' DEPOSITS VERIFIED';
+  if(hoursSince>=24){
+    status.innerText='🍯 CONES READY! SHAKE NOW!';
+    coneEl.innerText='🍯 $'+daily.toFixed(2)+' cones ready to collect!';coneEl.style.color='#10b981';
+    btn.innerText='🤲 SHAKE TREE NOW - COLLECT $'+daily.toFixed(2)+'!';
+    btn.style.display='block';btn.className='btn btn-gold';area.style.borderColor='#10b981';
+    nextEl.innerText='⚠ Shake within 24h or cones rot & you miss profit!';
+    document.getElementById('treeEmoji').innerText='🌲🍯';
   }else{
-    document.getElementById('hasBox').style.display='none';
-    document.getElementById('noBox').style.display='block';
-    document.getElementById('totalBal').innerText='$0.00';
-    document.getElementById('dot').innerText='● NO VERIFIED DEPOSITS';
-    document.getElementById('dot').style.color='#c97a5a';
-  }
-
-  // Render deposits
-  let depEl=document.getElementById('depList');
-  if(userDeposits.length===0){depEl.innerHTML='<div style="color:#5a6a4a;font-size:10px">No deposits - Go to Deposit page</div>';}
-  else{
-    let h=''; userDeposits.slice().reverse().forEach(d=>{
-      h+='<div class="dep" style="border-color:'+(d.verified?'#10b981':'#c9a86a')+'"><b style="color:#fff">$'+parseFloat(d.amount).toFixed(2)+' '+(d.verified?'✅':'⏳')+'</b> • '+new Date(d.date).toLocaleDateString()+'<br><span style="color:#6a7a4f">TX: '+d.tx.substring(0,18)+'... • '+(d.verified?'Verified':'Pending')+'</span></div>';
-    }); depEl.innerHTML=h;
-  }
-
-  // Render withdrawals
-  let wEl=document.getElementById('wHistory');
-  if(userWithdrawals.length===0){wEl.innerHTML='<div style="font-size:9px;color:#5a6a4a;margin-top:8px">No withdrawals yet</div>';}
-  else{
-    let wh='<div style="font-size:10px;color:#c97a5a;margin-top:8px;font-weight:700">Withdrawal History:</div>';
-    userWithdrawals.slice().reverse().forEach(w=>{
-      wh+='<div class="dep" style="border-color:#c97a5a"><b style="color:#e8a07a">-$'+parseFloat(w.amount).toFixed(2)+' → $'+parseFloat(w.amountNet||w.amount*0.95).toFixed(2)+' net</b> • '+new Date(w.date).toLocaleDateString()+'<br><span style="color:#6a7a4f">To: '+w.to.substring(0,12)+'... • '+(w.status||'Processing')+'</span></div>';
-    }); wEl.innerHTML=wh;
+    let nextTime=new Date(lastRed);nextTime.setHours(nextTime.getHours()+24);let diff=nextTime-now;let h=Math.floor(diff/3600000);let m=Math.floor((diff%3600000)/60000);let s=Math.floor((diff%60000)/1000);
+    status.innerText='🌲 Tree growing next cones...';coneEl.innerText='Next harvest growing...';coneEl.style.color='#6a7a4f';btn.style.display='none';nextEl.innerText='⏰ Next shake in: '+h+'h '+m+'m '+s+'s';document.getElementById('treeEmoji').innerText='🌲';missBox.style.display='none';
   }
 }
 
-function doWithdraw(){
-  const addr=document.getElementById('wAddr').value.trim();
-  const amt=parseFloat(document.getElementById('wAmt').value);
-  const sess=JSON.parse(localStorage.getItem('cedars_session')||'{}');
-  const userId=sess.email||'';
-
-  if(!addr||!addr.startsWith('T')||addr.length<26) return showWStatus('❌ Invalid TRC20 address - Must start with T, 26-35 chars','err');
-  if(!amt||amt<20) return showWStatus('❌ Minimum withdrawal $20','err');
-
-  // Check available
-  let deposits=JSON.parse(localStorage.getItem('cedars_deposits')||'[]');
-  let withdrawals=JSON.parse(localStorage.getItem('cedars_withdrawals')||'[]');
-  let userDeposits=deposits.filter(d=>(d.userId===userId||d.email===userId)&&d.verified!==false);
-  let total=0; userDeposits.forEach(d=>total+=parseFloat(d.amount||0));
-  if(total===0) return showWStatus('❌ No verified deposits - Deposit TRC20 first','err');
-
-  const firstDate=new Date(userDeposits[0].date);
-  const days=Math.max(0,Math.floor((Date.now()-firstDate.getTime())/86400000));
-  const earnings=total*0.015*days;
-  let withdrawn=0; withdrawals.filter(w=>w.userId===userId||w.email===userId).forEach(w=>withdrawn+=parseFloat(w.amountNet||w.amount||0));
-  let available=Math.max(0,earnings-withdrawn);
-
-  if(amt>available) return showWStatus('❌ Insufficient available balance<br>Available: $'+available.toFixed(2)+'<br>You requested: $'+amt.toFixed(2),'err');
-
-  const fee=amt*0.05;
-  const net=amt-fee;
-
-  if(!confirm('Confirm withdrawal?\n\nAmount: $'+amt.toFixed(2)+'\nFee 5%: $'+fee.toFixed(2)+'\nYou receive: $'+net.toFixed(2)+'\nTo: '+addr+'\n\nProceed?')) return;
-
-  let w={id:Date.now(),userId,email:userId,to:addr,amount:amt,fee:fee,amountNet:net,date:new Date().toISOString(),status:'Processing - Sent to treasury for payout',tx:'W'+Date.now()};
-  withdrawals.push(w);
-  localStorage.setItem('cedars_withdrawals',JSON.stringify(withdrawals));
-
-  showWStatus('✅ Withdrawal requested: $'+amt.toFixed(2)+' → $'+net.toFixed(2)+' net to '+addr.substring(0,10)+'...<br>Fee 5% applied<br>Balance auto-updated - Available now: $'+(available-amt).toFixed(2),'ok');
-
-  // Auto-refresh balances
-  setTimeout(()=>{loadData();},500);
+function shakeTree(){
+  const d=getData();let myDeps=d.deposits.filter(x=>x.userId===curUserId||x.email===curUserId);let total=0;myDeps.forEach(x=>{if(x.verified!==false) total+=parseFloat(x.amount||0);});if(total<=0){location.href='deposit.html?v=SHAKE';return;}
+  let myRed=d.redemptions.filter(x=>x.userId===curUserId);let lastRed=myRed.length>0?new Date(myRed[myRed.length-1].date):null;let now=new Date();let hoursSince=lastRed?(now-lastRed)/3600000:999;if(hoursSince<24){showNotify('⏰ Tree still growing! Come back in '+(24-Math.floor(hoursSince))+'h','info');return;}
+  let daily=total*0.015;
+  // Animation
+  const tree=document.getElementById('treeEmoji');tree.classList.add('shake');setTimeout(()=>tree.classList.remove('shake'),600);
+  // Falling cones
+  for(let i=0;i<8;i++){setTimeout(()=>{let cone=document.createElement('div');cone.className='cone';cone.innerText=Math.random()>0.5?'🍯':'💰';cone.style.left=(20+Math.random()*60)+'%';cone.style.top='40%';document.getElementById('treeArea').appendChild(cone);setTimeout(()=>cone.remove(),1200);},i*120);
+  // Confetti
+  createConfetti();
+  // Save redemption
+  let redemption={userId:curUserId,amount:daily,date:now.toISOString(),day:Math.floor((now-new Date(myDeps[0].date))/86400000)+1};let reds=d.redemptions;reds.push(reds);d.redemptions.push(redemption);save('cedars_redemptions',d.redemptions);addLedger('REDEEM',daily,'Day '+(redemption.day)+' - Shook tree & collected');showNotify('🎉 COLLECTED! $'+daily.toFixed(2)+' cones! +$'+daily.toFixed(2)+' added to collected!','success');
+  setTimeout(()=>{loadAll();},800);
 }
 
-loadData();
-// Auto-refresh every 10 secs
-setInterval(loadData,10000);
-</script>
-</body></html>
+function createConfetti(){const c=document.getElementById('confetti');for(let i=0;i<20;i++){let el=document.createElement('div');el.style.position='absolute';el.style.left=Math.random()*100+'%';el.style.top='-10px';el.style.fontSize='20px';el.innerText=['🎉','💰','🍯','✨','🌲'][Math.floor(Math.random()*5)];el.style.animation='fall '+(1+Math.random())+'s linear forwards';c.appendChild(el);setTimeout(()=>el.remove(),2000);}}
+
+function showNotify(msg,type){const n=document.getElementById('notify');n.innerHTML=msg;n.style.display='block';n.style.borderColor=type==='miss'?'#c97a5a':type==='success'?'#10b981':'#c9a86a';setTimeout(()=>n.style.display='none',5000);}
+
+function doWithdraw(){const addr=document.getElementById('wAddr').value.trim();const amt=parseFloat(document.getElementById('wAmt').value);const d=getData();let myDeps=d.deposits.filter(x=>x.userId===curUserId||x.email===curUserId);let total=0;myDeps.forEach(x=>{if(x.verified!==false) total+=parseFloat(x.amount||0);});if(total<=0){alert('No tree');return;}let myRed=d.redemptions.filter(x=>x.userId===curUserId);let collected=0;myRed.forEach(r=>collected+=parseFloat(r.amount||0));let myWith=d.withdrawals.filter(x=>x.userId===curUserId||x.email===curUserId);let withdrawn=0;myWith.forEach(w=>withdrawn+=parseFloat(w.amountNet||w.amount||0));let available=Math.max(0,collected-withdrawn);if(!addr||!addr.startsWith('T')||addr.length<26){document.getElementById('wStatus').style.display='block';document.getElementById('wStatus').innerHTML='❌ Invalid TRC20 address';document.getElementById('wStatus').style.background='#2a1010';document.getElementById('wStatus').style.border='1px solid #c97a5a';return;}if(!amt||amt<20){document.getElementById('wStatus').style.display='block';document.getElementById('wStatus').innerHTML='❌ Min $20 from collected only';return;}if(amt>available){document.getElementById('wStatus').style.display='block';document.getElementById('wStatus').innerHTML='❌ Only $'+available.toFixed(2)+' collected available';return;}const fee=amt*0.05;const net=amt-fee;if(!confirm('Withdraw $'+amt.toFixed(2)+' → $'+net.toFixed(2)+' net to '+addr+'?'))return;let w={id:Date.now(),userId:curUserId,email:curUserId,to:addr,amount:amt,fee:fee,amountNet:net,date:new Date().toISOString(),status:'Queued for TRC20 payout'};d.withdrawals.push(w);save('cedars_withdrawals',d.withdrawals);addLedger('WITHDRAW',amt,'Withdraw $'+amt.toFixed(2)+' → $'+net.toFixed(2)+' net to '+addr.substring(0,8)+'...');document.getElementById('wStatus').style.display='block';document.getElementById('wStatus').style.background='#0a1f0a';document.getElementById('wStatus').style.border='1px solid #10b981';document.getElementById('wStatus').innerHTML='✅ Queued $'+amt.toFixed(2)+' → $'+net.toFixed(2)+' net to TRC20';setTimeout(()=>loadAll(),600);}
+
+function exportLedger(){const d=getData();let my=d.ledger.filter(x=>x.userId===curUserId);let csv='Date,Type,Amount,Note\n';my.forEach(e=>{csv+=new Date(e.date).toLocaleString()+','+e.type+','+e.amount+',"'+e.note+'"\n';});let blob=new Blob([csv],{type:'text/csv'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='Cedars_'+curUserId+'_ledger.csv';a.click();}
+
+loadAll();setInterval(loadAll,10000);
+// Check for missed daily on load
+(function(){const d=getData();let myDeps=d.deposits.filter(x=>x.userId===curUserId||x.email===curUserId);if(myDeps.length===0) return;let myRed=d.redemptions.filter(x=>x.userId===curUserId);if(myRed.length===0) return;let lastRed=new Date(myRed[myRed.length-1].date);let now=new Date();let daysMissed=Math.floor((now-lastRed)/86400000)-1;if(daysMissed>=1){showNotify('🥀 You missed '+daysMissed+' day(s)! Check tree!','miss');}})();
+</script></body></html>
