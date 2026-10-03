@@ -1,12 +1,32 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Referral - Military Vault</title><style>body{margin:0;background:#040804;color:#e8e9d8;font-family:Arial} .top{padding:14px 20px;background:#070d07;border-bottom:1px solid #1f351f;display:flex;justify-content:space-between} .wrap{max-width:520px;margin:30px auto;padding:0 18px} .card{background:#0a120a;border:1px solid #1f351f;border-radius:14px;padding:20px} .code{background:#000;border:1px dashed #2a4a2a;padding:12px;text-align:center;color:#a8c686;font-weight:900;letter-spacing:2px;margin:12px 0} .btn{width:100%;padding:12px;background:linear-gradient(90deg,#7a9a4a,#a8c686);border:0;border-radius:8px;font-weight:800;margin-top:10px}</style></head><body>
-<div class="top"><div style="color:#c8b07a;font-weight:900;font-size:12px">🌲 REFERRAL • REAL</div><div><a href="balance.html" style="color:#5a6a4a;font-size:10px;text-decoration:none">BACK TO BALANCE</a></div></div>
-<div class="wrap"><div class="card"><div style="font-size:10px;color:#5a6a4a">YOUR REAL REFERRAL LINK</div><div class="code" id="link">Loading...</div><div style="font-size:9px;color:#6a7a5a;line-height:1.6">• Real tracking<br>• Clean & neat<br>• 5% real commission on investor deposit</div><button class="btn" onclick="navigator.clipboard.writeText(document.getElementById('link').innerText);alert('Copied real link')">COPY REAL LINK</button><div style="margin-top:14px;padding:10px;background:#080d08;border-radius:8px;font-size:9px;color:#6a7a5a" id="stats">Referrals: 0 • Earned: $0.00</div></div></div>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars of Wealth | Referral</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"><style>:root{--b:#102A43;--g:#a8c686;--bg:#F8F9FA;--t:#1A1A1A;--bd:#DADADA;--blue:#0057B8}*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,Arial,sans-serif;font-size:18px;line-height:1.7;color:var(--t);background:var(--bg);padding-top:72px} .top{position:fixed;top:0;left:0;right:0;z-index:9999;background:var(--b);border-bottom:2px solid var(--g);padding:12px 20px;display:flex;justify-content:space-between;align-items:center} .logo{font-size:20px;font-weight:700;color:#fff} .logo span{color:var(--g)} .nav{display:flex;gap:8px;flex-wrap:wrap} .nav a{font-size:16px;font-weight:600;color:#fff;text-decoration:none;padding:10px 14px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15)} .nav a.active{background:var(--g);color:var(--b)} .wrap{max-width:900px;margin:0 auto;padding:24px} .card{background:#fff;border:1px solid var(--bd);border-radius:16px;padding:24px;margin-top:20px} h2{font-size:36px;font-weight:700} h3{font-size:24px;font-weight:600;margin-bottom:12px} .refbox{background:#102A43;color:#fff;padding:16px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:16px 0} .refcode{font-size:16px;word-break:break-all;color:#a8c686} .btn{padding:14px 20px;font-size:16px;font-weight:600;border-radius:8px;border:0;background:var(--g);color:var(--b);cursor:pointer} .btn2{padding:14px 20px;font-size:16px;font-weight:600;border-radius:8px;border:0;background:var(--b);color:#fff;cursor:pointer;width:100%;margin-top:12px} .stat{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px} .s{background:#F8F9FA;border:1px solid var(--bd);border-radius:12px;padding:16px;text-align:center} .s b{font-size:28px;display:block;color:var(--b)} *:focus{outline:3px solid #4D90FE;outline-offset:2px} @media(max-width:900px){.stat{grid-template-columns:1fr}body{padding-top:120px}.top{flex-direction:column;gap:10px}h2{font-size:28px}}</style></head><body>
+<div class="top"><div class="logo">🌲 CEDARS <span>OF WEALTH</span></div><div class="nav"><a href="../index.html">🏠 Home</a><a href="balance.html">💰 Balance</a><a href="deposit.html">📥 Deposit</a><a href="withdraw.html">📤 Withdraw</a><a href="referral.html" class="active">👥 Referral</a><a href="../login.html">🔐 Login</a><a href="../register.html">✨ Register</a><a href="#" onclick="localStorage.removeItem('cedar_login');localStorage.removeItem('cedar_session');location.href='../login.html'" style="background:#8b0000">🔓 Logout</a></div></div>
+
+<div class="wrap">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px"><h2>Referral</h2><a href="balance.html" style="color:var(--blue);font-size:16px;font-weight:600;text-decoration:none">← Back to Balance</a></div>
+<p style="color:#444;font-size:18px;margin-top:8px">Clean link. No sensitive info.</p>
+
+<div class="card"><h3>Your Referral Link</h3>
+<div class="refbox"><span class="refcode" id="link">https://cryptolordug.github.io/Cedars-of-Wealth/register.html?ref=USER</span><button class="btn" onclick="copy()">Copy</button></div>
+<div id="copied" style="font-size:16px;color:#0B6E4F;font-weight:600"></div>
+
+<div class="stat">
+<div class="s"><b id="count">0</b><span style="font-size:16px;color:#444">Invited</span></div>
+<div class="s"><b id="earn">$0.00</b><span style="font-size:16px;color:#444">Bonus</span></div>
+<div class="s"><b>10%</b><span style="font-size:16px;color:#444">Per Deposit</span></div>
+</div>
+
+<p style="font-size:16px;color:#444;margin-top:16px">Share your link. Earn 10% when they deposit. Clean and real.</p>
+</div>
+</div>
+
 <script>
-if(localStorage.getItem('cedar_login')!='1')location.href='../login.html';
+if(localStorage.getItem('cedar_login')!=='1'){location.href='../login.html'}
 let u=JSON.parse(localStorage.getItem('cedar_user')||'{}');
-let code=(u.u||'CEDAR')+'-'+Math.floor(1000+Math.random()*9000);
-let url=location.origin+'/Cedars-of-Wealth/register.html?ref='+code;
-document.getElementById('link').innerText=url;
-let refs=JSON.parse(localStorage.getItem('cedar_refs')||'[]');
-document.getElementById('stats').innerHTML=`Referrals: ${refs.length} • Earned: $${(refs.length*5).toFixed(2)} • Real Data`;
-</script></body></html>
+let ref=u.u||u.e||'CEDARS';let finalLink='https://cryptolordug.github.io/Cedars-of-Wealth/register.html?ref='+encodeURIComponent(ref);
+document.getElementById('link').innerText=finalLink;
+function copy(){navigator.clipboard.writeText(finalLink);document.getElementById('copied').innerText='✓ Copied — share now';setTimeout(()=>document.getElementById('copied').innerText='',2000)}
+// Stats from localStorage demo
+let deps=JSON.parse(localStorage.getItem('cedar_deposits')||'[]');let total=0;deps.forEach(d=>{if(d.status==='approved')total+=parseFloat(d.amount)*0.1});
+document.getElementById('earn').innerText='$'+total.toFixed(2);
+</script>
+</body></html>
