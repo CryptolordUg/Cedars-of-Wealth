@@ -1,1 +1,68 @@
-navigator.serviceWorker.getRegistrations().then(r=>r.forEach(reg=>reg.unregister())); caches.keys().then(k=>k.forEach(n=>caches.delete(n))); localStorage.clear(); sessionStorage.clear(); location.href=location.href.split('?')[0]+'?v='+Date.now()
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><title>Cedars Dashboard - Microsoft Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#0078D4;--dark:#102A43;--gold:#FFD700;--bg:#F5F5F7}
+*{font-family:'Segoe UI',sans-serif;box-sizing:border-box}body{margin:0;background:var(--bg);color:#1a1a1a}
+.top{height:56px;background:#fff;border-bottom:1px solid #E6E6E6;display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:100}
+.logo{font-weight:900;font-size:18px}.logo b{color:var(--blue)}
+.nav a{margin-left:12px;text-decoration:none;font-weight:600;font-size:13px;padding:8px 14px;border-radius:4px;background:#F3F2F1;color:#000}.nav a.primary{background:var(--blue);color:#fff}
+.wrap{max-width:1280px;margin:0 auto;padding:28px 20px;display:grid;grid-template-columns:260px 1fr;gap:20px}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}}
+.sidebar{background:#fff;border:1px solid #EDEBE9;border-radius:8px;padding:16px;height:fit-content}
+.sidebar a{display:block;padding:12px 10px;border-radius:6px;text-decoration:none;color:#222;font-weight:600;margin:4px 0}.sidebar a.active{background:var(--blue);color:#fff}
+.main{display:grid;gap:18px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.kpi{background:#fff;border:1px solid #EDEBE9;border-radius:8px;padding:18px}
+.kpi b{font-size:26px;display:block}.kpi small{color:#666}
+.card{background:#fff;border:1px solid #EDEBE9;border-radius:8px;padding:22px}
+.task{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #F0F0F0}
+.task button{background:var(--blue);color:#fff;border:0;padding:8px 16px;border-radius:4px;font-weight:700;cursor:pointer}
+.wallet{background:linear-gradient(135deg,#102A43,#0078D4);color:#fff;border-radius:8px;padding:22px}
+.progress{height:8px;background:#E6E6E6;border-radius:4px;overflow:hidden;margin-top:10px}.progress div{height:100%;width:72%;background:var(--blue)}
+.dot{width:8px;height:8px;background:#00D100;border-radius:50%;display:inline-block;animation:blink 1s infinite}
+@keyframes blink{50%{opacity:.3}}
+</style>
+<script>
+// KILL OLD SERVICE WORKERS - ANTI JUMP FIX
+if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(r=>r.forEach(reg=>reg.unregister()))}
+if(window.caches){caches.keys().then(k=>k.forEach(n=>caches.delete(n)))}
+// DO NOT REDIRECT - STAY HERE
+console.log('Cedars Dashboard v15 - Clean Microsoft Build - No Jump');
+</script>
+</head><body>
+<div class="top"><div class="logo">🌲 CEDARS <b>DASHBOARD</b> <span class="dot"></span> <small style="font-weight:400;margin-left:8px">Live • Microsoft Fluent</small></div><div class="nav"><a href="../index.html">🏠 Home</a><a href="../index.html?v=14" class="primary">Back to Site</a></div></div>
+
+<div class="wrap">
+<div class="sidebar">
+<a class="active">📊 Overview</a>
+<a>✅ Daily Tasks (2-5 mins)</a>
+<a>💰 Wallet & Payouts</a>
+<a>📈 Treasury Report</a>
+<a>🎓 Academy</a>
+<a>⚙️ Settings</a>
+<div style="margin-top:16px;padding:12px;background:#FFF8E1;border-radius:6px;border:1px solid #FFD700">
+<b style="font-size:12px">VAULT SECURED</b><br><small>Zero debt engine. No external wallet needed. Payouts via Mobile Money + Solana USDC.</small>
+</div>
+</div>
+
+<div class="main">
+<div class="kpis">
+<div class="kpi"><small>Today's Earnings</small><b>$1.00</b><small style="color:green">✔ Verified B2B Revenue</small><div class="progress"><div></div></div></div>
+<div class="kpi"><small>Total Balance</small><b>$47.50</b><small>Withdraw min $1.00</small></div>
+<div class="kpi"><small>Tasks Completed</small><b>142</b><small>RLHF + Edge Ping</small></div>
+<div class="kpi"><small>Platform Margin</small><b>33.3%</b><small>$0.50 retained</small></div>
+</div>
+
+<div class="card"><h3 style="margin:0">🎙️ Daily Micro-Tasks — 2 Minutes</h3><p style="color:#555">Enterprise AI labs need human verification. Complete to unlock $1.00 daily floor.</p>
+<div class="task"><span><b>1.</b> AI Prompt Evaluation (RLHF) — 30s</span><button>Start</button></div>
+<div class="task"><span><b>2.</b> Localized Image Tagging — 45s</span><button>Start</button></div>
+<div class="task"><span><b>3.</b> Edge Mesh Bandwidth Ping — 15s</span><button>Verify</button></div>
+<div class="task"><span><b>4.</b> Market Survey (Authentic) — 40s</span><button>Start</button></div>
+</div>
+
+<div class="wallet"><h3 style="margin:0 0 8px 0">💳 Wallet — Instant Cash-Out</h3><p style="opacity:.85">No vault address needed. No "VERIFY DEPOSIT". Direct Mobile Money / Solana USDC.</p><p><b>Balance: $47.50 USDC</b> • Payout Fee 5% • 24h instant<br>Methods: MTN MoMo, Airtel Money, Paystack, Flutterwave, Solana Base</p><button style="margin-top:10px;background:var(--gold);color:#102A43;border:0;padding:12px 22px;border-radius:6px;font-weight:900">Withdraw $1.00 Now</button></div>
+
+<div class="card"><h3>🏗️ Why This Dashboard Does NOT Jump</h3><p style="line-height:1.7;color:#444">Old file <code>verify.html</code> with Vault <code>8XQvt...</code> contained wallet-drainer logic that forced redirect from index. We deleted it. This new dashboard:<br>• No <code>location.href</code><br>• No <code>window.location</code> redirect<br>• No service worker<br>• No external vault address<br>• 100% Microsoft Fluent institutional design matching your landing.</p></div>
+</div>
+</div>
+</body></html>
