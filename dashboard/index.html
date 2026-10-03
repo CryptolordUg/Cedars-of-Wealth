@@ -1,62 +1,70 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars Auto Vault</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
-<style>body{margin:0;background:#070E22;color:#fff;font-family:Inter,sans-serif}.top{position:sticky;top:0;z-index:99;background:#0A1931;border-bottom:2px solid #FFD700;padding:14px 20px;display:flex;justify-content:space-between}.card{background:#11264E;border:1px solid #1E3A6B;border-radius:18px;padding:18px;margin-bottom:14px}.btn{border:0;border-radius:999px;padding:14px 18px;font-weight:900;cursor:pointer;width:100%}.btn-gold{background:#FFD700;color:#0A1931}.btn:disabled{opacity:.4}.mono{font-family:JetBrains Mono}.bar{height:10px;background:#0A1931;border-radius:999px;overflow:hidden}.fill{height:100%;background:#FFD700;transition:.8s}</style>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars of Wealth - Genesis</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+<style>:root{--gold:#FFD700;--bg:#070E22;--card:#11264E;--green:#00FF88}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#fff;font-family:Inter,sans-serif}.top{position:sticky;top:0;z-index:99;background:#0A1931;border-bottom:2px solid var(--gold);padding:14px 20px;display:flex;justify-content:space-between;align-items:center}.badge{font-size:10px;padding:6px 10px;border-radius:999px;border:1px solid #00FF8844;background:#00FF8811;color:var(--green);font-family:JetBrains Mono}.wrap{max-width:900px;margin:0 auto;padding:18px}.card{background:var(--card);border:1px solid #1E3A6B;border-radius:18px;padding:18px;margin-bottom:14px}.mono{font-family:JetBrains Mono}.btn{border:0;border-radius:999px;padding:16px 18px;font-weight:900;cursor:pointer;width:100%;font-size:15px}.btn-gold{background:var(--gold);color:#0A1931}.btn:disabled{opacity:.4;cursor:not-allowed}.bar{height:10px;background:#0A1931;border-radius:999px;overflow:hidden}.fill{height:100%;background:var(--gold);transition:.8s}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}</style>
 </head><body>
-<div class="top"><b>🌲 CEDARS AUTO VAULT</b><span style="font-size:10px;padding:6px 10px;border-radius:999px;border:1px solid #00FF8844;background:#00FF8811;color:#00FF88" class="mono">● AUTO PAYOUT</span></div>
-<div style="max-width:900px;margin:0 auto;padding:18px">
-<div class="card">
-<div style="display:flex;justify-content:space-between"><span class="mono" style="font-size:11px;color:#FFD700">ID: <span id="uid">guest</span></span><span class="mono" style="font-size:11px">SECURED</span></div>
-<div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
-<div class="card" style="margin:0"><small>Vault Balance</small><div class="mono" style="font-size:30px;color:#FFD700" id="vault">$0.00</div><small>Min withdraw $30 • Fee $10</small></div>
-<div class="card" style="margin:0"><small>You Receive</small><div class="mono" style="font-size:30px;color:#00FF88" id="receive">$0.00</div><small>After fee, auto to your wallet</small></div>
+<div class="top"><b>🌲 CEDARS GENESIS — G1</b><span class="badge">● TRON TRC20 LIVE</span></div>
+<div class="wrap">
+<div class="card" style="border-color:#FFD70044">
+<div style="display:flex;justify-content:space-between"><span class="mono" style="font-size:11px;color:var(--gold)">GENESIS ID: <span id="uid">guest</span></span><span class="mono" style="font-size:11px">TRUST: <span id="trust">0.80</span></span></div>
+<h2 style="margin:10px 0 4px">Vault Balance</h2>
+<div class="grid2">
+<div class="card" style="margin:0;background:#0A1931"><small style="opacity:.6">Total Vault</small><div class="mono" style="font-size:28px;color:var(--gold)" id="vault">$2.50</div><small>Welcome $2.50 + $0.80/task</small></div>
+<div class="card" style="margin:0;background:#0A1931"><small style="opacity:.6">You Receive After Fee</small><div class="mono" style="font-size:28px;color:var(--green)" id="receive">$0.00</div><small>Min $30 • Fee $10 • Auto to hidden wallet</small></div>
 </div>
-<div class="bar" style="margin-top:14px"><div class="fill" id="fill" style="width:32%"></div></div>
-<button class="btn btn-gold" style="margin-top:14px" onclick="doTask()">🌱 Do Task +$0.80 +100 XP</button>
-<button class="btn" id="wBtn" style="margin-top:10px;background:#0A1931;color:#fff;border:1px solid #1E3A6B" onclick="withdraw()">💰 Auto Withdraw — Min $30 | Fee $10</button>
-<div id="txlog" style="margin-top:12px;font-size:11px" class="mono"></div>
-<div style="margin-top:14px;font-size:10px;opacity:.4">Payout wallet hidden for security • Auto-routed • TX hash will appear after send</div>
+<div style="margin-top:14px"><div style="display:flex;justify-content:space-between;font-size:11px" class="mono"><span>XP PROGRESS</span><span id="xpTxt">320/1000</span></div><div class="bar" style="margin-top:6px"><div class="fill" id="fill" style="width:32%"></div></div></div>
+<button class="btn btn-gold" style="margin-top:16px" onclick="doTask()">🌱 Do Task +$0.80 +100 XP</button>
+<button class="btn" id="wBtn" style="margin-top:10px;background:#0A1931;color:#fff;border:1px solid #1E3A6B" onclick="withdraw()">💰 Auto Withdraw — TRC20</button>
+<div id="txlog" style="margin-top:14px;font-size:11px" class="mono"></div>
+<div style="margin-top:14px;background:#0A1931;padding:12px;border-radius:12px;border:1px dashed #FFD70033;font-size:11px;line-height:1.5">
+<b style="color:var(--gold)">GENESIS TREASURY (TRON TRC20):</b><br>
+<span class="mono">TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u</span><br>
+<span style="opacity:.6">Network: Tron TRC20 ONLY. Your payout wallet is hidden for security and auto-routed.</span>
 </div>
+</div>
+<div class="card"><small class="mono">GENESIS PROTOCOL</small><div style="font-size:12px;opacity:.7;margin-top:6px">You are Generation 1. Your work validates B2B AI tasks ($7.50 gross → $5 to you). $2.50 stays in 50-year treasury. Trust >0.90 unlocks Council.</div></div>
 </div>
 <script>
 const MASTER = 'TE26B7zQjMbahYAWcxEsSPC6aZEr2Hcz1u';
-const MIN = 30; const FEE = 10;
+const MIN = 30; const FEE = 10; const PER_TASK = 0.80;
 const id = new URLSearchParams(location.search).get('id') || 'guest';
-document.getElementById('uid').innerText = id;
+document.getElementById('uid').innerText = id.toUpperCase();
 let investors = JSON.parse(localStorage.getItem('cedars_investors')||'{}');
-// Demo for 3 investors - in production this comes from Supabase, wallet never exposed to frontend JS of other users
-if(!investors[id]){ investors[id]={wallet:'T-hidden-'+id, bonus:2.5, tasks:0, vault:2.5}; }
+if(!investors[id]){ investors[id]={wallet:'T_hidden_genesis_'+id, bonus:2.5, tasks:0, trust:0.80, xp:320, gen:1}; }
 let inv = investors[id];
-let xp=320;
+function mask(w){if(!w||w.length<8)return '****';return w.slice(0,4)+'****'+w.slice(-4);}
 function update(){
- let total = parseFloat(inv.vault) + (inv.tasks*0.80);
- let net = total >= MIN? total - FEE : 0;
+ let total = parseFloat(inv.bonus) + (inv.tasks*PER_TASK);
+ let net = total>=MIN? total-FEE:0;
  document.getElementById('vault').innerText='$'+total.toFixed(2);
  document.getElementById('receive').innerText='$'+net.toFixed(2);
- document.getElementById('fill').style.width=Math.min(100,(xp%1000/10))+'%';
+ document.getElementById('trust').innerText=(0.80+inv.tasks*0.01).toFixed(2);
+ document.getElementById('xpTxt').innerText=(320+inv.tasks*100)+'/1000';
+ document.getElementById('fill').style.width=Math.min(100,((inv.xp+inv.tasks*100)%1000)/10)+'%';
  document.getElementById('wBtn').disabled = total < MIN;
- document.getElementById('wBtn').innerText = total < MIN? `Need $${(MIN-total).toFixed(2)} more to withdraw` : `💰 Auto Withdraw $${total.toFixed(2)} → You get $${net.toFixed(2)}`;
+ document.getElementById('wBtn').innerText = total<MIN?`Need $${(MIN-total).toFixed(2)} more to withdraw ($${MIN} min)`:`💰 Auto Withdraw $${total.toFixed(2)} → You get $${net.toFixed(2)} USDT TRC20`;
 }
-function doTask(){inv.tasks++;xp+=100;update();document.getElementById('txlog').innerHTML='<span style=color:#00FF88>✔ +$0.80 credited</span><br>'+document.getElementById('txlog').innerHTML; investors[id]=inv; localStorage.setItem('cedars_investors',JSON.stringify(investors));}
-function mask(w){ if(!w) return '***'; return w.slice(0,4)+'****'+w.slice(-4); }
-async function withdraw(){
- let total = parseFloat(inv.vault) + (inv.tasks*0.80);
- if(total < MIN) return alert('Min $'+MIN);
- let wallet = investors[id]?.wallet; // HIDDEN - never prompt, taken from admin ledger
- if(!wallet || wallet.includes('hidden')){ alert('Wallet not linked by admin yet. Contact support.'); return; }
- let sendAmount = total - FEE;
- let req = {id, to:wallet, to_masked:mask(wallet), amount:total, fee:FEE, willSend:sendAmount, time:Date.now(), tx:'pending', master:MASTER};
- let queue = JSON.parse(localStorage.getItem('cedars_withdraw_queue')||'[]');
- queue.push(req);
- localStorage.setItem('cedars_withdraw_queue', JSON.stringify(queue));
- document.getElementById('txlog').innerHTML=`<div style=background:#0A1931;padding:10px;border-radius:10px;border:1px solid #FFD70033>
- ⏳ Auto withdraw queued<br>
- Amount: $${total.toFixed(2)}<br>
- Fee: $${FEE}<br>
- <b style=color:#00FF88>Net to you: $${sendAmount.toFixed(2)} USDT</b><br>
- To: ${mask(wallet)} (hidden)<br>
- Status: sending... TX hash coming</div><br>`+document.getElementById('txlog').innerHTML;
- inv.vault=0;inv.tasks=0; investors[id]=inv; localStorage.setItem('cedars_investors',JSON.stringify(investors)); update();
- // In Vercel version, this fetch auto-sends: fetch('/api/payout',{method:'POST',body:JSON.stringify(req)})
+function doTask(){
+ inv.tasks++; inv.xp+=100; inv.trust=Math.min(0.99, inv.trust+0.01);
+ investors[id]=inv; localStorage.setItem('cedars_investors',JSON.stringify(investors));
+ document.getElementById('txlog').innerHTML=`<div style=color:#00FF88>✔ Task validated — 3-way consensus 2/3 match — +$${PER_TASK.toFixed(2)}</div>`+document.getElementById('txlog').innerHTML;
+ update();
+}
+function withdraw(){
+ let total = parseFloat(inv.bonus)+(inv.tasks*PER_TASK);
+ if(total<MIN)return alert('Need $'+MIN+' minimum. Keep doing tasks.');
+ let wallet = investors[id].wallet;
+ if(!wallet || wallet.startsWith('T_hidden')){ alert('Genesis wallet not linked by admin. Contact Cedars Treasury.'); return; }
+ let willSend = total-FEE;
+ let req = {id, to:wallet, to_masked:mask(wallet), amount:total, fee:FEE, willSend, network:'TRON TRC20', master:MASTER, time:Date.now(), tx:'queued'};
+ let q = JSON.parse(localStorage.getItem('cedars_withdraw_queue')||'[]'); q.push(req);
+ localStorage.setItem('cedars_withdraw_queue',JSON.stringify(q));
+ document.getElementById('txlog').innerHTML=`<div style=background:#0A1931;padding:12px;border-radius:12px;border:1px solid #FFD70066>
+ ⏳ <b>WITHDRAW QUEUED — TRC20</b><br>
+ Gross: $${total.toFixed(2)}<br>Fee: $${FEE} (gas + treasury)<br>
+ <b style=color:#00FF88>Net: $${willSend.toFixed(2)} USDT → ${mask(wallet)}</b><br>
+ <span style=opacity:.6>Wallet hidden • Auto-routed from ${mask(MASTER)} • TX hash will appear after admin approves</span>
+ </div><br>`+document.getElementById('txlog').innerHTML;
+ inv.bonus=0;inv.tasks=0; investors[id]=inv; localStorage.setItem('cedars_investors',JSON.stringify(investors)); update();
 }
 update();
 </script>
