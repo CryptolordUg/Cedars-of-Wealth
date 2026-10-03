@@ -1,1 +1,35 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars of Wealth</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet"><style>:root{--b:#102A43;--g:#a8c686}*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,sans-serif;background:#fff;color:#102A43}header{position:fixed;top:0;left:0;right:0;background:#102A43;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;z-index:999}.logo{color:#fff;font-weight:700;font-size:18px}.logo span{color:#a8c686}.nav a{color:#fff;text-decoration:none;margin-left:12px;font-size:14px;font-weight:600}.hero{margin-top:72px;padding:80px 20px;text-align:center;background:#F8F9FA}.hero h1{font-size:36px;font-weight:700}.hero p{margin:16px 0;font-size:16px}.btn{display:inline-block;padding:14px 28px;background:#102A43;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;margin:6px}.btn-g{background:#a8c686;color:#102A43}.wrap{max-width:1100px;margin:0 auto;padding:24px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}.card{border:1px solid #DADADA;border-radius:12px;padding:20px;text-align:center}footer{text-align:center;padding:20px;font-size:12px;color:#666;border-top:1px solid #ddd;margin-top:40px}@media(max-width:800px){.grid{grid-template-columns:1fr}.hero h1{font-size:28px}}</style></head><body><header><div class="logo">🌲 CEDARS <span>OF WEALTH</span></div><div class="nav"><a href="login.html">Login</a><a href="register.html">Register</a></div></header><div class="hero"><h1>Building Wealth Through Innovation</h1><p>CEDARS OF WEALTH</p><a href="register.html" class="btn btn-g">Create Account</a><a href="login.html" class="btn">Login</a></div><div class="wrap"><div class="grid"><div class="card"><h3>TRON TRC20</h3><p>USDT</p></div><div class="card"><h3>$20</h3><p>Minimum Deposit</p></div><div class="card"><h3>$30</h3><p>Minimum Withdraw</p></div></div></div><footer>© CEDARS OF WEALTH | <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a></footer></body></html>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars of Wealth</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;900&display=swap" rel="stylesheet"><style>:root{--b:#102A43;--g:#FFD700}*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,sans-serif;background:#000;overflow-x:hidden}
+.top{position:fixed;top:0;left:0;right:0;z-index:9999;background:#102A43;border-bottom:2px solid #FFD700;padding:10px 16px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:38px;font-weight:900;color:#fff;letter-spacing:1px;text-shadow:0 0 10px #FFD700,0 0 20px #fff}
+.logo span{color:#FFD700;text-shadow:0 0 15px #FFD700,0 0 30px #FFA500}
+.nav{display:flex;gap:6px;flex-wrap:wrap}
+.nav a{color:#fff;text-decoration:none;font-size:13px;font-weight:700;padding:9px 14px;border-radius:20px;background:rgba(255,255,255,.12);border:1px solid rgba(255,215,0,.3)}
+.nav a:hover{background:#FFD700;color:#102A43}
+.hero{margin-top:68px;height:82vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.5s;display:flex;align-items:center;justify-content:center;flex-direction:column;background-size:cover;background-position:center}
+.slide.active{opacity:1}
+.slide1{background:linear-gradient(135deg,#102A43 0%,#000 100%)}
+.slide2{background:linear-gradient(135deg,#000 0%,#1a3d5c 100%)}
+.slide3{background:linear-gradient(135deg,#1a1a1a 0%,#102A43 100%)}
+.glitter{font-size:58px;font-weight:900;background:linear-gradient(90deg,#FFD700,#FF69B4,#00FFFF,#FFD700,#FF4500);background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:rainbow 3s linear infinite,shine 1.5s ease-in-out infinite alternate;text-shadow:0 0 20px rgba(255,215,0,.8)}
+@keyframes rainbow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes shine{0%{filter:brightness(1) drop-shadow(0 0 10px #FFD700)}100%{filter:brightness(1.5) drop-shadow(0 0 30px #FFD700)}}
+.sub{font-size:18px;color:#a8c686;margin-top:12px;letter-spacing:2px;font-weight:700}
+.btn{margin-top:20px;display:inline-block;padding:14px 32px;background:#FFD700;color:#102A43;text-decoration:none;border-radius:30px;font-weight:900;font-size:14px;box-shadow:0 0 20px #FFD700}
+.dots{position:absolute;bottom:20px;display:flex;gap:8px}.dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer}.dot.active{background:#FFD700;box-shadow:0 0 10px #FFD700}
+.wrap{max-width:1100px;margin:0 auto;padding:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;background:#fff}
+.card{border:1px solid #ddd;border-radius:12px;padding:16px;text-align:center;background:#fff}
+footer{text-align:center;padding:16px;font-size:11px;color:#888;background:#fff;border-top:1px solid #ddd}
+@media(max-width:800px){.logo{font-size:26px}.glitter{font-size:32px}.hero{height:70vh}.top{flex-direction:column;gap:8px}.wrap{grid-template-columns:1fr}}
+</style></head><body>
+<div class="top"><div class="logo">🌲 CEDARS <span>OF WEALTH</span></div><div class="nav"><a href="index.html">Home</a><a href="register.html">Register</a><a href="dashboard/deposit.html">Deposit</a><a href="dashboard/withdraw.html">Withdraw</a><a href="dashboard/referral.html">Referral</a><a href="dashboard/balance.html">Balance</a><a href="login.html">Sign In</a></div></div>
+<div class="hero">
+<div class="slide slide1 active"><div class="glitter">CEDARS OF WEALTH</div><div class="sub">DIE RICH OR DIE TRYING</div><a href="register.html" class="btn">JOIN NOW</a></div>
+<div class="slide slide2"><div class="glitter">BUILD LEGACY</div><div class="sub">DIE RICH OR DIE TRYING</div><a href="register.html" class="btn">CREATE ACCOUNT</a></div>
+<div class="slide slide3"><div class="glitter">SECURE FUTURE</div><div class="sub">CEDARS OF WEALTH</div><a href="dashboard/balance.html" class="btn">DASHBOARD</a></div>
+<div class="dots"><div class="dot active" onclick="go(0)"></div><div class="dot" onclick="go(1)"></div><div class="dot" onclick="go(2)"></div></div>
+</div>
+<div class="wrap"><div class="card"><h3>TRC20</h3><p>USDT</p></div><div class="card"><h3>$20</h3><p>Min Deposit</p></div><div class="card"><h3>$30</h3><p>Min Withdraw</p></div></div>
+<footer>© CEDARS OF WEALTH</footer>
+<script>let cur=0;let slides=document.querySelectorAll('.slide');let dots=document.querySelectorAll('.dot');function go(n){slides[cur].classList.remove('active');dots[cur].classList.remove('active');cur=n;slides[cur].classList.add('active');dots[cur].classList.add('active')}setInterval(()=>{go((cur+1)%3)},4000);</script>
+</body></html>
