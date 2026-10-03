@@ -1,31 +1,30 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><title>CEDARS OF WEALTH</title><style>
-body{margin:0;background:#020617;color:#fff;font-family:Inter,system-ui;overflow:hidden}
-.top{position:fixed;top:0;left:0;right:0;height:62px;background:#0F2A43;display:flex;align-items:center;justify-content:space-between;padding:0 18px;z-index:9999;border-bottom:4px solid #FFD700}
-.logo{color:#fff;font-weight:900;font-size:22px}.logo b{color:#FFD700}
-.nav{display:flex;gap:10px}.nav a{color:#fff;text-decoration:none;font-size:13px;font-weight:700;padding:8px 12px;border-radius:20px;background:rgba(255,255,255,.08)}.nav a.join{background:#FFD700;color:#0F2A43}
-.hero{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:radial-gradient(circle at center,#102A43 0%,#020617 80%);padding:20px}
-.cedars{font-size:56px;font-weight:900;letter-spacing:6px;color:#fff;text-shadow:0 0 20px rgba(255,215,0,.8);margin:0}
-.glitter{font-size:52px;font-weight:900;margin:10px 0;
-background:linear-gradient(90deg,#FFD700,#FFFFFF,#FFD700,#FF8C00,#FFD700);
-background-size:300% 100%;
--webkit-background-clip:text;-webkit-text-fill-color:transparent;
-animation: glitterMove 2s linear infinite, blink 0.9s infinite alternate;
-filter: drop-shadow(0 0 25px #FFD700);
-}
-@keyframes glitterMove{0%{background-position:0% 50%}100%{background-position:300% 50%}}
-@keyframes blink{0%{opacity:1; transform:scale(1)}50%{opacity:0.4}100%{opacity:1; transform:scale(1.05)}}
-.btn{margin-top:30px;padding:18px 36px;background:#FFD700;color:#102A43;border-radius:40px;font-weight:900;text-decoration:none;font-size:18px;box-shadow:0 0 30px #FFD700;animation: pulse 1.2s infinite}
-@keyframes pulse{0%{box-shadow:0 0 10px #FFD700}50%{box-shadow:0 0 40px #FFD700}100%{box-shadow:0 0 10px #FFD700}}
-.sparkles{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;background-image: radial-gradient(#FFD700 1px, transparent 1px);background-size: 50px 50px;opacity:.15;animation: sparkle 3s linear infinite}
-@keyframes sparkle{0%{transform:translateY(0)}100%{transform:translateY(-50px)}}
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars of Wealth - 50-Year Master Vault</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;font-family:'Inter',sans-serif}
+body{margin:0;background:#0A1931;color:#fff;overflow:hidden}
+.top{height:48px;background:#0F2540;border-bottom:2px solid #FFD700;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.top b{color:#FFD700;letter-spacing:.1em}
+.top .nav{display:flex;gap:8px}
+.top .nav a{padding:6px 14px;border-radius:999px;font-size:12px;font-weight:700;text-decoration:none;color:#fff;background:#162C4A;border:1px solid #1E3A5A}
+.top .nav a.join{background:#FFD700;color:#0A1931}
+.hero{height:calc(100vh - 48px);display:grid;place-items:center;text-align:center;background:radial-gradient(ellipse at center, #102A5E 0%, #0A1931 70%)}
+.h1{font-size:56px;font-weight:900;line-height:1.1;text-transform:uppercase;text-shadow:0 0 18px #FFD700, 0 0 32px #FFD700;letter-spacing:.02em}
+.h1 .small{display:block;font-size:38px;margin-top:8px}
+.btn{margin-top:22px;background:#FFF8DC;color:#0A1931;border:0;padding:14px 32px;border-radius:999px;font-weight:900;box-shadow:0 0 18px #FFD700, 0 0 32px #FFD700;cursor:pointer;font-size:14px}
+@media(max-width:600px){.h1{font-size:36px}.h1 .small{font-size:26px}}
 </style>
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(r=>r.forEach(reg=>reg.unregister()))}</script>
+<script>
+// ANTI-JUMP - CLEAN VERSION OF YOUR OLD FAVOURITE
+if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(r=>r.forEach(x=>x.unregister()))}
+console.log('Cedars - Die rich or Die trying - Clean v16 - No Redirect');
+</script>
 </head><body>
-<div class="top"><div class="logo">🌲 CEDARS <b>OF WEALTH</b></div><div class="nav"><a href="dashboard/index.html">📊 Dashboard</a><a href="register.html">👤 Register</a><a href="login.html">🔑 Login</a><a href="register.html" class="join">🚀 Join</a></div></div>
+<div class="top"><b>🌲 CEDARS OF WEALTH</b><div class="nav"><a href="dashboard/index.html">Dashboard</a><a>Register</a><a>Login</a><a class="join" href="dashboard/index.html">Join</a></div></div>
 <div class="hero">
-<div class="sparkles"></div>
-<h1 class="cedars">CEDARS OF WEALTH</h1>
-<h2 class="glitter">Die rich or Die trying</h2>
-<a href="register.html" class="btn">💰 Join Ecosystem</a>
+<div>
+<div class="h1">CEDARS OF WEALTH<span class="small">Die rich or Die trying</span></div>
+<button class="btn" onclick="location.href='dashboard/index.html'">Join Ecosystem</button>
+</div>
 </div>
 </body></html>
