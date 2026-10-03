@@ -1,42 +1,5 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars of Wealth | Referral</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"><style>:root{--b:#102A43;--g:#a8c686;--bg:#F8F9FA;--t:#1A1A1A;--bd:#DADADA;--blue:#0057B8}*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,Arial,sans-serif;font-size:18px;line-height:1.7;color:var(--t);background:var(--bg);padding-top:72px} .top{position:fixed;top:0;left:0;right:0;z-index:9999;background:var(--b);border-bottom:2px solid var(--g);padding:12px 20px;display:flex;justify-content:space-between;align-items:center} .logo{font-size:20px;font-weight:700;color:#fff} .logo span{color:var(--g)} .nav{display:flex;gap:8px;flex-wrap:wrap} .nav a{font-size:16px;font-weight:600;color:#fff;text-decoration:none;padding:10px 14px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15)} .nav a.active{background:var(--g);color:var(--b)} .wrap{max-width:900px;margin:0 auto;padding:24px} .card{background:#fff;border:1px solid var(--bd);border-radius:16px;padding:24px;margin-top:20px} h2{font-size:36px;font-weight:700} h3{font-size:24px;font-weight:600;margin-bottom:12px} .refbox{background:#102A43;color:#fff;padding:16px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:16px 0} .refcode{font-size:14px;word-break:break-all;color:#a8c686} .btn{padding:14px 20px;font-size:16px;font-weight:600;border-radius:8px;border:0;background:var(--g);color:var(--b);cursor:pointer} .btn2{padding:14px 20px;font-size:16px;font-weight:600;border-radius:8px;border:0;background:var(--b);color:#fff;cursor:pointer;width:100%;margin-top:12px} .stat{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px} .s{background:#F8F9FA;border:1px solid var(--bd);border-radius:12px;padding:16px;text-align:center} .s b{font-size:28px;display:block;color:var(--b)} *:focus{outline:3px solid #4D90FE;outline-offset:2px} @media(max-width:900px){.stat{grid-template-columns:1fr}body{padding-top:120px}.top{flex-direction:column;gap:10px}h2{font-size:28px}}</style></head><body>
-<div class="top"><div class="logo">🌲 CEDARS <span>OF WEALTH</span></div><div class="nav"><a href="../index.html">🏠 Home</a><a href="balance.html">💰 Balance</a><a href="deposit.html">📥 Deposit</a><a href="withdraw.html">📤 Withdraw</a><a href="referral.html" class="active">👥 Referral</a><a href="../login.html">🔐 Login</a><a href="../register.html">✨ Register</a><a href="#" onclick="localStorage.clear();location.href='../login.html'" style="background:#8b0000">🔓 Logout</a></div></div>
-
-<div class="wrap">
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px"><h2>Referral</h2><a href="balance.html" style="color:var(--blue);font-size:16px;font-weight:600;text-decoration:none">← Back to Balance</a></div>
-<p style="color:#444;font-size:18px;margin-top:8px">Clean link. No sensitive info.</p>
-
-<div class="card"><h3>Your Referral Link</h3>
-<div class="refbox"><span class="refcode" id="link">https://cryptolordug.github.io/Cedars-of-Wealth/register.html?ref=USER</span><button class="btn" onclick="copy()">Copy</button></div>
-<div id="copied" style="font-size:16px;color:#0B6E4F;font-weight:600"></div>
-
-<div class="stat">
-<div class="s"><b id="count">0</b><span style="font-size:16px;color:#444">Invited</span></div>
-<div class="s"><b id="earn">$0.00</b><span style="font-size:16px;color:#444">Bonus</span></div>
-<div class="s"><b>10%</b><span style="font-size:16px;color:#444">Per Deposit</span></div>
-</div>
-
-<p style="font-size:16px;color:#444;margin-top:16px">Share your link. Earn 10% when they deposit. Clean and real.</p>
-</div>
-</div>
-
-<script>
-// INTEGRITY FIX — NO MORE STUCK LOOP
-(function(){
- let user = localStorage.getItem('cedar_user');
- if(!user){
-   localStorage.setItem('cedar_user', JSON.stringify({u:'Guest',e:'guest@cedars.com',p:'demo',bal:100}));
- }
- localStorage.setItem('cedar_login','1');
- if(!localStorage.getItem('cedar_session')){
-   localStorage.setItem('cedar_session', Date.now().toString());
- }
-})();
-
-let u=JSON.parse(localStorage.getItem('cedar_user')||'{}');
-let ref=u.u||u.e||'CEDARS';let finalLink='https://cryptolordug.github.io/Cedars-of-Wealth/register.html?ref='+encodeURIComponent(ref);
-document.getElementById('link').innerText=finalLink;
-function copy(){navigator.clipboard.writeText(finalLink);document.getElementById('copied').innerText='✓ Copied — share now';setTimeout(()=>document.getElementById('copied').innerText='',2000)}
-let deps=JSON.parse(localStorage.getItem('cedar_deposits')||'[]');let total=0;deps.forEach(d=>{if(d.status==='approved')total+=parseFloat(d.amount)*0.1});
-document.getElementById('earn').innerText='$'+total.toFixed(2);
-</script>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Referral — Cedars of Wealth</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"><style>:root{--b:#102A43;--g:#a8c686;--bg:#F8F9FA;--bd:#DADADA}*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,Arial,sans-serif;background:var(--bg);padding-top:72px;font-size:16px} .top{position:fixed;top:0;left:0;right:0;z-index:9999;background:var(--b);border-bottom:2px solid var(--g);padding:12px 20px;display:flex;justify-content:space-between;align-items:center} .logo{font-size:19px;font-weight:700;color:#fff} .logo span{color:var(--g)} .nav{display:flex;gap:8px;flex-wrap:wrap} .nav a{font-size:15px;font-weight:600;color:#fff;text-decoration:none;padding:10px 14px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15)} .nav a.active{background:var(--g);color:var(--b)} .wrap{max-width:800px;margin:0 auto;padding:24px} .card{background:#fff;border:1px solid var(--bd);border-radius:16px;padding:24px;margin-top:20px} h2{font-size:28px;color:#102A43} .refbox{background:#102A43;color:#a8c686;padding:14px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0;word-break:break-all} .btn{padding:12px 18px;font-size:14px;font-weight:600;border-radius:8px;border:0;background:#a8c686;color:#102A43;cursor:pointer} footer{text-align:center;padding:20px;font-size:12px;color:#666;border-top:1px solid #ddd;margin-top:40px} @media(max-width:900px){body{padding-top:110px}.top{flex-direction:column;gap:10px}}</style></head><body>
+<div class="top"><div class="logo">🌲 CEDARS <span>OF WEALTH</span></div><div class="nav"><a href="../index.html">Home</a><a href="balance.html">Balance</a><a href="deposit.html">Deposit</a><a href="withdraw.html">Withdraw</a><a href="referral.html" class="active">Referral</a><a href="../login.html">Login</a><a href="#" onclick="localStorage.clear();location.href='../login.html'" style="background:#8b0000">Logout</a></div></div>
+<div class="wrap"><h2>Referral (demo)</h2><p style="font-size:14px;color:#666">One-time bonus up to 5% from marketing budget on approved deposits. Not from other users funds.</p><div class="card"><h3 style="font-size:18px">Your link</h3><div class="refbox"><span id="link" style="font-size:13px"></span><button class="btn" onclick="copy()">Copy</button></div><div id="copied" style="font-size:13px;color:#0B6E4F;font-weight:600"></div><div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px"><div style="background:#F8F9FA;border:1px solid #ddd;border-radius:10px;padding:14px;text-align:center"><b style="font-size:24px;display:block" id="count">0</b><span style="font-size:13px;color:#666">Invited (demo)</span></div><div style="background:#F8F9FA;border:1px solid #ddd;border-radius:10px;padding:14px;text-align:center"><b style="font-size:24px;display:block">5%</b><span style="font-size:13px;color:#666">Max one-time</span></div></div><p style="font-size:12px;color:#666;margin-top:12px">Referral tracking is demo only. Real tracking requires backend.</p></div><footer>Demo only. Not financial advice. <a href="../terms.html">Terms</a></footer></div>
+<script>(function(){if(!localStorage.getItem('cedar_user'))localStorage.setItem('cedar_user',JSON.stringify({u:'Guest',e:'guest@cedars.com',p:'demo',bal:100}));localStorage.setItem('cedar_login','1')})();let u=JSON.parse(localStorage.getItem('cedar_user')||'{}');let ref=u.u||'CEDARS';let link='https://cryptolordug.github.io/Cedars-of-Wealth/register.html?ref='+encodeURIComponent(ref);document.getElementById('link').innerText=link;function copy(){navigator.clipboard.writeText(link);document.getElementById('copied').innerText='Copied';setTimeout(()=>document.getElementById('copied').innerText='',2000)}</script>
 </body></html>
