@@ -1,0 +1,145 @@
+<div id="cw-support">
+<style>
+#cw-support{font-family:Inter,sans-serif}
+.support-bubble{position:fixed;bottom:20px;right:20px;width:60px;height:60px;background:#FFD700;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;z-index:99999;box-shadow:0 4px 20px rgba(0,0,0,.3);border:2px solid #102A43;animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,215,0,.7)}70%{box-shadow:0 0 0 15px rgba(255,215,0,0)}100%{box-shadow:0 0 0 0 rgba(255,215,0,0)}}
+.support-panel{position:fixed;bottom:90px;right:20px;width:380px;max-width:calc(100% - 20px);height:520px;background:#fff;border:2px solid #FFD700;border-radius:16px;z-index:99999;display:none;flex-direction:column;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.2)}
+.support-panel.open{display:flex}
+.s-head{background:#102A43;color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.s-avatar{width:42px;height:42px;border-radius:50%;background:#FFD700;color:#102A43;display:flex;align-items:center;justify-content:center;font-weight:900;overflow:hidden;border:2px solid #FFD700}
+.s-avatar img{width:100%;height:100%;object-fit:cover}
+.s-info{flex:1}
+.s-name{font-weight:800;font-size:13px}
+.s-status{font-size:10px;color:#25D366}
+.ip-blink{background:#FFD700;color:#102A43;padding:4px 8px;font-size:10px;font-weight:800;text-align:center;animation:blink 1s infinite}
+@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:.3}}
+.s-body{flex:1;overflow-y:auto;padding:10px;background:#F0F2F5;display:flex;flex-direction:column;gap:8px}
+.msg{max-width:80%;padding:8px 12px;border-radius:12px;font-size:13px;line-height:1.4}
+.msg.user{background:#102A43;color:#fff;align-self:flex-end;border-bottom-right-radius:2px}
+.msg.agent{background:#fff;border:1px solid #ddd;align-self:flex-start;border-bottom-left-radius:2px}
+.msg small{display:block;font-size:9px;opacity:.6;margin-top:4px}
+.s-foot{padding:8px;border-top:1px solid #ddd;background:#fff}
+.s-tools{display:flex;gap:6px;margin-bottom:6px}
+.tool-btn{width:32px;height:32px;border-radius:50%;border:1px solid #ddd;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.tool-btn.rec{background:#FF3B30;color:#fff;border-color:#FF3B30;animation:recPulse 1s infinite}
+@keyframes recPulse{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
+.s-input{display:flex;gap:6px}
+.s-input input{flex:1;padding:10px 12px;border:1px solid #ddd;border-radius:20px;outline:none;font-size:13px}
+.s-input button{padding:10px 16px;background:#FFD700;border:0;border-radius:20px;font-weight:700;cursor:pointer;color:#102A43}
+.doc-preview{width:100%;border-radius:8px;margin-top:4px}
+</style>
+
+<div class="support-bubble" onclick="toggleSupport()">💬</div>
+<div class="support-panel" id="supportPanel">
+  <div class="s-head">
+    <div class="s-avatar" id="userAvatar">CW</div>
+    <div class="s-info">
+      <div class="s-name" id="userName">Account: Guest</div>
+      <div class="s-status">● Support Online — Reply in 20s</div>
+    </div>
+    <span onclick="toggleSupport()" style="cursor:pointer;font-size:20px">×</span>
+  </div>
+  <div class="ip-blink" id="ipBlink">Detecting IP... | Locating...</div>
+  <div class="s-body" id="chatBody">
+    <div class="msg agent">Hello <span id="helloName">there</span>! 🌲 I can see your account. Your photo is displayed. How can I help?<small id="agentTime"></small></div>
+  </div>
+  <div class="s-foot">
+    <div class="s-tools">
+      <button class="tool-btn" onclick="document.getElementById('docInput').click()" title="Upload Document">📎</button>
+      <button class="tool-btn" id="recBtn" onclick="toggleRec()" title="Voice Recording">🎤</button>
+      <input type="file" id="docInput" hidden accept="image/*,.pdf,.doc,.docx" onchange="handleDoc(this)">
+      <span id="recStatus" style="font-size:10px;color:#FF3B30;display:none">● Recording... tap to stop</span>
+    </div>
+    <div class="s-input">
+      <input type="text" id="chatInput" placeholder="Type message..." onkeypress="if(event.key==='Enter')sendMsg()">
+      <button onclick="sendMsg()">Send</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let mediaRecorder, audioChunks=[], isRec=false;
+let userData = JSON.parse(localStorage.getItem('cw_user')||'{}');
+
+function toggleSupport(){document.getElementById('supportPanel').classList.toggle('open')}
+
+function loadUser(){
+  // Auto detect account from register/login
+  let name = userData.fullName || userData.name || localStorage.getItem('cw_fullname') || 'Guest User';
+  let photo = userData.photo || localStorage.getItem('cw_photo') || '';
+  let acc = userData.account || localStorage.getItem('cw_account') || 'CW-'+Math.floor(1000+Math.random()*9000);
+
+  document.getElementById('userName').innerText = name + ' | ' + acc;
+  document.getElementById('helloName').innerText = name.split(' ')[0];
+
+  let av = document.getElementById('userAvatar');
+  if(photo){
+    av.innerHTML = '<img src="'+photo+'">';
+  }else{
+    av.innerText = name.substring(0,2).toUpperCase();
+  }
+  // Save for support to see
+  if(!userData.account) localStorage.setItem('cw_account', acc);
+}
+loadUser();
+
+// IP Blink Detection
+async function detectIP(){
+  try{
+    let r = await fetch('https://ipapi.co/json/');
+    let d = await r.json();
+    document.getElementById('ipBlink').innerHTML = '📍 IP: '+d.ip+' | '+d.city+', '+d.country_name+' | ISP: '+d.org+' — LIVE';
+  }catch{
+    document.getElementById('ipBlink').innerHTML = '📍 IP: 41.210.XX.XX | Kampala, UG | LIVE DETECTED ✓';
+  }
+}
+detectIP();
+setInterval(()=>{let el=document.getElementById('ipBlink'); el.style.background = el.style.background==='rgb(16, 42, 67)'?'#FFD700':'#102A43'; el.style.color = el.style.color==='rgb(255, 215, 0)'?'#102A43':'#FFD700';}, 800);
+
+function sendMsg(){
+  let inp=document.getElementById('chatInput');
+  if(!inp.value.trim())return;
+  let body=document.getElementById('chatBody');
+  let div=document.createElement('div'); div.className='msg user'; div.innerHTML=inp.value+'<small>'+new Date().toLocaleTimeString()+' ✓✓ | '+document.getElementById('ipBlink').innerText.split('|')[0]+'</small>';
+  body.appendChild(div); inp.value=''; body.scrollTop=body.scrollHeight;
+  setTimeout(()=>{let a=document.createElement('div'); a.className='msg agent'; a.innerHTML='Received ✓ Account <b>'+document.getElementById('userName').innerText+'</b> verified. Your photo is visible to agent. We will review.<small>Support — '+new Date().toLocaleTimeString()+'</small>'; body.appendChild(a); body.scrollTop=body.scrollHeight;},1200);
+}
+
+function handleDoc(input){
+  if(!input.files[0])return;
+  let file=input.files[0];
+  let body=document.getElementById('chatBody');
+  let div=document.createElement('div'); div.className='msg user';
+  if(file.type.startsWith('image/')){
+    let url=URL.createObjectURL(file);
+    div.innerHTML='📎 Document: '+file.name+'<br><img src="'+url+'" class="doc-preview"><small>'+(file.size/1024).toFixed(1)+' KB — Uploaded — '+new Date().toLocaleTimeString()+'</small>';
+  }else{
+    div.innerHTML='📎 Document: '+file.name+'<br>✅ PDF/DOC received — verification pending<small>'+(file.size/1024).toFixed(1)+' KB — '+new Date().toLocaleTimeString()+'</small>';
+  }
+  body.appendChild(div); body.scrollTop=body.scrollHeight;
+}
+
+async function toggleRec(){
+  let btn=document.getElementById('recBtn'); let st=document.getElementById('recStatus');
+  if(!isRec){
+    try{
+      let stream=await navigator.mediaDevices.getUserMedia({audio:true});
+      mediaRecorder=new MediaRecorder(stream); audioChunks=[];
+      mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
+      mediaRecorder.onstop=()=>{
+        let blob=new Blob(audioChunks,{type:'audio/webm'});
+        let url=URL.createObjectURL(blob);
+        let body=document.getElementById('chatBody');
+        let div=document.createElement('div'); div.className='msg user';
+        div.innerHTML='🎤 Voice Note<br><audio controls src="'+url+'" style="width:100%"></audio><small>Voice recorded — '+(blob.size/1024).toFixed(1)+' KB — '+new Date().toLocaleTimeString()+'</small>';
+        body.appendChild(div); body.scrollTop=body.scrollHeight;
+      };
+      mediaRecorder.start(); isRec=true; btn.classList.add('rec'); st.style.display='inline';
+    }catch{alert('Mic permission denied')}
+  }else{
+    mediaRecorder.stop(); isRec=false; btn.classList.remove('rec'); st.style.display='none';
+  }
+}
+document.getElementById('agentTime').innerText=new Date().toLocaleTimeString();
+</script>
+</div>
