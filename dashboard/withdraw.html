@@ -1,4 +1,49 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Withdraw</title><style>body{margin:0;background:#060a06;color:#e6e9d8;font-family:Arial} .top{padding:12px 20px;background:#0a120a;display:flex;justify-content:space-between} .box{background:#0c140c;border:1px solid #1e301e;padding:16px;border-radius:12px;margin:12px} input{width:100%;padding:10px;margin:6px 0;background:#060a06;border:1px solid #2a4a2a;color:#fff;border-radius:6px} .btn{width:100%;padding:10px;background:#8faf68;border:0;border-radius:8px;font-weight:800}</style></head><body>
-<div class="top"><div style="color:#c7b07a;font-weight:900">🌲 WITHDRAW</div><a href="balance.html" style="color:#8faf68;font-size:10px">Back</a></div>
-<div class="box"><div style="font-size:9px;color:#c7b07a">AVAILABLE: $1.50 daily yield</div><input placeholder="Amount to withdraw (Min $1.50)" value="1.50"><input placeholder="Your TRON USDT Address (TRC20)"><input placeholder="Login Password"><button class="btn" onclick="alert('Withdraw request submitted! Processing 24h. Military security check.')">REQUEST WITHDRAWAL</button><div style="font-size:8px;color:#6a7a4a;margin-top:8px">24h processing • Tron network • No fees • Military grade</div></div>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars of Wealth | Withdraw</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"><style>:root{--b:#102A43;--g:#a8c686;--bg:#F8F9FA;--t:#1A1A1A;--bd:#DADADA;--blue:#0057B8}*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,Arial,sans-serif;font-size:18px;line-height:1.7;color:var(--t);background:var(--bg);padding-top:72px} .top{position:fixed;top:0;left:0;right:0;z-index:9999;background:var(--b);border-bottom:2px solid var(--g);padding:12px 20px;display:flex;justify-content:space-between;align-items:center} .logo{font-size:20px;font-weight:700;color:#fff} .logo span{color:var(--g)} .nav{display:flex;gap:8px;flex-wrap:wrap} .nav a{font-size:16px;font-weight:600;color:#fff;text-decoration:none;padding:10px 14px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15)} .nav a.active{background:var(--g);color:var(--b)} .wrap{max-width:1100px;margin:0 auto;padding:24px} .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px} .card{background:#fff;border:1px solid var(--bd);border-radius:16px;padding:24px} h2{font-size:36px;font-weight:700} h3{font-size:24px;font-weight:600;margin-bottom:12px} .bal{font-size:36px;font-weight:700;color:var(--b)} input{width:100%;font-size:16px;padding:14px;border:1px solid var(--bd);border-radius:8px;margin:8px 0;box-sizing:border-box} input:focus{outline:3px solid #4D90FE;outline-offset:2px} .btn{width:100%;padding:14px;font-size:18px;font-weight:600;border-radius:8px;border:0;background:var(--b);color:#fff;cursor:pointer} .btn:hover{background:#0a2035} table{width:100%;border-collapse:collapse;margin-top:12px} th{font-size:14px;font-weight:600;text-align:left;color:#444;padding:10px;border-bottom:2px solid var(--bd)} td{font-size:16px;padding:10px;border-bottom:1px solid #eee} .badge{padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600} .ok{background:#d1f0d1;color:#0B6E4F} .pend{background:#fff3cd;color:#856404} *:focus{outline:3px solid #4D90FE;outline-offset:2px} @media(max-width:900px){.grid{grid-template-columns:1fr}body{padding-top:120px}.top{flex-direction:column;gap:10px}h2{font-size:28px}}</style></head><body>
+<div class="top"><div class="logo">🌲 CEDARS <span>OF WEALTH</span></div><div class="nav"><a href="../index.html">🏠 Home</a><a href="balance.html">💰 Balance</a><a href="deposit.html">📥 Deposit</a><a href="withdraw.html" class="active">📤 Withdraw</a><a href="referral.html">👥 Referral</a><a href="../login.html">🔐 Login</a><a href="../register.html">✨ Register</a><a href="#" onclick="localStorage.removeItem('cedar_login');localStorage.removeItem('cedar_session');location.href='../login.html'" style="background:#8b0000">🔓 Logout</a></div></div>
+
+<div class="wrap">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px"><h2>Withdraw — TRON Only</h2><a href="balance.html" style="color:var(--blue);font-size:16px;font-weight:600;text-decoration:none">← Back to Balance</a></div>
+
+<div class="grid">
+<div class="card"><h3>Available Balance</h3><div class="bal" id="bal">$100.00 Real</div><p style="font-size:16px;color:#444;margin:12px 0">TRON TRC20 only. No extra info. Clean withdrawal.</p>
+<input id="addr" placeholder="Your TRON Address (T...)">
+<input id="amt" type="number" placeholder="Amount to withdraw (Min $20)">
+<div style="background:#F8F9FA;border:1px solid var(--bd);border-radius:8px;padding:12px;margin:12px 0;font-size:14px;color:#444">• Fee: $1 TRON network<br>• Min: $20<br>• Time: 5-30 mins after approval<br>• KYC must be verified</div>
+<button class="btn" onclick="doWith()">Request Withdraw</button>
+<div id="msg" style="margin-top:12px;font-size:16px"></div>
+</div>
+
+<div class="card"><h3>Withdraw History</h3><table><thead><tr><th>Amount</th><th>To</th><th>Status</th></tr></thead><tbody id="hist"></tbody></table></div>
+</div>
+</div>
+
+<script>
+if(localStorage.getItem('cedar_login')!=='1'){location.href='../login.html'}
+function getRealBal(){
+ let u=JSON.parse(localStorage.getItem('cedar_user')||'{"bal":100}');let deps=JSON.parse(localStorage.getItem('cedar_deposits')||'[]');let withs=JSON.parse(localStorage.getItem('cedar_withdraws')||'[]');let t=parseFloat(u.bal||100);deps.forEach(x=>{if(x.status==='approved')t+=parseFloat(x.amount||0)});withs.forEach(x=>{if(x.status!=='rejected')t-=parseFloat(x.amount||0)});return t;
+}
+function refreshBal(){document.getElementById('bal').innerText='$'+getRealBal().toFixed(2)+' Real'}
+refreshBal();
+function doWith(){
+ let addr=document.getElementById('addr').value.trim();let amt=parseFloat(document.getElementById('amt').value);
+ if(!addr.startsWith('T')||addr.length<20)return alert('Enter valid TRON T-address');
+ if(!amt||amt<20)return alert('Min $20');
+ let bal=getRealBal();if(amt>bal)return alert('Insufficient real balance. Your real balance is $'+bal.toFixed(2));
+ let kyc=localStorage.getItem('cedar_kyc');if(kyc!=='approved'){return alert('KYC not verified — please deposit and verify first');}
+ let withs=JSON.parse(localStorage.getItem('cedar_withdraws')||'[]');
+ withs.push({amount:amt,addr:addr,status:'pending',date:new Date().toLocaleDateString()});
+ localStorage.setItem('cedar_withdraws',JSON.stringify(withs));
+ document.getElementById('msg').innerHTML='<span style="color:#0B6E4F;font-weight:600">✓ Withdraw request submitted — pending approval.</span>';
+ loadHist();refreshBal();document.getElementById('amt').value='';
+}
+function loadHist(){
+ let withs=JSON.parse(localStorage.getItem('cedar_withdraws')||'[]');let h=document.getElementById('hist');h.innerHTML='';
+ if(withs.length===0){h.innerHTML='<tr><td colspan="3" style="color:#888">No withdrawals yet</td></tr>';return}
+ withs.slice().reverse().forEach(w=>{
+  let b=w.status==='approved'?'<span class="badge ok">Approved</span>':'<span class="badge pend">Pending</span>';
+  h.innerHTML+=`<tr><td>$${parseFloat(w.amount).toFixed(2)}</td><td>${w.addr.substring(0,8)}...</td><td>${b}</td></tr>`
+ })
+}
+loadHist();
+</script>
 </body></html>
