@@ -1,36 +1,31 @@
-<!DOCTYPE html>
-<html><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
-<title>Cedars of Wealth - AI Solar Manufacturing</title>
-<script>
-// KILL ALL OLD SERVICE WORKERS AND CACHE - FIX JUMP
-if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(r=>r.forEach(reg=>reg.unregister()))}
-if(window.caches){caches.keys().then(k=>k.forEach(n=>caches.delete(n)))}
-localStorage.clear(); sessionStorage.clear();
-// STOP JUMP - clear old redirect flag
-history.replaceState(null,'','/Cedars-of-Wealth/?v=12');
-</script>
-<style>body{font-family:Inter,system-ui,sans-serif;margin:0;background:#F8FAFC;color:#102A43}.top{position:fixed;top:0;left:0;right:0;height:62px;background:#0F2A43;display:flex;align-items:center;justify-content:space-between;padding:0 18px;z-index:9999;border-bottom:4px solid #FFD700}.logo{color:#fff;font-weight:900;font-size:22px}.logo b{color:#FFD700}.nav{display:flex;gap:10px}.nav a{color:#fff;text-decoration:none;font-size:13px;font-weight:700;padding:8px 12px;border-radius:20px;background:rgba(255,255,255,.08)}.nav a.join{background:#FFD700;color:#0F2A43}.hero{margin-top:62px;background:linear-gradient(135deg,#102A43,#1A4730);color:#fff;padding:70px 20px;text-align:center}.hero h1{font-size:40px;font-weight:900;margin:0;line-height:1}.hero h1 span{color:#FFD700}.btn{display:inline-block;margin-top:16px;padding:14px 28px;background:#FFD700;color:#102A43;border-radius:30px;font-weight:900;text-decoration:none}.wrap{max-width:1100px;margin:0 auto;padding:20px}.card{background:#fff;border-radius:18px;padding:22px;margin:18px 0;border:2px solid #E2E8F0}.card img{width:100%;border-radius:14px;border:3px solid #FFD700;margin:10px 0}</style>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><title>CEDARS OF WEALTH</title><style>
+body{margin:0;background:#020617;color:#fff;font-family:Inter,system-ui;overflow:hidden}
+.top{position:fixed;top:0;left:0;right:0;height:62px;background:#0F2A43;display:flex;align-items:center;justify-content:space-between;padding:0 18px;z-index:9999;border-bottom:4px solid #FFD700}
+.logo{color:#fff;font-weight:900;font-size:22px}.logo b{color:#FFD700}
+.nav{display:flex;gap:10px}.nav a{color:#fff;text-decoration:none;font-size:13px;font-weight:700;padding:8px 12px;border-radius:20px;background:rgba(255,255,255,.08)}.nav a.join{background:#FFD700;color:#0F2A43}
+.hero{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:radial-gradient(circle at center,#102A43 0%,#020617 80%);padding:20px}
+.cedars{font-size:56px;font-weight:900;letter-spacing:6px;color:#fff;text-shadow:0 0 20px rgba(255,215,0,.8);margin:0}
+.glitter{font-size:52px;font-weight:900;margin:10px 0;
+background:linear-gradient(90deg,#FFD700,#FFFFFF,#FFD700,#FF8C00,#FFD700);
+background-size:300% 100%;
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+animation: glitterMove 2s linear infinite, blink 0.9s infinite alternate;
+filter: drop-shadow(0 0 25px #FFD700);
+}
+@keyframes glitterMove{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+@keyframes blink{0%{opacity:1; transform:scale(1)}50%{opacity:0.4}100%{opacity:1; transform:scale(1.05)}}
+.btn{margin-top:30px;padding:18px 36px;background:#FFD700;color:#102A43;border-radius:40px;font-weight:900;text-decoration:none;font-size:18px;box-shadow:0 0 30px #FFD700;animation: pulse 1.2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 10px #FFD700}50%{box-shadow:0 0 40px #FFD700}100%{box-shadow:0 0 10px #FFD700}}
+.sparkles{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;background-image: radial-gradient(#FFD700 1px, transparent 1px);background-size: 50px 50px;opacity:.15;animation: sparkle 3s linear infinite}
+@keyframes sparkle{0%{transform:translateY(0)}100%{transform:translateY(-50px)}}
+</style>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(r=>r.forEach(reg=>reg.unregister()))}</script>
 </head><body>
 <div class="top"><div class="logo">🌲 CEDARS <b>OF WEALTH</b></div><div class="nav"><a href="dashboard/index.html">📊 Dashboard</a><a href="register.html">👤 Register</a><a href="login.html">🔑 Login</a><a href="register.html" class="join">🚀 Join</a></div></div>
-<div class="hero"><h1>🌲 CEDARS OF WEALTH<br><span>AI Solar Manufacturing</span></h1><p>7 Divisions • Smart • Sustainable • Precision • v12 No-Jump</p><a href="register.html" class="btn">Join Ecosystem</a></div>
-<div class="wrap">
-<div class="card"><h2>🏗️ 7 Divisions</h2><p><b>1.</b> AI Solar Manufacturing<br><b>2.</b> Cedars Academy<br><b>3.</b> Cedars Treasury<br><b>4.</b> Real Estates Intelligence<br><b>5.</b> Digital Infrastructure<br><b>6.</b> Governance Framework<br><b>7.</b> Community Programs</p></div>
-<div class="card"><h2>☀️ AI Solar Manufacturing</h2><img src="assets/images/ai-solar-factory.jpg"><p>120 panels/hr • 98.7% efficiency • 99.2% pass rate</p><img src="assets/images/ai-solar-dashboard.jpg"><p>Digital Twin • 1,247 panels/day • 2.4MW renewable</p></div>
-<div class="card"><h2>📚 Cedars Academy</h2><img src="assets/images/academy.jpg"><p>AI, Solar Tech, ICT, Real Estate Tech training.</p></div>
+<div class="hero">
+<div class="sparkles"></div>
+<h1 class="cedars">CEDARS OF WEALTH</h1>
+<h2 class="glitter">Die rich or Die trying</h2>
+<a href="register.html" class="btn">💰 Join Ecosystem</a>
 </div>
-<div id="support-root"></div>
-<script>
-// Load widget with cache buster + no redirect
-fetch('dashboard/support-widget.html?v=12&nocache='+Date.now()).then(r=>r.text()).then(h=>{
-document.getElementById('support-root').innerHTML=h;
-let s=document.getElementById('support-root').querySelectorAll('script');
-s.forEach(o=>{
-if(o.textContent.includes('location') || o.textContent.includes('redirect')) return; // BLOCK OLD JUMP CODE
-let n=document.createElement('script'); n.textContent=o.textContent; document.body.appendChild(n)
-})
-});
-</script>
 </body></html>
