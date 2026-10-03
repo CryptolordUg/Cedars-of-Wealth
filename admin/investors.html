@@ -1,0 +1,22 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin - Investors</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#070E22;color:#fff;font-family:Inter;padding:20px}input{padding:10px;border-radius:10px;border:1px solid #1E3A6B;background:#0A1931;color:#fff;width:100%;margin:6px 0}.card{background:#11264E;border:1px solid #1E3A6B;border-radius:18px;padding:16px;margin-bottom:12px}.btn{background:#FFD700;color:#0A1931;border:0;padding:12px 18px;border-radius:999px;font-weight:900;cursor:pointer;width:100%}.mono{font-family:JetBrains Mono}</style>
+</head><body>
+<h2 style="color:#FFD700">🌲 CEDARS ADMIN - 3 Investors</h2>
+<div id="list"></div>
+<h3>Add / Edit Investor</h3>
+<input id="id" placeholder="ID: investor1">
+<input id="name" placeholder="Name: e.g. John">
+<input id="wallet" placeholder="USDT TRC20 Wallet: T...">
+<input id="deposit" placeholder="Deposit: e.g. 20">
+<input id="bonus" placeholder="Bonus to credit today: e.g. 2.5">
+<button class="btn" onclick="save()">Save Investor</button>
+<p style="opacity:.6;font-size:12px">This saves in your browser. Copy the JSON below and paste into dashboard file later for permanent.</p>
+<pre id="json" class="mono" style="background:#0A1931;padding:12px;border-radius:12px;overflow:auto"></pre>
+<script>
+let investors = JSON.parse(localStorage.getItem('cedars_investors')||'[]');
+function render(){let h='';let j={};investors.forEach(inv=>{j[inv.id]=inv;h+=`<div class="card"><b class="mono">${inv.id}</b> - ${inv.name}<br>Wallet: <span class="mono">${inv.wallet}</span><br>Deposit: $${inv.deposit} | Bonus: $${inv.bonus} | Balance: $${(parseFloat(inv.deposit)*0.1 + parseFloat(inv.bonus)).toFixed(2)}<br><small>Earning link:.../dashboard/index.html?id=${inv.id}</small></div>`});document.getElementById('list').innerHTML=h||'No investors yet';document.getElementById('json').innerText=JSON.stringify(j,null,2)}
+function save(){let inv={id:document.getElementById('id').value, name:document.getElementById('name').value, wallet:document.getElementById('wallet').value, deposit:document.getElementById('deposit').value, bonus:document.getElementById('bonus').value||'2.5'};let idx=investors.findIndex(x=>x.id===inv.id);if(idx>=0)investors[idx]=inv;else investors.push(inv);localStorage.setItem('cedars_investors',JSON.stringify(investors));render()}
+render();
+</script>
+</body></html>
