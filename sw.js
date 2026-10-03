@@ -1,1 +1,0 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><script>sessionStorage.redirect=location.href;location.href='/Cedars-of-Wealth/';</script></head><body>Redirecting...</body></html>
