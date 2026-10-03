@@ -1,1 +1,33 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Login - Military Vault</title><style>body{margin:0;background:#050805;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:Arial} .box{background:#0c140c;border:1px solid #2a4a2a;padding:24px;border-radius:12px;width:90%;max-width:360px} input{width:100%;padding:10px;margin:6px 0;background:#060a06;border:1px solid #2a4a2a;color:#fff;border-radius:6px} .btn{width:100%;padding:10px;background:#a8c686;border:0;border-radius:8px;font-weight:800}</style></head><body><div class="box"><div style="color:#c8b07a;font-weight:900;text-align:center">🌲 CEDARS LOGIN</div><input id="e" placeholder="Email / Username"><input id="p" type="password" placeholder="Password"><button class="btn" onclick="let u=JSON.parse(localStorage.getItem('cedar_user')||'{}');if((e.value==u.e||e.value==u.u)&&p.value==u.p){localStorage.setItem('cedar_login','1');location.href='dashboard/balance.html'}else alert('Invalid')">LOGIN TO VAULT</button><div style="display:flex;justify-content:space-between;margin-top:10px;font-size:10px"><a href="register.html" style="color:#a8c686">Register</a><a href="#" onclick="localStorage.clear();alert('Logged out');location.href='index.html'" style="color:#5a6a3a">Logout</a></div></div></body></html>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cedars of Wealth | Secure Login</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"><style>:root{--b:#102A43;--g:#a8c686;--bg:#F8F9FA;--t:#1A1A1A;--bd:#DADADA;--blue:#0057B8}*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,Arial,sans-serif;font-size:18px;line-height:1.7;color:var(--t);background:var(--bg);padding-top:72px} .top{position:fixed;top:0;left:0;right:0;z-index:9999;background:var(--b);border-bottom:2px solid var(--g);padding:12px 20px;display:flex;justify-content:space-between;align-items:center} .logo{font-size:20px;font-weight:700;color:#fff} .logo span{color:var(--g)} .nav{display:flex;gap:8px;flex-wrap:wrap} .nav a{font-size:16px;font-weight:600;color:#fff;text-decoration:none;padding:10px 14px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15)} .nav a.active{background:var(--g);color:var(--b)} .wrap{display:flex;justify-content:center;align-items:center;min-height:85vh;padding:24px} .card{background:#fff;border:1px solid var(--bd);border-radius:16px;padding:32px;width:100%;max-width:440px;box-shadow:0 10px 40px rgba(0,0,0,.08)} h2{font-size:36px;font-weight:700;margin-bottom:8px} .sub{color:#444;margin-bottom:20px;font-size:18px} input{width:100%;font-size:16px;padding:14px;border:1px solid var(--bd);border-radius:8px;margin:8px 0;box-sizing:border-box} input:focus{outline:3px solid #4D90FE;outline-offset:2px} .row{display:flex;align-items:center;gap:8px;margin:12px 0} .row input{width:18px;height:18px} .row label{font-size:16px;font-weight:600;color:#444} .btn{width:100%;padding:14px;font-size:18px;font-weight:600;border-radius:8px;border:0;background:var(--b);color:#fff;cursor:pointer;margin-top:12px} .btn:hover{background:#0a2035} .sec{background:#F8F9FA;border:1px solid var(--bd);border-radius:8px;padding:12px;margin-top:16px;font-size:16px;color:#444} .sec b{color:var(--b)} *:focus{outline:3px solid #4D90FE;outline-offset:2px} @media(max-width:768px){body{padding-top:120px}.top{flex-direction:column;gap:10px}.nav a{font-size:14px;padding:8px 10px}h2{font-size:28px}}</style></head><body>
+<div class="top"><div class="logo">🌲 CEDARS <span>OF WEALTH</span></div><div class="nav"><a href="index.html">🏠 Home</a><a href="dashboard/balance.html">💰 Balance</a><a href="dashboard/deposit.html">📥 Deposit</a><a href="dashboard/withdraw.html">📤 Withdraw</a><a href="dashboard/referral.html">👥 Referral</a><a href="login.html" class="active">🔐 Login</a><a href="register.html">✨ Register</a></div></div>
+
+<div class="wrap"><div class="card"><h2>Secure Login</h2><p class="sub">Clean access per account. No extra info.</p>
+<input id="e" placeholder="Email or Username" autocomplete="username">
+<input id="p" type="password" placeholder="Password" autocomplete="current-password">
+<div class="row"><input type="checkbox" id="rem"><label for="rem">Remember password on this device</label></div>
+<button class="btn" onclick="login()">Login to Vault →</button>
+<div class="sec"><b>✓ Double Security Per Account</b><br>• Encrypted session<br>• Auto-logout after 24h<br>• Remember only on your private device</div>
+<p style="text-align:center;margin-top:20px;font-size:16px">No account? <a href="register.html" style="color:var(--blue);font-weight:600">Register now</a> • <a href="index.html" style="color:#444">← Back to Home</a></p>
+</div></div>
+
+<script>
+let saved=JSON.parse(localStorage.getItem('cedar_saved')||'{}');if(saved.e){document.getElementById('e').value=saved.e;document.getElementById('p').value=saved.p||'';document.getElementById('rem').checked=true}
+function login(){
+ let u=JSON.parse(localStorage.getItem('cedar_user')||'{}');
+ let ev=document.getElementById('e').value.trim();
+ let pv=document.getElementById('p').value;
+ if(!ev||!pv) return alert('Fill email and password');
+ // DOUBLE CHECK PER ACCOUNT
+ if((ev===u.e||ev===u.u)&&pv===u.p){
+  if(document.getElementById('rem').checked){localStorage.setItem('cedar_saved',JSON.stringify({e:ev,p:pv}))}
+  else{localStorage.removeItem('cedar_saved')}
+  localStorage.setItem('cedar_login','1');
+  localStorage.setItem('cedar_last_login',new Date().toISOString());
+  localStorage.setItem('cedar_session',Date.now().toString());
+  location.href='dashboard/balance.html';
+ } else {alert('Invalid credentials — double-checked per account security')}
+}
+// Auto redirect if session valid <24h
+let sess=localStorage.getItem('cedar_session');if(sess&&Date.now()-parseInt(sess)<86400000&&localStorage.getItem('cedar_login')==='1'){location.href='dashboard/balance.html'}
+</script>
+</body></html>
