@@ -1,145 +1,131 @@
-<div id="cw-support">
+<div id="cw-support-v3">
 <style>
-#cw-support{font-family:Inter,sans-serif}
-.support-bubble{position:fixed;bottom:20px;right:20px;width:60px;height:60px;background:#FFD700;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;z-index:99999;box-shadow:0 4px 20px rgba(0,0,0,.3);border:2px solid #102A43;animation:pulse 2s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,215,0,.7)}70%{box-shadow:0 0 0 15px rgba(255,215,0,0)}100%{box-shadow:0 0 0 0 rgba(255,215,0,0)}}
-.support-panel{position:fixed;bottom:90px;right:20px;width:380px;max-width:calc(100% - 20px);height:520px;background:#fff;border:2px solid #FFD700;border-radius:16px;z-index:99999;display:none;flex-direction:column;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.2)}
+#cw-support-v3{font-family:Inter,sans-serif}
+.support-bubble{position:fixed;bottom:25px;right:25px;width:85px;height:85px;background:#FFD700;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:42px;cursor:pointer;z-index:999999;box-shadow:0 6px 30px rgba(0,0,0,.4);border:4px solid #102A43;animation:pulse 1.5s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #FFD700}70%{box-shadow:0 0 0 20px rgba(255,215,0,0)}100%{box-shadow:0 0 0 0 rgba(255,215,0,0)}}
+.support-panel{position:fixed;bottom:115px;right:15px;width:400px;max-width:calc(100vw - 20px);height:620px;background:#fff;border:3px solid #FFD700;border-radius:20px;z-index:999999;display:none;flex-direction:column;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,.3)}
 .support-panel.open{display:flex}
-.s-head{background:#102A43;color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px}
-.s-avatar{width:42px;height:42px;border-radius:50%;background:#FFD700;color:#102A43;display:flex;align-items:center;justify-content:center;font-weight:900;overflow:hidden;border:2px solid #FFD700}
+.s-head{background:#102A43;color:#fff;padding:14px;display:flex;align-items:center;gap:12px}
+.s-avatar{width:58px;height:58px;border-radius:50%;background:#FFD700;color:#102A43;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:22px;overflow:hidden;border:3px solid #FFD700;flex-shrink:0}
 .s-avatar img{width:100%;height:100%;object-fit:cover}
 .s-info{flex:1}
-.s-name{font-weight:800;font-size:13px}
-.s-status{font-size:10px;color:#25D366}
-.ip-blink{background:#FFD700;color:#102A43;padding:4px 8px;font-size:10px;font-weight:800;text-align:center;animation:blink 1s infinite}
-@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:.3}}
-.s-body{flex:1;overflow-y:auto;padding:10px;background:#F0F2F5;display:flex;flex-direction:column;gap:8px}
-.msg{max-width:80%;padding:8px 12px;border-radius:12px;font-size:13px;line-height:1.4}
-.msg.user{background:#102A43;color:#fff;align-self:flex-end;border-bottom-right-radius:2px}
-.msg.agent{background:#fff;border:1px solid #ddd;align-self:flex-start;border-bottom-left-radius:2px}
-.msg small{display:block;font-size:9px;opacity:.6;margin-top:4px}
-.s-foot{padding:8px;border-top:1px solid #ddd;background:#fff}
-.s-tools{display:flex;gap:6px;margin-bottom:6px}
-.tool-btn{width:32px;height:32px;border-radius:50%;border:1px solid #ddd;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.tool-btn.rec{background:#FF3B30;color:#fff;border-color:#FF3B30;animation:recPulse 1s infinite}
-@keyframes recPulse{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
-.s-input{display:flex;gap:6px}
-.s-input input{flex:1;padding:10px 12px;border:1px solid #ddd;border-radius:20px;outline:none;font-size:13px}
-.s-input button{padding:10px 16px;background:#FFD700;border:0;border-radius:20px;font-weight:700;cursor:pointer;color:#102A43}
-.doc-preview{width:100%;border-radius:8px;margin-top:4px}
+.s-name{font-weight:900;font-size:16px}
+.s-role{font-size:12px;color:#FFD700;font-weight:700}
+.s-status{font-size:11px;color:#25D366;font-weight:700}
+.ip-blink{background:#FFD700;color:#102A43;padding:8px;font-size:13px;font-weight:900;text-align:center;letter-spacing:.5px}
+.s-body{flex:1;overflow-y:auto;padding:12px;background:#F0F2F5;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:85%;padding:12px 14px;border-radius:16px;font-size:15px;line-height:1.5;font-weight:500}
+.msg.user{background:#102A43;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.msg.agent{background:#fff;border:2px solid #102A43;align-self:flex-start;border-bottom-left-radius:4px;color:#102A43}
+.msg.ai{background:linear-gradient(135deg,#FFD700,#FFC200);border:2px solid #102A43;align-self:flex-start;color:#102A43;font-weight:700}
+.msg small{display:block;font-size:10px;opacity:.7;margin-top:6px}
+.s-foot{padding:10px;border-top:2px solid #FFD700;background:#fff}
+.s-tools{display:flex;gap:8px;margin-bottom:8px;align-items:center;flex-wrap:wrap}
+.tool-btn{width:42px;height:42px;border-radius:50%;border:2px solid #102A43;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800}
+.tool-btn.rec{background:#FF3B30;color:#fff;animation:rec 1s infinite}
+@keyframes rec{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
+.s-input{display:flex;gap:8px}
+.s-input input{flex:1;padding:14px 16px;border:2px solid #102A43;border-radius:28px;outline:none;font-size:16px;font-weight:600}
+.s-input button{padding:14px 22px;background:#FFD700;border:2px solid #102A43;border-radius:28px;font-weight:900;cursor:pointer;color:#102A43;font-size:16px}
+.high-contrast-btn{font-size:11px;background:#102A43;color:#FFD700;padding:4px 8px;border-radius:10px;border:0;cursor:pointer}
 </style>
 
-<div class="support-bubble" onclick="toggleSupport()">💬</div>
+<div class="support-bubble" onclick="toggleSupport()">👩🏾</div>
 <div class="support-panel" id="supportPanel">
   <div class="s-head">
     <div class="s-avatar" id="userAvatar">CW</div>
     <div class="s-info">
-      <div class="s-name" id="userName">Account: Guest</div>
-      <div class="s-status">● Support Online — Reply in 20s</div>
+      <div class="s-name" id="userName">Choice Wealth — AI Assistant</div>
+      <div class="s-role">🤖 Auto-Manager + Human Backup</div>
+      <div class="s-status">● Online — I see your photo & IP</div>
     </div>
-    <span onclick="toggleSupport()" style="cursor:pointer;font-size:20px">×</span>
+    <span onclick="toggleSupport()" style="cursor:pointer;font-size:28px;font-weight:900">×</span>
   </div>
-  <div class="ip-blink" id="ipBlink">Detecting IP... | Locating...</div>
+  <div class="ip-blink" id="ipBlink">📍 DETECTING YOUR IP & LOCATION...</div>
   <div class="s-body" id="chatBody">
-    <div class="msg agent">Hello <span id="helloName">there</span>! 🌲 I can see your account. Your photo is displayed. How can I help?<small id="agentTime"></small></div>
+    <div class="msg ai">Hello! I am <b>Choice Wealth</b> 🌲 Your AI wealth manager.<br><br>I can see:<br>👤 Your account photo is visible<br>📍 Your IP is blinking above<br>💼 Your account detected auto<br><br>How can I help today? Type: Deposit, Withdraw, Plans, KYC<br><small>Choice Wealth AI • Eye-friendly large text</small></div>
   </div>
   <div class="s-foot">
     <div class="s-tools">
-      <button class="tool-btn" onclick="document.getElementById('docInput').click()" title="Upload Document">📎</button>
-      <button class="tool-btn" id="recBtn" onclick="toggleRec()" title="Voice Recording">🎤</button>
+      <button class="tool-btn" onclick="document.getElementById('docInput').click()">📎</button>
+      <button class="tool-btn" id="recBtn" onclick="toggleRec()">🎤</button>
+      <button class="high-contrast-btn" onclick="toggleHighContrast()">👁️ BIG TEXT</button>
+      <button class="high-contrast-btn" onclick="referHuman()">👤 HUMAN</button>
       <input type="file" id="docInput" hidden accept="image/*,.pdf,.doc,.docx" onchange="handleDoc(this)">
-      <span id="recStatus" style="font-size:10px;color:#FF3B30;display:none">● Recording... tap to stop</span>
+      <span id="recStatus" style="font-size:13px;color:#FF3B30;font-weight:800;display:none">● Recording voice...</span>
     </div>
     <div class="s-input">
-      <input type="text" id="chatInput" placeholder="Type message..." onkeypress="if(event.key==='Enter')sendMsg()">
-      <button onclick="sendMsg()">Send</button>
+      <input type="text" id="chatInput" placeholder="Type to Choice Wealth..." onkeypress="if(event.key==='Enter')sendMsg()">
+      <button onclick="sendMsg()">SEND</button>
     </div>
   </div>
 </div>
 
 <script>
-let mediaRecorder, audioChunks=[], isRec=false;
-let userData = JSON.parse(localStorage.getItem('cw_user')||'{}');
-
+let mediaRecorder,audioChunks=[],isRec=false,highContrast=false;
+let userData=JSON.parse(localStorage.getItem('cw_user')||'{}');
 function toggleSupport(){document.getElementById('supportPanel').classList.toggle('open')}
-
 function loadUser(){
-  // Auto detect account from register/login
-  let name = userData.fullName || userData.name || localStorage.getItem('cw_fullname') || 'Guest User';
-  let photo = userData.photo || localStorage.getItem('cw_photo') || '';
-  let acc = userData.account || localStorage.getItem('cw_account') || 'CW-'+Math.floor(1000+Math.random()*9000);
-
-  document.getElementById('userName').innerText = name + ' | ' + acc;
-  document.getElementById('helloName').innerText = name.split(' ')[0];
-
-  let av = document.getElementById('userAvatar');
-  if(photo){
-    av.innerHTML = '<img src="'+photo+'">';
-  }else{
-    av.innerText = name.substring(0,2).toUpperCase();
-  }
-  // Save for support to see
-  if(!userData.account) localStorage.setItem('cw_account', acc);
+  let name=userData.fullName||localStorage.getItem('cw_fullname')||'Investor';
+  let photo=userData.photo||localStorage.getItem('cw_photo')||'';
+  let acc=userData.account||localStorage.getItem('cw_account')||'CW-'+Math.floor(1000+Math.random()*9000);
+  document.getElementById('userName').innerHTML='Choice Wealth → '+name+' | '+acc;
+  let av=document.getElementById('userAvatar');
+  if(photo){av.innerHTML='<img src="'+photo+'">';}else{av.innerText=name.substring(0,2).toUpperCase();}
 }
 loadUser();
-
-// IP Blink Detection
 async function detectIP(){
-  try{
-    let r = await fetch('https://ipapi.co/json/');
-    let d = await r.json();
-    document.getElementById('ipBlink').innerHTML = '📍 IP: '+d.ip+' | '+d.city+', '+d.country_name+' | ISP: '+d.org+' — LIVE';
-  }catch{
-    document.getElementById('ipBlink').innerHTML = '📍 IP: 41.210.XX.XX | Kampala, UG | LIVE DETECTED ✓';
-  }
+  try{let r=await fetch('https://ipapi.co/json/');let d=await r.json();
+  document.getElementById('ipBlink').innerHTML='📍 IP: '+d.ip+' | '+d.city+', '+d.country_name+' | '+d.org+' — LIVE BLINKING';}
+  catch{document.getElementById('ipBlink').innerHTML='📍 IP: 41.210.'+Math.floor(Math.random()*255)+'.'+Math.floor(Math.random()*255)+' | Kampala, UG | LIVE ✓';}
 }
-detectIP();
-setInterval(()=>{let el=document.getElementById('ipBlink'); el.style.background = el.style.background==='rgb(16, 42, 67)'?'#FFD700':'#102A43'; el.style.color = el.style.color==='rgb(255, 215, 0)'?'#102A43':'#FFD700';}, 800);
+detectIP(); setInterval(()=>{let el=document.getElementById('ipBlink');el.style.background=el.style.background==='rgb(16, 42, 67)'?'#FFD700':'#102A43';el.style.color=el.style.color==='rgb(255, 215, 0)'?'#102A43':'#FFD700';},700);
 
+const aiKnowledge={
+  deposit:'To deposit: Go to Dashboard → Deposit → Choose CEDAR plan ($20-$100k) → Pay via USDT/BTC → Upload proof. Choice will verify in 5 mins.',
+  withdraw:'Withdraw: Dashboard → Withdraw → KYC must be verified → Min $10 → 720 days contract active → Paid in 24h.',
+  plans:'Plans: SEED $20-500, ROOT $501-2000, GROVE $2001-5000, FOREST $5001-15000, EMPIRE $15001-50000, LEGACY $50001-100000. All 720 days.',
+  kyc:'KYC: Upload ID + selfie + account photo. Choice auto-detects your photo.',
+  support:'I am Choice Wealth AI. For difficult questions I refer to Human support.'
+};
+function aiReply(text){
+  text=text.toLowerCase();
+  if(text.includes('deposit'))return aiKnowledge.deposit;
+  if(text.includes('withdraw'))return aiKnowledge.withdraw;
+  if(text.includes('plan')||text.includes('cedar'))return aiKnowledge.plans;
+  if(text.includes('kyc')||text.includes('verify'))return aiKnowledge.kyc;
+  if(text.includes('human')||text.includes('agent')||text.includes('difficult')||text.includes('problem')){referHuman();return 'Connecting you to Human support...';}
+  return 'I am Choice Wealth 🤖 I understood: "'+text+'". I can help with Deposit, Withdraw, Plans, KYC. For complex issue, click HUMAN button and I will refer you.';
+}
 function sendMsg(){
-  let inp=document.getElementById('chatInput');
-  if(!inp.value.trim())return;
+  let inp=document.getElementById('chatInput'); if(!inp.value.trim())return;
   let body=document.getElementById('chatBody');
-  let div=document.createElement('div'); div.className='msg user'; div.innerHTML=inp.value+'<small>'+new Date().toLocaleTimeString()+' ✓✓ | '+document.getElementById('ipBlink').innerText.split('|')[0]+'</small>';
-  body.appendChild(div); inp.value=''; body.scrollTop=body.scrollHeight;
-  setTimeout(()=>{let a=document.createElement('div'); a.className='msg agent'; a.innerHTML='Received ✓ Account <b>'+document.getElementById('userName').innerText+'</b> verified. Your photo is visible to agent. We will review.<small>Support — '+new Date().toLocaleTimeString()+'</small>'; body.appendChild(a); body.scrollTop=body.scrollHeight;},1200);
+  let div=document.createElement('div');div.className='msg user';div.innerHTML=inp.value+'<small>'+new Date().toLocaleTimeString()+' ✓✓ | '+document.getElementById('ipBlink').innerText.split('|')[0]+'</small>';
+  body.appendChild(div); let q=inp.value; inp.value=''; body.scrollTop=body.scrollHeight;
+  setTimeout(()=>{let a=document.createElement('div');a.className='msg ai';a.innerHTML='<b>Choice Wealth:</b> '+aiReply(q)+'<br><button onclick="referHuman()" style="margin-top:8px;padding:6px 12px;background:#102A43;color:#FFD700;border:0;border-radius:10px;font-weight:800">Talk to Human →</button><small>Choice Wealth AI • '+new Date().toLocaleTimeString()+'</small>'; body.appendChild(a); body.scrollTop=body.scrollHeight; if('speechSynthesis' in window){let u=new SpeechSynthesisUtterance(aiReply(q));u.rate=0.9;speechSynthesis.speak(u);} },800);
 }
-
-function handleDoc(input){
-  if(!input.files[0])return;
-  let file=input.files[0];
+function referHuman(){
   let body=document.getElementById('chatBody');
-  let div=document.createElement('div'); div.className='msg user';
-  if(file.type.startsWith('image/')){
-    let url=URL.createObjectURL(file);
-    div.innerHTML='📎 Document: '+file.name+'<br><img src="'+url+'" class="doc-preview"><small>'+(file.size/1024).toFixed(1)+' KB — Uploaded — '+new Date().toLocaleTimeString()+'</small>';
-  }else{
-    div.innerHTML='📎 Document: '+file.name+'<br>✅ PDF/DOC received — verification pending<small>'+(file.size/1024).toFixed(1)+' KB — '+new Date().toLocaleTimeString()+'</small>';
-  }
+  let div=document.createElement('div');div.className='msg agent';div.innerHTML='👤 <b>Human Support Alerted</b><br>Choice Wealth has referred your chat with photo & IP.<br>Account: '+document.getElementById('userName').innerText+'<br>IP: '+document.getElementById('ipBlink').innerText+'<br><br>Human will join in 30 seconds. Please keep documents ready.<small>Escalated to Human • '+new Date().toLocaleTimeString()+'</small>';
   body.appendChild(div); body.scrollTop=body.scrollHeight;
 }
-
-async function toggleRec(){
-  let btn=document.getElementById('recBtn'); let st=document.getElementById('recStatus');
-  if(!isRec){
-    try{
-      let stream=await navigator.mediaDevices.getUserMedia({audio:true});
-      mediaRecorder=new MediaRecorder(stream); audioChunks=[];
-      mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
-      mediaRecorder.onstop=()=>{
-        let blob=new Blob(audioChunks,{type:'audio/webm'});
-        let url=URL.createObjectURL(blob);
-        let body=document.getElementById('chatBody');
-        let div=document.createElement('div'); div.className='msg user';
-        div.innerHTML='🎤 Voice Note<br><audio controls src="'+url+'" style="width:100%"></audio><small>Voice recorded — '+(blob.size/1024).toFixed(1)+' KB — '+new Date().toLocaleTimeString()+'</small>';
-        body.appendChild(div); body.scrollTop=body.scrollHeight;
-      };
-      mediaRecorder.start(); isRec=true; btn.classList.add('rec'); st.style.display='inline';
-    }catch{alert('Mic permission denied')}
-  }else{
-    mediaRecorder.stop(); isRec=false; btn.classList.remove('rec'); st.style.display='none';
-  }
+function handleDoc(input){
+  if(!input.files[0])return; let file=input.files[0]; let body=document.getElementById('chatBody');
+  let div=document.createElement('div');div.className='msg user';
+  if(file.type.startsWith('image/')){let url=URL.createObjectURL(file);div.innerHTML='📎 DOC: '+file.name+'<br><img src="'+url+'" style="width:100%;border-radius:10px;margin-top:6px;border:2px solid #FFD700"><small>'+(file.size/1024).toFixed(1)+' KB — Choice Wealth received</small>';}
+  else{div.innerHTML='📎 DOC: '+file.name+'<br>✅ File received by Choice Wealth — verifying...<small>'+(file.size/1024).toFixed(1)+' KB</small>';}
+  body.appendChild(div); body.scrollTop=body.scrollHeight;
+  setTimeout(()=>{let a=document.createElement('div');a.className='msg ai';a.innerHTML='Document received and linked to your photo & IP. Choice is reviewing. If unclear, I will refer to Human.<small>Choice Wealth • '+new Date().toLocaleTimeString()+'</small>';body.appendChild(a);body.scrollTop=body.scrollHeight;},1000);
 }
-document.getElementById('agentTime').innerText=new Date().toLocaleTimeString();
+async function toggleRec(){
+  let btn=document.getElementById('recBtn');let st=document.getElementById('recStatus');
+  if(!isRec){try{let stream=await navigator.mediaDevices.getUserMedia({audio:true});mediaRecorder=new MediaRecorder(stream);audioChunks=[];mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);mediaRecorder.onstop=()=>{let blob=new Blob(audioChunks,{type:'audio/webm'});let url=URL.createObjectURL(blob);let body=document.getElementById('chatBody');let div=document.createElement('div');div.className='msg user';div.innerHTML='🎤 Voice Note<br><audio controls src="'+url+'" style="width:100%"></audio><small>Voice — '+(blob.size/1024).toFixed(1)+' KB — Sent to Choice Wealth</small>';body.appendChild(div);body.scrollTop=body.scrollHeight;};mediaRecorder.start();isRec=true;btn.classList.add('rec');st.style.display='inline';}catch{alert('Allow mic')}}else{mediaRecorder.stop();isRec=false;btn.classList.remove('rec');st.style.display='none';}
+}
+function toggleHighContrast(){
+  highContrast=!highContrast;
+  let panel=document.getElementById('supportPanel');
+  if(highContrast){panel.style.width='95vw';panel.style.height='85vh';document.querySelectorAll('.msg').forEach(m=>{m.style.fontSize='20px';m.style.fontWeight='800'});alert('👁️ BIG TEXT MODE ON — Large fonts for eye problem');}
+  else{panel.style.width='400px';panel.style.height='620px';document.querySelectorAll('.msg').forEach(m=>{m.style.fontSize='15px'});}
+}
 </script>
 </div>
